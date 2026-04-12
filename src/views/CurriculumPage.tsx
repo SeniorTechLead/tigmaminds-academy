@@ -247,14 +247,14 @@ export default function CurriculumPage() {
         {/* Hero */}
         <div className="mb-10 text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
-            12-Month School Curriculum
+            12-Month Curriculum
           </h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             48 weeks of structured learning. Every week has a topic, learning objectives,
             platform stories to use, and a project deliverable. Pick a track.
           </p>
           <p className="text-sm text-gray-400 dark:text-gray-500 mt-3">
-            Looking for the career-focused program? See the <Link href="/curriculum/bootcamp" className="text-amber-600 dark:text-amber-400 hover:underline">24-Week Bootcamp Curriculum</Link>.
+            Looking for the career-focused program? See the <Link href="/curriculum/bootcamp" className="text-amber-600 dark:text-amber-400 hover:underline">24-Week Bootcamp</Link>.
           </p>
         </div>
 
@@ -340,7 +340,7 @@ export default function CurriculumPage() {
             </div>
             {/* Callback form */}
             <div className="p-8 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-              <CallbackForm context="12-Month School Program" />
+              <CallbackForm context="12-Month Curriculum" />
             </div>
           </div>
 

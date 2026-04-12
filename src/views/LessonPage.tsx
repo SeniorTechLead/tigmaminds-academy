@@ -122,7 +122,7 @@ export default function LessonPage() {
                 {lesson.stem.title}
               </span>
               <span className="text-gray-500 dark:text-gray-400 text-sm">
-                {lesson.track === 'school' ? '12-Month School Program' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'All Tracks'}
+                {lesson.track === 'school' ? '12-Month Curriculum' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'All Tracks'}
               </span>
               {lesson.estimatedHours && (
                 <span className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm">
@@ -151,7 +151,7 @@ export default function LessonPage() {
                 <div>
                   <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Track</p>
                   <p className="text-gray-900 dark:text-white font-medium">
-                    {lesson.track === 'school' ? '12-Month School Program' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'All Tracks'}
+                    {lesson.track === 'school' ? '12-Month Curriculum' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'All Tracks'}
                   </p>
                 </div>
               </div>
@@ -704,7 +704,7 @@ plt.show()`}</pre>
             </div>
 
             <p className="text-center text-gray-500 text-xs">
-              Level 0 is always free. Coding levels (1-4) are part of our {lesson.track === 'school' ? '12-Month School Program' : '24-Week Bootcamp'}.
+              Level 0 is always free. Coding levels (1-4) are part of our {lesson.track === 'school' ? '12-Month Curriculum' : '24-Week Bootcamp'}.
             </p>
           </div>
         </section>
@@ -716,7 +716,7 @@ plt.show()`}</pre>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-4">Ready to Build This?</h2>
             <p className="text-lg text-white/90 mb-8">
-              This lesson is part of our {lesson.track === 'school' ? '12-Month School Program' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Bootcamp and School Program'}. Apply now and start building.
+              This lesson is part of our {lesson.track === 'school' ? '12-Month Curriculum' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Bootcamp and School Program'}. Apply now and start building.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/auth" className="inline-flex items-center justify-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all">

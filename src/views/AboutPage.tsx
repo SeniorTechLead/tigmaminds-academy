@@ -40,7 +40,7 @@ export default function AboutPage() {
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
             We teach programming, AI, and robotics through illustrated stories that make science feel like an adventure.
-            Two tracks — a 24-week bootcamp for career changers and a 12-month school program for grades 6–12 — one mission:
+            Two tracks — a 24-week bootcamp for career changers and a 12-month curriculum for grades 6–12 — one mission:
             make STEM accessible, creative, and irresistible.
           </p>
         </div>

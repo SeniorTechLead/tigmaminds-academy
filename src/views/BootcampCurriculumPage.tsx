@@ -202,14 +202,14 @@ export default function BootcampCurriculumPage() {
         {/* Hero */}
         <div className="mb-10 text-center">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
-            24-Week Bootcamp Curriculum
+            24-Week Bootcamp
           </h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Intensive, career-focused. 24 weeks from fundamentals to job-ready.
             Small cohorts, hands-on projects every week, and direct employer introductions.
           </p>
           <p className="text-sm text-gray-400 dark:text-gray-500 mt-3">
-            Looking for the school program? See the <Link href="/curriculum" className="text-amber-600 dark:text-amber-400 hover:underline">12-Month School Curriculum</Link>.
+            Looking for the school program? See the <Link href="/curriculum" className="text-amber-600 dark:text-amber-400 hover:underline">12-Month Curriculum</Link>.
           </p>
         </div>
 

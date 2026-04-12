@@ -1,5 +1,5 @@
 /**
- * 12-Month School Program Curriculum
+ * 12-Month Curriculum Curriculum
  *
  * Each track has 4 terms (12 weeks each = 48 weeks total).
  * Each week has: topic, lesson slug(s), level(s) to cover, project deliverable, and learning objectives.
