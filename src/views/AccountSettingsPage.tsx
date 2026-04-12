@@ -1,16 +1,57 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Mail, Lock, Check, Loader2, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Mail, Lock, Check, Loader2, AlertCircle, ArrowLeft, Camera } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useAuth } from '../contexts/AuthContext';
 import { useSubscription } from '../contexts/SubscriptionContext';
+import { supabase } from '../lib/supabase';
 import Link from 'next/link';
 
 export default function AccountSettingsPage() {
-  const { user, updateEmail, updatePassword, signOut } = useAuth();
+  const { user, profile, updateProfile, updateEmail, updatePassword, signOut } = useAuth();
   const { subscription, hasActiveSubscription, plan: currentPlan } = useSubscription();
   const router = useRouter();
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  // Profile photo
+  const [uploading, setUploading] = useState(false);
+  const [displayName, setDisplayName] = useState(profile?.display_name || '');
+  const [nameLoading, setNameLoading] = useState(false);
+  const [nameMsg, setNameMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+    setUploading(true);
+    try {
+      const ext = file.name.split('.').pop() || 'jpg';
+      const path = `avatars/${user.id}.${ext}`;
+      const { error: uploadErr } = await supabase.storage.from('avatars').upload(path, file, { upsert: true });
+      if (uploadErr) throw uploadErr;
+      const { data: { publicUrl } } = supabase.storage.from('avatars').getPublicUrl(path);
+      // Add cache-buster
+      const url = `${publicUrl}?t=${Date.now()}`;
+      await updateProfile({ avatar_url: url });
+    } catch (err) {
+      console.warn('[Avatar] Upload error:', err);
+    }
+    setUploading(false);
+  };
+
+  const handleNameChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setNameMsg(null);
+    if (!displayName.trim()) { setNameMsg({ type: 'error', text: 'Name cannot be empty.' }); return; }
+    setNameLoading(true);
+    try {
+      await updateProfile({ display_name: displayName.trim() });
+      setNameMsg({ type: 'success', text: 'Name updated.' });
+    } catch {
+      setNameMsg({ type: 'error', text: 'Failed to update name.' });
+    }
+    setNameLoading(false);
+  };
 
   // Email change
   const [newEmail, setNewEmail] = useState('');
@@ -92,7 +133,53 @@ export default function AccountSettingsPage() {
           </button>
 
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Account Settings</h1>
-          <p className="text-gray-500 dark:text-gray-400 mb-10">Manage your email and password.</p>
+          <p className="text-gray-500 dark:text-gray-400 mb-10">Manage your profile, email, and password.</p>
+
+          {/* Profile photo + name */}
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700 mb-8">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Profile</h2>
+            <div className="flex items-center gap-5">
+              {/* Avatar */}
+              <div className="relative flex-shrink-0">
+                {profile?.avatar_url ? (
+                  <img src={profile.avatar_url} alt="" className="w-20 h-20 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600" />
+                ) : (
+                  <div className="w-20 h-20 rounded-full bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center text-2xl font-bold text-amber-600 dark:text-amber-400 border-2 border-gray-200 dark:border-gray-600">
+                    {(profile?.display_name || user.email || '?')[0].toUpperCase()}
+                  </div>
+                )}
+                <button
+                  onClick={() => fileRef.current?.click()}
+                  disabled={uploading}
+                  className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center hover:bg-amber-600 transition-colors shadow-sm disabled:opacity-50"
+                  title="Upload photo"
+                >
+                  {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Camera className="w-4 h-4" />}
+                </button>
+                <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
+              </div>
+              {/* Name */}
+              <form onSubmit={handleNameChange} className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Display name</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={displayName}
+                    onChange={e => setDisplayName(e.target.value)}
+                    placeholder="Your name"
+                    className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  />
+                  <button type="submit" disabled={nameLoading || displayName === profile?.display_name}
+                    className="px-4 py-2 bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 dark:disabled:bg-gray-600 text-white rounded-lg text-sm font-semibold transition-colors">
+                    {nameLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Save'}
+                  </button>
+                </div>
+                {nameMsg && (
+                  <p className={`mt-1.5 text-xs ${nameMsg.type === 'success' ? 'text-emerald-600' : 'text-red-500'}`}>{nameMsg.text}</p>
+                )}
+              </form>
+            </div>
+          </div>
 
           {/* Current account info */}
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700 mb-8">

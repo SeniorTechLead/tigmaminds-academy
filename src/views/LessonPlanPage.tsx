@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import { lessons, SUBJECTS, type Subject, getLessonBySlug, type Lesson, DISCIPLINES, type Discipline } from '../data/lessons';
 import { useProgress } from '../contexts/ProgressContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useBasicsProgress, type BasicsCourseSlug } from '../contexts/BasicsProgressContext';
 import { supabase } from '../lib/supabase';
 
 interface PlanEntry { id: number; slug: string; addedAt: string; }
@@ -219,7 +220,7 @@ const LEARNING_GOALS = [
     color: 'from-blue-400 to-indigo-500',
     slugs: ['girl-who-spoke-to-elephants', 'orange-sunsets-assam', 'firefly-festival-of-majuli', 'why-the-muga-silk-is-golden', 'old-banyan-trees-stories'],
     skills: ['Python', 'Variables', 'Loops', 'Functions'],
-    prerequisite: { name: 'Python Basics', href: '/learn/python-basics', desc: 'Complete this 2-hour course first if you have never coded before' },
+    prerequisite: { name: 'Python Basics', href: '/learn/python-basics', desc: 'Complete this 2-hour course first if you have never coded before', courseSlug: 'python-basics' as BasicsCourseSlug, totalLessons: 8 },
   },
   {
     id: 'data-science',
@@ -229,7 +230,7 @@ const LEARNING_GOALS = [
     color: 'from-emerald-400 to-teal-500',
     slugs: ['fishermans-daughter-storm', 'snow-leopards-promise', 'monsoon-home', 'dragonfly-and-the-paddy-field', 'map-makers-granddaughter'],
     skills: ['NumPy', 'Matplotlib', 'Data Analysis', 'Statistics'],
-    prerequisite: { name: 'Python Basics', href: '/learn/python-basics', desc: 'Covers variables through numpy — everything you need for data science stories' },
+    prerequisite: { name: 'Python Basics', href: '/learn/python-basics', desc: 'Covers variables through numpy — everything you need for data science stories', courseSlug: 'python-basics' as BasicsCourseSlug, totalLessons: 8 },
   },
   {
     id: 'biology-ecology',
@@ -257,7 +258,7 @@ const LEARNING_GOALS = [
     color: 'from-rose-400 to-pink-500',
     slugs: ['firefly-festival-of-majuli', 'river-dolphins-secret', 'music-dimasa', 'tigers-whisker', 'singing-bamboo'],
     skills: ['Arduino', 'Circuits', 'Sensors'],
-    prerequisite: { name: 'Arduino Basics', href: '/learn/arduino-basics', desc: 'Learn setup/loop, LEDs, input, and Serial — everything you need for electronics stories' },
+    prerequisite: { name: 'Arduino Basics', href: '/learn/arduino-basics', desc: 'Learn setup/loop, LEDs, input, Serial, and audio — everything you need for electronics stories', courseSlug: 'arduino-basics' as BasicsCourseSlug, totalLessons: 7 },
   },
   {
     id: 'mythology-stem',
@@ -294,6 +295,7 @@ export default function LessonPlanPage() {
   const [expandedGoal, setExpandedGoal] = useState<string | null>(null);
   const [goalTab, setGoalTab] = useState<'curated' | 'discipline'>('curated');
   const { isStoryComplete, isLevelComplete, getStoryProgress } = useProgress();
+  const basicsProgress = useBasicsProgress();
   const { streak, recordActivity } = useStreak(user?.id);
 
   useEffect(() => {
@@ -650,17 +652,37 @@ export default function LessonPlanPage() {
                             </button>
                             {isExpanded && (
                               <div className="border-t border-gray-100 dark:border-gray-700 px-5 pb-5">
-                                {'prerequisite' in goal && (goal as any).prerequisite && (
-                                  <Link href={(goal as any).prerequisite.href}
-                                    className="flex items-center gap-3 mt-3 mb-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 hover:border-amber-400 dark:hover:border-amber-600 transition-colors">
-                                    <span className="text-amber-500 text-lg">📚</span>
-                                    <div className="flex-1">
-                                      <p className="text-sm font-semibold text-amber-700 dark:text-amber-300">Start with: {(goal as any).prerequisite.name}</p>
-                                      <p className="text-xs text-gray-500 dark:text-gray-400">{(goal as any).prerequisite.desc}</p>
+                                {'prerequisite' in goal && (goal as any).prerequisite && (() => {
+                                  const prereq = (goal as any).prerequisite as { name: string; href: string; desc: string; courseSlug: BasicsCourseSlug; totalLessons: number };
+                                  const done = basicsProgress.getCompletedCount(prereq.courseSlug);
+                                  const total = prereq.totalLessons;
+                                  const complete = done >= total;
+                                  return (
+                                    <div className={`mt-3 mb-2 p-3 rounded-xl border transition-colors ${complete ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-800' : 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800'}`}>
+                                      <div className="flex items-center gap-3">
+                                        <span className="text-lg">{complete ? '✅' : '📚'}</span>
+                                        <div className="flex-1 min-w-0">
+                                          <p className={`text-sm font-semibold ${complete ? 'text-emerald-700 dark:text-emerald-300' : 'text-amber-700 dark:text-amber-300'}`}>
+                                            {complete ? 'Prerequisite complete:' : 'Start with:'} {prereq.name}
+                                          </p>
+                                          <p className="text-xs text-gray-500 dark:text-gray-400">{prereq.desc}</p>
+                                          {/* Progress bar */}
+                                          {!complete && done > 0 && (
+                                            <div className="mt-1.5 flex items-center gap-2">
+                                              <div className="flex-1 h-1.5 bg-amber-200 dark:bg-amber-800 rounded-full overflow-hidden">
+                                                <div className="h-full bg-amber-500 rounded-full transition-all" style={{ width: `${(done / total) * 100}%` }} />
+                                              </div>
+                                              <span className="text-[10px] font-semibold text-amber-600 dark:text-amber-400">{done}/{total}</span>
+                                            </div>
+                                          )}
+                                        </div>
+                                        <Link href={prereq.href} className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${complete ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300' : 'bg-amber-500 text-white hover:bg-amber-600'}`}>
+                                          {complete ? 'Review' : done > 0 ? 'Continue' : 'Start'}
+                                        </Link>
+                                      </div>
                                     </div>
-                                    <ArrowRight className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                                  </Link>
-                                )}
+                                  );
+                                })()}
                                 <div className="flex items-center justify-between py-3">
                                   <span className="text-xs text-gray-500 dark:text-gray-400">{goalLessons.length} stories</span>
                                   <button onClick={() => addGoal(goal.slugs)} className="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline">Add all to plan</button>
@@ -736,17 +758,36 @@ export default function LessonPlanPage() {
                         {/* Expanded: show individual stories */}
                         {isExpanded && (
                           <div className="border-t border-gray-100 dark:border-gray-700 px-5 pb-5">
-                            {'prerequisite' in goal && (goal as any).prerequisite && (
-                              <Link href={(goal as any).prerequisite.href}
-                                className="flex items-center gap-3 mt-3 mb-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 hover:border-amber-400 dark:hover:border-amber-600 transition-colors">
-                                <span className="text-amber-500 text-lg">📚</span>
-                                <div className="flex-1">
-                                  <p className="text-sm font-semibold text-amber-700 dark:text-amber-300">Start with: {(goal as any).prerequisite.name}</p>
-                                  <p className="text-xs text-gray-500 dark:text-gray-400">{(goal as any).prerequisite.desc}</p>
+                            {'prerequisite' in goal && (goal as any).prerequisite && (() => {
+                              const prereq = (goal as any).prerequisite as { name: string; href: string; desc: string; courseSlug: BasicsCourseSlug; totalLessons: number };
+                              const done = basicsProgress.getCompletedCount(prereq.courseSlug);
+                              const total = prereq.totalLessons;
+                              const complete = done >= total;
+                              return (
+                                <div className={`mt-3 mb-2 p-3 rounded-xl border transition-colors ${complete ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-800' : 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800'}`}>
+                                  <div className="flex items-center gap-3">
+                                    <span className="text-lg">{complete ? '✅' : '📚'}</span>
+                                    <div className="flex-1 min-w-0">
+                                      <p className={`text-sm font-semibold ${complete ? 'text-emerald-700 dark:text-emerald-300' : 'text-amber-700 dark:text-amber-300'}`}>
+                                        {complete ? 'Prerequisite complete:' : 'Start with:'} {prereq.name}
+                                      </p>
+                                      <p className="text-xs text-gray-500 dark:text-gray-400">{prereq.desc}</p>
+                                      {!complete && done > 0 && (
+                                        <div className="mt-1.5 flex items-center gap-2">
+                                          <div className="flex-1 h-1.5 bg-amber-200 dark:bg-amber-800 rounded-full overflow-hidden">
+                                            <div className="h-full bg-amber-500 rounded-full transition-all" style={{ width: `${(done / total) * 100}%` }} />
+                                          </div>
+                                          <span className="text-[10px] font-semibold text-amber-600 dark:text-amber-400">{done}/{total}</span>
+                                        </div>
+                                      )}
+                                    </div>
+                                    <Link href={prereq.href} className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${complete ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300' : 'bg-amber-500 text-white hover:bg-amber-600'}`}>
+                                      {complete ? 'Review' : done > 0 ? 'Continue' : 'Start'}
+                                    </Link>
+                                  </div>
                                 </div>
-                                <ArrowRight className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                              </Link>
-                            )}
+                              );
+                            })()}
                             <div className="flex items-center justify-between py-3">
                               <span className="text-xs text-gray-500 dark:text-gray-400">{goalLessons.length} stories &middot; ~{goalLessons.length * 12} hours</span>
                               <button

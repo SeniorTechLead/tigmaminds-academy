@@ -1,0 +1,175 @@
+import type { Problem } from '../playground-problems';
+
+export const problems: Problem[] = [
+{
+    id: 159, slug: 'recursive-sum', title: 'Recursive Sum',
+    story: 'The Sacred River Ganges', storySlug: 'sacred-river-ganges',
+    description: 'Write `recursive_sum(lst)` that sums a list of numbers using recursion (no loops, no sum()).',
+    difficulty: 'easy', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Sum a list recursively.', hint: 'Base case: empty list → 0. Recursive: first element + recursive_sum(rest).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def recursive_sum(lst):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5]', expected: '15', label: 'Basic' },
+          { input: '[]', expected: '0', label: 'Empty' },
+          { input: '[42]', expected: '42', label: 'Single' },
+          { input: '[-1, 1, -1, 1]', expected: '0', label: 'Cancelling' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle nested lists: recursive_sum([1, [2, [3]]]) → 6.', hint: 'If element is a list, recurse into it. Use isinstance(x, list).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def recursive_sum(lst):\n    """Sum nested lists recursively."""\n    pass\n',
+        testCases: [
+          { input: '[1, [2, [3, [4]]]]', expected: '10', label: 'Deeply nested' },
+          { input: '[[1, 2], [3, 4]]', expected: '10', label: 'Two nested' },
+          { input: '[]', expected: '0', label: 'Empty' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use tail recursion pattern with an accumulator for O(1) stack usage conceptually.', hint: 'Add an acc parameter with default 0. Return acc when list empty.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def recursive_sum(lst, acc=0):\n    """Tail-recursive sum with accumulator."""\n    pass\n',
+        testCases: [
+          { input: 'list(range(100))', expected: '4950', label: 'Larger list' },
+          { input: '[1, 2, 3]', expected: '6', label: 'Basic' },
+        ] },
+    ],
+  },
+{
+    id: 160, slug: 'flatten-recursive', title: 'Flatten List',
+    story: 'The Little River That Joined the Sea', storySlug: 'little-river-joined-sea',
+    description: 'Write `flatten(lst)` that takes a nested list of any depth and returns a flat list. Example: `flatten([1, [2, [3]], 4])` → `[1, 2, 3, 4]`.',
+    difficulty: 'easy', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Flatten nested lists.', hint: 'For each element: if it is a list, recursively flatten it. Otherwise, add to result.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def flatten(lst):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, [2, [3]], 4]', expected: '[1, 2, 3, 4]', label: 'Mixed depth' },
+          { input: '[[1, 2], [3, [4, 5]]]', expected: '[1, 2, 3, 4, 5]', label: 'Two levels' },
+          { input: '[]', expected: '[]', label: 'Empty' },
+          { input: '[1, 2, 3]', expected: '[1, 2, 3]', label: 'Already flat' },
+          { input: '[[[[1]]]]', expected: '[1]', label: 'Very deep' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add a max_depth parameter. Only flatten up to that depth.', hint: 'Decrement depth on each recursive call. Stop flattening when depth = 0.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def flatten(lst, max_depth=float("inf")):\n    """Flatten up to max_depth levels."""\n    pass\n',
+        testCases: [
+          { input: '[1, [2, [3]]], 1', expected: '[1, 2, [3]]', label: 'Depth 1' },
+          { input: '[1, [2, [3]]], 2', expected: '[1, 2, 3]', label: 'Depth 2' },
+          { input: '[1, [2, [3]]], 0', expected: '[1, [2, [3]]]', label: 'Depth 0 = no flatten' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Implement using a generator (yield) for memory efficiency.', hint: 'Use yield instead of appending to a list. yield from for recursive calls.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def flatten(lst):\n    """Generator-based flatten using yield."""\n    pass\n',
+        testCases: [
+          { input: '[1, [2, [3]], 4]', expected: '[1, 2, 3, 4]', label: 'Generator result (wrap in list)' },
+          { input: '[[1, 2], [3, [4, 5]]]', expected: '[1, 2, 3, 4, 5]', label: 'Nested' },
+        ] },
+    ],
+  },
+{
+    id: 161, slug: 'fibonacci-recursive', title: 'Fibonacci Memoized',
+    story: 'The Bodhi Tree and Enlightenment', storySlug: 'bodhi-tree-enlightenment',
+    description: 'Write `fib(n)` that returns the nth Fibonacci number. F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2).',
+    difficulty: 'medium', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Implement recursive Fibonacci.', hint: 'Base cases: fib(0)=0, fib(1)=1. Otherwise fib(n-1) + fib(n-2).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def fib(n):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '0', expected: '0', label: 'F(0)' },
+          { input: '1', expected: '1', label: 'F(1)' },
+          { input: '10', expected: '55', label: 'F(10)' },
+          { input: '20', expected: '6765', label: 'F(20)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Add memoization to avoid exponential time.', hint: 'Use a dict as cache. Check if n is already computed before recursing.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def fib(n, memo={}):\n    """Memoized Fibonacci — O(n) time."""\n    pass\n',
+        testCases: [
+          { input: '50', expected: '12586269025', label: 'F(50) fast' },
+          { input: '0', expected: '0', label: 'F(0)' },
+          { input: '100', expected: '354224848179261915075', label: 'F(100)' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use @functools.lru_cache and compare. Also implement iterative version.', hint: '@lru_cache(maxsize=None) on a recursive function gives free memoization.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def fib_iterative(n):\n    """Iterative Fibonacci — O(n) time, O(1) space."""\n    pass\n',
+        testCases: [
+          { input: '50', expected: '12586269025', label: 'F(50)' },
+          { input: '0', expected: '0', label: 'F(0)' },
+          { input: '1', expected: '1', label: 'F(1)' },
+        ] },
+    ],
+  },
+{
+    id: 162, slug: 'recursive-binary-search', title: 'Recursive Binary Search',
+    story: 'The Postman of the Hills', storySlug: 'postman-of-the-hills',
+    description: 'Write `binary_search(sorted_list, target)` using recursion. Return the index if found, -1 otherwise.',
+    difficulty: 'medium', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Binary search recursively.', hint: 'Compare target to middle. If less, search left half. If greater, search right half. Base: empty range → -1.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-search', label: 'Search in the Library' },
+        starterCode: 'def binary_search(lst, target, lo=0, hi=None):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 3, 5, 7, 9], 5', expected: '2', label: 'Found in middle' },
+          { input: '[1, 3, 5, 7, 9], 1', expected: '0', label: 'First element' },
+          { input: '[1, 3, 5, 7, 9], 9', expected: '4', label: 'Last element' },
+          { input: '[1, 3, 5, 7, 9], 4', expected: '-1', label: 'Not found' },
+          { input: '[], 5', expected: '-1', label: 'Empty list' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Return the index of the first occurrence if duplicates exist.', hint: 'When found, check if there is an earlier occurrence in the left half.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-search', label: 'Search in the Library' },
+        starterCode: 'def binary_search(lst, target, lo=0, hi=None):\n    """Return index of first occurrence."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 2, 2, 3], 2', expected: '1', label: 'First of duplicates' },
+          { input: '[5, 5, 5, 5], 5', expected: '0', label: 'All same' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Count and return the number of recursive calls made. Return (index, call_count).', hint: 'Pass a mutable counter (list of one int) through the recursion.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-search', label: 'Search in the Library' },
+        starterCode: 'def binary_search(lst, target):\n    """Return (index, call_count)."""\n    pass\n',
+        testCases: [
+          { input: 'list(range(100)), 50', expected: 'True', label: 'Index 50, few calls (checked via [0] and [1])' },
+          { input: 'list(range(1024)), 512', expected: 'True', label: 'Max ~10 calls for 1024 elements' },
+        ] },
+    ],
+  },
+{
+    id: 163, slug: 'tower-of-hanoi', title: 'Tower of Hanoi',
+    story: 'The Dharma Wheel of Nalanda', storySlug: 'dharma-wheel-nalanda',
+    description: 'Write `hanoi(n, source="A", target="C", auxiliary="B")` that returns a list of moves to solve the Tower of Hanoi for n disks. Each move is a tuple (from_peg, to_peg).',
+    difficulty: 'hard', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Solve Tower of Hanoi recursively.', hint: 'Move n-1 disks to auxiliary. Move largest to target. Move n-1 from auxiliary to target.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def hanoi(n, source="A", target="C", auxiliary="B"):\n    # Return list of (from, to) tuples\n    pass\n',
+        testCases: [
+          { input: '1', expected: '[("A", "C")]', label: '1 disk' },
+          { input: '2', expected: '[("A", "B"), ("A", "C"), ("B", "C")]', label: '2 disks' },
+          { input: '3', expected: 'True', label: '7 moves (checked via len)' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Validate n > 0. Return move count alongside moves.', hint: 'The formula is 2^n - 1 moves. Validate n >= 1.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def hanoi(n):\n    """Return (moves_list, move_count)."""\n    pass\n',
+        testCases: [
+          { input: '3', expected: 'True', label: '7 moves total' },
+          { input: '0', expected: '([], 0)', label: 'Zero disks' },
+          { input: '4', expected: 'True', label: '15 moves' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Print visual state of all three pegs after each move. Return the final state.', hint: 'Use lists for each peg. Pop from source, append to target after each recursive move.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def hanoi_visual(n):\n    """Return list of peg states after each move.\n    \n    Each state is {"A": [...], "B": [...], "C": [...]}\n    """\n    pass\n',
+        testCases: [
+          { input: '2', expected: 'True', label: '3 states (after each move)' },
+        ] },
+    ],
+  },
+{
+    id: 164, slug: 'power-set', title: 'Power Set',
+    story: 'The Seven Sisters of the Northeast', storySlug: 'seven-sisters-states',
+    description: 'Write `power_set(s)` that returns all subsets of a list. Example: `power_set([1, 2])` → `[[], [1], [2], [1, 2]]`.',
+    difficulty: 'hard', topic: 'recursion',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Generate all subsets.', hint: 'Base: power_set([]) = [[]]. For each element, take all subsets without it and add it to each.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def power_set(s):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[]', expected: '[[]]', label: 'Empty set' },
+          { input: '[1]', expected: '[[], [1]]', label: 'Single element' },
+          { input: '[1, 2]', expected: 'True', label: '4 subsets (checked via len)' },
+          { input: '[1, 2, 3]', expected: 'True', label: '8 subsets' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Return subsets sorted by length, then lexicographically.', hint: 'Sort by (len(subset), subset).', hintRef: { slug: 'algorithms-data-structures', section: 'algo-recursion', label: 'Recursion in the Library' },
+        starterCode: 'def power_set(s):\n    """Return sorted subsets: by length, then by content."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3]', expected: '[[], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]', label: 'Sorted output' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use a generator to yield subsets lazily instead of building the full list.', hint: 'yield from recursion. yield each subset as you build it.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def power_set(s):\n    """Generator that yields subsets lazily."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3]', expected: 'True', label: '8 subsets yielded (checked via len(list(...)))' },
+        ] },
+    ],
+  },
+];

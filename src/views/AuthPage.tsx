@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function AuthPage() {
-  const [mode, setMode] = useState<'login' | 'signup'>('login');
+  const [mode, setMode] = useState<'login' | 'signup' | 'forgot' | 'resend'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -19,6 +19,16 @@ export default function AuthPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const explicitReturnTo = searchParams?.get('returnTo');
+  const verified = searchParams?.get('verified');
+  const urlError = searchParams?.get('error');
+
+  // Show messages from redirect query params
+  useEffect(() => {
+    if (verified === 'true') setSuccess('Email verified! You can now log in.');
+    if (urlError === 'invalid_link') setError('Invalid verification link.');
+    if (urlError === 'invalid_or_expired_token') setError('This link is invalid or has already been used.');
+    if (urlError === 'token_expired') setError('This link has expired. Please request a new one.');
+  }, [verified, urlError]);
 
   // If user is already signed in, route based on role or explicit returnTo
   useEffect(() => {
@@ -31,7 +41,7 @@ export default function AuthPage() {
     if (hasRole('admin') || hasRole('teacher')) {
       router.push('/program/mentor', { replace: true });
     } else if (hasRole('parent')) {
-      router.push('/program/parent', { replace: true });
+      router.push('/program/guardian', { replace: true });
     } else {
       router.push('/lessons', { replace: true });
     }
@@ -62,6 +72,41 @@ export default function AuthPage() {
     setLoading(false);
   };
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(''); setSuccess(''); setLoading(true);
+    if (!email.trim()) { setError('Enter your email address first.'); setLoading(false); return; }
+    try {
+      const res = await fetch('/api/auth/send-reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setError(data.error || 'Failed to send reset email.'); }
+      else { setSuccess(`If an account exists for ${email}, a password reset link has been sent. Check your inbox.`); }
+    } catch { setError('Network error. Please try again.'); }
+    setLoading(false);
+  };
+
+  const handleResendConfirmation = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(''); setSuccess(''); setLoading(true);
+    if (!email.trim()) { setError('Enter your email address first.'); setLoading(false); return; }
+    try {
+      const res = await fetch('/api/auth/send-verification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setError(data.error || 'Failed to send email.'); }
+      else if (data.action === 'reset_sent') { setSuccess(`We found your account. A password setup link has been sent to ${email}. Check your inbox.`); }
+      else { setSuccess(`Verification email sent to ${email}. Check your inbox (and spam folder).`); }
+    } catch { setError('Network error. Please try again.'); }
+    setLoading(false);
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       <Header />
@@ -73,16 +118,21 @@ export default function AuthPage() {
               <span className="text-white font-extrabold text-xl">TMA</span>
             </div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              {mode === 'login' ? 'Welcome Back' : 'Join TigmaMinds Academy'}
+              {mode === 'login' ? 'Welcome Back' : mode === 'signup' ? 'Join TigmaMinds Academy' : mode === 'forgot' ? 'Reset Password' : 'Resend Confirmation'}
             </h1>
             <p className="text-gray-600 dark:text-gray-300">
               {mode === 'login'
                 ? 'Sign in to track your progress and earn certificates.'
-                : 'Create an account to save your progress across devices.'}
+                : mode === 'signup'
+                ? 'Create an account to save your progress across devices.'
+                : mode === 'forgot'
+                ? 'We\'ll email you a link to reset your password.'
+                : 'We\'ll send you a link to set up or reset your password.'}
             </p>
           </div>
 
-          {/* Tab toggle */}
+          {/* Tab toggle — hide for forgot/resend */}
+          {(mode === 'login' || mode === 'signup') && (
           <div className="flex gap-1 bg-gray-100 dark:bg-gray-800 rounded-xl p-1 mb-6">
             <button
               onClick={() => { setMode('login'); setError(''); setSuccess(''); }}
@@ -101,6 +151,7 @@ export default function AuthPage() {
               Sign Up
             </button>
           </div>
+          )}
 
           {error && (
             <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-sm text-red-700 dark:text-red-300">
@@ -114,8 +165,8 @@ export default function AuthPage() {
             </div>
           )}
 
-          {/* Google OAuth */}
-          <button
+          {/* Google OAuth — hide for forgot/resend */}
+          {(mode === 'login' || mode === 'signup') && <button
             type="button"
             onClick={() => { setGoogleRedirecting(true); signInWithGoogle(); }}
             disabled={googleRedirecting}
@@ -134,15 +185,59 @@ export default function AuthPage() {
                 Continue with Google
               </>
             )}
-          </button>
+          </button>}
 
           {/* Divider */}
-          <div className="flex items-center gap-3 mb-4">
+          {(mode === 'login' || mode === 'signup') && <div className="flex items-center gap-3 mb-4">
             <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
             <span className="text-xs text-gray-400 dark:text-gray-500 font-medium uppercase">or continue with email</span>
             <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
-          </div>
+          </div>}
 
+          {/* Forgot password form */}
+          {mode === 'forgot' && (
+            <form onSubmit={handleForgotPassword} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Enter your email and we'll send a password reset link.</p>
+              <div className="mb-4">
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="you@example.com"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
+                </div>
+              </div>
+              <button type="submit" disabled={loading}
+                className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2">
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Send Reset Link'}
+              </button>
+              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+                <button onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="text-amber-600 dark:text-amber-400 font-semibold hover:underline">Back to login</button>
+              </p>
+            </form>
+          )}
+
+          {/* Resend confirmation form */}
+          {mode === 'resend' && (
+            <form onSubmit={handleResendConfirmation} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Can't log in? Enter your email and we'll send a link to set up or reset your password.</p>
+              <div className="mb-4">
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="you@example.com"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
+                </div>
+              </div>
+              <button type="submit" disabled={loading}
+                className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2">
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Send Login Link'}
+              </button>
+              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+                <button onClick={() => { setMode('login'); setError(''); setSuccess(''); }} className="text-amber-600 dark:text-amber-400 font-semibold hover:underline">Back to login</button>
+              </p>
+            </form>
+          )}
+
+          {/* Main login/signup form */}
+          {(mode === 'login' || mode === 'signup') && (
           <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
             {mode === 'signup' && (
               <div className="mb-4">
@@ -211,8 +306,22 @@ export default function AuthPage() {
                 </>
               )}
             </button>
-          </form>
 
+            {/* Help links — only on login */}
+            {mode === 'login' && (
+              <div className="flex items-center justify-between mt-4 text-xs">
+                <button onClick={() => { setMode('forgot'); setError(''); setSuccess(''); }} className="text-amber-600 dark:text-amber-400 font-semibold hover:underline">
+                  Forgot password?
+                </button>
+                <button onClick={() => { setMode('resend'); setError(''); setSuccess(''); }} className="text-gray-500 dark:text-gray-400 hover:underline">
+                  Can't log in?
+                </button>
+              </div>
+            )}
+          </form>
+          )}
+
+          {(mode === 'login' || mode === 'signup') && (
           <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
             {mode === 'login' ? (
               <>No account? <button onClick={() => setMode('signup')} className="text-amber-600 dark:text-amber-400 font-semibold hover:underline">Sign up free</button></>
@@ -220,6 +329,7 @@ export default function AuthPage() {
               <>Already have an account? <button onClick={() => setMode('login')} className="text-amber-600 dark:text-amber-400 font-semibold hover:underline">Log in</button></>
             )}
           </p>
+          )}
 
           <p className="text-center text-xs text-gray-400 dark:text-gray-500 mt-4">
             You can also use the platform without an account — your progress will be saved locally in your browser.

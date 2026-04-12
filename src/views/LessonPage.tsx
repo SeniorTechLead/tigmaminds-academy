@@ -13,6 +13,7 @@ import DiagramZoom from '../components/DiagramZoom';
 import { useLessonMeta } from '../contexts/LessonMetaContext';
 import { Lock } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { useBasicsProgress, type BasicsCourseSlug } from '../contexts/BasicsProgressContext';
 import SignUpGate from '../components/SignUpGate';
 
 type Level = 'listener' | 'explorer' | 'builder' | 'engineer' | 'creator';
@@ -39,6 +40,7 @@ export default function LessonPage() {
   const { markLevelComplete, isLevelComplete, canMarkComplete, recordLevelViewed, getStoryProgress, getLevelDetail } = useProgress();
   const { isDemoStory } = useLessonMeta();
   const { user } = useAuth();
+  const basicsProgress = useBasicsProgress();
   const isSignedIn = !!user;
   const isDemo = lesson ? isDemoStory(lesson.slug) : false;
   const [clientReady, setClientReady] = useState(false);
@@ -242,10 +244,13 @@ export default function LessonPage() {
               const arduinoSlugs = ['river-dolphins-secret', 'fireflies-dont-burn', 'firefly-festival-of-majuli', 'music-dimasa', 'tigers-whisker', 'singing-bamboo'];
               const htmlSlugs = ['boy-who-built-a-library'];
               const codingPrereq = arduinoSlugs.includes(lesson.slug)
-                ? { name: 'Arduino Basics', href: '/learn/arduino-basics' }
+                ? { name: 'Arduino Basics', href: '/learn/arduino-basics', courseSlug: 'arduino-basics' as BasicsCourseSlug, total: 6 }
                 : htmlSlugs.includes(lesson.slug)
-                ? { name: 'Web Basics', href: '/learn/web-basics' }
-                : { name: 'Python Basics', href: '/learn/python-basics' };
+                ? { name: 'Web Basics', href: '/learn/web-basics', courseSlug: 'web-basics' as BasicsCourseSlug, total: 8 }
+                : { name: 'Python Basics', href: '/learn/python-basics', courseSlug: 'python-basics' as BasicsCourseSlug, total: 8 };
+
+              const prereqDone = basicsProgress.getCompletedCount(codingPrereq.courseSlug);
+              const prereqComplete = prereqDone >= codingPrereq.total;
 
               // Find stories that list this one in their nextLessons (= this story's prerequisites)
               const priorStories = lessons.filter(l =>
@@ -261,13 +266,20 @@ export default function LessonPage() {
                   </h3>
                   <div className="space-y-2">
                     <Link href={`${codingPrereq.href}?from=${lesson.slug}`}
-                      className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-600 transition-colors">
-                      <span className="text-amber-500">📚</span>
+                      className={`flex items-center gap-3 p-3 rounded-lg border transition-colors ${prereqComplete ? 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-200 dark:border-emerald-800' : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-600'}`}>
+                      <span>{prereqComplete ? '✅' : '📚'}</span>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">{codingPrereq.name}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">Prerequisite coding course</p>
+                        <p className={`text-sm font-medium ${prereqComplete ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-900 dark:text-white'}`}>{codingPrereq.name}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {prereqComplete ? 'Complete' : prereqDone > 0 ? `${prereqDone}/${codingPrereq.total} lessons done` : 'Prerequisite coding course'}
+                        </p>
+                        {!prereqComplete && prereqDone > 0 && (
+                          <div className="mt-1 w-24 h-1 bg-amber-200 dark:bg-amber-800 rounded-full overflow-hidden">
+                            <div className="h-full bg-amber-500 rounded-full" style={{ width: `${(prereqDone / codingPrereq.total) * 100}%` }} />
+                          </div>
+                        )}
                       </div>
-                      <ArrowRight className="w-4 h-4 text-gray-400" />
+                      {prereqComplete ? <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" /> : <ArrowRight className="w-4 h-4 text-gray-400" />}
                     </Link>
                     {priorStories.map(ps => {
                       const reason = ps.level0?.nextLessons?.find((nl: { slug: string; reason: string }) => nl.slug === lesson.slug)?.reason;
@@ -365,19 +377,33 @@ export default function LessonPage() {
                     const arduinoSlugs = ['river-dolphins-secret', 'fireflies-dont-burn'];
                     const htmlSlugs = ['boy-who-built-a-library'];
                     const prereq = arduinoSlugs.includes(lesson.slug)
-                      ? { name: 'Arduino Basics', href: '/learn/arduino-basics', lessons: '6' }
+                      ? { name: 'Arduino Basics', href: '/learn/arduino-basics', lessons: '6', courseSlug: 'arduino-basics' as BasicsCourseSlug, total: 6 }
                       : htmlSlugs.includes(lesson.slug)
-                      ? { name: 'Web Basics', href: '/learn/web-basics', lessons: '8' }
-                      : { name: 'Python Basics', href: '/learn/python-basics', lessons: '8' };
+                      ? { name: 'Web Basics', href: '/learn/web-basics', lessons: '8', courseSlug: 'web-basics' as BasicsCourseSlug, total: 8 }
+                      : { name: 'Python Basics', href: '/learn/python-basics', lessons: '8', courseSlug: 'python-basics' as BasicsCourseSlug, total: 8 };
+                    const pDone = basicsProgress.getCompletedCount(prereq.courseSlug);
+                    const pComplete = pDone >= prereq.total;
                     return (
                       <>
+                        {!pComplete && (
                         <div className="mb-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 flex items-center gap-3">
                           <span className="text-amber-600 dark:text-amber-400 text-lg">💡</span>
-                          <p className="text-sm text-gray-700 dark:text-gray-300">
-                            <span className="font-semibold">New to coding?</span>{' '}
-                            Complete the <a href={`${prereq.href}?from=${lesson.slug}`} className="text-amber-700 dark:text-amber-400 underline font-medium">{prereq.name}</a> course first — {prereq.lessons} short lessons that teach you everything you need for Level 1.
-                          </p>
+                          <div className="flex-1">
+                            <p className="text-sm text-gray-700 dark:text-gray-300">
+                              <span className="font-semibold">{pDone > 0 ? 'Almost there!' : 'New to coding?'}</span>{' '}
+                              {pDone > 0
+                                ? <>You have completed {pDone}/{prereq.total} lessons in <a href={`${prereq.href}?from=${lesson.slug}`} className="text-amber-700 dark:text-amber-400 underline font-medium">{prereq.name}</a>. Finish the rest before starting Level 1.</>
+                                : <>Complete the <a href={`${prereq.href}?from=${lesson.slug}`} className="text-amber-700 dark:text-amber-400 underline font-medium">{prereq.name}</a> course first — {prereq.lessons} short lessons that teach you everything you need for Level 1.</>
+                              }
+                            </p>
+                            {pDone > 0 && (
+                              <div className="mt-2 w-32 h-1.5 bg-amber-200 dark:bg-amber-800 rounded-full overflow-hidden">
+                                <div className="h-full bg-amber-500 rounded-full" style={{ width: `${(pDone / prereq.total) * 100}%` }} />
+                              </div>
+                            )}
+                          </div>
                         </div>
+                        )}
                         <Level1 />
                       </>
                     );

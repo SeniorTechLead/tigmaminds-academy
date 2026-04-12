@@ -247,7 +247,12 @@ void loop() {
   Serial.println("  Shape: concave fillet ... GOOD");
   Serial.println("  Surface: shiny, smooth ... GOOD");
   Serial.println("  Coverage: pad + lead wetted ... GOOD");
+  Serial.println("  Continuity test (multimeter beep):");
+  tone(8, 2000);
+  delay(300);
+  noTone(8);
   Serial.println("  Resistance: < 0.01 ohm ... PASS");
+  Serial.println("  Beep! Circuit is complete.");
   Serial.println("");
 
 

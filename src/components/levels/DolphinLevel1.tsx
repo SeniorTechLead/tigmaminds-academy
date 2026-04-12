@@ -66,7 +66,7 @@ function SonarMiniLesson({ lesson, number }: { lesson: SonarLesson; number: numb
         </div>
       )}
       <div className="border-t border-gray-200 dark:border-gray-700">
-        <ArduinoPlayground starterCode={lesson.code} title={`Sonar ${number}`} ledCount={lesson.ledCount || 1} />
+        <ArduinoPlayground starterCode={lesson.code} title={`Sonar ${number}`} ledCount={lesson.ledCount || 1} sonarMode />
       </div>
       {lesson.challenge && (
         <div className="px-6 py-3 bg-sky-50 dark:bg-sky-900/20 border-t border-sky-200 dark:border-sky-800">
@@ -253,7 +253,7 @@ void loop() {
 }`,
       ledCount: 1,
       challenge: 'The LED brightness indicates proximity — brighter = closer object. A real radar display would draw this as a semicircle with dots at each (angle, distance) pair.',
-      successHint: 'You just built the logic for a radar/sonar scanner. In Level 2, you\'ll send this data to a Processing or Python sketch that draws a real-time radar sweep on screen.',
+      successHint: 'You\'ve written the logic for a radar/sonar scanner. In Level 2, you\'ll send this data to a Processing or Python sketch that draws a real-time radar sweep on screen.',
     },
     {
       title: 'Speed of sound — temperature matters',
@@ -374,9 +374,9 @@ The same principles power submarine navigation, medical imaging, autonomous vehi
       storyConnection: 'Nabajit learned the dolphin\'s secret: the world speaks to those who close their eyes and open their ears. You\'ve learned to build the technology that does the same thing — turning sound into sight, echoes into maps, clicks into understanding.',
       checkQuestion: 'A bat, a dolphin, a submarine, and an autonomous car all use echolocation. What\'s different about each one?',
       checkAnswer: 'The medium (air vs. water), the frequency (bats: 20-200 kHz, dolphins: 20-130 kHz, submarine sonar: 1-10 kHz, car ultrasonic: 40 kHz), and the range (bat: 5m, dolphin: 100m, submarine: 10km, car: 5m). Same principle, wildly different implementations.',
-      codeIntro: 'Summary of everything: a complete sonar readout.',
+      codeIntro: 'Summary of everything: a complete sonar readout with audio proximity alert.',
       code: `// Lesson 6: Complete Sonar System
-// All concepts combined
+// All concepts combined + audio proximity beep
 
 void setup() {
   Serial.println("============================");
@@ -387,6 +387,7 @@ void setup() {
   Serial.println("Range: 2 cm - 400 cm");
   Serial.println("Accuracy: +/- 3mm");
   Serial.println("Temp sensor: enabled");
+  Serial.println("Buzzer: pin 8 (proximity beep)");
   Serial.println("");
 }
 
@@ -403,13 +404,25 @@ void loop() {
   Serial.println("Zone: WARNING (< 30 cm)");
   Serial.println("");
 
+  // Proximity beep — closer = higher pitch
+  tone(8, 1200);
   analogWrite(2, 200);
-  Serial.println("LED: proximity indicator ON");
-  delay(800);
-  analogWrite(2, 80);
+  Serial.println("LED + BEEP: proximity alert ON");
   delay(400);
+  noTone(8);
+  delay(200);
+
+  tone(8, 800);
+  analogWrite(2, 80);
+  delay(300);
+  noTone(8);
+  delay(200);
+
+  tone(8, 1200);
   analogWrite(2, 200);
-  delay(600);
+  delay(400);
+  noTone(8);
+  delay(200);
 }`,
       ledCount: 1,
       challenge: 'You\'ve gone from "sound bounces" to a complete measurement system with temperature correction and noise filtering. Level 2 builds the real hardware.',

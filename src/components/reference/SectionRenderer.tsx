@@ -1,4 +1,4 @@
-import { Suspense, Component, useState, useEffect, type ReactNode } from 'react';
+import { Suspense, Component, useState, useEffect, useRef, createContext, useContext, type ReactNode } from 'react';
 import type { ReferenceSection } from '../../data/reference';
 import diagramRegistry from './DiagramRegistry';
 import DiagramZoom from '../DiagramZoom';
@@ -25,6 +25,26 @@ import SignUpGate from '../SignUpGate';
  * Render inline markdown: **bold** and `code`.
  * Returns an array of React nodes.
  */
+// Search highlight context — set by SectionRenderer, consumed by renderInlineMarkdown
+const SearchHighlightContext = createContext('');
+
+function highlightSearchInText(text: string, searchQuery: string, key: number): React.ReactNode {
+  if (!searchQuery || searchQuery.length < 2) return text;
+  const regex = new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    regex.test(part)
+      ? <mark key={`sh${key}_${i}`} className="bg-amber-200 dark:bg-amber-700/50 text-inherit rounded px-0.5">{part}</mark>
+      : part
+  );
+}
+
+function HighlightText({ text, k }: { text: string; k: number }) {
+  const sq = useContext(SearchHighlightContext);
+  return <>{highlightSearchInText(text, sq, k)}</>;
+}
+
 function renderInlineMarkdown(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
   // Match **bold** and `code` spans
@@ -34,19 +54,16 @@ function renderInlineMarkdown(text: string): React.ReactNode[] {
   let key = 0;
 
   while ((match = regex.exec(text)) !== null) {
-    // Text before the match
     if (match.index > lastIndex) {
-      parts.push(text.slice(lastIndex, match.index));
+      parts.push(<HighlightText key={key++} text={text.slice(lastIndex, match.index)} k={key} />);
     }
     if (match[2]) {
-      // **bold**
       parts.push(
         <strong key={key++} className="font-semibold text-gray-900 dark:text-white">
-          {match[2]}
+          <HighlightText text={match[2]} k={key} />
         </strong>
       );
     } else if (match[3]) {
-      // `code`
       parts.push(
         <code
           key={key++}
@@ -59,9 +76,8 @@ function renderInlineMarkdown(text: string): React.ReactNode[] {
     lastIndex = match.index + match[0].length;
   }
 
-  // Remaining text after last match
   if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex));
+    parts.push(<HighlightText key={key++} text={text.slice(lastIndex)} k={key} />);
   }
 
   return parts;
@@ -166,6 +182,8 @@ function renderInteractive(config: NonNullable<ReferenceSection['interactive']>)
         <MatchingActivity
           pairs={config.props.pairs as [string, string][]}
           title={config.props.title as string}
+          explanations={config.props.explanations as string[] | undefined}
+          transformMatrices={config.props.transformMatrices as [number, number, number, number][] | undefined}
         />
       );
     case 'true-false': {
@@ -222,6 +240,7 @@ function renderInteractive(config: NonNullable<ReferenceSection['interactive']>)
 interface Props {
   section: ReferenceSection;
   level?: 0 | 1 | 2;
+  searchQuery?: string;
 }
 
 const GATED_INTERACTIVE_TYPES = new Set([
@@ -242,15 +261,15 @@ class DiagramErrorBoundary extends Component<{ children: ReactNode }, { hasError
   render() { return this.state.hasError ? null : this.props.children; }
 }
 
-export default function SectionRenderer({ section, level = 0 }: Props) {
+export default function SectionRenderer({ section, level = 0, searchQuery }: Props) {
   const { user } = useAuth();
   const isSignedIn = !!user;
   const DiagramComponent = section.diagram ? diagramRegistry[section.diagram] : null;
-
   return (
+    <SearchHighlightContext.Provider value={searchQuery || ''}>
     <div className="mb-6 last:mb-0">
       <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2">
-        {section.title}
+        <HighlightText text={section.title} k={99999} />
       </h4>
 
       {/* Beginner — everyone sees this */}
@@ -324,5 +343,6 @@ export default function SectionRenderer({ section, level = 0 }: Props) {
         </div>
       )}
     </div>
+    </SearchHighlightContext.Provider>
   );
 }

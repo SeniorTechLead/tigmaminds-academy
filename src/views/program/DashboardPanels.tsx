@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import {
   CheckCircle, Clock, AlertTriangle, Send, Plus, Camera,
-  MessageSquare, Tag, ChevronDown, ChevronRight, X,
+  MessageSquare, Tag, ChevronDown, ChevronRight, X, Loader2,
+  UserPlus, XCircle,
 } from 'lucide-react';
 import {
   getPayments,
@@ -632,5 +633,127 @@ export function PhotoUploadButton({
         className="hidden"
       />
     </button>
+  );
+}
+
+// ── Enrollment Requests Panel ─────────────────────────────
+
+interface EnrollmentRequest {
+  id: string;
+  guardian_name: string;
+  guardian_email: string;
+  guardian_phone: string | null;
+  student_name: string;
+  student_email: string;
+  student_age: number | null;
+  preferred_track: string | null;
+  message: string | null;
+  status: 'pending' | 'approved' | 'rejected';
+  admin_notes: string | null;
+  created_at: string;
+}
+
+export function EnrollmentRequestsPanel() {
+  const [requests, setRequests] = useState<EnrollmentRequest[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [processing, setProcessing] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { supabase } = await import('../../lib/supabase');
+      const { data } = await supabase
+        .from('enrollment_requests')
+        .select('*')
+        .order('created_at', { ascending: false });
+      setRequests((data || []) as EnrollmentRequest[]);
+      setLoading(false);
+    })();
+  }, []);
+
+  const updateStatus = async (id: string, status: 'approved' | 'rejected') => {
+    setProcessing(id);
+    const { supabase } = await import('../../lib/supabase');
+    await supabase.from('enrollment_requests').update({
+      status,
+      reviewed_at: new Date().toISOString(),
+    }).eq('id', id);
+    setRequests(prev => prev.map(r => r.id === id ? { ...r, status } : r));
+    setProcessing(null);
+  };
+
+  const pending = requests.filter(r => r.status === 'pending');
+  const reviewed = requests.filter(r => r.status !== 'pending');
+
+  if (loading) return <div className="p-8 text-center text-gray-400"><Loader2 className="w-5 h-5 animate-spin mx-auto" /></div>;
+
+  return (
+    <div className="p-4 space-y-4">
+      <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+        Enrollment Requests
+        {pending.length > 0 && <span className="ml-2 text-sm bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full">{pending.length} pending</span>}
+      </h3>
+
+      {requests.length === 0 && (
+        <p className="text-sm text-gray-500 dark:text-gray-400 py-8 text-center">No enrollment requests yet.</p>
+      )}
+
+      {/* Pending */}
+      {pending.map(r => (
+        <div key={r.id} className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <UserPlus className="w-4 h-4 text-amber-600" />
+                <span className="font-semibold text-gray-900 dark:text-white">{r.student_name}</span>
+                <span className="text-xs text-gray-500">{r.student_email}</span>
+                {r.student_age && <span className="text-xs text-gray-400">Age {r.student_age}</span>}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                Guardian: <span className="font-medium">{r.guardian_name}</span> ({r.guardian_email})
+                {r.guardian_phone && <span className="ml-2">{r.guardian_phone}</span>}
+              </div>
+              {r.preferred_track && <div className="text-xs text-gray-500 mt-1">Preferred: {r.preferred_track}</div>}
+              {r.message && <div className="text-xs text-gray-500 mt-1 italic">"{r.message}"</div>}
+              <div className="text-[10px] text-gray-400 mt-1">{new Date(r.created_at).toLocaleDateString()}</div>
+            </div>
+            <div className="flex gap-2 flex-shrink-0">
+              <button
+                onClick={() => updateStatus(r.id, 'approved')}
+                disabled={processing === r.id}
+                className="flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition-colors disabled:opacity-50"
+              >
+                {processing === r.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <CheckCircle className="w-3 h-3" />}
+                Approve
+              </button>
+              <button
+                onClick={() => updateStatus(r.id, 'rejected')}
+                disabled={processing === r.id}
+                className="flex items-center gap-1 px-3 py-1.5 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-xs font-semibold transition-colors disabled:opacity-50"
+              >
+                <XCircle className="w-3 h-3" /> Decline
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* Reviewed */}
+      {reviewed.length > 0 && (
+        <div className="mt-6">
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">Previously reviewed</p>
+          {reviewed.map(r => (
+            <div key={r.id} className={`flex items-center justify-between p-3 rounded-lg mb-1 ${r.status === 'approved' ? 'bg-emerald-50 dark:bg-emerald-900/10' : 'bg-gray-50 dark:bg-gray-800/50'}`}>
+              <div className="text-sm">
+                <span className="font-medium text-gray-900 dark:text-white">{r.student_name}</span>
+                <span className="text-gray-500 ml-2">{r.student_email}</span>
+              </div>
+              <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${r.status === 'approved' ? 'text-emerald-700 bg-emerald-100 dark:text-emerald-300 dark:bg-emerald-900/30' : 'text-gray-500 bg-gray-100 dark:text-gray-400 dark:bg-gray-700'}`}>
+                {r.status === 'approved' ? 'Approved' : 'Declined'}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

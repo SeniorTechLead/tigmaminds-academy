@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { BookOpen, ChevronRight, CheckCircle, Sparkles, Cpu } from 'lucide-react';
+import { BookOpen, ChevronRight, CheckCircle, Circle, Sparkles, Cpu } from 'lucide-react';
 import ArduinoPlayground from '../components/ArduinoPlayground';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useBasicsProgress } from '../contexts/BasicsProgressContext';
 
 const lessons = [
   {
@@ -262,10 +263,80 @@ void loop() {
     challenge: 'Add a running average: track the last 5 sensor readings in an array and print the average alongside each new reading. Also count total detections and print a summary showing the detection rate (detections / total readings) at the end of each session.',
     successHint: 'You just built a data logging system. Real wildlife conservation projects in Kaziranga use exactly this pattern — sensors detect animal crossings, log the data, and flag unusual activity. The only difference is scale.',
   },
+  {
+    title: 'Making sound — tone(), frequency, and the buzzer',
+    concept: `So far your Arduino can blink, fade, read buttons, and log data — but it is silent. A **piezo buzzer** changes that. Connect one to any digital pin and use \`tone(pin, frequency)\` to produce a sound at a specific pitch.
+
+**Frequency** is measured in **hertz (Hz)** — vibrations per second. Middle C on a piano is 262 Hz. The A above it is 440 Hz. Higher frequency = higher pitch. The human ear can hear roughly 20 Hz to 20,000 Hz.
+
+\`tone(pin, frequency)\` starts a continuous tone. \`tone(pin, frequency, duration)\` plays for a set number of milliseconds then stops. \`noTone(pin)\` silences it immediately.
+
+Why does this matter? Parking sensors beep faster as you get closer. Smoke alarms use a specific frequency pattern. Medical monitors use different pitches for different alerts. Every one of these is a \`tone()\` call with changing frequency and timing.`,
+    analogy: 'Think of a guitar string. A thick, loose string vibrates slowly — low frequency, deep sound. A thin, tight string vibrates fast — high frequency, high pitch. tone() tells the Arduino how fast to vibrate the buzzer. 262 vibrations per second = middle C. 880 vibrations per second = a high A. You are programming the string tension with a number.',
+    storyConnection: 'In "The River Dolphin\'s Secret," the dolphin uses clicks at specific frequencies to echolocate — higher frequencies for closer objects. In the sonar capstone, you will use tone() to create a pitch-mapped proximity alert that beeps higher as an object gets closer. This lesson teaches you the building block.',
+    starterCode: `// === MAKING SOUND ===
+// Buzzer on pin 5
+
+int buzzer = 5;
+
+void setup() {
+  pinMode(buzzer, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("=== Sound lesson ===");
+
+  // Play a startup melody
+  Serial.println("Playing startup melody...");
+  tone(buzzer, 262, 200);  // C
+  delay(250);
+  tone(buzzer, 330, 200);  // E
+  delay(250);
+  tone(buzzer, 392, 200);  // G
+  delay(250);
+  tone(buzzer, 523, 400);  // High C
+  delay(500);
+  noTone(buzzer);
+  Serial.println("Ready!");
+}
+
+void loop() {
+  // Sweep from low to high pitch
+  Serial.println("Pitch sweep: low to high");
+  for (int freq = 200; freq <= 1000; freq = freq + 50) {
+    tone(buzzer, freq, 80);
+    Serial.print("  ");
+    Serial.print(freq);
+    Serial.println(" Hz");
+    delay(100);
+  }
+  noTone(buzzer);
+  delay(500);
+
+  // Alarm pattern: two-tone alternating
+  Serial.println("Alarm pattern:");
+  for (int i = 0; i < 5; i++) {
+    tone(buzzer, 800, 150);
+    delay(200);
+    tone(buzzer, 1200, 150);
+    delay(200);
+  }
+  noTone(buzzer);
+
+  Serial.println("--- Cycle complete ---");
+  delay(2000);
+}`,
+    ledCount: 1,
+    challenge: 'Create a "doorbell" — when the program starts, play a two-note chime (e.g., 659 Hz then 523 Hz, 300ms each). Then add an "intruder alert" that plays three fast high-pitched beeps (1500 Hz, 100ms each with 50ms gaps).',
+    successHint: 'You can now make your Arduino produce any pitch, any pattern, any duration. Combined with LEDs and sensors from the previous lessons, you can build proximity alarms, musical instruments, and accessibility devices — all from tone(), noTone(), and a 50-cent buzzer.',
+  },
 ];
 
+const COURSE_SLUG = 'arduino-basics' as const;
+
 export default function ArduinoBasicsPage() {
+  const { markLessonComplete, isLessonComplete, getCompletedCount, isCourseComplete } = useBasicsProgress();
   const [expandedLesson, setExpandedLesson] = useState<number | null>(null);
+  const completedCount = getCompletedCount(COURSE_SLUG);
+  const courseComplete = isCourseComplete(COURSE_SLUG, lessons.length);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
@@ -281,37 +352,53 @@ export default function ArduinoBasicsPage() {
             Arduino Basics
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Never programmed a microcontroller? Start here. 6 lessons that take you from zero to
+            Never programmed a microcontroller? Start here. 7 lessons that take you from zero to
             building sensor systems and LED animations — all running in a simulator in your browser.
           </p>
           <div className="flex items-center justify-center gap-6 mt-6 text-sm text-gray-500 dark:text-gray-400">
-            <span className="flex items-center gap-1"><BookOpen className="w-4 h-4" /> 6 lessons</span>
+            <span className="flex items-center gap-1"><BookOpen className="w-4 h-4" /> 7 lessons</span>
             <span className="flex items-center gap-1"><Sparkles className="w-4 h-4" /> No experience needed</span>
             <span className="flex items-center gap-1"><Cpu className="w-4 h-4" /> Runs in your browser</span>
           </div>
         </div>
 
         {/* Progress overview */}
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-10">
-          {lessons.map((lesson, i) => (
-            <button
-              key={i}
-              onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
-              className={`aspect-square rounded-lg flex items-center justify-center text-sm font-bold transition-all
-                ${expandedLesson === i
-                  ? 'bg-amber-600 text-white scale-110 shadow-lg'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-amber-100 dark:hover:bg-amber-900/30'
-                }`}
-              title={lesson.title}
-            >
-              {i + 1}
-            </button>
-          ))}
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold text-gray-600 dark:text-gray-400">{completedCount} / {lessons.length} lessons complete</span>
+            {courseComplete && <span className="text-sm font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Course complete!</span>}
+          </div>
+          <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="h-full bg-amber-500 rounded-full transition-all duration-500" style={{ width: `${(completedCount / lessons.length) * 100}%` }} />
+          </div>
+        </div>
+        <div className="grid grid-cols-4 md:grid-cols-7 gap-2 mb-10">
+          {lessons.map((lesson, i) => {
+            const done = isLessonComplete(COURSE_SLUG, i);
+            return (
+              <button
+                key={i}
+                onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
+                className={`aspect-square rounded-lg flex items-center justify-center text-sm font-bold transition-all
+                  ${expandedLesson === i
+                    ? 'bg-amber-600 text-white scale-110 shadow-lg'
+                    : done
+                      ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 ring-2 ring-amber-400/50'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-amber-100 dark:hover:bg-amber-900/30'
+                  }`}
+                title={`${lesson.title}${done ? ' ✓' : ''}`}
+              >
+                {done ? <CheckCircle className="w-4 h-4" /> : i + 1}
+              </button>
+            );
+          })}
         </div>
 
         {/* Lessons */}
         <div className="space-y-6">
-          {lessons.map((lesson, i) => (
+          {lessons.map((lesson, i) => {
+            const done = isLessonComplete(COURSE_SLUG, i);
+            return (
             <div key={i}>
               {/* Lesson header — always visible */}
               <button
@@ -319,22 +406,27 @@ export default function ArduinoBasicsPage() {
                 className={`w-full text-left px-6 py-4 rounded-xl border transition-all flex items-center gap-4
                   ${expandedLesson === i
                     ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-300 dark:border-amber-700'
-                    : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700'
+                    : done
+                      ? 'bg-amber-50/50 dark:bg-amber-900/10 border-amber-200 dark:border-amber-800'
+                      : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:border-amber-300 dark:hover:border-amber-700'
                   }`}
               >
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold flex-shrink-0
                   ${expandedLesson === i
                     ? 'bg-amber-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
+                    : done
+                      ? 'bg-amber-500 text-white'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
                   }`}>
-                  {i + 1}
+                  {done ? <CheckCircle className="w-5 h-5" /> : i + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`font-semibold ${expandedLesson === i ? 'text-amber-700 dark:text-amber-300' : 'text-gray-900 dark:text-white'}`}>
+                  <p className={`font-semibold ${expandedLesson === i ? 'text-amber-700 dark:text-amber-300' : done ? 'text-amber-700 dark:text-amber-300' : 'text-gray-900 dark:text-white'}`}>
                     {lesson.title}
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{lesson.analogy.slice(0, 80)}...</p>
                 </div>
+                {done && expandedLesson !== i && <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 flex-shrink-0">Complete</span>}
                 <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedLesson === i ? 'rotate-90' : ''}`} />
               </button>
 
@@ -381,10 +473,37 @@ export default function ArduinoBasicsPage() {
                     <p className="text-sm font-semibold text-green-700 dark:text-green-400 mb-1">When You Succeed</p>
                     <p className="text-sm text-green-900 dark:text-green-200">{lesson.successHint}</p>
                   </div>
+
+                  {/* Mark Complete button */}
+                  <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4">
+                    {done ? (
+                      <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                        <CheckCircle className="w-5 h-5" />
+                        <span className="text-sm font-semibold">Lesson complete</span>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => markLessonComplete(COURSE_SLUG, i)}
+                        className="flex items-center gap-2 px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-semibold transition-colors"
+                      >
+                        <CheckCircle className="w-4 h-4" />
+                        Mark Complete
+                      </button>
+                    )}
+                    {i < lessons.length - 1 && (
+                      <button
+                        onClick={() => { if (!done) markLessonComplete(COURSE_SLUG, i); setExpandedLesson(i + 1); }}
+                        className="flex items-center gap-1 text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                      >
+                        Next lesson <ChevronRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
-          ))}
+          );
+          })}
         </div>
 
         {/* Completion CTA */}
@@ -392,7 +511,7 @@ export default function ArduinoBasicsPage() {
           <CheckCircle className="w-10 h-10 text-amber-600 mx-auto mb-3" />
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Ready for Level 1</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-4">
-            After completing these 6 lessons, you have the Arduino skills to start
+            After completing these 7 lessons, you have the Arduino skills to start
             Level 1 of the electronics and hardware stories.
           </p>
           <div className="flex flex-wrap justify-center gap-3">

@@ -91,8 +91,8 @@ const registry: Record<string, LevelComponents> = {
   'dhol-drum': {Level1: lazy(() => import('./DholDrumLevel1')), Level2: lazy(() => import('./DholDrumLevel2')), Level3: lazy(() => import('./DholDrumLevel3')), Level4: lazy(() => import('./DholDrumLevel4')) },
   'eri-silk': {Level1: lazy(() => import('./EriSilkLevel1')), Level2: lazy(() => import('./EriSilkLevel2')), Level3: lazy(() => import('./EriSilkLevel3')), Level4: lazy(() => import('./EriSilkLevel4')) },
   'little-chef': {Level1: lazy(() => import('./LittleChefLevel1')), Level2: lazy(() => import('./LittleChefLevel2')), Level3: lazy(() => import('./LittleChefLevel3')), Level4: lazy(() => import('./LittleChefLevel4')) },
-  'siang-river': { Level1: lazy(() => import('./RiverBraidLevel1')), Level2: lazy(() => import('./RiverBraidLevel2')) },
-  'fireflies-dont-burn': {Level1: lazy(() => import('./FireflyLevel1')), Level2: lazy(() => import('./FireflyLevel2')), Level3: lazy(() => import('./FireflyLevel3')), Level4: lazy(() => import('./FireflyLevel4')) },
+  'siang-river': { Level1: lazy(() => import('./SiangRiverLevel1')), Level2: lazy(() => import('./SiangRiverLevel2')) },
+  'fireflies-dont-burn': { Level1: lazy(() => import('./FireflyChemLevel1')), Level2: lazy(() => import('./FireflyChemLevel2')) },
   'orange-sunsets-assam': { Level1: lazy(() => import('./OrangeSunsetsLevel1')), Level2: lazy(() => import('./OrangeSunsetsLevel2')), Level3: lazy(() => import('./OrangeSunsetsLevel3')), Level4: lazy(() => import('./OrangeSunsetsLevel4')) },
   'fishermans-daughter-storm': {Level1: lazy(() => import('./FishermanStormLevel1')), Level2: lazy(() => import('./FishermanStormLevel2')), Level3: lazy(() => import('./FishermanStormLevel3')), Level4: lazy(() => import('./FishermanStormLevel4')) },
   'snow-leopards-promise': {Level1: lazy(() => import('./SnowLeopardLevel1')), Level2: lazy(() => import('./SnowLeopardLevel2')), Level3: lazy(() => import('./SnowLeopardLevel3')), Level4: lazy(() => import('./SnowLeopardLevel4')) },
@@ -180,6 +180,59 @@ const registry: Record<string, LevelComponents> = {
   'silk-road-network': { Level1: lazy(() => import('./SilkRoadLevel1')), Level2: lazy(() => import('./SilkRoadLevel2')), Level3: lazy(() => import('./SilkRoadLevel3')), Level4: lazy(() => import('./SilkRoadLevel4')) },
   'leonardo-machines': { Level1: lazy(() => import('./LeonardoLevel1')), Level2: lazy(() => import('./LeonardoLevel2')), Level3: lazy(() => import('./LeonardoLevel3')), Level4: lazy(() => import('./LeonardoLevel4')) },
   'the-black-death': { Level1: lazy(() => import('./BlackDeathLevel1')), Level2: lazy(() => import('./BlackDeathLevel2')), Level3: lazy(() => import('./BlackDeathLevel3')), Level4: lazy(() => import('./BlackDeathLevel4')) },
+
+  // Regional stories (India)
+  'sundarbans-mangroves': { Level1: lazy(() => import('./SundarbansLevel1')), Level2: lazy(() => import('./SundarbansLevel2')), Level3: lazy(() => import('./SundarbansLevel3')), Level4: lazy(() => import('./SundarbansLevel4')) },
+  'kumartuli-pandal-builder': { Level1: lazy(() => import('./KumartuliLevel1')), Level2: lazy(() => import('./KumartuliLevel2')), Level3: lazy(() => import('./KumartuliLevel3')), Level4: lazy(() => import('./KumartuliLevel4')) },
+  'kolkata-last-tram': { Level1: lazy(() => import('./KolkataTramLevel1')), Level2: lazy(() => import('./KolkataTramLevel2')), Level3: lazy(() => import('./KolkataTramLevel3')), Level4: lazy(() => import('./KolkataTramLevel4')) },
+  'bankura-terracotta-horse': { Level1: lazy(() => import('./BankuraLevel1')), Level2: lazy(() => import('./BankuraLevel2')), Level3: lazy(() => import('./BankuraLevel3')), Level4: lazy(() => import('./BankuraLevel4')) },
+  'kuchipudi-anklet': { Level1: lazy(() => import('./KuchipudiLevel1')), Level2: lazy(() => import('./KuchipudiLevel2')), Level3: lazy(() => import('./KuchipudiLevel3')), Level4: lazy(() => import('./KuchipudiLevel4')) },
+  'pochampally-ikat-weaver': { Level1: lazy(() => import('./PochampallyLevel1')), Level2: lazy(() => import('./PochampallyLevel2')), Level3: lazy(() => import('./PochampallyLevel3')), Level4: lazy(() => import('./PochampallyLevel4')) },
+  'nagarjuna-sagar-dam': { Level1: lazy(() => import('./NagarjunaLevel1')), Level2: lazy(() => import('./NagarjunaLevel2')), Level3: lazy(() => import('./NagarjunaLevel3')), Level4: lazy(() => import('./NagarjunaLevel4')) },
+  'bidriware-silver-inlay': { Level1: lazy(() => import('./BidriwareLevel1')), Level2: lazy(() => import('./BidriwareLevel2')), Level3: lazy(() => import('./BidriwareLevel3')), Level4: lazy(() => import('./BidriwareLevel4')) },
+  'charminar-pigeons': { Level1: lazy(() => import('./CharminorLevel1')), Level2: lazy(() => import('./CharminorLevel2')), Level3: lazy(() => import('./CharminorLevel3')), Level4: lazy(() => import('./CharminorLevel4')) },
+  'swamimalai-bronze-casters': { Level1: lazy(() => import('./SwamimalaiLevel1')), Level2: lazy(() => import('./SwamimalaiLevel2')), Level3: lazy(() => import('./SwamimalaiLevel3')), Level4: lazy(() => import('./SwamimalaiLevel4')) },
+  'mahabalipuram-stone-screens': { Level1: lazy(() => import('./MahabalipuramLevel1')), Level2: lazy(() => import('./MahabalipuramLevel2')), Level3: lazy(() => import('./MahabalipuramLevel3')), Level4: lazy(() => import('./MahabalipuramLevel4')) },
+  'chettinad-spice-trader': { Level1: lazy(() => import('./ChettinadLevel1')), Level2: lazy(() => import('./ChettinadLevel2')), Level3: lazy(() => import('./ChettinadLevel3')), Level4: lazy(() => import('./ChettinadLevel4')) },
+  'pamban-bridge': { Level1: lazy(() => import('./PambanLevel1')), Level2: lazy(() => import('./PambanLevel2')), Level3: lazy(() => import('./PambanLevel3')), Level4: lazy(() => import('./PambanLevel4')) },
+  'auroville-solar-kitchen': { Level1: lazy(() => import('./AurovilleLevel1')), Level2: lazy(() => import('./AurovilleLevel2')), Level3: lazy(() => import('./AurovilleLevel3')), Level4: lazy(() => import('./AurovilleLevel4')) },
+
+  // NE State stories — Mizoram
+  'cheraw-bamboo-dance': { Level1: lazy(() => import('./CherawDanceLevel1')), Level2: lazy(() => import('./CherawDanceLevel2')), Level3: lazy(() => import('./CherawDanceLevel3')), Level4: lazy(() => import('./CherawDanceLevel4')) },
+  'mautam-bamboo-famine': { Level1: lazy(() => import('./MautamFamineLevel1')), Level2: lazy(() => import('./MautamFamineLevel2')), Level3: lazy(() => import('./MautamFamineLevel3')), Level4: lazy(() => import('./MautamFamineLevel4')) },
+  'iron-smiths-lushai': { Level1: lazy(() => import('./IronSmithsLevel1')), Level2: lazy(() => import('./IronSmithsLevel2')), Level3: lazy(() => import('./IronSmithsLevel3')), Level4: lazy(() => import('./IronSmithsLevel4')) },
+  'hawk-blue-mountain': { Level1: lazy(() => import('./HawkBlueLevel1')), Level2: lazy(() => import('./HawkBlueLevel2')), Level3: lazy(() => import('./HawkBlueLevel3')), Level4: lazy(() => import('./HawkBlueLevel4')) },
+  'orchids-phawngpui': { Level1: lazy(() => import('./OrchidsPhawngpuiLevel1')), Level2: lazy(() => import('./OrchidsPhawngpuiLevel2')), Level3: lazy(() => import('./OrchidsPhawngpuiLevel3')), Level4: lazy(() => import('./OrchidsPhawngpuiLevel4')) },
+
+  // NE State stories — Manipur
+  'kangla-fort-manipur': { Level1: lazy(() => import('./KanglaFortLevel1')), Level2: lazy(() => import('./KanglaFortLevel2')), Level3: lazy(() => import('./KanglaFortLevel3')), Level4: lazy(() => import('./KanglaFortLevel4')) },
+  'thang-ta-manipur': { Level1: lazy(() => import('./ThangTaLevel1')), Level2: lazy(() => import('./ThangTaLevel2')), Level3: lazy(() => import('./ThangTaLevel3')), Level4: lazy(() => import('./ThangTaLevel4')) },
+  'ras-lila-manipur': { Level1: lazy(() => import('./RasLilaLevel1')), Level2: lazy(() => import('./RasLilaLevel2')), Level3: lazy(() => import('./RasLilaLevel3')), Level4: lazy(() => import('./RasLilaLevel4')) },
+  'ima-keithel-market': { Level1: lazy(() => import('./ImaKeithelLevel1')), Level2: lazy(() => import('./ImaKeithelLevel2')), Level3: lazy(() => import('./ImaKeithelLevel3')), Level4: lazy(() => import('./ImaKeithelLevel4')) },
+  'polo-manipur': { Level1: lazy(() => import('./PoloManipurLevel1')), Level2: lazy(() => import('./PoloManipurLevel2')), Level3: lazy(() => import('./PoloManipurLevel3')), Level4: lazy(() => import('./PoloManipurLevel4')) },
+
+  // NE State stories — Tripura
+  'neermahal-water-palace': { Level1: lazy(() => import('./NeermahalLevel1')), Level2: lazy(() => import('./NeermahalLevel2')), Level3: lazy(() => import('./NeermahalLevel3')), Level4: lazy(() => import('./NeermahalLevel4')) },
+  'fourteen-gods-tripura': { Level1: lazy(() => import('./FourteenGodsLevel1')), Level2: lazy(() => import('./FourteenGodsLevel2')), Level3: lazy(() => import('./FourteenGodsLevel3')), Level4: lazy(() => import('./FourteenGodsLevel4')) },
+  'rubber-tripura': { Level1: lazy(() => import('./RubberTripuraLevel1')), Level2: lazy(() => import('./RubberTripuraLevel2')), Level3: lazy(() => import('./RubberTripuraLevel3')), Level4: lazy(() => import('./RubberTripuraLevel4')) },
+  'cane-weavers-tripura': { Level1: lazy(() => import('./CaneWeaversLevel1')), Level2: lazy(() => import('./CaneWeaversLevel2')), Level3: lazy(() => import('./CaneWeaversLevel3')), Level4: lazy(() => import('./CaneWeaversLevel4')) },
+  'tripura-sundari-temple': { Level1: lazy(() => import('./TripuraSundariLevel1')), Level2: lazy(() => import('./TripuraSundariLevel2')), Level3: lazy(() => import('./TripuraSundariLevel3')), Level4: lazy(() => import('./TripuraSundariLevel4')) },
+
+  // NE State stories — Nagaland
+  'dzukou-valley-lily': { Level1: lazy(() => import('./DzukouLilyLevel1')), Level2: lazy(() => import('./DzukouLilyLevel2')), Level3: lazy(() => import('./DzukouLilyLevel3')), Level4: lazy(() => import('./DzukouLilyLevel4')) },
+  'stone-pulling-nagaland': { Level1: lazy(() => import('./StonePullingLevel1')), Level2: lazy(() => import('./StonePullingLevel2')), Level3: lazy(() => import('./StonePullingLevel3')), Level4: lazy(() => import('./StonePullingLevel4')) },
+  'hornbill-flight-nagaland': { Level1: lazy(() => import('./HornbillHelmetLevel1')), Level2: lazy(() => import('./HornbillHelmetLevel2')), Level3: lazy(() => import('./HornbillHelmetLevel3')), Level4: lazy(() => import('./HornbillHelmetLevel4')) },
+  'naga-dao-metallurgy': { Level1: lazy(() => import('./NagaDaoLevel1')), Level2: lazy(() => import('./NagaDaoLevel2')), Level3: lazy(() => import('./NagaDaoLevel3')), Level4: lazy(() => import('./NagaDaoLevel4')) },
+
+  // NE State stories — Sikkim
+  'kanchenjunga-five-treasures': { Level1: lazy(() => import('./KanchenjungaLevel1')), Level2: lazy(() => import('./KanchenjungaLevel2')), Level3: lazy(() => import('./KanchenjungaLevel3')), Level4: lazy(() => import('./KanchenjungaLevel4')) },
+  'red-panda-sikkim': { Level1: lazy(() => import('./RedPandaSikkimLevel1')), Level2: lazy(() => import('./RedPandaSikkimLevel2')), Level3: lazy(() => import('./RedPandaSikkimLevel3')), Level4: lazy(() => import('./RedPandaSikkimLevel4')) },
+  'cardamom-hills-sikkim': { Level1: lazy(() => import('./CardamomHillsLevel1')), Level2: lazy(() => import('./CardamomHillsLevel2')), Level3: lazy(() => import('./CardamomHillsLevel3')), Level4: lazy(() => import('./CardamomHillsLevel4')) },
+  'prayer-flags-sikkim': { Level1: lazy(() => import('./PrayerFlagsLevel1')), Level2: lazy(() => import('./PrayerFlagsLevel2')), Level3: lazy(() => import('./PrayerFlagsLevel3')), Level4: lazy(() => import('./PrayerFlagsLevel4')) },
+
+  // Additional 100-stories with dedicated components
+  'seed-travel': { Level1: lazy(() => import('./SeedTravelLevel1')), Level2: lazy(() => import('./SeedTravelLevel2')), Level3: lazy(() => import('./SeedTravelLevel3')), Level4: lazy(() => import('./SeedTravelLevel4')) },
+  'takin-face': { Level1: lazy(() => import('./TakinFaceLevel1')), Level2: lazy(() => import('./TakinFaceLevel2')), Level3: lazy(() => import('./TakinFaceLevel3')), Level4: lazy(() => import('./TakinFaceLevel4')) },
 };
 
 export function getLevelComponents(slug: string): LevelComponents {

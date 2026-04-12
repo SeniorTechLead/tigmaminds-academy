@@ -20,7 +20,7 @@ import {
 } from '../../lib/program';
 import { allTracks, type WeekPlan } from '../../data/school-curriculum';
 import { supabase } from '../../lib/supabase';
-import { PaymentsPanel, DiscountsPanel, MessagesPanel, PhotoUploadButton } from './DashboardPanels';
+import { PaymentsPanel, DiscountsPanel, MessagesPanel, PhotoUploadButton, EnrollmentRequestsPanel } from './DashboardPanels';
 
 // ── Helpers ──────────────────────────────────────────────────
 
@@ -201,16 +201,29 @@ function StudentRow({
   trackId,
   currentWeek,
   onPhotoUploaded,
+  onRemove,
 }: {
   row: CohortDashboardRow;
   trackId: string;
   currentWeek: number;
   onPhotoUploaded: (enrollmentId: string, url: string) => void;
+  onRemove: (enrollmentId: string) => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [weeklyData, setWeeklyData] = useState<WeeklyProgress[]>([]);
   const [loading, setLoading] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState(row.student_photo_url);
+  const [removing, setRemoving] = useState(false);
+  const [confirmRemove, setConfirmRemove] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+
+  // Resolve signed URL for private bucket
+  useEffect(() => {
+    if (row.student_photo_url) {
+      import('../../lib/program').then(({ getStudentPhotoUrl }) =>
+        getStudentPhotoUrl(row.student_photo_url).then(url => setPhotoUrl(url))
+      );
+    }
+  }, [row.student_photo_url]);
 
   const status = getStudentStatus(row);
 
@@ -295,6 +308,41 @@ function StudentRow({
                   ))}
                 </div>
               )}
+              {/* Remove student */}
+              <div className="px-4 py-2 border-t border-gray-100 dark:border-gray-700">
+                {!confirmRemove ? (
+                  <div className="flex justify-end">
+                    <button onClick={() => setConfirmRemove(true)}
+                      className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-semibold">
+                      Remove Student
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between bg-red-50 dark:bg-red-900/20 rounded-lg px-4 py-3 border border-red-200 dark:border-red-800">
+                    <div>
+                      <p className="text-sm font-semibold text-red-700 dark:text-red-300">Remove {row.student_email || 'this student'}?</p>
+                      <p className="text-xs text-red-500 dark:text-red-400 mt-0.5">This permanently deletes their enrollment and all progress data.</p>
+                    </div>
+                    <div className="flex gap-2 ml-4 flex-shrink-0">
+                      <button onClick={() => setConfirmRemove(false)} disabled={removing}
+                        className="px-3 py-1.5 text-xs font-semibold text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        Cancel
+                      </button>
+                      <button
+                        onClick={async () => {
+                          setRemoving(true);
+                          const { removeStudent } = await import('../../lib/program');
+                          await removeStudent(row.enrollment_id);
+                          onRemove(row.enrollment_id);
+                        }}
+                        disabled={removing}
+                        className="px-3 py-1.5 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors disabled:opacity-50">
+                        {removing ? 'Removing...' : 'Remove'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </td>
         </tr>
@@ -338,7 +386,7 @@ export default function MentorDashboard() {
   const [enrollError, setEnrollError] = useState('');
 
   // Dashboard tabs
-  type DashTab = 'students' | 'payments' | 'messages' | 'discounts';
+  type DashTab = 'students' | 'payments' | 'messages' | 'discounts' | 'requests';
   const [activeTab, setActiveTab] = useState<DashTab>('students');
 
   // Auth guard
@@ -405,20 +453,16 @@ export default function MentorDashboard() {
     if (result.error) {
       setEnrollError(result.error.message);
     } else {
-      const parts: string[] = [];
-      if (result.invited) {
-        parts.push(`${enrollForm.email} enrolled (invitation email sent)`);
-      } else {
-        parts.push(`${enrollForm.email} enrolled successfully`);
-      }
-      if (result.inviteResults?.length) {
-        parts.push(result.inviteResults.join(', '));
-      }
-      const msg = parts.join('. ');
       setEnrollError('');
       setShowEnroll(false);
+      const studentName = enrollForm.email.split('@')[0];
+      const hasParent = !!enrollForm.parentEmail;
       setEnrollForm({ email: '', parentEmail: '', parentName: '' });
-      showToast(msg);
+      showToast(
+        hasParent
+          ? `${studentName} enrolled. Setup emails sent to student and guardian.`
+          : `${studentName} enrolled. Setup email sent.`
+      );
       // Reload dashboard
       getCohortDashboard(selectedCohortId).then(setDashboard);
     }
@@ -467,7 +511,7 @@ export default function MentorDashboard() {
   // Generate parent report token
   async function handleSendParentReport(enrollmentId: string, parentEmail: string | null) {
     if (!parentEmail) {
-      setReportStatus('No parent email on file for this student.');
+      setReportStatus('No guardian email on file for this student.');
       return;
     }
     setSendingReport(true);
@@ -482,7 +526,7 @@ export default function MentorDashboard() {
     if (error) {
       setReportStatus('Failed to generate token.');
     } else {
-      const url = `${window.location.origin}/program/parent?token=${token}`;
+      const url = `${window.location.origin}/program/guardian?token=${token}`;
       await navigator.clipboard.writeText(url).catch(() => {});
       setReportStatus(`Report link copied: ${url}`);
     }
@@ -714,6 +758,7 @@ export default function MentorDashboard() {
                 { key: 'payments' as DashTab, label: 'Payments' },
                 { key: 'messages' as DashTab, label: 'Messages' },
                 ...(isAdmin ? [{ key: 'discounts' as DashTab, label: 'Discounts' }] : []),
+                ...(isAdmin ? [{ key: 'requests' as DashTab, label: 'Requests' }] : []),
               ]).map(tab => (
                 <button key={tab.key} onClick={() => setActiveTab(tab.key)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
@@ -776,13 +821,13 @@ export default function MentorDashboard() {
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm dark:text-white" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1">Parent Email</label>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">Guardian Email</label>
                     <input type="email" value={enrollForm.parentEmail} onChange={e => setEnrollForm({ ...enrollForm, parentEmail: e.target.value })}
-                      placeholder="parent@email.com"
+                      placeholder="guardian@email.com"
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm dark:text-white" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1">Parent Name</label>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">Guardian Name</label>
                     <input type="text" value={enrollForm.parentName} onChange={e => setEnrollForm({ ...enrollForm, parentName: e.target.value })}
                       placeholder="Parent's name"
                       className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm dark:text-white" />
@@ -836,6 +881,9 @@ export default function MentorDashboard() {
                         onPhotoUploaded={(eid, url) => {
                           setDashboard(prev => prev.map(r => r.enrollment_id === eid ? { ...r, student_photo_url: url } : r));
                         }}
+                        onRemove={(eid) => {
+                          setDashboard(prev => prev.filter(r => r.enrollment_id !== eid));
+                        }}
                       />
                     ))}
                   </tbody>
@@ -843,7 +891,7 @@ export default function MentorDashboard() {
 
                 {/* Per-student parent report buttons */}
                 <div className="border-t border-gray-200 dark:border-gray-700 px-4 py-3">
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Send Parent Reports</p>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Send Guardian Reports</p>
                   <div className="flex flex-wrap gap-2">
                     {dashboard.map(row => (
                       <button
@@ -853,7 +901,7 @@ export default function MentorDashboard() {
                         className="flex items-center gap-1 px-2.5 py-1 text-xs rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 disabled:opacity-50 transition-colors"
                       >
                         <Send className="w-3 h-3" />
-                        {row.student_name || 'Student'}{row.parent_email ? ` → ${row.parent_email}` : ' (no parent email)'}
+                        {row.student_name || 'Student'}{row.parent_email ? ` → ${row.parent_email}` : ' (no guardian email)'}
                       </button>
                     ))}
                   </div>
@@ -876,6 +924,10 @@ export default function MentorDashboard() {
             {/* ── Tab: Discounts (admin only) ──────────── */}
             {activeTab === 'discounts' && isAdmin && user && (
               <DiscountsPanel userId={user.id} />
+            )}
+
+            {activeTab === 'requests' && isAdmin && (
+              <EnrollmentRequestsPanel />
             )}
           </>
         )}

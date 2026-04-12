@@ -706,7 +706,7 @@ class TradeDashboard:
         # Financial summary
         cash_pct = self.cash / self.total_capital * 100
         print(f"\\n  FINANCIAL POSITION:")
-        print(f"    Cash: ${self.cash:,.0f} ({cash_pct:.0f}% of capital)")
+        print(f"    Cash: " + "$" + f"{self.cash:,.0f} ({cash_pct:.0f}% of capital)")
         print(f"    Active shipments: {self.active_shipments}")
 
         # Market signals
@@ -721,7 +721,7 @@ class TradeDashboard:
             signal, dev = self.price_signal(spice)
             s = self.spices[spice]
             marker = "<--" if "STRONG" in signal else ""
-            print(f"    {spice:<12} ${s['price']:>4}   ${s['avg_6mo']:>4}    "
+            print(f"    {spice:<12} " + "$" + f"{s['price']:>4}   " + "$" + f"{s['avg_6mo']:>4}    "
                   f"{signal:<12} {dev:>+6.0%}  {marker}")
             if "BUY" in signal:
                 buy_list.append(spice)

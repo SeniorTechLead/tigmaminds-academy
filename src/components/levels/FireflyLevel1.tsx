@@ -136,36 +136,48 @@ In Arduino, \`analogWrite(pin, value)\` takes a value from **0** (always off) to
       checkQuestion: 'If analogWrite(pin, 64) means 25% brightness, and analogWrite(pin, 191) means 75%, what does analogWrite(pin, 0) look like?',
       checkAnswer: 'Completely off. 0/255 = 0% duty cycle. The LED never turns on. analogWrite(pin, 255) = fully on, 100% duty cycle. The range 0-255 gives you 256 brightness levels.',
       codeIntro: 'Make an LED fade smoothly from off to full brightness and back — like breathing.',
-      code: `// Lesson 2: Firefly breathing with PWM
-// analogWrite(pin, 0-255) controls brightness
+      code: `// Lesson 2: Firefly breathing with PWM + tone
+// analogWrite controls brightness, tone follows glow
 
 void setup() {
   pinMode(2, OUTPUT);
   Serial.println("Firefly breathing started");
+  Serial.println("Tone follows LED brightness");
 }
 
 void loop() {
-  // Fade in: dim -> bright
+  // Fade in: dim -> bright, tone rises
   analogWrite(2, 30);
+  tone(8, 200);
   delay(150);
   analogWrite(2, 80);
+  tone(8, 350);
   delay(150);
   analogWrite(2, 140);
+  tone(8, 550);
   delay(150);
   analogWrite(2, 200);
+  tone(8, 750);
   delay(150);
   analogWrite(2, 255);
+  tone(8, 900);
   delay(250);
 
-  // Fade out: bright -> dim (never fully off)
+  // Fade out: bright -> dim, tone falls
   analogWrite(2, 200);
+  tone(8, 750);
   delay(150);
   analogWrite(2, 140);
+  tone(8, 550);
   delay(150);
   analogWrite(2, 80);
+  tone(8, 350);
   delay(150);
   analogWrite(2, 30);
-  delay(250);
+  tone(8, 200);
+  delay(200);
+  noTone(8);
+  delay(50);
 }`,
       ledCount: 1,
       challenge: 'Add more intermediate steps for a smoother fade. Try steps of 25 instead of 50-80. More steps = smoother glow, but more code.',
@@ -274,8 +286,9 @@ Scientists study this because the same math applies to:
       checkQuestion: 'If firefly A flashes every 1.0 seconds and firefly B flashes every 0.9 seconds, and B adjusts 10% toward A\'s timing each cycle, how many cycles until they\'re nearly synchronized?',
       checkAnswer: 'B\'s period: 0.9, then 0.91, 0.919, 0.927... After about 7-8 cycles, they\'re within 1% of each other. The Kuramoto model converges exponentially — fast at first, then fine-tuning. Real firefly swarms synchronize in about 5-10 minutes.',
       codeIntro: 'Simulate fireflies that gradually synchronize their blinking.',
-      code: `// Lesson 5: Firefly synchronization
+      code: `// Lesson 5: Firefly synchronization + audio
 // LEDs start random, gradually sync up
+// Tone pitch rises as order parameter increases
 
 void setup() {
   pinMode(2, OUTPUT);
@@ -283,10 +296,12 @@ void setup() {
   pinMode(4, OUTPUT);
   Serial.println("Synchronization starting...");
   Serial.println("Watch the LEDs converge!");
+  Serial.println("Listen: pitch rises as sync improves");
 }
 
 void loop() {
-  // Phase 1: Random (unsynchronized)
+  // Phase 1: Random (unsynchronized) — low tone
+  tone(8, 200);
   analogWrite(2, 255);
   analogWrite(3, 0);
   analogWrite(4, 128);
@@ -302,7 +317,8 @@ void loop() {
   analogWrite(4, 255);
   delay(350);
 
-  // Phase 2: Partially synced
+  // Phase 2: Partially synced — mid tone
+  tone(8, 600);
   analogWrite(2, 255);
   analogWrite(3, 200);
   analogWrite(4, 128);
@@ -313,7 +329,8 @@ void loop() {
   analogWrite(4, 50);
   delay(300);
 
-  // Phase 3: Nearly synchronized
+  // Phase 3: Nearly synchronized — high tone
+  tone(8, 1200);
   analogWrite(2, 255);
   analogWrite(3, 255);
   analogWrite(4, 230);
@@ -323,6 +340,7 @@ void loop() {
   analogWrite(3, 0);
   analogWrite(4, 0);
   delay(400);
+  noTone(8);
 
   Serial.println("Synced!");
 }`,

@@ -107,27 +107,27 @@ void loop() {
   // Fade in: 0 to 255 in steps of 5
   // for (brightness = 0; brightness <= 255; brightness += 5)
   analogWrite(2, 0);
-  delay(100);
+  delay(150);
   analogWrite(2, 50);
-  delay(100);
+  delay(150);
   analogWrite(2, 100);
-  delay(100);
+  delay(150);
   analogWrite(2, 150);
-  delay(100);
+  delay(150);
   analogWrite(2, 200);
-  delay(100);
+  delay(150);
   analogWrite(2, 255);
-  delay(100);
+  delay(150);
 
   // Fade out
   analogWrite(2, 200);
-  delay(100);
+  delay(150);
   analogWrite(2, 150);
-  delay(100);
+  delay(150);
   analogWrite(2, 100);
-  delay(100);
+  delay(150);
   analogWrite(2, 50);
-  delay(100);
+  delay(150);
   analogWrite(2, 0);
   delay(300);
 
@@ -199,53 +199,63 @@ This is the secret to convincing LED animation: use trigonometry instead of line
       checkQuestion: 'If brightness = 128 + 127 * sin(angle), what brightness do you get at angle = 0, π/2, and π?',
       checkAnswer: 'At 0: sin(0) = 0, so brightness = 128 (mid). At π/2: sin(π/2) = 1, brightness = 255 (max). At π: sin(π) = 0, brightness = 128 (mid again). At 3π/2: sin = -1, brightness = 1 (min). A full cycle goes 128→255→128→1→128.',
       codeIntro: 'Simulate sine-wave breathing on the LEDs.',
-      code: `// Level 2, Lesson 3: Sine-wave breathing
-// Smooth organic glow using trigonometry
+      code: `// Level 2, Lesson 3: Sine-wave breathing + subtle tone
+// Smooth organic glow with tone tracking sine wave
 
 void setup() {
   pinMode(2, OUTPUT);
-  Serial.println("Sine-wave breathing");
-  Serial.println("Smooth organic glow");
+  Serial.println("Sine-wave breathing + tone");
+  Serial.println("Tone tracks the sine wave shape");
 }
 
 void loop() {
   // Simulate sine wave: 0° to 360° in steps
   // brightness = 128 + 127 * sin(angle)
+  // tone pitch tracks brightness
 
   // 0°: mid brightness
   analogWrite(2, 128);
+  tone(8, 500);
   Serial.println("Phase 0: brightness 128 (middle)");
   delay(200);
 
   // 45°: rising
   analogWrite(2, 218);
+  tone(8, 780);
   delay(200);
 
   // 90°: peak
   analogWrite(2, 255);
+  tone(8, 900);
   Serial.println("Phase 90: brightness 255 (peak)");
   delay(200);
 
   // 135°: falling
   analogWrite(2, 218);
+  tone(8, 780);
   delay(200);
 
   // 180°: mid again
   analogWrite(2, 128);
+  tone(8, 500);
   delay(200);
 
   // 225°: dim
   analogWrite(2, 38);
+  tone(8, 220);
   delay(200);
 
   // 270°: minimum
   analogWrite(2, 1);
+  tone(8, 150);
   Serial.println("Phase 270: brightness 1 (trough)");
   delay(200);
 
   // 315°: rising back
   analogWrite(2, 38);
+  tone(8, 220);
   delay(200);
+  noTone(8);
 }`,
       ledCount: 1,
       challenge: 'Notice how the LED lingers at the extremes (bright and dim) and moves quickly through the middle. That\'s the sine curve — and it looks much more alive than a linear fade.',
@@ -318,8 +328,8 @@ This algorithm is used in:
       checkQuestion: 'If coupling_strength = 0.1 and the phase difference between two fireflies is 90° (π/2), how much does the slower one adjust? (sin(π/2) = 1)',
       checkAnswer: 'Phase adjustment = 0.1 × sin(π/2) = 0.1 × 1 = 0.1 radians ≈ 5.7°. So the slower firefly advances by about 6° toward the faster one. After many cycles, the difference shrinks exponentially toward zero.',
       codeIntro: 'Simulate Kuramoto synchronization: random start → gradual sync.',
-      code: `// Level 2, Lesson 5: Kuramoto synchronization
-// Random phases converge over time
+      code: `// Level 2, Lesson 5: Kuramoto synchronization + audio
+// Random phases converge, tone confirms sync
 
 void setup() {
   pinMode(2, OUTPUT);
@@ -327,10 +337,11 @@ void setup() {
   pinMode(4, OUTPUT);
   Serial.println("=== Kuramoto Sync ===");
   Serial.println("Starting unsynchronized...");
+  Serial.println("Listen for the sync confirmation tone");
 }
 
 void loop() {
-  // Phase 1: Random (unsynchronized)
+  // Phase 1: Random (unsynchronized) — no tone
   analogWrite(2, 255);
   analogWrite(3, 40);
   analogWrite(4, 150);
@@ -342,7 +353,8 @@ void loop() {
 
   Serial.println("Phase 1: random");
 
-  // Phase 2: Partially synced
+  // Phase 2: Partially synced — faint tone
+  tone(8, 400);
   analogWrite(2, 230);
   analogWrite(3, 180);
   analogWrite(4, 200);
@@ -351,10 +363,12 @@ void loop() {
   analogWrite(3, 30);
   analogWrite(4, 60);
   delay(300);
+  noTone(8);
 
   Serial.println("Phase 2: converging");
 
-  // Phase 3: Nearly synchronized
+  // Phase 3: Nearly synchronized — rising tone
+  tone(8, 800);
   analogWrite(2, 250);
   analogWrite(3, 240);
   analogWrite(4, 245);
@@ -363,18 +377,25 @@ void loop() {
   analogWrite(3, 15);
   analogWrite(4, 8);
   delay(350);
+  noTone(8);
 
   Serial.println("Phase 3: synchronized!");
 
-  // Phase 4: Perfect sync — all breathe together
+  // Phase 4: Perfect sync — ascending confirmation tone
+  tone(8, 800);
   analogWrite(2, 255);
   analogWrite(3, 255);
   analogWrite(4, 255);
-  delay(400);
+  delay(200);
+  tone(8, 1000);
+  delay(200);
+  tone(8, 1200);
+  delay(200);
+  noTone(8);
   analogWrite(2, 0);
   analogWrite(3, 0);
   analogWrite(4, 0);
-  delay(500);
+  delay(300);
 
   Serial.println("All synced! Restarting...");
   delay(300);

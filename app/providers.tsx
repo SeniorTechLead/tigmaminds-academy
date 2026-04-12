@@ -2,6 +2,7 @@
 
 import { AuthProvider } from '../src/contexts/AuthContext';
 import { ProgressProvider } from '../src/contexts/ProgressContext';
+import { BasicsProgressProvider } from '../src/contexts/BasicsProgressContext';
 import { SubscriptionProvider } from '../src/contexts/SubscriptionContext';
 import { LessonMetaProvider } from '../src/contexts/LessonMetaContext';
 import { PyodideProvider } from '../src/contexts/PyodideContext';
@@ -15,6 +16,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <LessonMetaProvider>
         <SubscriptionProvider>
           <ProgressProvider>
+            <BasicsProgressProvider>
             <PyodideProvider>
               <SqlJsProvider>
                 <TsProvider>
@@ -24,6 +26,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
                 </TsProvider>
               </SqlJsProvider>
             </PyodideProvider>
+            </BasicsProgressProvider>
           </ProgressProvider>
         </SubscriptionProvider>
       </LessonMetaProvider>

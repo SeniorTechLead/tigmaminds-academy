@@ -15,12 +15,15 @@ const PyodideContext = createContext<PyodideContextType | undefined>(undefined);
 const PYODIDE_VERSION = '0.24.1';
 const PYODIDE_CDN = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full`;
 
+// Store on window to survive provider remounts during navigation
+const WIN = typeof window !== 'undefined' ? (window as any) : null;
+
 export function PyodideProvider({ children }: { children: ReactNode }) {
-  const pyodideRef = useRef<any>(null);
-  const stateRef = useRef<PyodideState>('idle');
+  const pyodideRef = useRef<any>(WIN?.__tma_pyodide ?? null);
+  const stateRef = useRef<PyodideState>(WIN?.__tma_pyodide ? 'ready' : 'idle');
   const progressRef = useRef('');
-  const loadingRef = useRef(false);
-  const loadPromiseRef = useRef<Promise<any> | null>(null);
+  const loadingRef = useRef(!!WIN?.__tma_pyodide_loading);
+  const loadPromiseRef = useRef<Promise<any> | null>(WIN?.__tma_pyodide_promise ?? null);
   const listenersRef = useRef<Set<() => void>>(new Set());
 
   const notify = useCallback(() => {
@@ -33,10 +36,14 @@ export function PyodideProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const load = useCallback(async () => {
+    // Check window cache first (survives provider remounts)
+    if (WIN?.__tma_pyodide) { pyodideRef.current = WIN.__tma_pyodide; stateRef.current = 'ready'; notify(); return WIN.__tma_pyodide; }
     if (pyodideRef.current) return pyodideRef.current;
+    if (WIN?.__tma_pyodide_promise) return WIN.__tma_pyodide_promise;
     if (loadingRef.current && loadPromiseRef.current) return loadPromiseRef.current;
 
     loadingRef.current = true;
+    if (WIN) WIN.__tma_pyodide_loading = true;
     stateRef.current = 'loading';
     progressRef.current = 'Loading Python runtime...';
     notify();
@@ -100,6 +107,7 @@ export function PyodideProvider({ children }: { children: ReactNode }) {
         ].join('\n'));
 
         pyodideRef.current = pyodide;
+        if (WIN) { WIN.__tma_pyodide = pyodide; WIN.__tma_pyodide_loading = false; WIN.__tma_pyodide_promise = null; }
         stateRef.current = 'ready';
         progressRef.current = '';
         loadingRef.current = false;
@@ -115,6 +123,7 @@ export function PyodideProvider({ children }: { children: ReactNode }) {
     })();
 
     loadPromiseRef.current = promise;
+    if (WIN) WIN.__tma_pyodide_promise = promise;
     return promise;
   }, [notify]);
 

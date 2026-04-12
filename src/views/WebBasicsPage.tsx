@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { BookOpen, ChevronRight, CheckCircle, Code2, Sparkles } from 'lucide-react';
+import { BookOpen, ChevronRight, CheckCircle, Circle, Code2, Sparkles } from 'lucide-react';
 import HtmlPlayground from '../components/HtmlPlayground';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useBasicsProgress } from '../contexts/BasicsProgressContext';
 
 const lessons = [
   {
@@ -1218,8 +1219,13 @@ You will also learn **event.preventDefault()**, which stops a form from refreshi
   },
 ];
 
+const COURSE_SLUG = 'web-basics' as const;
+
 export default function WebBasicsPage() {
+  const { markLessonComplete, isLessonComplete, getCompletedCount, isCourseComplete } = useBasicsProgress();
   const [expandedLesson, setExpandedLesson] = useState<number | null>(null);
+  const completedCount = getCompletedCount(COURSE_SLUG);
+  const courseComplete = isCourseComplete(COURSE_SLUG, lessons.length);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
@@ -1246,26 +1252,42 @@ export default function WebBasicsPage() {
         </div>
 
         {/* Progress overview */}
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold text-gray-600 dark:text-gray-400">{completedCount} / {lessons.length} lessons complete</span>
+            {courseComplete && <span className="text-sm font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Course complete!</span>}
+          </div>
+          <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="h-full bg-blue-500 rounded-full transition-all duration-500" style={{ width: `${(completedCount / lessons.length) * 100}%` }} />
+          </div>
+        </div>
         <div className="grid grid-cols-4 md:grid-cols-8 gap-2 mb-10">
-          {lessons.map((lesson, i) => (
-            <button
-              key={i}
-              onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
-              className={`aspect-square rounded-lg flex items-center justify-center text-sm font-bold transition-all
-                ${expandedLesson === i
-                  ? 'bg-blue-600 text-white scale-110 shadow-lg'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-blue-900/30'
-                }`}
-              title={lesson.title}
-            >
-              {i + 1}
-            </button>
-          ))}
+          {lessons.map((lesson, i) => {
+            const done = isLessonComplete(COURSE_SLUG, i);
+            return (
+              <button
+                key={i}
+                onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
+                className={`aspect-square rounded-lg flex items-center justify-center text-sm font-bold transition-all
+                  ${expandedLesson === i
+                    ? 'bg-blue-600 text-white scale-110 shadow-lg'
+                    : done
+                      ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 ring-2 ring-blue-400/50'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-blue-900/30'
+                  }`}
+                title={`${lesson.title}${done ? ' ✓' : ''}`}
+              >
+                {done ? <CheckCircle className="w-4 h-4" /> : i + 1}
+              </button>
+            );
+          })}
         </div>
 
         {/* Lessons */}
         <div className="space-y-6">
-          {lessons.map((lesson, i) => (
+          {lessons.map((lesson, i) => {
+            const done = isLessonComplete(COURSE_SLUG, i);
+            return (
             <div key={i}>
               {/* Lesson header — always visible */}
               <button
@@ -1273,22 +1295,27 @@ export default function WebBasicsPage() {
                 className={`w-full text-left px-6 py-4 rounded-xl border transition-all flex items-center gap-4
                   ${expandedLesson === i
                     ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-700'
-                    : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-700'
+                    : done
+                      ? 'bg-blue-50/50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800'
+                      : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-700'
                   }`}
               >
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold flex-shrink-0
                   ${expandedLesson === i
                     ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
+                    : done
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
                   }`}>
-                  {i + 1}
+                  {done ? <CheckCircle className="w-5 h-5" /> : i + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`font-semibold ${expandedLesson === i ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-white'}`}>
+                  <p className={`font-semibold ${expandedLesson === i ? 'text-blue-700 dark:text-blue-300' : done ? 'text-blue-700 dark:text-blue-300' : 'text-gray-900 dark:text-white'}`}>
                     {lesson.title}
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{lesson.analogy.slice(0, 80)}...</p>
                 </div>
+                {done && expandedLesson !== i && <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 flex-shrink-0">Complete</span>}
                 <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedLesson === i ? 'rotate-90' : ''}`} />
               </button>
 
@@ -1334,10 +1361,37 @@ export default function WebBasicsPage() {
                     <p className="text-sm font-semibold text-green-700 dark:text-green-400 mb-1">When You Succeed</p>
                     <p className="text-sm text-green-900 dark:text-green-200">{lesson.successHint}</p>
                   </div>
+
+                  {/* Mark Complete button */}
+                  <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4">
+                    {done ? (
+                      <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                        <CheckCircle className="w-5 h-5" />
+                        <span className="text-sm font-semibold">Lesson complete</span>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => markLessonComplete(COURSE_SLUG, i)}
+                        className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-colors"
+                      >
+                        <CheckCircle className="w-4 h-4" />
+                        Mark Complete
+                      </button>
+                    )}
+                    {i < lessons.length - 1 && (
+                      <button
+                        onClick={() => { if (!done) markLessonComplete(COURSE_SLUG, i); setExpandedLesson(i + 1); }}
+                        className="flex items-center gap-1 text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      >
+                        Next lesson <ChevronRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
-          ))}
+          );
+          })}
         </div>
 
         {/* Completion CTA */}

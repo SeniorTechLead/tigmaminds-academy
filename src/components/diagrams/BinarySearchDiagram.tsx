@@ -1,156 +1,204 @@
-import { useState, useEffect } from 'react';
+'use client';
+import { useState, useEffect, useRef } from 'react';
 
-/**
- * Animated binary search diagram.
- * Shows the search space halving each step.
- */
+const SORTED_ARRAY = [2, 5, 8, 12, 16, 23, 38, 42, 55, 61, 70, 73, 84, 90, 95, 99];
+const TARGETS = [5, 12, 23, 42, 55, 70, 90, 99];
+
+interface Step {
+  lo: number;
+  hi: number;
+  mid: number;
+  result: 'found' | 'go-left' | 'go-right';
+}
+
+function computeSteps(arr: number[], target: number): Step[] {
+  const steps: Step[] = [];
+  let lo = 0, hi = arr.length - 1;
+  while (lo <= hi) {
+    const mid = Math.floor((lo + hi) / 2);
+    if (arr[mid] === target) {
+      steps.push({ lo, hi, mid, result: 'found' });
+      break;
+    } else if (arr[mid] < target) {
+      steps.push({ lo, hi, mid, result: 'go-right' });
+      lo = mid + 1;
+    } else {
+      steps.push({ lo, hi, mid, result: 'go-left' });
+      hi = mid - 1;
+    }
+  }
+  return steps;
+}
+
 export default function BinarySearchDiagram() {
-  const data = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91];
-  const target = 23;
-  const [step, setStep] = useState(0);
+  const arr = SORTED_ARRAY;
+  const [target, setTarget] = useState(42);
+  const [stepIdx, setStepIdx] = useState(-1);
   const [playing, setPlaying] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Pre-compute search steps
-  const steps: { left: number; right: number; mid: number; found: boolean }[] = [];
-  {
-    let l = 0, r = data.length - 1;
-    while (l <= r) {
-      const m = Math.floor((l + r) / 2);
-      steps.push({ left: l, right: r, mid: m, found: data[m] === target });
-      if (data[m] === target) break;
-      if (data[m] < target) l = m + 1;
-      else r = m - 1;
+  const steps = computeSteps(arr, target);
+  const done = stepIdx >= 0 && stepIdx <= steps.length - 1 && steps[Math.min(stepIdx, steps.length - 1)].result === 'found';
+
+  // Build set of eliminated indices up to current step
+  const eliminated = new Set<number>();
+  for (let s = 0; s <= Math.min(stepIdx, steps.length - 1); s++) {
+    const step = steps[s];
+    if (step.result === 'go-right') {
+      for (let i = step.lo; i <= step.mid; i++) eliminated.add(i);
+    } else if (step.result === 'go-left') {
+      for (let i = step.mid; i <= step.hi; i++) eliminated.add(i);
     }
   }
 
-  const maxSteps = steps.length - 1;
+  const currentStep = stepIdx >= 0 && stepIdx < steps.length ? steps[stepIdx] : null;
 
   useEffect(() => {
-    if (!playing) return;
-    const timer = setInterval(() => {
-      setStep(s => {
-        if (s >= maxSteps) { setPlaying(false); return maxSteps; }
-        return s + 1;
-      });
-    }, 1500);
-    return () => clearInterval(timer);
-  }, [playing, maxSteps]);
+    if (playing) {
+      timerRef.current = setInterval(() => {
+        setStepIdx(prev => {
+          const next = prev + 1;
+          if (next >= steps.length) {
+            setPlaying(false);
+            return steps.length - 1;
+          }
+          return next;
+        });
+      }, 600);
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [playing, steps.length]);
 
-  const current = steps[Math.min(step, maxSteps)];
+  function reset() {
+    setPlaying(false);
+    setStepIdx(-1);
+  }
 
-  const boxW = 40;
-  const boxH = 36;
-  const gap = 3;
-  const startX = 30;
-  const topY = 56;
-  const cellW = boxW + gap;
-  const totalW = startX + data.length * cellW + 30;
+  function nextStep() {
+    if (!done && stepIdx < steps.length - 1) setStepIdx(prev => prev + 1);
+  }
+
+  // SVG layout
+  const boxW = 24, boxH = 26, gap = 2, startX = 14, startY = 56;
+
+  function boxFill(i: number): string {
+    if (currentStep && currentStep.result === 'found' && i === currentStep.mid) return '#22c55e';
+    if (currentStep && i === currentStep.mid) return '#f59e0b';
+    if (eliminated.has(i)) return '#94a3b8';
+    return '#3b82f6';
+  }
 
   return (
-    <svg viewBox={`0 0 ${totalW} 210`} className="w-full max-w-xl mx-auto" role="img" aria-label="Binary search animation finding 23 in a sorted list">
-      {/* Title */}
-      <text x={totalW / 2} y="18" textAnchor="middle" className="fill-gray-800 dark:fill-gray-200" fontSize="13" fontWeight="700">
-        Binary Search: Find {target}
-      </text>
-      <text x={totalW / 2} y="34" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">
-        Halve the search space each step — O(log n)
-      </text>
+    <div className="w-full max-w-lg mx-auto my-4">
+      {/* Controls */}
+      <div className="flex items-center gap-2 mb-2 flex-wrap">
+        <label className="text-xs font-semibold text-gray-600 dark:text-slate-400">Target:</label>
+        <select
+          value={target}
+          onChange={e => { setTarget(Number(e.target.value)); reset(); }}
+          className="text-xs px-2 py-0.5 rounded border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-200"
+        >
+          {TARGETS.map(t => (
+            <option key={t} value={t}>{t}</option>
+          ))}
+        </select>
+        <button onClick={nextStep} disabled={done || playing} className="px-2 py-0.5 text-xs rounded font-medium bg-blue-600 text-white disabled:opacity-40 hover:bg-blue-700 transition-colors">Next Step</button>
+        <button
+          onClick={() => { if (stepIdx < 0) setStepIdx(0); setPlaying(!playing); }}
+          disabled={done}
+          className="px-2 py-0.5 text-xs rounded font-medium bg-amber-500 text-white disabled:opacity-40 hover:bg-amber-600 transition-colors"
+        >
+          {playing ? 'Pause' : 'Animate'}
+        </button>
+        <button onClick={reset} className="px-2 py-0.5 text-xs rounded font-medium bg-gray-300 dark:bg-slate-700 text-gray-700 dark:text-slate-300 hover:bg-gray-400 dark:hover:bg-slate-600 transition-colors">Reset</button>
+      </div>
 
-      {/* Data boxes */}
-      {data.map((val, i) => {
-        const x = startX + i * cellW;
-        const inRange = i >= current.left && i <= current.right;
-        const isMid = i === current.mid;
-        const isFound = isMid && current.found;
-        const eliminated = !inRange;
+      <svg viewBox="0 0 460 170" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label={`Binary search visualization finding ${target} in a sorted array of ${arr.length} elements`}>
+        <rect width="460" height="170" rx="8" className="fill-white dark:fill-slate-950" />
 
-        return (
-          <g key={i}>
-            <rect x={x} y={topY} width={boxW} height={boxH} rx="5"
-              className={
-                isFound ? 'fill-emerald-200 dark:fill-emerald-800/60 stroke-emerald-500 dark:stroke-emerald-400' :
-                isMid ? 'fill-amber-200 dark:fill-amber-800/60 stroke-amber-500 dark:stroke-amber-400' :
-                eliminated ? 'fill-gray-100 dark:fill-gray-800/40 stroke-gray-200 dark:stroke-gray-700' :
-                'fill-blue-50 dark:fill-blue-900/30 stroke-blue-300 dark:stroke-blue-700'
-              }
-              strokeWidth={isMid ? 2.5 : 1.5}
-              opacity={eliminated ? 0.35 : 1} />
-            <text x={x + boxW / 2} y={topY + boxH / 2 + 1} textAnchor="middle" dominantBaseline="central"
-              className={eliminated ? 'fill-gray-400 dark:fill-gray-600' : 'fill-gray-900 dark:fill-white'}
-              fontSize="13" fontWeight={isMid ? '800' : '600'} fontFamily="monospace"
-              opacity={eliminated ? 0.4 : 1}>
-              {val}
-            </text>
-            {/* Index below */}
-            <text x={x + boxW / 2} y={topY + boxH + 12} textAnchor="middle"
-              className="fill-gray-400 dark:fill-gray-600" fontSize="8" fontFamily="monospace"
-              opacity={eliminated ? 0.3 : 0.7}>
-              [{i}]
-            </text>
-          </g>
-        );
-      })}
+        {/* Title */}
+        <text x="230" y="18" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-gray-700 dark:fill-slate-200">
+          Finding {target} in a sorted list of {arr.length}
+        </text>
 
-      {/* Pointer labels */}
-      {!current.found && (
-        <>
-          {/* Left bracket */}
-          <text x={startX + current.left * cellW + boxW / 2} y={topY - 8} textAnchor="middle"
-                className="fill-blue-600 dark:fill-blue-400" fontSize="9" fontWeight="700">
-            L
-          </text>
-          {/* Right bracket */}
-          <text x={startX + current.right * cellW + boxW / 2} y={topY - 8} textAnchor="middle"
-                className="fill-blue-600 dark:fill-blue-400" fontSize="9" fontWeight="700">
-            R
-          </text>
-          {/* Mid pointer */}
-          <text x={startX + current.mid * cellW + boxW / 2} y={topY - 8} textAnchor="middle"
-                className="fill-amber-600 dark:fill-amber-400" fontSize="9" fontWeight="700">
-            mid
-          </text>
-        </>
-      )}
-
-      {/* Explanation */}
-      <g transform={`translate(${totalW / 2}, ${topY + boxH + 30})`}>
-        {current.found ? (
-          <text textAnchor="middle" className="fill-emerald-600 dark:fill-emerald-400" fontSize="12" fontWeight="700">
-            ✓ Found {target} at index {current.mid}!
-          </text>
-        ) : (
+        {/* lo/hi pointer labels above boxes */}
+        {currentStep && !done && (
           <>
-            <text textAnchor="middle" className="fill-gray-700 dark:fill-gray-300" fontSize="11" fontWeight="600">
-              Step {step + 1}: mid=[{current.mid}]={data[current.mid]} {data[current.mid] < target ? '< ' + target + ' → search RIGHT half' : '> ' + target + ' → search LEFT half'}
-            </text>
-            <text y="16" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">
-              Search space: [{current.left}..{current.right}] = {current.right - current.left + 1} elements
-            </text>
+            <text x={startX + currentStep.lo * (boxW + gap) + boxW / 2} y={startY - 14} textAnchor="middle" fontSize="8" fontWeight="700" fill="#3b82f6">lo</text>
+            <line x1={startX + currentStep.lo * (boxW + gap) + boxW / 2} y1={startY - 12} x2={startX + currentStep.lo * (boxW + gap) + boxW / 2} y2={startY - 2} stroke="#3b82f6" strokeWidth="1" markerEnd="" />
+            <text x={startX + currentStep.hi * (boxW + gap) + boxW / 2} y={startY - 14} textAnchor="middle" fontSize="8" fontWeight="700" fill="#ef4444">hi</text>
+            <line x1={startX + currentStep.hi * (boxW + gap) + boxW / 2} y1={startY - 12} x2={startX + currentStep.hi * (boxW + gap) + boxW / 2} y2={startY - 2} stroke="#ef4444" strokeWidth="1" />
           </>
         )}
-      </g>
 
-      {/* Step counter */}
-      <text x={totalW / 2} y={topY + boxH + 72} textAnchor="middle"
-            className="fill-gray-400 dark:fill-gray-500" fontSize="9">
-        {step + 1} of {steps.length} steps to find {target} in {data.length} items (log₂{data.length} ≈ {Math.ceil(Math.log2(data.length))})
-      </text>
+        {/* Index labels */}
+        {arr.map((_, i) => (
+          <text key={`idx-${i}`} x={startX + i * (boxW + gap) + boxW / 2} y={startY - 4} textAnchor="middle" fontSize="7" className="fill-gray-400 dark:fill-slate-500">{i}</text>
+        ))}
 
-      {/* Controls */}
-      <g transform={`translate(${totalW / 2 - 60}, 180)`}>
-        <rect x="0" y="0" width="50" height="22" rx="4"
-              className="fill-gray-200 dark:fill-gray-700 stroke-gray-300 dark:stroke-gray-600" strokeWidth="1"
-              onClick={() => { setStep(0); setPlaying(false); }} style={{ cursor: 'pointer' }} />
-        <text x="25" y="15" textAnchor="middle" className="fill-gray-700 dark:fill-gray-300 pointer-events-none" fontSize="10" fontWeight="600">
-          Reset
+        {/* Array boxes */}
+        {arr.map((val, i) => {
+          const isElim = eliminated.has(i) && !(currentStep && i === currentStep.mid);
+          return (
+            <g key={i}>
+              <rect
+                x={startX + i * (boxW + gap)}
+                y={startY}
+                width={boxW}
+                height={boxH}
+                rx="3"
+                fill={boxFill(i)}
+                opacity={isElim ? 0.3 : 1}
+              />
+              <text
+                x={startX + i * (boxW + gap) + boxW / 2}
+                y={startY + boxH / 2 + 4}
+                textAnchor="middle"
+                fontSize="9"
+                fontWeight="600"
+                fill={isElim ? '#64748b' : '#ffffff'}
+              >
+                {val}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Mid pointer below */}
+        {currentStep && (
+          <>
+            <text x={startX + currentStep.mid * (boxW + gap) + boxW / 2} y={startY + boxH + 12} textAnchor="middle" fontSize="8" fontWeight="700" fill="#f59e0b">mid</text>
+          </>
+        )}
+
+        {/* Step explanation */}
+        {currentStep && (
+          <text x="230" y={startY + boxH + 30} textAnchor="middle" fontSize="9" className="fill-gray-600 dark:fill-slate-400">
+            {currentStep.result === 'found'
+              ? `arr[${currentStep.mid}] = ${arr[currentStep.mid]} = ${target} -- Found!`
+              : currentStep.result === 'go-right'
+              ? `arr[${currentStep.mid}] = ${arr[currentStep.mid]} < ${target} -- search right half`
+              : `arr[${currentStep.mid}] = ${arr[currentStep.mid]} > ${target} -- search left half`}
+          </text>
+        )}
+
+        {/* Step counter */}
+        <text x="230" y="155" textAnchor="middle" fontSize="9" fontWeight="600" className="fill-gray-500 dark:fill-slate-400">
+          {stepIdx >= 0 ? `Steps taken: ${stepIdx + 1}` : 'Click "Next Step" or "Animate" to begin'}
+          {done ? ` of ${arr.length} elements` : ''}
         </text>
-        <rect x="58" y="0" width="62" height="22" rx="4"
-              className="fill-blue-100 dark:fill-blue-900/40 stroke-blue-400 dark:stroke-blue-600" strokeWidth="1"
-              onClick={() => { if (step >= maxSteps) setStep(0); setPlaying(!playing); }} style={{ cursor: 'pointer' }} />
-        <text x="89" y="15" textAnchor="middle" className="fill-blue-700 dark:fill-blue-300 pointer-events-none" fontSize="10" fontWeight="600">
-          {playing ? '⏸ Pause' : '▶ Play'}
-        </text>
-      </g>
-    </svg>
+      </svg>
+
+      {/* Result */}
+      {done && (
+        <p className="mt-2 text-xs font-semibold text-green-600 dark:text-green-400 text-center">
+          Found {target} in {stepIdx + 1} step{stepIdx > 0 ? 's' : ''} out of {arr.length} elements. Linear search would need up to {arr.length} steps.
+        </p>
+      )}
+
+      <p className="mt-1 text-xs text-gray-600 dark:text-slate-400 leading-relaxed">
+        Binary search halves the remaining elements each step. For {arr.length} elements it needs at most {Math.ceil(Math.log2(arr.length))} comparisons instead of {arr.length}.
+      </p>
+    </div>
   );
 }

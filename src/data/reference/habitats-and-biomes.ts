@@ -1,0 +1,61 @@
+import type { ReferenceGuide } from '../reference';
+
+export const guide: ReferenceGuide = {
+  slug: 'habitats-and-biomes',
+  title: 'Habitats & Biomes',
+  category: 'ecology',
+  icon: '🌿',
+  tagline: 'From Kaziranga grasslands to Himalayan alpine meadows — where life thrives and why.',
+  relatedStories: ['kaziranga-grass', 'snow-leopards-promise', 'cloud-weaver-of-tawang', 'dancing-deer-of-loktak-lake'],
+  understand: [
+    {
+      title: 'What Defines a Habitat',
+      interactive: {
+        type: 'matching',
+        props: {
+          title: 'Match each habitat factor to its category',
+          pairs: [
+            ['Temperature, rainfall, soil type', 'Abiotic (non-living) factors'],
+            ['Predators, food species, competitors', 'Biotic (living) factors'],
+            ['Kaziranga floodplain grasslands', 'Habitat for Indian one-horned rhinoceros'],
+            ['Loktak Lake floating phumdi mats', 'Habitat for the sangai deer — found nowhere else on Earth'],
+          ],
+        },
+      },
+      beginnerContent: 'A **habitat** is the natural environment where an organism lives, providing the food, water, shelter, and space it needs to survive and reproduce. Every species has specific habitat requirements shaped by millions of years of evolution. The Indian one-horned rhinoceros requires tall alluvial grasslands with nearby water sources for wallowing — exactly the conditions found in Kaziranga\'s Brahmaputra floodplain. The sangai deer of Loktak Lake needs floating phumdi mats, a habitat so specialized that it exists nowhere else on Earth.\n\nHabitats are defined by both **abiotic** (non-living) and **biotic** (living) factors. Abiotic factors include temperature, rainfall, soil type, sunlight, altitude, and water chemistry. Biotic factors include the presence of food species, predators, competitors, parasites, and symbiotic partners. Change any of these factors significantly and a habitat may become unsuitable for its current residents. When the Ithai Barrage raised water levels in Loktak Lake, it thinned the phumdi mats — the sangai\'s floating habitat literally sank, pushing the species to the edge of extinction.\n\nHabitat destruction is the single greatest threat to biodiversity worldwide, responsible for more species declines than pollution, hunting, or climate change. When a forest is cleared for agriculture, the habitat does not just shrink — it fragments into isolated patches too small to sustain viable populations, with roads, fields, and settlements creating barriers to movement between patches.',
+      intermediateContent:
+        'Habitat suitability is modelled using **species distribution models (SDMs)** that correlate species occurrence records with environmental variables (temperature, rainfall, elevation, soil type) to predict where a species could live. **MaxEnt** (Maximum Entropy modelling) is the most widely used algorithm, generating probability maps from presence-only data. For the Indian rhinoceros, SDMs identify the Brahmaputra floodplain, Terai grasslands, and parts of the Duars as high-suitability habitat, matching observed populations. **Habitat fragmentation** is measured by landscape metrics: patch size, edge-to-area ratio, nearest-neighbour distance, and connectivity indices. The **species–area relationship** S = cA^z (where S is species count, A is area, c and z are constants, z ≈ 0.15–0.35 for habitat islands) predicts that halving habitat area reduces species by 20–30%.',
+      advancedContent:
+        'Conservation planning uses **systematic conservation planning** frameworks (Margules & Pressey, 2000) to identify priority areas. Tools like **Marxan** and **Zonation** solve optimisation problems: which set of areas protects the most biodiversity at least cost? Inputs include species occurrence, habitat maps, connectivity layers, land costs, and existing protected areas. For NE India, analyses consistently identify the Kaziranga–Karbi Anglong corridor, the Namdapha–Kamlang complex, and Meghalaya’s sacred groves as irreplaceable. **Circuit theory** (McRae et al., 2008) models animal movement across landscapes as electrical current flowing through a resistance surface, where low-resistance cells (forest) carry more current (animal movement) than high-resistance cells (roads, settlements). This approach has mapped optimal elephant corridors in Assam, guiding highway design to include wildlife underpasses.',
+    },
+    {
+      title: 'Terrestrial Biomes',
+      diagram: 'ClimateZonesDiagram',
+      beginnerContent: '**Biomes** are large-scale ecosystems classified by their dominant vegetation and climate. The major terrestrial biomes, arranged roughly from equator to poles, include: **tropical rainforest** (warm, wet year-round, with the highest biodiversity on Earth), **tropical dry forest** (warm with distinct wet and dry seasons), **savanna/grassland** (warm with seasonal rainfall, dominated by grasses with scattered trees), **desert** (extremely low rainfall, below 250 mm per year), **temperate forest** (moderate temperatures with distinct seasons), **temperate grassland** (cold winters, hot summers, too dry for forests), **boreal forest/taiga** (long, cold winters, dominated by conifers like spruce and pine), and **tundra** (permafrost, extremely cold, treeless, with only mosses, lichens, and low shrubs).\n\nEach biome supports characteristic life forms adapted to its conditions. Desert organisms conserve water through waxy coatings, nocturnal activity, and concentrated urine. Tundra plants grow close to the ground to avoid wind and complete their life cycles in the brief summer. Tropical rainforest trees grow towering canopies to compete for light, with more species of trees in a single hectare of Amazonian forest (up to 300) than in all of northern Europe.\n\nAltitude compresses these biome transitions into remarkably short distances. Climbing from sea level to 5,000 metres in the Himalayas, you pass through tropical, subtropical, temperate, subalpine, and alpine zones — the equivalent of travelling from equatorial India to the Arctic — in just 100 km of horizontal distance.',
+    },
+    {
+      title: 'Aquatic Ecosystems',
+      diagram: 'WaterCycleDiagram',
+      beginnerContent: '**Freshwater ecosystems** — rivers, lakes, ponds, streams, and wetlands — cover less than 1% of Earth\'s surface but support roughly 10% of all known animal species. Rivers are dynamic systems where water flow, oxygen levels, temperature, and sediment load vary from headwaters to mouth. The Brahmaputra\'s upper reaches in Tibet are cold, fast-flowing, and oxygen-rich; by the time it reaches Assam\'s floodplain, it is warm, slower, sediment-laden, and nutrient-rich, supporting a different community of organisms. Lakes and wetlands (beels) in the Brahmaputra valley are critical nurseries for fish, feeding grounds for migratory birds, and buffers against flooding.\n\n**Marine ecosystems** include the open ocean, coral reefs, estuaries, and coastal zones. Coral reefs, sometimes called "rainforests of the sea," cover less than 0.1% of the ocean floor but support about 25% of marine fish species. Estuaries — where rivers meet the sea — are among the most productive ecosystems on Earth, mixing freshwater nutrients with saltwater to create nurseries for commercially important fish and shrimp. The Sundarbans, where the Ganges-Brahmaputra delta meets the Bay of Bengal, is the world\'s largest mangrove forest.\n\n**Wetlands** deserve special attention because they are disproportionately valuable and disproportionately threatened. Wetlands filter water, store carbon, buffer floods, recharge groundwater, and support extraordinary biodiversity. Loktak Lake in Manipur, with its unique floating phumdis, is a Ramsar Wetland of International Importance. Yet globally, over 35% of wetlands have been lost since 1970 — drained for agriculture, filled for construction, or degraded by pollution.',
+    },
+    {
+      title: 'Northeast India\'s Biome Diversity',
+      diagram: 'NEIndiaBiomesDiagram',
+      beginnerContent: 'Northeast India is one of the most biologically remarkable regions on Earth, containing representatives of nearly every major Asian biome within a compact geographic area. This extraordinary diversity results from the region\'s position at the confluence of three biogeographic realms: the Indian subcontinent, the Indo-Malayan region (Southeast Asia), and the Palearctic realm (Central and East Asia via the Himalayas). Within a 200 km transect from the Brahmaputra valley to the peaks of Arunachal Pradesh, you traverse tropical semi-evergreen forest (below 900 m), subtropical broadleaf forest (900–1,800 m), temperate forest of oaks and rhododendrons (1,800–3,000 m), subalpine forest of birch and juniper (3,000–4,000 m), and alpine meadows and scrub above the tree line (4,000–5,000 m).\n\nKaziranga\'s grasslands represent a unique alluvial floodplain ecosystem — among the tallest and most productive grasslands in Asia, maintained by the annual Brahmaputra floods that deposit nutrient-rich silt and prevent forest succession. The Khasi and Jaintia Hills of Meghalaya support subtropical pine forests and some of the last sacred groves — patches of ancient forest protected by indigenous Khasi law. Meghalaya\'s limestone caves harbour unique cave-adapted species found nowhere else. The Naga Hills contain montane forests with high endemism — species that evolved in isolation on these ancient mountains.\n\nThis concentration of biomes makes NE India part of two global biodiversity hotspots (Eastern Himalayas and Indo-Burma) and home to an estimated 8,000 plant species, 160 mammal species, 700 bird species, and countless invertebrates — many still undescribed by science.',
+    },
+    {
+      title: 'Microhabitats',
+      interactive: {
+        type: 'did-you-know',
+        props: {
+          facts: [
+            'A single large tree in an Arunachal cloud forest can host over 50 species of epiphytes, each providing microhabitat for additional organisms.',
+            'A rotting log on a forest floor is its own tiny world — home to beetles, fungi, centipedes, termites, and salamanders that could not survive in the open.',
+            'Old-growth forests have hundreds of microhabitats (fallen logs, tree hollows, leaf litter layers), which is why they support far more species than monoculture plantations of the same area.',
+          ],
+        },
+      },
+      beginnerContent: 'Within any large habitat, there are **microhabitats** — small, specialized environments with conditions distinct from their surroundings. A rotting log on the floor of a Meghalaya cloud forest is a microhabitat: its interior is moister, darker, and cooler than the surrounding air, and it supports beetles, fungi, centipedes, termites, and salamanders that would not survive on the exposed forest floor. The underside of a rock in a Brahmaputra tributary is a microhabitat for aquatic insects and freshwater crabs. The hollow of a tree trunk provides a microhabitat for nesting hornbills, roosting bats, and arboreal snakes.\n\nMicrohabitats matter because they increase the total habitat diversity of an ecosystem, allowing more species to coexist. A structurally complex forest — with fallen logs, standing dead trees (snags), leaf litter layers, epiphyte-covered branches, and streams — offers hundreds of microhabitats. A monoculture tree plantation of the same area, with uniform age, species, and structure, offers far fewer. This is why species richness drops dramatically when old-growth forests are replaced by plantations, even if the total tree cover remains the same.\n\nEpiphytes — plants that grow on other plants without parasitizing them — create their own microhabitats. Orchids, ferns, and mosses growing on tree branches in NE India\'s cloud forests collect water and organic matter, forming tiny aerial gardens that support communities of insects, spiders, and frogs. A single large tree in an Arunachal cloud forest can host over 50 species of epiphytes, each providing microhabitat for additional organisms. Microhabitats within microhabitats — it is complexity all the way down.',
+    },
+  ],
+};

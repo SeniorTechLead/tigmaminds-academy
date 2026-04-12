@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { BookOpen, ChevronRight, CheckCircle, Code2, Sparkles, ArrowLeft } from 'lucide-react';
+import { BookOpen, ChevronRight, CheckCircle, Circle, Code2, Sparkles, ArrowLeft } from 'lucide-react';
 import MiniLesson from '../components/MiniLesson';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { usePyodide } from '../contexts/PyodideContext';
+import { useBasicsProgress } from '../contexts/BasicsProgressContext';
 import {
   PrintDiagram, VariableDiagram, ListDiagram, LoopDiagram,
   ConditionalDiagram, FunctionDiagram, NumpyDiagram, PlotDiagram,
@@ -562,11 +563,16 @@ print("\\nYou are now ready for Level 1 of any story!")`,
   },
 ];
 
+const COURSE_SLUG = 'python-basics' as const;
+
 export default function PythonBasicsPage() {
   const { ready: pyReady } = usePyodide();
+  const { markLessonComplete, isLessonComplete, getCompletedCount, isCourseComplete } = useBasicsProgress();
   const [expandedLesson, setExpandedLesson] = useState<number | null>(null);
   const searchParams = useSearchParams();
   const fromSlug = searchParams.get('from');
+  const completedCount = getCompletedCount(COURSE_SLUG);
+  const courseComplete = isCourseComplete(COURSE_SLUG, lessons.length);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
@@ -600,26 +606,42 @@ export default function PythonBasicsPage() {
         </div>
 
         {/* Progress overview */}
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold text-gray-600 dark:text-gray-400">{completedCount} / {lessons.length} lessons complete</span>
+            {courseComplete && <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Course complete!</span>}
+          </div>
+          <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: `${(completedCount / lessons.length) * 100}%` }} />
+          </div>
+        </div>
         <div className="grid grid-cols-4 md:grid-cols-8 gap-2 mb-10">
-          {lessons.map((lesson, i) => (
-            <button
-              key={i}
-              onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
-              className={`aspect-square rounded-lg flex items-center justify-center text-sm font-bold transition-all
-                ${expandedLesson === i
-                  ? 'bg-emerald-600 text-white scale-110 shadow-lg'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/30'
-                }`}
-              title={lesson.title}
-            >
-              {i + 1}
-            </button>
-          ))}
+          {lessons.map((lesson, i) => {
+            const done = isLessonComplete(COURSE_SLUG, i);
+            return (
+              <button
+                key={i}
+                onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
+                className={`aspect-square rounded-lg flex items-center justify-center text-sm font-bold transition-all
+                  ${expandedLesson === i
+                    ? 'bg-emerald-600 text-white scale-110 shadow-lg'
+                    : done
+                      ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 ring-2 ring-emerald-400/50'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/30'
+                  }`}
+                title={`${lesson.title}${done ? ' ✓' : ''}`}
+              >
+                {done ? <CheckCircle className="w-4 h-4" /> : i + 1}
+              </button>
+            );
+          })}
         </div>
 
         {/* Lessons */}
         <div className="space-y-6">
-          {lessons.map((lesson, i) => (
+          {lessons.map((lesson, i) => {
+            const done = isLessonComplete(COURSE_SLUG, i);
+            return (
             <div key={i}>
               {/* Lesson header — always visible */}
               <button
@@ -627,22 +649,27 @@ export default function PythonBasicsPage() {
                 className={`w-full text-left px-6 py-4 rounded-xl border transition-all flex items-center gap-4
                   ${expandedLesson === i
                     ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-700'
-                    : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:border-emerald-300 dark:hover:border-emerald-700'
+                    : done
+                      ? 'bg-emerald-50/50 dark:bg-emerald-900/10 border-emerald-200 dark:border-emerald-800'
+                      : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 hover:border-emerald-300 dark:hover:border-emerald-700'
                   }`}
               >
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold flex-shrink-0
                   ${expandedLesson === i
                     ? 'bg-emerald-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
+                    : done
+                      ? 'bg-emerald-500 text-white'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
                   }`}>
-                  {i + 1}
+                  {done ? <CheckCircle className="w-5 h-5" /> : i + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`font-semibold ${expandedLesson === i ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-900 dark:text-white'}`}>
+                  <p className={`font-semibold ${expandedLesson === i ? 'text-emerald-700 dark:text-emerald-300' : done ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-900 dark:text-white'}`}>
                     {lesson.title}
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{lesson.codeIntro}</p>
                 </div>
+                {done && expandedLesson !== i && <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex-shrink-0">Complete</span>}
                 <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedLesson === i ? 'rotate-90' : ''}`} />
               </button>
 
@@ -664,10 +691,36 @@ export default function PythonBasicsPage() {
                       <ConditionalDiagram />, <FunctionDiagram />, <NumpyDiagram />, <PlotDiagram />,
                     ][i]}
                   />
+                  {/* Mark Complete button */}
+                  <div className="mt-6 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4">
+                    {done ? (
+                      <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+                        <CheckCircle className="w-5 h-5" />
+                        <span className="text-sm font-semibold">Lesson complete</span>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => markLessonComplete(COURSE_SLUG, i)}
+                        className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-semibold transition-colors"
+                      >
+                        <CheckCircle className="w-4 h-4" />
+                        Mark Complete
+                      </button>
+                    )}
+                    {i < lessons.length - 1 && (
+                      <button
+                        onClick={() => { if (!done) markLessonComplete(COURSE_SLUG, i); setExpandedLesson(i + 1); }}
+                        className="flex items-center gap-1 text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                      >
+                        Next lesson <ChevronRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
-          ))}
+          );
+          })}
         </div>
 
         {/* Completion CTA */}

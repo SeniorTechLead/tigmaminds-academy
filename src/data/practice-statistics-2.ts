@@ -112,7 +112,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-09', difficulty: 1,
       question: 'A multiple-choice test has **6 questions**, each with 4 options. If you guess randomly, what is P(getting exactly 2 correct)?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6'], values: [0.178,0.356,0.297,0.132,0.033,0.004,0.000], highlight: 2 },
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 6, p: 0.25 }, markX: 2 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 6, k = 2, p = 1/4 = 0.25' },
         { label: 'Step 2: C(6,2)', content: 'C(6,2) = 15' },
@@ -194,7 +194,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-16', difficulty: 1,
       question: 'If X ~ Binomial(8, 0.5), what is P(X = 4)?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.004,0.031,0.109,0.219,0.273,0.219,0.109,0.031,0.004], highlight: 4 },
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 8, p: 0.5 }, markX: 4 },
       steps: [
         { label: 'Step 1: C(8,4)', content: 'C(8,4) = 70' },
         { label: 'Step 2: Compute', content: 'P(X=4) = 70 × 0.5⁴ × 0.5⁴ = 70 × (1/256) = 70/256 ≈ **0.2734**' },
@@ -206,7 +206,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-17', difficulty: 1,
       question: 'A basketball player makes 60% of free throws. In **5 attempts**, what is P(exactly 3 makes)?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5'], values: [0.010,0.077,0.230,0.346,0.259,0.078], highlight: 3 },
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 5, p: 0.6 }, markX: 3 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 5, k = 3, p = 0.6' },
         { label: 'Step 2: C(5,3)', content: 'C(5,3) = 10' },
@@ -352,7 +352,7 @@ export const practiceBinomialDistribution: PracticeSet = {
       answer: '1.000 (verified)',
       code: '# Verify binomial probs sum to 1 for n=3, p=0.5\nfrom math import comb\n\n# Your code here\n',
       codeSolution: 'from math import comb\n\nn, p = 3, 0.5\ntotal = 0\nfor k in range(n + 1):\n    prob = comb(n, k) * p**k * (1-p)**(n-k)\n    total += prob\n    print(f"P(X={k}) = {prob:.4f}")\nprint(f"Sum = {total:.4f}")',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3'], values: [0.125,0.375,0.375,0.125] },
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 3, p: 0.5 } },
     },
     {
       id: 'bin-28', difficulty: 2,
@@ -423,7 +423,7 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-33', difficulty: 2,
       question: 'A weather forecast says 30% chance of rain each day. In a **7-day** week, what is P(rain on exactly 3 days)?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7'], values: [0.082,0.247,0.318,0.227,0.097,0.025,0.004,0.000], highlight: 3 },
+      visual: { kind: 'distribution', type: 'binomial', params: { n: 7, p: 0.3 }, markX: 3 },
       steps: [
         { label: 'Step 1: Parameters', content: 'n = 7, k = 3, p = 0.3' },
         { label: 'Step 2: C(7,3)', content: 'C(7,3) = 35' },
@@ -567,7 +567,6 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-44', difficulty: 3,
       question: 'A spam filter correctly identifies spam 98% of the time and correctly identifies non-spam 95% of the time. If 20% of emails are spam, and the filter processes **50 emails**, what is the expected number of **misclassified** emails?',
-      visual: { kind: 'bar-chart', labels: ['Missed spam','Missed non-spam','Total misclassified'], values: [0.2,2.0,2.2] },
       steps: [
         { label: 'Step 1: Misclassification rates', content: 'P(miss spam) = 0.02, P(miss non-spam) = 0.05' },
         { label: 'Step 2: Expected spam emails', content: '50 × 0.20 = 10 spam, 50 × 0.80 = 40 non-spam' },
@@ -594,7 +593,6 @@ export const practiceBinomialDistribution: PracticeSet = {
     {
       id: 'bin-46', difficulty: 3,
       question: 'Two factories supply widgets. Factory A (60% of supply) has 3% defect rate; Factory B (40%) has 5% defect rate. A random widget is defective. What is P(it came from Factory A)? Then: in a batch of **10** from Factory A, what is P(exactly 1 defective)?',
-      visual: { kind: 'bar-chart', labels: ['P(D|A)×P(A)','P(D|B)×P(B)'], values: [0.018,0.020] },
       steps: [
         { label: 'Step 1: Bayes\' theorem', content: 'P(A|D) = P(D|A)P(A) / P(D) = (0.03 × 0.60) / (0.03 × 0.60 + 0.05 × 0.40)' },
         { label: 'Step 2: Compute', content: 'P(A|D) = 0.018 / (0.018 + 0.020) = 0.018 / 0.038 ≈ **0.4737**' },

@@ -69,7 +69,7 @@ function CircuitMiniLesson({ lesson, number }: { lesson: CircuitLesson; number: 
       )}
 
       <div className="border-t border-gray-200 dark:border-gray-700">
-        <ArduinoPlayground starterCode={lesson.code} title={`Circuit ${number}`} ledCount={lesson.ledCount || 3} />
+        <ArduinoPlayground starterCode={lesson.code} title={`Circuit ${number}`} ledCount={lesson.ledCount || 3} sonarMode />
       </div>
 
       {lesson.challenge && (
@@ -410,7 +410,7 @@ void loop() {
   Serial.print(",");
   Serial.println(beepInterval);
 
-  delay(60);
+  delay(200);
 }`,
       ledCount: 3,
       challenge: 'Change the mapping to non-linear: use beepInterval = 50 + (dist * dist) / 120 for a quadratic curve. This makes the alert ramp up much faster at close range, which feels more natural for collision avoidance.',
@@ -438,6 +438,7 @@ On real hardware, this project uses an HC-SR04 ($2), a piezo buzzer ($0.50), 3 L
 int ledClose = 2;  // Red
 int ledMid = 3;    // Yellow
 int ledFar = 4;    // Green
+int buzzer = 5;    // Piezo buzzer
 
 // Moving average filter
 int buf[] = {150, 150, 150, 150, 150};
@@ -445,8 +446,6 @@ int bIdx = 0;
 int dist = 200;
 int dir = -3;
 int tick = 0;
-int beepTimer = 0;
-int beepState = 0;
 
 int avgFilter() {
   int s = 0;
@@ -458,16 +457,17 @@ void setup() {
   pinMode(ledClose, OUTPUT);
   pinMode(ledMid, OUTPUT);
   pinMode(ledFar, OUTPUT);
+  pinMode(buzzer, OUTPUT);
 
-  // Self-test
+  // Self-test: flash LEDs + beep
   Serial.println("=== Dolphin Sonar Capstone ===");
-  digitalWrite(ledFar, HIGH); delay(200);
+  digitalWrite(ledFar, HIGH); tone(buzzer, 800, 150); delay(200);
   digitalWrite(ledFar, LOW);
-  digitalWrite(ledMid, HIGH); delay(200);
+  digitalWrite(ledMid, HIGH); tone(buzzer, 1200, 150); delay(200);
   digitalWrite(ledMid, LOW);
-  digitalWrite(ledClose, HIGH); delay(200);
-  digitalWrite(ledClose, LOW);
-  Serial.println("Self-test OK");
+  digitalWrite(ledClose, HIGH); tone(buzzer, 1800, 150); delay(200);
+  digitalWrite(ledClose, LOW); noTone(buzzer);
+  Serial.println("Self-test OK — LEDs + buzzer working");
   Serial.println("ms,raw,filtered,zone,beep_ms");
 }
 
@@ -497,26 +497,16 @@ void loop() {
   digitalWrite(ledMid, LOW);
   digitalWrite(ledFar, LOW);
 
-  // Zone display + alert
+  // Zone display + audio alert
   if (filtered < 30) {
-    beepTimer += 60;
-    if (beepTimer >= beepInt) {
-      beepState = 1 - beepState;
-      beepTimer = 0;
-    }
-    analogWrite(ledClose, beepState * 255);
+    analogWrite(ledClose, 255);
+    tone(buzzer, 2000 - filtered * 30, beepInt);
   } else if (filtered < 100) {
     digitalWrite(ledMid, HIGH);
-    beepTimer += 60;
-    if (beepTimer >= beepInt) {
-      beepState = 1 - beepState;
-      beepTimer = 0;
-    }
-    analogWrite(ledClose, beepState * 80);
+    tone(buzzer, 1500 - filtered * 8, beepInt);
   } else {
     digitalWrite(ledFar, HIGH);
-    analogWrite(ledClose, 0);
-    beepTimer = 0;
+    noTone(buzzer);
   }
 
   // CSV log
@@ -531,11 +521,11 @@ void loop() {
   Serial.println(beepInt);
 
   tick++;
-  delay(60);
+  delay(200);
 }`,
       ledCount: 3,
-      challenge: 'On real hardware: connect an HC-SR04 (TRIG to pin 7, ECHO to pin 8) and replace the simulated distance with pulseIn(ECHO, HIGH) / 58.2. Add a piezo buzzer on pin 5 and use tone(5, 2000 - filtered * 5, beepInt) for pitch-mapped audio alerts.',
-      successHint: 'You built a complete sonar ranging system: sensing, filtering, visual display, audio alert, and data logging. This is the same architecture used in parking sensors, robotic navigation, and accessibility devices.',
+      challenge: 'Try changing the tone frequencies — what happens if you map closer objects to higher pitches? On real hardware, connect an HC-SR04 (TRIG to pin 7, ECHO to pin 8) and replace the simulated distance with pulseIn(ECHO, HIGH) / 58.2.',
+      successHint: 'You\'ve built a working sonar system — LEDs show distance zones, audio pitch changes with proximity, and the serial monitor logs data. Upload this code to a real Arduino with an HC-SR04 sensor and it works identically.',
     },
   ];
 

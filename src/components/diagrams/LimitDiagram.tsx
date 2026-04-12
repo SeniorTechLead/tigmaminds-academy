@@ -29,9 +29,9 @@ export default function LimitDiagram() {
         <text x="275" y="278" textAnchor="middle" className="fill-red-600 dark:fill-red-400" fontSize="12" fontWeight="600">a</text>
         <text x="38" y="76" textAnchor="end" className="fill-red-600 dark:fill-red-400" fontSize="12" fontWeight="600">L</text>
 
-        {/* Zoom-in magnification circle */}
-        <circle cx="275" cy="72" r="35" fill="none" className="stroke-amber-500 dark:stroke-amber-400" strokeWidth="1.5" strokeDasharray="4,3" />
-        <text x="316" y="58" className="fill-amber-600 dark:fill-amber-400" fontSize="10">zoom in</text>
+        {/* Highlight the limit point area */}
+        <circle cx="275" cy="72" r="35" fill="rgba(245,158,11,0.08)" className="stroke-amber-500 dark:stroke-amber-400" strokeWidth="1.5" strokeDasharray="4,3" />
+        <text x="316" y="58" className="fill-amber-600 dark:fill-amber-400" fontSize="10">approaches L</text>
 
         {/* Approaching arrows from left */}
         <line x1="200" y1="105" x2="255" y2="78" className="stroke-emerald-500" strokeWidth="1.5" markerEnd="url(#limitArrow)" />

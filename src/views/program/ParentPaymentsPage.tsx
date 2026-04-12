@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { CheckCircle, Clock, AlertTriangle, ArrowLeft, Loader2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import {
-  getParentEnrollment,
+  getParentEnrollments,
   getPayments,
   type ProgramPayment,
   type Enrollment,
@@ -22,10 +22,14 @@ export default function ParentPaymentsPage() {
   const { user, profile, hasRole, loading: authLoading } = useAuth();
   const router = useRouter();
 
-  const [enrollment, setEnrollment] = useState<(Enrollment & { cohorts: Cohort }) | null>(null);
-  const [payments, setPayments] = useState<ProgramPayment[]>([]);
+  const [enrollments, setEnrollments] = useState<(Enrollment & { cohorts: Cohort })[]>([]);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [paymentsByEnrollment, setPaymentsByEnrollment] = useState<Record<string, ProgramPayment[]>>({});
   const [loading, setLoading] = useState(true);
   const [paying, setPaying] = useState(false);
+
+  const enrollment = enrollments[activeIdx] || null;
+  const payments = enrollment ? (paymentsByEnrollment[enrollment.id] || []) : [];
 
   const handlePay = async (payment: ProgramPayment) => {
     if (!user || !enrollment) return;
@@ -41,8 +45,8 @@ export default function ParentPaymentsPage() {
           name: profile?.display_name || user.email?.split('@')[0] || 'Parent',
           amount: payment.amount / 100, // convert paise to rupees
           productInfo: `Program Fee — ${payment.month_label}`,
-          returnUrl: `${window.location.origin}/program/parent/payments?result=success&month=${encodeURIComponent(payment.month_label)}`,
-          failureUrl: `${window.location.origin}/program/parent/payments?result=failed`,
+          returnUrl: `${window.location.origin}/program/guardian/payments?result=success&month=${encodeURIComponent(payment.month_label)}`,
+          failureUrl: `${window.location.origin}/program/guardian/payments?result=failed`,
           udf1: enrollment.id,
           udf2: payment.id,
           udf3: payment.month_label,
@@ -70,15 +74,19 @@ export default function ParentPaymentsPage() {
 
   useEffect(() => {
     if (authLoading) return;
-    if (!user) { router.push('/auth?returnTo=/program/parent/payments'); return; }
+    if (!user) { router.push('/auth?returnTo=/program/guardian/payments'); return; }
     if (user && !profile) return;
 
     (async () => {
-      const enr = await getParentEnrollment(user.id, user.email || undefined);
-      if (enr) {
-        setEnrollment(enr);
-        const p = await getPayments(enr.id);
-        setPayments(p);
+      const enrs = await getParentEnrollments(user.id, user.email || undefined);
+      if (enrs.length > 0) {
+        setEnrollments(enrs);
+        setActiveIdx(0);
+        const pMap: Record<string, ProgramPayment[]> = {};
+        for (const e of enrs) {
+          pMap[e.id] = await getPayments(e.id);
+        }
+        setPaymentsByEnrollment(pMap);
       }
       setLoading(false);
     })();
@@ -99,7 +107,7 @@ export default function ParentPaymentsPage() {
           <AlertTriangle className="mx-auto text-amber-500 mb-3" size={40} />
           <h1 className="text-lg font-semibold text-gray-800 mb-2">No enrollment found</h1>
           <p className="text-sm text-gray-500 mb-4">We couldn't find a program enrollment linked to your account.</p>
-          <Link href="/program/parent" className="text-sm text-indigo-600 hover:underline">← Back to progress</Link>
+          <Link href="/program/guardian" className="text-sm text-indigo-600 hover:underline">← Back to progress</Link>
         </div>
       </div>
     );
@@ -114,14 +122,33 @@ export default function ParentPaymentsPage() {
       <div className="max-w-lg mx-auto px-4 py-8">
         {/* Nav */}
         <div className="flex items-center justify-between mb-6">
-          <Link href="/program/parent" className="flex items-center gap-2 text-sm text-indigo-600 hover:underline">
+          <Link href="/program/guardian" className="flex items-center gap-2 text-sm text-indigo-600 hover:underline">
             <ArrowLeft className="w-4 h-4" /> Back to progress
           </Link>
           <span className="text-xs text-gray-400">{profile?.display_name || user?.email?.split('@')[0]}</span>
         </div>
 
         <h1 className="text-2xl font-bold text-gray-900 mb-1">Payments</h1>
-        <p className="text-sm text-gray-500 mb-6">{enrollment.cohorts?.name || 'School Program'}</p>
+        <p className="text-sm text-gray-500 mb-4">{enrollment.cohorts?.name || 'School Program'}</p>
+
+        {/* Ward selector */}
+        {enrollments.length > 1 && (
+          <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
+            {enrollments.map((enr, idx) => (
+              <button
+                key={enr.id}
+                onClick={() => setActiveIdx(idx)}
+                className={`px-4 py-2 rounded-lg border text-sm font-semibold transition-all flex-shrink-0 ${
+                  idx === activeIdx
+                    ? 'bg-indigo-50 border-indigo-300 text-indigo-700'
+                    : 'bg-white border-gray-200 text-gray-600 hover:border-indigo-200'
+                }`}
+              >
+                {(enr as any).student_email?.split('@')[0] || `Ward ${idx + 1}`}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Summary cards */}
         <div className="grid grid-cols-3 gap-3 mb-6">
@@ -204,7 +231,7 @@ export default function ParentPaymentsPage() {
 
         {/* Help text */}
         <div className="mt-8 text-center text-xs text-gray-400 leading-relaxed">
-          <p>For payment queries, contact the academy or your child's mentor.</p>
+          <p>For payment queries, contact the academy or your ward's mentor.</p>
           <Link href="/contact" className="text-indigo-500 hover:underline">Contact us</Link>
         </div>
       </div>
