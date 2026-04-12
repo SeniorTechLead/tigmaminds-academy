@@ -281,14 +281,127 @@ export const REFERENCE_CATEGORIES: CategoryMeta[] = [
 ];
 
 // ─── Combined references array ───────────────────────────────
-// Still imports from the two monolith files for now.
-// Individual guide files exist under ./reference/ for future migration
-// to dynamic imports (lazy loading per guide).
+// Each guide loaded from its own file for code splitting.
 
-import { codingReferences } from './reference-coding';
-import { scienceReferences } from './reference-science';
+import { guide as lightAndColor } from './reference/light-and-color';
+import { guide as soundAndVibration } from './reference/sound-and-vibration';
+import { guide as forcesAndMotion } from './reference/forces-and-motion';
+import { guide as altitudeAndAtmosphere } from './reference/altitude-and-atmosphere';
+import { guide as plantBiology } from './reference/plant-biology';
+import { guide as animalSensesAndBehavior } from './reference/animal-senses-and-behavior';
+import { guide as riversAndLandforms } from './reference/rivers-and-landforms';
+import { guide as patternsInNature } from './reference/patterns-in-nature';
+import { guide as ecologyAndPopulations } from './reference/ecology-and-populations';
+import { guide as weatherAndClimate } from './reference/weather-and-climate';
+import { guide as materialsAndChemistry } from './reference/materials-and-chemistry';
+import { guide as electricityAndCurrent } from './reference/electricity-and-current';
+import { guide as magnetismAndElectromagnetism } from './reference/magnetism-and-electromagnetism';
+import { guide as opticsAndLenses } from './reference/optics-and-lenses';
+import { guide as wavesAndProperties } from './reference/waves-and-properties';
+import { guide as heatAndThermodynamics } from './reference/heat-and-thermodynamics';
+import { guide as energyAndWork } from './reference/energy-and-work';
+import { guide as cellStructure } from './reference/cell-structure';
+import { guide as geneticsAndDna } from './reference/genetics-and-dna';
+import { guide as humanBodySystems } from './reference/human-body-systems';
+import { guide as evolutionAndNaturalSelection } from './reference/evolution-and-natural-selection';
+import { guide as algebraFundamentals } from './reference/algebra-fundamentals';
+import { guide as geometryEssentials } from './reference/geometry-essentials';
+import { guide as trigonometry } from './reference/trigonometry';
+import { guide as probabilityAndCombinatorics } from './reference/probability-and-combinatorics';
+import { guide as nuclearPhysics } from './reference/nuclear-physics';
+import { guide as gravityAndOrbits } from './reference/gravity-and-orbits';
+import { guide as fluidMechanics } from './reference/fluid-mechanics';
+import { guide as introToRelativity } from './reference/intro-to-relativity';
+import { guide as atomsAndStructure } from './reference/atoms-and-structure';
+import { guide as periodicTable } from './reference/periodic-table';
+import { guide as chemicalBonding } from './reference/chemical-bonding';
+import { guide as chemicalReactions } from './reference/chemical-reactions';
+import { guide as microbiology } from './reference/microbiology';
+import { guide as classificationOfLife } from './reference/classification-of-life';
+import { guide as molecularBiology } from './reference/molecular-biology';
+import { guide as ecosystemsAndBiomes } from './reference/ecosystems-and-biomes';
+import { guide as acidsBasesAndPh } from './reference/acids-bases-and-ph';
+import { guide as statesOfMatter } from './reference/states-of-matter';
+import { guide as organicChemistryIntro } from './reference/organic-chemistry-intro';
+import { guide as electrochemistry } from './reference/electrochemistry';
+import { guide as coordinateGeometry } from './reference/coordinate-geometry';
+import { guide as numberTheoryAndSequences } from './reference/number-theory-and-sequences';
+import { guide as introToCalculus } from './reference/intro-to-calculus';
+import { guide as statisticsAndDistributions } from './reference/statistics-and-distributions';
+import { guide as matricesAndVectors } from './reference/matrices-and-vectors';
+import { guide as plateTectonics } from './reference/plate-tectonics';
+import { guide as mapsAndNavigation } from './reference/maps-and-navigation';
+import { guide as climateAndZones } from './reference/climate-and-zones';
+import { guide as rocksMineralsSoil } from './reference/rocks-minerals-soil';
+import { guide as populationAndUrbanization } from './reference/population-and-urbanization';
+import { guide as naturalResources } from './reference/natural-resources';
+import { guide as foodWebsEnergyFlow } from './reference/food-webs-energy-flow';
+import { guide as habitatsAndBiomes } from './reference/habitats-and-biomes';
+import { guide as symbiosisAndInteractions } from './reference/symbiosis-and-interactions';
+import { guide as conservationBiology } from './reference/conservation-biology';
+import { guide as nutrientCycles } from './reference/nutrient-cycles';
+import { guide as solarSystemAndSpace } from './reference/solar-system-and-space';
+import { guide as humanHealthNutrition } from './reference/human-health-nutrition';
+import { guide as simpleMachines } from './reference/simple-machines';
+import { guide as environmentalScience } from './reference/environmental-science';
+import { guide as scientificMethod } from './reference/scientific-method';
+import { guide as ratiosAndProportions } from './reference/ratios-and-proportions';
+import { guide as supplyDemandEconomics } from './reference/supply-demand-economics';
+import { guide as engineeringDesign } from './reference/engineering-design';
+import { guide as musicTheoryPhysics } from './reference/music-theory-physics';
+import { guide as rhythmAndPercussion } from './reference/rhythm-and-percussion';
+import { guide as colorAndVisualArts } from './reference/color-and-visual-arts';
+import { guide as machinesAndMotors } from './reference/machines-and-motors';
+import { guide as structuralEngineering } from './reference/structural-engineering';
+import { guide as rotationalMechanics } from './reference/rotational-mechanics';
+import { guide as sonarAndEcholocation } from './reference/sonar-and-echolocation';
+import { guide as tidesAndOceanography } from './reference/tides-and-oceanography';
+import { guide as aerodynamicsAndFlight } from './reference/aerodynamics-and-flight';
+import { guide as neuroscienceAndBrain } from './reference/neuroscience-and-brain';
+import { guide as geologyAndEarth } from './reference/geology-and-earth';
+import { guide as hydrologyAndWater } from './reference/hydrology-and-water';
+import { guide as python } from './reference/python';
+import { guide as htmlCssJs } from './reference/html-css-js';
+import { guide as typescript } from './reference/typescript';
+import { guide as arduinoLanguage } from './reference/arduino-language';
+import { guide as numpy } from './reference/numpy';
+import { guide as matplotlib } from './reference/matplotlib';
+import { guide as machineLearning } from './reference/machine-learning';
+import { guide as signalProcessing } from './reference/signal-processing';
+import { guide as circuitsBasics } from './reference/circuits-basics';
+import { guide as arduinoSimulator } from './reference/arduino-simulator';
+import { guide as statisticsBasics } from './reference/statistics-basics';
+import { guide as sineWaves } from './reference/sine-waves';
+import { guide as gitVersionControl } from './reference/git-version-control';
+import { guide as databasesAndSql } from './reference/databases-and-sql';
+import { guide as apisAndWeb } from './reference/apis-and-web';
+import { guide as algorithmsDataStructures } from './reference/algorithms-data-structures';
+import { guide as cybersecurityBasics } from './reference/cybersecurity-basics';
+import { guide as logicGates } from './reference/logic-gates';
 
 export const references: ReferenceGuide[] = [
-  ...scienceReferences,
-  ...codingReferences,
+  lightAndColor, soundAndVibration, forcesAndMotion, altitudeAndAtmosphere,
+  plantBiology, animalSensesAndBehavior, riversAndLandforms, patternsInNature,
+  ecologyAndPopulations, weatherAndClimate, materialsAndChemistry, electricityAndCurrent,
+  magnetismAndElectromagnetism, opticsAndLenses, wavesAndProperties, heatAndThermodynamics,
+  energyAndWork, cellStructure, geneticsAndDna, humanBodySystems,
+  evolutionAndNaturalSelection, algebraFundamentals, geometryEssentials, trigonometry,
+  probabilityAndCombinatorics, nuclearPhysics, gravityAndOrbits, fluidMechanics,
+  introToRelativity, atomsAndStructure, periodicTable, chemicalBonding,
+  chemicalReactions, microbiology, classificationOfLife, molecularBiology,
+  ecosystemsAndBiomes, acidsBasesAndPh, statesOfMatter, organicChemistryIntro,
+  electrochemistry, coordinateGeometry, numberTheoryAndSequences, introToCalculus,
+  statisticsAndDistributions, matricesAndVectors, plateTectonics, mapsAndNavigation,
+  climateAndZones, rocksMineralsSoil, populationAndUrbanization, naturalResources,
+  foodWebsEnergyFlow, habitatsAndBiomes, symbiosisAndInteractions, conservationBiology,
+  nutrientCycles, solarSystemAndSpace, humanHealthNutrition, simpleMachines,
+  environmentalScience, scientificMethod, ratiosAndProportions, supplyDemandEconomics,
+  engineeringDesign, musicTheoryPhysics, rhythmAndPercussion, colorAndVisualArts,
+  machinesAndMotors, structuralEngineering, rotationalMechanics, sonarAndEcholocation,
+  tidesAndOceanography, aerodynamicsAndFlight, neuroscienceAndBrain, geologyAndEarth,
+  hydrologyAndWater, python, htmlCssJs, typescript,
+  arduinoLanguage, numpy, matplotlib, machineLearning,
+  signalProcessing, circuitsBasics, arduinoSimulator, statisticsBasics,
+  sineWaves, gitVersionControl, databasesAndSql, apisAndWeb,
+  algorithmsDataStructures, cybersecurityBasics, logicGates,
 ];
