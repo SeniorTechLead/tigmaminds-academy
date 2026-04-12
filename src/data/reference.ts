@@ -281,6 +281,9 @@ export const REFERENCE_CATEGORIES: CategoryMeta[] = [
 ];
 
 // ─── Combined references array ───────────────────────────────
+// Still imports from the two monolith files for now.
+// Individual guide files exist under ./reference/ for future migration
+// to dynamic imports (lazy loading per guide).
 
 import { codingReferences } from './reference-coding';
 import { scienceReferences } from './reference-science';
@@ -289,4 +292,3 @@ export const references: ReferenceGuide[] = [
   ...scienceReferences,
   ...codingReferences,
 ];
-// cache-bust 1774467249

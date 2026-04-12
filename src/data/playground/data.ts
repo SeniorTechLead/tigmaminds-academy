@@ -1,0 +1,327 @@
+import type { Problem } from '../playground-problems';
+
+export const problems: Problem[] = [
+{
+    id: 20,
+    slug: 'monsoon-rainfall-average',
+    title: 'Monsoon Rainfall Average',
+    story: 'The House That Breathed with the Monsoon',
+    storySlug: 'monsoon-home',
+    description: 'Given daily rainfall data (in mm), write `moving_average(data, window)` that calculates a moving average with the given window size.',
+    difficulty: 'medium',
+    topic: 'data',
+    tiers: [
+      {
+        tier: 1, tierName: 'Solve It',
+        goal: 'Calculate the moving average.',
+        hint: 'For each position, average the `window` elements ending there.',
+        hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: `def moving_average(data, window):\n    # Return list of averages, rounded to 1 decimal\n    # Your code here\n    pass\n`,
+        testCases: [
+          { input: '[10, 20, 30, 40, 50], 3', expected: '[20.0, 30.0, 40.0]', label: 'Window of 3' },
+          { input: '[5, 5, 5, 5], 2', expected: '[5.0, 5.0, 5.0]', label: 'Constant' },
+          { input: '[10, 20], 2', expected: '[15.0]', label: 'Minimum data' },
+        ],
+      },
+      {
+        tier: 2, tierName: 'Clean It',
+        goal: 'Handle window > data length, window = 0. Return empty list for invalid.',
+        hint: 'Validate inputs first.',
+        hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: `def moving_average(data, window):\n    """Moving average with validation.\n    \n    Returns empty list if window > len(data) or window <= 0.\n    """\n    # Your code here\n    pass\n`,
+        testCases: [
+          { input: '[10, 20, 30], 3', expected: '[20.0]', label: 'Window = length' },
+          { input: '[10, 20], 5', expected: '[]', label: 'Window too big' },
+          { input: '[10, 20, 30], 0', expected: '[]', label: 'Zero window' },
+          { input: '[10, 20, 30, 40], 2', expected: '[15.0, 25.0, 35.0]', label: 'Normal' },
+        ],
+      },
+      {
+        tier: 3, tierName: 'Optimize It',
+        goal: 'Sliding window — O(n) time. Don\'t recalculate the sum each time.',
+        hint: 'Subtract the element leaving the window, add the one entering.',
+        hintRef: { slug: 'algorithms-data-structures', section: 'algo-sliding-window', label: 'Sliding window in the Library' },
+        starterCode: `def moving_average(data, window):\n    """O(n) sliding window moving average."""\n    # Your code here\n    pass\n`,
+        testCases: [
+          { input: '[10, 20, 30, 40, 50], 3', expected: '[20.0, 30.0, 40.0]', label: 'Sliding' },
+          { input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4', expected: '[2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5]', label: 'Longer' },
+          { input: '[100], 1', expected: '[100.0]', label: 'Window of 1' },
+        ],
+      },
+    ],
+  },
+{
+    id: 31, slug: 'dragonfly-speed-average', title: 'Dragonfly Speed Average',
+    story: 'The Dragonfly and the Paddy Field', storySlug: 'dragonfly-paddy-field',
+    description: 'Write `trim_mean(values, trim_percent)` that calculates the mean after trimming the top and bottom percentages.',
+    difficulty: 'medium', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Calculate trimmed mean.', hint: 'Sort, remove top/bottom trim_percent, average the rest.', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def trim_mean(values, trim_percent):\n    # trim_percent is 0-50 (percentage to remove from each end)\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 100], 10', expected: '5.0', label: 'Trim outlier 100' },
+          { input: '[10, 20, 30, 40, 50], 20', expected: '30.0', label: '20% trim' },
+          { input: '[5, 5, 5], 0', expected: '5.0', label: 'No trim' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle edge cases: empty list, trim > 50.', hint: 'Return None for invalid inputs.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def trim_mean(values, trim_percent):\n    """Trimmed mean with validation."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[], 10', expected: 'None', label: 'Empty' },
+          { input: '[1, 2, 3], 60', expected: 'None', label: 'Trim too high' },
+          { input: '[1, 2, 3, 4, 5], 20', expected: '3.0', label: 'Normal' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Compare regular mean, median, and trimmed mean.', hint: 'Return a dict with all three.', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def compare_averages(values, trim_percent):\n    """Return {mean, median, trimmed_mean} rounded to 1 decimal."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 100], 20', expected: "{'mean': 22.0, 'median': 3, 'trimmed_mean': 3.0}", label: 'Outlier impact' },
+        ] },
+    ],
+  },
+{
+    id: 37, slug: 'sal-tree-height-percentile', title: 'Sal Tree Height Percentile',
+    story: 'The Sal Tree That Stood Alone', storySlug: 'sal-tree-stood-alone',
+    description: 'Write `percentile(data, p)` that returns the p-th percentile of a dataset.',
+    difficulty: 'medium', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Calculate the p-th percentile.', hint: 'Sort data, find the index at p/100 * (n-1).', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def percentile(data, p):\n    # p is 0-100\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[15, 20, 35, 40, 50], 50', expected: '35', label: 'Median (50th)' },
+          { input: '[15, 20, 35, 40, 50], 0', expected: '15', label: '0th = min' },
+          { input: '[15, 20, 35, 40, 50], 100', expected: '50', label: '100th = max' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Interpolate between values for non-integer indices.', hint: 'If index is 2.5, average values at index 2 and 3.', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def percentile(data, p):\n    """Percentile with linear interpolation."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30, 40], 25', expected: '15.0', label: 'Interpolated' },
+          { input: '[10, 20, 30, 40], 50', expected: '25.0', label: 'Midpoint' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Calculate Q1, Q3, and IQR in one function.', hint: 'Q1 = 25th percentile, Q3 = 75th, IQR = Q3 - Q1.', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def quartiles(data):\n    """Return (Q1, median, Q3, IQR)."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5, 6, 7, 8]', expected: '(2.5, 4.5, 6.5, 4.0)', label: 'Even count' },
+        ] },
+    ],
+  },
+{
+    id: 40, slug: 'orchid-classification', title: 'Orchid Classifier',
+    story: 'The Wild Orchids in the Trees', storySlug: 'wild-orchids-trees',
+    description: 'Given orchid measurements as (petal_length, petal_width) tuples and their species, write `classify(known, unknown)` using k-nearest-neighbors (k=3).',
+    difficulty: 'hard', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Find the 3 closest known orchids and return the majority species.', hint: 'Calculate distance to each known point, sort, take top 3.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-sorting', label: 'Sorting algorithms in the Library' },
+        starterCode: 'def classify(known, unknown):\n    # known = [((pl, pw), species), ...]\n    # unknown = (pl, pw)\n    # Return the most common species among 3 nearest\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[((1,1),"A"), ((1,2),"A"), ((5,5),"B"), ((5,6),"B"), ((6,5),"B")], (1, 1.5)', expected: '"A"', label: 'Closest to A' },
+          { input: '[((1,1),"A"), ((5,5),"B"), ((5,6),"B"), ((6,5),"B")], (5, 5.5)', expected: '"B"', label: 'Closest to B' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Make k configurable.', hint: 'Add a k parameter, default 3.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def classify(known, unknown, k=3):\n    """K-nearest-neighbors with configurable k."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[((1,1),"A"), ((1,2),"A"), ((2,2),"B"), ((5,5),"B")], (1, 1.5), 1', expected: '"A"', label: 'k=1' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Use heapq.nsmallest for O(n log k) instead of full sort O(n log n).', hint: 'heapq.nsmallest(k, items, key=...) is faster for small k.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-search', label: 'Search algorithms in the Library' },
+        starterCode: 'import heapq\nfrom collections import Counter\n\ndef classify(known, unknown, k=3):\n    """KNN using heapq.nsmallest — O(n log k)."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[((1,1),"A"), ((1,2),"A"), ((5,5),"B"), ((5,6),"B"), ((6,5),"B")], (1, 1.5), 3', expected: '"A"', label: 'Heap-based' },
+        ] },
+    ],
+  },
+{
+    id: 51, slug: 'storm-moving-median', title: 'Storm Moving Median',
+    story: "The Fisherman's Daughter and the Storm", storySlug: 'fishermans-daughter-storm',
+    description: 'Write `moving_median(data, window)` that calculates the median over a sliding window.',
+    difficulty: 'medium', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Calculate moving median.', hint: 'For each window, sort and find the middle value.', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def moving_median(data, window):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 3, 5, 7, 9], 3', expected: '[3, 5, 7]', label: 'Odd window' },
+          { input: '[4, 2, 7, 1], 2', expected: '[3.0, 4.5, 4.0]', label: 'Even window' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle edge cases.', hint: 'Return empty for invalid window.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def moving_median(data, window):\n    """Moving median with validation."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 3, 5], 3', expected: '[3]', label: 'Window = length' },
+          { input: '[], 3', expected: '[]', label: 'Empty' },
+          { input: '[1, 2], 5', expected: '[]', label: 'Window too large' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Compare moving mean vs moving median on data with outliers.', hint: 'Return both and show which is more robust.', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def compare_moving(data, window):\n    """Return {means: [...], medians: [...]} for comparison."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 100, 3, 4], 3', expected: "{'means': [34.33, 35.0, 35.67], 'medians': [2, 3, 4]}", label: 'Outlier at 100' },
+        ] },
+    ],
+  },
+{
+    id: 66, slug: 'cave-painting-histogram', title: 'Cave Painting Histogram',
+    story: 'The Cave Paintings of Meghalaya', storySlug: 'cave-paintings-meghalaya',
+    description: 'Write `histogram(data, bins)` that groups values into equal-width bins and counts them.',
+    difficulty: 'medium', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Create a histogram with n bins.', hint: 'Calculate bin width = (max - min) / bins. Assign each value to a bin.', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def histogram(data, bins):\n    # Return list of counts, one per bin\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5', expected: '[2, 2, 2, 2, 2]', label: 'Even distribution' },
+          { input: '[1, 1, 1, 10], 2', expected: '[3, 1]', label: 'Skewed' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Return bin edges too.', hint: 'Return (counts, edges) where edges has bins+1 values.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def histogram(data, bins):\n    """Return (counts, bin_edges)."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[0, 5, 10], 2', expected: '([2, 1], [0.0, 5.0, 10.0])', label: 'With edges' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Render as ASCII art.', hint: 'Use # characters proportional to count.', hintRef: { slug: 'python', section: 'py-strings', label: 'Strings in the Library' },
+        starterCode: 'def histogram_ascii(data, bins, width=40):\n    """Return list of strings visualizing the histogram."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1,1,1,2,2,3], 3, 10', expected: '["########## 3", "######     2", "###        1"]', label: 'ASCII bars' },
+        ] },
+    ],
+  },
+{
+    id: 71, slug: 'crop-yield-normalize', title: 'Crop Yield Normalizer',
+    story: 'The Dragonfly and the Paddy Field', storySlug: 'dragonfly-paddy-field',
+    description: 'Write `normalize(data)` that scales values to 0-1 range using min-max normalization.',
+    difficulty: 'easy', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Min-max normalize.', hint: '(x - min) / (max - min)', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def normalize(data):\n    # Return list of normalized values (0-1)\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30, 40, 50]', expected: '[0.0, 0.25, 0.5, 0.75, 1.0]', label: 'Linear' },
+          { input: '[5, 5, 5]', expected: '[0.0, 0.0, 0.0]', label: 'All same' },
+          { input: '[]', expected: '[]', label: 'Empty' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle all-same values (avoid division by zero).', hint: 'If max == min, return all 0.0.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def normalize(data):\n    """Min-max normalization with zero-division safety."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[100, 100]', expected: '[0.0, 0.0]', label: 'All same' },
+          { input: '[0, 100]', expected: '[0.0, 1.0]', label: 'Min to max' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Also support z-score normalization.', hint: 'z = (x - mean) / std_dev', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def normalize(data, method="minmax"):\n    """method=\\"minmax\\" or \\"zscore\\". Returns rounded to 2 decimals."""\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30], "minmax"', expected: '[0.0, 0.5, 1.0]', label: 'Min-max' },
+          { input: '[10, 20, 30], "zscore"', expected: '[-1.22, 0.0, 1.22]', label: 'Z-score' },
+        ] },
+    ],
+  },
+{
+    id: 91, slug: 'dolphin-signal-smooth', title: 'Signal Smoother', story: "The River Dolphin's Secret", storySlug: 'river-dolphins-secret',
+    description: 'Write `smooth(signal, window)` that smooths a noisy signal using a simple moving average.', difficulty: 'easy', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Smooth using moving average.', hint: 'Average each window of values.', hintRef: { slug: 'statistics-basics', section: 'stats-central', label: 'Mean & averages in the Library' },
+        starterCode: 'def smooth(signal, window):\n    pass\n', testCases: [{ input: '[1, 5, 2, 8, 3, 7], 3', expected: '[2.67, 5.0, 4.33, 6.0]', label: 'Smoothed' }] },
+      { tier: 2, tierName: 'Clean It', goal: 'Pad edges to keep same length.', hint: 'Use smaller windows at the edges.', hintRef: { slug: 'python', section: 'py-functions', label: 'Functions in the Library' },
+        starterCode: 'def smooth(signal, window):\n    """Edge-padded smoothing — same length output."""\n    pass\n', testCases: [{ input: '[1, 5, 2, 8, 3], 3', expected: '[3.0, 2.67, 5.0, 4.33, 5.5]', label: 'Same length' }] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Sliding window O(n) smoothing.', hint: 'Maintain running sum.', hintRef: { slug: 'algorithms-data-structures', section: 'algo-sliding-window', label: 'Sliding window in the Library' },
+        starterCode: 'def smooth(signal, window):\n    """O(n) sliding window smoothing."""\n    pass\n', testCases: [{ input: '[1, 5, 2, 8, 3, 7], 3', expected: '[2.67, 5.0, 4.33, 6.0]', label: 'Efficient' }] },
+    ],
+  },
+{
+    id: 165, slug: 'outlier-detector', title: 'Outlier Detector',
+    story: 'The Boy Who Counted Butterflies', storySlug: 'boy-who-counted-butterflies',
+    description: 'Write `find_outliers(data, threshold=2)` that finds values more than `threshold` standard deviations from the mean. Return a list of (index, value) tuples.',
+    difficulty: 'medium', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Find outliers using standard deviation.', hint: 'Calculate mean and stdev. Check |value - mean| > threshold * stdev for each value.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def find_outliers(data, threshold=2):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[10, 12, 11, 10, 100, 11, 12], 2', expected: '[(4, 100)]', label: 'One outlier' },
+          { input: '[1, 2, 3, 4, 5], 2', expected: '[]', label: 'No outliers' },
+          { input: '[1, 1, 1, 1, 1], 1', expected: '[]', label: 'No variance' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle edge cases: empty data, single value, all same values.', hint: 'Check len(data) < 2 (can\'t compute stdev). Zero stdev = no outliers.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def find_outliers(data, threshold=2):\n    """Outlier detection with edge case handling."""\n    pass\n',
+        testCases: [
+          { input: '[], 2', expected: '[]', label: 'Empty' },
+          { input: '[42], 2', expected: '[]', label: 'Single value' },
+          { input: '[5, 5, 5, 5], 1', expected: '[]', label: 'Zero variance' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Return (outliers, cleaned_data) where cleaned_data has outliers removed.', hint: 'Build both lists in one pass.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def find_outliers(data, threshold=2):\n    """Return (outlier_list, cleaned_data)."""\n    pass\n',
+        testCases: [
+          { input: '[10, 12, 11, 100, 11], 2', expected: 'True', label: 'Cleaned data excludes 100' },
+        ] },
+    ],
+  },
+{
+    id: 166, slug: 'normalize-data', title: 'Data Normalizer',
+    story: 'The Tea Leaf and the Fly', storySlug: 'tea-leaf-and-fly',
+    description: 'Write `normalize(data)` that scales values to the range [0, 1] using min-max normalization: (x - min) / (max - min).',
+    difficulty: 'medium', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Normalize to [0, 1].', hint: 'Find min and max. For each value: (v - min) / (max - min).', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def normalize(data):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30, 40, 50]', expected: '[0.0, 0.25, 0.5, 0.75, 1.0]', label: 'Linear' },
+          { input: '[5, 5, 5]', expected: '[0.0, 0.0, 0.0]', label: 'All same' },
+          { input: '[100]', expected: '[0.0]', label: 'Single value' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle empty list and support custom range [a, b].', hint: 'Scale to (x - min) / (max - min) * (b - a) + a.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def normalize(data, new_min=0.0, new_max=1.0):\n    """Normalize to custom range [new_min, new_max]."""\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30], 0, 100', expected: '[0.0, 50.0, 100.0]', label: 'Scale to 0-100' },
+          { input: '[], 0, 1', expected: '[]', label: 'Empty' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Implement z-score normalization: (x - mean) / stdev. Return both min-max and z-score versions.', hint: 'Compute mean and stdev. Z-score handles outliers better than min-max.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def normalize(data, method="minmax"):\n    """method = "minmax" or "zscore"."""\n    pass\n',
+        testCases: [
+          { input: '[10, 20, 30, 40, 50], "minmax"', expected: '[0.0, 0.25, 0.5, 0.75, 1.0]', label: 'Min-max' },
+          { input: '[10, 20, 30, 40, 50], "zscore"', expected: 'True', label: 'Z-scores sum to ~0' },
+        ] },
+    ],
+  },
+{
+    id: 167, slug: 'correlation', title: 'Correlation Calculator',
+    story: 'The Dragonfly and the Paddy Field', storySlug: 'dragonfly-paddy-field',
+    description: 'Write `correlation(x, y)` that computes Pearson\'s correlation coefficient between two lists. Return a float between -1 and 1.',
+    difficulty: 'hard', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Compute Pearson correlation.', hint: 'r = Σ(xi-x̄)(yi-ȳ) / sqrt(Σ(xi-x̄)² × Σ(yi-ȳ)²). Compute means first, then sums.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def correlation(x, y):\n    # Your code here\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5], [2, 4, 6, 8, 10]', expected: '1.0', label: 'Perfect positive' },
+          { input: '[1, 2, 3, 4, 5], [10, 8, 6, 4, 2]', expected: '-1.0', label: 'Perfect negative' },
+          { input: '[1, 2, 3], [1, 2, 3]', expected: '1.0', label: 'Identity' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle edge cases: mismatched lengths, zero variance, less than 2 points.', hint: 'Check len(x) == len(y) >= 2. If stdev is 0, correlation is undefined → return 0.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def correlation(x, y):\n    """Pearson correlation with edge case handling."""\n    pass\n',
+        testCases: [
+          { input: '[1, 1, 1], [2, 3, 4]', expected: '0.0', label: 'Zero variance in x' },
+          { input: '[1], [2]', expected: '0.0', label: 'Too few points' },
+          { input: '[1, 2], [3, 4, 5]', expected: '0.0', label: 'Mismatched lengths' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Compute in a single pass (no separate mean calculation). Use running sums.', hint: 'Track sum_x, sum_y, sum_xy, sum_x2, sum_y2. Apply the formula at the end.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def correlation(x, y):\n    """Single-pass Pearson correlation."""\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5], [2, 4, 6, 8, 10]', expected: '1.0', label: 'Perfect positive (single pass)' },
+          { input: 'list(range(1000)), list(range(1000, 2000))', expected: '1.0', label: 'Large dataset' },
+        ] },
+    ],
+  },
+{
+    id: 168, slug: 'frequency-table', title: 'Frequency Table',
+    story: 'The Music of the Dimasa', storySlug: 'music-of-dimasa',
+    description: 'Write `freq_table(data, bins=5)` that creates a frequency distribution. Divide the range into equal bins and count how many values fall in each. Return list of (range_start, range_end, count) tuples.',
+    difficulty: 'hard', topic: 'data',
+    tiers: [
+      { tier: 1, tierName: 'Solve It', goal: 'Create a binned frequency table.', hint: 'Compute bin_width = (max - min) / bins. For each value, determine which bin it falls in.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def freq_table(data, bins=5):\n    # Return list of (start, end, count)\n    pass\n',
+        testCases: [
+          { input: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5', expected: 'True', label: '5 bins, roughly 2 each' },
+          { input: '[1, 1, 1, 1], 3', expected: 'True', label: 'All same value' },
+          { input: '[], 5', expected: '[]', label: 'Empty' },
+        ] },
+      { tier: 2, tierName: 'Clean It', goal: 'Handle single-value data and ensure last value falls in the last bin.', hint: 'For single value: use a bin of width 1 centered on the value. For max value: include in last bin.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def freq_table(data, bins=5):\n    """Frequency table with edge case handling."""\n    pass\n',
+        testCases: [
+          { input: '[5, 5, 5], 3', expected: 'True', label: 'Single value handled' },
+          { input: '[1, 10], 2', expected: 'True', label: 'Max in last bin' },
+        ] },
+      { tier: 3, tierName: 'Optimize It', goal: 'Add a text-based bar chart visualization. Return list of (range_label, count, bar).', hint: 'Bar = "█" * count or scaled to max_width.', hintRef: { slug: 'python', section: 'py-data', label: 'Data Processing in the Library' },
+        starterCode: 'def freq_table(data, bins=5, max_bar_width=20):\n    """Return [(label, count, bar_string)]."""\n    pass\n',
+        testCases: [
+          { input: 'list(range(100)), 5', expected: 'True', label: '5 bins with bars' },
+        ] },
+    ],
+  },
+];

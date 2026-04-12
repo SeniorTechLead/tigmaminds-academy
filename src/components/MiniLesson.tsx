@@ -305,10 +305,12 @@ export default function MiniLesson({
   const pyodideRef = propPyodideRef ?? ctx.pyodideRef;
   const onLoadPyodide = propOnLoadPyodide ?? ctx.load;
   const pyReady = propPyReady ?? ctx.ready;
+  const pyContextLoading = ctx.state === 'loading';
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState('');
   const [imageOutput, setImageOutput] = useState<string | null>(null);
   const [running, setRunning] = useState(false);
+  const [pyLoading, setPyLoading] = useState(false);
   const [hasRun, setHasRun] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showPractice, setShowPractice] = useState(false);
@@ -474,11 +476,13 @@ len(plt.get_fignums()) > 0
         toolbar={<>
           {!pyReady && !pyodideRef?.current ? (
             <button
-              onClick={onLoadPyodide}
-              className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-semibold transition-colors animate-pulse"
+              onClick={async () => { setPyLoading(true); await onLoadPyodide(); setPyLoading(false); }}
+              disabled={pyLoading || pyContextLoading}
+              className={`flex items-center gap-2 px-4 py-2 text-white rounded-lg text-sm font-semibold transition-colors ${pyLoading || pyContextLoading ? 'bg-amber-700' : 'bg-amber-600 hover:bg-amber-700'}`}
               title="Load Python to run this code"
             >
-              <Sparkles className="w-4 h-4" /> Load Python
+              {pyLoading || pyContextLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+              {pyLoading || pyContextLoading ? 'Loading Python...' : 'Load Python'}
             </button>
           ) : (
             <button

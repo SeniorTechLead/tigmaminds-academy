@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { BookOpen, HelpCircle, CheckCircle, XCircle, Sparkles, ArrowRight, Lightbulb, Globe, Library, Compass } from 'lucide-react';
 import type { Lesson } from '../data/lessons';
 import { getLessonBySlug } from '../data/lessons';
-import { references } from '../data/reference';
+import { referenceMeta } from '../data/reference-meta';
 import MatchingActivity from './interactive/MatchingActivity';
 import TrueFalse from './interactive/TrueFalse';
 import DidYouKnow from './interactive/DidYouKnow';
@@ -372,7 +372,7 @@ export default function Level0Listener({ lesson }: Props) {
           </p>
           <div className="space-y-3">
             {lesson.level0.referenceLinks.map((ref: { slug: string; reason: string }) => {
-              const refGuide = references.find(r => r.slug === ref.slug);
+              const refGuide = referenceMeta.find(r => r.slug === ref.slug);
               if (!refGuide) return null;
               return (
                 <Link

@@ -154,7 +154,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-11', difficulty: 1,
       question: 'How many ways can you arrange **4 different books** on a shelf?',
-      visual: { kind: 'bar-chart', labels: ['Book A', 'Book B', 'Book C', 'Book D'], values: [4, 3, 2, 1] },
       steps: [
         { label: 'Step 1: Recognize this is a permutation', content: 'Arranging all 4 books = **4!**' },
         { label: 'Step 2: Compute', content: '4! = 4 × 3 × 2 × 1 = **24**' },
@@ -166,7 +165,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-12', difficulty: 1,
       question: 'From a group of **10 students**, how many ways can you choose a **committee of 3**?',
-      visual: { kind: 'bar-chart', labels: ['n=10', 'r=3', 'C(10,3)'], values: [10, 3, 120] },
       steps: [
         { label: 'Step 1: Order does not matter → combination', content: 'C(10, 3) = 10! / (3! × 7!)' },
         { label: 'Step 2: Compute', content: '(10 × 9 × 8) / (3 × 2 × 1) = 720/6 = **120**' },
@@ -178,7 +176,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-13', difficulty: 1,
       question: 'How many 3-letter **arrangements** (permutations) can be made from the letters A, B, C, D, E (no repeats)?',
-      visual: { kind: 'bar-chart', labels: ['1st letter', '2nd letter', '3rd letter'], values: [5, 4, 3] },
       steps: [
         { label: 'Step 1: This is P(5, 3)', content: 'Choose 3 from 5, order matters' },
         { label: 'Step 2: Compute', content: 'P(5, 3) = 5 × 4 × 3 = **60**' },
@@ -190,7 +187,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-14', difficulty: 1,
       question: 'A pizza shop offers **8 toppings**. How many ways can you choose **2 toppings**?',
-      visual: { kind: 'bar-chart', labels: ['n=8', 'r=2', 'C(8,2)'], values: [8, 2, 28] },
       steps: [
         { label: 'Step 1: Order does not matter', content: 'This is C(8, 2)' },
         { label: 'Step 2: Compute', content: 'C(8,2) = (8 × 7) / (2 × 1) = **28**' },
@@ -215,7 +211,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-16', difficulty: 1,
       question: 'A lock has a **4-digit code** where each digit is 0–9 and **digits may repeat**. How many possible codes are there?',
-      visual: { kind: 'bar-chart', labels: ['Pos 1', 'Pos 2', 'Pos 3', 'Pos 4'], values: [10, 10, 10, 10] },
       steps: [
         { label: 'Step 1: Each position has 10 choices', content: 'Digits 0–9, repetition allowed' },
         { label: 'Step 2: Multiplication principle', content: '10 × 10 × 10 × 10 = 10⁴ = **10,000**' },
@@ -239,7 +234,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-18', difficulty: 3,
       question: 'A round table seats **8 people**. How many distinct **circular arrangements** are possible?',
-      visual: { kind: 'bar-chart', labels: ['Linear (8!)', 'Circular ((8-1)!)'], values: [40320, 5040] },
       steps: [
         { label: 'Step 1: Circular permutation formula', content: 'Fix one person to remove rotational symmetry → (n−1)!' },
         { label: 'Step 2: Compute', content: '(8−1)! = 7! = **5,040**' },
@@ -251,7 +245,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-19', difficulty: 3,
       question: 'How many ways can you distribute **12 identical cookies** among **4 children** so each gets at least one?',
-      visual: { kind: 'bar-chart', labels: ['Child 1', 'Child 2', 'Child 3', 'Child 4'], values: [3, 3, 3, 3] },
       steps: [
         { label: 'Step 1: Stars and bars with minimum 1 each', content: 'Give 1 cookie to each child first → 12 − 4 = 8 remaining' },
         { label: 'Step 2: Distribute 8 identical items into 4 bins', content: 'C(8 + 4 − 1, 4 − 1) = C(11, 3)' },
@@ -385,7 +378,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-29', difficulty: 3,
       question: 'In a group of **23 people**, what is the probability that **at least two share a birthday**? (Assume 365 days, uniform distribution.)',
-      visual: { kind: 'bar-chart', labels: ['n=23', 'P(match)'], values: [23, 50] },
       steps: [
         { label: 'Step 1: Use complement', content: 'P(at least one match) = 1 − P(all different)' },
         { label: 'Step 2: P(all different)', content: '(365/365) × (364/365) × (363/365) × ... × (343/365)' },
@@ -592,7 +584,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-44', difficulty: 2,
       question: 'A spinner has 4 equal sections labeled 1, 2, 3, and 4. What is the **expected value** of a spin?',
-      visual: { kind: 'bar-chart', labels: ['1', '2', '3', '4'], values: [25, 25, 25, 25] },
       steps: [
         { label: 'Step 1: Each section has P = 1/4', content: 'Outcomes: 1, 2, 3, 4' },
         { label: 'Step 2: E[X]', content: '(1+2+3+4) / 4 = 10/4 = **2.5**' },
@@ -671,7 +662,6 @@ export const practiceProbability: PracticeSet = {
     {
       id: 'prob-50', difficulty: 3,
       question: 'You are collecting **all 6 different stickers** from cereal boxes (one random sticker per box). On average, how many boxes must you buy to collect all 6? (**Coupon Collector Problem**)',
-      visual: { kind: 'bar-chart', labels: ['Sticker 1', 'Sticker 2', 'Sticker 3', 'Sticker 4', 'Sticker 5', 'Sticker 6'], values: [1, 1, 1, 1, 1, 1] },
       steps: [
         { label: 'Step 1: After collecting k stickers', content: 'P(new sticker) = (6−k)/6. Expected tries for the next new one = 6/(6−k).' },
         { label: 'Step 2: Sum over all stages', content: 'E = 6/6 + 6/5 + 6/4 + 6/3 + 6/2 + 6/1\n= 1 + 1.2 + 1.5 + 2 + 3 + 6 = **14.7**' },

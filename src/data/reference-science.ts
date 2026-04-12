@@ -2087,7 +2087,7 @@ export const scienceReferences: ReferenceGuide[] = [
   // ──────────────────────────────────────────────────────────────
   {
     slug: 'algebra-fundamentals',
-    title: 'Algebra Fundamentals',
+    title: 'Algebra',
     category: 'math',
     icon: '📊',
     tagline:
@@ -2738,11 +2738,13 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Conditional Probability',
         beginnerContent:
+          '[diagram:ConditionalProbDiagram]\n\n' +
           '**The question:** Given that B happened, what is the chance of A?\n\n' +
           '`P(A|B) = P(A and B) / P(B)`\n\n' +
           '**Example:** 60% of students pass maths, 40% pass both maths and science.\n\n' +
           'P(science | passed maths) = 0.40 / 0.60 = **2/3**\n\n' +
           '**Bayes\' Theorem — reversing the condition:**\n\n' +
+          '[diagram:BayesTreeDiagram]\n\n' +
           '`P(A|B) = P(B|A) x P(A) / P(B)`\n\n' +
           '**Famous example: Medical testing**\n\n' +
           '| Given | Value |\n' +
@@ -2770,6 +2772,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'The test "updates" your belief by a factor of 99, but the low base rate still dominates.',
         advancedContent:
           '**Applying Bayes\' theorem iteratively — updating beliefs with new evidence:**\n\n' +
+          '[diagram:BayesUpdatingDiagram]\n\n' +
           'Return to the medical test. You tested positive, giving P(disease) = 9%. The doctor orders a second, independent test. You test positive again. What now?\n\n' +
           '| Round | Prior | Test result | Calculation | Posterior |\n' +
           '|-------|-------|-------------|-------------|----------|\n' +
@@ -3149,7 +3152,7 @@ export const scienceReferences: ReferenceGuide[] = [
   // ──────────────────────────────────────────────────────────────
   {
     slug: 'intro-to-relativity',
-    title: 'Intro to Relativity',
+    title: 'Relativity',
     category: 'physics',
     icon: '🚀',
     tagline: "Why nothing travels faster than light, and why time itself can slow down.",
@@ -4127,7 +4130,7 @@ export const scienceReferences: ReferenceGuide[] = [
   // ──────────────────────────────────────────────────────────────
   {
     slug: 'intro-to-calculus',
-    title: 'Intro to Calculus',
+    title: 'Calculus',
     category: 'math',
     icon: '📐',
     tagline: 'The mathematics of change — how slopes and areas reveal the rules behind motion.',
@@ -4164,12 +4167,37 @@ export const scienceReferences: ReferenceGuide[] = [
           '- `lim(x->0-) 1/x = -infinity`\n\n' +
           'If left and right limits disagree, the two-sided limit does not exist.',
         advancedContent:
-          '**Rigorous foundations:**\n\n' +
-          'The epsilon-delta definition: for every epsilon > 0, there exists delta > 0 such that |x - c| < delta implies |f(x) - f(c)| < epsilon.\n\n' +
-          '**Key theorems built on limits:**\n\n' +
-          '- **Intermediate Value Theorem** — continuous f on [a,b] with f(a) < k < f(b) implies f(c) = k for some c in (a,b). Proves roots exist\n' +
-          '- **Squeeze Theorem** — if g(x) <= f(x) <= h(x) and lim g = lim h = L, then lim f = L. Proves lim(x->0) x²sin(1/x) = 0\n\n' +
-          'Developed by Cauchy and Weierstrass, these foundations resolved centuries of confusion about infinitesimals.',
+          '**The Epsilon-Delta Definition — A Challenge Game**\n\n' +
+          'Think of the rigorous definition of a limit as a two-player game:\n\n' +
+          '1. **Your opponent** picks an epsilon (e) — a tiny tolerance. They say: "I want f(x) within e of L."\n' +
+          '2. **You** must find a delta (d) — a range around the target point — so that whenever x is within d of c, f(x) is within e of L.\n' +
+          '3. If you can **always win** no matter how small epsilon is, the limit exists and equals L.\n\n' +
+          '**Formal statement:** `lim(x->c) f(x) = L` means: for every e > 0, there exists d > 0 such that `0 < |x - c| < d` implies `|f(x) - L| < e`.\n\n' +
+          '**Concrete example:** Prove `lim(x->3) 2x + 1 = 7`.\n\n' +
+          '| Step | Work |\n' +
+          '|------|------|\n' +
+          '| We need | \\|f(x) - 7\\| < e whenever \\|x - 3\\| < d |\n' +
+          '| Simplify | \\|(2x+1) - 7\\| = \\|2x - 6\\| = 2\\|x - 3\\| |\n' +
+          '| Choose d | Set d = e/2. Then 2\\|x - 3\\| < 2(e/2) = e |\n' +
+          '| Result | No matter how small e is, d = e/2 works. The limit is proven. |\n\n' +
+          '---\n\n' +
+          '**Intermediate Value Theorem (IVT) — No Teleporting Allowed**\n\n' +
+          'The intuition is simple: **continuous functions cannot skip values.** If you drive from 0 mph to 60 mph, at some point you were going exactly 30 mph. You cannot teleport from 0 to 60 without passing through every speed in between.\n\n' +
+          '**Formal statement:** If f is continuous on [a, b] and k is any value between f(a) and f(b), then there exists some c in (a, b) where f(c) = k.\n\n' +
+          '**Why should you care?** IVT is how we prove roots exist. If f(1) = -3 and f(2) = 5, and f is continuous, then f(c) = 0 for some c between 1 and 2. The root **must** be there, even before we find it. This is the theoretical foundation behind root-finding algorithms like bisection and Newton\'s method.\n\n' +
+          '---\n\n' +
+          '**Squeeze Theorem — Trapped Between Converging Walls**\n\n' +
+          'Imagine walking down a narrowing corridor. The left wall and right wall are closing in toward the same point. You are between them. Where do you end up? At that same point. You have no choice.\n\n' +
+          '**Formal statement:** If `g(x) <= f(x) <= h(x)` near a point, and `lim g(x) = lim h(x) = L`, then `lim f(x) = L`.\n\n' +
+          '**Classic example:** Prove `lim(x->0) x²sin(1/x) = 0`.\n\n' +
+          '| Piece | Reasoning |\n' +
+          '|-------|-----------|\n' +
+          '| sin(1/x) oscillates wildly | But it is always between -1 and 1 |\n' +
+          '| So -x² <= x²sin(1/x) <= x² | f(x) is trapped between -x² and x² |\n' +
+          '| lim(x->0) -x² = 0 | Left wall goes to 0 |\n' +
+          '| lim(x->0) x² = 0 | Right wall goes to 0 |\n' +
+          '| Conclusion | x²sin(1/x) is squeezed to 0 |\n\n' +
+          'Developed by Cauchy and Weierstrass in the 19th century, these foundations replaced vague notions of "infinitely small" with precise, provable definitions — turning calculus from an intuitive tool into a rigorous branch of mathematics.',
         diagram: 'LimitDiagram',
       },
       {
@@ -4214,11 +4242,34 @@ export const scienceReferences: ReferenceGuide[] = [
           '| Max area | **r²** |\n\n' +
           'Second derivative test confirms it is a maximum.',
         advancedContent:
-          '**Physical meaning chain:** position -> velocity -> acceleration (successive derivatives).\n\n' +
-          '**Related rates** use the chain rule: if a balloon\'s volume V = (4/3)pi*r³ inflates at dV/dt = 100 cm³/s:\n\n' +
-          '`dr/dt = (dV/dt) / (4*pi*r²)`\n\n' +
-          'When r = 10 cm: dr/dt = 100/(400pi) = 0.08 cm/s.\n\n' +
-          '**Taylor series:** `f(x) = sum of f^(n)(a)(x-a)^n / n!` approximates any smooth function as a polynomial — how calculators compute sin, cos, e^x, and ln.',
+          '**Physical meaning chain:** position -> velocity -> acceleration (successive derivatives). Each derivative peels back one layer of motion.\n\n' +
+          '---\n\n' +
+          '**Related Rates — Step by Step**\n\n' +
+          'Related rates problems ask: "Two quantities are changing. I know the rate of one. What is the rate of the other?" The chain rule connects them.\n\n' +
+          '**Example:** A balloon inflates at dV/dt = 100 cm³/s. How fast is the radius growing when r = 10 cm?\n\n' +
+          '| Step | What you do | Work |\n' +
+          '|------|-------------|------|\n' +
+          '| 1. Write the relationship | V and r are related by geometry | V = (4/3)pi*r³ |\n' +
+          '| 2. Differentiate both sides with respect to time | Chain rule — r depends on t | dV/dt = 4*pi*r² * dr/dt |\n' +
+          '| 3. Plug in what you know | dV/dt = 100, r = 10 | 100 = 4*pi*(100) * dr/dt |\n' +
+          '| 4. Solve for what you want | Isolate dr/dt | dr/dt = 100/(400*pi) ≈ **0.08 cm/s** |\n\n' +
+          '**Key insight:** You never differentiate with respect to r or V directly. Everything is differentiated with respect to **time**, because time is the hidden variable driving both changes.\n\n' +
+          '---\n\n' +
+          '**Taylor Series — Approximating Curves with Polynomials**\n\n' +
+          'The big idea: **any smooth function can be approximated by a polynomial**, and the more terms you keep, the better the approximation.\n\n' +
+          'Why polynomials? Because they are trivially easy to compute — just addition and multiplication. This is literally how your calculator evaluates sin, cos, e^x, and ln.\n\n' +
+          '**Formula:** `f(x) = f(a) + f\'(a)(x-a) + f\'\'(a)(x-a)²/2! + f\'\'\'(a)(x-a)³/3! + ...`\n\n' +
+          'Each term captures one more "layer" of the function\'s behavior at the point a: its value, its slope, its curvature, the rate of change of curvature, and so on.\n\n' +
+          '**Example: sin(x) around x = 0**\n\n' +
+          '`sin(x) ≈ x - x³/6 + x⁵/120 - x⁷/5040 + ...`\n\n' +
+          'Watch how adding terms improves accuracy:\n\n' +
+          '| x = 0.5 | Approximation | Value | Error |\n' +
+          '|---------|--------------|-------|-------|\n' +
+          '| Just x | 0.5 | 0.500000 | 0.0206 |\n' +
+          '| x - x³/6 | 0.5 - 0.0208 | 0.479167 | 0.0003 |\n' +
+          '| x - x³/6 + x⁵/120 | + 0.000260 | 0.479427 | 0.000001 |\n' +
+          '| Exact sin(0.5) | — | 0.479426 | — |\n\n' +
+          'Three terms give **six decimal places of accuracy** at x = 0.5. This is why Taylor series are so powerful — a handful of simple arithmetic operations replaces a transcendental function.',
         diagram: 'DerivativeVisualizerDiagram',
         interactive: { type: 'python-playground' as const, props: { starterCode: '# Explore derivatives numerically\ndef f(x):\n    return x**3 - 3*x + 1\n\ndef derivative(f, x, h=0.0001):\n    return (f(x + h) - f(x)) / h\n\nprint("x     f(x)    f\'(x)")\nprint("-" * 28)\nfor x in [-2, -1, 0, 1, 2, 3]:\n    print(f"{x:>3}   {f(x):>6.1f}   {derivative(f, x):>6.1f}")\n\n# Where is f\'(x) = 0? (peaks/valleys)\n# Try changing f(x) above!', title: 'Try it — Derivatives' } },
       },
@@ -4256,10 +4307,35 @@ export const scienceReferences: ReferenceGuide[] = [
           '**Implicit differentiation:** For x² + y² = 25, differentiate both sides:\n\n' +
           '2x + 2y(dy/dx) = 0, so dy/dx = -x/y. At (3, 4): dy/dx = **-3/4**.',
         advancedContent:
-          '**Automatic differentiation (AD)** — used in PyTorch, TensorFlow — computes exact derivatives of arbitrary computational graphs via the chain rule.\n\n' +
-          '- **Forward-mode AD** propagates derivatives alongside values\n' +
-          '- **Reverse-mode AD** (backpropagation) propagates derivatives backward from output\n\n' +
-          'For a neural network with millions of parameters, reverse-mode AD computes the gradient of the loss with respect to ALL parameters in roughly the same time as one forward evaluation — this efficiency makes training deep networks feasible.',
+          '**Automatic Differentiation (AD) — How AI Learns**\n\n' +
+          'Every time you train a neural network, the computer must compute derivatives of the loss function with respect to millions of parameters. Doing this by hand is impossible. Numerical approximation (finite differences) is too slow and too inaccurate. **Automatic differentiation** solves this by applying the chain rule systematically to a computational graph.\n\n' +
+          '**The two modes:**\n\n' +
+          '| Mode | Direction | Best when |\n' +
+          '|------|-----------|----------|\n' +
+          '| Forward-mode | Input -> Output | Few inputs, many outputs |\n' +
+          '| Reverse-mode (backprop) | Output -> Input | Many inputs, few outputs (e.g., neural networks) |\n\n' +
+          '**Concrete example:** `y = (a + b) * c`\n\n' +
+          'The computational graph has two steps:\n' +
+          '- Step 1: `p = a + b`\n' +
+          '- Step 2: `y = p * c`\n\n' +
+          '**Forward mode** (tracking da, the derivative with respect to a):\n\n' +
+          '| Node | Value | Derivative w.r.t. a |\n' +
+          '|------|-------|--------------------|\n' +
+          '| a | a | da/da = 1 |\n' +
+          '| b | b | db/da = 0 |\n' +
+          '| p = a + b | a + b | dp/da = 1 + 0 = 1 |\n' +
+          '| c | c | dc/da = 0 |\n' +
+          '| y = p * c | (a+b)*c | dy/da = c*1 + (a+b)*0 = **c** |\n\n' +
+          'One forward pass gives us dy/da. To get dy/db and dy/dc, we need two more passes.\n\n' +
+          '**Reverse mode** (tracking dy, the derivative of the output):\n\n' +
+          '| Node | dy/d(node) | How |\n' +
+          '|------|-----------|-----|\n' +
+          '| y | 1 | Start here |\n' +
+          '| p | dy/dp = c | y = p*c, so dy/dp = c |\n' +
+          '| c | dy/dc = p = a+b | y = p*c, so dy/dc = p |\n' +
+          '| a | dy/da = dy/dp * dp/da = c*1 = **c** | Chain rule backward |\n' +
+          '| b | dy/db = dy/dp * dp/db = c*1 = **c** | Chain rule backward |\n\n' +
+          'One reverse pass gives dy/da, dy/db, AND dy/dc — all at once. For a neural network with millions of parameters and one scalar loss, reverse mode computes **all** gradients in roughly the same time as one forward evaluation. This is why backpropagation made deep learning feasible.',
       },
       {
         title: 'Integration — Area Under a Curve',
@@ -4291,12 +4367,47 @@ export const scienceReferences: ReferenceGuide[] = [
           '**Worked integral:** integral from 0 to 2 of (3x² + 2x) dx = [x³ + x²] from 0 to 2 = (8 + 4) - 0 = **12**.\n\n' +
           '**Substitution:** integral of cos(3x) dx -> let u = 3x, du = 3dx -> (1/3) * sin(3x) + C.',
         advancedContent:
-          '**Advanced techniques:**\n\n' +
-          '- **Integration by parts:** integral(u dv) = uv - integral(v du)\n' +
-          '- **Partial fractions** — decompose rational functions\n' +
-          '- **Trig substitution** — for integrals involving sqrt(a²-x²)\n\n' +
-          'Not all functions have closed-form antiderivatives: integral(e^(-x²)) dx (the Gaussian integral) cannot be expressed in elementary functions, yet equals sqrt(pi)/2 from 0 to infinity.\n\n' +
-          '**Numerical integration** (Simpson\'s rule, Gaussian quadrature, Monte Carlo) handles functions that resist analytical methods. Monte Carlo is especially powerful in high dimensions.',
+          '**Integration by Parts — Swapping a Hard Integral for an Easier One**\n\n' +
+          'The idea: if a product of two functions is hard to integrate directly, shift the difficulty from one factor to the other.\n\n' +
+          '**Formula:** `integral(u dv) = uv - integral(v du)`\n\n' +
+          '**Worked example:** integral of x * e^x dx\n\n' +
+          '| Step | Choice / Work |\n' +
+          '|------|---------------|\n' +
+          '| Pick u and dv | u = x (gets simpler when differentiated), dv = e^x dx |\n' +
+          '| Compute du and v | du = dx, v = e^x |\n' +
+          '| Apply formula | x*e^x - integral(e^x dx) |\n' +
+          '| Evaluate remaining integral | x*e^x - e^x + C |\n' +
+          '| Result | **e^x(x - 1) + C** |\n\n' +
+          'The trick worked because differentiating u = x made it simpler (just 1), while integrating dv = e^x dx was easy (still e^x). Choose u to be the part that simplifies when differentiated.\n\n' +
+          '**Other key techniques:**\n' +
+          '- **Partial fractions** — break a complicated rational function like 1/((x-1)(x+2)) into simpler pieces: A/(x-1) + B/(x+2), each easy to integrate\n' +
+          '- **Trig substitution** — for integrals with sqrt(a²-x²), substitute x = a*sin(t) to exploit the identity sin²+cos²=1\n\n' +
+          '---\n\n' +
+          '**The Gaussian Integral — Why It Matters**\n\n' +
+          'The integral `integral from -inf to inf of e^(-x²) dx = sqrt(pi)` cannot be computed by any standard technique — there is no elementary antiderivative for e^(-x²).\n\n' +
+          '**Why should you care?** This integral is everywhere:\n' +
+          '- The **normal distribution** (bell curve) in statistics is built on e^(-x²)\n' +
+          '- **Quantum mechanics** — the ground state of the harmonic oscillator is a Gaussian\n' +
+          '- **Signal processing** — Gaussian filters are used in image smoothing\n\n' +
+          '**The polar coordinates trick (brief sketch):**\n\n' +
+          '| Step | Idea |\n' +
+          '|------|------|\n' +
+          '| 1. Call the integral I | I = integral of e^(-x²) dx from -inf to inf |\n' +
+          '| 2. Square it | I² = integral of e^(-x²) dx * integral of e^(-y²) dy |\n' +
+          '| 3. Combine into 2D | I² = double integral of e^(-(x²+y²)) dx dy |\n' +
+          '| 4. Switch to polar | x²+y² = r², dx dy = r dr dtheta |\n' +
+          '| 5. The 2D integral is now easy | integral of r*e^(-r²) dr is solvable by substitution u = r² |\n' +
+          '| 6. Result | I² = pi, so I = **sqrt(pi)** |\n\n' +
+          'The genius: a 1D integral that is impossible becomes a 2D integral that is easy, because circles have a simpler formula than lines in this context.\n\n' +
+          '---\n\n' +
+          '**Numerical Integration — When Formulas Fail**\n\n' +
+          'Many real-world integrals have no closed-form solution. Numerical methods approximate the answer:\n\n' +
+          '| Method | How it works | Accuracy | Best for |\n' +
+          '|--------|-------------|----------|----------|\n' +
+          '| **Simpson\'s rule** | Fits parabolas through groups of 3 points | Very good for smooth functions | 1D integrals where f is smooth |\n' +
+          '| **Gaussian quadrature** | Chooses optimal evaluation points (not equally spaced) | Excellent — can be exact for polynomials | 1D integrals needing high precision |\n' +
+          '| **Monte Carlo** | Throws random points and counts how many land under the curve | Accuracy scales as 1/sqrt(N) regardless of dimension | High-dimensional integrals (5D, 100D, ...) |\n\n' +
+          'Monte Carlo\'s superpower: in 1D, Simpson\'s rule and Gaussian quadrature are far superior. But in 10 dimensions, traditional methods need an astronomical number of grid points (curse of dimensionality), while Monte Carlo\'s convergence rate stays the same. This is why Monte Carlo dominates in physics simulations, financial modeling, and Bayesian inference.',
         diagram: 'AreaUnderCurveDiagram',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\n# Numerical integration (trapezoidal rule)\ndef f(x):\n    return x**2\n\na, b = 0, 3\nn = 1000\ndx = (b - a) / n\ntotal = 0\nfor i in range(n):\n    x0 = a + i * dx\n    x1 = x0 + dx\n    total += (f(x0) + f(x1)) / 2 * dx\n\nprint(f"Integral of x^2 from {a} to {b}:")\nprint(f"  Numerical: {total:.4f}")\nprint(f"  Exact:     {b**3/3 - a**3/3:.4f}")\n\n# Try changing f(x) to x**3, math.sin(x), etc.', title: 'Try it — Integration' } },
       },
@@ -4324,11 +4435,32 @@ export const scienceReferences: ReferenceGuide[] = [
           '| Distance: v(t) = 3t²+2t, t=0..5 | t³+t² | 125+25 - 0 | **150 metres** |\n\n' +
           'The FTC also gives: `d/dx[integral from 0 to x of sin(t²) dt] = sin(x²)` — differentiation undoes integration.',
         advancedContent:
-          '**Generalizations to multiple dimensions:**\n\n' +
-          '- **Stokes\' theorem** and **divergence theorem** connect integrals over boundaries to integrals over interiors\n' +
-          '- **Gauss\'s law:** the electric flux through a closed surface equals the enclosed charge divided by epsilon-0 — the divergence theorem applied to electromagnetism\n' +
-          '- **Green\'s theorem** relates a line integral around a closed curve to a double integral over the enclosed region\n\n' +
-          'These generalizations form the mathematical backbone of fluid dynamics, electromagnetism, and general relativity.',
+          '**The Big Idea: Boundaries Tell You About Interiors**\n\n' +
+          'In 1D, the FTC says: the integral of f\'(x) over [a, b] equals f(b) - f(a). You integrate a "derivative" over a region and get something evaluated on the **boundary** (just the two endpoints).\n\n' +
+          'This principle generalizes beautifully to higher dimensions. In every case, the pattern is the same: **integrating a "derivative-like thing" over a region = evaluating something on the boundary of that region.**\n\n' +
+          '| Dimension | Theorem | "Derivative" integrated over... | Equals something on... |\n' +
+          '|-----------|---------|-------------------------------|----------------------|\n' +
+          '| 1D | **FTC** | f\'(x) over an interval [a, b] | f at the two endpoints a, b |\n' +
+          '| 2D | **Green\'s theorem** | A curl-like quantity over a flat region | A line integral around the boundary curve |\n' +
+          '| 3D (surfaces) | **Stokes\' theorem** | Curl of a vector field over a surface | A line integral around the edge of the surface |\n' +
+          '| 3D (volumes) | **Divergence theorem** | Divergence of a vector field over a solid volume | A flux integral over the enclosing surface |\n\n' +
+          'All four are really the **same theorem** at different levels of dimension. Stokes\' theorem in its most general form (using differential forms) unifies them all.\n\n' +
+          '---\n\n' +
+          '**Gauss\'s Law — Learning About the Inside from the Outside**\n\n' +
+          'The divergence theorem has a famous physical application: **Gauss\'s law** in electromagnetism.\n\n' +
+          'Imagine a closed surface (like a balloon) surrounding some electric charges. The divergence theorem says:\n\n' +
+          '`Total electric flux leaving the surface = Total charge enclosed / epsilon-0`\n\n' +
+          'In plain language: **you can figure out how much charge is inside a closed surface by only measuring the electric field on the surface.** You never need to look inside.\n\n' +
+          'This is extraordinarily powerful. It means:\n' +
+          '- A uniformly charged sphere looks identical (from outside) to a point charge at the center\n' +
+          '- The electric field inside a hollow conducting shell is exactly zero, regardless of external charges\n' +
+          '- Symmetry arguments that would be impossibly hard with direct calculation become simple one-line derivations\n\n' +
+          '---\n\n' +
+          '**Why should you care?** These theorems are not abstract curiosities. They form the mathematical backbone of:\n' +
+          '- **Fluid dynamics** — how water and air flow\n' +
+          '- **Electromagnetism** — Maxwell\'s equations are all divergence/curl theorems\n' +
+          '- **General relativity** — Einstein\'s field equations involve the same boundary-interior relationships on curved spacetime\n\n' +
+          'The unifying message: **the behavior inside a region is fully encoded in what happens at its boundary.** This is one of the deepest ideas in all of mathematics and physics.',
       },
     ],
   },
@@ -4372,12 +4504,17 @@ export const scienceReferences: ReferenceGuide[] = [
           '| Midterm | 70 | 0.30 |\n' +
           '| Final | 90 | 0.40 |\n' +
           '| **Weighted mean** | | **82.5** |\n\n' +
+          '[diagram:WeightedMeanDiagram]\n\n' +
           '**Percentiles and quartiles:**\n\n' +
-          '- **Q1** (25th percentile) — 25% of data falls below\n' +
-          '- **Q2** (50th percentile) = Median\n' +
-          '- **Q3** (75th percentile) — 75% of data falls below\n' +
-          '- **IQR** = Q3 - Q1 — the middle 50% of data\n' +
-          '- Outliers are typically defined as values beyond Q1 - 1.5*IQR or Q3 + 1.5*IQR',
+          '| Measure | What it means |\n' +
+          '|---------|---------------|\n' +
+          '| **Q1** (25th percentile) | 25% of data falls below this value |\n' +
+          '| **Q2** (50th percentile) | The median — the middle value |\n' +
+          '| **Q3** (75th percentile) | 75% of data falls below this value |\n' +
+          '| **IQR** = Q3 − Q1 | The range of the middle 50% of the data |\n' +
+          '| **Outlier fences** | Values beyond Q1 − 1.5×IQR or Q3 + 1.5×IQR are flagged as outliers |\n\n' +
+          '**Try it — switch datasets and watch the box plot change:**\n\n' +
+          '[diagram:BoxPlotDiagram]',
         advancedContent:
           '**Robust statistics — worked example with MAD:**\n\n' +
           'Data: 12, 14, 13, 15, 14, **100**, 13, 11 (one outlier at 100)\n\n' +
@@ -4387,27 +4524,54 @@ export const scienceReferences: ReferenceGuide[] = [
           '| Median | sort → middle of 12,13,13,14,14,15,100 | **13.5** | No |\n' +
           '| Std dev | | **29.2** | Yes — massively inflated |\n' +
           '| MAD | median of |12−13.5|, |14−13.5|, ..., |100−13.5| | **1.0** | No |\n\n' +
-          '**MAD step by step:**\n' +
-          '1. Median of data = 13.5\n' +
-          '2. Absolute deviations: |12−13.5|=1.5, |14−13.5|=0.5, |13−13.5|=0.5, |15−13.5|=1.5, |14−13.5|=0.5, |100−13.5|=86.5, |13−13.5|=0.5, |11−13.5|=2.5\n' +
-          '3. Median of those deviations: sort → 0.5, 0.5, 0.5, 0.5, **1.0**, 1.5, 1.5, 2.5, 86.5 → MAD = **1.0**\n' +
-          '4. Scaled MAD = 1.0 × 1.4826 = **1.48** (scale factor makes it comparable to std dev for normal data)\n\n' +
-          '**Trimmed mean (10% trim):** Sort data, discard lowest 10% and highest 10%, average the rest. ' +
-          'For our 8 values: discard 1 lowest (11) and 1 highest (100) → mean of [12,13,13,14,14,15] = **13.5**. ' +
-          'The outlier is gone.\n\n' +
-          '**M-estimators** iteratively down-weight points far from the centre. Huber\'s method: treat points within 1.345σ normally, ' +
-          'but limit the influence of points beyond that threshold. After a few iterations, the estimate converges to a robust centre.',
+          '**MAD step by step:**\n\n' +
+          '**Step 1:** Median of data = **13.5**\n\n' +
+          '**Step 2:** Compute absolute deviations from the median:\n\n' +
+          '| Value | |Value − 13.5| | Deviation |\n' +
+          '|-------|---------------|----------|\n' +
+          '| 11 | |11 − 13.5| | 2.5 |\n' +
+          '| 12 | |12 − 13.5| | 1.5 |\n' +
+          '| 13 | |13 − 13.5| | 0.5 |\n' +
+          '| 13 | |13 − 13.5| | 0.5 |\n' +
+          '| 14 | |14 − 13.5| | 0.5 |\n' +
+          '| 14 | |14 − 13.5| | 0.5 |\n' +
+          '| 15 | |15 − 13.5| | 1.5 |\n' +
+          '| **100** | |100 − 13.5| | **86.5** |\n\n' +
+          '**Step 3:** Sort the deviations and find their median:\n\n' +
+          '0.5, 0.5, 0.5, 0.5, **1.0**, 1.5, 1.5, 2.5, 86.5 → MAD = **1.0**\n\n' +
+          'The outlier\'s huge deviation (86.5) doesn\'t affect the median — it\'s just one value at the end.\n\n' +
+          '**Step 4:** Scale to compare with standard deviation:\n\n' +
+          'Scaled MAD = 1.0 × 1.4826 = **1.48** (the 1.4826 factor makes MAD match std dev for normally distributed data)\n\n' +
+          'Compare: std dev = 29.2 (wrecked by outlier) vs. scaled MAD = 1.48 (ignores it).\n\n' +
+          '**Trimmed mean (10% trim):**\n\n' +
+          '| Step | Action | Values |\n' +
+          '|------|--------|--------|\n' +
+          '| Sort | Arrange in order | 11, 12, 13, 13, 14, 14, 15, 100 |\n' +
+          '| Trim | Discard lowest 10% and highest 10% (1 value each) | ~~11~~, 12, 13, 13, 14, 14, 15, ~~100~~ |\n' +
+          '| Average | Mean of remaining 6 values | (12+13+13+14+14+15)/6 = **13.5** |\n\n' +
+          'The outlier is gone. The trimmed mean matches the median — both robust.\n\n' +
+          '**M-estimators — iterative reweighting:**\n\n' +
+          'Huber\'s method down-weights points far from the centre. Watch it converge:\n\n' +
+          '[diagram:HuberEstimatorDiagram]\n\n' +
+          '| Distance from centre | Treatment |\n' +
+          '|---------------------|----------|\n' +
+          '| Within 1.345σ (green zone) | Full weight — treated normally |\n' +
+          '| Beyond 1.345σ | Weight = 1.345σ / distance — shrinks with distance |\n\n' +
+          'The estimate starts at the mean (24.0, pulled by the outlier). Each iteration recalculates weights — ' +
+          'the outlier at 100 gets progressively less influence until the estimate converges near **13.5**.',
         interactive: { type: 'python-playground' as const, props: { starterCode: '# Compute summary statistics\ndata = [45, 67, 72, 72, 78, 81, 95]\n\nmean = sum(data) / len(data)\nsorted_d = sorted(data)\nn = len(sorted_d)\nmedian = sorted_d[n//2] if n % 2 else (sorted_d[n//2-1] + sorted_d[n//2]) / 2\n\n# Mode: most common value\nfrom collections import Counter\nmode = Counter(data).most_common(1)[0][0]\n\nprint(f"Data: {data}")\nprint(f"Mean:   {mean:.1f}")\nprint(f"Median: {median}")\nprint(f"Mode:   {mode}")\nprint(f"Range:  {max(data) - min(data)}")\n\n# Add an outlier and watch the mean shift!\ndata2 = data + [5]\nmean2 = sum(data2) / len(data2)\nprint(f"\\nWith outlier 5: mean = {mean2:.1f}")', title: 'Try it — Summary Statistics' } },
         practice: practiceMeanMedianMode,
       },
       {
         title: 'Standard Deviation & Variance',
         beginnerContent:
+          '[diagram:StdDevBellCurveDiagram]\n\n' +
           '**The mean tells you the centre. Standard deviation tells you the spread.**\n\n' +
           'Two classes can have the same mean test score (75) but very different spreads:\n\n' +
           '- Class A: 70, 73, 75, 77, 80 — scores clustered tightly\n' +
           '- Class B: 50, 60, 75, 90, 100 — scores spread widely\n\n' +
           'How do we measure "how spread out"? Here is the idea, built step by step.\n\n' +
+          '[diagram:StdDevStepsDiagram]\n\n' +
           '**Step 1 — Find the mean.** Data = {2, 4, 4, 4, 5, 5, 7, 9}. Mean = (2+4+4+4+5+5+7+9)/8 = 40/8 = **5**.\n\n' +
           '**Step 2 — How far is each value from the mean?**\n\n' +
           '| Value | Distance from mean (value − 5) |\n' +
@@ -4456,6 +4620,7 @@ export const scienceReferences: ReferenceGuide[] = [
           '| μ ± 2σ | 55 to 95 | ~95% (nearly everyone) |\n' +
           '| μ ± 3σ | 45 to 105 | ~99.7% (all but 3 in 1000) |\n\n' +
           '**Z-scores — "how many standard deviations from the mean?"**\n\n' +
+          '[diagram:ZScoreDiagram]\n\n' +
           'z = (your value − mean) / σ. A student scoring 95 on the exam above: z = (95−75)/10 = **+2.0**. ' +
           'They are 2 standard deviations above average — better than about 97.7% of students.\n\n' +
           'A student scoring 60: z = (60−75)/10 = **−1.5**. They are 1.5σ below average — better than about 6.7% of students.\n\n' +
@@ -4524,6 +4689,7 @@ export const scienceReferences: ReferenceGuide[] = [
           '*See also: The Gaussian distribution in Machine Learning — how it is used in classification, anomaly detection, and Bayesian inference.*',
         advancedContent:
           '**Building the bell curve formula from scratch:**\n\n' +
+          '[diagram:BellCurveBuilderDiagram]\n\n' +
           'We want a function f(x) that:\n' +
           '- Is highest at the centre (x = μ)\n' +
           '- Falls off symmetrically on both sides\n' +
@@ -4565,8 +4731,10 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Binomial Distribution',
         beginnerContent:
+          '[diagram:BinomialDistDiagram]\n\n' +
           '**Building the formula piece by piece — not memorising it.**\n\n' +
           'Suppose you flip a coin 3 times. What is the probability of getting exactly 2 heads?\n\n' +
+          '[diagram:CoinFlipBinomialDiagram]\n\n' +
           '**Step 1 — List the ways to get 2 heads out of 3 flips:**\n' +
           'HHT, HTH, THH — there are **3 ways**. (This is C(3,2) = 3.)\n\n' +
           '**Step 2 — What is the probability of any ONE of these sequences?**\n' +
@@ -4615,15 +4783,26 @@ export const scienceReferences: ReferenceGuide[] = [
           'Var(X) = n × p(1−p) = **np(1−p)** ∎\n\n' +
           'For 10 fair flips: Var = 10 × 0.25 = 2.5. Std dev = √2.5 ≈ **1.58** heads.\n\n' +
           '**The geometric distribution — derived from binomial thinking:**\n\n' +
+          '[diagram:GeometricDistDiagram]\n\n' +
           '"How many trials until the first success?" If each trial has probability p:\n' +
           '- Success on trial 1: P = p\n' +
           '- Success on trial 2 (fail then succeed): P = (1−p)×p\n' +
           '- Success on trial k: P = (1−p)^(k−1) × p\n\n' +
           'Mean waiting time = 1/p. If a bus comes with probability 0.1 each minute, you wait on average 10 minutes.\n\n' +
           '**The Poisson limit — why rare events follow Poisson:**\n\n' +
-          'In 10,000 emails, each has 0.02% chance of being phishing. n = 10000, p = 0.0002, λ = np = 2. ' +
-          'Computing Binomial(10000, 0.0002) requires factorials of 10000. Poisson(2) gives the same answer with a pocket calculator: ' +
-          'P(X=k) = 2ᵏ e⁻² / k!. The derivation (shown in the Poisson section) replaces C(n,k)pᵏ(1−p)ⁿ⁻ᵏ with λᵏe⁻λ/k! as n→∞.',
+          '**Scenario:** 10,000 emails arrive. Each has a 0.02% chance of being phishing.\n\n' +
+          '| Parameter | Value |\n' +
+          '|-----------|-------|\n' +
+          '| n (trials) | 10,000 emails |\n' +
+          '| p (probability each) | 0.0002 (0.02%) |\n' +
+          '| λ = np (expected count) | **2** phishing emails |\n\n' +
+          '**The problem:** Computing Binomial(10000, 0.0002) requires factorials of 10,000 — impractical.\n\n' +
+          '**The shortcut:** When n is large and p is tiny, Binomial ≈ Poisson:\n\n' +
+          '| Binomial (exact, impractical) | Poisson (approximation, easy) |\n' +
+          '|------|------|\n' +
+          '| P(X=k) = C(10000, k) × 0.0002ᵏ × 0.9998^(10000−k) | P(X=k) = 2ᵏ × e⁻² / k! |\n' +
+          '| Needs factorial of 10,000 | Needs a pocket calculator |\n\n' +
+          'The derivation replaces C(n,k)pᵏ(1−p)ⁿ⁻ᵏ with λᵏe⁻λ/k! as n → ∞. See the Poisson section for the full proof.',
         interactive: { type: 'python-playground' as const, props: { starterCode: 'import math\n\ndef binomial_pmf(n, k, p):\n    comb = math.factorial(n) // (math.factorial(k) * math.factorial(n - k))\n    return comb * p**k * (1 - p)**(n - k)\n\nn, p = 10, 0.5  # 10 coin flips, fair coin\nprint(f"Binomial(n={n}, p={p})")\nprint(f"Mean = {n*p}, SD = {math.sqrt(n*p*(1-p)):.2f}")\nprint()\nfor k in range(n + 1):\n    prob = binomial_pmf(n, k, p)\n    bar = "#" * int(prob * 80)\n    print(f"  k={k:>2}  P={prob:.4f}  {bar}")', title: 'Try it — Binomial Distribution' } },
         practice: practiceBinomialDistribution,
       },
@@ -4631,6 +4810,7 @@ export const scienceReferences: ReferenceGuide[] = [
         title: 'Correlation & Regression',
         beginnerContent:
           '**Do two variables move together?**\n\n' +
+          '[diagram:CorrelationRegressionDiagram]\n\n' +
           'Correlation measures the **strength and direction** of the linear relationship between two variables.\n\n' +
           '**Correlation coefficient r** ranges from -1 to +1:\n\n' +
           '| r value | Meaning |\n' +
@@ -4646,15 +4826,18 @@ export const scienceReferences: ReferenceGuide[] = [
           '- Shoe size vs IQ: no correlation (r = 0.02)\n\n' +
           '**The critical warning:**\n\n' +
           'Correlation does NOT imply causation. Ice cream sales and drowning deaths are positively correlated — but ice cream does not cause drowning. Both increase in summer (the **confounding variable**).\n\n' +
+          '[diagram:ConfoundingVariableDiagram]\n\n' +
           '**Linear regression** draws the straight line that best fits the data — the one that comes as close as possible to all the points at once. ' +
           'Once you have that line, you can use it to predict: "if x increases by 10, how much does y change?" The intermediate and advanced sections show exactly how to compute it.',
         intermediateContent:
           '**What "best-fit" means — and why we square the errors:**\n\n' +
+          '[diagram:LeastSquaresDiagram]\n\n' +
           'You draw a line through your data. Some points are above the line (positive error), some below (negative error). ' +
           'If you just add the errors, positives and negatives cancel — even a terrible line can have total error = 0.\n\n' +
           'Fix: **square** each error first. Then all errors are positive. The best line minimises the total of these squared errors. ' +
           'That is "least squares."\n\n' +
           '**Computing the slope — what the formula actually does:**\n\n' +
+          '[diagram:SlopeDeviationDiagram]\n\n' +
           'The slope measures: "when x goes up by 1, how much does y go up?" To find this:\n' +
           '1. For each point, ask: is x above or below average? Is y above or below average?\n' +
           '2. Multiply those two deviations together\n' +
@@ -4712,6 +4895,7 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'The Poisson Distribution',
         beginnerContent:
+          '[diagram:PoissonDistDiagram]\n\n' +
           '**Where the Poisson formula comes from — step by step.**\n\n' +
           'A shop averages 3 customers per hour. What is the probability that exactly 0 customers arrive in an hour? Exactly 1? Exactly 5?\n\n' +
           '**The idea:** Divide the hour into tiny slices. If you split 1 hour into n = 1000 tiny intervals (each 3.6 seconds), ' +
@@ -4774,6 +4958,7 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'The Exponential Distribution',
         beginnerContent:
+          '[diagram:ExponentialDistDiagram]\n\n' +
           '**How long until the next event? Building the formula from a question.**\n\n' +
           'Buses arrive at a rate of about 6 per hour (one every 10 minutes on average). You just arrived at the stop. How long will you wait?\n\n' +
           'The waiting time is NOT fixed at 10 minutes. Sometimes a bus comes in 2 minutes, sometimes you wait 20. The exponential distribution describes this randomness.\n\n' +
@@ -4793,8 +4978,13 @@ export const scienceReferences: ReferenceGuide[] = [
           '| 30 min | 1 − e⁻³ = 1 − 0.050 = **95%** | Three times the average for 95% |\n\n' +
           'Notice: even at the "average" waiting time (10 min), there is still a **37% chance** you are still waiting. That feels counterintuitive — but the distribution is skewed right (long tail).\n\n' +
           '**The memoryless property — the strangest fact:**\n\n' +
-          'You have already waited 15 minutes. What is the probability of waiting 5 MORE minutes? Answer: **exactly the same as if you just arrived** (39%). ' +
-          'The bus does not "owe" you anything for your past wait. The exponential distribution is the ONLY continuous distribution with this property.',
+          '[diagram:MemorylessDiagram]\n\n' +
+          'You have already waited 15 minutes. What is the probability of waiting 5 MORE minutes?\n\n' +
+          '| Scenario | Probability of waiting > 5 min |\n' +
+          '|----------|-------------------------------|\n' +
+          '| Just arrived | e^(−0.1×5) = e^(−0.5) = **39%** |\n' +
+          '| Already waited 15 min | e^(−0.1×5) = e^(−0.5) = **39%** |\n\n' +
+          'Exactly the same! The bus does not "owe" you anything for your past wait. The exponential distribution is the ONLY continuous distribution with this property.',
         intermediateContent:
           '**From CDF to PDF — what "density" means:**\n\n' +
           'We already know the CDF: P(wait ≤ t) = 1 − e⁻λᵗ. The PDF is the slope of the CDF — it tells you how likely you are to get a bus at EXACTLY time t (per unit time).\n\n' +
@@ -4837,6 +5027,7 @@ export const scienceReferences: ReferenceGuide[] = [
       {
         title: 'Chi-Squared & Hypothesis Testing',
         beginnerContent:
+          '[diagram:ChiSquaredDiagram]\n\n' +
           '**Is the difference real, or just random chance?**\n\n' +
           'You flip a coin 100 times and get 60 heads. Is the coin unfair, or did you just get lucky? A fair coin COULD give 60 heads — it is unlikely but not impossible. How do we decide?\n\n' +
           '**The idea: measure how far the results are from what we expected.**\n\n' +
@@ -4848,6 +5039,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'But how big is "10 off"? If we expected 50, being 10 off is a 20% deviation. If we expected 500, being 10 off is only 2%. ' +
           'The size of the discrepancy depends on what you expected.\n\n' +
           '**Building the χ² statistic step by step:**\n\n' +
+          '[diagram:ChiSquaredStepsDiagram]\n\n' +
           'For each category: square the difference (to make negatives positive), then divide by expected (to scale by what was expected):\n\n' +
           '| | (Observed − Expected)² | ÷ Expected | Contribution |\n' +
           '|--|----------------------|------------|-------------|\n' +
@@ -4968,6 +5160,7 @@ export const scienceReferences: ReferenceGuide[] = [
           '[diagram:VectorBoatDiagram]',
         intermediateContent:
           '**Working with vectors — one operation at a time.**\n\n' +
+          '[diagram:VectorOperationsDiagram]\n\n' +
           'Let **a** = (3, −2) and **b** = (1, 5).\n\n' +
           '**Addition** — add the matching components:\n\n' +
           'a + b = (3+1, −2+5) = **(4, 3)**\n\n' +
@@ -4995,7 +5188,8 @@ export const scienceReferences: ReferenceGuide[] = [
           'A matrix is a grid of numbers — rank 2. The pattern continues: rank 3, 4, ...\n\n' +
           '**The stress tensor — a rank-2 example you can feel:**\n\n' +
           'Squeeze a rubber block. At every point inside, forces act on every possible internal surface. ' +
-          'The stress tensor σᵢⱼ is a 3×3 matrix:\n\n' +
+          'The stress tensor σᵢⱼ is a 3×3 matrix — click each face to see its force components:\n\n' +
+          '[diagram:StressTensorDiagram]\n\n' +
           '| | Force in x | Force in y | Force in z |\n' +
           '|---|---|---|---|\n' +
           '| Surface facing x | σ_xx (compression) | σ_xy (shear) | σ_xz (shear) |\n' +
@@ -5021,12 +5215,12 @@ export const scienceReferences: ReferenceGuide[] = [
           '| Large and positive | Pointing in similar directions | (1,0) · (1,0) = 1 |\n' +
           '| Zero | Perpendicular (at 90°) | (1,0) · (0,1) = 0 |\n' +
           '| Negative | Pointing in opposite-ish directions | (1,0) · (−1,0) = −1 |\n\n' +
+          '**Try it — drag the vectors and watch the dot product and angle change:**\n\n' +
+          '[diagram:DotProductAngleDiagram]\n\n' +
           '**Finding the angle between two vectors:**\n\n' +
           'cos θ = (**a** · **b**) / (|**a**| × |**b**|)\n\n' +
           '|**a**| = √(4+9) = √13 ≈ 3.61. |**b**| = √(16+1) = √17 ≈ 4.12.\n\n' +
           'cos θ = 11 / (3.61 × 4.12) = 11 / 14.87 = 0.74. θ = arccos(0.74) ≈ **42°** — they point in somewhat similar directions.\n\n' +
-          '**Try it — drag the vectors and watch the angle and dot product change:**\n\n' +
-          '[diagram:DotProductAngleDiagram]\n\n' +
           '**Checking perpendicularity** (critical for ML):\n\n' +
           'Are (3, 4) and (−4, 3) perpendicular? Dot product = 3×(−4) + 4×3 = −12 + 12 = **0**. Yes — perpendicular. ✓\n\n' +
           '**Why ML cares:** In machine learning, each data point is a vector of features. The dot product measures similarity. Two elephant rumbles with similar frequency and amplitude have a large dot product → likely the same mood. Two with opposite patterns have a negative dot product → different moods.\n\n' +
@@ -5040,7 +5234,16 @@ export const scienceReferences: ReferenceGuide[] = [
           '**a** × **b** = (−3, 6, −3) — this vector is perpendicular to BOTH **a** and **b**.\n\n' +
           'Verify: (−3, 6, −3) · (1, 2, 3) = −3 + 12 − 9 = **0** ✓ Perpendicular!',
         intermediateContent:
-          'The cross product **a × b** gives a vector perpendicular to both inputs. For a = (2, 3, 0) and b = (0, 1, 4): a × b = (3×4 − 0×1, 0×0 − 2×4, 2×1 − 3×0) = **(12, −8, 2)**. Its magnitude |a × b| = √(144+64+4) = √212 ≈ 14.56 equals the area of the parallelogram spanned by a and b. The scalar triple product a·(b × c) gives the volume of the parallelepiped. Right-hand rule: curl the fingers of your right hand from a toward b — your thumb points in the direction of a × b.',
+          '**Cross product worked example** — a = (2, 3, 0) and b = (0, 1, 4):\n\n' +
+          '| Component | Calculation | Result |\n' +
+          '|-----------|------------|--------|\n' +
+          '| x | 3×4 − 0×1 | **12** |\n' +
+          '| y | 0×0 − 2×4 | **−8** |\n' +
+          '| z | 2×1 − 3×0 | **2** |\n\n' +
+          'a × b = **(12, −8, 2)**\n\n' +
+          '**Magnitude:** |a × b| = √(144 + 64 + 4) = √212 ≈ **14.56** — this equals the area of the parallelogram spanned by a and b.\n\n' +
+          '**Scalar triple product:** a · (b × c) gives the volume of the parallelepiped formed by three vectors.\n\n' +
+          '**Right-hand rule:** Curl the fingers of your right hand from **a** toward **b** — your thumb points in the direction of **a × b**.',
         advancedContent:
           '**Lambert\'s cosine law — how dot products light 3D scenes:**\n\n' +
           'A surface faces direction **n** (the normal vector). Light comes from direction **L**. How bright is the surface?\n\n' +
@@ -5100,23 +5303,50 @@ export const scienceReferences: ReferenceGuide[] = [
           '[apple; banana] = [3 −1; −5 2] × [8; 19] = [24−19; −40+38] = **[5; −2]**\n\n' +
           'Apple = ₹5, banana = ... ₹−2? That means our data is inconsistent (or bananas are giving you a refund). In real problems, check that the answer makes sense!',
         intermediateContent:
-          'The determinant of a 2×2 matrix [a b; c d] is ad − bc. If det = 0, the matrix is singular (no inverse, the transformation collapses 2D to a line or point). For [3 1; 2 4]: det = 12 − 2 = 10, inverse = (1/10)[4 −1; −2 3]. Check: [3 1; 2 4] × (1/10)[4 −1; −2 3] = [1 0; 0 1] ✓. Solving Ax = b: if A = [2 1; 5 3] and b = [8; 19], then x = A⁻¹b = [3 −1; −5 2][8; 19] = [24−19; −40+38] = **(5, −2)**.',
+          '**The determinant** of a 2×2 matrix tells you whether the matrix has an inverse:\n\n' +
+          '| Matrix | Formula | Result |\n' +
+          '|--------|---------|--------|\n' +
+          '| `[a b; c d]` | ad − bc | The determinant |\n' +
+          '| `[3 1; 2 4]` | 3×4 − 1×2 | **10** |\n\n' +
+          'If det = 0, the matrix is **singular** — no inverse exists. The transformation collapses 2D to a line or a point.\n\n' +
+          '**Finding the inverse** of `[3 1; 2 4]`:\n\n' +
+          '| Step | Calculation |\n' +
+          '|------|------------|\n' +
+          '| Swap diagonal, negate off-diagonal | `[4 −1; −2 3]` |\n' +
+          '| Divide by determinant (10) | (1/10) × `[4 −1; −2 3]` |\n\n' +
+          '**Check:** `[3 1; 2 4]` × (1/10)`[4 −1; −2 3]` = (1/10)`[10 0; 0 10]` = `[1 0; 0 1]` ✓ — identity matrix.\n\n' +
+          '**Solving Ax = b with inverses:**\n\n' +
+          'Given A = `[2 1; 5 3]` and b = `[8; 19]`:\n\n' +
+          '| Step | Calculation |\n' +
+          '|------|------------|\n' +
+          '| Determinant | 2×3 − 1×5 = **1** |\n' +
+          '| Inverse | `[3 −1; −5 2]` |\n' +
+          '| x = A⁻¹b | `[3 −1; −5 2]` × `[8; 19]` |\n' +
+          '| Result | (24−19, −40+38) = **(5, −2)** |',
         advancedContent:
           '**Eigenvalues — finding them by hand for a 2×2 matrix:**\n\n' +
-          'Given A = [4 1; 2 3]. An eigenvector **v** satisfies A**v** = λ**v** — the matrix only stretches it, no rotation.\n\n' +
-          '1. Rewrite: (A − λI)**v** = 0. For a non-zero solution, det(A − λI) = 0.\n' +
-          '2. det([4−λ, 1; 2, 3−λ]) = (4−λ)(3−λ) − 2 = λ² − 7λ + 10 = 0\n' +
-          '3. Factor: (λ−5)(λ−2) = 0 → **λ₁ = 5, λ₂ = 2**\n\n' +
-          'For λ₁ = 5: (A−5I)**v** = [−1, 1; 2, −2]**v** = 0 → v₁ = (1, 1)\n' +
-          'For λ₂ = 2: (A−2I)**v** = [2, 1; 2, 1]**v** = 0 → v₂ = (1, −2)\n\n' +
+          'Given A = `[4 1; 2 3]`. An eigenvector **v** satisfies A**v** = λ**v** — the matrix only stretches it, no rotation.\n\n' +
+          '| Step | Work | Result |\n' +
+          '|------|------|--------|\n' +
+          '| Rewrite | (A − λI)**v** = 0; need det(A − λI) = 0 | |\n' +
+          '| Expand determinant | (4−λ)(3−λ) − 2 | λ² − 7λ + 10 = 0 |\n' +
+          '| Factor | (λ−5)(λ−2) = 0 | **λ₁ = 5, λ₂ = 2** |\n\n' +
+          '**Finding the eigenvectors:**\n\n' +
+          '| Eigenvalue | Solve (A−λI)**v** = 0 | Eigenvector |\n' +
+          '|------------|----------------------|-------------|\n' +
+          '| λ₁ = 5 | `[−1 1; 2 −2]`**v** = 0 | **v₁ = (1, 1)** |\n' +
+          '| λ₂ = 2 | `[2 1; 2 1]`**v** = 0 | **v₂ = (1, −2)** |\n\n' +
           '**Interpretation:** A stretches the direction (1,1) by factor 5 and the direction (1,−2) by factor 2. Any input vector decomposes into these two directions.\n\n' +
           '**SVD — works for ANY matrix (even non-square):**\n\n' +
-          'A = UΣVᵀ, where U and V are rotation matrices and Σ is diagonal (singular values).\n\n' +
-          '**Image compression example:** A 1000×1000 grayscale image has 1 million values. SVD decomposes it into singular values σ₁ ≥ σ₂ ≥ ... ≥ σ₁₀₀₀. ' +
-          'Keep only the top 50: the reconstructed image uses 50×(1000+1000+1) ≈ 100,000 values — 10× compression — ' +
-          'and looks nearly identical because the discarded singular values were tiny (they captured noise, not structure).\n\n' +
-          '**PageRank:** Google models the web as a matrix where entry Aᵢⱼ = probability of clicking from page j to page i. ' +
-          'The dominant eigenvector (λ = 1) gives the steady-state probability of being on each page — that\'s the page ranking.',
+          'A = UΣVᵀ, where U and V are rotation matrices and Σ is diagonal (the singular values).\n\n' +
+          '**Image compression example:**\n\n' +
+          '| | Raw image | After SVD (top 50 values) |\n' +
+          '|---|-----------|---------------------------|\n' +
+          '| Size | 1000 × 1000 = 1,000,000 values | 50 × (1000 + 1000 + 1) ≈ 100,000 values |\n' +
+          '| Compression | 1× | **10× smaller** |\n' +
+          '| Quality | Original | Nearly identical — discarded values captured noise, not structure |\n\n' +
+          '**PageRank — how Google ranks web pages:**\n\n' +
+          'Model the web as a matrix where entry Aᵢⱼ = probability of clicking from page j to page i. The dominant eigenvector (λ = 1) gives the steady-state probability of being on each page — that is the page ranking.',
         diagram: 'MatrixMultiplicationDiagram',
       },
       {
@@ -5141,6 +5371,7 @@ export const scienceReferences: ReferenceGuide[] = [
           'An image enters as a vector of pixel values. After multiplying by the first weight matrix, it becomes a vector of "edge features." After the second matrix, "shape features." After the third, "object features." Each matrix transformation reveals more abstract patterns.',
         intermediateContent:
           '**Composing two transformations — do them one at a time, then as one matrix.**\n\n' +
+          '[diagram:TransformCompositionDiagram]\n\n' +
           'Rotate the point (1, 0) by 90°, then scale by 2.\n\n' +
           '**Step by step (two separate operations):**\n\n' +
           '| Step | Matrix | Input | Output |\n' +
@@ -5158,26 +5389,34 @@ export const scienceReferences: ReferenceGuide[] = [
           'Combined = [0 −2; 2 0]. Apply: [0 −2; 2 0] × [1; 0] = **(0, 2)** ✓ Same answer!\n\n' +
           'The single matrix [0 −2; 2 0] does both operations at once. This is why games and ML use matrix composition — multiply 10 transformation matrices into one, then apply that one matrix to millions of points.',
         advancedContent:
-          '**Composing transformations — why order matters, worked by hand:**\n\n' +
-          'Rotate 90° then scale by 2 vs scale by 2 then rotate 90°. Are they the same?\n\n' +
-          'Rotation 90°: R = [0, −1; 1, 0]. Scaling by 2: S = [2, 0; 0, 2].\n\n' +
-          '**Option 1: Rotate first, then scale (SR):**\n' +
-          'SR = [2,0; 0,2] × [0,−1; 1,0] = [0,−2; 2,0]\n' +
-          'Apply to (1, 0): [0,−2; 2,0] × [1; 0] = **(0, 2)**\n\n' +
-          '**Option 2: Scale first, then rotate (RS):**\n' +
-          'RS = [0,−1; 1,0] × [2,0; 0,2] = [0,−2; 2,0]\n\n' +
-          'Same result here! But that is because scaling is uniform (same factor both directions). Try non-uniform scaling:\n\n' +
-          'S = [3, 0; 0, 1] (stretch x by 3, keep y). Now:\n' +
-          'SR = [3,0; 0,1] × [0,−1; 1,0] = [0,−3; 1,0]. Apply to (1,0): **(0, 1)**\n' +
-          'RS = [0,−1; 1,0] × [3,0; 0,1] = [0,−1; 3,0]. Apply to (1,0): **(0, 3)**\n\n' +
-          'Different! Order matters when transformations are non-uniform.\n\n' +
+          '**Does the order of transformations matter?**\n\n' +
+          'Let\'s test: rotate 90° then scale by 2 vs. scale by 2 then rotate 90°.\n\n' +
+          '**The two matrices:**\n\n' +
+          '| Transformation | Matrix | What it does to (1, 0) |\n' +
+          '|---------------|--------|----------------------|\n' +
+          '| Rotation 90° | R = `[0 −1; 1 0]` | (1, 0) → (0, 1) |\n' +
+          '| Uniform scaling ×2 | S = `[2 0; 0 2]` | (1, 0) → (2, 0) |\n\n' +
+          '**Test 1 — uniform scaling (same factor both axes):**\n\n' +
+          '| Order | Combined matrix | (1, 0) maps to |\n' +
+          '|-------|----------------|---------------|\n' +
+          '| Rotate then scale (SR) | `[2 0; 0 2]` × `[0 −1; 1 0]` = `[0 −2; 2 0]` | **(0, 2)** |\n' +
+          '| Scale then rotate (RS) | `[0 −1; 1 0]` × `[2 0; 0 2]` = `[0 −2; 2 0]` | **(0, 2)** |\n\n' +
+          'Same result! Uniform scaling commutes with rotation because it stretches equally in all directions.\n\n' +
+          '**Test 2 — non-uniform scaling (different factors per axis):**\n\n' +
+          'Now S = `[3 0; 0 1]` (stretch x by 3, keep y unchanged):\n\n' +
+          '| Order | Combined matrix | (1, 0) maps to |\n' +
+          '|-------|----------------|---------------|\n' +
+          '| Rotate then scale (SR) | `[3 0; 0 1]` × `[0 −1; 1 0]` = `[0 −3; 1 0]` | **(0, 1)** |\n' +
+          '| Scale then rotate (RS) | `[0 −1; 1 0]` × `[3 0; 0 1]` = `[0 −1; 3 0]` | **(0, 3)** |\n\n' +
+          '**Different!** In one order the point ends up at (0, 1), in the other at (0, 3). Non-uniform transformations do not commute — **order matters.**\n\n' +
           '**Neural networks are matrix transformations:**\n\n' +
-          'A neural network layer: y = activation(W × x + b)\n\n' +
-          'The weight matrix W transforms the input vector x into a new space. For a layer with 784 inputs (a 28×28 image flattened) and 128 neurons:\n' +
-          '- W is 128 × 784 (128 rows, 784 columns)\n' +
-          '- x is 784 × 1 (the input)\n' +
-          '- W × x = 128 × 1 (the output — 128 features extracted from the image)\n\n' +
-          'Each row of W is a "template" the neuron looks for. Training adjusts W so these templates detect useful features (edges, curves, textures).',
+          'A neural network layer: y = activation(W × x + b). The weight matrix W transforms the input vector into a new space.\n\n' +
+          '| Part | Size | Meaning |\n' +
+          '|------|------|--------|\n' +
+          '| Input x | 784 × 1 | A 28×28 image flattened to a column |\n' +
+          '| Weight matrix W | 128 × 784 | 128 "templates" the neurons look for |\n' +
+          '| Output Wx | 128 × 1 | 128 features extracted from the image |\n\n' +
+          'Training adjusts W so these templates detect useful features (edges, curves, textures). A deep network chains many such transformations: each layer\'s output becomes the next layer\'s input.',
         diagram: 'TransformationMatrixDiagram',
         interactive: {
           type: 'matching',
@@ -5188,6 +5427,18 @@ export const scienceReferences: ReferenceGuide[] = [
               ['[sx 0; 0 sy]', 'Scaling by factors sx horizontally and sy vertically'],
               ['[1 0; 0 −1]', 'Reflection across the x-axis'],
               ['[1 k; 0 1]', 'Horizontal shear by factor k'],
+            ],
+            explanations: [
+              'For 90°: cos 90°=0, sin 90°=1 → [0 −1; 1 0]. The point (1,0) maps to (0,1) — east becomes north.',
+              'The diagonal entries stretch each axis independently. [2 0; 0 3] doubles x and triples y.',
+              'y-component flips sign: (3,4) → (3,−4). Like a mirror on the x-axis.',
+              'x shifts by k×y, y stays. The top of a square leans right while the bottom stays put.',
+            ],
+            transformMatrices: [
+              [0, -1, 1, 0],     // rotation 90°
+              [2, 0, 0, 3],      // scale
+              [1, 0, 0, -1],     // reflect x
+              [1, 1, 0, 1],      // shear (k=1)
             ],
           },
         },

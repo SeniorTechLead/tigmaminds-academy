@@ -59,7 +59,7 @@ export default function PythonPlayground({ starterCode, title = 'Try it' }: Pyth
   }, [code]);
 
   const lineCount = code.split('\n').length;
-  const pyState = running ? 'running' : state;
+  const pyState = state === 'loading' ? 'loading' : running ? 'running' : state;
 
   return (
     <div className={`${isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-300'} rounded-xl overflow-hidden border`}>
@@ -106,6 +106,17 @@ export default function PythonPlayground({ starterCode, title = 'Try it' }: Pyth
           style={{ tabSize: 4 }}
         />
       </div>
+
+      {/* Loading indicator */}
+      {pyState === 'loading' && (
+        <div className={`border-t px-4 py-4 flex items-center gap-3 ${isDark ? 'border-gray-700 bg-gray-800/50' : 'border-gray-200 bg-gray-50'}`}>
+          <Loader2 className="w-4 h-4 animate-spin text-emerald-500" />
+          <div>
+            <p className={`text-sm font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Loading Python runtime...</p>
+            <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Downloading Pyodide ({'>'}10 MB). This only happens once per session.</p>
+          </div>
+        </div>
+      )}
 
       {/* Output */}
       {error && (

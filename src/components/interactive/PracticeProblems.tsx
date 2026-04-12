@@ -27,17 +27,31 @@ function renderContent(text: string) {
       const rows = lines.slice(2).map(parseRow);
       return (
         <div key={i} className="overflow-x-auto mb-2">
-          <table className="w-full text-xs border-collapse rounded overflow-hidden">
-            <thead><tr className="bg-gray-100 dark:bg-gray-700">{headers.map((h, j) => <th key={j} className="px-2 py-1 text-left font-semibold">{renderMd(h)}</th>)}</tr></thead>
-            <tbody>{rows.map((row, ri) => <tr key={ri} className={ri % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>{row.map((cell, ci) => <td key={ci} className="px-2 py-1">{renderMd(cell)}</td>)}</tr>)}</tbody>
+          <table className="w-full text-sm border-collapse rounded overflow-hidden">
+            <thead><tr className="bg-gray-100 dark:bg-gray-700">{headers.map((h, j) => <th key={j} className="px-3 py-1.5 text-left font-semibold">{renderMd(h)}</th>)}</tr></thead>
+            <tbody>{rows.map((row, ri) => <tr key={ri} className={ri % 2 === 0 ? '' : 'bg-gray-50 dark:bg-gray-800/50'}>{row.map((cell, ci) => <td key={ci} className="px-3 py-1.5">{renderMd(cell)}</td>)}</tr>)}</tbody>
           </table>
         </div>
       );
     }
     if (p.trim().startsWith('- ') || p.trim().startsWith('• ')) {
-      return <ul key={i} className="text-xs mb-2 space-y-0.5 ml-1">{p.split('\n').filter(l => l.trim()).map((item, j) => <li key={j} className="flex items-start gap-1.5"><span className="text-amber-500 mt-0.5">•</span><span>{renderMd(item.replace(/^[•\-]\s*/, ''))}</span></li>)}</ul>;
+      return <ul key={i} className="text-sm mb-2 space-y-0.5 ml-1">{p.split('\n').filter(l => l.trim()).map((item, j) => <li key={j} className="flex items-start gap-1.5"><span className="text-amber-500 mt-0.5">•</span><span>{renderMd(item.replace(/^[•\-]\s*/, ''))}</span></li>)}</ul>;
     }
-    return <p key={i} className="text-xs leading-relaxed mb-2 last:mb-0">{renderMd(p)}</p>;
+    // Handle single \n as line breaks within a paragraph
+    const lines = p.split('\n');
+    if (lines.length > 1) {
+      return (
+        <p key={i} className="text-sm leading-relaxed mb-2 last:mb-0">
+          {lines.map((line, li) => (
+            <span key={li}>
+              {li > 0 && <br />}
+              {renderMd(line)}
+            </span>
+          ))}
+        </p>
+      );
+    }
+    return <p key={i} className="text-sm leading-relaxed mb-2 last:mb-0">{renderMd(p)}</p>;
   });
 }
 
@@ -118,6 +132,85 @@ function WaitingVisual({ avgMinutes, markTime }: { avgMinutes: number; markTime?
   );
 }
 
+const VECTOR_COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'];
+
+function VectorVisual({ points, showLine }: { points: [number, number][]; showLine?: boolean }) {
+  // Compute bounds to fit all points + origin
+  const allX = [0, ...points.map(p => p[0])];
+  const allY = [0, ...points.map(p => p[1])];
+  const minX = Math.min(...allX), maxX = Math.max(...allX);
+  const minY = Math.min(...allY), maxY = Math.max(...allY);
+  const rangeX = Math.max(maxX - minX, 1);
+  const rangeY = Math.max(maxY - minY, 1);
+  // Add padding
+  const pad = 1.5;
+  const lo = { x: minX - pad, y: minY - pad };
+  const hi = { x: maxX + pad, y: maxY + pad };
+  const w = hi.x - lo.x;
+  const h = hi.y - lo.y;
+  // SVG mapping: 200x160 canvas with 20px margin
+  const mx = 20, my = 20;
+  const cw = 200 - 2 * mx, ch = 160 - 2 * my;
+  const sx = (v: number) => mx + ((v - lo.x) / w) * cw;
+  const sy = (v: number) => my + ((hi.y - v) / h) * ch;
+
+  // Grid lines at integer intervals
+  const gridLines: React.ReactNode[] = [];
+  const step = rangeX > 15 || rangeY > 15 ? 5 : 1;
+  for (let gx = Math.ceil(lo.x / step) * step; gx <= hi.x; gx += step) {
+    gridLines.push(<line key={`gx${gx}`} x1={sx(gx)} y1={my} x2={sx(gx)} y2={160 - my} stroke="#e5e7eb" strokeWidth="0.5" />);
+  }
+  for (let gy = Math.ceil(lo.y / step) * step; gy <= hi.y; gy += step) {
+    gridLines.push(<line key={`gy${gy}`} x1={mx} y1={sy(gy)} x2={200 - mx} y2={sy(gy)} stroke="#e5e7eb" strokeWidth="0.5" />);
+  }
+
+  return (
+    <svg viewBox="0 0 200 160" className="w-full max-w-xs h-auto">
+      {/* Grid */}
+      {gridLines}
+      {/* Axes */}
+      <line x1={sx(lo.x)} y1={sy(0)} x2={sx(hi.x)} y2={sy(0)} stroke="#9ca3af" strokeWidth="1" />
+      <line x1={sx(0)} y1={sy(lo.y)} x2={sx(0)} y2={sy(hi.y)} stroke="#9ca3af" strokeWidth="1" />
+      {/* Arrow markers */}
+      <defs>
+        {points.map((_, i) => (
+          <marker key={i} id={`va${i}`} markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6" fill={VECTOR_COLORS[i % VECTOR_COLORS.length]} />
+          </marker>
+        ))}
+      </defs>
+      {/* Dashed line connecting last two points if showLine */}
+      {showLine && points.length >= 2 && (
+        <line
+          x1={sx(points[0][0])} y1={sy(points[0][1])}
+          x2={sx(points[points.length - 1][0])} y2={sy(points[points.length - 1][1])}
+          stroke="#f87171" strokeWidth="1" strokeDasharray="4,3"
+        />
+      )}
+      {/* Vectors from origin */}
+      {points.map(([px, py], i) => {
+        const color = VECTOR_COLORS[i % VECTOR_COLORS.length];
+        // Shorten the line slightly so the arrowhead sits at the tip
+        const len = Math.sqrt(px * px + py * py);
+        if (len === 0) return <circle key={i} cx={sx(0)} cy={sy(0)} r="3" fill={color} />;
+        return (
+          <g key={i}>
+            <line
+              x1={sx(0)} y1={sy(0)} x2={sx(px)} y2={sy(py)}
+              stroke={color} strokeWidth="2" markerEnd={`url(#va${i})`}
+            />
+            <text x={sx(px) + 4} y={sy(py) - 4} fontSize="9" fill={color} fontWeight="600">
+              ({px},{py})
+            </text>
+          </g>
+        );
+      })}
+      {/* Origin label */}
+      <text x={sx(0) - 10} y={sy(0) + 12} fontSize="8" fill="#6b7280">O</text>
+    </svg>
+  );
+}
+
 function ProblemVisual({ visual }: { visual: ProblemVisualType }) {
   switch (visual.kind) {
     case 'dice': return <DiceVisual count={visual.count} values={visual.values} />;
@@ -125,12 +218,7 @@ function ProblemVisual({ visual }: { visual: ProblemVisualType }) {
     case 'cards': return <CardVisual drawn={visual.drawn} />;
     case 'bar-chart': return <BarChartVisual labels={visual.labels} values={visual.values} highlight={visual.highlight} />;
     case 'waiting': return <WaitingVisual avgMinutes={visual.avgMinutes} markTime={visual.markTime} />;
-    case 'scatter': return (
-      <svg viewBox="0 0 200 150" className="w-full max-w-xs h-auto">
-        {visual.points.map(([x, y], i) => <circle key={i} cx={20 + x * 1.6} cy={140 - y * 1.2} r="3" className="fill-blue-500" />)}
-        {visual.showLine && <line x1="20" y1="130" x2="180" y2="20" className="stroke-red-500 stroke-1" strokeDasharray="4" />}
-      </svg>
-    );
+    case 'scatter': return <VectorVisual points={visual.points} showLine={visual.showLine} />;
     case 'distribution': return null; // TODO: SVG distribution curves
     default: return null;
   }
@@ -214,7 +302,7 @@ export default function PracticeProblems({ practice }: Props) {
       </div>
 
       {/* Problem content */}
-      <div className="p-4">
+      <div className="p-5 min-h-[320px] max-h-[70vh] overflow-y-auto">
         {/* Difficulty + question */}
         <div className="flex items-start gap-2 mb-3">
           <DiffBadge d={problem.difficulty} />
@@ -234,13 +322,13 @@ export default function PracticeProblems({ practice }: Props) {
         {problem.hint && !hintShown && revealedSteps === 0 && (
           <button
             onClick={() => setHintShown(true)}
-            className="mb-3 text-xs text-violet-600 dark:text-violet-400 hover:underline"
+            className="mb-3 text-sm text-violet-600 dark:text-violet-400 hover:underline"
           >
             Show hint
           </button>
         )}
         {hintShown && (
-          <div className="mb-3 p-2.5 rounded-lg bg-violet-50 dark:bg-violet-900/20 text-xs text-violet-700 dark:text-violet-300">
+          <div className="mb-3 p-2.5 rounded-lg bg-violet-50 dark:bg-violet-900/20 text-sm text-violet-700 dark:text-violet-300">
             {renderContent(problem.hint!)}
           </div>
         )}
@@ -248,11 +336,11 @@ export default function PracticeProblems({ practice }: Props) {
         {/* Solution steps — revealed one at a time */}
         {revealedSteps > 0 && (
           <div className="mb-3 space-y-2">
-            <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Solution</div>
+            <div className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Solution</div>
             {problem.steps.slice(0, revealedSteps).map((step, i) => (
               <div key={i} className="pl-3 border-l-2 border-emerald-400 dark:border-emerald-600">
-                <div className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 mb-0.5">{step.label}</div>
-                <div className="text-xs text-gray-700 dark:text-gray-300">{renderContent(step.content)}</div>
+                <div className="text-sm font-semibold text-emerald-700 dark:text-emerald-300 mb-0.5">{step.label}</div>
+                <div className="text-sm text-gray-700 dark:text-gray-300">{renderContent(step.content)}</div>
               </div>
             ))}
           </div>

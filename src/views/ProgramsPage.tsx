@@ -13,8 +13,9 @@ import CheckoutButton from '../components/CheckoutButton';
 import { useSubscription } from '../contexts/SubscriptionContext';
 import { useAuth } from '../contexts/AuthContext';
 import { FEATURES } from '../config/features';
+import EnrollmentRequestForm from '../components/EnrollmentRequestForm';
 import { lessons, SUBJECTS } from '../data/lessons';
-import { problems } from '../data/playground-problems';
+import { problemMeta } from '../data/playground-meta';
 import { getLessonOrigin } from '../data/lesson-types';
 
 /* ── "What Students Will Build" — real capstone projects from real lessons ── */
@@ -307,7 +308,7 @@ function SelfPacedCard({ isIndia }: { isIndia: boolean }) {
       <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">Learn anywhere, anytime. Stories, concepts, and coding — all in your browser.</p>
       <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
         <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> {lessons.length}+ stories with 5 levels each</li>
-        <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> {problems.length}+ coding problems (Python, SQL, TS, HTML, Arduino)</li>
+        <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> {problemMeta.length}+ coding problems (Python, SQL, TS, HTML, Arduino)</li>
         <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Stories from {cultureGroups.length}+ cultures and traditions</li>
         <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> In-browser coding with Arduino simulator — no setup</li>
         <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Interactive reference library with 40+ diagrams</li>
@@ -663,7 +664,7 @@ export default function ProgramsPage() {
               <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Everything in Free, plus:</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> All 5 levels per story</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> {problems.length}+ coding problems</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> {problemMeta.length}+ coding problems</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Full reference library</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Progress tracking &amp; certificates</li>
               </ul>
@@ -736,6 +737,19 @@ export default function ProgramsPage() {
       </section>
 
 
+      {/* ── Enrollment Request ── */}
+      <section id="enroll" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Enroll Your Ward</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Fill out the form below and our team will get back to you within 2 business days to discuss the best program for your ward.
+            </p>
+          </div>
+          <EnrollmentRequestForm />
+        </div>
+      </section>
+
       {/* ── Footer CTA ── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-500 to-orange-500">
         <div className="max-w-4xl mx-auto text-center">
@@ -743,7 +757,7 @@ export default function ProgramsPage() {
             {user ? 'Continue your journey' : 'Start with any story — it\'s free'}
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            {lessons.length}+ stories and growing. {problems.length}+ coding problems. Real science.{!user && ' No credit card.'}
+            {lessons.length}+ stories and growing. {problemMeta.length}+ coding problems. Real science.{!user && ' No credit card.'}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/lessons" className="inline-flex items-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">

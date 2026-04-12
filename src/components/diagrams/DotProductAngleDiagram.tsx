@@ -121,7 +121,7 @@ export default function DotProductAngleDiagram() {
             textAnchor="middle" dominantBaseline="middle"
             className={`text-[11px] font-bold ${isPerpendicular ? 'fill-green-600 dark:fill-green-400' : 'fill-amber-600 dark:fill-amber-400'}`}
           >
-            {theta.toFixed(0)}°
+            {theta.toFixed(1)}°
           </text>
         )}
 

@@ -1,0 +1,1483 @@
+import type { ReferenceGuide } from '../reference';
+
+export const guide: ReferenceGuide = {
+  slug: 'python',
+  title: 'Python',
+  category: 'language',
+  icon: '🐍',
+  tagline: 'The friendly language that reads like English',
+  relatedStories: ['girl-who-spoke-to-elephants', 'dragonfly-and-the-paddy-field', 'why-the-muga-silk-is-golden', 'boy-who-talked-to-clouds'],
+
+  understand: [
+    {
+      title: 'What Is a Program?',
+      beginnerContent:
+        'A program is a set of instructions that tells a computer what to do, step by step. ' +
+        'Think of it like a recipe: you list ingredients (data) and steps (instructions), and ' +
+        'the computer follows them in order. When Priya wrote code to track elephants, her ' +
+        'program was really just a recipe — take a photo, look for an elephant shape, write ' +
+        'down where it was.',
+      intermediateContent:
+        'Programs are built from four fundamental operations: **input** (getting data from the user, a file, or a sensor), **processing** (performing calculations and making decisions), **output** (displaying results or sending data), and **storage** (saving data for later). Every program, from a simple calculator to an AI system, is a combination of these four. A Python program to calculate elephant BMI: `weight = float(input("Weight in kg: "))`, `height = float(input("Height in m: "))`, `bmi = weight / height**2`, `print(f"BMI: {bmi:.1f}")`. This uses all four: input → processing → output, with variables providing temporary storage.',
+      advancedContent:
+        'At the hardware level, a program is a sequence of binary instructions (machine code) stored in memory. The CPU fetches each instruction, decodes it, and executes it — the fetch-decode-execute cycle, billions of times per second. Python is an **interpreted** language: the Python interpreter reads your source code, converts it to bytecode (.pyc files), and executes that bytecode on the Python Virtual Machine (PVM). This is slower than compiled languages (C, Rust) but much faster to develop with. **Just-in-time (JIT)** compilers like PyPy compile frequently-executed bytecode to machine code at runtime, achieving 10-100× speedups for computational workloads.',
+    },
+    {
+      title: 'How Computers Follow Instructions',
+      beginnerContent:
+        'Computers are incredibly fast but completely literal. If you tell a person "go to the ' +
+        'shop and buy milk", they figure out the details. A computer needs every micro-step: ' +
+        'stand up, turn left, walk 12 steps, open the door... Python lets you write those ' +
+        'instructions in words that look almost like English, so you can focus on *what* you ' +
+        'want to happen rather than every tiny detail.',
+      intermediateContent:
+        'Tracing code execution manually is a crucial debugging skill. For this code: `x = 5`, `y = x + 3`, `x = y * 2`, `print(x, y)` — trace step by step: after line 1, x=5. After line 2, y=8. After line 3, x=16 (x is reassigned, y unchanged). Output: **16 8**. Common mistake: thinking `x = y * 2` also changes y. Variables store values independently after assignment — changing x does not retroactively change y. Python evaluates the right side completely before assigning to the left side.',
+      advancedContent:
+        'Python uses **dynamic typing** (variables can change type at runtime) and **reference semantics** (variables are names pointing to objects in memory, not boxes containing values). When you write `a = [1, 2, 3]` and `b = a`, both names point to the SAME list object. Modifying `b.append(4)` also changes a, because they reference the same object. Use `b = a.copy()` or `b = a[:]` for an independent copy. This distinction between mutable objects (lists, dicts, sets) and immutable objects (ints, strings, tuples) is essential for avoiding subtle bugs in larger programs.',
+    },
+    {
+      title: 'Variables Are Labeled Boxes',
+      beginnerContent:
+        'A variable is a named container that holds a value. Imagine you have a row of boxes, ' +
+        'each with a label on the front. One box is labeled "name" and inside it is the text ' +
+        '"Priya". Another is labeled "age" and holds the number 14. You can peek inside a box, ' +
+        'change what\'s in it, or use its contents in a calculation. That\'s all a variable is — ' +
+        'a labeled box the computer remembers for you.',
+      intermediateContent:
+        'Variable naming conventions in Python: use `snake_case` for variables and functions (`elephant_weight`, `calculate_bmi`), `UPPER_CASE` for constants (`MAX_SPEED = 299792458`), and `PascalCase` for classes (`ElephantTracker`). Names must start with a letter or underscore, cannot contain spaces or special characters, and cannot be Python keywords (`if`, `for`, `class`, etc.). Type annotations document expected types: `weight: float = 4500.0`, `name: str = "Ranga"`. While Python does not enforce these types at runtime, tools like mypy check them statically, catching bugs before the code runs.',
+      advancedContent:
+        'Python\'s memory model uses **reference counting** and **garbage collection**. Each object has a reference count — when it reaches zero, the memory is freed. The `id()` function shows an object\'s memory address: `x = 42; print(id(x))` → something like 140234567890. Python **interns** small integers (-5 to 256) and short strings, meaning `a = 256; b = 256; a is b` returns True (same object), but `a = 257; b = 257; a is b` may return False (different objects with equal values). The `is` operator checks identity (same object), while `==` checks equality (same value) — a critical distinction when debugging.',
+      diagram: 'VariablesDiagram',
+    },
+    {
+      title: 'Making Decisions (If / Else)',
+      beginnerContent:
+        'Programs often need to choose between actions. Think of a fork in a trail: if it\'s ' +
+        'raining, take the sheltered path; otherwise, take the scenic route. In Python this ' +
+        'looks like `if temperature > 35: warn("heat alert")`. The computer checks the ' +
+        'condition and picks one branch. You can chain conditions with `elif` (else-if) to ' +
+        'handle many possibilities, like choosing clothing for different weather.',
+      intermediateContent:
+        'Chained comparisons in Python: `18 <= age < 65` is equivalent to `age >= 18 and age < 65` but more readable. Boolean operators: `and` (both true), `or` (at least one true), `not` (inverts). Short-circuit evaluation: `if x != 0 and 10/x > 2` is safe because Python stops evaluating after `x != 0` is False, never dividing by zero. The ternary expression `result = "adult" if age >= 18 else "minor"` is a one-line if/else. Truthy/falsy values: `0`, `""`, `[]`, `None`, `False` are falsy; everything else is truthy.',
+      advancedContent:
+        'Pattern matching (Python 3.10+) uses `match/case` for structural pattern matching: `match command: case "quit": exit()`, `case ["move", x, y]: move_to(int(x), int(y))`, `case _: print("unknown")`. This is more powerful than if/elif chains for complex decision trees. Guard clauses (`case x if x > 0:`) add conditions to patterns. Under the hood, Python compiles match statements into efficient decision trees. In functional programming languages (Haskell, Erlang), pattern matching is the primary control flow mechanism — Python\'s adoption reflects the convergence of programming paradigms.',
+    },
+    {
+      title: 'Repeating Things (Loops)',
+      beginnerContent:
+        'Loops let you repeat an action without writing it out every time. Imagine you have ' +
+        '100 exam papers to stamp "RECEIVED". Instead of writing the stamping instruction 100 ' +
+        'times, you say "for each paper in the stack, stamp it". Python\'s `for` loop does ' +
+        'exactly this. A `while` loop keeps going until a condition changes — like stirring a ' +
+        'pot *while* the sauce is still lumpy.',
+      intermediateContent:
+        'Loop patterns to master: **accumulator** (`total = 0; for x in data: total += x`), **counter** (`count = 0; for x in data: if x > threshold: count += 1`), **search** (`for x in data: if condition: result = x; break`), **transform** (`new = [f(x) for x in data]`), **filter** (`kept = [x for x in data if condition]`). Enumerate gives index + value: `for i, name in enumerate(animals): print(f"{i}: {name}")`. Zip pairs elements: `for name, weight in zip(names, weights): print(f"{name}: {weight}kg")`.',
+      advancedContent:
+        'Generator expressions produce values lazily (one at a time, without storing the entire sequence in memory): `sum(x**2 for x in range(1_000_000))` uses constant memory regardless of the range size, while `sum([x**2 for x in range(1_000_000)])` creates a million-element list first. The `yield` keyword creates generator functions: `def fibonacci(): a, b = 0, 1; while True: yield a; a, b = b, a + b`. Iterators and generators implement the **iterator protocol** (`__iter__` and `__next__` methods) — the same protocol that `for` loops use internally. Understanding generators is essential for processing large datasets that do not fit in memory.',
+      interactive: {
+        type: 'matching',
+        props: {
+          title: 'Match the programming concept to its everyday analogy',
+          pairs: [
+            ['Variable', 'A labeled box that holds a value'],
+            ['If / Else', 'A fork in a trail'],
+            ['For loop', 'Stamping every paper in a stack'],
+            ['Function', 'A recipe you can reuse by name'],
+            ['List', 'A numbered shopping list'],
+          ],
+        },
+      },
+    },
+    {
+      title: 'How a Program Runs — Line by Line',
+      beginnerContent:
+        'A computer reads your program from top to bottom, one line at a time, like reading ' +
+        'a book. It finishes the current line completely before moving to the next. This is ' +
+        'called *sequential execution*. If you write `mood = "calm"` and then `print(mood)`, ' +
+        'the computer stores the word first, then prints it. But if you flip the order — ' +
+        '`print(mood)` before `mood = "calm"` — you get a NameError because the computer ' +
+        'hasn\'t seen `mood` yet. Order matters in every program. In Priya\'s elephant ' +
+        'monitoring code, the camera must capture a photo *before* the classifier can analyze ' +
+        'it, and the classifier must produce a result *before* the alert can be sent. Each ' +
+        'step depends on the one before it, just like following a recipe in the right order.',
+      intermediateContent:
+        'The call stack tracks function execution. When `main()` calls `analyze()` which calls `sort()`, the stack is [main → analyze → sort]. When sort finishes, execution returns to analyze. A `RecursionError: maximum recursion depth exceeded` means the stack grew too deep — usually from a recursive function missing its base case. Python\'s default limit is 1,000 frames. Stack traces (tracebacks) read bottom-to-top: the last line is where the error occurred, and each line above shows the caller. Learning to read tracebacks is the single most valuable debugging skill.',
+      advancedContent:
+        'Python\'s Global Interpreter Lock (GIL) means only one thread executes Python bytecode at a time — even on multi-core CPUs. For CPU-bound work, use `multiprocessing` (separate processes with separate GILs) instead of `threading`. For I/O-bound work (network requests, file reads), `threading` or `asyncio` (cooperative multitasking) works well because the GIL is released during I/O waits. The `asyncio` event loop uses `async/await` syntax: `async def fetch(url): response = await session.get(url)`. Understanding concurrency models — threading, multiprocessing, and async — is essential for building responsive, high-performance Python applications.',
+    },
+    {
+      title: 'Debugging — Finding and Fixing Mistakes',
+      beginnerContent:
+        'Every programmer makes mistakes — they are called bugs, and finding them is called ' +
+        'debugging. Python gives you helpful error messages if you learn to read them. A ' +
+        '`NameError: name \'elphant\' is not defined` means you misspelled a variable name. ' +
+        'A `TypeError: can\'t multiply sequence by non-int` means you tried math on text. ' +
+        'An `IndentationError` means your spaces are inconsistent — Python uses indentation ' +
+        'to know which lines belong together. The simplest debugging technique is *print ' +
+        'debugging*: add `print()` statements at key points to see what values your variables ' +
+        'hold. For example, if your elephant classifier keeps saying "unknown", add ' +
+        '`print(f"weight={weight}, height={height}")` right before the decision to check ' +
+        'whether the data looks right. Most bugs turn out to be small — a missing colon, ' +
+        'a wrong variable name, or an off-by-one error in a loop.',
+      intermediateContent:
+        'Beyond print debugging, Python offers `pdb` (Python Debugger): insert `breakpoint()` in your code to pause execution and inspect variables interactively. Commands: `n` (next line), `s` (step into function), `c` (continue), `p variable` (print value), `l` (list code around current line). `assert` statements catch assumptions: `assert weight > 0, f"Invalid weight: {weight}"` raises AssertionError with a message if the condition fails. Try/except blocks handle expected errors gracefully: `try: value = int(input("Enter number: ")) except ValueError: print("That\'s not a number!")`.',
+      advancedContent:
+        'Professional debugging tools include IDE debuggers (VSCode, PyCharm) with breakpoints, watch expressions, and call stack visualization. **Logging** (`import logging; logging.debug("weight=%s", weight)`) is superior to print statements because you can set levels (DEBUG, INFO, WARNING, ERROR), direct output to files, and disable all debug messages with one setting change. **Unit testing** (`import unittest` or `pytest`) writes automated tests that verify each function works correctly — running hundreds of tests in seconds catches regressions before they reach users. Test-driven development (TDD) writes tests BEFORE code, ensuring every feature is testable by design.',
+      interactive: {
+        type: 'true-false',
+        props: {
+          statements: [
+            { text: 'A NameError means you used a variable that does not exist yet.', answer: true, explanation: 'Python raises NameError when it encounters a name it has not seen — usually a typo or using a variable before assigning it.' },
+            { text: 'Python ignores the order of lines and runs them in whatever order is fastest.', answer: false, explanation: 'Python executes line by line, top to bottom. Order matters — a variable must be created before it is used.' },
+            { text: 'An IndentationError means your spaces or tabs are inconsistent.', answer: true, explanation: 'Python uses indentation to group code blocks, so mismatched spaces cause IndentationError.' },
+          ],
+        },
+      },
+    },
+  ],
+
+  build: [
+    {
+      title: 'Hello World and print()',
+      beginnerContent:
+        'Every Python journey starts with `print()`. It sends text to the screen. ' +
+        'Strings go inside quotes; numbers don\'t need them.',
+      code: `# Your first program
+print("Hello, world!")
+print("My name is Priya")
+
+# Print numbers and expressions
+print(42)
+print(3 + 7)        # 10
+print("Age:", 14)    # you can mix types with commas`,
+    },
+    {
+      id: 'py-variables',
+      title: 'Variables and Types',
+      beginnerContent:
+        'Variables store values. Python figures out the type automatically — you never declare types like in Java or C.\n\n' +
+        '**Core types:** `int` (whole numbers), `float` (decimals), `str` (text), `bool` (True/False), `None` (nothing).\n\n' +
+        '**Type conversion:** `int()` truncates decimals, `float()` adds .0, `str()` turns anything to text, `bool()` checks truthiness.\n\n' +
+        '**The `math` module** provides mathematical functions beyond basic arithmetic.',
+      code: `name = "Priya"          # str (text)
+age = 14                # int (whole number)
+height = 1.62           # float (decimal)
+loves_coding = True     # bool (True or False)
+nothing = None          # NoneType (absence of value)
+
+# Check types
+print(type(name))       # <class 'str'>
+print(type(age))        # <class 'int'>
+
+# ── Type conversion ──
+age_text = str(age)     # "14"
+pi_approx = int(3.14)  # 3 (truncates, doesn't round!)
+whole = float(5)        # 5.0
+is_valid = bool(42)     # True (any non-zero = True)
+is_empty = bool(0)      # False (0, "", [], None = False)
+
+# ── Rounding and abs ──
+print(round(3.14159, 2))  # 3.14 (round to 2 decimals)
+print(round(2.5))          # 2 (banker's rounding!)
+print(abs(-42))            # 42 (absolute value)
+
+# ── The math module ──
+import math
+print(math.pi)             # 3.141592653589793
+print(math.sqrt(16))       # 4.0
+print(math.ceil(3.1))      # 4 (round up)
+print(math.floor(3.9))     # 3 (round down)
+print(math.hypot(3, 4))    # 5.0 (distance formula)
+
+# ── Integer division and modulo ──
+print(17 // 5)   # 3 (integer division — drops remainder)
+print(17 % 5)    # 2 (modulo — the remainder itself)
+print(2 ** 10)   # 1024 (power/exponent)
+
+# ── Checking types safely ──
+x = 42
+print(isinstance(x, int))        # True
+print(isinstance(x, (int, float)))  # True (either type)
+print(isinstance("hi", str))     # True`,
+      interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: create your own variables\nname = "your name here"\nage = 14\nprint(f"Hi, I am {name} and I am {age} years old")\nprint(f"Next year I will be {age + 1}")\nprint(f"Type of name: {type(name).__name__}")\nprint(f"Type of age: {type(age).__name__}")', title: 'Try it — Variables' } },
+    },
+    {
+      id: 'py-strings',
+      title: 'Strings',
+      diagram: 'StringSlicingDiagram',
+      beginnerContent:
+        'Strings are sequences of characters. Every character has a position number (index), starting from 0. ' +
+        'Negative indices count from the end: -1 is the last character, -2 is second-to-last.\n\n' +
+        '**Slicing** extracts a portion of a string using `s[start:stop:step]`:\n' +
+        '- `start` — where to begin (included). Default: 0.\n' +
+        '- `stop` — where to end (excluded). Default: end of string.\n' +
+        '- `step` — how many positions to skip. Default: 1. Use -1 to reverse.\n\n' +
+        'Strings are **immutable** — you cannot change individual characters. Every operation returns a new string.',
+      code: `name = "KAZIRANGA"
+
+# ── Indexing ──
+print(name[0])       # K  (first character)
+print(name[-1])      # A  (last character)
+print(name[-3])      # N  (third from end)
+
+# ── Slicing: s[start:stop] ──
+print(name[0:5])     # KAZIR  (chars 0,1,2,3,4)
+print(name[5:])      # ANGA   (from 5 to end)
+print(name[:4])      # KAZI   (from start to 3)
+
+# ── Step parameter: s[start:stop:step] ──
+print(name[::2])     # KZRNA  (every 2nd character)
+print(name[::-1])    # AGNARIZAK  (reversed!)
+print(name[1::2])    # AIAG   (odd-indexed characters)
+
+# ── Common string methods ──
+greeting = "Hello, Assam!"
+print(greeting.upper())          # HELLO, ASSAM!
+print(greeting.lower())          # hello, assam!
+print(greeting.replace("Assam", "World"))  # Hello, World!
+
+# Checking content
+print("Assam" in greeting)       # True
+print(greeting.startswith("He")) # True
+print("hello".isalpha())         # True (only letters)
+print("abc123".isalnum())        # True (letters or digits)
+
+# Splitting and joining
+words = "elephant dolphin rhino".split(" ")
+print(words)                     # ['elephant', 'dolphin', 'rhino']
+print(" + ".join(words))         # elephant + dolphin + rhino
+
+# Stripping whitespace
+messy = "  data  "
+print(messy.strip())             # "data"
+
+# f-strings — the modern way to format
+animal = "elephant"
+count = 3
+print(f"We spotted {count} {animal}s today!")
+print(f"Name reversed: {name[::-1]}")`,
+    },
+    {
+      id: 'py-lists',
+      title: 'Lists',
+      beginnerContent:
+        'Lists hold ordered collections enclosed in square brackets `[]`. They can contain any type — numbers, strings, ' +
+        'even other lists. Lists are **mutable**: you can add, remove, and change items after creation.\n\n' +
+        '**Key operations:** indexing (`[0]`, `[-1]`), slicing (`[1:3]`), membership (`in`), length (`len()`), ' +
+        'sorting (`sort()` mutates, `sorted()` returns new list), and filtering.\n\n' +
+        'Lists support the same slice syntax as strings: `list[start:stop:step]`.',
+      code: `# ── Creating and accessing ──
+animals = ["elephant", "dolphin", "tiger", "rhino"]
+
+print(animals[0])      # elephant (first)
+print(animals[-1])     # rhino (last)
+print(animals[1:3])    # ['dolphin', 'tiger'] (slice)
+
+# ── Adding items ──
+animals.append("leopard")       # add to end
+animals.insert(1, "pangolin")   # insert at position 1
+print(animals)
+
+# ── Removing items ──
+animals.remove("tiger")         # remove by value
+last = animals.pop()            # remove and return last item
+print(last)                     # leopard
+del animals[0]                  # remove by index
+
+# ── Sorting ──
+numbers = [42, 7, 23, 1, 99]
+numbers.sort()                  # mutates the original list
+print(numbers)                  # [1, 7, 23, 42, 99]
+
+# sorted() returns a NEW list (original unchanged)
+original = [42, 7, 23]
+ordered = sorted(original)
+print(original)                 # [42, 7, 23] (unchanged!)
+print(ordered)                  # [7, 23, 42]
+
+# Sort descending
+print(sorted(numbers, reverse=True))  # [99, 42, 23, 7, 1]
+
+# ── Useful patterns ──
+print(len(animals))             # length
+print("dolphin" in animals)     # membership test: True/False
+print(animals.count("dolphin")) # how many times it appears
+print(animals.index("dolphin")) # position of first occurrence
+
+# ── Filtering with list comprehension ──
+weights = [4500, 280, 3200, 60, 5100]
+heavy = [w for w in weights if w > 1000]
+print(heavy)  # [4500, 3200, 5100]
+
+# ── Reversing ──
+print(animals[::-1])            # reversed (new list)
+animals.reverse()               # reverse in-place
+
+# ── Min, Max, Sum ──
+scores = [85, 92, 78, 95, 88]
+print(min(scores))   # 78
+print(max(scores))   # 95
+print(sum(scores))   # 438`,
+      interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: make a list and explore it\nfruits = ["mango", "banana", "apple", "guava"]\nprint("All fruits:", fruits)\nprint("First:", fruits[0])\nprint("Last:", fruits[-1])\n\nfruits.append("papaya")\nprint("After append:", fruits)\nprint("Count:", len(fruits))\n\n# Try sorting\nfruits.sort()\nprint("Sorted:", fruits)', title: 'Try it — Lists' } },
+    },
+    {
+      id: 'py-conditionals',
+      title: 'If / Elif / Else',
+      beginnerContent:
+        'Branching lets your program make decisions based on conditions. Python uses indentation (4 spaces) to define code blocks.\n\n' +
+        '**Operators:** `==` equals, `!=` not equal, `<` `>` `<=` `>=` comparisons, `in` membership, `not` negation.\n' +
+        '**Combine:** `and` (both true), `or` (either true), `not` (flip).\n' +
+        '**Chained:** Python allows `10 <= age <= 18` — no need for `age >= 10 and age <= 18`.',
+      code: `temperature = 38
+
+# ── Basic if/elif/else ──
+if temperature > 40:
+  print("Dangerous heat — stay indoors")
+elif temperature > 30:
+  print("Hot day — drink water")
+elif temperature > 20:
+  print("Pleasant weather")
+else:
+  print("Bring a jacket")
+
+# ── Combine conditions ──
+age = 14
+has_ticket = True
+if age >= 12 and has_ticket:
+  print("Welcome to the show!")
+
+# ── Chained comparisons ──
+score = 85
+if 80 <= score <= 100:
+  print("Excellent!")   # cleaner than: score >= 80 and score <= 100
+
+# ── Membership testing with 'in' ──
+animal = "dolphin"
+endangered = ["tiger", "rhino", "pangolin"]
+if animal in endangered:
+  print(f"{animal} is endangered!")
+else:
+  print(f"{animal} is not on the list")
+
+# ── Ternary expression (one-line if) ──
+status = "adult" if age >= 18 else "minor"
+print(status)  # "minor"
+
+# ── Guard clause pattern ──
+def classify(magnitude):
+  if magnitude < 0:
+      return "invalid"    # guard: handle bad input first
+  if magnitude < 2:
+      return "micro"
+  if magnitude < 4:
+      return "minor"
+  if magnitude < 6:
+      return "moderate"
+  return "major"          # no need for else — earlier returns handle it
+
+print(classify(5.5))  # "moderate"`,
+      interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: change the temperature and see what happens\ntemperature = 28\n\nif temperature > 35:\n    print("Too hot!")\nelif temperature > 25:\n    print("Warm and pleasant")\nelif temperature > 15:\n    print("Cool")\nelse:\n    print("Cold!")\n\n# Try changing temperature to 40, 10, or -5', title: 'Try it — Conditionals' } },
+    },
+    {
+      id: 'py-loops',
+      title: 'Loops',
+      beginnerContent:
+        '`for` loops iterate over any sequence (list, string, range). `while` loops repeat until a condition is false.\n\n' +
+        '**Key patterns:**\n' +
+        '- `enumerate()` — loop with both index and value\n' +
+        '- `zip()` — loop over two lists in parallel\n' +
+        '- `break` — exit the loop early\n' +
+        '- `continue` — skip to the next iteration\n' +
+        '- Accumulator pattern — build up a result across iterations (sum, max, count)\n' +
+        '- Tracking state — keep a running variable (current streak, best-so-far)',
+      code: `# ── For loop basics ──
+colors = ["red", "green", "blue"]
+for color in colors:
+  print(f"I like {color}")
+
+# range(start, stop, step)
+for i in range(0, 10, 2):    # 0, 2, 4, 6, 8
+  print(i, end=" ")
+print()
+
+# ── enumerate() — get index AND value ──
+animals = ["elephant", "dolphin", "rhino"]
+for i, animal in enumerate(animals):
+  print(f"{i}: {animal}")
+# 0: elephant
+# 1: dolphin
+# 2: rhino
+
+# ── zip() — loop over two lists together ──
+names = ["Ranga", "Mohini", "Kavi"]
+ages = [25, 18, 30]
+for name, age in zip(names, ages):
+  print(f"{name} is {age} years old")
+
+# ── While loop ──
+count = 10
+while count > 0:
+  print(count, end=" ")
+  count -= 1
+print("Launch!")
+
+# ── break and continue ──
+# break: exit the loop entirely
+for n in range(100):
+  if n > 0 and n % 7 == 0:
+      print(f"First multiple of 7: {n}")  # 7
+      break
+
+# continue: skip this iteration, go to next
+for n in range(10):
+  if n % 2 == 0:
+      continue  # skip even numbers
+  print(n, end=" ")  # 1 3 5 7 9
+print()
+
+# ── Accumulator pattern — track a running total ──
+readings = [23.5, 24.1, 22.8, 25.0, 23.2]
+total = 0
+for r in readings:
+  total += r
+average = total / len(readings)
+print(f"Average: {average:.1f}")  # 23.7
+
+# ── Find max in one pass ──
+speeds = [120, 85, 200, 95, 180]
+max_speed = speeds[0]
+max_index = 0
+for i, s in enumerate(speeds):
+  if s > max_speed:
+      max_speed = s
+      max_index = i
+print(f"Max: {max_speed} at index {max_index}")  # 200 at 2
+
+# ── Streak tracking ──
+growth = [2, 3, 0, 1, 4, 5, 0, 1]
+current_streak = 0
+longest_streak = 0
+for g in growth:
+  if g > 0:
+      current_streak += 1
+      longest_streak = max(longest_streak, current_streak)
+  else:
+      current_streak = 0
+print(f"Longest growth streak: {longest_streak}")  # 3`,
+      interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: loops in action\nanimals = ["elephant", "tiger", "rhino", "deer"]\n\n# for loop\nfor animal in animals:\n    print(f"I saw a {animal}!")\n\nprint()\n\n# range loop\ntotal = 0\nfor i in range(1, 11):\n    total += i\nprint(f"Sum of 1 to 10 = {total}")', title: 'Try it — Loops' } },
+    },
+    {
+      id: 'py-functions',
+      title: 'Functions',
+      beginnerContent:
+        'Functions group reusable logic. They take parameters and return results. Use `def` to define, and `return` to send back a value.\n\n' +
+        '**Key concepts:**\n' +
+        '- **Default parameters** — provide fallback values: `def f(x, y=10)`\n' +
+        '- **Multiple return values** — return a tuple: `return a, b`\n' +
+        '- **Type hints** — document expected types: `def f(x: int) -> str`\n' +
+        '- **Docstrings** — explain what the function does, right after `def`\n' +
+        '- **isinstance()** — check if a value is the right type before using it\n' +
+        '- **Generators** — functions that `yield` values one at a time instead of returning a list',
+      code: `# ── Basic function ──
+def greet(name):
+  """Return a friendly greeting."""
+  return f"Namaste, {name}!"
+
+print(greet("Priya"))   # Namaste, Priya!
+
+# ── Default parameters ──
+def power(base, exp=2):
+  return base ** exp
+
+print(power(5))      # 25 (uses default exp=2)
+print(power(2, 10))  # 1024
+
+# ── Multiple return values (returns a tuple) ──
+def min_max(numbers):
+  return min(numbers), max(numbers)
+
+lo, hi = min_max([3, 1, 8, 2])
+print(lo, hi)  # 1 8
+
+# ── Type hints — document expected types ──
+def distance(p1: tuple, p2: tuple) -> float:
+  """Euclidean distance between two 2D points."""
+  dx = p2[0] - p1[0]
+  dy = p2[1] - p1[1]
+  return (dx**2 + dy**2) ** 0.5
+
+print(distance((0, 0), (3, 4)))  # 5.0
+
+# ── Input validation with isinstance() ──
+def reverse_name(name):
+  """Reverse a string safely. Returns '' for non-strings."""
+  if not isinstance(name, str):
+      return ""
+  return name[::-1]
+
+print(reverse_name("Ranga"))  # agnaR
+print(reverse_name(123))      # "" (not a string)
+print(reverse_name(None))     # "" (not a string)
+
+# ── Guard clauses — handle edge cases first ──
+def safe_average(numbers):
+  """Average of a list, or None if empty."""
+  if not numbers:
+      return None
+  return sum(numbers) / len(numbers)
+
+print(safe_average([10, 20, 30]))  # 20.0
+print(safe_average([]))             # None
+
+# ── Generators — yield values one at a time ──
+def fibonacci(n):
+  """Yield the first n Fibonacci numbers."""
+  a, b = 0, 1
+  for _ in range(n):
+      yield a
+      a, b = b, a + b
+
+# Generators are lazy — they produce values on demand
+for num in fibonacci(8):
+  print(num, end=" ")  # 0 1 1 2 3 5 8 13
+print()
+
+# Convert generator to list
+fib_list = list(fibonacci(5))
+print(fib_list)  # [0, 1, 1, 2, 3]
+
+# ── Lambda — small one-line functions ──
+double = lambda x: x * 2
+print(double(7))  # 14
+
+# Useful with sorted()
+animals = [("elephant", 4500), ("dolphin", 150), ("rhino", 2200)]
+by_weight = sorted(animals, key=lambda a: a[1])
+print(by_weight[0])  # ('dolphin', 150)`,
+      interactive: { type: 'python-playground' as const, props: { starterCode: '# Try it: write and call your own function\ndef greet(name, times=1):\n    for _ in range(times):\n        print(f"Hello, {name}!")\n\ngreet("Tara")\ngreet("Kavitha", 3)\n\n# Now write a function that calculates area\ndef area_circle(radius):\n    return 3.14159 * radius ** 2\n\nprint(f"Area of radius 5: {area_circle(5):.2f}")', title: 'Try it — Functions' } },
+    },
+    {
+      id: 'py-dicts',
+      title: 'Dictionaries',
+      diagram: 'DictCounterDiagram',
+      beginnerContent:
+        'Dictionaries map **keys** to **values**. Keys must be immutable (strings, numbers, tuples). Values can be anything.\n\n' +
+        '**Key methods:**\n' +
+        '- `d[key]` — get value (raises KeyError if missing)\n' +
+        '- `d.get(key, default)` — get value safely (returns default if missing)\n' +
+        '- `d.items()` — loop through key-value pairs\n' +
+        '- `d.keys()`, `d.values()` — get all keys or values\n\n' +
+        '**collections module** provides specialized dict types:\n' +
+        '- `Counter` — count occurrences automatically\n' +
+        '- `defaultdict` — auto-create missing keys with a default value',
+      code: `# ── Creating and accessing ──
+elephant = {
+  "name": "Ranga",
+  "age": 25,
+  "location": "Kaziranga"
+}
+
+print(elephant["name"])         # Ranga
+
+# .get() is safe — returns default if key missing
+print(elephant.get("weight", "unknown"))  # unknown
+# vs elephant["weight"] would crash with KeyError
+
+# ── Adding, updating, deleting ──
+elephant["weight"] = 4500       # add new key
+elephant["age"] = 26            # update existing
+del elephant["location"]        # delete a key
+
+# ── Looping ──
+for key, value in elephant.items():
+  print(f"{key}: {value}")
+
+# Just keys or just values
+print(list(elephant.keys()))    # ['name', 'age', 'weight']
+
+# ── Counting with a dict ──
+sky = "RROOYYRP"
+counts = {}
+for char in sky:
+  counts[char] = counts.get(char, 0) + 1
+print(counts)  # {'R': 2, 'O': 2, 'Y': 2, 'P': 1}
+
+# ── collections.Counter — does counting for you ──
+from collections import Counter
+sky_counts = Counter("RROOYYRP")
+print(sky_counts)               # Counter({'R': 2, 'O': 2, 'Y': 2, 'P': 1})
+print(sky_counts.most_common(2))  # [('R', 2), ('O', 2)]
+
+# ── collections.defaultdict — auto-create missing keys ──
+from collections import defaultdict
+grouped = defaultdict(list)     # missing keys get empty list
+sightings = [("Dendrobium", "Kaziranga"), ("Vanda", "Manas"), ("Dendrobium", "Majuli")]
+for species, location in sightings:
+  grouped[species].append(location)
+print(dict(grouped))
+# {'Dendrobium': ['Kaziranga', 'Majuli'], 'Vanda': ['Manas']}
+
+# ── Dictionary comprehension ──
+squares = {n: n**2 for n in range(1, 6)}
+print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Filter a dict
+big_squares = {k: v for k, v in squares.items() if v > 10}
+print(big_squares)  # {4: 16, 5: 25}
+
+# ── Sets — unordered collection of unique values ──
+animals = {"elephant", "dolphin", "elephant", "rhino"}
+print(animals)  # {'elephant', 'dolphin', 'rhino'} (no duplicates)
+
+# Set operations
+set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+print(set_a & set_b)   # {3, 4}  intersection
+print(set_a | set_b)   # {1, 2, 3, 4, 5, 6}  union
+print(set_a - set_b)   # {1, 2}  difference
+
+# Deduplicate a list
+names = ["Ranga", "Mohini", "Ranga", "Kavi", "Mohini"]
+unique = sorted(set(names))
+print(unique)  # ['Kavi', 'Mohini', 'Ranga']
+
+# ── Tuples — immutable sequences ──
+point = (3, 4)
+x, y = point          # unpacking
+print(f"x={x}, y={y}")
+
+# Tuples as dict keys (lists can't be keys)
+grid = {(0, 0): "start", (3, 4): "end"}
+print(grid[(3, 4)])    # end`,
+    },
+    {
+      id: 'py-comprehensions',
+      title: 'List Comprehensions — One-Line Loops',
+      beginnerContent:
+        'A list comprehension builds a new list in one line: `[expression for item in iterable]`.\n\n' +
+        '**Add a filter:** `[x for x in items if condition]`\n' +
+        '**Generator expression:** Same syntax with `()` instead of `[]` — produces values lazily (one at a time, saving memory).\n' +
+        '**Dict/set comprehensions:** `{k: v for ...}` and `{x for ...}`.',
+      code: `# ── List comprehension basics ──
+doubled = [x * 2 for x in range(10)]
+print(doubled)  # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+# Filter: keep only heavy animals
+weights = [4500, 280, 3200, 60, 5100]
+heavy = [w for w in weights if w > 1000]
+print(heavy)  # [4500, 3200, 5100]
+
+# Transform + filter in one go
+names = ["Ranga", "Mo", "Kaziranga", "Kavi"]
+long_upper = [n.upper() for n in names if len(n) > 3]
+print(long_upper)  # ['RANGA', 'KAZIRANGA', 'KAVI']
+
+# ── Nested: flatten a list of lists ──
+sightings = [[1, 3], [0, 2], [5, 1]]
+flat = [count for day in sightings for count in day]
+print(flat)  # [1, 3, 0, 2, 5, 1]
+
+# ── Generator expressions — lazy, memory efficient ──
+# Use () instead of [] — values computed one at a time
+total = sum(w for w in weights if w > 1000)
+print(total)  # 12900
+
+# Count items matching a condition
+count = sum(1 for w in weights if w > 1000)
+print(count)  # 3
+
+# Check if any/all match
+print(any(w > 5000 for w in weights))  # True
+print(all(w > 0 for w in weights))     # True
+
+# ── Dict comprehension ──
+squares = {n: n**2 for n in range(1, 6)}
+print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Invert a dictionary
+inverted = {v: k for k, v in squares.items()}
+print(inverted)  # {1: 1, 4: 2, 9: 3, 16: 4, 25: 5}
+
+# ── Set comprehension (unique values) ──
+words = ["hello", "world", "hello", "python"]
+lengths = {len(w) for w in words}
+print(lengths)  # {5, 6}
+
+# ── zip() in comprehensions ──
+names = ["Ranga", "Mohini", "Kavi"]
+ages = [25, 18, 30]
+profiles = {name: age for name, age in zip(names, ages)}
+print(profiles)  # {'Ranga': 25, 'Mohini': 18, 'Kavi': 30}`,
+    },
+    {
+      id: 'py-files',
+      title: 'Working with Files',
+      beginnerContent:
+        'Real data lives in files. Python makes it easy to read and write text files and CSVs. ' +
+        'Use `with open(...)` to ensure files are properly closed after use.',
+      code: `import csv
+
+# --- Reading a text file ---
+with open("notes.txt", "r") as f:
+  contents = f.read()
+  print(contents)
+
+# --- Reading a CSV of elephant data ---
+with open("elephant_data.csv", "r") as f:
+  reader = csv.DictReader(f)
+  for row in reader:
+      name = row["name"]
+      weight = float(row["weight_kg"])
+      print(f"{name} weighs {weight} kg")
+
+# --- Writing results to a file ---
+results = [
+  {"name": "Ranga", "status": "healthy"},
+  {"name": "Mohini", "status": "needs checkup"},
+]
+
+with open("report.csv", "w", newline="") as f:
+  writer = csv.DictWriter(f, fieldnames=["name", "status"])
+  writer.writeheader()
+  for r in results:
+      writer.writerow(r)
+  print("Report saved to report.csv")
+
+# --- Counting lines in a large file ---
+with open("elephant_data.csv", "r") as f:
+  line_count = sum(1 for line in f)
+  print(f"Total rows: {line_count - 1}")  # minus header`,
+    },
+    {
+      id: 'py-errors',
+      title: 'Error Handling — try / except',
+      beginnerContent:
+        'Errors happen. `try/except` catches them so your program doesn\u2019t crash.\n\n' +
+        '**Common errors:** `ValueError` (wrong value), `TypeError` (wrong type), `KeyError` (missing dict key), ' +
+        '`IndexError` (list index out of range), `ZeroDivisionError`.\n\n' +
+        '**Best practice:** Catch specific errors, not bare `except:`. Validate input at boundaries, trust internal code.',
+      code: `# ── Basic try/except ──
+try:
+  number = int("hello")       # this will fail
+except ValueError:
+  print("That's not a number!")  # catches it gracefully
+
+# ── Catch specific errors ──
+def safe_divide(a, b):
+  try:
+      return round(a / b, 2)
+  except ZeroDivisionError:
+      return None
+  except TypeError:
+      return None
+
+print(safe_divide(10, 3))    # 3.33
+print(safe_divide(10, 0))    # None
+print(safe_divide(10, "x"))  # None
+
+# ── Multiple except + else + finally ──
+def read_config(filename):
+  try:
+      with open(filename) as f:
+          data = f.read()
+  except FileNotFoundError:
+      print(f"{filename} not found — using defaults")
+      data = "default=true"
+  except PermissionError:
+      print(f"No permission to read {filename}")
+      data = ""
+  else:
+      print(f"Loaded {filename} successfully")  # runs if NO error
+  finally:
+      print("Config loading complete")  # ALWAYS runs
+  return data
+
+# ── Raising errors ──
+def set_age(age):
+  if not isinstance(age, int):
+      raise TypeError(f"age must be int, got {type(age).__name__}")
+  if age < 0 or age > 150:
+      raise ValueError(f"age must be 0-150, got {age}")
+  return age
+
+try:
+  set_age(-5)
+except ValueError as e:
+  print(f"Error: {e}")  # Error: age must be 0-150, got -5
+
+# ── The LBYL vs EAFP debate ──
+# LBYL (Look Before You Leap):
+if "name" in elephant:
+  print(elephant["name"])
+
+# EAFP (Easier to Ask Forgiveness — Pythonic):
+try:
+  print(elephant["name"])
+except KeyError:
+  print("no name")`,
+      diagram: 'ErrorFlowDiagram',
+    },
+    {
+      id: 'py-bisect',
+      title: 'The bisect Module — Binary Search Built In',
+      beginnerContent:
+        'Python\u2019s `bisect` module provides efficient binary search for sorted lists. ' +
+        'Instead of writing your own binary search, use `bisect_left()` and `bisect_right()` to find insertion points in O(log n).\n\n' +
+        '**Use cases:** finding closest values, counting items in a range, classifying values by thresholds.',
+      code: `import bisect
+
+# ── bisect_left: where would target go? ──
+data = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+# Find insertion point for 35
+pos = bisect.bisect_left(data, 35)
+print(pos)  # 3 (would go between 30 and 40)
+
+# Check if a value exists (binary search!)
+def binary_search(sorted_list, target):
+  pos = bisect.bisect_left(sorted_list, target)
+  if pos < len(sorted_list) and sorted_list[pos] == target:
+      return pos  # found at this index
+  return -1       # not found
+
+print(binary_search(data, 50))   # 4
+print(binary_search(data, 55))   # -1
+
+# ── Find closest value ──
+def find_closest(sorted_list, target):
+  pos = bisect.bisect_left(sorted_list, target)
+  if pos == 0:
+      return sorted_list[0]
+  if pos == len(sorted_list):
+      return sorted_list[-1]
+  before = sorted_list[pos - 1]
+  after = sorted_list[pos]
+  return before if (target - before) <= (after - target) else after
+
+temps = [0, 1000, 2000, 3000, 4000, 5000]
+print(find_closest(temps, 1800))  # 2000
+print(find_closest(temps, 1200))  # 1000
+
+# ── Count items in a range [lo, hi] ──
+def count_in_range(sorted_list, lo, hi):
+  left = bisect.bisect_left(sorted_list, lo)
+  right = bisect.bisect_right(sorted_list, hi)
+  return right - left
+
+scores = [55, 62, 70, 75, 80, 85, 90, 95]
+print(count_in_range(scores, 70, 90))  # 4 (70, 75, 80, 85, 90... wait)
+# bisect_right(90) = 7, bisect_left(70) = 2 → 7-2 = 5 ✓
+
+# ── Classify with thresholds ──
+def richter_class(magnitude):
+  thresholds = [2, 4, 5, 6, 7]
+  labels = ["micro", "minor", "light", "moderate", "strong", "major"]
+  return labels[bisect.bisect_right(thresholds, magnitude)]
+
+print(richter_class(1.5))  # micro
+print(richter_class(5.5))  # moderate
+print(richter_class(7.2))  # major
+
+# ── insort: insert and keep sorted ──
+scores = [60, 70, 80, 90]
+bisect.insort(scores, 75)
+print(scores)  # [60, 70, 75, 80, 90] — inserted in right place`,
+    },
+    {
+      id: 'py-itertools',
+      title: 'The itertools Module — Power Tools for Iteration',
+      beginnerContent:
+        '`itertools` provides building blocks for efficient iteration. All functions return lazy iterators (memory-efficient).\n\n' +
+        '**Key functions:**\n' +
+        '- `cycle()` — repeat a sequence forever\n' +
+        '- `chain()` — join multiple iterables into one\n' +
+        '- `product()` — all combinations (like nested loops)\n' +
+        '- `combinations()` / `permutations()` — choose items\n' +
+        '- `islice()` — slice an iterator (like list slicing but lazy)',
+      code: `from itertools import cycle, chain, product, combinations, islice, accumulate
+
+# ── cycle: repeat forever ──
+colors = cycle(["red", "green", "blue"])
+# Take first 7 from the infinite cycle
+first_7 = [next(colors) for _ in range(7)]
+print(first_7)
+# ['red', 'green', 'blue', 'red', 'green', 'blue', 'red']
+
+# Round-robin assignment
+gardens = ["A", "B", "C", "D", "E"]
+workers = ["W1", "W2"]
+assignments = dict(zip(gardens, cycle(workers)))
+print(assignments)
+# {'A': 'W1', 'B': 'W2', 'C': 'W1', 'D': 'W2', 'E': 'W1'}
+
+# ── chain: join iterables ──
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+list3 = [7, 8, 9]
+print(list(chain(list1, list2, list3)))
+# [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# ── product: all combinations (like nested loops) ──
+rows = range(2)
+cols = range(3)
+grid = list(product(rows, cols))
+print(grid)
+# [(0,0), (0,1), (0,2), (1,0), (1,1), (1,2)]
+
+# ── combinations: choose k items ──
+animals = ["elephant", "dolphin", "rhino", "tiger"]
+pairs = list(combinations(animals, 2))
+print(pairs)
+# [('elephant','dolphin'), ('elephant','rhino'), ...]
+print(f"{len(pairs)} pairs from {len(animals)} animals")  # 6
+
+# ── islice: slice an iterator ──
+# Useful for taking first N items from any iterator
+from itertools import count  # infinite counter
+first_10_evens = list(islice(count(0, 2), 10))
+print(first_10_evens)  # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+# ── accumulate: running totals ──
+daily_rain = [5, 10, 3, 8, 2]
+cumulative = list(accumulate(daily_rain))
+print(cumulative)  # [5, 15, 18, 26, 28]
+
+# ── Repeat a pattern to fill a length ──
+pattern = [1, 2, 3]
+total_length = 7
+filled = list(islice(cycle(pattern), total_length))
+print(filled)  # [1, 2, 3, 1, 2, 3, 1]`,
+    },
+    {
+      id: 'py-tuples-sets',
+      title: 'Tuples & Sets',
+      beginnerContent:
+        '**Tuples** are immutable sequences — once created, they cannot be changed. Create them with parentheses `()` or just commas. They\'re perfect for fixed data like coordinates, RGB colors, or database records.\n\n' +
+        '**Tuple unpacking** lets you assign multiple variables at once: `lat, lon = (26.14, 91.74)`. This works in for-loops too.\n\n' +
+        '**Named tuples** from `collections` give each position a name, making code more readable than raw index access.\n\n' +
+        '**Sets** hold unique values only — duplicates are automatically removed. Create them with `{}` or `set()`. They\'re backed by hash tables, making membership testing (`x in my_set`) blazingly fast — O(1) vs O(n) for lists.\n\n' +
+        '**Set operations** mirror mathematical set theory: `|` union, `&` intersection, `-` difference, `^` symmetric difference.\n\n' +
+        '**When to use what:** Tuples for fixed data and dict keys (they\'re hashable). Lists for mutable collections. Sets for membership testing and deduplication.',
+      code: `# ── Tuples: immutable sequences ──
+elephant_pos = (26.14, 91.74)  # latitude, longitude
+# elephant_pos[0] = 27.0  # ERROR! Tuples can't be changed.
+
+# Create without parentheses — commas make the tuple
+species = "Asian elephant", "Indian rhino", "Bengal tiger"
+print(type(species))  # <class 'tuple'>
+
+# ── Tuple unpacking ──
+lat, lon = elephant_pos
+print(f"Latitude: {lat}, Longitude: {lon}")
+
+# Swap variables — Python's elegant trick
+a, b = 10, 20
+a, b = b, a  # now a=20, b=10
+
+# Unpack in a loop
+sightings = [("Ranga", 5), ("Mohini", 3), ("Gaja", 8)]
+for name, count in sightings:
+  print(f"{name}: {count} sightings")
+
+# ── Named tuples: readable tuple access ──
+from collections import namedtuple
+Animal = namedtuple("Animal", ["name", "species", "weight"])
+ranga = Animal("Ranga", "Asian elephant", 4500)
+print(ranga.name)      # "Ranga" (much clearer than ranga[0])
+print(ranga.weight)    # 4500
+
+# ── Sets: unique values only ──
+river_species = {"dolphin", "turtle", "catfish", "dolphin", "turtle"}
+print(river_species)  # {'dolphin', 'turtle', 'catfish'} — no duplicates!
+print(len(river_species))  # 3
+
+# Add and remove
+river_species.add("otter")
+river_species.discard("catfish")  # safe — no error if missing
+
+# ── Set operations ──
+kaziranga = {"elephant", "rhino", "tiger", "buffalo"}
+manas = {"elephant", "rhino", "langur", "pygmy hog"}
+
+# Union: all species in either park
+all_species = kaziranga | manas
+print(all_species)  # {'elephant', 'rhino', 'tiger', 'buffalo', 'langur', 'pygmy hog'}
+
+# Intersection: species in both parks
+shared = kaziranga & manas
+print(shared)  # {'elephant', 'rhino'}
+
+# Difference: only in Kaziranga
+only_kaziranga = kaziranga - manas
+print(only_kaziranga)  # {'tiger', 'buffalo'}
+
+# Symmetric difference: in one but not both
+unique_to_each = kaziranga ^ manas
+print(unique_to_each)  # {'tiger', 'buffalo', 'langur', 'pygmy hog'}
+
+# ── Fast membership testing ──
+endangered = {"rhino", "pygmy hog", "tiger", "dolphin", "vulture"}
+animal = "rhino"
+print(animal in endangered)  # True — O(1) lookup!
+
+# ── Deduplication while preserving order ──
+sighting_log = ["elephant", "rhino", "elephant", "tiger", "rhino", "elephant"]
+unique_ordered = list(dict.fromkeys(sighting_log))
+print(unique_ordered)  # ['elephant', 'rhino', 'tiger']
+
+# ── Tuples as dict keys (sets can't be keys!) ──
+grid_data = {}
+grid_data[(0, 0)] = "forest"
+grid_data[(0, 1)] = "river"
+grid_data[(1, 0)] = "grassland"
+print(grid_data[(0, 1)])  # "river"
+
+# ── Frozenset: an immutable set (can be a dict key) ──
+habitat = frozenset(["forest", "grassland"])
+print("forest" in habitat)  # True`,
+      diagram: 'TupleSetDiagram',
+    },
+    {
+      id: 'py-classes',
+      title: 'Classes — Building Your Own Types',
+      beginnerContent:
+        'A **class** is a blueprint for creating objects. An **instance** is a specific object built from that blueprint. Think of it like a "species card" template (the class) vs. a card filled out for a specific elephant (the instance).\n\n' +
+        '`__init__` is the constructor — it runs when you create a new instance and sets up its data. `self` refers to the specific instance being created or used.\n\n' +
+        '**Instance variables** (set via `self.name = ...`) belong to each object individually. **Methods** are functions defined inside the class that operate on the instance\'s data.\n\n' +
+        '`__str__` controls what `print()` shows. `__repr__` controls what the REPL shows (aim for a string that could recreate the object).\n\n' +
+        '**Inheritance** lets one class extend another, reusing code. The child class gets all parent methods and can override or add new ones.\n\n' +
+        '**When to use classes vs dicts:** Use dicts for simple key-value data. Use classes when the data has behavior (methods), validation, or relationships. If you\'re passing the same group of variables to many functions, that group probably wants to be a class.',
+      code: `# ── Basic class: a blueprint ──
+class ElephantTracker:
+  """Tracks sightings of an individual elephant."""
+
+  def __init__(self, name, species="Asian"):
+      self.name = name
+      self.species = species
+      self.sightings = []  # starts empty
+
+  def record_sighting(self, location, date):
+      """Add a new sighting record."""
+      self.sightings.append({"location": location, "date": date})
+
+  def total_sightings(self):
+      """How many times this elephant has been seen."""
+      return len(self.sightings)
+
+  def __str__(self):
+      return f"{self.name} ({self.species}) — {self.total_sightings()} sightings"
+
+  def __repr__(self):
+      return f"ElephantTracker('{self.name}', '{self.species}')"
+
+# Create instances
+ranga = ElephantTracker("Ranga")
+mohini = ElephantTracker("Mohini")
+
+# Use methods
+ranga.record_sighting("Kaziranga East", "2026-01-15")
+ranga.record_sighting("Kaziranga Central", "2026-02-20")
+mohini.record_sighting("Manas NP", "2026-01-22")
+
+print(ranga)          # Ranga (Asian) — 2 sightings
+print(repr(mohini))   # ElephantTracker('Mohini', 'Asian')
+print(ranga.total_sightings())  # 2
+
+# ── Class with validation ──
+class Lesson:
+  VALID_LEVELS = (0, 1, 2, 3)
+
+  def __init__(self, title, story, level=0):
+      if level not in self.VALID_LEVELS:
+          raise ValueError(f"Level must be one of {self.VALID_LEVELS}")
+      self.title = title
+      self.story = story
+      self.level = level
+      self.completed = False
+
+  def complete(self):
+      self.completed = True
+
+  def __str__(self):
+      status = "done" if self.completed else "in progress"
+      return f"L{self.level}: {self.title} [{status}]"
+
+lesson = Lesson("AI & Wildlife Tracking", "The Girl Who Spoke to Elephants", level=1)
+print(lesson)  # L1: AI & Wildlife Tracking [in progress]
+lesson.complete()
+print(lesson)  # L1: AI & Wildlife Tracking [done]
+
+# ── Inheritance: extending a class ──
+class Animal:
+  """Base class for all tracked animals."""
+  def __init__(self, name, species):
+      self.name = name
+      self.species = species
+
+  def describe(self):
+      return f"{self.name} the {self.species}"
+
+class Elephant(Animal):
+  """An elephant with herd tracking."""
+  def __init__(self, name, herd=None):
+      super().__init__(name, "Asian elephant")  # call parent __init__
+      self.herd = herd
+
+  def describe(self):
+      base = super().describe()  # reuse parent method
+      if self.herd:
+          return f"{base} (herd: {self.herd})"
+      return base
+
+class Dolphin(Animal):
+  def __init__(self, name, river):
+      super().__init__(name, "Gangetic dolphin")
+      self.river = river
+
+gaja = Elephant("Gaja", herd="Kaziranga East")
+print(gaja.describe())  # Gaja the Asian elephant (herd: Kaziranga East)
+
+susu = Dolphin("Susu", river="Brahmaputra")
+print(susu.describe())  # Susu the Gangetic dolphin
+
+# They share the Animal interface
+animals = [gaja, susu]
+for a in animals:
+  print(isinstance(a, Animal))  # True for both`,
+      diagram: 'ClassBlueprintDiagram',
+    },
+    {
+      id: 'py-scope',
+      title: 'Scope — Where Variables Live',
+      beginnerContent:
+        'Every variable in Python lives in a **scope** — a region of code where that name is valid. Understanding scope prevents bugs where variables seem to "disappear" or hold unexpected values.\n\n' +
+        'Python uses the **LEGB rule** to look up names: **L**ocal (inside the current function) → **E**nclosing (inside any outer function) → **G**lobal (module level) → **B**uilt-in (Python\'s own names like `print`, `len`).\n\n' +
+        'A **closure** is a function that remembers variables from its enclosing scope, even after that scope has finished executing. This is the foundation of function factories and decorators.\n\n' +
+        '**Why avoid global variables:** They create hidden dependencies between functions, make testing harder, and cause subtle bugs when two functions modify the same global. Instead, pass data as arguments and return results.\n\n' +
+        '**Function factories** are functions that return new functions, each with its own enclosed state — powerful for creating specialized versions of a general function.',
+      code: `# ── Local vs Global scope ──
+species = "elephant"  # global variable
+
+def track_animal():
+  species = "dolphin"  # local variable — shadows the global
+  print(species)        # "dolphin"
+
+track_animal()
+print(species)  # "elephant" — global unchanged!
+
+# ── LEGB rule in action ──
+habitat = "forest"           # Global
+
+def outer():
+  habitat = "wetland"      # Enclosing
+  def inner():
+      habitat = "river"    # Local
+      print(habitat)       # "river" (found at Local level)
+  inner()
+  print(habitat)           # "wetland" (Enclosing, unchanged)
+
+outer()
+print(habitat)               # "forest" (Global, unchanged)
+
+# ── Closures: functions that remember ──
+def make_tracker(animal_name):
+  """Returns a function that tracks sightings for one animal."""
+  sightings = []  # this lives in the enclosing scope
+
+  def record(location):
+      sightings.append(location)  # closure captures 'sightings'
+      return f"{animal_name}: {len(sightings)} sightings"
+
+  return record
+
+track_ranga = make_tracker("Ranga")
+track_mohini = make_tracker("Mohini")
+
+print(track_ranga("Kaziranga"))   # Ranga: 1 sightings
+print(track_ranga("Manas"))       # Ranga: 2 sightings
+print(track_mohini("Pobitora"))   # Mohini: 1 sightings
+# Each function has its OWN sightings list!
+
+# ── Function factory: specialized functions ──
+def make_converter(factor, unit):
+  """Create a unit converter function."""
+  def convert(value):
+      return f"{value * factor:.2f} {unit}"
+  return convert
+
+km_to_miles = make_converter(0.621371, "miles")
+kg_to_pounds = make_converter(2.20462, "lbs")
+celsius_to_f = make_converter(1.8, "°F offset")  # simplified
+
+print(km_to_miles(100))    # "62.14 miles"
+print(kg_to_pounds(4500))  # "9920.79 lbs" (one elephant!)
+
+# ── Why globals are bad — the bug ──
+count = 0  # global
+
+def add_sighting_bad():
+  global count    # modifying global — fragile!
+  count += 1
+
+def add_sighting_good(current_count):
+  return current_count + 1  # pure function — no side effects
+
+# The good version is testable, predictable, safe
+result = add_sighting_good(0)
+result = add_sighting_good(result)
+print(result)  # 2
+
+# ── Score tracker with closure (practical example) ──
+def create_scorer():
+  scores = []
+  def add(score):
+      scores.append(score)
+      avg = sum(scores) / len(scores)
+      return f"Added {score}, average: {avg:.1f}, total: {len(scores)}"
+  def get_scores():
+      return scores.copy()  # return copy so caller can't mutate
+  return add, get_scores
+
+add_score, get_scores = create_scorer()
+print(add_score(85))   # Added 85, average: 85.0, total: 1
+print(add_score(92))   # Added 92, average: 88.5, total: 2
+print(get_scores())    # [85, 92]`,
+    },
+    {
+      id: 'py-formatting',
+      title: 'String Formatting — f-strings and Beyond',
+      beginnerContent:
+        '**f-strings** (formatted string literals, Python 3.6+) are the modern way to embed expressions in strings. Prefix with `f` and put expressions in `{curly braces}`.\n\n' +
+        '**Format specs** after a colon control appearance: `:.2f` for 2 decimal places, `:>20` for right-alignment in 20 chars, `:,` for thousands separators, `:<10` for left-alignment, `:^15` for center.\n\n' +
+        '**Multiline f-strings** work with triple quotes — great for generating reports and formatted output.\n\n' +
+        'The older **`.format()`** method uses `{}` placeholders filled by `.format(args)`. It\'s still useful for reusable templates where the template string is defined separately from the data.\n\n' +
+        '**When to use which:** f-strings for most cases (readable, fast). `.format()` for reusable templates. `%` formatting is legacy — avoid in new code.',
+      code: `# ── Basic f-strings ──
+elephant = "Ranga"
+weight = 4500
+print(f"Tracking {elephant}, weight: {weight}kg")
+# Tracking Ranga, weight: 4500kg
+
+# Expressions inside braces
+sightings = [3, 7, 2, 5]
+print(f"Total sightings: {sum(sightings)}")     # Total sightings: 17
+print(f"Average: {sum(sightings)/len(sightings):.1f}")  # Average: 4.2
+
+# ── Number formatting ──
+distance = 1234567.891
+print(f"Distance: {distance:,.2f} meters")  # Distance: 1,234,567.89 meters
+print(f"Rounded: {distance:.0f}")           # Rounded: 1234568
+print(f"Scientific: {distance:.2e}")        # Scientific: 1.23e+06
+
+population = 42
+print(f"Count: {population:05d}")  # Count: 00042 (zero-padded)
+
+# ── Alignment and padding ──
+animals = [("Elephant", 4500), ("Dolphin", 85), ("Rhino", 2200)]
+
+print(f"{'Animal':<15} {'Weight (kg)':>12}")
+print("-" * 28)
+for name, wt in animals:
+  print(f"{name:<15} {wt:>12,}")
+
+# Output:
+# Animal           Weight (kg)
+# ----------------------------
+# Elephant                4,500
+# Dolphin                    85
+# Rhino                  2,200
+
+# ── Multiline f-strings ──
+species = "Asian elephant"
+location = "Kaziranga National Park"
+count = 2413
+status = "Endangered"
+
+report = f"""
+╔══════════════════════════════════╗
+║  Wildlife Report                 ║
+╠══════════════════════════════════╣
+║  Species:  {species:<22}║
+║  Location: {location:<22}║
+║  Count:    {count:<22,}║
+║  Status:   {status:<22}║
+╚══════════════════════════════════╝
+"""
+print(report)
+
+# ── Formatting types quick reference ──
+val = 42.5678
+print(f"{val:.2f}")    # 42.57    — 2 decimal places
+print(f"{val:10.2f}")  # "     42.57" — right-aligned in 10 chars
+print(f"{val:<10.2f}") # "42.57     " — left-aligned
+print(f"{val:^10.2f}") # "  42.57   " — centered
+
+pct = 0.8567
+print(f"{pct:.1%}")    # 85.7%    — percentage format
+
+# ── .format() for reusable templates ──
+template = "The {animal} was spotted at {location} on {date}."
+
+# Same template, different data
+print(template.format(animal="elephant", location="Kaziranga", date="Jan 15"))
+print(template.format(animal="dolphin", location="Brahmaputra", date="Feb 20"))
+
+# Positional arguments
+print("Coordinates: ({0}, {1})".format(26.14, 91.74))
+
+# ── Debugging with f-strings (Python 3.8+) ──
+x = 42
+name = "Ranga"
+print(f"{x = }")        # x = 42
+print(f"{name = }")     # name = 'Ranga'
+print(f"{len(name) = }")  # len(name) = 5`,
+    },
+    {
+      id: 'py-math',
+      title: 'Math & Numbers — Beyond Arithmetic',
+      beginnerContent:
+        'Python\'s built-in `math` module provides essential mathematical functions: rounding, powers, roots, logarithms, trigonometry, and constants like `math.pi` and `math.e`.\n\n' +
+        '**Rounding family:** `math.floor(x)` always rounds down, `math.ceil(x)` always rounds up, `round(x)` rounds to nearest (with banker\'s rounding for .5). `round(x, n)` rounds to n decimal places.\n\n' +
+        '**Powers & roots:** `x ** n` for integer powers, `math.sqrt(x)` for square roots, `math.pow(x, n)` for float powers. `math.log(x, base)` for logarithms.\n\n' +
+        '**The `statistics` module** (standard library) provides `mean()`, `median()`, `stdev()`, `mode()` — safer than writing your own because they handle edge cases.\n\n' +
+        '**Integer division:** `//` gives the integer quotient (floor division), `%` gives the remainder (modulo). Together: `divmod(17, 5)` returns `(3, 2)` meaning 17 = 5×3 + 2.',
+      code: `import math
+import statistics
+
+# ── Rounding ──
+x = 3.7
+print(math.floor(x))   # 3  (always down)
+print(math.ceil(x))    # 4  (always up)
+print(round(x))        # 4  (nearest)
+print(round(3.14159, 2))  # 3.14  (2 decimal places)
+
+# Banker's rounding for .5 (round to even)
+print(round(2.5))  # 2  (not 3!)
+print(round(3.5))  # 4
+
+# ── Powers, roots, logs ──
+print(2 ** 10)           # 1024 (integer power)
+print(math.sqrt(144))    # 12.0
+print(math.pow(2, 0.5))  # 1.4142... (same as sqrt(2))
+
+print(math.log(1000, 10))  # 3.0 (10^3 = 1000)
+print(math.log2(256))      # 8.0 (2^8 = 256)
+
+# ── Absolute value and sign ──
+print(abs(-42))          # 42
+print(math.copysign(5, -1))  # -5.0 (copy sign)
+
+# ── Integer division & modulo ──
+print(17 // 5)   # 3  (quotient)
+print(17 % 5)    # 2  (remainder)
+q, r = divmod(17, 5)
+print(f"17 = 5 × {q} + {r}")  # 17 = 5 × 3 + 2
+
+# ── Constants ──
+print(math.pi)   # 3.141592653589793
+print(math.e)    # 2.718281828459045
+print(math.inf)  # infinity (useful for min/max init)
+
+# ── Statistics module ──
+weights = [4500, 3800, 5200, 4100, 3200]
+
+print(statistics.mean(weights))    # 4160.0
+print(statistics.median(weights))  # 4100
+print(statistics.stdev(weights))   # 756.6... (sample std dev)
+
+# Percentile-like: quantiles (Python 3.8+)
+print(statistics.quantiles(weights, n=4))
+# [3500.0, 4100.0, 4850.0] — quartile boundaries
+
+# ── Useful patterns ──
+# Clamp a value to a range
+value = 150
+clamped = max(0, min(value, 100))  # 100
+
+# Check if float is "close enough" (avoid ==)
+a = 0.1 + 0.2
+print(a == 0.3)                # False! (floating point)
+print(math.isclose(a, 0.3))   # True (within tolerance)`,
+      diagram: 'MathModuleDiagram',
+    },
+    {
+      id: 'py-data',
+      title: 'Data Processing — Filter, Transform, Aggregate',
+      beginnerContent:
+        'Data processing follows a pipeline pattern: **raw data → filter → transform → aggregate → result**. Python\'s built-in tools make each step clean and composable.\n\n' +
+        '**Filtering** selects items that match a condition. Use list comprehensions with `if`: `[x for x in data if x > 0]`. For complex filters, `filter(fn, data)` works too.\n\n' +
+        '**Transforming** (mapping) applies a function to each item: `[fn(x) for x in data]` or `map(fn, data)`. Extract fields, convert types, compute derived values.\n\n' +
+        '**Aggregating** reduces a collection to a single value: `sum()`, `min()`, `max()`, `len()`, or custom reductions with `functools.reduce()`. The `statistics` module handles mean, median, stdev.\n\n' +
+        '**Grouping** organizes items by a key. Use `collections.defaultdict(list)` or `itertools.groupby()` (requires sorted input). Pattern: loop over items, append to group dict.\n\n' +
+        '**Chaining** these steps is the core of data analysis. Each step is small and testable. This is the same pattern used by pandas, SQL, and every data tool.',
+      code: `from collections import defaultdict
+import statistics
+
+# ── Sample data: elephant sightings ──
+sightings = [
+  {"name": "Ranga", "weight": 4500, "park": "Kaziranga"},
+  {"name": "Mohini", "weight": 3800, "park": "Manas"},
+  {"name": "Gaja", "weight": 5200, "park": "Kaziranga"},
+  {"name": "Tara", "weight": 4100, "park": "Kaziranga"},
+  {"name": "Bala", "weight": 3200, "park": "Manas"},
+]
+
+# ── Step 1: Filter ──
+kaziranga = [s for s in sightings if s["park"] == "Kaziranga"]
+print(len(kaziranga))  # 3
+
+# ── Step 2: Transform (extract weights) ──
+weights = [s["weight"] for s in kaziranga]
+print(weights)  # [4500, 5200, 4100]
+
+# ── Step 3: Aggregate ──
+avg_weight = statistics.mean(weights)
+print(f"Average: {avg_weight:.0f} kg")  # Average: 4600 kg
+
+# ── Grouping by key ──
+by_park = defaultdict(list)
+for s in sightings:
+  by_park[s["park"]].append(s["name"])
+
+for park, names in by_park.items():
+  print(f"{park}: {', '.join(names)}")
+# Kaziranga: Ranga, Gaja, Tara
+# Manas: Mohini, Bala
+
+# ── Moving average (sliding window) ──
+def moving_average(data, window):
+  """Smooth noisy data with a sliding window."""
+  result = []
+  for i in range(len(data) - window + 1):
+      chunk = data[i:i + window]
+      result.append(sum(chunk) / window)
+  return result
+
+readings = [10, 12, 11, 15, 14, 20, 18, 22]
+smoothed = moving_average(readings, 3)
+print(smoothed)  # [11.0, 12.67, 13.33, 16.33, 17.33, 20.0]
+
+# ── Percentile ──
+def percentile(data, p):
+  """Simple percentile calculation."""
+  sorted_data = sorted(data)
+  k = (len(sorted_data) - 1) * (p / 100)
+  f = int(k)
+  c = f + 1 if f + 1 < len(sorted_data) else f
+  return sorted_data[f] + (k - f) * (sorted_data[c] - sorted_data[f])
+
+all_weights = [s["weight"] for s in sightings]
+print(f"25th percentile: {percentile(all_weights, 25)}")  # 3500.0
+print(f"75th percentile: {percentile(all_weights, 75)}")  # 4800.0
+
+# ── Chained pipeline (one expression) ──
+result = statistics.mean(
+  s["weight"]
+  for s in sightings
+  if s["park"] == "Kaziranga"
+)
+print(f"Kaziranga avg: {result:.0f} kg")  # 4600 kg`,
+      diagram: 'DataPipelineDiagram',
+    },
+  ],
+};

@@ -88,7 +88,7 @@ export function calculatePeriodEnd(months: number): string {
 
 // ── Supabase admin client (service role) ──
 export function getSupabaseAdmin() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
   return createClient(url, serviceKey);
 }

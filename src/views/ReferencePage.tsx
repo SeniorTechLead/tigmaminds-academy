@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, usePathname } from 'next/navigation';
 import { BookOpen, Search, List, ChevronDown, ChevronUp } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import GuideCard from '../components/reference/GuideCard';
-import { references, REFERENCE_CATEGORIES, type ReferenceGuide, type CategoryGroup } from '../data/reference';
+import { REFERENCE_CATEGORIES, type ReferenceGuide, type CategoryGroup } from '../data/reference';
+import { referenceMeta } from '../data/reference-meta';
+import searchIndex from '../data/reference-search-index.json';
 
 export type ReferenceLevel = 0 | 1 | 2;  // 0=Listener, 1=Explorer/Builder, 2=Engineer/Creator
 
@@ -17,12 +19,14 @@ const LEVEL_OPTIONS: { value: ReferenceLevel; label: string; desc: string }[] = 
 export default function ReferencePage() {
   const { slug } = useParams<{ slug?: string }>();
   const pathname = usePathname();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState(''); // debounced
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showIndex, setShowIndex] = useState(false);
   const [jumpToSlug, setJumpToSlug] = useState<string | null>(null);
   const [forceExpandSlug, setForceExpandSlug] = useState<string | null>(null);
   const [level, setLevel] = useState<ReferenceLevel>(0);
+
 
   // Restore saved level after hydration to avoid server/client mismatch
   useEffect(() => {
@@ -30,11 +34,17 @@ export default function ReferencePage() {
     if (saved) setLevel(parseInt(saved) as ReferenceLevel);
   }, []);
 
+  // Debounce search — only filter after 300ms of no typing
+  useEffect(() => {
+    const timer = setTimeout(() => setSearchQuery(searchInput), 300);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
   // When navigating directly to a guide via slug, clear filters and scroll to it
   useEffect(() => {
     if (slug) {
       setSelectedCategory(null);
-      setSearchQuery('');
+      setSearchInput(''); setSearchQuery('');
       // Scroll to the guide card after render
       const attempt = (tries: number) => {
         const el = document.getElementById(`ref-${slug}`);
@@ -111,26 +121,59 @@ export default function ReferencePage() {
     requestAnimationFrame(tryScroll);
   }, [jumpToSlug]);
 
-  const searchLower = searchQuery.toLowerCase();
+  // Guide cache — loaded on demand when a guide is expanded
+  const [guideCache, setGuideCache] = useState<Record<string, ReferenceGuide>>({});
 
-  const filtered = references.filter(guide => {
-    const matchesCat = !selectedCategory || guide.category === selectedCategory;
-    if (!matchesCat) return false;
-    if (!searchQuery) return true;
+  const guideCacheRef = useRef(guideCache);
+  guideCacheRef.current = guideCache;
 
-    const searchIn = (sections: typeof guide.understand) =>
-      sections.some(s =>
-        s.title.toLowerCase().includes(searchLower) ||
-        (s.beginnerContent && s.beginnerContent.toLowerCase().includes(searchLower))
-      );
+  const loadGuide = useCallback(async (guideSlug: string): Promise<ReferenceGuide | null> => {
+    if (guideCacheRef.current[guideSlug]) return guideCacheRef.current[guideSlug];
+    try {
+      const mod = await import(`../data/reference/${guideSlug}`);
+      const guide = mod.guide as ReferenceGuide;
+      setGuideCache(prev => ({ ...prev, [guideSlug]: guide }));
+      return guide;
+    } catch {
+      return null;
+    }
+  }, []);
 
-    return (
-      guide.title.toLowerCase().includes(searchLower) ||
-      guide.tagline.toLowerCase().includes(searchLower) ||
-      searchIn(guide.understand) ||
-      (guide.build ? searchIn(guide.build) : false)
-    );
-  });
+  // Pre-load the guide when navigating to /library/slug
+  useEffect(() => {
+    if (slug) loadGuide(slug);
+  }, [slug]);
+
+  // Search uses the pre-built index (297KB JSON) — no guide content loaded
+  const searchLower = searchQuery.toLowerCase().trim();
+  const searchWords = searchLower.split(/[\s&]+/).filter(w => w.length > 0);
+
+  const filteredSlugs = new Set(
+    searchWords.length > 0
+      ? searchIndex
+          .filter(entry => {
+            if (selectedCategory && entry.category !== selectedCategory) return false;
+            return searchWords.every(w => entry.searchText.includes(w));
+          })
+          .map(e => e.slug)
+      : referenceMeta
+          .filter(g => !selectedCategory || g.category === selectedCategory)
+          .map(g => g.slug)
+  );
+
+  // When search settles (debounced), load full content for matched guides (for snippets)
+  useEffect(() => {
+    if (searchWords.length === 0) return;
+    const toLoad = [...filteredSlugs].filter(s => !guideCache[s]).slice(0, 10); // cap at 10
+    if (toLoad.length > 0) {
+      toLoad.forEach(s => loadGuide(s));
+    }
+  }, [searchQuery]); // only debounced value
+
+  // Build the filtered list from metadata + cached full guides where available
+  const filtered = referenceMeta
+    .filter(g => filteredSlugs.has(g.slug))
+    .map(meta => guideCache[meta.slug] || { ...meta, understand: [], relatedStories: [] } as unknown as ReferenceGuide);
 
   // Group by category group (science / coding)
   const scienceCats = REFERENCE_CATEGORIES.filter(c => c.group === 'science');
@@ -145,7 +188,7 @@ export default function ReferencePage() {
   const CategoryPills = ({ cats }: { cats: typeof REFERENCE_CATEGORIES }) => (
     <>
       {cats.map(cat => {
-        const count = references.filter(r => r.category === cat.key).length;
+        const count = referenceMeta.filter(r => r.category === cat.key).length;
         if (count === 0) return null;
         return (
           <button key={cat.key}
@@ -179,6 +222,7 @@ export default function ReferencePage() {
               expandedSlug={slug || forceExpandSlug || null}
               searchQuery={searchQuery}
               level={level}
+              onExpand={loadGuide}
             />
           ))}
         </div>
@@ -204,7 +248,7 @@ export default function ReferencePage() {
           <div className="max-w-md mx-auto mb-5">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
+              <input type="text" value={searchInput} onChange={e => setSearchInput(e.target.value)}
                 placeholder="Search (e.g., Rayleigh scattering, NumPy, circuits)..."
                 className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm" />
             </div>
@@ -217,7 +261,7 @@ export default function ReferencePage() {
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   !selectedCategory ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
                 }`}>
-                All ({references.length})
+                All ({referenceMeta.length})
               </button>
               <span className="text-gray-300 dark:text-gray-600 self-center">|</span>
               <CategoryPills cats={scienceCats} />
@@ -249,7 +293,7 @@ export default function ReferencePage() {
               /* Single-category TOC: show section-level detail for each guide */
               (() => {
                 const cat = REFERENCE_CATEGORIES.find(c => c.key === selectedCategory);
-                const catGuides = references.filter(r => r.category === selectedCategory).sort((a, b) => a.title.localeCompare(b.title));
+                const catGuides = referenceMeta.filter(r => r.category === selectedCategory).sort((a, b) => a.title.localeCompare(b.title));
                 return (
                   <div>
                     <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
@@ -308,8 +352,8 @@ export default function ReferencePage() {
             ) : (
               /* All-categories TOC: show category groups with guide titles */
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
-                {REFERENCE_CATEGORIES.filter(cat => references.some(r => r.category === cat.key)).map(cat => {
-                  const catGuides = references.filter(r => r.category === cat.key).sort((a, b) => a.title.localeCompare(b.title));
+                {REFERENCE_CATEGORIES.filter(cat => referenceMeta.some(r => r.category === cat.key)).map(cat => {
+                  const catGuides = referenceMeta.filter(r => r.category === cat.key).sort((a, b) => a.title.localeCompare(b.title));
                   return (
                     <div key={cat.key}>
                       <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1.5">
@@ -323,7 +367,7 @@ export default function ReferencePage() {
                               onClick={(e) => {
                                 e.preventDefault();
                                 setSelectedCategory(null);
-                                setSearchQuery('');
+                                setSearchInput(''); setSearchQuery('');
                                 setShowIndex(false);
                                 setJumpToSlug(guide.slug);
                               }}
@@ -369,7 +413,7 @@ export default function ReferencePage() {
           {filtered.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500 dark:text-gray-400">No references match your search.</p>
-              <button onClick={() => { setSearchQuery(''); setSelectedCategory(null); }} className="mt-2 text-amber-600 hover:underline text-sm">Clear filters</button>
+              <button onClick={() => { setSearchInput(''); setSearchQuery(''); setSelectedCategory(null); }} className="mt-2 text-amber-600 hover:underline text-sm">Clear filters</button>
             </div>
           ) : selectedCategory ? (
             // Flat list when a specific category is selected

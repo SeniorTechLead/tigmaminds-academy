@@ -66,7 +66,7 @@ function SonarMiniLesson({ lesson, number }: { lesson: SonarLesson; number: numb
         </div>
       )}
       <div className="border-t border-gray-200 dark:border-gray-700">
-        <ArduinoPlayground starterCode={lesson.code} title={`Sonar ${number}`} ledCount={lesson.ledCount || 1} />
+        <ArduinoPlayground starterCode={lesson.code} title={`Sonar ${number}`} ledCount={lesson.ledCount || 1} sonarMode />
       </div>
       {lesson.challenge && (
         <div className="px-6 py-3 bg-sky-50 dark:bg-sky-900/20 border-t border-sky-200 dark:border-sky-800">
@@ -390,45 +390,54 @@ void loop() {
   // Initial state: x=0, P=100 (very uncertain)
   // Robot moves 20cm per step, sonar measures with noise
 
-  // Step 1
+  // Step 1 — high uncertainty, low confidence tone
   Serial.println("  1  |  20  |  20.0   |  22.3   | 21.9   | 0.92 | 8.3");
   analogWrite(2, 30);
+  tone(8, 300);
   delay(350);
 
-  // Step 2
+  // Step 2 — confidence growing
   Serial.println("  2  |  40  |  41.9   |  38.5   | 39.3   | 0.58 | 5.5");
   analogWrite(2, 60);
+  tone(8, 500);
   delay(350);
 
   // Step 3
   Serial.println("  3  |  60  |  59.3   |  63.1   | 61.0   | 0.51 | 4.8");
   analogWrite(2, 90);
+  tone(8, 700);
   delay(350);
 
   // Step 4
   Serial.println("  4  |  80  |  81.0   |  77.8   | 79.5   | 0.49 | 4.5");
   analogWrite(2, 120);
+  tone(8, 900);
   delay(350);
 
   // Step 5
   Serial.println("  5  | 100  |  99.5   | 102.1   | 100.7  | 0.49 | 4.4");
   analogWrite(2, 150);
+  tone(8, 1000);
   delay(350);
 
-  // Step 6
+  // Step 6 — converging
   Serial.println("  6  | 120  | 120.7   | 118.4   | 119.6  | 0.48 | 4.3");
   analogWrite(2, 180);
+  tone(8, 1100);
   delay(350);
 
   // Step 7
   Serial.println("  7  | 140  | 139.6   | 143.5   | 141.5  | 0.48 | 4.3");
   analogWrite(2, 210);
+  tone(8, 1200);
   delay(350);
 
-  // Step 8
+  // Step 8 — high confidence, high pitch
   Serial.println("  8  | 160  | 161.5   | 158.2   | 159.9  | 0.48 | 4.3");
   analogWrite(2, 240);
+  tone(8, 1200);
   delay(350);
+  noTone(8);
 
   Serial.println("");
   Serial.println("=== ANALYSIS ===");

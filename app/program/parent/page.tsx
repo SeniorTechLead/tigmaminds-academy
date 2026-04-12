@@ -1,7 +1,2 @@
-'use client';
-
-import ParentProgressView from '../../../src/views/program/ParentProgressView';
-
-export default function Page() {
-  return <ParentProgressView />;
-}
+import { redirect } from 'next/navigation';
+export default function Page() { redirect('/program/guardian'); }

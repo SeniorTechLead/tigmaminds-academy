@@ -4170,25 +4170,50 @@ plt.show()`,
           'changes. Some features are nearly worthless. Others are critical. The model has to figure this ' +
           'out from examples alone.',
         intermediateContent:
-          'Feature engineering transforms raw data into model inputs. For elephant tracking: GPS → distance_to_water, vegetation_density, time_of_day, season. **One-hot encoding**: species=["Asian","African"] → [1,0] or [0,1]. Feature scaling: StandardScaler (mean=0, std=1) or MinMaxScaler (0-1). Gradient descent: w_new = w_old - lr × ∂loss/∂w. Learning rate too high → diverges; too low → slow. Feature selection removes irrelevant inputs that add noise without improving predictions.',
+          '**Feature engineering — transforming raw data into model inputs:**\n\n' +
+          '| Raw data | Engineered features |\n' +
+          '|----------|--------------------|\n' +
+          '| GPS coordinates | distance_to_water, vegetation_density |\n' +
+          '| Timestamp | time_of_day, season, day_of_week |\n' +
+          '| Species name ("Asian") | One-hot: [1, 0] (Asian) or [0, 1] (African) |\n\n' +
+          '**Feature scaling** — models work better when features are on the same scale:\n\n' +
+          '| Method | Formula | Result |\n' +
+          '|--------|---------|--------|\n' +
+          '| StandardScaler | (x − mean) / std | Mean = 0, std = 1 |\n' +
+          '| MinMaxScaler | (x − min) / (max − min) | Range 0 to 1 |\n\n' +
+          '**Gradient descent** — how the model learns the right weights:\n\n' +
+          '[diagram:GradientDescentDiagram]\n\n' +
+          '`w_new = w_old − learning_rate × ∂loss/∂w`\n\n' +
+          '| Learning rate | What happens |\n' +
+          '|--------------|-------------|\n' +
+          '| Too high | Overshoots — loss bounces around and diverges |\n' +
+          '| Too low | Tiny steps — takes forever to converge |\n' +
+          '| Just right | Steady descent toward the minimum |\n\n' +
+          '**Feature selection** removes irrelevant inputs that add noise without improving predictions.',
         advancedContent:
           '**Transfer learning — why you rarely train from scratch:**\n\n' +
-          'Training a model to recognize elephants from 500 photos seems impossible — most models need millions of images. ' +
-          'The trick: start with a model (ResNet, EfficientNet) already trained on ImageNet (14 million images, 1000 categories). ' +
-          'Its early layers already know edges, textures, and shapes. Freeze those layers, replace the final layer with your 3-class output (Asian, African, juvenile), ' +
-          'and train on your 500 photos. The frozen layers provide features; your small dataset teaches the final classification.\n\n' +
-          '**SHAP values — explaining individual predictions:**\n' +
-          'Your model says this rumble is "danger." Why? SHAP (SHapley Additive exPlanations) computes each feature\'s contribution:\n' +
-          '- Base prediction (average across all data): 33% danger\n' +
-          '- Frequency = 45 Hz: +25% (low frequency → danger)\n' +
-          '- Pulse rate = 3.8: +22% (fast pulses → danger)\n' +
-          '- Amplitude = 1.2: +12% (loud → danger)\n' +
-          '- Final prediction: 92% danger\n\n' +
-          'SHAP values are based on cooperative game theory (Shapley, 1953 Nobel laureate). For each prediction, they satisfy three properties: ' +
-          'the contributions sum to the prediction, identical features get identical values, and irrelevant features get zero. ' +
-          'This makes them the gold standard for model interpretability — regulators (GDPR "right to explanation") increasingly require them.\n\n' +
-          '**Domain surprise:** In wildlife tracking models, SHAP often reveals that time-of-day matters more than GPS location — ' +
-          'because animal behavior follows circadian rhythms. The model learned what domain experts already knew, but quantified it.',
+          '| Step | What happens |\n' +
+          '|------|-------------|\n' +
+          '| 1. Start with pretrained model | ResNet/EfficientNet trained on ImageNet (14M images, 1000 categories) |\n' +
+          '| 2. Freeze early layers | They already know edges, textures, shapes — keep that knowledge |\n' +
+          '| 3. Replace final layer | Swap 1000-class output with your 3-class output (Asian, African, juvenile) |\n' +
+          '| 4. Train on your data | Only 500 photos needed — frozen layers provide features, your data teaches classification |\n\n' +
+          '**SHAP values — explaining individual predictions:**\n\n' +
+          'Your model says this rumble is "danger." Why?\n\n' +
+          '[diagram:SHAPWaterfallDiagram]\n\n' +
+          '| Feature | Value | Contribution | Why |\n' +
+          '|---------|-------|-------------|-----|\n' +
+          '| Base (average) | — | 33% danger | Starting point |\n' +
+          '| Frequency | 45 Hz | **+25%** | Low frequency → danger signal |\n' +
+          '| Pulse rate | 3.8/s | **+22%** | Fast pulses → urgency |\n' +
+          '| Amplitude | 1.2 | **+12%** | Loud → danger |\n' +
+          '| **Final** | | **92% danger** | Sum of all contributions |\n\n' +
+          'SHAP values are based on cooperative game theory (Shapley, 1953 Nobel laureate). Three guarantees:\n\n' +
+          '- Contributions **sum to the prediction** (nothing hidden)\n' +
+          '- Identical features get **identical values** (fair)\n' +
+          '- Irrelevant features get **zero** (no noise)\n\n' +
+          'This makes SHAP the gold standard for model interpretability — regulators (GDPR "right to explanation") increasingly require them.\n\n' +
+          '**Domain surprise:** SHAP often reveals that time-of-day matters more than GPS location in wildlife tracking — because animal behavior follows circadian rhythms. The model quantified what domain experts already knew.',
         diagram: 'FeatureWeightsDiagram',
       },
       {
@@ -4207,24 +4232,32 @@ plt.show()`,
           'A feature vector is a list of numbers describing an observation. For an elephant: [weight_kg, height_m, tusk_length_cm, ear_area_m2, age_years] = [4500, 2.8, 60, 1.2, 25]. Each number is a dimension in feature space — this elephant is a point in 5D space. Similar elephants are nearby points; different species are far apart. Feature engineering chooses which measurements matter: tusk_length distinguishes Asian from African elephants, but tail_length probably does not. Good features make classification easy; poor features make it impossible regardless of the algorithm.',
         advancedContent:
           '**PCA — Principal Component Analysis, step by step:**\n\n' +
-          'You have 50 features describing each elephant. Many are correlated (height and weight move together). PCA finds the directions ' +
-          'of maximum variance and projects the data onto them:\n\n' +
-          '1. Center the data (subtract the mean of each feature)\n' +
-          '2. Compute the covariance matrix (50×50 — how each feature varies with every other)\n' +
-          '3. Find eigenvectors (directions of maximum variance) and eigenvalues (how much variance in each direction)\n' +
-          '4. Sort by eigenvalue. The top 2-3 eigenvectors capture most of the variance.\n' +
-          '5. Project all data onto these 2-3 directions → you can now plot it on screen\n\n' +
+          'You have 50 features describing each elephant. Many are correlated (height and weight move together). PCA finds the directions of maximum variance and projects the data onto them.\n\n' +
+          '[diagram:PCAStepsDiagram]\n\n' +
+          '| Step | What it does | Why |\n' +
+          '|------|-------------|-----|\n' +
+          '| 1. Center | Subtract the mean of each feature | Moves the data cloud to the origin |\n' +
+          '| 2. Covariance matrix | Compute the 50×50 matrix of how each feature varies with every other | Captures all pairwise relationships |\n' +
+          '| 3. Eigenvectors | Find the directions of maximum variance | These are the principal components |\n' +
+          '| 4. Sort | Rank eigenvectors by eigenvalue (how much variance each captures) | Top 2-3 capture most of the information |\n' +
+          '| 5. Project | Map all data onto the top 2-3 directions | 50D → 2D with minimal information loss |\n\n' +
           'If the first two components capture 85% of variance, you have compressed 50 dimensions into 2 with only 15% information loss.\n\n' +
-          '**t-SNE and UMAP — for visualization, not analysis:**\n' +
-          'PCA preserves global structure (big distances). t-SNE and UMAP preserve local neighborhoods (similar points stay close, but clusters may be placed arbitrarily). ' +
-          'Use them to VISUALIZE clusters and outliers before training — but do not draw conclusions about distances between clusters.\n\n' +
-          '**Deep learning\'s automatic feature hierarchy:**\n' +
-          'A CNN trained on wildlife camera trap images builds its own features:\n' +
-          '- Layer 1: edges, textures (fur patterns, vegetation)\n' +
-          '- Layer 2: parts (ears, trunks, tails, legs)\n' +
-          '- Layer 3: whole objects (elephant, rhino, deer)\n\n' +
-          'This hierarchy emerges automatically from the data — no human engineer picks the features. This is why deep learning dominates image and audio tasks: ' +
-          'it discovers features that humans would never think to code.',
+          '**t-SNE and UMAP — for visualization, not analysis:**\n\n' +
+          '| Method | Preserves | Best for | Limitation |\n' +
+          '|--------|-----------|----------|------------|\n' +
+          '| PCA | Global structure (big distances) | Dimensionality reduction, analysis | Misses nonlinear patterns |\n' +
+          '| t-SNE | Local neighborhoods | Visualizing clusters | Cluster distances are meaningless |\n' +
+          '| UMAP | Local + some global | Visualizing + faster than t-SNE | Still not for distance analysis |\n\n' +
+          'Use t-SNE/UMAP to visualize clusters and outliers **before** training — but do not draw conclusions about distances between clusters.\n\n' +
+          '**Deep learning\'s automatic feature hierarchy:**\n\n' +
+          '[diagram:CNNFeatureHierarchyDiagram]\n\n' +
+          'A CNN trained on wildlife camera trap images builds its own features:\n\n' +
+          '| Layer | What it detects | Equivalent human task |\n' +
+          '|-------|----------------|---------------------|\n' +
+          '| Layer 1 | Edges, textures (fur patterns, vegetation) | "I see lines and patterns" |\n' +
+          '| Layer 2 | Parts (ears, trunks, tails, legs) | "I see body parts" |\n' +
+          '| Layer 3 | Whole objects (elephant, rhino, deer) | "That\'s an elephant!" |\n\n' +
+          'This hierarchy emerges **automatically** from the data — no human engineer picks the features. This is why deep learning dominates image and audio tasks.',
         diagram: 'FeatureExtractionDiagram',
       },
       {
@@ -4366,6 +4399,7 @@ plt.show()`,
       {
         title: 'Accuracy, Precision, Recall — Did It Actually Work?',
         beginnerContent:
+          '[diagram:PrecisionRecallDiagram]\n\n' +
           '**Accuracy** = correct predictions / total predictions. If the model classifies 90 of 100 ' +
           'rumbles correctly, accuracy is 90%.\n\n' +
           'But accuracy can lie. If 95% of rumbles are "calm", a model that ALWAYS guesses "calm" gets ' +
@@ -4378,7 +4412,15 @@ plt.show()`,
           'For conservation, recall on "danger" matters most. A false alarm (precision error) means rangers ' +
           'investigate nothing. A missed danger (recall error) means an elephant herd crashes into a village.',
         intermediateContent:
-          'For binary classification (elephant/not-elephant): **Accuracy** = (TP + TN) / total — misleading when classes are imbalanced (99% "not elephant" in camera traps → always predicting "not elephant" gives 99% accuracy). **Precision** = TP / (TP + FP) — of all predicted elephants, how many were real? **Recall** = TP / (TP + FN) — of all real elephants, how many did we detect? **F1 score** = 2 × (Precision × Recall) / (Precision + Recall) — harmonic mean balancing both. For conservation: high recall is critical (missing a real elephant is worse than a false alarm).',
+          '**The metrics — what each one measures:**\n\n' +
+          '| Metric | Formula | Answers the question | Danger |\n' +
+          '|--------|---------|---------------------|--------|\n' +
+          '| Accuracy | (TP + TN) / total | How often is the model right overall? | Misleading when classes are imbalanced |\n' +
+          '| Precision | TP / (TP + FP) | Of everything called "danger," how many really were? | Low = too many false alarms |\n' +
+          '| Recall | TP / (TP + FN) | Of everything that WAS danger, how many did we catch? | Low = missed real threats |\n' +
+          '| F1 Score | 2 × (P × R) / (P + R) | Balance between precision and recall | Harmonic mean — both must be high |\n\n' +
+          '**The imbalance trap:** 99% of camera trap images are "not elephant." A model that always says "not elephant" gets 99% accuracy — while detecting zero elephants. Accuracy lies. Precision and recall don\'t.\n\n' +
+          '**For conservation:** High recall is critical — missing a real elephant (or danger signal) is far worse than a false alarm.',
         advancedContent:
           '**ROC curves — understanding the threshold tradeoff:**\n\n' +
           'Your model outputs a probability (say, 73% chance this is a danger signal). You choose a threshold to decide: ' +
@@ -4400,6 +4442,7 @@ plt.show()`,
       {
         title: 'The Confusion Matrix — Where Mistakes Live',
         beginnerContent:
+          '[diagram:ConfusionMatrixDiagram]\n\n' +
           'A **confusion matrix** is a table showing exactly where the model gets confused. Rows are ' +
           'actual labels, columns are predicted labels. The diagonal shows correct predictions; ' +
           'off-diagonal cells show specific mistakes.\n\n' +
@@ -4410,7 +4453,14 @@ plt.show()`,
           'This is how real ML engineers work: train → evaluate → read the confusion matrix → improve → ' +
           'repeat until the model is reliable enough for deployment.',
         intermediateContent:
-          'A confusion matrix is a table where rows represent actual classes and columns represent predicted classes. For 3 classes (elephant, rhino, deer), a 3×3 matrix shows counts for each actual→predicted combination. The diagonal shows correct predictions; off-diagonal elements show specific error patterns. If the model often confuses elephants with rhinos (high count in elephant-row, rhino-column), that reveals which classes need better features. Normalize rows to get per-class accuracy rates.',
+          '**Reading the matrix — a worked example:**\n\n' +
+          '| | Predicted: Elephant | Predicted: Rhino | Predicted: Deer | Accuracy |\n' +
+          '|---|---|---|---|---|\n' +
+          '| **Actual: Elephant** | **85** ✓ | 10 | 5 | 85% |\n' +
+          '| **Actual: Rhino** | 3 | **15** ✓ | 2 | 75% |\n' +
+          '| **Actual: Deer** | 2 | 3 | **75** ✓ | 94% |\n\n' +
+          '**Reading this:** The model confuses elephants with rhinos 10 times (they look similar from behind). It rarely confuses deer with anything (distinct body shape).\n\n' +
+          '**Normalize by row** to get per-class accuracy rates — each row should sum to 100%. Classes with low row-accuracy need better features.',
         advancedContent:
           '**Multi-class averaging — which metric to report:**\n\n' +
           'With 3 classes (elephant 100 examples, rhino 20, deer 80), per-class precision might be [0.95, 0.70, 0.90]. ' +
@@ -4677,7 +4727,44 @@ plt.show()`,
           'Click a word below to see its attention pattern — which other words it focuses on to ' +
           'understand context.',
         intermediateContent:
-          'Transformers process input through self-attention: each token attends to every other token, computing a weighted sum where weights reflect relevance. Attention(Q,K,V) = softmax(QKᵀ/√d)V, where Q (queries), K (keys), V (values) are learned projections of the input. Multi-head attention runs several attention functions in parallel, capturing different types of relationships. The transformer architecture: input embedding → positional encoding → N × (multi-head attention + feed-forward network + layer normalization) → output.',
+          '**How self-attention works — step by step:**\n\n' +
+          '[diagram:TransformerAttentionDiagram]\n\n' +
+          'Each token "looks at" every other token to decide what is relevant:\n\n' +
+          '| Step | What happens | Intuition |\n' +
+          '|------|-------------|----------|\n' +
+          '| 1. Project | Each token becomes three vectors: **Q** (query), **K** (key), **V** (value) | Q = "what am I looking for?", K = "what do I contain?", V = "what info do I carry?" |\n' +
+          '| 2. Score | Compute Q·K between every pair of tokens | High score = these two tokens are relevant to each other |\n' +
+          '| 3. Scale | Divide by √d (dimension size) | Prevents scores from getting too large |\n' +
+          '| 4. Softmax | Convert scores to weights that sum to 1 | Now each token has a "probability distribution" over all others |\n' +
+          '| 5. Weighted sum | Multiply weights × V and sum | Each token\'s output is a blend of information from relevant tokens |\n\n' +
+          '**The formula:** Attention(Q, K, V) = softmax(QKᵀ / √d) × V\n\n' +
+          '**Concrete example — how "it" resolves to "elephant":**\n\n' +
+          'Sentence: "The elephant rumbled because **it** was nervous."\n\n' +
+          '| Step | What "it" does | Result |\n' +
+          '|------|---------------|--------|\n' +
+          '| 1. Query | "it" asks: "What do I refer to?" | Q_it = [0.8, -0.2, 0.5, ...] |\n' +
+          '| 2. Keys | Every word answers: "Here\'s what I am" | K_elephant = [0.7, -0.1, 0.6, ...] |\n' +
+          '| 3. Score | Q_it · K_elephant = **high** (similar!) | Score = 4.2 |\n' +
+          '| | Q_it · K_rumbled = low (different) | Score = 0.8 |\n' +
+          '| 4. Softmax | Convert scores to weights | elephant: **0.72**, rumbled: 0.05, ... |\n' +
+          '| 5. Output | Weighted sum of V vectors | "it" now carries elephant\'s meaning |\n\n' +
+          '**Multi-head attention** — why one attention isn\'t enough:\n\n' +
+          '| Head | What it learns to focus on | Example |\n' +
+          '|------|--------------------------|--------|\n' +
+          '| Head 1 | Grammar/syntax | "it" → "elephant" (subject reference) |\n' +
+          '| Head 2 | Meaning/semantics | "nervous" → "rumbled" (cause-effect) |\n' +
+          '| Head 3 | Position/distance | Adjacent words attend to each other |\n' +
+          '| Head 4 | Coreference | Pronouns → their antecedents |\n\n' +
+          'All heads run in parallel, then their outputs are concatenated and projected. Different heads capture different types of relationships simultaneously.\n\n' +
+          '**The full transformer block:**\n\n' +
+          '| Stage | What it does |\n' +
+          '|-------|-------------|\n' +
+          '| Input embedding | Convert words to vectors |\n' +
+          '| Positional encoding | Add position information (word order) |\n' +
+          '| Multi-head attention | Each word attends to every other word |\n' +
+          '| Feed-forward network | Process each position independently |\n' +
+          '| Layer normalization | Stabilize training |\n' +
+          '| Repeat N times | Stack these blocks — deeper = more reasoning |',
         advancedContent:
           '**Scaling laws — why bigger models keep getting smarter:**\n\n' +
           'Transformer performance follows predictable power laws:\n' +
@@ -5665,10 +5752,10 @@ void loop() {
   // ─────────────────────────────────────────────────────────────
   {
     slug: 'statistics-basics',
-    title: 'Statistics Basics',
+    title: 'Statistical Thinking',
     category: 'data-science',
     icon: '📐',
-    tagline: 'Make sense of data with numbers',
+    tagline: 'Sampling, confidence intervals, p-values, and the replication crisis — thinking critically about data.',
     relatedStories: ['girl-who-spoke-to-elephants', 'why-the-muga-silk-is-golden', 'boy-who-talked-to-clouds', 'dancing-deer-of-loktak-lake'],
 
     understand: [
@@ -7800,39 +7887,68 @@ GROUP BY park;
       {
         title: 'What Is an Algorithm?',
         beginnerContent:
-          'An algorithm is a step-by-step procedure for solving a problem. You follow algorithms every ' +
-          'day without calling them that. A recipe for making tea is an algorithm: boil water, add tea ' +
-          'leaves, wait 3 minutes, strain, add milk. Directions to school are an algorithm. The process ' +
-          'you use to find a word in a dictionary is an algorithm (and a very efficient one — you do not ' +
-          'start at page 1 and read every entry).\n\n' +
-          'In computer science, algorithms are written precisely enough for a machine to follow. The ' +
-          'interesting part is that there are often many algorithms to solve the same problem, and they ' +
-          'can differ enormously in speed. Searching for a name in an unsorted list of 1 million entries ' +
-          'might take 1 million steps with one algorithm and only 20 steps with another. Choosing the ' +
-          'right algorithm is often the difference between software that feels instant and software that ' +
-          'freezes for minutes. That is why algorithms are a core subject in computer science — they are ' +
-          'the recipes that determine how fast and how well your program works.',
+          '**An algorithm is a step-by-step procedure for solving a problem.** You follow algorithms every day:\n\n' +
+          '| Everyday algorithm | Steps |\n' +
+          '|-------------------|-------|\n' +
+          '| Making tea | Boil water → add tea leaves → wait 3 min → strain → add milk |\n' +
+          '| Finding a word in a dictionary | Open to the middle → too early or too late? → jump to the right half → repeat |\n' +
+          '| Getting to school | Walk to bus stop → take bus #7 → get off at 3rd stop → walk 2 blocks |\n\n' +
+          'In computer science, algorithms are written precisely enough for a machine to follow.\n\n' +
+          '**The key insight: different algorithms for the same problem can differ enormously in speed.**\n\n' +
+          '| Task: Find "Priya" in 1,000,000 names | Steps needed |\n' +
+          '|----------------------------------------|-------------|\n' +
+          '| Check every name from the start (linear search) | Up to **1,000,000** |\n' +
+          '| Use the dictionary trick on a sorted list (binary search) | At most **20** |\n\n' +
+          'That is a 50,000× difference. Choosing the right algorithm is the difference between software that feels instant and software that freezes.',
         intermediateContent:
-          'Algorithm efficiency is measured by **Big O notation**: O(1) = constant time (array access), O(log n) = logarithmic (binary search), O(n) = linear (scanning a list), O(n log n) = linearithmic (merge sort), O(n²) = quadratic (bubble sort), O(2ⁿ) = exponential (brute force). For n=1,000,000: O(n) takes ~1 ms, O(n log n) ~20 ms, O(n²) ~17 minutes, O(2ⁿ) → heat death of the universe. Binary search on a sorted array of 1 billion elements finds any item in at most **30 comparisons** (log₂ 10⁹ ≈ 30). This is why sorting data first (O(n log n) one-time cost) pays off with repeated O(log n) searches.',
+          '**Big O notation — how we measure algorithm speed:**\n\n' +
+          '[diagram:BigOComparisonDiagram]\n\n' +
+          '| Notation | Name | Example | n = 1,000,000 |\n' +
+          '|----------|------|---------|---------------|\n' +
+          '| O(1) | Constant | Array access by index | **Instant** |\n' +
+          '| O(log n) | Logarithmic | Binary search | **20 steps** |\n' +
+          '| O(n) | Linear | Scanning a list | ~1 ms |\n' +
+          '| O(n log n) | Linearithmic | Merge sort | ~20 ms |\n' +
+          '| O(n²) | Quadratic | Bubble sort | ~17 minutes |\n' +
+          '| O(2ⁿ) | Exponential | Brute force | Heat death of universe |\n\n' +
+          '**The sorting payoff:** Binary search on a sorted array of 1 billion elements finds any item in at most **30 comparisons** (log₂ 10⁹ ≈ 30). Sorting costs O(n log n) once, but every subsequent search costs only O(log n) — the investment pays for itself immediately.',
         advancedContent:
-          'The P vs NP problem asks whether every problem whose solution can be verified quickly (in polynomial time) can also be solved quickly. If P = NP, then problems like the travelling salesman, protein folding, and breaking RSA encryption would have efficient algorithms — transforming science, medicine, and rendering current cryptography useless. Most computer scientists believe P ≠ NP, but no proof exists. This is one of the seven Millennium Prize Problems ($1 million reward). **NP-complete** problems (Boolean satisfiability, graph coloring, subset sum) are the hardest in NP — solving any one efficiently would solve all of them. Practical approaches: heuristics, approximation algorithms, and quantum computing (which offers speedups for some problems but does not solve NP-complete problems in general).',
+          '**The P vs NP problem — the biggest open question in computer science:**\n\n' +
+          'Can every problem whose solution can be **verified** quickly also be **solved** quickly?\n\n' +
+          '| If P = NP (unlikely) | Consequence |\n' +
+          '|---------------------|-------------|\n' +
+          '| Travelling salesman | Optimal routes computed instantly |\n' +
+          '| Protein folding | Drug design becomes trivial |\n' +
+          '| RSA encryption | All current cryptography breaks |\n\n' +
+          'Most computer scientists believe P ≠ NP, but no proof exists. This is one of the seven **Millennium Prize Problems** ($1 million reward).\n\n' +
+          '**NP-complete problems** — the hardest in NP:\n\n' +
+          '- Boolean satisfiability\n' +
+          '- Graph coloring\n' +
+          '- Subset sum\n\n' +
+          'Solving ANY one efficiently would solve ALL of them (they are all reducible to each other).\n\n' +
+          '**Practical approaches when you can\'t solve optimally:**\n\n' +
+          '| Approach | How it works | Trade-off |\n' +
+          '|----------|-------------|----------|\n' +
+          '| Heuristics | Rules of thumb that find "good enough" solutions | Fast but no guarantee of optimal |\n' +
+          '| Approximation algorithms | Proven to be within X% of optimal | Slower but with guarantees |\n' +
+          '| Quantum computing | Speedups for some problems (Shor\'s, Grover\'s) | Doesn\'t solve NP-complete in general |',
       },
       {
         id: 'algo-arrays',
         title: 'Arrays and Lists: Storing Ordered Data',
         beginnerContent:
-          'Before you can run algorithms on data, you need a way to organize that data. The simplest ' +
-          'structure is an *array* (called a *list* in Python): an ordered sequence of elements, each ' +
-          'identified by its position (called an *index*). The array `[25, 18, 42, 7, 33]` stores five ' +
-          'numbers. The first element is at index 0 (not 1 — most programming languages count from zero), ' +
-          'so `arr[0]` is 25 and `arr[3]` is 7.\n\n' +
-          'Arrays are fast at accessing any element by index — it takes the same time whether the array ' +
-          'has 10 elements or 10 million. But inserting an element in the middle is slow because every ' +
-          'element after it must shift over to make room. Other data structures solve this: a *linked list* ' +
-          'makes insertion fast but access slow, a *hash map* (dictionary in Python) gives instant lookup ' +
-          'by key, and a *stack* enforces last-in-first-out order (like a stack of plates). Choosing the ' +
-          'right data structure for the job is just as important as choosing the right algorithm — they ' +
-          'go hand in hand.',
+          '[diagram:DataStructuresDiagram]\n\n' +
+          'Before you can run algorithms on data, you need a way to organize that data. The simplest structure is an *array* (called a *list* in Python): an ordered sequence of elements, each identified by its position (called an *index*).\n\n' +
+          'The array `[25, 18, 42, 7, 33]` stores five numbers. The first element is at index 0 (not 1 — most programming languages count from zero), so `arr[0]` is 25 and `arr[3]` is 7.\n\n' +
+          '**Choosing the right data structure is just as important as choosing the right algorithm.** Here are the five essential structures:\n\n' +
+          '| Data structure | What it\'s good at | Real-world analogy |\n' +
+          '|----------------|-------------------|--------------------|\n' +
+          '| **Array / List** | Fast access by position (index) | Numbered lockers — go straight to locker #7 |\n' +
+          '| **Linked List** | Fast insertion / deletion in the middle | A chain of paper clips — easy to add or remove one anywhere |\n' +
+          '| **Hash Map (dict)** | Instant lookup by key | A phone book — look up a name, get the number instantly |\n' +
+          '| **Stack (LIFO)** | Last-in, first-out order | A stack of plates — you always take the top one |\n' +
+          '| **Queue (FIFO)** | First-in, first-out order | A waiting line — first person in line is served first |\n\n' +
+          '**Key trade-off:** Arrays are fast at accessing any element by index (same speed whether 10 elements or 10 million). But inserting in the middle is slow — every element after it must shift over. Linked lists solve this, but sacrifice fast random access.',
         code: `from collections import deque
 
 # ── Stack: Last-In, First-Out (LIFO) ──
@@ -7877,9 +7993,35 @@ for val in [10, 20, 30, 40, 50]:
 # Dict:  lookup by key, counting, grouping
 # Set:   membership testing, deduplication`,
         intermediateContent:
-          'An array stores elements in contiguous memory. Access by index: O(1) — jump directly to position. Insert/delete at the end: O(1) amortized. Insert/delete in the middle: O(n) — must shift all subsequent elements. Python lists are dynamic arrays that automatically resize (doubling capacity when full). A linked list stores each element with a pointer to the next: insert/delete anywhere is O(1) if you have a reference to the position, but access by index is O(n) — you must walk from the start. Arrays for random access; linked lists for frequent insertion/deletion.',
+          '**Array vs Linked List — the fundamental trade-off:**\n\n' +
+          '| Operation | Array | Linked List |\n' +
+          '|-----------|-------|------------|\n' +
+          '| Access by index | **O(1)** — jump directly | O(n) — walk from start |\n' +
+          '| Insert/delete at end | **O(1)** amortized | **O(1)** with tail pointer |\n' +
+          '| Insert/delete in middle | O(n) — must shift elements | **O(1)** if you have a reference |\n' +
+          '| Memory layout | Contiguous (cache-friendly) | Scattered (pointer overhead) |\n\n' +
+          '**Rule of thumb:** Use arrays when you need fast random access. Use linked lists when you frequently insert/delete in the middle.\n\n' +
+          '**Python lists** are dynamic arrays — they automatically double their capacity when full. That is why `append()` is O(1) amortized: most appends are instant, but occasionally the entire array must be copied to a larger block.',
         advancedContent:
-          'Hash maps (Python dict, JavaScript Object/Map) combine arrays with hash functions for O(1) average lookup by key. The hash function maps keys to array indices; collisions (two keys mapping to the same index) are handled by chaining (linked lists at each index) or open addressing (probing for the next empty slot). Load factor (items/slots) affects performance: Python dicts resize when ~2/3 full. Stacks (LIFO: push/pop) and queues (FIFO: enqueue/dequeue) are abstract data types implementable with arrays or linked lists. Stacks handle function calls, undo operations, and expression parsing; queues handle print jobs, BFS, and message passing.',
+          '**Hash maps — O(1) lookup by key:**\n\n' +
+          'A hash function converts any key to an array index:\n\n' +
+          '| Step | What happens |\n' +
+          '|------|-------------|\n' +
+          '| 1. Key in | `"Priya"` |\n' +
+          '| 2. Hash function | `hash("Priya") = 7429...` |\n' +
+          '| 3. Modulo | `7429 % 16 = 5` → slot 5 |\n' +
+          '| 4. Store/retrieve | Go directly to slot 5 — **O(1)** |\n\n' +
+          '**Collisions** (two keys mapping to the same slot):\n\n' +
+          '| Strategy | How it works |\n' +
+          '|----------|-------------|\n' +
+          '| Chaining | Each slot holds a linked list of entries |\n' +
+          '| Open addressing | Probe the next empty slot |\n\n' +
+          'Python dicts resize when ~⅔ full (load factor). This keeps collision chains short.\n\n' +
+          '**Stacks vs Queues:**\n\n' +
+          '| Structure | Order | Real-world use |\n' +
+          '|-----------|-------|---------------|\n' +
+          '| Stack (LIFO) | Last in, first out | Undo history, function calls, bracket matching |\n' +
+          '| Queue (FIFO) | First in, first out | Print jobs, BFS, message passing |',
         interactive: {
           type: 'matching',
           props: {
@@ -7897,47 +8039,89 @@ for val in [10, 20, 30, 40, 50]:
       {
         title: 'Searching: Linear vs Binary Search',
         beginnerContent:
-          'Suppose you have a list of 1,000 student names and need to find "Priya." The simplest approach ' +
-          'is *linear search*: start at the beginning and check each name one by one. On average, you will ' +
-          'check 500 names before finding Priya, and in the worst case, all 1,000. This is fine for small ' +
-          'lists but painfully slow for large ones.\n\n' +
-          'If the list is *sorted alphabetically*, you can do far better with *binary search*. Open the ' +
-          'list to the middle — say it shows "Kavita." Since "Priya" comes after "Kavita" alphabetically, ' +
-          'you ignore the entire first half and look at the middle of the remaining half. Each step ' +
-          'eliminates half the remaining options. For 1,000 names, binary search needs at most 10 checks ' +
-          '(because 2^10 = 1,024). For 1 million names, it needs only 20 checks. This is the same ' +
-          'strategy you instinctively use with a physical dictionary — you never start from page 1.\n\n' +
-          'The catch is that binary search requires sorted data. If the data changes frequently, keeping ' +
-          'it sorted has its own cost. This is a recurring theme in computer science: every optimization ' +
-          'has a trade-off. Linear search works on any list (sorted or not) and needs no preparation. ' +
-          'Binary search is vastly faster but demands sorted input.',
+          '[diagram:BinarySearchDiagram]\n\n' +
+          'Suppose you have a list of 1,000 student names and need to find "Priya."\n\n' +
+          '**Linear vs Binary Search — side by side:**\n\n' +
+          '| | Linear search | Binary search |\n' +
+          '|---|---|---|\n' +
+          '| **Strategy** | Start at the beginning, check each name one by one | Open to the middle, eliminate half each step |\n' +
+          '| **Requires sorted data?** | No — works on any list | Yes — data must be sorted first |\n' +
+          '| **1,000 names** | Up to 1,000 checks | At most **10** checks |\n' +
+          '| **1,000,000 names** | Up to 1,000,000 checks | At most **20** checks |\n' +
+          '| **Preparation needed** | None | Must sort the data first |\n\n' +
+          '**The dictionary analogy:** Binary search is exactly what you do with a physical dictionary. Open to the middle — say it shows "Kavita." Since "Priya" comes after "Kavita" alphabetically, you ignore the entire first half. Repeat on the remaining half. You never start from page 1.\n\n' +
+          '**The trade-off:** Linear search needs no preparation and works on any list. Binary search is vastly faster but demands sorted input. If the data changes frequently, keeping it sorted has its own cost. This is a recurring theme in computer science — every optimization has a trade-off.',
         intermediateContent:
-          'Linear search: check each element from start to end. O(n) — works on any list. Binary search: for sorted data only. Compare with the middle element; if target is smaller, search the left half; if larger, search the right half. Each step halves the search space: O(log n). For 1 billion elements: linear search checks up to 10⁹ items; binary search checks at most log₂(10⁹) ≈ **30 items**. Implementation: lo, hi = 0, len(arr)-1; while lo <= hi: mid = (lo+hi)//2; if arr[mid] == target: return mid; elif arr[mid] < target: lo = mid+1; else: hi = mid-1.',
+          '**Linear vs Binary — the numbers:**\n\n' +
+          '| | Linear search | Binary search |\n' +
+          '|---|---|---|\n' +
+          '| Requirement | Any list | **Sorted** list only |\n' +
+          '| Strategy | Check each element from start | Compare with middle, eliminate half |\n' +
+          '| Time | O(n) | O(log n) |\n' +
+          '| 1,000 elements | Up to 1,000 checks | At most **10** checks |\n' +
+          '| 1,000,000 elements | Up to 1,000,000 checks | At most **20** checks |\n' +
+          '| 1,000,000,000 elements | Up to 1 billion checks | At most **30** checks |\n\n' +
+          '**Binary search step by step:**\n\n' +
+          '- Set `lo = 0`, `hi = length - 1`\n' +
+          '- While `lo ≤ hi`:\n' +
+          '- Find the middle: `mid = (lo + hi) // 2`\n' +
+          '- If `arr[mid] == target` → found it!\n' +
+          '- If `arr[mid] < target` → target is in the right half → `lo = mid + 1`\n' +
+          '- If `arr[mid] > target` → target is in the left half → `hi = mid - 1`\n' +
+          '- If `lo > hi` → target is not in the array',
         advancedContent:
-          'Binary search applies beyond sorted arrays: any scenario where you can determine which half contains the answer. **Binary search on answer**: "What is the minimum speed to arrive on time?" — binary search over possible speeds, checking each with a feasibility function. **Bisection method** (root finding): find where f(x) = 0 by repeatedly halving the interval where the sign changes. Git bisect uses binary search through commit history. Interpolation search improves on binary search for uniformly distributed data: instead of always checking the midpoint, it estimates the target\'s position proportionally — achieving O(log log n) average case.',
+          'Binary search applies far beyond sorted arrays — it works in any scenario where you can determine which half contains the answer.\n\n' +
+          '**Binary search applications:**\n\n' +
+          '| Application | How it uses binary search | Example |\n' +
+          '|-------------|--------------------------|--------|\n' +
+          '| **Binary search on answer** | Search over a range of possible answers, checking each with a feasibility function | "What is the minimum speed to arrive on time?" — binary search over speeds |\n' +
+          '| **Bisection method** | Find where f(x) = 0 by halving the interval where the sign changes | Root finding in numerical analysis |\n' +
+          '| **Git bisect** | Binary search through commit history to find the commit that introduced a bug | Debugging regressions in large codebases |\n' +
+          '| **Interpolation search** | Estimates the target\'s position proportionally instead of always checking the midpoint | O(log log n) average for uniformly distributed data |',
       },
       {
         title: 'Sorting: Bubble Sort and Merge Sort',
         beginnerContent:
-          'Sorting data is one of the most common tasks in computing — search engines rank results, ' +
-          'spreadsheets sort columns, and leaderboards order by score. *Bubble sort* is the simplest ' +
-          'sorting algorithm: compare adjacent pairs and swap them if they are in the wrong order, then ' +
-          'repeat until no swaps are needed. It is easy to understand but very slow for large lists — ' +
-          'sorting 10,000 items takes roughly 100 million comparisons.\n\n' +
-          '*Merge sort* uses a clever divide-and-conquer strategy. Split the list in half, sort each half ' +
-          '(by splitting again, recursively), then merge the two sorted halves together. Merging two ' +
-          'sorted lists is easy: compare the first element of each and take the smaller one, repeat. ' +
-          'Merge sort handles 10,000 items in roughly 130,000 comparisons — nearly 1,000 times faster ' +
-          'than bubble sort. The difference becomes even more dramatic as data grows.\n\n' +
-          'There are dozens of sorting algorithms, each with different strengths. *Quick sort* is fast ' +
-          'on average and uses less memory than merge sort. *Counting sort* is blazingly fast when values ' +
-          'are small integers. Python\'s built-in `sort()` uses *Timsort*, a hybrid algorithm designed ' +
-          'for real-world data. The key insight is not to memorize every algorithm but to understand that ' +
-          'different approaches have wildly different performance characteristics.',
+          '[diagram:SortingVisualizerDiagram]\n\n' +
+          'Sorting data is one of the most common tasks in computing — search engines rank results, spreadsheets sort columns, and leaderboards order by score.\n\n' +
+          '**Four sorting algorithms compared:**\n\n' +
+          '| Algorithm | How it works | Speed | When to use it |\n' +
+          '|-----------|-------------|-------|----------------|\n' +
+          '| **Bubble sort** | Compare adjacent pairs, swap if wrong order, repeat | Very slow (10,000 items = ~100 million comparisons) | Teaching only — never in real code |\n' +
+          '| **Merge sort** | Split in half, sort each half recursively, merge back | Fast (10,000 items = ~130,000 comparisons) | When you need guaranteed speed |\n' +
+          '| **Quick sort** | Pick a pivot, partition around it, recurse | Fast on average, uses less memory than merge sort | General purpose, most standard libraries |\n' +
+          '| **Timsort** | Hybrid of merge sort + insertion sort, optimized for real data | Fast, adapts to partially sorted data | Python\'s built-in `sort()` uses this |\n\n' +
+          'The difference is dramatic: merge sort handles 10,000 items nearly **1,000 times faster** than bubble sort. The gap widens as data grows.\n\n' +
+          'The key insight is not to memorize every algorithm but to understand that different approaches have wildly different performance characteristics.',
         intermediateContent:
-          'Sorting compared: **Bubble sort** O(n²) — swap adjacent pairs, repeat. **Merge sort** O(n log n) — divide, sort halves, merge; uses O(n) memory. **Quick sort** O(n log n) average — pick pivot, partition, recurse; fastest in practice. Python\'s sorted() uses **Timsort** — optimized for real-world data with partial ordering. For 1M items: bubble sort ≈ 17 min, merge sort ≈ 0.02 sec. Binary search on sorted data: O(log n) — finds any item in 1 billion elements in **30 steps**.',
+          '**Sorting algorithms compared:**\n\n' +
+          '| Algorithm | Time | Space | How it works |\n' +
+          '|-----------|------|-------|--------------|\n' +
+          '| Bubble sort | O(n²) | O(1) | Swap adjacent pairs, repeat until sorted |\n' +
+          '| Merge sort | O(n log n) | O(n) | Split in half, sort each half, merge back |\n' +
+          '| Quick sort | O(n log n) avg | O(log n) | Pick pivot, partition around it, recurse |\n' +
+          '| Timsort | O(n log n) | O(n) | Python\'s built-in — hybrid of merge + insertion |\n\n' +
+          '**Why the difference matters:**\n\n' +
+          '| n = 1,000,000 items | Bubble sort (n²) | Merge sort (n log n) |\n' +
+          '|---------------------|-------------------|-----------------------|\n' +
+          '| Operations | 1,000,000,000,000 | 20,000,000 |\n' +
+          '| Time at 1B ops/sec | **~17 minutes** | **~0.02 seconds** |',
         advancedContent:
-          'Advanced data structures: **hash tables** (Python dict) give O(1) average lookup via hash functions. **BSTs** maintain sorted order with O(log n) operations. **Heaps** provide O(1) min/max — used in priority queues, Dijkstra\'s algorithm, and OS schedulers. **Graphs** model networks: BFS (shortest unweighted paths), Dijkstra (weighted), A* (heuristic). **Dynamic programming** solves optimization by caching subproblem results — the Fibonacci sequence computed naively is O(2ⁿ) but with memoization is O(n). DP is the key technique for coding interview problems and real-world optimization.',
+          '**Beyond basic sorting — the algorithms that power real systems:**\n\n' +
+          '| Structure/Algorithm | What it does | Time | Used in |\n' +
+          '|-------|------|------|--------|\n' +
+          '| Hash table | O(1) lookup by key | O(1) avg | Python dict, databases, caches |\n' +
+          '| BST (balanced) | Sorted order + fast search | O(log n) | File systems, databases |\n' +
+          '| Heap | Instant access to min/max | O(1) peek, O(log n) insert | Priority queues, Dijkstra, OS schedulers |\n' +
+          '| BFS/DFS | Graph traversal | O(V+E) | Shortest paths, web crawlers |\n' +
+          '| Dijkstra | Shortest weighted path | O(E log V) | Google Maps, network routing |\n' +
+          '| A* | Heuristic shortest path | O(E log V) | Game AI, robot navigation |\n\n' +
+          '**Dynamic programming — the key to optimization:**\n\n' +
+          '| Approach | Fibonacci(40) | Time |\n' +
+          '|----------|--------------|------|\n' +
+          '| Naive recursion | 2⁴⁰ ≈ 1 trillion calls | Minutes |\n' +
+          '| With memoization | 40 calls (each computed once) | Instant |\n\n' +
+          'DP caches subproblem results to avoid recomputation. It is the single most important technique for coding interviews and real-world optimization.',
         interactive: {
           type: 'true-false',
           props: {
@@ -7952,83 +8136,114 @@ for val in [10, 20, 30, 40, 50]:
       {
         title: 'Big O Notation: Why Speed Matters',
         beginnerContent:
-          'When computer scientists compare algorithms, they use *Big O notation* to describe how the ' +
-          'running time grows as the input size increases. It ignores constants and focuses on the shape ' +
-          'of the growth curve. The most common classes are:\n\n' +
-          '- *O(1)* — constant time. No matter how big the input, it takes the same time. Example: ' +
-          'accessing an array element by index.\n' +
-          '- *O(log n)* — logarithmic time. Doubling the input adds only one extra step. Example: binary ' +
-          'search.\n' +
+          '[diagram:BigOComparisonDiagram]\n\n' +
+          'When computer scientists compare algorithms, they use *Big O notation* to describe how the running time grows as the input size increases. It ignores constants and focuses on the shape of the growth curve.\n\n' +
+          '**The most common complexity classes:**\n\n' +
+          '- *O(1)* — constant time. No matter how big the input, it takes the same time. Example: accessing an array element by index.\n' +
+          '- *O(log n)* — logarithmic time. Doubling the input adds only one extra step. Example: binary search.\n' +
           '- *O(n)* — linear time. Double the input, double the time. Example: linear search.\n' +
           '- *O(n log n)* — the sweet spot for sorting. Example: merge sort.\n' +
           '- *O(n²)* — quadratic time. Double the input, quadruple the time. Example: bubble sort.\n\n' +
-          'To make this concrete: for a list of 1 million items, an O(n) algorithm takes about 1 million ' +
-          'steps, an O(n log n) algorithm takes about 20 million steps, and an O(n²) algorithm takes ' +
-          '1 trillion steps. At 1 billion operations per second, that is 1 millisecond vs 20 milliseconds ' +
-          'vs 16 minutes. The gap only widens with more data. This is why choosing the right algorithm ' +
-          'matters — it is not just academic; it determines whether your program finishes in the blink ' +
-          'of an eye or never finishes at all.',
+          '**What does this mean at scale?** (n = 1,000,000 items, at 1 billion ops/sec)\n\n' +
+          '| Complexity | Steps | Wall-clock time |\n' +
+          '|------------|-------|----------------|\n' +
+          '| O(1) | 1 | **Instant** |\n' +
+          '| O(log n) | 20 | **Instant** |\n' +
+          '| O(n) | 1,000,000 | **~1 millisecond** |\n' +
+          '| O(n log n) | 20,000,000 | **~20 milliseconds** |\n' +
+          '| O(n²) | 1,000,000,000,000 | **~16 minutes** |\n' +
+          '| O(2ⁿ) | 10^301,029 | **Heat death of universe** |\n\n' +
+          'This is why choosing the right algorithm matters — it is not just academic. It determines whether your program finishes in the blink of an eye or never finishes at all.',
         intermediateContent:
-          'Big O describes how time grows with input size n: O(1) constant (array access, hash lookup), O(log n) logarithmic (binary search), O(n) linear (scan entire list), O(n log n) linearithmic (merge sort, Python sorted()), O(n²) quadratic (nested loops, bubble sort), O(2ⁿ) exponential (brute force subset enumeration). To find Big O: count nested loops. One loop over n → O(n). Two nested loops each over n → O(n²). A loop that halves n each iteration → O(log n). Drop constants and lower terms: O(3n² + 5n + 7) = O(n²).',
+          '**How to determine Big O — the cheat sheet:**\n\n' +
+          '| Code pattern | Big O | Why |\n' +
+          '|-------------|-------|-----|\n' +
+          '| Single loop over n items | O(n) | Visit each once |\n' +
+          '| Two nested loops, each over n | O(n²) | n × n iterations |\n' +
+          '| Loop that halves n each step | O(log n) | Cuts problem in half repeatedly |\n' +
+          '| Sorted loop + binary search inside | O(n log n) | Linear × logarithmic |\n' +
+          '| Checking all subsets of n items | O(2ⁿ) | Every item is in or out |\n\n' +
+          '**Simplification rules:**\n\n' +
+          '- Drop constants: O(3n) → O(n)\n' +
+          '- Drop lower terms: O(n² + 5n + 7) → O(n²)\n' +
+          '- Multiply nested: O(n) inside O(n) → O(n²)\n' +
+          '- Add sequential: O(n) then O(n) → O(n), not O(n²)',
         advancedContent:
-          'Space complexity measures memory usage: merge sort uses O(n) extra space; quicksort uses O(log n) stack space. In-place algorithms (heapsort) use O(1) extra space. Amortized analysis: Python list.append() is O(1) amortized — occasional O(n) resize is spread across n operations. The Master Theorem solves divide-and-conquer recurrences: T(n) = aT(n/b) + O(n^d). If d < log_b(a): T = O(n^(log_b(a))); if d = log_b(a): T = O(n^d log n); if d > log_b(a): T = O(n^d). For merge sort: a=2, b=2, d=1, log₂2 = 1 = d → T = O(n log n). This theorem covers most recursive algorithm analyses.',
+          '**Space complexity — memory matters too:**\n\n' +
+          '| Algorithm | Time | Extra space |\n' +
+          '|-----------|------|------------|\n' +
+          '| Merge sort | O(n log n) | O(n) — needs a copy |\n' +
+          '| Quick sort | O(n log n) avg | O(log n) — stack frames |\n' +
+          '| Heap sort | O(n log n) | **O(1)** — in-place |\n\n' +
+          '**Amortized analysis:** Python `list.append()` is O(1) amortized — occasional O(n) resizes are spread across n operations.\n\n' +
+          '**The Master Theorem** — solves divide-and-conquer recurrences:\n\n' +
+          'For T(n) = aT(n/b) + O(n^d):\n\n' +
+          '| Condition | Result |\n' +
+          '|-----------|--------|\n' +
+          '| d < log_b(a) | T = O(n^(log_b(a))) |\n' +
+          '| d = log_b(a) | T = O(n^d × log n) |\n' +
+          '| d > log_b(a) | T = O(n^d) |\n\n' +
+          '**Merge sort example:** a=2, b=2, d=1. log₂(2) = 1 = d → middle case → T = O(n log n) ✓',
       },
       {
         title: 'Information Entropy',
         beginnerContent:
-          'How do you measure surprise? If someone tells you the sun rose this morning, that is not ' +
-          'surprising at all — it happens every day. But if someone tells you it snowed in the Sahara, ' +
-          'that is extremely surprising. Claude Shannon, the father of information theory, turned this ' +
-          'intuition into a precise formula. He defined *information* as the amount of surprise in a ' +
-          'message, measured in *bits*.\n\n' +
-          'A fair coin flip carries 1 bit of information — there are two equally likely outcomes and you ' +
-          'need one yes/no question to determine which happened. A fair six-sided die carries about 2.58 ' +
-          'bits — you need more questions because there are more possibilities. Shannon\'s entropy formula ' +
-          'is H = -\\u03A3 p\\u1D62 log\\u2082(p\\u1D62), where p\\u1D62 is the probability of each outcome. The negative sign ' +
-          'makes the result positive (since log of a fraction is negative). When all outcomes are equally ' +
-          'likely, entropy is maximized — that is maximum uncertainty. When one outcome is certain, ' +
-          'entropy is zero — there is no surprise at all.\n\n' +
-          'Entropy measures diversity too. An ecosystem where every species is equally common has high ' +
-          'entropy. A monoculture has low entropy. In data compression, entropy tells you the theoretical ' +
-          'minimum number of bits needed to encode a message. You cannot compress below the entropy limit ' +
-          'without losing information — this is Shannon\'s source coding theorem.',
+          '[diagram:EntropyDiagram]\n\n' +
+          '**How do you measure surprise?** If someone tells you the sun rose this morning, that is not surprising at all. But if someone tells you it snowed in the Sahara, that is extremely surprising. Claude Shannon turned this intuition into a precise formula: *information* is the amount of surprise in a message, measured in *bits*.\n\n' +
+          '**Entropy examples — more possibilities = more bits:**\n\n' +
+          '| Event | Outcomes | Entropy (bits) | Intuition |\n' +
+          '|-------|----------|---------------|----------|\n' +
+          '| Fair coin flip | 2 (heads/tails) | **1 bit** | One yes/no question determines the result |\n' +
+          '| Fair six-sided die | 6 | **2.58 bits** | More possibilities, more surprise |\n' +
+          '| Fair 52-card draw | 52 | **5.7 bits** | Many options, high uncertainty |\n' +
+          '| Certain event (sun rises) | 1 | **0 bits** | No surprise at all |\n\n' +
+          'Shannon\'s entropy formula: **H = -\\u03A3 p\\u1D62 log\\u2082(p\\u1D62)**, where p\\u1D62 is the probability of each outcome. The negative sign makes the result positive (since log of a fraction is negative).\n\n' +
+          '**Key principles:**\n\n' +
+          '- When all outcomes are equally likely, entropy is **maximized** — maximum uncertainty\n' +
+          '- When one outcome is certain, entropy is **zero** — no surprise\n' +
+          '- Entropy measures diversity too — a biodiverse ecosystem has high entropy, a monoculture has low entropy\n' +
+          '- In data compression, entropy sets the **theoretical minimum** bits needed to encode a message (Shannon\'s source coding theorem)',
         intermediateContent:
-          'For a discrete random variable X with outcomes {x₁, ..., xₙ} and probabilities {p₁, ..., pₙ}, ' +
-          'Shannon entropy is H(X) = -\\u03A3 p\\u1D62 log\\u2082(p\\u1D62). For a fair coin: H = -2(0.5 × log\\u2082 0.5) = 1 bit. ' +
-          'For an unfair coin (p=0.9): H = -(0.9 log\\u2082 0.9 + 0.1 log\\u2082 0.1) \\u2248 0.47 bits — less uncertainty ' +
-          'because the outcome is mostly predictable. **Cross-entropy** H(p,q) = -\\u03A3 p\\u1D62 log\\u2082(q\\u1D62) measures ' +
-          'the average bits needed when using distribution q to encode data from distribution p. ' +
-          '**KL divergence** D(p||q) = H(p,q) - H(p) measures the extra bits wasted by using the wrong ' +
-          'distribution. In machine learning, cross-entropy loss is the standard objective for classification.',
+          'For a discrete random variable X with outcomes {x\\u2081, ..., x\\u2099} and probabilities {p\\u2081, ..., p\\u2099}:\n\n' +
+          '**Worked examples:**\n\n' +
+          '- Fair coin: H = -2(0.5 \\u00D7 log\\u2082 0.5) = **1 bit**\n' +
+          '- Unfair coin (p=0.9): H = -(0.9 log\\u2082 0.9 + 0.1 log\\u2082 0.1) \\u2248 **0.47 bits** — less uncertainty because the outcome is mostly predictable\n\n' +
+          '**Key information-theoretic measures:**\n\n' +
+          '| Measure | Formula | What it measures |\n' +
+          '|---------|---------|------------------|\n' +
+          '| **Shannon entropy** | H(X) = -\\u03A3 p\\u1D62 log\\u2082(p\\u1D62) | Average surprise (uncertainty) in a distribution |\n' +
+          '| **Cross-entropy** | H(p,q) = -\\u03A3 p\\u1D62 log\\u2082(q\\u1D62) | Average bits needed when using distribution q to encode data from distribution p |\n' +
+          '| **KL divergence** | D(p||q) = H(p,q) - H(p) | Extra bits wasted by using the wrong distribution |\n\n' +
+          'In machine learning, **cross-entropy loss** is the standard objective for classification — it penalizes confident wrong predictions heavily.',
         advancedContent:
-          'Shannon\'s channel capacity theorem: C = max_{p(x)} I(X;Y), where mutual information I(X;Y) = H(X) - H(X|Y). ' +
-          'For a binary symmetric channel with error probability \\u03F5: C = 1 - H(\\u03F5). The noisy channel coding ' +
-          'theorem guarantees error-free communication at any rate below capacity using sufficiently long codes. ' +
-          'Differential entropy extends to continuous distributions: h(X) = -\\u222B f(x) log f(x) dx. The Gaussian ' +
-          'maximizes entropy for a given variance: h(N(\\u03BC,\\u03C3\\u00B2)) = \\u00BD log\\u2082(2\\u03C0e\\u03C3\\u00B2). In Bayesian inference, ' +
-          'maximum entropy priors encode minimal assumptions. Rate-distortion theory defines the minimum bits ' +
-          'needed for lossy compression at a given distortion level.',
+          '**Shannon\'s core theorems:**\n\n' +
+          '| Theorem | Statement | Key formula |\n' +
+          '|---------|-----------|------------|\n' +
+          '| **Channel capacity** | Maximum rate of error-free communication | C = max\\u209A\\u208D\\u2093\\u208E I(X;Y), where I(X;Y) = H(X) - H(X|Y) |\n' +
+          '| **Binary symmetric channel** | Capacity with error probability \\u03F5 | C = 1 - H(\\u03F5) |\n' +
+          '| **Noisy channel coding** | Error-free communication is possible at any rate below capacity | Requires sufficiently long codes |\n\n' +
+          '**Extensions beyond discrete distributions:**\n\n' +
+          '| Concept | Formula / description |\n' +
+          '|---------|---------------------|\n' +
+          '| **Differential entropy** | h(X) = -\\u222B f(x) log f(x) dx — extends entropy to continuous distributions |\n' +
+          '| **Gaussian maximum entropy** | h(N(\\u03BC,\\u03C3\\u00B2)) = \\u00BD log\\u2082(2\\u03C0e\\u03C3\\u00B2) — the Gaussian maximizes entropy for a given variance |\n' +
+          '| **Maximum entropy priors** | In Bayesian inference, encode minimal assumptions about the data |\n' +
+          '| **Rate-distortion theory** | Defines the minimum bits needed for lossy compression at a given distortion level |',
       },
       {
         title: 'Priority Scheduling',
         diagram: 'PrioritySchedulerDiagram',
         beginnerContent:
-          'Imagine you are a doctor in an emergency room. A patient with a paper cut and a patient having ' +
-          'a heart attack arrive at the same time. You do not serve them first-come-first-served — you ' +
-          'treat the heart attack first because it has higher priority. This is *priority scheduling*, and ' +
-          'computers use the same idea to decide which tasks to run.\n\n' +
-          'An operating system juggles dozens of programs at once: your music player, your web browser, ' +
-          'system updates, antivirus scans. Each task gets a *priority level*. High-priority tasks (like ' +
-          'responding to your keystrokes) run before low-priority tasks (like background indexing). The ' +
-          'data structure that makes this efficient is a *priority queue* — it always gives you the highest-' +
-          'priority item in O(log n) time using a structure called a *heap*.\n\n' +
-          'In *preemptive* scheduling, a high-priority task can interrupt a running lower-priority task ' +
-          'mid-execution. Your music keeps playing smoothly even while a large file downloads because the ' +
-          'audio task has higher priority and preempts the download whenever it needs CPU time. In *non-' +
-          'preemptive* scheduling, tasks run to completion before the next starts — simpler but riskier, ' +
-          'because one slow task blocks everything. The Apollo Guidance Computer used priority scheduling ' +
-          'during the Moon landing — when overloaded, it dropped low-priority display tasks to keep ' +
-          'critical navigation running, saving the mission.',
+          'Imagine you are a doctor in an emergency room. A patient with a paper cut and a patient having a heart attack arrive at the same time. You treat the heart attack first because it has higher priority. Computers use the same idea to decide which tasks to run.\n\n' +
+          'An operating system juggles dozens of programs at once: your music player, web browser, system updates, antivirus scans. Each task gets a *priority level*. The data structure that makes this efficient is a *priority queue* — it always gives you the highest-priority item in O(log n) time using a *heap*.\n\n' +
+          '**Preemptive vs non-preemptive scheduling:**\n\n' +
+          '| | Preemptive | Non-preemptive |\n' +
+          '|---|---|---|\n' +
+          '| **How it works** | High-priority tasks can interrupt running lower-priority tasks mid-execution | Tasks run to completion before the next one starts |\n' +
+          '| **Advantage** | Responsive — urgent tasks get CPU immediately | Simpler — no context-switching overhead |\n' +
+          '| **Risk** | More complex, context-switching overhead | One slow task blocks everything |\n' +
+          '| **Example** | Music keeps playing smoothly while a large file downloads | A print job finishes before the next one starts |\n\n' +
+          '> **Apollo 11 in action:** The Apollo Guidance Computer used priority scheduling during the Moon landing. When overloaded, it dropped low-priority display tasks to keep critical navigation running — saving the mission.',
         intermediateContent:
           'Common scheduling algorithms: **Fixed Priority** assigns static priorities (real-time systems, ' +
           'Apollo AGC). **Round Robin** gives each task a fixed time slice (quantum) and rotates — fair but ' +
@@ -8039,31 +8254,32 @@ for val in [10, 20, 30, 40, 50]:
           'until engineers uploaded a fix enabling **priority inheritance** (temporarily boosting the low-' +
           'priority task to release the lock faster).',
         advancedContent:
-          'Rate-Monotonic Scheduling (RMS) assigns priorities by period: shorter period = higher priority. ' +
-          'RMS is optimal among fixed-priority preemptive algorithms for independent periodic tasks. The ' +
-          'schedulability bound is U = \\u03A3(Cᵢ/Tᵢ) \\u2264 n(2^(1/n) - 1), approaching ln(2) \\u2248 0.693 as n\\u2192\\u221E. ' +
-          'Earliest Deadline First (EDF) is optimal among dynamic-priority algorithms with bound U \\u2264 1.0. ' +
-          'The Linux Completely Fair Scheduler (CFS) uses a red-black tree keyed by virtual runtime — the ' +
-          'task with the smallest virtual runtime runs next, achieving O(log n) scheduling decisions. ' +
-          'Real-time systems use WCET (Worst Case Execution Time) analysis to guarantee deadlines.',
+          '**Real-time scheduling algorithms compared:**\n\n' +
+          '| Algorithm | Priority type | How it works | Schedulability bound |\n' +
+          '|-----------|--------------|-------------|---------------------|\n' +
+          '| **RMS** (Rate-Monotonic) | Fixed | Shorter period = higher priority | U = \\u03A3(C\\u1D62/T\\u1D62) \\u2264 n(2^(1/n) - 1), approaches ln(2) \\u2248 0.693 as n\\u2192\\u221E |\n' +
+          '| **EDF** (Earliest Deadline First) | Dynamic | Task with nearest deadline runs first | U \\u2264 1.0 — optimal among dynamic-priority algorithms |\n' +
+          '| **CFS** (Linux Completely Fair Scheduler) | Dynamic (fairness-based) | Red-black tree keyed by virtual runtime; smallest vruntime runs next | O(log n) scheduling decisions |\n\n' +
+          '**Key properties:**\n\n' +
+          '- RMS is optimal among fixed-priority preemptive algorithms for independent periodic tasks\n' +
+          '- EDF achieves higher utilization than RMS (up to 100% vs ~69%)\n' +
+          '- Real-time systems use **WCET** (Worst Case Execution Time) analysis to guarantee deadlines',
       },
       {
         title: 'Technology Diffusion Models',
         beginnerContent:
-          'Why does every new technology seem to follow the same pattern? First a handful of enthusiasts ' +
-          'adopt it, then adoption accelerates rapidly, and finally it levels off as nearly everyone who ' +
-          'wants it already has it. This pattern traces an S-shaped curve — slow start, fast middle, slow ' +
-          'finish — and it shows up everywhere: smartphones, electricity, the printing press, social media.\n\n' +
-          'Everett Rogers identified five adopter categories: *innovators* (2.5% — the risk-takers who try ' +
-          'anything new), *early adopters* (13.5% — opinion leaders who see the potential), *early majority* ' +
-          '(34% — pragmatists who wait for proof), *late majority* (34% — skeptics who adopt only when it ' +
-          'becomes the norm), and *laggards* (16% — the last holdouts). The critical moment is crossing the ' +
-          '*chasm* between early adopters and the early majority — many technologies die here because ' +
-          'enthusiast appeal does not translate to mainstream value.\n\n' +
-          '*Network effects* accelerate the middle of the S-curve: each new telephone user makes the network ' +
-          'more valuable for everyone, which attracts more users, creating a positive feedback loop. This is ' +
-          'why adoption curves are S-shaped rather than linear. The *adoption threshold* is the penetration ' +
-          'rate at which growth becomes self-sustaining — below it, the technology might fade away.',
+          '[diagram:TechDiffusionDiagram]\n\n' +
+          'Why does every new technology follow the same pattern? First a handful of enthusiasts adopt it, then adoption accelerates rapidly, and finally it levels off. This traces an **S-shaped curve** — slow start, fast middle, slow finish — visible in smartphones, electricity, the printing press, and social media.\n\n' +
+          '**Rogers\' five adopter categories:**\n\n' +
+          '| Category | % of population | Description |\n' +
+          '|----------|----------------|-------------|\n' +
+          '| **Innovators** | 2.5% | Risk-takers who try anything new |\n' +
+          '| **Early adopters** | 13.5% | Opinion leaders who see the potential early |\n' +
+          '| **Early majority** | 34% | Pragmatists who wait for proof before adopting |\n' +
+          '| **Late majority** | 34% | Skeptics who adopt only when it becomes the norm |\n' +
+          '| **Laggards** | 16% | The last holdouts, adopt only when unavoidable |\n\n' +
+          'The critical moment is crossing the **chasm** between early adopters and the early majority. Many technologies die here because enthusiast appeal does not translate to mainstream value.\n\n' +
+          '**Network effects** accelerate the middle of the S-curve: each new telephone user makes the network more valuable for everyone, creating a positive feedback loop. The *adoption threshold* is the penetration rate at which growth becomes self-sustaining — below it, the technology might fade away.',
         intermediateContent:
           'The **Bass diffusion model** separates two forces: innovation (external influence like advertising, ' +
           'coefficient p) and imitation (internal influence like word-of-mouth, coefficient q). The adoption ' +
@@ -8085,32 +8301,37 @@ for val in [10, 20, 30, 40, 50]:
       {
         title: 'Graph Theory and Network Analysis',
         beginnerContent:
-          'Think of a social network: each person is a dot, and each friendship is a line connecting ' +
-          'two dots. In mathematics, those dots are called **nodes** (or vertices) and the lines are ' +
-          'called **edges**. Together they form a **graph** — one of the most powerful structures in ' +
-          'computer science and mathematics.\n\n' +
-          'Graphs are everywhere once you learn to see them. Cities connected by roads form a graph. ' +
-          'Web pages connected by hyperlinks form a graph. Neurons connected by synapses form a graph. ' +
-          'Atoms connected by chemical bonds form a graph. Any time you have things and relationships ' +
-          'between those things, you have a graph.\n\n' +
-          'The most famous graph problem is the **shortest path**: what is the quickest route between ' +
-          'two nodes? Google Maps solves this billions of times daily using Dijkstra\'s algorithm, which ' +
-          'explores outward from the starting node, always expanding the closest unvisited node first, ' +
-          'until it reaches the destination.\n\n' +
-          '**Centrality** measures how important a node is. A person with many friends has high **degree ' +
-          'centrality**. A person who connects two otherwise separate groups has high **betweenness ' +
-          'centrality** — removing them would disconnect the network. Google\'s PageRank algorithm measures ' +
-          'a kind of centrality for web pages: a page is important if important pages link to it. This ' +
-          'recursive definition is what made Google\'s search engine revolutionary.',
+          '[diagram:GraphTraversalDiagram]\n\n' +
+          'Think of a social network: each person is a dot, and each friendship is a line connecting two dots. In mathematics, those dots are called **nodes** (or vertices) and the lines are **edges**. Together they form a **graph**.\n\n' +
+          '**Graphs are everywhere:**\n\n' +
+          '| Domain | Nodes | Edges |\n' +
+          '|--------|-------|-------|\n' +
+          '| Social network | People | Friendships |\n' +
+          '| Road map | Cities | Roads |\n' +
+          '| World Wide Web | Web pages | Hyperlinks |\n' +
+          '| Brain | Neurons | Synapses |\n' +
+          '| Chemistry | Atoms | Chemical bonds |\n\n' +
+          'Any time you have things and relationships between those things, you have a graph.\n\n' +
+          'The most famous graph problem is the **shortest path**: what is the quickest route between two nodes? Google Maps solves this billions of times daily using Dijkstra\'s algorithm, which explores outward from the starting node, always expanding the closest unvisited node first.\n\n' +
+          '**Centrality — measuring node importance:**\n\n' +
+          '- **Degree centrality** — a person with many friends is highly connected\n' +
+          '- **Betweenness centrality** — a person who connects two otherwise separate groups is a critical bridge (removing them would disconnect the network)\n' +
+          '- **PageRank** — Google\'s algorithm: a page is important if important pages link to it. This recursive definition made Google\'s search engine revolutionary.',
         intermediateContent:
-          'A graph G = (V, E) has |V| vertices and |E| edges. Storage: **adjacency matrix** uses O(V²) ' +
-          'space but allows O(1) edge lookup; **adjacency list** uses O(V + E) space and is preferred ' +
-          'for sparse graphs. BFS (breadth-first search) finds shortest paths in unweighted graphs in ' +
-          'O(V + E). **Dijkstra\'s algorithm** handles non-negative weighted edges in O((V + E) log V) ' +
-          'with a min-heap. **Bellman-Ford** handles negative weights in O(VE). **Floyd-Warshall** finds ' +
-          'all-pairs shortest paths in O(V³). Degree centrality: C_D(v) = deg(v)/(|V|-1). Betweenness: ' +
-          'C_B(v) = Σ σ_st(v)/σ_st summed over all pairs s,t where σ_st is the number of shortest paths ' +
-          'and σ_st(v) is those passing through v.',
+          'A graph G = (V, E) has |V| vertices and |E| edges.\n\n' +
+          '**Graph storage:**\n\n' +
+          '- **Adjacency matrix** — O(V\\u00B2) space, O(1) edge lookup. Best for dense graphs.\n' +
+          '- **Adjacency list** — O(V + E) space. Preferred for sparse graphs (most real-world networks).\n\n' +
+          '**Graph algorithms compared:**\n\n' +
+          '| Algorithm | Time complexity | Use case |\n' +
+          '|-----------|---------------|----------|\n' +
+          '| **BFS** (Breadth-First Search) | O(V + E) | Shortest path in unweighted graphs |\n' +
+          '| **Dijkstra\'s** | O((V + E) log V) | Shortest path with non-negative weights (Google Maps) |\n' +
+          '| **Bellman-Ford** | O(VE) | Shortest path with negative weights |\n' +
+          '| **Floyd-Warshall** | O(V\\u00B3) | All-pairs shortest paths |\n\n' +
+          '**Centrality formulas:**\n\n' +
+          '- **Degree centrality:** C_D(v) = deg(v) / (|V| - 1)\n' +
+          '- **Betweenness:** C_B(v) = \\u03A3 \\u03C3_st(v) / \\u03C3_st, summed over all pairs s,t (where \\u03C3_st is the number of shortest paths and \\u03C3_st(v) is those passing through v)',
         advancedContent:
           'Spectral graph theory analyses the eigenvalues of the graph Laplacian L = D - A (degree matrix ' +
           'minus adjacency matrix). The second-smallest eigenvalue λ₂ (algebraic connectivity) measures ' +
@@ -8516,7 +8737,15 @@ print(fibonacci(10))  # 55`,
           'Hamming(7,4) encodes 4 data bits into 7 bits (3 parity bits added). The overhead is 3/7 = 43%, but you gain the ability to correct any single-bit error automatically. QR codes, RAM modules (ECC memory), and satellite communication all use variants of this principle.\n\n' +
           'The **ikat weaving** of Pochampally uses a similar idea: the weaver plans the pattern as a binary grid (dye/no-dye) and the resist-tie placement must be error-free because a single misplaced tie corrupts the pattern irreversibly. Traditional weavers developed mental "checksums" — counting ties per row — that parallel parity checking.',
         advancedContent:
-          'Modern error correction uses **Reed-Solomon codes**, which operate on blocks of symbols (not individual bits). RS(255,223) — used in CDs, DVDs, QR codes, and deep-space communication — encodes 223 data bytes into 255 bytes (32 check bytes). It can correct up to 16 symbol errors per block, handling burst errors from scratches or signal fades. The math uses **Galois field arithmetic** (GF(2⁸)) where addition is XOR and multiplication uses polynomial arithmetic modulo an irreducible polynomial. The **Shannon limit** (channel capacity C = B·log₂(1 + SNR)) sets the theoretical maximum data rate for a given noise level. LDPC and Turbo codes approach within 0.1 dB of Shannon\'s limit and are used in 5G, Wi-Fi 6, and satellite links.',
+          '**Error correction codes compared:**\n\n' +
+          '| Code | How it works | Where it\'s used |\n' +
+          '|------|-------------|----------------|\n' +
+          '| **Reed-Solomon** | Operates on blocks of symbols (not individual bits). RS(255,223) encodes 223 data bytes into 255 bytes, correcting up to 16 symbol errors per block | CDs, DVDs, QR codes, deep-space communication |\n' +
+          '| **LDPC** (Low-Density Parity-Check) | Sparse parity-check matrix enables efficient iterative decoding. Approaches within 0.1 dB of Shannon\'s limit | 5G, Wi-Fi 6, satellite links |\n' +
+          '| **Turbo codes** | Two convolutional encoders with an interleaver; iterative decoding exchanges soft information | 3G/4G mobile, deep-space probes |\n' +
+          '| **Polar codes** | Channel polarization creates "perfect" and "useless" sub-channels; data sent on reliable ones only | 5G control channels |\n\n' +
+          '**The math behind Reed-Solomon:** Uses **Galois field arithmetic** (GF(2\\u2078)) where addition is XOR and multiplication uses polynomial arithmetic modulo an irreducible polynomial.\n\n' +
+          '**The Shannon limit** (channel capacity C = B\\u00B7log\\u2082(1 + SNR)) sets the theoretical maximum data rate for a given noise level. Modern codes (LDPC, Turbo, Polar) approach this limit within fractions of a decibel.',
       },
     ],
   },
@@ -8694,12 +8923,20 @@ print(fibonacci(10))  # 55`,
           'This two-state system is called **binary**, and the digits 0 and 1 are called **binary digits** (bits). ' +
           'Eight bits make a **byte**, enough to represent a single letter or a number up to 255.',
         intermediateContent:
-          'Binary (base-2) works exactly like decimal (base-10), but with only two digits. In decimal, 237 means ' +
-          '2×100 + 3×10 + 7×1. In binary, 1101 means 1×8 + 1×4 + 0×2 + 1×1 = 13. ' +
-          'To convert decimal to binary, repeatedly divide by 2 and read the remainders bottom-to-top. ' +
-          'Hexadecimal (base-16) is a shorthand: each hex digit (0–9, A–F) represents exactly 4 bits. ' +
-          'So the binary number 1010 1111 becomes AF in hex. Programmers use hex because it is compact yet maps ' +
-          'directly to binary — every color code like #FF6600 is really 24 bits of red, green, and blue.',
+          '**Binary works exactly like decimal — just with 2 digits instead of 10:**\n\n' +
+          '| Decimal (base 10) | Binary (base 2) |\n' +
+          '|---|---|\n' +
+          '| 237 = 2×100 + 3×10 + 7×1 | 1101 = 1×8 + 1×4 + 0×2 + 1×1 = **13** |\n\n' +
+          '**Quick reference:**\n\n' +
+          '| Decimal | Binary | Hex |\n' +
+          '|---------|--------|-----|\n' +
+          '| 0 | 0000 | 0 |\n' +
+          '| 5 | 0101 | 5 |\n' +
+          '| 10 | 1010 | A |\n' +
+          '| 15 | 1111 | F |\n' +
+          '| 255 | 1111 1111 | FF |\n\n' +
+          '**To convert decimal → binary:** repeatedly divide by 2, read remainders bottom-to-top.\n\n' +
+          '**Hexadecimal (base-16)** is a shorthand — each hex digit (0–9, A–F) represents exactly 4 bits. The color code `#FF6600` is really 24 bits: FF (red=255), 66 (green=102), 00 (blue=0).',
         advancedContent:
           '**CMOS — why modern chips barely use power when idle:**\n\n' +
           'A CMOS inverter (the simplest circuit) uses two transistors:\n' +
@@ -8729,11 +8966,16 @@ print(fibonacci(10))  # 55`,
           'In everyday life, AND logic appears everywhere: a car starts only if the key is in **and** the brake ' +
           'is pressed. A microwave runs only if the door is closed **and** the start button is pressed.',
         intermediateContent:
-          'In Boolean algebra, AND is written as multiplication: A · B or simply AB. This is because the ' +
-          'multiplication table for 0 and 1 matches the AND truth table: 0×0=0, 0×1=0, 1×0=0, 1×1=1. ' +
-          'AND has useful algebraic properties: **identity** (A · 1 = A), **null** (A · 0 = 0), ' +
-          '**idempotent** (A · A = A), **commutative** (A · B = B · A), and **associative** ' +
-          '((A · B) · C = A · (B · C)). These let you simplify complex expressions.',
+          '**In Boolean algebra, AND is written as multiplication: A · B or simply AB.**\n\n' +
+          'This works because the multiplication table for 0 and 1 matches AND: 0×0=0, 0×1=0, 1×0=0, 1×1=1.\n\n' +
+          '| Property | Rule | Why it works |\n' +
+          '|----------|------|--------------|\n' +
+          '| Identity | A · 1 = A | AND-ing with true changes nothing |\n' +
+          '| Null | A · 0 = 0 | If one input is false, output is false |\n' +
+          '| Idempotent | A · A = A | AND-ing with yourself changes nothing |\n' +
+          '| Commutative | A · B = B · A | Order doesn\'t matter |\n' +
+          '| Associative | (A · B) · C = A · (B · C) | Grouping doesn\'t matter |\n\n' +
+          'These properties let you simplify complex Boolean expressions — the same way you simplify algebra.',
         advancedContent:
           '**Why NAND is king in real chip design:**\n\n' +
           'You might expect an AND gate to be simpler than NAND. In CMOS, it is the opposite:\n' +
@@ -8770,11 +9012,15 @@ print(fibonacci(10))  # 55`,
           'A smoke alarm that triggers from smoke **or** heat uses OR logic. A phone that unlocks with fingerprint ' +
           '**or** face recognition is another OR example.',
         intermediateContent:
-          'In Boolean algebra, OR is written as addition: A + B. The "addition" table for bits: 0+0=0, 0+1=1, 1+0=1, 1+1=1 ' +
-          '(not 2 — there is no 2 in Boolean). Properties: **identity** (A + 0 = A), **null** (A + 1 = 1), ' +
-          '**idempotent** (A + A = A), **commutative**, and **associative**. The **distributive law** connects AND and OR: ' +
-          'A · (B + C) = A·B + A·C (just like regular algebra). The **absorption law** simplifies: ' +
-          'A + A·B = A (if A is true, the whole thing is true regardless of B).',
+          '**In Boolean algebra, OR is written as addition: A + B.**\n\n' +
+          'The "addition" table for bits: 0+0=0, 0+1=1, 1+0=1, 1+1=1 (not 2 — there is no 2 in Boolean).\n\n' +
+          '| Property | Rule | Why it works |\n' +
+          '|----------|------|--------------|\n' +
+          '| Identity | A + 0 = A | Adding nothing changes nothing |\n' +
+          '| Null | A + 1 = 1 | If one input is already true, output is true |\n' +
+          '| Idempotent | A + A = A | OR-ing with yourself changes nothing |\n' +
+          '| Distributive | A · (B + C) = A·B + A·C | Same as regular algebra |\n' +
+          '| Absorption | A + A·B = A | If A is true, the rest doesn\'t matter |',
         advancedContent:
           '**CMOS OR gate — built from NOR + NOT (6 transistors):**\n\n' +
           'Just like AND is NAND+NOT, OR is NOR+NOT. The NOR gate itself is 4 transistors (2 pMOS in series + 2 nMOS in parallel ' +
@@ -8838,11 +9084,14 @@ print(fibonacci(10))  # 55`,
           'Why is this useful? Chip manufacturers can mass-produce billions of identical NAND gates, then wire them ' +
           'differently to create any circuit they need. One building block, infinite possibilities.',
         intermediateContent:
-          'To build NOT from NAND: connect both inputs to the same signal. NAND(A, A) = NOT(A · A) = NOT(A). ' +
-          'To build AND from NAND: NAND then NOT, which is NAND followed by another NAND-as-NOT. To build OR from ' +
-          'NAND: NOT each input first, then NAND the results. This follows from **De Morgan\'s theorem**: ' +
-          '¬(A · B) = ¬A + ¬B. Similarly, NOR is universal: NOT from NOR(A, A), OR from ' +
-          'NOR-then-NOR-as-NOT, AND from NOT-each-then-NOR.',
+          '**Building ANY gate from NAND alone:**\n\n' +
+          '| Gate needed | How to build it from NAND |\n' +
+          '|------------|-------------------------|\n' +
+          '| NOT | Connect both NAND inputs together: NAND(A, A) = NOT(A) |\n' +
+          '| AND | NAND → then NOT (another NAND-as-NOT) |\n' +
+          '| OR | NOT each input → then NAND the results |\n\n' +
+          'This works because of **De Morgan\'s theorem**: ¬(A · B) = ¬A + ¬B.\n\n' +
+          'NOR is also universal — the same trick works with NOR gates instead of NAND.',
         advancedContent:
           '**NAND universality in practice — from 1960s chips to modern FPGAs:**\n\n' +
           'The 7400 chip (1966) contained four 2-input NAND gates on a single IC. Engineers wired them into any logic function needed. ' +
@@ -8943,22 +9192,37 @@ print(fibonacci(10))  # 55`,
       {
         title: 'From Gates to Processors',
         beginnerContent:
-          'A modern smartphone processor contains **billions** of transistors, each acting as a tiny switch. ' +
-          'Groups of transistors form gates. Groups of gates form adders, multiplexers, and memory cells. These ' +
-          'combine into an ALU (does math), registers (tiny fast storage), and a control unit (directs traffic). ' +
-          'Together they make a CPU — the brain of the computer.\n\n' +
-          'In 1965, Gordon Moore observed that the number of transistors on a chip doubles roughly every two years ' +
-          '— **Moore\'s Law**. The first microprocessor (Intel 4004, 1971) had 2,300 transistors. A modern ' +
-          'Apple M3 chip has over 25 billion. Yet every one of those billions of transistors is still just a switch, ' +
-          'and every circuit is still built from the same AND, OR, NOT gates you just learned.\n\n' +
+          'A modern smartphone processor contains **billions** of transistors, each acting as a tiny switch. They build on each other in layers:\n\n' +
+          '| Level | What it is | Built from |\n' +
+          '|-------|-----------|------------|\n' +
+          '| Transistor | A tiny switch (on/off) | Silicon + electricity |\n' +
+          '| Gate | AND, OR, NOT | 2-6 transistors |\n' +
+          '| Adder | Adds two numbers | A few gates |\n' +
+          '| ALU | Does all math + logic | Many adders + comparators |\n' +
+          '| CPU | The brain of the computer | ALU + registers + control unit |\n\n' +
+          '**Moore\'s Law** (1965): the number of transistors on a chip doubles roughly every two years.\n\n' +
+          '| Year | Chip | Transistors |\n' +
+          '|------|------|------------|\n' +
+          '| 1971 | Intel 4004 | 2,300 |\n' +
+          '| 1993 | Pentium | 3,100,000 |\n' +
+          '| 2010 | Core i7 | 731,000,000 |\n' +
+          '| 2023 | Apple M3 | 25,000,000,000 |\n\n' +
+          'Yet every one of those 25 billion transistors is still just a switch, and every circuit is still built from the same AND, OR, NOT gates you just learned.\n\n' +
           'Everything is binary. Everything is gates. That is the profound simplicity at the heart of all computing.',
         intermediateContent:
-          'A CPU executes the **fetch-decode-execute cycle** billions of times per second. Fetch: read the next ' +
-          'instruction from memory. Decode: figure out what operation it specifies (add? compare? branch?). Execute: ' +
-          'perform the operation in the ALU. Modern CPUs use **pipelining** (overlapping stages of different ' +
-          'instructions), **superscalar execution** (multiple ALUs working in parallel), and **branch prediction** ' +
-          '(guessing which way an if-statement will go to avoid stalling the pipeline). Clock speeds are measured ' +
-          'in GHz — a 3 GHz CPU completes 3 billion cycles per second.',
+          '**The fetch-decode-execute cycle — what a CPU does billions of times per second:**\n\n' +
+          '| Stage | What happens | Example |\n' +
+          '|-------|-------------|--------|\n' +
+          '| **Fetch** | Read the next instruction from memory | "Get instruction at address 0x4A20" |\n' +
+          '| **Decode** | Figure out what operation it specifies | "This is an ADD instruction" |\n' +
+          '| **Execute** | Perform the operation in the ALU | "Add registers R1 and R2, store in R3" |\n\n' +
+          '**How modern CPUs go faster:**\n\n' +
+          '| Technique | What it does |\n' +
+          '|-----------|-------------|\n' +
+          '| Pipelining | Overlap stages — while one instruction executes, the next is being decoded, and the one after is being fetched |\n' +
+          '| Superscalar | Multiple ALUs working in parallel — execute 4+ instructions per cycle |\n' +
+          '| Branch prediction | Guess which way an if-statement will go to avoid stalling the pipeline |\n\n' +
+          'A 3 GHz CPU completes **3 billion** of these cycles per second.',
         advancedContent:
           '**The end of Moore\'s Law — and what comes next:**\n\n' +
           '| Node size | Year | Transistors | Key challenge |\n' +

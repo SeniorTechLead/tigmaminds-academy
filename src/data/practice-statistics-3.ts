@@ -30,7 +30,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-02', difficulty: 1,
       question: 'Using λ = 2, compute **P(X = 1)** — exactly one call in a minute.',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361, 0.0120, 0.0034, 0.0009], highlight: 1 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 }, markX: 1 },
       steps: [
         { label: 'Formula', content: 'P(X = 1) = 2¹ · e^(−2) / 1!' },
         { label: 'Compute', content: '= 2 · 0.1353 / 1 = **0.2707**' },
@@ -42,7 +42,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-03', difficulty: 1,
       question: 'Using λ = 2, compute **P(X = 2)**.',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361, 0.0120, 0.0034, 0.0009], highlight: 2 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 }, markX: 2 },
       steps: [
         { label: 'Formula', content: 'P(X = 2) = 2² · e^(−2) / 2!' },
         { label: 'Compute', content: '= 4 · 0.1353 / 2 = **0.2707**' },
@@ -54,7 +54,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-04', difficulty: 1,
       question: 'A book has an average of **3 typos per page** (λ = 3). What is P(X = 0) — a page with **no typos**?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0498, 0.1494, 0.2240, 0.2240, 0.1680, 0.1008, 0.0504, 0.0216, 0.0081], highlight: 0 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 }, markX: 0 },
       steps: [
         { label: 'Formula', content: 'P(X = 0) = 3⁰ · e^(−3) / 0!' },
         { label: 'Compute', content: '= 1 · 0.0498 / 1 = **0.0498**' },
@@ -118,7 +118,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-09', difficulty: 1,
       question: 'With λ = 1, compute **P(X = 0)** — no customers in 10 minutes.',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.3679, 0.3679, 0.1839, 0.0613, 0.0153, 0.0031, 0.0005, 0.0001, 0.0000], highlight: 0 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 1 }, markX: 0 },
       steps: [
         { label: 'Formula', content: 'P(X = 0) = 1⁰ · e^(−1) / 0!' },
         { label: 'Compute', content: '= 1 · 0.3679 / 1 = **0.3679**' },
@@ -130,7 +130,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-10', difficulty: 1,
       question: 'With λ = 1, compute **P(X = 1)** — exactly one customer in 10 minutes.',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.3679, 0.3679, 0.1839, 0.0613, 0.0153, 0.0031, 0.0005, 0.0001, 0.0000], highlight: 1 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 1 }, markX: 1 },
       steps: [
         { label: 'Formula', content: 'P(X = 1) = 1¹ · e^(−1) / 1!' },
         { label: 'Compute', content: '= 1 · 0.3679 / 1 = **0.3679**' },
@@ -142,7 +142,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-11', difficulty: 1,
       question: 'An email server receives **5 spam emails per hour** on average. What is P(X = 5)?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0067, 0.0337, 0.0842, 0.1404, 0.1755, 0.1755, 0.1462, 0.1044, 0.0653] },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 5 }, markX: 5 },
       steps: [
         { label: 'Setup', content: 'λ = 5, k = 5' },
         { label: 'Compute λ^k', content: '5⁵ = 3125' },
@@ -156,7 +156,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-12', difficulty: 1,
       question: 'Compute **P(X = 4)** when λ = 3.',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0498, 0.1494, 0.2240, 0.2240, 0.1680, 0.1008, 0.0504, 0.0216, 0.0081], highlight: 4 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 }, markX: 4 },
       steps: [
         { label: 'Setup', content: 'λ = 3, k = 4' },
         { label: 'λ^k', content: '3⁴ = 81' },
@@ -170,7 +170,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-13', difficulty: 1,
       question: 'A printer produces an average of **2 misprints per 100 pages**. What is the probability of **exactly 2 misprints** in the next 100 pages?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361, 0.0120, 0.0034, 0.0009], highlight: 2 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 }, markX: 2 },
       steps: [
         { label: 'Setup', content: 'λ = 2, k = 2' },
         { label: 'Compute', content: 'P(X = 2) = 2² · e^(−2) / 2! = 4 · 0.1353 / 2 = **0.2707**' },
@@ -206,7 +206,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-16', difficulty: 1,
       question: 'Build the probability table for λ = 2 from k = 0 to k = 4.',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902] },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 } },
       steps: [
         { label: 'P(X=0)', content: '2⁰ · e^(−2) / 0! = 0.1353' },
         { label: 'P(X=1)', content: '2¹ · e^(−2) / 1! = 0.2707' },
@@ -221,7 +221,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-17', difficulty: 1,
       question: 'A hospital emergency room sees **6 patients per hour** on average. What is the probability of seeing **exactly 6 patients** in a given hour?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0025, 0.0149, 0.0446, 0.0892, 0.1339, 0.1606, 0.1606, 0.1377, 0.1033], highlight: 6 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 6 }, markX: 6 },
       steps: [
         { label: 'Setup', content: 'λ = 6, k = 6' },
         { label: 'λ^k', content: '6⁶ = 46656' },
@@ -306,7 +306,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-23', difficulty: 2,
       question: 'You observe 50 events in 10 hours. Estimate λ (events per hour) and compute P(X = 3) for a single hour.',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8'], values: [0.0067, 0.0337, 0.0842, 0.1404, 0.1755, 0.1755, 0.1462, 0.1044, 0.0653], highlight: 3 },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 5 }, markX: 3 },
       steps: [
         { label: 'Estimate λ', content: 'λ̂ = 50 / 10 = **5** events per hour' },
         { label: 'P(X = 3)', content: '= 5³ · e^(−5) / 3! = 125 · 0.0067 / 6 = 0.8375 / 6 = **0.1396**' },
@@ -318,7 +318,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-24', difficulty: 2,
       question: 'A factory produces defects at λ = 2 per batch. If 100 batches are inspected and 20 have zero defects, does this match the Poisson prediction?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361] },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 } },
       steps: [
         { label: 'Expected P(X=0)', content: 'P(X = 0) = e^(−2) = 0.1353' },
         { label: 'Expected count', content: '100 × 0.1353 = **13.53 batches** with zero defects' },
@@ -345,7 +345,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-26', difficulty: 2,
       question: 'Compare Binomial(n=1000, p=0.002) with Poisson(λ=2) for k=0,1,2. How close are they?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5'], values: [0.1353, 0.2707, 0.2707, 0.1804, 0.0902, 0.0361] },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 2 } },
       steps: [
         { label: 'Poisson P(0)', content: 'e^(−2) = 0.1353' },
         { label: 'Poisson P(1)', content: '2 · e^(−2) = 0.2707' },
@@ -417,7 +417,7 @@ export const practicePoissonDistribution: PracticeSet = {
     {
       id: 'poi-31', difficulty: 2,
       question: 'With λ = 3, build P(X = k) for k = 0 to 5 and verify the probabilities nearly sum to 1.',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5'], values: [0.0498, 0.1494, 0.2240, 0.2240, 0.1680, 0.1008] },
+      visual: { kind: 'distribution', type: 'poisson', params: { lambda: 3 } },
       steps: [
         { label: 'P(0)', content: '0.0498' },
         { label: 'P(1)', content: '3 · 0.0498 = 0.1494' },
@@ -1698,7 +1698,6 @@ export const practiceChiSquared: PracticeSet = {
     {
       id: 'chi-24', difficulty: 2,
       question: 'Survey: preferred subject by gender. Boys: Math=40, Science=30, English=30. Girls: Math=25, Science=35, English=40. Test independence at α = 0.05.',
-      visual: { kind: 'bar-chart', labels: ['Math','Science','English'], values: [65, 65, 70] },
       steps: [
         { label: 'Table totals', content: 'Boys=100, Girls=100, Total=200. Columns: Math=65, Science=65, English=70' },
         { label: 'Expected values', content: 'E(Boys,Math)=100·65/200=32.5, E(Boys,Sci)=32.5, E(Boys,Eng)=35. Same for Girls.' },

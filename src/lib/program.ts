@@ -111,6 +111,10 @@ export async function createCohort(cohort: {
  *  If the student has an account, links immediately.
  *  If not, creates an invite enrollment — auto-links when they sign up. */
 export async function enrollStudent(cohortId: string, studentEmail: string, parentEmail?: string, parentName?: string) {
+  // Validate
+  if (parentEmail && parentEmail.toLowerCase() === studentEmail.toLowerCase()) {
+    return { data: null, error: { message: 'Student and guardian emails cannot be the same' }, invited: false, parentToken: null, inviteResults: [] };
+  }
   // Try to find existing account
   let studentId: string | null = null;
   const { data: userId } = await supabase.rpc('lookup_user_by_email', { target_email: studentEmail });
@@ -154,7 +158,7 @@ export async function enrollStudent(cohortId: string, studentEmail: string, pare
     const { data: parentUserId } = await supabase.rpc('lookup_user_by_email', { target_email: parentEmail });
     if (parentUserId) {
       await supabase.from('enrollments').update({ parent_id: parentUserId }).eq('id', data.id);
-      await supabase.rpc('add_role_to_user', { target_user_id: parentUserId, new_role: 'parent' }).catch(() => {});
+      try { await supabase.rpc('add_role_to_user', { target_user_id: parentUserId, new_role: 'parent' }); } catch {}
     }
   }
 
@@ -219,6 +223,13 @@ export async function getMentorCohorts(mentorId: string) {
     .order('start_date', { ascending: false });
   if (error) console.warn('[Program] getMentorCohorts:', error.message);
   return (data || []) as Cohort[];
+}
+
+/** Remove a student — deletes enrollment and all linked data via SECURITY DEFINER function (bypasses RLS) */
+export async function removeStudent(enrollmentId: string) {
+  const { error } = await supabase.rpc('remove_enrollment', { target_enrollment_id: enrollmentId });
+  if (error) console.warn('[Program] removeStudent:', error.message);
+  return { error };
 }
 
 /** Get dashboard data for a cohort (direct query, not view) */
@@ -411,35 +422,84 @@ export async function getParentEnrollment(parentId: string, parentEmail?: string
   return data as (Enrollment & { cohorts: Cohort }) | null;
 }
 
-/** Get full parent view data (authenticated) */
-export async function getParentViewAuthenticated(parentId: string, parentEmail?: string) {
-  const enrollment = await getParentEnrollment(parentId, parentEmail);
-  if (!enrollment) return null;
+/** Get ALL parent's child enrollments (for multi-ward support) */
+export async function getParentEnrollments(parentId: string, parentEmail?: string) {
+  // Get all by parent_id
+  const { data: byId } = await supabase
+    .from('enrollments')
+    .select('*, cohorts(*)')
+    .eq('parent_id', parentId)
+    .eq('status', 'active');
 
-  const { data: progress } = await supabase
-    .from('weekly_progress')
-    .select('*')
-    .eq('enrollment_id', enrollment.id)
-    .order('week_number');
+  const results = [...(byId || [])];
 
-  let studentName = 'Student';
-  if (enrollment.student_id) {
-    const { data: profile } = await supabase
-      .from('user_profiles')
-      .select('display_name')
-      .eq('id', enrollment.student_id)
-      .maybeSingle();
-    if (profile?.display_name) studentName = profile.display_name;
-  } else if ((enrollment as any).student_email) {
-    studentName = (enrollment as any).student_email;
+  // Also get by parent_email if not already found via parent_id
+  if (parentEmail) {
+    const { data: byEmail } = await supabase
+      .from('enrollments')
+      .select('*, cohorts(*)')
+      .eq('parent_email', parentEmail)
+      .eq('status', 'active');
+
+    for (const enr of (byEmail || [])) {
+      if (!results.some(r => r.id === enr.id)) {
+        results.push(enr);
+        // Auto-link parent_id for next time
+        if (!enr.parent_id) {
+          await supabase.from('enrollments').update({ parent_id: parentId }).eq('id', enr.id);
+        }
+      }
+    }
   }
 
-  return {
-    studentName,
-    cohort: enrollment.cohorts as Cohort,
-    enrollment,
-    progress: (progress || []) as WeeklyProgress[],
-  };
+  return results as (Enrollment & { cohorts: Cohort })[];
+}
+
+export interface ParentWardData {
+  studentName: string;
+  cohort: Cohort;
+  enrollment: Enrollment & { cohorts: Cohort };
+  progress: WeeklyProgress[];
+}
+
+/** Get full parent view data (authenticated) — supports multiple wards */
+export async function getParentViewAuthenticated(parentId: string, parentEmail?: string): Promise<ParentWardData[] | null> {
+  const enrollments = await getParentEnrollments(parentId, parentEmail);
+  if (!enrollments.length) return null;
+
+  const wards: ParentWardData[] = [];
+
+  for (const enrollment of enrollments) {
+    const { data: progress } = await supabase
+      .from('weekly_progress')
+      .select('*')
+      .eq('enrollment_id', enrollment.id)
+      .order('week_number');
+
+    // Note: this function is now only called by token-based access (legacy).
+    // Authenticated guardians use /api/program/guardian-data instead.
+    let studentName = 'Student';
+    if (enrollment.student_id) {
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('display_name')
+        .eq('id', enrollment.student_id)
+        .maybeSingle();
+      if (profile?.display_name) studentName = profile.display_name;
+    }
+    if (studentName === 'Student' && (enrollment as any).student_email) {
+      studentName = (enrollment as any).student_email.split('@')[0];
+    }
+
+    wards.push({
+      studentName,
+      cohort: enrollment.cohorts as Cohort,
+      enrollment,
+      progress: (progress || []) as WeeklyProgress[],
+    });
+  }
+
+  return wards;
 }
 
 // ============================================================
@@ -574,7 +634,9 @@ export async function generatePendingPayments(enrollmentId: string, startDate: s
 // STUDENT PHOTO
 // ============================================================
 
-/** Upload student photo and update enrollment */
+/** Upload student photo and update enrollment.
+ *  Stores the storage PATH (not a public URL) in the DB.
+ *  Use getStudentPhotoUrl() to get a time-limited signed URL for display. */
 export async function uploadStudentPhoto(enrollmentId: string, file: File) {
   const ext = file.name.split('.').pop() || 'jpg';
   const path = `student-photos/${enrollmentId}.${ext}`;
@@ -588,14 +650,27 @@ export async function uploadStudentPhoto(enrollmentId: string, file: File) {
     return { url: null, error: uploadErr.message };
   }
 
-  const { data: urlData } = supabase.storage.from('program-assets').getPublicUrl(path);
-  const url = urlData?.publicUrl || null;
+  // Store the path, not a public URL — bucket is private
+  await supabase.from('enrollments').update({ student_photo_url: path }).eq('id', enrollmentId);
 
-  if (url) {
-    await supabase.from('enrollments').update({ student_photo_url: url }).eq('id', enrollmentId);
-  }
+  // Return a signed URL for immediate display (1 hour)
+  const { data: signedData } = await supabase.storage
+    .from('program-assets')
+    .createSignedUrl(path, 3600);
 
-  return { url, error: null };
+  return { url: signedData?.signedUrl || null, error: null };
+}
+
+/** Get a signed URL for a student photo path. Returns null if no photo. */
+export async function getStudentPhotoUrl(photoPath: string | null): Promise<string | null> {
+  if (!photoPath) return null;
+  // If it's already a full URL (legacy public URL), return as-is
+  if (photoPath.startsWith('http')) return photoPath;
+  // Generate a signed URL (1 hour expiry)
+  const { data } = await supabase.storage
+    .from('program-assets')
+    .createSignedUrl(photoPath, 3600);
+  return data?.signedUrl || null;
 }
 
 // ============================================================

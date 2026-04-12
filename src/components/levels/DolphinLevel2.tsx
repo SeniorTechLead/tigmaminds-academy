@@ -21,7 +21,7 @@ function SonarMiniLesson({ lesson, number }: { lesson: SonarLesson; number: numb
         {lesson.checkQuestion && (<div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 mb-2"><div className="flex items-start gap-3"><HelpCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" /><div className="flex-1"><p className="text-sm font-semibold text-amber-900 dark:text-amber-200 mb-1">Before you code:</p><p className="text-sm text-amber-800 dark:text-amber-300">{lesson.checkQuestion}</p>{lesson.checkAnswer && (<><button onClick={() => setShowAnswer(!showAnswer)} className="mt-2 flex items-center gap-1 text-xs font-semibold text-amber-600">{showAnswer ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}{showAnswer ? 'Hide' : 'Show answer'}</button>{showAnswer && <p className="mt-2 text-sm text-amber-700 bg-amber-100 dark:bg-amber-900/30 px-3 py-2 rounded-lg">{lesson.checkAnswer}</p>}</>)}</div></div></div>)}
       </div>
       {lesson.codeIntro && (<div className="px-6 py-2 bg-gray-50 dark:bg-gray-700/30 border-t border-gray-200 dark:border-gray-700"><p className="text-sm text-gray-600 dark:text-gray-400"><strong className="text-gray-900 dark:text-white">Now try it:</strong> {lesson.codeIntro}</p></div>)}
-      <div className="border-t border-gray-200 dark:border-gray-700"><ArduinoPlayground starterCode={lesson.code} title={`Sonar ${number}`} ledCount={lesson.ledCount || 1} /></div>
+      <div className="border-t border-gray-200 dark:border-gray-700"><ArduinoPlayground starterCode={lesson.code} title={`Sonar ${number}`} ledCount={lesson.ledCount || 1} sonarMode /></div>
       {lesson.challenge && (<div className="px-6 py-3 bg-sky-50 dark:bg-sky-900/20 border-t border-sky-200 dark:border-sky-800"><p className="text-sm text-sky-800 dark:text-sky-300"><strong>Experiment:</strong> {lesson.challenge}</p></div>)}
       {lesson.successHint && (<div className="px-6 py-3 bg-emerald-50 dark:bg-emerald-900/20 border-t border-emerald-200 dark:border-emerald-800"><p className="text-sm text-emerald-800 dark:text-emerald-300"><CheckCircle className="w-4 h-4 inline mr-1" />{lesson.successHint}</p></div>)}
     </div>
@@ -94,48 +94,57 @@ The key insight: servo accuracy limits map quality. A cheap servo has ±2° erro
       checkQuestion: 'A servo sweep from 0° to 180° in 5° steps takes a distance reading at each step. How many readings per sweep? If each reading takes 50ms, how long is one full sweep?',
       checkAnswer: '180/5 + 1 = 37 readings. At 50ms each: 37 × 50 = 1,850ms ≈ 1.85 seconds per sweep. That\'s about 0.5 sweeps per second — slow but sufficient for a stationary mapper.',
       codeIntro: 'Simulate a servo sweep with distance readings at each angle.',
-      code: `// Level 2, Lesson 2: Servo sweep
-// Rotate sensor, read at each angle
+      code: `// Level 2, Lesson 2: Servo sweep with tone feedback
+// Rotate sensor, read at each angle, tone = proximity
 
 void setup() {
   pinMode(2, OUTPUT);  // LED brightness = proximity
   Serial.println("=== Servo Sweep ===");
   Serial.println("0° to 180° in 30° steps");
+  Serial.println("Tone pitch rises as objects get closer");
   Serial.println("");
 }
 
 void loop() {
-  // Sweep forward
+  // Sweep forward with tone sweep
   Serial.println("Sweep: 0° → 180°");
 
   analogWrite(2, 50);
+  tone(8, 400);
   Serial.println("  0°: 120cm (wall)");
   delay(200);
 
   analogWrite(2, 80);
+  tone(8, 600);
   Serial.println("  30°: 85cm (shelf)");
   delay(200);
 
   analogWrite(2, 200);
+  tone(8, 1400);
   Serial.println("  60°: 32cm (obstacle!)");
   delay(200);
 
   analogWrite(2, 20);
+  tone(8, 200);
   Serial.println("  90°: 200cm (open)");
   delay(200);
 
   analogWrite(2, 220);
+  tone(8, 1600);
   Serial.println("  120°: 28cm (table!)");
   delay(200);
 
   analogWrite(2, 40);
+  tone(8, 300);
   Serial.println("  150°: 150cm (door)");
   delay(200);
 
   analogWrite(2, 70);
+  tone(8, 500);
   Serial.println("  180°: 95cm (wall)");
   delay(200);
 
+  noTone(8);
   Serial.println("Closest: 28cm at 120°");
   Serial.println("");
   analogWrite(2, 0);
@@ -260,36 +269,45 @@ This is a **reactive controller** — it responds to current sensor data without
       checkQuestion: 'A robot is 20cm wide. Its sonar reads: left (60°) = 40cm, center (90°) = 15cm, right (120°) = 80cm. What should it do?',
       checkAnswer: 'The center reading (15cm) is dangerously close — stop forward motion. Right (80cm) has much more space than left (40cm). Turn right. The decision rule: pick the direction with the largest distance reading.',
       codeIntro: 'Simulate a robot making navigation decisions from sonar.',
-      code: `// Level 2, Lesson 5: Obstacle avoidance
-// Read sonar, decide direction
+      code: `// Level 2, Lesson 5: Obstacle avoidance with audio
+// Read sonar, decide direction, beep = danger
 
 void setup() {
   pinMode(2, OUTPUT);  // LED: brightness = danger level
   Serial.println("=== Robot Navigation ===");
+  Serial.println("Buzzer on pin 8: beep rate = proximity");
   Serial.println("");
 }
 
 void loop() {
-  // Scenario 1: Clear path
+  // Scenario 1: Clear path — no beep
   Serial.println("--- Scan ---");
   Serial.println("Left (60°): 150cm");
   Serial.println("Center (90°): 200cm");
   Serial.println("Right (120°): 180cm");
-  Serial.println("Decision: GO FORWARD ✓");
+  Serial.println("Decision: GO FORWARD");
   analogWrite(2, 30);
+  noTone(8);
   delay(800);
 
-  // Scenario 2: Obstacle ahead
+  // Scenario 2: Obstacle ahead — rapid beeping
   Serial.println("");
   Serial.println("--- Scan ---");
   Serial.println("Left (60°): 45cm");
-  Serial.println("Center (90°): 18cm ← OBSTACLE!");
+  Serial.println("Center (90°): 18cm — OBSTACLE!");
   Serial.println("Right (120°): 90cm");
   Serial.println("Decision: TURN RIGHT (more space)");
   analogWrite(2, 220);
-  delay(800);
+  tone(8, 1500);
+  delay(200);
+  noTone(8);
+  delay(150);
+  tone(8, 1500);
+  delay(200);
+  noTone(8);
+  delay(250);
 
-  // Scenario 3: Narrow gap
+  // Scenario 3: Narrow gap — slow beep
   Serial.println("");
   Serial.println("--- Scan ---");
   Serial.println("Left (60°): 25cm");
@@ -297,15 +315,19 @@ void loop() {
   Serial.println("Right (120°): 22cm");
   Serial.println("Decision: SLOW FORWARD (tight but passable)");
   analogWrite(2, 150);
-  delay(800);
+  tone(8, 900);
+  delay(300);
+  noTone(8);
+  delay(500);
 
   Serial.println("");
   analogWrite(2, 0);
+  noTone(8);
   delay(400);
 }`,
       ledCount: 1,
       challenge: 'What if all three readings are < 20cm? The robot is cornered. The fallback: reverse and re-scan. Good obstacle avoidance always has a "stuck" recovery strategy.',
-      successHint: 'You just designed a robot brain — sense, decide, act. The same three-step loop runs in every autonomous vehicle, from toy robots to self-driving cars.',
+      successHint: 'Your simulation demonstrates a robot brain — sense, decide, act. The same three-step loop runs in every autonomous vehicle, from toy robots to self-driving cars.',
     },
     {
       title: 'The complete sonar system — from dolphin to robot',

@@ -702,8 +702,8 @@ class BridgeDecisionEngine:
                 total += c["annual_maint"]
                 if year == c["replacement_at_year"] and c["replacement_cost"] > 0:
                     total += c["replacement_cost"]
-            print(f"  {opt.capitalize():<12} 50-year total: \\{total:>5}M "
-                  f"(${total/50:.1f}M/year)")
+            print(f"  {opt.capitalize():<12} 50-year total: {total:>5}M "
+                  f"(" + "$" + f"{total/50:.1f}M/year)")
 
 # Run analysis
 condition = 45  # current capacity percentage

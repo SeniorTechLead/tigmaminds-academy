@@ -14,7 +14,9 @@ import { useAuth } from '../contexts/AuthContext';
 import { usePyodide } from '../contexts/PyodideContext';
 import { useSqlJs } from '../contexts/SqlJsContext';
 import { useTs } from '../contexts/TsContext';
-import { problems, type Problem, type ProblemTier, type Difficulty, type Topic, type Language } from '../data/playground-problems';
+import type { Problem, ProblemTier, Difficulty, Topic, Language } from '../data/playground-problems';
+import { problemMeta, type ProblemMeta } from '../data/playground-meta';
+import { loadProblem } from '../data/playground/index';
 import { lookupSection } from '../utils/referenceLookup';
 
 const FREE_PROBLEM_COUNT = 5;
@@ -51,8 +53,14 @@ const difficultyColors: Record<Difficulty, string> = {
    ══════════════════════════════════════════ */
 function HintPanel({ tier }: { tier: ProblemTier }) {
   const [expanded, setExpanded] = useState(false);
+  const [sectionData, setSectionData] = useState<{ section: any; guideTitle: string } | null>(null);
 
-  const sectionData = tier.hintRef?.section ? lookupSection(tier.hintRef.section) : null;
+  // Load section data on demand when expanded
+  useEffect(() => {
+    if (expanded && !sectionData && tier.hintRef?.section) {
+      lookupSection(tier.hintRef.section).then(setSectionData);
+    }
+  }, [expanded, tier.hintRef?.section]);
 
   return (
     <div className="mb-4">
@@ -881,15 +889,24 @@ export default function PlaygroundPage() {
   const { user } = useAuth();
   const [selectedProblem, setSelectedProblem] = useState<Problem | null>(null);
   const [selectedTier, setSelectedTier] = useState<ProblemTier | null>(null);
+  const [loadingProblem, setLoadingProblem] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterDifficulty, setFilterDifficulty] = useState<Difficulty | 'all'>('all');
   const [filterTopic, setFilterTopic] = useState<Topic | 'all'>('all');
   const [filterLanguage, setFilterLanguage] = useState<Language | 'all'>('all');
+  const [visibleCount, setVisibleCount] = useState(24);
 
-  const isFree = (p: Problem) => p.id <= FREE_PROBLEM_COUNT;
-  const canAccess = (p: Problem) => !!user || isFree(p);
+  const isFree = (p: { id: number }) => p.id <= FREE_PROBLEM_COUNT;
+  const canAccess = (p: { id: number }) => !!user || isFree(p);
 
-  const filtered = problems.filter(p => {
+  const selectProblem = useCallback(async (meta: ProblemMeta) => {
+    setLoadingProblem(true);
+    const full = await loadProblem(meta.slug, meta.topic);
+    if (full) setSelectedProblem(full);
+    setLoadingProblem(false);
+  }, []);
+
+  const filtered = problemMeta.filter(p => {
     if (filterDifficulty !== 'all' && p.difficulty !== filterDifficulty) return false;
     if (filterTopic !== 'all' && p.topic !== filterTopic) return false;
     if (filterLanguage !== 'all' && (p.language || 'python') !== filterLanguage) return false;
@@ -899,6 +916,12 @@ export default function PlaygroundPage() {
     }
     return true;
   });
+
+  // Reset pagination when filters change
+  useEffect(() => { setVisibleCount(24); }, [filterDifficulty, filterTopic, filterLanguage, searchQuery]);
+
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
 
   const pythonTopics: Topic[] = ['strings', 'lists', 'math', 'sorting', 'dictionaries', 'loops', 'functions', 'data', 'tuples-sets', 'classes', 'recursion', 'error-handling'];
   const sqlTopics: Topic[] = ['sql-select', 'sql-joins', 'sql-aggregate', 'sql-modify', 'sql-subqueries'];
@@ -979,6 +1002,22 @@ export default function PlaygroundPage() {
     );
   }
 
+  // Loading state while full problem data loads
+  if (loadingProblem) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+        <Header />
+        <section className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto flex flex-col items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 text-amber-500 animate-spin mb-4" />
+            <p className="text-gray-500 dark:text-gray-400 text-sm">Loading problem...</p>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    );
+  }
+
   // Problem list
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
@@ -991,7 +1030,7 @@ export default function PlaygroundPage() {
             Playground
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            {problems.length}+ problems and growing — inspired by real stories. Solve them, clean them up, then optimize. Same problem, three levels of mastery.
+            {problemMeta.length}+ problems and growing — inspired by real stories. Solve them, clean them up, then optimize. Same problem, three levels of mastery.
           </p>
         </div>
       </section>
@@ -1050,12 +1089,13 @@ export default function PlaygroundPage() {
       <section className="py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map((p) => {
+            {visible.map((p) => {
               const locked = !canAccess(p);
               return (
                 <button
                   key={p.id}
-                  onClick={() => { if (!locked) setSelectedProblem(p); }}
+                  onClick={() => { if (!locked) selectProblem(p); }}
+                  disabled={loadingProblem}
                   className={`text-left rounded-xl p-5 border transition-all group relative ${
                     locked
                       ? 'bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 opacity-70 cursor-default'
@@ -1069,7 +1109,7 @@ export default function PlaygroundPage() {
                   )}
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-1.5">
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${difficultyColors[p.difficulty]}`}>
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${difficultyColors[p.difficulty as Difficulty]}`}>
                         {p.difficulty}
                       </span>
                       {p.language === 'sql' && (
@@ -1105,8 +1145,8 @@ export default function PlaygroundPage() {
                     <BookOpen className="w-3 h-3" /> {p.story}
                   </p>
                   <div className="flex gap-1.5 mt-3">
-                    {p.tiers.map(t => (
-                      <div key={t.tier} className={`w-2 h-2 rounded-full ${locked ? 'bg-gray-300 dark:bg-gray-600' : `bg-gradient-to-br ${tierColors[t.tier]}`}`} title={t.tierName} />
+                    {Array.from({ length: p.tierCount }, (_, i) => (
+                      <div key={i} className={`w-2 h-2 rounded-full ${locked ? 'bg-gray-300 dark:bg-gray-600' : `bg-gradient-to-br ${tierColors[(i + 1) as 1 | 2 | 3]}`}`} title={p.tierNames[i]} />
                     ))}
                   </div>
                 </button>
@@ -1114,10 +1154,20 @@ export default function PlaygroundPage() {
             })}
           </div>
 
+          {/* Show More */}
+          {hasMore && (
+            <div className="mt-6 text-center">
+              <button onClick={() => setVisibleCount(v => v + 24)}
+                className="px-6 py-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold text-sm transition-colors">
+                Show More ({filtered.length - visibleCount} remaining)
+              </button>
+            </div>
+          )}
+
           {/* Sign-up gate after free problems */}
           {!user && filtered.some(p => !isFree(p)) && (
             <div className="mt-8">
-              <SignUpGate message={`Sign up free to unlock all ${problems.length}+ problems`} />
+              <SignUpGate message={`Sign up free to unlock all ${problemMeta.length}+ problems`} />
             </div>
           )}
 

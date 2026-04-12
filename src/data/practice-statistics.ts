@@ -16,7 +16,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-01', difficulty: 1,
       question: 'Find the **mean** of: 4, 7, 10, 13, 16',
-      visual: { kind: 'bar-chart', labels: ['4','7','10','13','16'], values: [4,7,10,13,16], highlight: 2 },
+
       steps: [
         { label: 'Step 1: Add all values', content: '4 + 7 + 10 + 13 + 16 = **50**' },
         { label: 'Step 2: Count the values', content: 'There are **5** values' },
@@ -29,7 +29,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-02', difficulty: 1,
       question: 'Find the **median** of: 3, 8, 1, 5, 9',
-      visual: { kind: 'bar-chart', labels: ['3','8','1','5','9'], values: [3,8,1,5,9] },
+
       steps: [
         { label: 'Step 1: Sort the values', content: '1, 3, 5, 8, 9' },
         { label: 'Step 2: Find the middle', content: '5 values → the middle is the 3rd value' },
@@ -42,7 +42,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-03', difficulty: 1,
       question: 'Find the **mode** of: 2, 5, 3, 5, 7, 5, 1',
-      visual: { kind: 'bar-chart', labels: ['2','5','3','5','7','5','1'], values: [2,5,3,5,7,5,1] },
+
       steps: [
         { label: 'Step 1: Count each value', content: '1 appears 1 time, 2 appears 1 time, 3 appears 1 time, **5 appears 3 times**, 7 appears 1 time' },
         { label: 'Step 2: Most frequent wins', content: 'Mode = **5** (appears 3 times)' },
@@ -54,7 +54,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-04', difficulty: 1,
       question: 'Find the **range** of: 12, 45, 23, 8, 31',
-      visual: { kind: 'bar-chart', labels: ['12','45','23','8','31'], values: [12,45,23,8,31] },
+
       steps: [
         { label: 'Step 1: Find the largest', content: 'Max = **45**' },
         { label: 'Step 2: Find the smallest', content: 'Min = **8**' },
@@ -67,7 +67,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-05', difficulty: 1,
       question: 'Find the **mean** of: 20, 20, 20, 20, 20',
-      visual: { kind: 'bar-chart', labels: ['20','20','20','20','20'], values: [20,20,20,20,20] },
+
       hint: 'What happens when all values are the same?',
       steps: [
         { label: 'Step 1: Add', content: '20 + 20 + 20 + 20 + 20 = 100' },
@@ -81,7 +81,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-06', difficulty: 1,
       question: 'Find the **median** of: 10, 20, 30, 40',
-      visual: { kind: 'bar-chart', labels: ['10','20','30','40'], values: [10,20,30,40] },
+
       hint: 'With an even number of values, average the two middle ones.',
       steps: [
         { label: 'Step 1: Already sorted', content: '10, 20, 30, 40' },
@@ -107,7 +107,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-08', difficulty: 1,
       question: 'Find the **mode** of: 1, 2, 3, 4, 5 (each appears once)',
-      visual: { kind: 'bar-chart', labels: ['1','2','3','4','5'], values: [1,2,3,4,5] },
+
       steps: [
         { label: 'Step 1: Count frequencies', content: 'Every value appears exactly once' },
         { label: 'Step 2: No value repeats', content: 'There is **no mode** — all values are equally common' },
@@ -131,7 +131,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-10', difficulty: 1,
       question: 'Find the median of: 100, 200, 300, 400, 500, 600, 700',
-      visual: { kind: 'bar-chart', labels: ['100','200','300','400','500','600','700'], values: [100,200,300,400,500,600,700], highlight: 3 },
+
       steps: [
         { label: 'Step 1: Count', content: '7 values (odd → one exact middle)' },
         { label: 'Step 2: Middle position', content: 'Position (7+1)/2 = 4th value' },
@@ -157,7 +157,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-12', difficulty: 1,
       question: 'Find the mean and median of: 1, 1, 1, 1, 100',
-      visual: { kind: 'bar-chart', labels: ['1','1','1','1','100'], values: [1,1,1,1,100] },
+
       hint: 'The 100 is an outlier. How does it affect each measure?',
       steps: [
         { label: 'Mean', content: '(1+1+1+1+100) ÷ 5 = 104 ÷ 5 = **20.8**' },
@@ -195,7 +195,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-15', difficulty: 1,
       question: 'Data: 5, 10, 15. A new value of 10 is added. How does the mean change?',
-      visual: { kind: 'bar-chart', labels: ['5','10','15','10'], values: [5,10,15,10] },
+
       steps: [
         { label: 'Original mean', content: '(5+10+15)/3 = 30/3 = **10**' },
         { label: 'New mean', content: '(5+10+15+10)/4 = 40/4 = **10**' },
@@ -220,7 +220,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-17', difficulty: 1,
       question: 'Is it possible for the mean, median, and mode to all be the same number?',
-      visual: { kind: 'bar-chart', labels: ['1','2','3','3','3','4','5'], values: [1,2,3,3,3,4,5] },
+
       hint: 'Think of a dataset where all values are equal, or a perfectly symmetric dataset.',
       steps: [
         { label: 'Example 1', content: 'Data: 5, 5, 5, 5, 5. Mean = 5, Median = 5, Mode = 5. All same.' },
@@ -236,7 +236,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-18', difficulty: 2,
       question: 'A class of 5 students has a mean score of 72. A 6th student joins with a score of 90. What is the new mean?',
-      visual: { kind: 'bar-chart', labels: ['S1','S2','S3','S4','S5','New'], values: [72,72,72,72,72,90] },
+
       steps: [
         { label: 'Step 1: Original total', content: '5 students × 72 = **360**' },
         { label: 'Step 2: Add new student', content: '360 + 90 = **450**' },
@@ -249,7 +249,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-19', difficulty: 2,
       question: 'The median of 5 numbers is 12. The numbers in sorted order are: 3, 8, ?, 15, 20. What is the missing number?',
-      visual: { kind: 'bar-chart', labels: ['3','8','?','15','20'], values: [3,8,12,15,20], highlight: 2 },
+
       steps: [
         { label: 'Step 1: Median of 5 numbers', content: 'The median is the 3rd value (middle)' },
         { label: 'Step 2: The 3rd value is the ?', content: '3, 8, **?**, 15, 20 — the ? IS the median' },
@@ -289,7 +289,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-22', difficulty: 2,
       question: 'A dataset has mode = 15 and median = 20. Is it possible for the mean to be 25?',
-      visual: { kind: 'bar-chart', labels: ['15','15','20','25','50'], values: [15,15,20,25,50] },
+
       steps: [
         { label: 'Step 1: Think about shape', content: 'Mode < Median < Mean indicates **right-skewed** data (long tail to the right)' },
         { label: 'Step 2: Example', content: 'Data: 15, 15, 20, 25, 50 → Mode=15, Median=20, Mean=25. ✓' },
@@ -318,7 +318,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-24', difficulty: 2,
       question: 'The mean of 10 numbers is 15. If one number (50) is removed, what is the mean of the remaining 9?',
-      visual: { kind: 'bar-chart', labels: ['1','2','3','4','5','6','7','8','9','50'], values: [15,15,15,15,15,15,15,15,15,50] },
+
       steps: [
         { label: 'Step 1: Total of 10 numbers', content: '10 × 15 = **150**' },
         { label: 'Step 2: Remove 50', content: '150 − 50 = **100**' },
@@ -331,7 +331,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-25', difficulty: 2,
       question: 'Find the **IQR** (Interquartile Range) of: 5, 8, 12, 15, 18, 22, 25, 30',
-      visual: { kind: 'bar-chart', labels: ['5','8','12','15','18','22','25','30'], values: [5,8,12,15,18,22,25,30] },
+
       steps: [
         { label: 'Step 1: Data is already sorted', content: '5, 8, 12, 15, 18, 22, 25, 30 (8 values)' },
         { label: 'Step 2: Find Q1 (median of lower half)', content: 'Lower half: 5, 8, 12, 15 → Q1 = (8+12)/2 = **10**' },
@@ -359,7 +359,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-27', difficulty: 2,
       question: 'Two datasets have the same mean (50) but dataset A has range 10 and dataset B has range 80. Which is more consistent?',
-      visual: { kind: 'bar-chart', labels: ['A min','A max','B min','B max'], values: [45,55,10,90] },
+
       steps: [
         { label: 'Step 1: Think about range', content: 'Range = max − min. Small range = values are close together.' },
         { label: 'Step 2: Compare', content: 'A: range 10 → values are between ~45 and ~55. Very consistent.' },
@@ -372,7 +372,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-28', difficulty: 2,
       question: 'Can a dataset have two modes? Give an example.',
-      visual: { kind: 'bar-chart', labels: ['2','2','2','5','5','5','8'], values: [2,2,2,5,5,5,8] },
+
       steps: [
         { label: 'Answer', content: '**Yes.** This is called **bimodal** data.' },
         { label: 'Example', content: 'Data: 2, 2, 2, 5, 5, 5, 8 → Mode = 2 AND 5 (both appear 3 times)' },
@@ -385,7 +385,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-29', difficulty: 2,
       question: 'A cricket team scores: 45, 120, 32, 88, 155, 12, 67, 95, 200, 78, 44. Find the mean, median, and identify any outliers using the IQR method.',
-      visual: { kind: 'bar-chart', labels: ['1','2','3','4','5','6','7','8','9','10','11'], values: [45,120,32,88,155,12,67,95,200,78,44] },
+
       steps: [
         { label: 'Step 1: Sort', content: '12, 32, 44, 45, 67, 78, 88, 95, 120, 155, 200' },
         { label: 'Step 2: Mean', content: 'Sum = 936. Mean = 936/11 = **85.1**' },
@@ -443,7 +443,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-33', difficulty: 2,
       question: 'If the mean of {a, b, c} is 10, what is the mean of {a+5, b+5, c+5}?',
-      visual: { kind: 'bar-chart', labels: ['a','b','c','a+5','b+5','c+5'], values: [8,10,12,13,15,17] },
+
       hint: 'What happens to the mean when you add the same number to every value?',
       steps: [
         { label: 'Step 1: Original mean', content: '(a+b+c)/3 = 10, so a+b+c = 30' },
@@ -458,7 +458,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-34', difficulty: 2,
       question: 'If the mean of {a, b, c} is 10, what is the mean of {2a, 2b, 2c}?',
-      visual: { kind: 'bar-chart', labels: ['a','b','c','2a','2b','2c'], values: [8,10,12,16,20,24] },
+
       steps: [
         { label: 'Step 1: Original', content: '(a+b+c)/3 = 10, so a+b+c = 30' },
         { label: 'Step 2: New sum', content: '2a + 2b + 2c = 2(a+b+c) = 2 × 30 = 60' },
@@ -487,7 +487,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-36', difficulty: 3,
       question: 'A teacher wants the class mean to be exactly 75. The 9 existing students have scores: 60, 65, 70, 72, 75, 78, 80, 85, 90. What must the 10th student score?',
-      visual: { kind: 'bar-chart', labels: ['60','65','70','72','75','78','80','85','90','?'], values: [60,65,70,72,75,78,80,85,90,75] },
+
       steps: [
         { label: 'Step 1: Target total', content: '10 students × 75 = 750' },
         { label: 'Step 2: Existing total', content: '60+65+70+72+75+78+80+85+90 = 675' },
@@ -500,7 +500,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-37', difficulty: 3,
       question: 'Prove that the sum of deviations from the mean always equals zero. Use data: 3, 7, 5.',
-      visual: { kind: 'bar-chart', labels: ['3','7','5'], values: [3,7,5] },
+
       steps: [
         { label: 'Step 1: Mean', content: '(3+7+5)/3 = 15/3 = 5' },
         { label: 'Step 2: Deviations', content: '(3−5) + (7−5) + (5−5) = −2 + 2 + 0 = **0** ✓' },
@@ -514,7 +514,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-38', difficulty: 3,
       question: 'India\'s GDP per capita is about ₹1,72,000. The median household income is about ₹1,20,000. Explain why they differ and which better represents a "typical" Indian.',
-      visual: { kind: 'bar-chart', labels: ['GDP/capita (mean)','Median income'], values: [172000,120000] },
+
       steps: [
         { label: 'Step 1: Why mean > median', content: 'A small number of very wealthy individuals (billionaires, top executives) pull the mean upward. The median is not affected by extreme wealth.' },
         { label: 'Step 2: Which is more representative?', content: 'The **median** better represents a typical Indian. More than half the population earns less than ₹1,72,000, so the mean overstates what most people experience.' },
@@ -527,7 +527,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-39', difficulty: 3,
       question: 'Find a dataset of exactly 5 whole numbers where: mean = 6, median = 5, mode = 5, range = 8.',
-      visual: { kind: 'bar-chart', labels: ['2','5','5','8','10'], values: [2,5,5,8,10] },
+
       hint: 'Start with the median and mode: at least two 5s in the middle. Then adjust the ends to get the right mean and range.',
       steps: [
         { label: 'Step 1: Median = 5', content: 'The 3rd value (sorted) must be 5' },
@@ -543,7 +543,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-40', difficulty: 3,
       question: 'The mean of 100 values is 50. You discover one value was recorded as 90 instead of the correct 40. What is the corrected mean?',
-      visual: { kind: 'bar-chart', labels: ['Wrong','Correct'], values: [90,40] },
+
       steps: [
         { label: 'Step 1: Original total', content: '100 × 50 = 5000' },
         { label: 'Step 2: Fix the error', content: 'Remove 90, add 40: 5000 − 90 + 40 = **4950**' },
@@ -556,7 +556,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-41', difficulty: 3,
       question: 'Combine two groups. Group A: 20 students, mean = 80. Group B: 30 students, mean = 70. What is the combined mean?',
-      visual: { kind: 'bar-chart', labels: ['Group A (n=20)','Group B (n=30)'], values: [80,70] },
+
       hint: 'You cannot just average 80 and 70 — the groups have different sizes.',
       steps: [
         { label: 'Step 1: Total for A', content: '20 × 80 = 1600' },
@@ -584,7 +584,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-43', difficulty: 3,
       question: 'Show that the mean minimises the sum of squared deviations. That is: for any constant c, Σ(xᵢ − c)² is smallest when c = x̄. Use data {1, 5, 6}.',
-      visual: { kind: 'bar-chart', labels: ['1','5','6'], values: [1,5,6] },
+
       steps: [
         { label: 'Step 1: Mean', content: 'x̄ = (1+5+6)/3 = 4' },
         { label: 'Step 2: Try c = 4 (the mean)', content: 'Σ(xᵢ−4)² = (1−4)² + (5−4)² + (6−4)² = 9 + 1 + 4 = **14**' },
@@ -600,7 +600,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-44', difficulty: 3,
       question: 'A median is considered better than the mean for skewed data. But can you construct a dataset where the median is MORE misleading than the mean?',
-      visual: { kind: 'bar-chart', labels: ['10','10','10','10','50','90','90','90','90'], values: [10,10,10,10,50,90,90,90,90] },
+
       steps: [
         { label: 'Step 1: Think of bimodal data', content: 'Data: 10, 10, 10, 10, 50, 90, 90, 90, 90' },
         { label: 'Step 2: Mean = 40, Median = 50', content: 'The data clusters around 10 and 90. Neither the mean (40) nor the median (50) represents a "typical" value — nobody is near 50!' },
@@ -613,7 +613,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-45', difficulty: 3,
       question: 'Your batting average this season is 45.0 (10 innings). You need your average to reach 50.0 by the end of 12 innings. What must you score in the next 2 innings combined?',
-      visual: { kind: 'bar-chart', labels: ['Current avg','Target avg'], values: [45,50] },
+
       steps: [
         { label: 'Step 1: Current total', content: '10 × 45 = 450 runs' },
         { label: 'Step 2: Target total', content: '12 × 50 = 600 runs' },
@@ -626,7 +626,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-46', difficulty: 3,
       question: 'A dataset of 1000 values has mean = 100 and median = 100. A new value of 1,000,000 is added. Estimate the new mean and new median.',
-      visual: { kind: 'bar-chart', labels: ['Old mean','Outlier','New mean'], values: [100,1000000,1099] },
+
       steps: [
         { label: 'Step 1: New mean', content: 'Old total = 1000 × 100 = 100,000. New total = 100,000 + 1,000,000 = 1,100,000. New mean = 1,100,000/1001 ≈ **1099**' },
         { label: 'Step 2: New median', content: '1001 values → median is the 501st. Adding one extreme value shifts the median by at most one position. New median ≈ **100** (barely changes)' },
@@ -639,7 +639,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-47', difficulty: 3,
       question: 'The harmonic mean of speeds. You drive 60 km at 30 km/h and 60 km at 60 km/h. What is your average speed for the whole trip? (It is NOT 45 km/h.)',
-      visual: { kind: 'bar-chart', labels: ['Leg 1 (30 km/h)','Leg 2 (60 km/h)'], values: [30,60] },
+
       hint: 'Average speed = total distance / total time. The arithmetic mean of speeds is WRONG when distances are equal.',
       steps: [
         { label: 'Step 1: Time for leg 1', content: '60 km ÷ 30 km/h = 2 hours' },
@@ -685,7 +685,7 @@ export const practiceMeanMedianMode: PracticeSet = {
     {
       id: 'mmm-50', difficulty: 3,
       question: 'A student claims: "I scored above the class median, so I scored above average." Is this always true?',
-      visual: { kind: 'bar-chart', labels: ['20','25','30','90','95'], values: [20,25,30,90,95] },
+
       steps: [
         { label: 'Step 1: When it IS true', content: 'For symmetric (bell-shaped) data, mean ≈ median. Scoring above the median means scoring above the mean.' },
         { label: 'Step 2: When it is NOT true', content: 'For **left-skewed** data (mean < median), the mean is BELOW the median. You can score above the median but below the mean.' },
@@ -708,7 +708,6 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-01', difficulty: 1,
       question: 'Find the **population variance** of: 2, 4, 6, 8, 10',
-      visual: { kind: 'bar-chart', labels: ['2','4','6','8','10'], values: [2,4,6,8,10] },
       steps: [
         { label: 'Step 1: Find the mean', content: '(2+4+6+8+10)/5 = 30/5 = **6**' },
         { label: 'Step 2: Squared deviations', content: '(2−6)² + (4−6)² + (6−6)² + (8−6)² + (10−6)² = 16 + 4 + 0 + 4 + 16 = **40**' },
@@ -721,7 +720,6 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-02', difficulty: 1,
       question: 'Find the **population standard deviation** of: 2, 4, 6, 8, 10',
-      visual: { kind: 'bar-chart', labels: ['2','4','6','8','10'], values: [2,4,6,8,10] },
       steps: [
         { label: 'Step 1: Variance (from sd-01)', content: 'σ² = 8' },
         { label: 'Step 2: Take square root', content: '√8 = **2.83** (rounded to 2 decimal places)' },
@@ -733,7 +731,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-03', difficulty: 1,
       question: 'Find the **population variance** of: 5, 5, 5, 5, 5',
-      visual: { kind: 'bar-chart', labels: ['5','5','5','5','5'], values: [5,5,5,5,5] },
+
       hint: 'What happens when every value equals the mean?',
       steps: [
         { label: 'Step 1: Mean', content: '25/5 = **5**' },
@@ -748,7 +746,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-04', difficulty: 1,
       question: 'Find the **population variance** of: 3, 7, 7, 3',
-      visual: { kind: 'bar-chart', labels: ['3','7','7','3'], values: [3,7,7,3] },
+
       steps: [
         { label: 'Step 1: Mean', content: '(3+7+7+3)/4 = 20/4 = **5**' },
         { label: 'Step 2: Squared deviations', content: '(3−5)² + (7−5)² + (7−5)² + (3−5)² = 4 + 4 + 4 + 4 = **16**' },
@@ -761,7 +759,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-05', difficulty: 1,
       question: 'A dataset has a variance of 25. What is the standard deviation?',
-      visual: { kind: 'bar-chart', labels: ['Variance','Std Dev'], values: [25,5] },
+
       steps: [
         { label: 'Step 1: Recall the relationship', content: 'σ = √(σ²)' },
         { label: 'Step 2: Compute', content: '√25 = **5**' },
@@ -798,7 +796,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-08', difficulty: 1,
       question: 'Find the **population variance** of: 10, 12, 14',
-      visual: { kind: 'bar-chart', labels: ['10','12','14'], values: [10,12,14] },
+
       steps: [
         { label: 'Step 1: Mean', content: '(10+12+14)/3 = 36/3 = **12**' },
         { label: 'Step 2: Squared deviations', content: '(10−12)² + (12−12)² + (14−12)² = 4 + 0 + 4 = **8**' },
@@ -811,7 +809,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-09', difficulty: 1,
       question: 'Find the **population standard deviation** of: 1, 3, 5, 7, 9',
-      visual: { kind: 'bar-chart', labels: ['1','3','5','7','9'], values: [1,3,5,7,9] },
+
       steps: [
         { label: 'Step 1: Mean', content: '(1+3+5+7+9)/5 = 25/5 = **5**' },
         { label: 'Step 2: Squared deviations', content: '16 + 4 + 0 + 4 + 16 = **40**' },
@@ -861,7 +859,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-13', difficulty: 1,
       question: 'Find the **population standard deviation** of: 100, 100, 100, 200, 200, 200',
-      visual: { kind: 'bar-chart', labels: ['100','100','100','200','200','200'], values: [100,100,100,200,200,200] },
+
       steps: [
         { label: 'Step 1: Mean', content: '(300+600)/6 = 900/6 = **150**' },
         { label: 'Step 2: Squared deviations', content: '3×(100−150)² + 3×(200−150)² = 3×2500 + 3×2500 = **15000**' },
@@ -887,7 +885,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-15', difficulty: 1,
       question: 'Find the **population variance** of: 0, 10',
-      visual: { kind: 'bar-chart', labels: ['0','10'], values: [0,10] },
+
       steps: [
         { label: 'Step 1: Mean', content: '(0+10)/2 = **5**' },
         { label: 'Step 2: Squared deviations', content: '(0−5)² + (10−5)² = 25 + 25 = **50**' },
@@ -900,7 +898,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-16', difficulty: 1,
       question: 'Which dataset has **greater spread**: A = {10, 10, 10} or B = {0, 10, 20}?',
-      visual: { kind: 'bar-chart', labels: ['A:10','A:10','A:10','B:0','B:10','B:20'], values: [10,10,10,0,10,20] },
+
       hint: 'Compute the variance of each.',
       steps: [
         { label: 'Dataset A', content: 'Mean = 10, all deviations = 0. Variance = **0**' },
@@ -927,7 +925,6 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-18', difficulty: 2,
       question: 'Find the **sample variance** (s²) of: 2, 4, 6, 8, 10. Explain why it differs from the population variance.',
-      visual: { kind: 'bar-chart', labels: ['2','4','6','8','10'], values: [2,4,6,8,10] },
       steps: [
         { label: 'Step 1: Mean', content: '30/5 = **6**' },
         { label: 'Step 2: Sum of squared deviations', content: '(2−6)²+(4−6)²+(6−6)²+(8−6)²+(10−6)² = 16+4+0+4+16 = **40**' },
@@ -966,7 +963,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-21', difficulty: 2,
       question: 'Compare the spread of two datasets using the **coefficient of variation (CV)**:\n- A: mean = 50, σ = 10\n- B: mean = 200, σ = 30',
-      visual: { kind: 'bar-chart', labels: ['A mean','A sigma','B mean','B sigma'], values: [50,10,200,30] },
+
       steps: [
         { label: 'Step 1: CV formula', content: 'CV = (σ / μ) × 100%' },
         { label: 'Step 2: CV for A', content: '(10/50) × 100% = **20%**' },
@@ -980,7 +977,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-22', difficulty: 2,
       question: 'If every value in a dataset is multiplied by 3, what happens to the variance and standard deviation?',
-      visual: { kind: 'bar-chart', labels: ['1','2','3','3','6','9'], values: [1,2,3,3,6,9] },
+
       steps: [
         { label: 'Step 1: Recall the rule', content: 'If Y = aX, then Var(Y) = a² · Var(X) and SD(Y) = |a| · SD(X)' },
         { label: 'Step 2: Apply with a = 3', content: 'Variance is multiplied by 3² = **9**. Standard deviation is multiplied by **3**.' },
@@ -993,7 +990,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-23', difficulty: 2,
       question: 'If 5 is added to every value in a dataset, what happens to the variance and standard deviation?',
-      visual: { kind: 'bar-chart', labels: ['1','2','3','6','7','8'], values: [1,2,3,6,7,8] },
+
       steps: [
         { label: 'Step 1: Rule', content: 'If Y = X + b, then Var(Y) = Var(X) and SD(Y) = SD(X)' },
         { label: 'Step 2: Why?', content: 'Adding a constant shifts all values by the same amount. The spread (distances between values) stays the same.' },
@@ -1017,7 +1014,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-25', difficulty: 2,
       question: 'Two students take different tests:\n- Alice: scored 85, class mean 75, σ = 5\n- Bob: scored 92, class mean 80, σ = 8\n\nWho performed better **relative to their class**?',
-      visual: { kind: 'bar-chart', labels: ['Alice score','Alice mean','Bob score','Bob mean'], values: [85,75,92,80] },
+
       steps: [
         { label: 'Step 1: Alice\'s z-score', content: 'z = (85−75)/5 = **2.0**' },
         { label: 'Step 2: Bob\'s z-score', content: 'z = (92−80)/8 = **1.5**' },
@@ -1030,7 +1027,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-26', difficulty: 2,
       question: 'Find the **sample standard deviation** of: 8, 12, 15, 18, 22',
-      visual: { kind: 'bar-chart', labels: ['8','12','15','18','22'], values: [8,12,15,18,22] },
+
       steps: [
         { label: 'Step 1: Mean', content: '(8+12+15+18+22)/5 = 75/5 = **15**' },
         { label: 'Step 2: Squared deviations', content: '(8−15)²+(12−15)²+(15−15)²+(18−15)²+(22−15)² = 49+9+0+9+49 = **116**' },
@@ -1044,7 +1041,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-27', difficulty: 2,
       question: 'Heights of students (cm): 160, 165, 168, 170, 172, 175, 180. The class mean is 170 and σ = 6. Which students are more than 1σ from the mean?',
-      visual: { kind: 'bar-chart', labels: ['160','165','168','170','172','175','180'], values: [160,165,168,170,172,175,180] },
+
       steps: [
         { label: 'Step 1: Range within ±1σ', content: '170 − 6 = 164 to 170 + 6 = 176' },
         { label: 'Step 2: Check each value', content: '160 < 164 ✗, 165 ≥ 164 ✓, 168 ✓, 170 ✓, 172 ✓, 175 ✓, 180 > 176 ✗' },
@@ -1082,7 +1079,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-30', difficulty: 2,
       question: 'Exam scores: 55, 60, 65, 70, 75, 80, 85, 90, 95. Compute the population std dev and identify any scores beyond ±2σ from the mean.',
-      visual: { kind: 'bar-chart', labels: ['55','60','65','70','75','80','85','90','95'], values: [55,60,65,70,75,80,85,90,95] },
+
       steps: [
         { label: 'Step 1: Mean', content: '675/9 = **75**' },
         { label: 'Step 2: Sum of squared deviations', content: '400+225+100+25+0+25+100+225+400 = **1500**' },
@@ -1110,7 +1107,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-32', difficulty: 2,
       question: 'Which investment is riskier?\n- Fund A: mean return 8%, σ = 2%\n- Fund B: mean return 20%, σ = 6%\n\nUse the coefficient of variation.',
-      visual: { kind: 'bar-chart', labels: ['A return','A sigma','B return','B sigma'], values: [8,2,20,6] },
+
       steps: [
         { label: 'Step 1: CV of A', content: '(2/8)×100% = **25%**' },
         { label: 'Step 2: CV of B', content: '(6/20)×100% = **30%**' },
@@ -1136,7 +1133,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-34', difficulty: 2,
       question: 'Find the population variance and std dev of this dataset using Python: 14, 18, 22, 26, 30, 34',
-      visual: { kind: 'bar-chart', labels: ['14','18','22','26','30','34'], values: [14,18,22,26,30,34] },
+
       steps: [
         { label: 'Step 1: Mean', content: '144/6 = **24**' },
         { label: 'Step 2: Squared deviations', content: '100+36+4+4+36+100 = **280**' },
@@ -1151,7 +1148,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-35', difficulty: 3,
       question: 'Prove that Var(aX + b) = a²·Var(X) starting from the definition of variance.',
-      visual: { kind: 'bar-chart', labels: ['1','2','3','4','5','13','16','19','22','25'], values: [1,2,3,4,5,13,16,19,22,25] },
+
       steps: [
         { label: 'Step 1: Definition', content: 'Var(Y) = E[(Y − E[Y])²]' },
         { label: 'Step 2: Let Y = aX + b', content: 'E[Y] = aE[X] + b = aμ + b' },
@@ -1193,7 +1190,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-38', difficulty: 3,
       question: 'A dataset has values: 1, 1, 1, 1, 1, 1, 1, 1, 1, 100. Is the empirical rule (68-95-99.7) appropriate here? Explain using the variance.',
-      visual: { kind: 'bar-chart', labels: ['1','1','1','1','1','1','1','1','1','100'], values: [1,1,1,1,1,1,1,1,1,100] },
+
       steps: [
         { label: 'Step 1: Mean', content: '(9×1 + 100)/10 = 109/10 = **10.9**' },
         { label: 'Step 2: Variance', content: '9×(1−10.9)² + (100−10.9)² = 9×98.01 + 7940.01 = 882.09 + 7940.01 = **8822.1**. σ² = 882.21' },
@@ -1208,7 +1205,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-39', difficulty: 3,
       question: 'Construct a dataset of exactly **5 integers** that has mean = 10 and standard deviation = 2.',
-      visual: { kind: 'bar-chart', labels: ['7','9','10','11','13'], values: [7,9,10,11,13] },
+
       steps: [
         { label: 'Step 1: Requirements', content: 'Sum = 50 (for mean 10). Sum of squared deviations = 5 × 4 = 20 (for σ² = 4, σ = 2).' },
         { label: 'Step 2: Strategy', content: 'Start with 10, 10, 10, 10, 10 (mean=10, σ=0). Adjust symmetrically to increase variance.' },
@@ -1224,7 +1221,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-40', difficulty: 3,
       question: 'Show that Var(X) = E[X²] − (E[X])² (the computational formula for variance).',
-      visual: { kind: 'bar-chart', labels: ['2','4','6'], values: [2,4,6] },
+
       steps: [
         { label: 'Step 1: Start from definition', content: 'Var(X) = E[(X − μ)²] where μ = E[X]' },
         { label: 'Step 2: Expand the square', content: 'E[(X − μ)²] = E[X² − 2μX + μ²]' },
@@ -1238,7 +1235,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-41', difficulty: 3,
       question: 'A company has two divisions.\n- Division A: 30 employees, mean salary $50k, σ = $5k\n- Division B: 20 employees, mean salary $70k, σ = $8k\n\nFind the **combined variance** of all 50 salaries.',
-      visual: { kind: 'bar-chart', labels: ['Div A (n=30)','Div B (n=20)'], values: [50,70] },
+
       steps: [
         { label: 'Step 1: Combined mean', content: 'μ = (30×50 + 20×70)/50 = (1500+1400)/50 = **$58k**' },
         { label: 'Step 2: Within-group variance contribution', content: 'Σ(nᵢσᵢ²) = 30×25 + 20×64 = 750 + 1280 = **2030**' },
@@ -1253,7 +1250,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-42', difficulty: 3,
       question: 'The standard deviation of a dataset is 0. What can you conclude about the data?',
-      visual: { kind: 'bar-chart', labels: ['7','7','7','7','7'], values: [7,7,7,7,7] },
+
       steps: [
         { label: 'Step 1: σ = 0 means σ² = 0', content: 'Variance is the average of squared deviations from the mean.' },
         { label: 'Step 2: Sum of squares = 0', content: 'Each squared deviation (xᵢ − μ)² ≥ 0. If their average is 0, every single term must be 0.' },
@@ -1266,7 +1263,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-43', difficulty: 3,
       question: 'Why does Bessel\'s correction use N−1 instead of N? Explain intuitively and show what happens with N = 2.',
-      visual: { kind: 'bar-chart', labels: ['Pop var (N)','Sample var (N-1)'], values: [8,10] },
+
       steps: [
         { label: 'Intuition', content: 'When computing sample variance, we use the sample mean x̄ as an estimate of μ. But x̄ is calculated FROM the data, so it\'s guaranteed to be "close" to the data — this makes deviations seem smaller than they truly are.' },
         { label: 'Degrees of freedom', content: 'Given the mean, only N−1 values can vary freely (the last one is determined). So we have N−1 "degrees of freedom" — divide by N−1 to correct.' },
@@ -1280,7 +1277,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-44', difficulty: 3,
       question: 'Incomes (in $k): 30, 35, 40, 42, 45, 48, 50, 250. Should you use standard deviation or IQR to describe the spread? Why?',
-      visual: { kind: 'bar-chart', labels: ['30','35','40','42','45','48','50','250'], values: [30,35,40,42,45,48,50,250] },
+
       steps: [
         { label: 'Step 1: Check for outliers', content: '250 is far from the rest (the second-largest is 50).' },
         { label: 'Step 2: Effect on std dev', content: 'Mean = 67.5. The 250 contributes (250−67.5)² = 33,306.25 to variance — dominating the calculation. σ ≈ 69.5.' },
@@ -1294,7 +1291,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-45', difficulty: 3,
       question: 'Prove: for any dataset with range R, the standard deviation σ ≤ R/2.',
-      visual: { kind: 'bar-chart', labels: ['3','3','7','7'], values: [3,3,7,7] },
+
       steps: [
         { label: 'Step 1: Setup', content: 'Let min = a, max = b, so R = b − a. The mean μ lies between a and b.' },
         { label: 'Step 2: Maximum deviation', content: 'Every value xᵢ satisfies a ≤ xᵢ ≤ b, so |xᵢ − μ| ≤ max(μ−a, b−μ) ≤ b−a = R.' },
@@ -1321,7 +1318,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-47', difficulty: 3,
       question: 'A population is uniformly distributed between 0 and 10. What is the true population variance? If you repeatedly draw samples of size 5 and compute each sample\'s variance using the (n−1) formula, will the average of all those sample variances match the true value?',
-      visual: { kind: 'bar-chart', labels: ['0','1','2','3','4','5','6','7','8','9','10'], values: [1,1,1,1,1,1,1,1,1,1,1] },
+
       steps: [
         { label: 'Step 1: True population variance', content: 'For a uniform distribution on [a, b]: Var = (b−a)² / 12 = (10−0)² / 12 = 100/12 = **8.33**' },
         { label: 'Step 2: What Bessel\'s correction does', content: 'Dividing by (n−1) instead of n makes s² an **unbiased estimator** — on average, s² equals the true σ².' },
@@ -1335,7 +1332,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-48', difficulty: 3,
       question: 'If X and Y are **independent** random variables, prove that Var(X + Y) = Var(X) + Var(Y).',
-      visual: { kind: 'bar-chart', labels: ['Var(X)','Var(Y)','Var(X+Y)'], values: [9,16,25] },
+
       steps: [
         { label: 'Step 1: Expand', content: 'Var(X+Y) = E[(X+Y)²] − (E[X+Y])²' },
         { label: 'Step 2: E[(X+Y)²]', content: '= E[X²+2XY+Y²] = E[X²] + 2E[XY] + E[Y²]' },
@@ -1364,7 +1361,7 @@ export const practiceStdDevVariance: PracticeSet = {
     {
       id: 'sd-50', difficulty: 3,
       question: 'Can two datasets have the same mean and standard deviation but look completely different? Give an example.',
-      visual: { kind: 'bar-chart', labels: ['2','4','6','8','10'], values: [2,4,6,8,10] },
+
       steps: [
         { label: 'Step 1: Dataset A', content: 'A = {2, 4, 6, 8, 10}. Mean = 6, σ² = 8, σ ≈ 2.83.' },
         { label: 'Step 2: Dataset B', content: 'B = {0.34, 5.17, 6, 6.83, 11.66}. Mean = 6, σ² = 8, σ ≈ 2.83.' },
@@ -1664,7 +1661,7 @@ export const practiceNormalDistribution: PracticeSet = {
     {
       id: 'nd-24', difficulty: 2,
       question: 'Compare these two students:\n- Alex: scored 88 on a test with μ = 80, σ = 6\n- Jamie: scored 75 on a test with μ = 65, σ = 4\n\nWho scored at a higher percentile?',
-      visual: { kind: 'bar-chart', labels: ['Alex score','Alex mean','Jamie score','Jamie mean'], values: [88,80,75,65] },
+
       steps: [
         { label: 'Step 1: Alex\'s z-score', content: 'z = (88−80)/6 = 8/6 ≈ **1.33**' },
         { label: 'Step 2: Jamie\'s z-score', content: 'z = (75−65)/4 = 10/4 = **2.5**' },
@@ -1701,7 +1698,7 @@ export const practiceNormalDistribution: PracticeSet = {
     {
       id: 'nd-27', difficulty: 2,
       question: 'Women\'s heights are N(μ=64, σ=2.5) inches. Men\'s heights are N(μ=70, σ=3) inches. A woman is 68 inches tall and a man is 74 inches tall. Who is taller **relative to their group**?',
-      visual: { kind: 'bar-chart', labels: ['Woman','W mean','Man','M mean'], values: [68,64,74,70] },
+
       steps: [
         { label: 'Step 1: Woman\'s z-score', content: 'z = (68−64)/2.5 = 4/2.5 = **1.6**' },
         { label: 'Step 2: Man\'s z-score', content: 'z = (74−70)/3 = 4/3 ≈ **1.33**' },

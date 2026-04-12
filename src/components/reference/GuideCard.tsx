@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { ReferenceGuide } from '../../data/reference';
 import { REFERENCE_CATEGORIES } from '../../data/reference';
 import SectionRenderer from './SectionRenderer';
@@ -22,46 +22,112 @@ interface Props {
   expandedSlug?: string | null;
   searchQuery?: string;
   level?: 0 | 1 | 2;
+  onExpand?: (slug: string) => void;
 }
 
-function getMatchingSnippets(guide: ReferenceGuide, query: string): { sectionTitle: string; snippet: string }[] {
+function getMatchingSnippets(guide: ReferenceGuide, query: string): { sectionTitle: string; snippet: string; sectionIdx: number }[] {
   if (!query || query.length < 2) return [];
   const q = query.toLowerCase();
-  const results: { sectionTitle: string; snippet: string }[] = [];
-  const allSections = [...guide.understand, ...(guide.build || [])];
+  const results: { sectionTitle: string; snippet: string; sectionIdx: number }[] = [];
+  const allSections = [...(guide.understand || []), ...(guide.build || [])];
 
-  for (const section of allSections) {
-    const text = section.beginnerContent || '';
+  for (let si = 0; si < allSections.length; si++) {
+    const section = allSections[si];
+    const text = [section.beginnerContent, section.intermediateContent, section.advancedContent].filter(Boolean).join(' ');
     const contentLower = text.toLowerCase();
     const idx = contentLower.indexOf(q);
-    if (idx === -1) continue;
+    if (idx === -1) {
+      // Also check section title
+      if (section.title.toLowerCase().includes(q)) {
+        results.push({ sectionTitle: section.title, snippet: section.title, sectionIdx: si });
+      }
+      continue;
+    }
 
-    // Extract ~120 chars around the match
     const start = Math.max(0, idx - 50);
     const end = Math.min(text.length, idx + query.length + 70);
     let snippet = text.slice(start, end).trim();
     if (start > 0) snippet = '...' + snippet;
     if (end < text.length) snippet = snippet + '...';
 
-    results.push({ sectionTitle: section.title, snippet });
+    results.push({ sectionTitle: section.title, snippet, sectionIdx: si });
     if (results.length >= 3) break;
   }
   return results;
 }
 
-export default function GuideCard({ guide, defaultTab = 'understand', expandedSlug, searchQuery = '', level = 0 }: Props) {
+export default function GuideCard({ guide, defaultTab = 'understand', expandedSlug, searchQuery = '', level = 0, onExpand }: Props) {
   const [isExpanded, setIsExpanded] = useState(expandedSlug === guide.slug);
+  const pendingScrollRef = useRef<number | null>(null);
 
-  // Re-expand when expandedSlug changes (e.g. deep-link hash navigation)
+  // Re-expand when expandedSlug changes
   useEffect(() => {
-    if (expandedSlug === guide.slug) setIsExpanded(true);
+    if (expandedSlug === guide.slug) {
+      setIsExpanded(true);
+      onExpand?.(guide.slug);
+    }
   }, [expandedSlug, guide.slug]);
 
   const { user } = useAuth();
   const isSignedIn = !!user;
   const category = REFERENCE_CATEGORIES.find((c) => c.key === guide.category);
-  const allSections = [...guide.understand, ...(guide.build || [])];
+  const allSections = [...(guide.understand || []), ...(guide.build || [])];
   const matchingSnippets = getMatchingSnippets(guide, searchQuery);
+
+  // Scroll to a specific section by index — retries until element exists, then scrolls to first <mark>
+  const scrollToSection = (sectionIdx: number) => {
+    const domId = allSections[sectionIdx]?.id || `section-${guide.slug}-${sectionIdx}`;
+    let tries = 0;
+    const attempt = () => {
+      const el = document.getElementById(domId);
+      if (el && el.offsetHeight > 0) {
+        // Scroll to the first <mark> within the section if it exists, otherwise the section itself
+        const mark = el.querySelector('mark');
+        const target = mark || el;
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('ring-2', 'ring-amber-400', 'ring-offset-2', 'rounded-lg');
+        setTimeout(() => el.classList.remove('ring-2', 'ring-amber-400', 'ring-offset-2', 'rounded-lg'), 3000);
+      } else if (tries < 20) {
+        tries++;
+        setTimeout(attempt, 250);
+      }
+    };
+    setTimeout(attempt, 100);
+  };
+
+  // Handle clicking the card header
+  const handleHeaderClick = () => {
+    if (!isExpanded) {
+      setIsExpanded(true);
+      onExpand?.(guide.slug);
+      // If there's a search match, scroll to first match after expand
+      if (matchingSnippets.length > 0) {
+        pendingScrollRef.current = matchingSnippets[0].sectionIdx;
+      }
+    } else {
+      setIsExpanded(false);
+    }
+  };
+
+  // Handle clicking a specific snippet result
+  const handleSnippetClick = (sectionIdx: number) => {
+    if (!isExpanded) {
+      setIsExpanded(true);
+      onExpand?.(guide.slug);
+      pendingScrollRef.current = sectionIdx;
+    } else {
+      scrollToSection(sectionIdx);
+    }
+  };
+
+  // Execute pending scroll after content renders
+  useEffect(() => {
+    if (isExpanded && pendingScrollRef.current !== null && allSections.length > 0) {
+      const idx = pendingScrollRef.current;
+      pendingScrollRef.current = null;
+      scrollToSection(idx);
+    }
+  }, [isExpanded, guide]);
 
   return (
     <div
@@ -74,11 +140,11 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
     >
       {/* Collapsed header — always visible */}
       <div
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={handleHeaderClick}
         className="w-full flex items-center gap-3 p-4 text-left cursor-pointer select-text"
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsExpanded(!isExpanded); }}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleHeaderClick(); }}
       >
         <span className="text-2xl flex-shrink-0">{guide.icon}</span>
         <div className="flex-1 min-w-0">
@@ -97,10 +163,14 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 truncate">
             {highlightMatch(guide.tagline, searchQuery)}
           </p>
+          {/* Search result snippets — clickable to jump to section */}
           {matchingSnippets.length > 0 && !isExpanded && (
             <div className="mt-2 space-y-1">
               {matchingSnippets.map((m, i) => (
-                <div key={i} className="text-xs text-gray-500 dark:text-gray-400">
+                <div key={i}
+                  onClick={(e) => { e.stopPropagation(); handleSnippetClick(m.sectionIdx); }}
+                  className="text-xs text-gray-500 dark:text-gray-400 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                >
                   <span className="font-semibold text-gray-600 dark:text-gray-300">{m.sectionTitle}:</span>{' '}
                   {highlightMatch(m.snippet, searchQuery)}
                 </div>
@@ -152,9 +222,9 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
 
           {/* All sections — understand + build combined */}
           <div className="space-y-1">
-            {(isSignedIn ? allSections : allSections.slice(0, 1)).map((section, i) => (
+            {(isSignedIn || (searchQuery && searchQuery.length >= 2) ? allSections : allSections.slice(0, 1)).map((section, i) => (
               <div key={i} id={section.id || `section-${guide.slug}-${i}`} className="scroll-mt-20">
-                <SectionRenderer section={section} level={level} />
+                <SectionRenderer section={section} level={level} searchQuery={searchQuery} />
               </div>
             ))}
             {!isSignedIn && allSections.length > 1 && (

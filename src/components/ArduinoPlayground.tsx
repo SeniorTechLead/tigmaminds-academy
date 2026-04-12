@@ -6,6 +6,8 @@ interface ArduinoPlaygroundProps {
   title?: string;
   ledCount?: number;
   description?: string;
+  robotMode?: boolean;
+  sonarMode?: boolean;
 }
 
 interface LedState {
@@ -13,9 +15,74 @@ interface LedState {
   brightness: number;
 }
 
+interface RobotState {
+  x: number;
+  y: number;
+  angle: number; // radians, 0 = right, pi/2 = down
+  leftSpeed: number;
+  rightSpeed: number;
+  leftDir: number; // 1 = forward, 0 = reverse
+  rightDir: number;
+  trail: { x: number; y: number }[];
+  collided: boolean;
+  sensorDist: number;
+}
+
+interface Obstacle {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+const ARENA_SIZE = 300;
+const ROBOT_W = 15;
+const ROBOT_H = 20;
+const OBSTACLES: Obstacle[] = [
+  { x: 80, y: 40, w: 40, h: 30 },
+  { x: 200, y: 100, w: 30, h: 60 },
+  { x: 60, y: 200, w: 50, h: 25 },
+  { x: 180, y: 220, w: 35, h: 40 },
+];
+
+function computeSensorDistance(rx: number, ry: number, angle: number, obstacles: Obstacle[]): number {
+  // Cast a ray from robot center in facing direction, find nearest obstacle hit
+  const maxDist = 200;
+  const steps = 100;
+  const dx = Math.cos(angle);
+  const dy = Math.sin(angle);
+  for (let s = 1; s <= steps; s++) {
+    const dist = (s / steps) * maxDist;
+    const px = rx + dx * dist;
+    const py = ry + dy * dist;
+    // Check arena bounds
+    if (px < 0 || px >= ARENA_SIZE || py < 0 || py >= ARENA_SIZE) return dist;
+    // Check obstacles
+    for (const ob of obstacles) {
+      if (px >= ob.x && px <= ob.x + ob.w && py >= ob.y && py <= ob.y + ob.h) {
+        return dist;
+      }
+    }
+  }
+  return maxDist;
+}
+
+function checkCollision(rx: number, ry: number, obstacles: Obstacle[]): boolean {
+  // Simple point-in-rect for robot center + small radius
+  const r = 8;
+  if (rx - r < 0 || rx + r >= ARENA_SIZE || ry - r < 0 || ry + r >= ARENA_SIZE) return true;
+  for (const ob of obstacles) {
+    if (rx + r > ob.x && rx - r < ob.x + ob.w && ry + r > ob.y && ry - r < ob.y + ob.h) {
+      return true;
+    }
+  }
+  return false;
+}
+
 /* ── Tiny Arduino-C interpreter ──
    Handles: int variables, arrays, for/if/else, arithmetic expressions,
-   analogWrite, digitalWrite, pinMode, Serial.print/println, delay, millis, random.
+   analogWrite, digitalWrite, pinMode, Serial.print/println, delay, millis, random,
+   tone, noTone, analogRead, pulseIn.
    NOT a full C parser — but enough for the lesson code. */
 
 interface UserFunc { params: string[]; bodyTokens: string[] }
@@ -25,6 +92,10 @@ function createInterpreter(
   ledCount: number,
   onLed: (leds: LedState[]) => void,
   onSerial: (text: string) => void,
+  onTone: (frequency: number, duration: number) => void,
+  onMotor: (pin: number, value: number, isAnalog: boolean) => void,
+  getAnalogRead: (pin: number) => number,
+  getPulseIn: (pin: number, value: number) => number,
   signal: AbortSignal,
 ) {
   const leds: LedState[] = Array.from({ length: ledCount }, (_, i) => ({ pin: i + 2, brightness: 0 }));
@@ -235,16 +306,23 @@ function createInterpreter(
     }
     if (t === 'analogRead' && tokens[pos.i + 1] === '(') {
       pos.i += 2;
-      evalExpr(tokens, pos, env); // skip pin arg
+      const pin = Math.trunc(evalExpr(tokens, pos, env));
       if (tokens[pos.i] === ')') pos.i++;
-      // Simulate sensor reading: varies between 200-800 (LDR-like)
-      return 200 + Math.floor(Math.random() * 600);
+      return getAnalogRead(pin);
     }
     if (t === 'digitalRead' && tokens[pos.i + 1] === '(') {
       pos.i += 2;
       evalExpr(tokens, pos, env);
       if (tokens[pos.i] === ')') pos.i++;
       return Math.random() > 0.5 ? 1 : 0;
+    }
+    if (t === 'pulseIn' && tokens[pos.i + 1] === '(') {
+      pos.i += 2;
+      const pin = Math.trunc(evalExpr(tokens, pos, env));
+      if (tokens[pos.i] === ',') pos.i++;
+      const val = Math.trunc(evalExpr(tokens, pos, env));
+      if (tokens[pos.i] === ')') pos.i++;
+      return getPulseIn(pin, val);
     }
     if (t === 'map' && tokens[pos.i + 1] === '(') {
       pos.i += 2;
@@ -431,6 +509,32 @@ function createInterpreter(
       return;
     }
 
+    // While loop
+    if (t === 'while') {
+      pos.i++; // skip 'while'
+      if (tokens[pos.i] === '(') pos.i++;
+      const condStart = pos.i;
+      let loopCount = 0;
+      while (loopCount < 500 && !signal.aborted) {
+        pos.i = condStart;
+        const cond = evalExpr(tokens, pos, env);
+        if (tokens[pos.i] === ')') pos.i++;
+        const bodyStart = pos.i;
+        if (!cond) {
+          skipBlock(tokens, pos);
+          break;
+        }
+        pos.i = bodyStart;
+        if (tokens[pos.i] === '{') {
+          await execBlock(tokens, pos, env);
+        } else {
+          await execStatement(tokens, pos, env);
+        }
+        loopCount++;
+      }
+      return;
+    }
+
     // If/else
     if (t === 'if') {
       pos.i++; // skip 'if'
@@ -477,6 +581,8 @@ function createInterpreter(
       if (val > 255) val = 255;
       if (tokens[pos.i] === ')') pos.i++;
       if (tokens[pos.i] === ';') pos.i++;
+      // Notify motor callback for robot mode
+      onMotor(pin, val, true);
       const idx = leds.findIndex(l => l.pin === pin);
       if (idx >= 0) { leds[idx].brightness = val; flushLeds(); }
       return;
@@ -489,6 +595,8 @@ function createInterpreter(
       const val = Math.trunc(evalExpr(tokens, pos, env));
       if (tokens[pos.i] === ')') pos.i++;
       if (tokens[pos.i] === ';') pos.i++;
+      // Notify motor callback for robot mode
+      onMotor(pin, val, false);
       const idx = leds.findIndex(l => l.pin === pin);
       if (idx >= 0) { leds[idx].brightness = val ? 255 : 0; flushLeds(); }
       return;
@@ -501,6 +609,33 @@ function createInterpreter(
       evalExpr(tokens, pos, env); // mode
       if (tokens[pos.i] === ')') pos.i++;
       if (tokens[pos.i] === ';') pos.i++;
+      return;
+    }
+
+    // tone(pin, frequency) or tone(pin, frequency, duration)
+    if (t === 'tone' && tokens[pos.i + 1] === '(') {
+      pos.i += 2;
+      evalExpr(tokens, pos, env); // pin (ignored, we just play the tone)
+      if (tokens[pos.i] === ',') pos.i++;
+      const freq = Math.trunc(evalExpr(tokens, pos, env));
+      let dur = 0;
+      if (tokens[pos.i] === ',') {
+        pos.i++;
+        dur = Math.trunc(evalExpr(tokens, pos, env));
+      }
+      if (tokens[pos.i] === ')') pos.i++;
+      if (tokens[pos.i] === ';') pos.i++;
+      onTone(freq, dur);
+      return;
+    }
+
+    // noTone(pin)
+    if (t === 'noTone' && tokens[pos.i + 1] === '(') {
+      pos.i += 2;
+      evalExpr(tokens, pos, env); // pin (ignored)
+      if (tokens[pos.i] === ')') pos.i++;
+      if (tokens[pos.i] === ';') pos.i++;
+      onTone(0, 0);
       return;
     }
 
@@ -911,27 +1046,411 @@ function createInterpreter(
   return { run };
 }
 
+// ── Robot Arena SVG component ──
+function RobotArena({ robot }: { robot: RobotState }) {
+  const sensorColor = robot.sensorDist > 80 ? '#22c55e' : robot.sensorDist > 40 ? '#eab308' : '#ef4444';
+  const sensorConeLen = Math.min(robot.sensorDist, 100);
+  const coneHalfAngle = 0.35; // ~20 degrees
+
+  // Sensor cone points
+  const cx = robot.x;
+  const cy = robot.y;
+  const ang = robot.angle;
+  const p1x = cx + Math.cos(ang - coneHalfAngle) * sensorConeLen;
+  const p1y = cy + Math.sin(ang - coneHalfAngle) * sensorConeLen;
+  const p2x = cx + Math.cos(ang + coneHalfAngle) * sensorConeLen;
+  const p2y = cy + Math.sin(ang + coneHalfAngle) * sensorConeLen;
+
+  // Robot body corners (rotated rectangle)
+  const cos = Math.cos(ang);
+  const sin = Math.sin(ang);
+  const hw = ROBOT_W / 2;
+  const hh = ROBOT_H / 2;
+  // Rectangle corners relative to center, then rotated
+  // The robot faces along its angle, so "forward" = +angle direction
+  // We orient the long axis (H) along the forward direction
+  const corners = [
+    { x: -hh, y: -hw },
+    { x: -hh, y: hw },
+    { x: hh, y: hw },
+    { x: hh, y: -hw },
+  ].map(c => ({
+    x: cx + c.x * cos - c.y * sin,
+    y: cy + c.x * sin + c.y * cos,
+  }));
+
+  // Nose triangle (front of robot)
+  const noseTip = { x: cx + (hh + 6) * cos, y: cy + (hh + 6) * sin };
+  const noseL = { x: cx + hh * cos - 5 * sin, y: cy + hh * sin + 5 * cos };
+  const noseR = { x: cx + hh * cos + 5 * sin, y: cy + hh * sin - 5 * cos };
+
+  return (
+    <svg width={ARENA_SIZE} height={ARENA_SIZE} className="mx-auto" style={{ background: '#374151', borderRadius: 8 }}>
+      {/* Grid lines */}
+      {Array.from({ length: 7 }).map((_, i) => (
+        <g key={i}>
+          <line x1={(i + 1) * (ARENA_SIZE / 7)} y1={0} x2={(i + 1) * (ARENA_SIZE / 7)} y2={ARENA_SIZE} stroke="#4b5563" strokeWidth={0.5} />
+          <line x1={0} y1={(i + 1) * (ARENA_SIZE / 7)} x2={ARENA_SIZE} y2={(i + 1) * (ARENA_SIZE / 7)} stroke="#4b5563" strokeWidth={0.5} />
+        </g>
+      ))}
+
+      {/* Obstacles */}
+      {OBSTACLES.map((ob, i) => (
+        <rect key={i} x={ob.x} y={ob.y} width={ob.w} height={ob.h} fill="#6b7280" stroke="#9ca3af" strokeWidth={1} rx={2} />
+      ))}
+
+      {/* Trail */}
+      {robot.trail.map((pt, i) => (
+        <circle key={i} cx={pt.x} cy={pt.y} r={1.5} fill={`rgba(56, 189, 248, ${0.15 + (i / robot.trail.length) * 0.4})`} />
+      ))}
+
+      {/* Sensor cone */}
+      <polygon
+        points={`${cx},${cy} ${p1x},${p1y} ${p2x},${p2y}`}
+        fill={sensorColor}
+        fillOpacity={0.15}
+        stroke={sensorColor}
+        strokeWidth={0.5}
+        strokeOpacity={0.4}
+      />
+
+      {/* Robot body */}
+      <polygon
+        points={corners.map(c => `${c.x},${c.y}`).join(' ')}
+        fill={robot.collided ? '#ef4444' : '#3b82f6'}
+        stroke={robot.collided ? '#fca5a5' : '#93c5fd'}
+        strokeWidth={1.5}
+      >
+        {robot.collided && (
+          <animate attributeName="fill" values="#ef4444;#fca5a5;#ef4444" dur="0.4s" repeatCount="indefinite" />
+        )}
+      </polygon>
+
+      {/* Nose direction indicator */}
+      <polygon
+        points={`${noseTip.x},${noseTip.y} ${noseL.x},${noseL.y} ${noseR.x},${noseR.y}`}
+        fill={robot.collided ? '#fca5a5' : '#60a5fa'}
+      />
+
+      {/* Collision flash */}
+      {robot.collided && (
+        <rect x={0} y={0} width={ARENA_SIZE} height={ARENA_SIZE} fill="#ef4444" fillOpacity={0.08} rx={8}>
+          <animate attributeName="fill-opacity" values="0.08;0.02;0.08" dur="0.6s" repeatCount="indefinite" />
+        </rect>
+      )}
+
+      {/* Sensor distance label */}
+      <text x={ARENA_SIZE - 5} y={15} textAnchor="end" fill="#9ca3af" fontSize={10} fontFamily="monospace">
+        Sensor: {Math.round(robot.sensorDist)}cm
+      </text>
+    </svg>
+  );
+}
+
+// ── Buzzer visual component ──
+// ── Sonar Display ──────────────────────────────────────────
+
+function SonarDisplay({ serialOutput }: { serialOutput: string }) {
+  // Parse the last CSV line: ms,raw,filtered,zone,beep_ms
+  const lines = serialOutput.trim().split('\n').filter(l => l.includes(','));
+  const lastLine = lines[lines.length - 1] || '';
+  const parts = lastLine.split(',');
+
+  const raw = parseInt(parts[1]) || 0;
+  const filtered = parseInt(parts[2]) || 0;
+  const zone = (parts[3] || '').trim();
+  const isClose = zone === 'CLOSE';
+  const isMedium = zone === 'MEDIUM';
+  const isFar = zone === 'FAR';
+
+  // Build history for the radar sweep (last 30 readings)
+  const history: number[] = [];
+  const recentLines = lines.slice(-30);
+  for (const l of recentLines) {
+    const p = l.split(',');
+    const f = parseInt(p[2]);
+    if (!isNaN(f)) history.push(f);
+  }
+
+  const maxDist = 350;
+  const W = 280, H = 160;
+  const cx = W / 2, cy = H - 10;
+  const maxR = 140;
+
+  // Map distance to radius (closer = smaller radius on radar)
+  const distToR = (d: number) => Math.min(maxR, (d / maxDist) * maxR);
+
+  const zoneColor = isClose ? '#ef4444' : isMedium ? '#f59e0b' : isFar ? '#22c55e' : '#6b7280';
+  const zoneLabel = isClose ? 'CLOSE' : isMedium ? 'MEDIUM' : isFar ? 'FAR' : '—';
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      {/* Radar arc display */}
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-[280px]">
+        {/* Background arcs for zones */}
+        <path d={`M ${cx - maxR} ${cy} A ${maxR} ${maxR} 0 0 1 ${cx + maxR} ${cy}`}
+          fill="rgba(34,197,94,0.08)" stroke="#22c55e" strokeWidth="0.5" strokeDasharray="2,3" />
+        <path d={`M ${cx - distToR(100)} ${cy} A ${distToR(100)} ${distToR(100)} 0 0 1 ${cx + distToR(100)} ${cy}`}
+          fill="rgba(245,158,11,0.08)" stroke="#f59e0b" strokeWidth="0.5" strokeDasharray="2,3" />
+        <path d={`M ${cx - distToR(30)} ${cy} A ${distToR(30)} ${distToR(30)} 0 0 1 ${cx + distToR(30)} ${cy}`}
+          fill="rgba(239,68,68,0.1)" stroke="#ef4444" strokeWidth="0.5" strokeDasharray="2,3" />
+
+        {/* Zone labels */}
+        <text x={cx} y={cy - maxR + 14} fontSize="8" fill="#22c55e" textAnchor="middle" opacity="0.6">FAR</text>
+        <text x={cx} y={cy - distToR(100) + 14} fontSize="8" fill="#f59e0b" textAnchor="middle" opacity="0.6">MED</text>
+        <text x={cx} y={cy - distToR(30) + 14} fontSize="8" fill="#ef4444" textAnchor="middle" opacity="0.6">CLOSE</text>
+
+        {/* Distance rings */}
+        {[50, 100, 150, 200, 250, 300].map(d => {
+          const r = distToR(d);
+          return r < maxR ? (
+            <g key={d}>
+              <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`}
+                fill="none" stroke="#374151" strokeWidth="0.5" opacity="0.3" />
+              <text x={cx + r + 3} y={cy - 2} fontSize="7" fill="#6b7280" opacity="0.5">{d}</text>
+            </g>
+          ) : null;
+        })}
+
+        {/* History blips (fading trail) */}
+        {history.map((d, i) => {
+          const r = distToR(d);
+          const angle = -Math.PI / 2 + ((i - history.length / 2) / history.length) * 0.8;
+          const bx = cx + r * Math.cos(angle);
+          const by = cy + r * Math.sin(angle);
+          const opacity = 0.1 + (i / history.length) * 0.6;
+          return <circle key={i} cx={bx} cy={by} r="2" fill={zoneColor} opacity={opacity} />;
+        })}
+
+        {/* Current object blip (pulsing) */}
+        {filtered > 0 && (
+          <g>
+            <circle cx={cx} cy={cy - distToR(filtered)} r="5" fill={zoneColor} opacity="0.8">
+              <animate attributeName="r" values="4;7;4" dur="0.8s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.8;0.4;0.8" dur="0.8s" repeatCount="indefinite" />
+            </circle>
+            <circle cx={cx} cy={cy - distToR(filtered)} r="3" fill={zoneColor} />
+          </g>
+        )}
+
+        {/* Sensor origin */}
+        <circle cx={cx} cy={cy} r="4" fill="#60a5fa" stroke="#3b82f6" strokeWidth="1.5" />
+        <text x={cx} y={cy + 12} fontSize="7" fill="#60a5fa" textAnchor="middle">SENSOR</text>
+      </svg>
+
+      {/* Distance readout */}
+      <div className="flex items-center gap-4 text-center">
+        <div>
+          <div className="text-2xl font-bold font-mono" style={{ color: zoneColor }}>
+            {filtered > 0 ? `${filtered} cm` : '—'}
+          </div>
+          <div className="text-[10px] text-gray-500 uppercase tracking-wide">Filtered distance</div>
+        </div>
+        <div className="w-px h-8 bg-gray-700" />
+        <div>
+          <div className="text-lg font-bold font-mono" style={{ color: zoneColor }}>
+            {zoneLabel}
+          </div>
+          <div className="text-[10px] text-gray-500 uppercase tracking-wide">Zone</div>
+        </div>
+        <div className="w-px h-8 bg-gray-700" />
+        <div>
+          <div className="text-sm font-mono text-gray-400">{raw > 0 ? `${raw} cm` : '—'}</div>
+          <div className="text-[10px] text-gray-500 uppercase tracking-wide">Raw</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BuzzerVisual({ freq }: { freq: number }) {
+  if (freq <= 0) return null;
+  return (
+    <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: 'rgba(168,85,247,0.1)' }}>
+      <svg width={32} height={32} viewBox="0 0 40 40">
+        <rect x={8} y={14} width={8} height={12} rx={1} fill="#a855f7" />
+        <polygon points="16,14 26,8 26,32 16,26" fill="#a855f7" />
+        <path d="M29,14 Q34,20 29,26" fill="none" stroke="#a855f7" strokeWidth={1.5} opacity={0.7}>
+          <animate attributeName="opacity" values="0.7;0.2;0.7" dur="0.5s" repeatCount="indefinite" />
+        </path>
+        <path d="M32,10 Q39,20 32,30" fill="none" stroke="#a855f7" strokeWidth={1.5} opacity={0.4}>
+          <animate attributeName="opacity" values="0.4;0.1;0.4" dur="0.5s" repeatCount="indefinite" begin="0.15s" />
+        </path>
+      </svg>
+      <span className="text-xs font-mono text-purple-400 font-semibold">{freq} Hz</span>
+    </div>
+  );
+}
+
 export default function ArduinoPlayground({
   starterCode,
   title = 'Arduino Simulator',
   ledCount = 3,
   description,
+  robotMode = false,
+  sonarMode = false,
 }: ArduinoPlaygroundProps) {
   const [code, setCode] = useState(starterCode);
   const [leds, setLeds] = useState<LedState[]>(Array.from({ length: ledCount }, (_, i) => ({ pin: i + 2, brightness: 0 })));
   const [serialOutput, setSerialOutput] = useState('');
   const [running, setRunning] = useState(false);
+  const [buzzerFreq, setBuzzerFreq] = useState(0);
+  const [robot, setRobot] = useState<RobotState>({
+    x: 30, y: 150, angle: 0,
+    leftSpeed: 0, rightSpeed: 0, leftDir: 1, rightDir: 1,
+    trail: [], collided: false, sensorDist: 200,
+  });
+
   const abortRef = useRef<AbortController | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const oscillatorRef = useRef<OscillatorNode | null>(null);
+  const gainRef = useRef<GainNode | null>(null);
+  const toneTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const robotRef = useRef<RobotState>(robot);
+
+  // Keep robotRef in sync
+  useEffect(() => { robotRef.current = robot; }, [robot]);
+
+  // ── Audio helpers ──
+  const stopAudio = useCallback(() => {
+    if (toneTimerRef.current) { clearTimeout(toneTimerRef.current); toneTimerRef.current = null; }
+    if (oscillatorRef.current) {
+      try { oscillatorRef.current.stop(); } catch (_) { /* already stopped */ }
+      oscillatorRef.current = null;
+    }
+    setBuzzerFreq(0);
+  }, []);
+
+  const handleTone = useCallback((frequency: number, duration: number) => {
+    // Stop previous
+    if (toneTimerRef.current) { clearTimeout(toneTimerRef.current); toneTimerRef.current = null; }
+    if (oscillatorRef.current) {
+      try { oscillatorRef.current.stop(); } catch (_) { /* ok */ }
+      oscillatorRef.current = null;
+    }
+
+    if (frequency <= 0) {
+      setBuzzerFreq(0);
+      return;
+    }
+
+    // Create audio context on first use
+    if (!audioCtxRef.current) {
+      audioCtxRef.current = new AudioContext();
+    }
+    const ctx = audioCtxRef.current;
+    if (ctx.state === 'suspended') ctx.resume();
+
+    // Create gain node for volume control
+    if (!gainRef.current) {
+      gainRef.current = ctx.createGain();
+      gainRef.current.gain.value = 0.15;
+      gainRef.current.connect(ctx.destination);
+    }
+
+    const osc = ctx.createOscillator();
+    osc.type = 'square';
+    osc.frequency.value = frequency;
+    osc.connect(gainRef.current);
+    osc.start();
+    oscillatorRef.current = osc;
+    setBuzzerFreq(frequency);
+
+    if (duration > 0) {
+      toneTimerRef.current = setTimeout(() => {
+        try { osc.stop(); } catch (_) { /* ok */ }
+        oscillatorRef.current = null;
+        setBuzzerFreq(0);
+        toneTimerRef.current = null;
+      }, duration);
+    }
+  }, []);
+
+  // ── Robot motor handler ──
+  const handleMotor = useCallback((pin: number, value: number, isAnalog: boolean) => {
+    if (!robotMode) return;
+    setRobot(prev => {
+      const next = { ...prev };
+      if (isAnalog) {
+        // analogWrite: speed
+        if (pin === 5) next.leftSpeed = value;
+        else if (pin === 6) next.rightSpeed = value;
+      } else {
+        // digitalWrite: direction
+        if (pin === 7) next.leftDir = value;
+        else if (pin === 8) next.rightDir = value;
+      }
+      // Compute movement (differential drive)
+      const leftV = next.leftSpeed * (next.leftDir ? 1 : -1) / 255;
+      const rightV = next.rightSpeed * (next.rightDir ? 1 : -1) / 255;
+      const forward = (leftV + rightV) / 2;
+      const turn = (rightV - leftV) * 0.08; // turning rate
+
+      let newAngle = next.angle + turn;
+      let newX = next.x + Math.cos(newAngle) * forward * 3;
+      let newY = next.y + Math.sin(newAngle) * forward * 3;
+
+      // Check collision
+      const collided = checkCollision(newX, newY, OBSTACLES);
+      if (collided && !next.collided) {
+        // Stop at collision point
+        next.collided = true;
+        next.angle = newAngle;
+      } else if (!collided) {
+        next.x = newX;
+        next.y = newY;
+        next.angle = newAngle;
+        next.collided = false;
+        // Add trail point (limit trail length)
+        const trail = [...next.trail, { x: newX, y: newY }];
+        if (trail.length > 200) trail.shift();
+        next.trail = trail;
+      }
+
+      // Update sensor distance
+      next.sensorDist = computeSensorDistance(next.x, next.y, next.angle, OBSTACLES);
+      return next;
+    });
+  }, [robotMode]);
+
+  // ── Sensor readers for robot mode ──
+  const getAnalogRead = useCallback((pin: number): number => {
+    if (robotMode && (pin === 14)) { // A0 = 14
+      // Map distance (0-200cm) to analog value (0-1023)
+      const dist = robotRef.current.sensorDist;
+      return Math.trunc((1 - dist / 200) * 1023);
+    }
+    // Default: random LDR-like
+    return 200 + Math.floor(Math.random() * 600);
+  }, [robotMode]);
+
+  const getPulseIn = useCallback((pin: number, value: number): number => {
+    if (robotMode) {
+      // Simulate HC-SR04: distance_cm * 58.2 = pulse time in microseconds
+      const dist = robotRef.current.sensorDist;
+      return Math.trunc(dist * 58.2);
+    }
+    return Math.floor(Math.random() * 20000);
+  }, [robotMode]);
 
   const stop = useCallback(() => {
     abortRef.current?.abort();
     setRunning(false);
     setLeds(Array.from({ length: ledCount }, (_, i) => ({ pin: i + 2, brightness: 0 })));
-  }, [ledCount]);
+    stopAudio();
+  }, [ledCount, stopAudio]);
 
   const run = useCallback(() => {
     stop();
+    // Reset robot on new run
+    if (robotMode) {
+      setRobot({
+        x: 30, y: 150, angle: 0,
+        leftSpeed: 0, rightSpeed: 0, leftDir: 1, rightDir: 1,
+        trail: [], collided: false, sensorDist: 200,
+      });
+    }
     const ac = new AbortController();
     abortRef.current = ac;
     setRunning(true);
@@ -941,15 +1460,27 @@ export default function ArduinoPlayground({
       ledCount,
       (newLeds) => setLeds(newLeds),
       (text) => setSerialOutput(text),
+      handleTone,
+      handleMotor,
+      getAnalogRead,
+      getPulseIn,
       ac.signal,
     );
 
     interp.run(code).then(() => setRunning(false)).catch(() => setRunning(false));
-  }, [code, ledCount, stop]);
+  }, [code, ledCount, stop, handleTone, handleMotor, getAnalogRead, getPulseIn, robotMode]);
 
+  // Cleanup on unmount
   useEffect(() => {
-    return () => { abortRef.current?.abort(); };
-  }, []);
+    return () => {
+      abortRef.current?.abort();
+      stopAudio();
+      if (audioCtxRef.current) {
+        audioCtxRef.current.close();
+        audioCtxRef.current = null;
+      }
+    };
+  }, [stopAudio]);
 
   const lineCount = code.split('\n').length;
 
@@ -1002,32 +1533,62 @@ export default function ArduinoPlayground({
     ? 'fixed inset-0 z-50 flex flex-col bg-gray-900'
     : 'bg-gray-900 rounded-2xl overflow-hidden border border-gray-700';
 
-  const ledsAndSerial = (
+  const hardwarePanel = (
     <>
-      {/* LED board */}
-      <div className="p-4 bg-gray-800/50 border-b border-gray-700">
-        <p className="text-xs text-gray-500 uppercase tracking-wide mb-3 font-semibold">Breadboard</p>
-        <div className="flex gap-3 justify-center flex-wrap">
-          {leds.map((led, i) => (
-            <div key={i} className="text-center">
-              <div
-                className="w-8 h-12 rounded-full mx-auto transition-all duration-150"
-                style={{
-                  backgroundColor: led.brightness > 0
-                    ? `rgba(34, 197, 94, ${led.brightness / 255})`
-                    : '#1f2937',
-                  boxShadow: led.brightness > 0
-                    ? `0 0 ${led.brightness / 10}px ${led.brightness / 20}px rgba(34, 197, 94, ${led.brightness / 300})`
-                    : 'none',
-                  border: '2px solid #374151',
-                }}
-              />
-              <p className="text-xs text-gray-500 mt-1.5 font-mono">Pin {led.pin}</p>
-              <p className="text-xs text-gray-600 font-mono">{led.brightness > 0 ? led.brightness : 'OFF'}</p>
-            </div>
-          ))}
+      {/* Robot arena OR LED board */}
+      {robotMode ? (
+        <div className="p-4 bg-gray-800/50 border-b border-gray-700">
+          <p className="text-xs text-gray-500 uppercase tracking-wide mb-3 font-semibold">Robot Arena</p>
+          <RobotArena robot={robot} />
+          <div className="flex justify-between mt-2 text-xs font-mono text-gray-500">
+            <span>L: {robot.leftSpeed}{robot.leftDir ? 'F' : 'R'}</span>
+            <span>({Math.round(robot.x)}, {Math.round(robot.y)})</span>
+            <span>R: {robot.rightSpeed}{robot.rightDir ? 'F' : 'R'}</span>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="p-4 bg-gray-800/50 border-b border-gray-700">
+          {/* Sonar display — shows radar, distance readout, zone */}
+          {sonarMode && (
+            <div className="mb-4">
+              <SonarDisplay serialOutput={serialOutput} />
+            </div>
+          )}
+          {/* LEDs + buzzer */}
+          <p className="text-xs text-gray-500 uppercase tracking-wide mb-3 font-semibold">Breadboard</p>
+          <div className="flex gap-3 justify-center flex-wrap">
+            {leds.map((led, i) => {
+              // Color LEDs differently for sonar mode
+              const ledColors = sonarMode
+                ? ['239, 68, 68', '245, 158, 11', '34, 197, 94'] // red, yellow, green
+                : ['34, 197, 94', '34, 197, 94', '34, 197, 94']; // all green
+              const color = ledColors[i] || '34, 197, 94';
+              return (
+                <div key={i} className="text-center">
+                  <div
+                    className="w-8 h-12 rounded-full mx-auto transition-all duration-150"
+                    style={{
+                      backgroundColor: led.brightness > 0
+                        ? `rgba(${color}, ${led.brightness / 255})`
+                        : '#1f2937',
+                      boxShadow: led.brightness > 0
+                        ? `0 0 ${led.brightness / 10}px ${led.brightness / 20}px rgba(${color}, ${led.brightness / 300})`
+                        : 'none',
+                      border: '2px solid #374151',
+                    }}
+                  />
+                  <p className="text-xs text-gray-500 mt-1.5 font-mono">
+                    {sonarMode ? ['Close', 'Med', 'Far'][i] || `Pin ${led.pin}` : `Pin ${led.pin}`}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-3 flex justify-center">
+            <BuzzerVisual freq={buzzerFreq} />
+          </div>
+        </div>
+      )}
 
       {/* Serial monitor */}
       <div className="p-4 flex-1 flex flex-col min-h-0">
@@ -1046,6 +1607,7 @@ export default function ArduinoPlayground({
         <Cpu className="w-4 h-4 text-teal-400" />
         <h3 className="text-white font-bold text-sm">{title}</h3>
         <span className="text-xs text-teal-400 bg-teal-900/30 px-2 py-0.5 rounded-full">Simulated</span>
+        {robotMode && <span className="text-xs text-blue-400 bg-blue-900/30 px-2 py-0.5 rounded-full">Robot</span>}
         <div className="flex items-center gap-2 ml-auto">
           <button onClick={() => { setCode(starterCode); stop(); setSerialOutput(''); }}
             className="flex items-center gap-1 px-2 py-1.5 text-gray-400 hover:text-white text-xs transition-colors" title="Reset">
@@ -1076,7 +1638,7 @@ export default function ArduinoPlayground({
 
       {/* Main content: code left, hardware right */}
       <div ref={containerRef} className={`flex flex-col lg:flex-row ${expanded ? 'flex-1 min-h-0' : ''}`}
-        style={expanded ? {} : { height: 420 }}>
+        style={expanded ? {} : { height: robotMode ? 520 : 420 }}>
         {/* Code editor */}
         <div className="min-w-0 overflow-y-auto border-b lg:border-b-0 lg:border-r border-gray-700"
           style={{ width: expanded ? `${splitRatio * 100}%` : undefined, flex: expanded ? 'none' : '1' }}>
@@ -1112,9 +1674,9 @@ export default function ArduinoPlayground({
           </div>
         )}
 
-        {/* Hardware panel: LEDs + serial */}
-        <div className={`flex flex-col ${expanded ? 'flex-1 min-w-0' : 'w-full lg:w-72 flex-shrink-0'}`}>
-          {ledsAndSerial}
+        {/* Hardware panel */}
+        <div className={`flex flex-col ${expanded ? 'flex-1 min-w-0' : 'w-full lg:w-80 flex-shrink-0'}`}>
+          {hardwarePanel}
         </div>
       </div>
     </div>

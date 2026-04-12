@@ -10,15 +10,15 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useAuth } from '../../contexts/AuthContext';
 import {
-  getStudentEnrollment,
-  getStudentWeeklyProgress,
   submitProject,
   markStoryCompleted,
   getCurrentWeek,
   getWeekStatus,
   getMessages,
   sendMessage,
+  getStudentWeeklyProgress,
 } from '../../lib/program';
+import { supabase } from '../../lib/supabase';
 import type { Enrollment, Cohort, WeeklyProgress, ProgramMessage } from '../../lib/program';
 import { MessageSquare } from 'lucide-react';
 import { allTracks } from '../../data/school-curriculum';
@@ -149,14 +149,24 @@ export default function StudentProgramView() {
 
     async function load() {
       setLoading(true);
-      const enr = await getStudentEnrollment(user!.id);
-      if (cancelled) return;
-      setEnrollment(enr);
-      setStudentPhotoUrl(enr.student_photo_url || null);
+      try {
+        const session = await supabase.auth.getSession();
+        const token = session.data.session?.access_token;
+        if (!token) { setLoading(false); return; }
 
-      if (enr) {
-        const wp = await getStudentWeeklyProgress(enr.id);
-        if (!cancelled) setProgress(wp);
+        const res = await fetch('/api/program/student-data', {
+          headers: { 'Authorization': `Bearer ${token}` },
+        });
+        const data = await res.json();
+        if (cancelled) return;
+
+        if (data.enrollment) {
+          setEnrollment(data.enrollment);
+          setProgress(data.progress || []);
+          if (data.photoUrl) setStudentPhotoUrl(data.photoUrl);
+        }
+      } catch (err) {
+        console.warn('[Student] Load error:', err);
       }
       setLoading(false);
     }

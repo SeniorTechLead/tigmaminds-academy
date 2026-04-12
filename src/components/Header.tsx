@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { Menu, X, User, Sun, Moon, ChevronDown } from 'lucide-react';
+import { Menu, X, User, Sun, Moon, ChevronDown, Camera } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
 
 function useTheme() {
   const [dark, setDark] = useState(false);
@@ -118,13 +119,34 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 {/* Role-aware context switcher */}
                 <div className="relative group/ctx">
-                  <button className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-1.5 rounded-full">
-                    <User className="w-4 h-4 text-amber-600" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{profile?.display_name || user.email?.split('@')[0]}</span>
+                  <button className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-1.5 py-1 rounded-full">
+                    {profile?.avatar_url ? (
+                      <img src={profile.avatar_url} alt="" className="w-6 h-6 rounded-full object-cover" />
+                    ) : (
+                      <div className="w-6 h-6 rounded-full bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center text-xs font-bold text-amber-600 dark:text-amber-400">
+                        {(profile?.display_name || user.email || '?')[0].toUpperCase()}
+                      </div>
+                    )}
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 pr-1">{profile?.display_name || user.email?.split('@')[0]}</span>
                     <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                   </button>
                   <div className="absolute top-full right-0 pt-2 hidden group-hover/ctx:block z-50">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 min-w-[200px]">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 min-w-[240px]">
+                      {/* Profile card */}
+                      <Link href="/account" className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                        {profile?.avatar_url ? (
+                          <img src={profile.avatar_url} alt="" className="w-10 h-10 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600" />
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center text-lg font-bold text-amber-600 dark:text-amber-400 border-2 border-gray-200 dark:border-gray-600">
+                            {(profile?.display_name || user.email || '?')[0].toUpperCase()}
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{profile?.display_name || user.email?.split('@')[0]}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user.email}</p>
+                        </div>
+                      </Link>
+                      <div className="py-1">
                       {hasRole('admin') && (
                         <Link href="/program/mentor" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                           <span className="w-2 h-2 rounded-full bg-red-500" />
@@ -142,9 +164,9 @@ export default function Header() {
                         Student
                       </Link>
                       {hasRole('parent') && (
-                        <Link href="/program/parent" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <Link href="/program/guardian" className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                           <span className="w-2 h-2 rounded-full bg-blue-500" />
-                          Parent / Guardian
+                          Guardian
                         </Link>
                       )}
                       {/* Divider */}
@@ -155,6 +177,7 @@ export default function Header() {
                       <button onClick={signOut} className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left">
                         Sign Out
                       </button>
+                      </div>
                     </div>
                   </div>
                 </div>

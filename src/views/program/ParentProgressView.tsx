@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ChevronDown, ChevronUp, Star, CheckCircle, XCircle, Loader2, AlertTriangle, MessageSquare } from 'lucide-react';
-import { getParentView, getParentViewAuthenticated, getMessages, sendMessage, getCurrentWeek, getWeekStatus, getMessagesByToken, sendParentMessage, type Cohort, type WeeklyProgress, type ProgramMessage } from '../../lib/program';
+import { getParentView, getStudentPhotoUrl, getMessages, sendMessage, getCurrentWeek, getWeekStatus, getMessagesByToken, sendParentMessage, type Cohort, type WeeklyProgress, type ProgramMessage, type ParentWardData } from '../../lib/program';
+import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { allTracks, type TrackCurriculum } from '../../data/school-curriculum';
 
@@ -148,6 +149,8 @@ export default function ParentProgressView() {
   const { user, profile, hasRole, loading: authLoading } = useAuth();
   const isAuthParent = hasRole('parent') && !!user;
 
+  const [allWards, setAllWards] = useState<ParentWardData[]>([]);
+  const [activeWardIdx, setActiveWardIdx] = useState(0);
   const [viewData, setViewData] = useState<ParentData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -161,35 +164,68 @@ export default function ParentProgressView() {
     if (user && !profile) return;
 
     (async () => {
-      let result = null;
-
-      if (isAuthParent && user) {
-        // Authenticated parent — load via user ID + email fallback
-        result = await getParentViewAuthenticated(user.id, user.email || undefined);
-      } else if (user && !isAuthParent) {
-        // Logged in but not a parent — try email fallback anyway (role might not be set yet)
-        result = await getParentViewAuthenticated(user.id, user.email || undefined);
+      if ((isAuthParent || user) && user) {
+        // Authenticated guardian — load all wards via server API (bypasses RLS)
+        const session = await supabase.auth.getSession();
+        const accessToken = session.data.session?.access_token;
+        if (accessToken) {
+          try {
+            const res = await fetch('/api/program/guardian-data', {
+              headers: { 'Authorization': `Bearer ${accessToken}` },
+            });
+            const data = await res.json();
+            if (data.wards && data.wards.length > 0) {
+              const wards: ParentWardData[] = data.wards.map((w: any) => ({
+                studentName: w.studentName,
+                cohort: w.cohort,
+                enrollment: { ...w.enrollment, _resolvedPhotoUrl: w.photoUrl },
+                progress: w.progress,
+              }));
+              setAllWards(wards);
+              setActiveWardIdx(0);
+              const ward = wards[0];
+              setViewData(ward as ParentData);
+              setStudentPhotoUrl(data.wards[0].photoUrl);
+              const currentWeek = getCurrentWeek(ward.cohort.start_date);
+              setExpandedTerms({ [Math.ceil(currentWeek / 12)]: true });
+            } else {
+              setError(true);
+            }
+          } catch {
+            setError(true);
+          }
+        } else {
+          setError(true);
+        }
       } else if (token) {
-        // Token-based access (legacy/shared link)
-        result = await getParentView(token);
-      }
-
-      if (!result) {
-        // No auth and no token — show error
-        if (!isAuthParent && !token) setError(true);
-        // Auth parent but no enrollment found
-        else if (isAuthParent) setError(true);
-        else setError(true);
+        // Token-based access (legacy/shared link) — single ward only
+        const result = await getParentView(token);
+        if (result) {
+          setAllWards([result as ParentWardData]);
+          setViewData(result as ParentData);
+          const tPhotoUrl = await getStudentPhotoUrl((result as any).enrollment?.student_photo_url || null);
+          setStudentPhotoUrl(tPhotoUrl);
+          const currentWeek = getCurrentWeek(result.cohort.start_date);
+          setExpandedTerms({ [Math.ceil(currentWeek / 12)]: true });
+        } else {
+          setError(true);
+        }
       } else {
-        setViewData(result as ParentData);
-        setStudentPhotoUrl((result as any).enrollment?.student_photo_url || null);
-        const currentWeek = getCurrentWeek(result.cohort.start_date);
-        const currentTerm = Math.ceil(currentWeek / 12);
-        setExpandedTerms({ [currentTerm]: true });
+        setError(true);
       }
       setLoading(false);
     })();
   }, [token, user, profile, isAuthParent, authLoading]);
+
+  // Switch active ward
+  const switchWard = (idx: number) => {
+    setActiveWardIdx(idx);
+    const ward = allWards[idx];
+    setViewData(ward as ParentData);
+    setStudentPhotoUrl((ward.enrollment as any)?._resolvedPhotoUrl || null);
+    const currentWeek = getCurrentWeek(ward.cohort.start_date);
+    setExpandedTerms({ [Math.ceil(currentWeek / 12)]: true });
+  };
 
   // ── Loading ──
   if (loading) {
@@ -223,16 +259,15 @@ export default function ParentProgressView() {
                   Welcome, {user?.email?.split('@')[0]}
                 </h2>
                 <p className="text-sm text-gray-500 mb-6">
-                  We couldn't find an active enrollment linked to your account yet.
-                  This usually means your child hasn't confirmed their enrollment.
+                  No active enrollments are linked to your guardian account.
                 </p>
                 <div className="bg-gray-50 rounded-xl p-4 text-left mb-6">
-                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">What to do</p>
-                  <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
-                    <li>Ask your child to check their email for a signup link from TigmaMinds Academy</li>
-                    <li>Once they create their account, your dashboard will show their progress automatically</li>
-                    <li>If you haven't received any enrollment confirmation, contact the academy</li>
-                  </ol>
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">This could mean</p>
+                  <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+                    <li>Your ward hasn't been enrolled yet — contact the academy to enroll them</li>
+                    <li>Your ward's enrollment was recently completed — their progress will appear here once they start</li>
+                    <li>Your ward was removed from the program — contact the academy for details</li>
+                  </ul>
                 </div>
                 <div className="flex gap-3 justify-center">
                   <a href="/contact" className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold transition-colors">
@@ -247,11 +282,11 @@ export default function ParentProgressView() {
               <>
                 <h2 className="text-lg font-semibold text-gray-800 mb-2">Invalid or expired link</h2>
                 <p className="text-sm text-gray-500 mb-6">
-                  This progress report link is no longer valid. Please contact your child's mentor for an updated link.
+                  This progress report link is no longer valid. Please contact your ward's mentor for an updated link.
                 </p>
                 <div className="flex gap-3 justify-center">
                   <a href="/auth" className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold transition-colors">
-                    Sign in as Parent
+                    Sign in as Guardian
                   </a>
                   <a href="/contact" className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors">
                     Contact Academy
@@ -320,13 +355,39 @@ export default function ParentProgressView() {
           <div className="flex items-center gap-3 text-xs">
             {user && (
               <>
-                <a href="/program/parent/payments" className="text-indigo-600 hover:underline font-medium">Payments</a>
+                <a href="/program/guardian/payments" className="text-indigo-600 hover:underline font-medium">Payments</a>
                 <span className="text-gray-400">{profile?.display_name || user.email?.split('@')[0]}</span>
               </>
             )}
           </div>
         </div>
         <p className="text-xs text-gray-400 mb-4 -mt-4">Student Progress Report</p>
+
+        {/* ── Ward selector (multiple children) ── */}
+        {allWards.length > 1 && (
+          <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
+            {allWards.map((ward, idx) => (
+              <button
+                key={ward.enrollment.id}
+                onClick={() => switchWard(idx)}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-semibold transition-all flex-shrink-0 ${
+                  idx === activeWardIdx
+                    ? 'bg-indigo-50 border-indigo-300 text-indigo-700 shadow-sm'
+                    : 'bg-white border-gray-200 text-gray-600 hover:border-indigo-200'
+                }`}
+              >
+                {(ward.enrollment as any)._resolvedPhotoUrl ? (
+                  <img src={(ward.enrollment as any)._resolvedPhotoUrl} alt="" className="w-7 h-7 rounded-full object-cover" />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-400">
+                    {ward.studentName.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <span>{ward.studentName}</span>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* ── Header ── */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 mb-4">
@@ -536,7 +597,7 @@ export default function ParentProgressView() {
 
         {/* ── Footer ── */}
         <div className="text-center text-xs text-gray-400 leading-relaxed pb-4">
-          <p>This report is generated from your child's program at TigmaMinds Academy.</p>
+          <p>This report is generated from your ward's program at TigmaMinds Academy.</p>
         </div>
       </div>
     </div>

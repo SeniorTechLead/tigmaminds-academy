@@ -117,7 +117,7 @@ export default function CareersPage() {
               Our guarantee to learners and parents
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Every mentor teaching your child has completed our training program, passed a live assessment observed by our team, and earned TigmaMinds certification. They teach exclusively from our platform curriculum — the same lessons, experiments, and projects you can preview online. We run monthly calibration sessions to ensure consistent quality across all workshops and cities.
+              Every mentor teaching your ward has completed our training program, passed a live assessment observed by our team, and earned TigmaMinds certification. They teach exclusively from our platform curriculum — the same lessons, experiments, and projects you can preview online. We run monthly calibration sessions to ensure consistent quality across all workshops and cities.
             </p>
             <div className="border-t border-amber-200 dark:border-amber-800 pt-4">
               <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
