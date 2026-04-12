@@ -38,6 +38,7 @@ export const guide: ReferenceGuide = {
     },
     {
       title: 'HTML — The Structure',
+      diagram: 'HTMLTagsDiagram',
       beginnerContent:
         'HTML (HyperText Markup Language) defines *what* is on the page. It uses tags — words in ' +
         'angle brackets — to label content. `<h1>` says "this is a main heading." `<p>` says "this ' +
@@ -97,6 +98,7 @@ export const guide: ReferenceGuide = {
     },
     {
       title: 'How the Three Work Together',
+      diagram: 'ComponentDiagram',
       beginnerContent:
         'Think of building a car. HTML is the frame and body panels — the structure that defines ' +
         'where the seats, dashboard, and wheels go. CSS is the paint job, upholstery, and trim — ' +
@@ -179,6 +181,7 @@ export const guide: ReferenceGuide = {
   build: [
     {
       title: 'A Complete HTML Page',
+      diagram: 'HTMLStructureDiagram',
       beginnerContent:
         'Every HTML file follows this structure. The `<!DOCTYPE html>` tells the browser which version ' +
         'of HTML to use. The `<head>` holds metadata; the `<body>` holds visible content.',
@@ -322,6 +325,7 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
     },
     {
       title: 'Putting It All Together: A Mini App',
+      diagram: 'TodoDataFlowDiagram',
       beginnerContent:
         'A complete mini-application that combines HTML structure, CSS styling, and JavaScript behavior into one working page.',
       code: `<!-- Save as index.html and open in a browser -->
@@ -491,6 +495,7 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
     {
       id: 'html-dom',
       title: 'The DOM — Selecting & Changing Elements',
+      diagram: 'DOMManipulationDiagram',
       beginnerContent:
         'The **DOM (Document Object Model)** is the browser\'s live representation of your HTML page as a tree of objects. JavaScript can read and change any part of it.\n\n' +
         '**Selecting elements:**\n' +
@@ -550,6 +555,7 @@ li { list-style: none; }
     {
       id: 'html-events',
       title: 'Events — Responding to User Actions',
+      diagram: 'EventListenerDiagram',
       beginnerContent:
         'An **event** is something the user does: click a button, type in an input, hover over an image, submit a form. JavaScript lets you run code when events happen.\n\n' +
         '**Adding event listeners:**\n' +
@@ -671,6 +677,7 @@ document.getElementById("regForm").addEventListener("submit", (e) => {
     {
       id: 'html-flexbox',
       title: 'Flexbox — Layout Made Simple',
+      diagram: 'FlexboxDiagram',
       beginnerContent:
         'Before flexbox, laying out elements side by side required hacks (floats, tables). Flexbox makes it one line: `display: flex`.\n\n' +
         '**Key properties on the container (parent):**\n' +

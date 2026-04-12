@@ -4,6 +4,13 @@ import ArduinoPlayground from '../components/ArduinoPlayground';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useBasicsProgress } from '../contexts/BasicsProgressContext';
+import FrequencyExplorerDiagram from '../components/diagrams/FrequencyExplorerDiagram';
+import LEDBlinkDiagram from '../components/diagrams/LEDBlinkDiagram';
+import VariableSpeedDiagram from '../components/diagrams/VariableSpeedDiagram';
+import LEDPatternDiagram from '../components/diagrams/LEDPatternDiagram';
+import ButtonInputDiagram from '../components/diagrams/ButtonInputDiagram';
+import PWMBrightnessDiagram from '../components/diagrams/PWMBrightnessDiagram';
+import SerialLoggerDiagram from '../components/diagrams/SerialLoggerDiagram';
 
 const lessons = [
   {
@@ -399,10 +406,16 @@ export default function ArduinoBasicsPage() {
           {lessons.map((lesson, i) => {
             const done = isLessonComplete(COURSE_SLUG, i);
             return (
-            <div key={i}>
+            <div key={i} id={`lesson-${i}`}>
               {/* Lesson header — always visible */}
               <button
-                onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
+                onClick={() => {
+                  const opening = expandedLesson !== i;
+                  setExpandedLesson(opening ? i : null);
+                  if (opening) {
+                    setTimeout(() => document.getElementById(`lesson-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                  }
+                }}
                 className={`w-full text-left px-6 py-4 rounded-xl border transition-all flex items-center gap-4
                   ${expandedLesson === i
                     ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-300 dark:border-amber-700'
@@ -424,7 +437,7 @@ export default function ArduinoBasicsPage() {
                   <p className={`font-semibold ${expandedLesson === i ? 'text-amber-700 dark:text-amber-300' : done ? 'text-amber-700 dark:text-amber-300' : 'text-gray-900 dark:text-white'}`}>
                     {lesson.title}
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{lesson.analogy.slice(0, 80)}...</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{lesson.analogy}</p>
                 </div>
                 {done && expandedLesson !== i && <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 flex-shrink-0">Complete</span>}
                 <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedLesson === i ? 'rotate-90' : ''}`} />
@@ -442,6 +455,15 @@ export default function ArduinoBasicsPage() {
                       {lesson.concept}
                     </div>
                   </div>
+
+                  {/* Interactive diagrams — one per lesson */}
+                  {i === 0 && <LEDBlinkDiagram />}
+                  {i === 1 && <VariableSpeedDiagram />}
+                  {i === 2 && <LEDPatternDiagram />}
+                  {i === 3 && <ButtonInputDiagram />}
+                  {i === 4 && <PWMBrightnessDiagram />}
+                  {i === 5 && <SerialLoggerDiagram />}
+                  {i === 6 && <FrequencyExplorerDiagram />}
 
                   {/* Analogy */}
                   <div className="bg-amber-50 dark:bg-amber-900/10 rounded-xl p-5 border border-amber-200 dark:border-amber-800">

@@ -311,10 +311,16 @@ export default function SqlBasicsPage() {
           {lessons.map((lesson, i) => {
             const done = isLessonComplete(COURSE_SLUG, i);
             return (
-            <div key={i}>
+            <div key={i} id={`lesson-${i}`}>
               {/* Lesson header — always visible */}
               <button
-                onClick={() => setExpandedLesson(expandedLesson === i ? null : i)}
+                onClick={() => {
+                  const opening = expandedLesson !== i;
+                  setExpandedLesson(opening ? i : null);
+                  if (opening) {
+                    setTimeout(() => document.getElementById(`lesson-${i}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                  }
+                }}
                 className={`w-full text-left px-6 py-4 rounded-xl border transition-all flex items-center gap-4
                   ${expandedLesson === i
                     ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-700'
@@ -336,7 +342,7 @@ export default function SqlBasicsPage() {
                   <p className={`font-semibold ${expandedLesson === i ? 'text-emerald-700 dark:text-emerald-300' : done ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-900 dark:text-white'}`}>
                     {lesson.title}
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate">{lesson.challenge}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{lesson.challenge}</p>
                 </div>
                 {done && expandedLesson !== i && <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex-shrink-0">Complete</span>}
                 <ChevronRight className={`w-5 h-5 text-gray-400 transition-transform ${expandedLesson === i ? 'rotate-90' : ''}`} />
