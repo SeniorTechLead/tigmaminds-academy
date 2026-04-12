@@ -1,5 +1,5 @@
 /**
- * 24-Week Bootcamp Curriculum
+ * 24-Week Bootcamp
  *
  * 3 career tracks, each with 6 phases (4 weeks per phase = 24 weeks total).
  * Every week has: topic, project deliverable, learning objectives.

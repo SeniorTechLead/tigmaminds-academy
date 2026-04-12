@@ -468,7 +468,7 @@ function SchoolProgramCard({ isIndia }: { isIndia: boolean }) {
 
   return (
     <div id="school-program" className="bg-white dark:bg-gray-800 rounded-xl border border-emerald-200 dark:border-emerald-800 p-5 mb-4 scroll-mt-24">
-      <h4 className="text-sm font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wide mb-2">12-Month School Program</h4>
+      <h4 className="text-sm font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wide mb-2">12-Month Curriculum</h4>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Students — Grades 6 and up</p>
       <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
         <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Robotics &amp; Arduino, Python &amp; AI, or Creative Coding</li>
@@ -600,7 +600,7 @@ export default function ProgramsPage() {
             {/* School Program */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-emerald-200 dark:border-emerald-800 flex flex-col">
               <span className="text-3xl mb-3">🏫</span>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">12-Month School Program</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">12-Month Curriculum</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
                 Structured 48-week curriculum with a dedicated mentor. Small cohorts (max 12), hands-on hardware, monthly project showcases. Grades 6-12.
               </p>

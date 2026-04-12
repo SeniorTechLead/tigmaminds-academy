@@ -36,8 +36,8 @@ export default function Header() {
     ] },
     { name: 'Programs', href: '/programs', children: [
       { name: 'Overview', href: '/programs' },
-      { name: '12-Month School Curriculum', href: '/curriculum' },
-      { name: '24-Week Bootcamp Curriculum', href: '/curriculum/bootcamp' },
+      { name: '12-Month Curriculum', href: '/curriculum' },
+      { name: '24-Week Bootcamp', href: '/curriculum/bootcamp' },
       { name: 'Capstones', href: '/capstones' },
     ] },
     { name: 'Lessons', href: '/lessons' },

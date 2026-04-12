@@ -24,7 +24,7 @@ const tracks = [
     link: '/programs#bootcamp',
   },
   {
-    title: '12-Month School Program',
+    title: '12-Month Curriculum',
     audience: 'Grades 6–12',
     subjects: ['Robotics & Arduino', 'Python & AI', 'Creative Coding'],
     color: 'from-emerald-500 to-green-400',
@@ -195,7 +195,7 @@ export default function HomePage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-50/50 to-white dark:from-amber-900/10 dark:to-gray-900">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8">
-            <span className="inline-block text-[11px] font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/30 px-3 py-1 rounded-full uppercase tracking-wider mb-4">12-Month School Program</span>
+            <span className="inline-block text-[11px] font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/30 px-3 py-1 rounded-full uppercase tracking-wider mb-4">12-Month Curriculum</span>
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
               From Blinking LED to <span className="text-gradient">Autonomous Robot</span>
             </h2>
