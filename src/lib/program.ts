@@ -177,7 +177,7 @@ export async function enrollStudent(cohortId: string, studentEmail: string, pare
           body: JSON.stringify({
             studentEmail: !studentId ? studentEmail : undefined,
             parentEmail: parentEmail || undefined,
-            cohortName: cohort?.name || 'School Program',
+            cohortName: cohort?.name || '12-Month Curriculum',
           }),
         });
         const result = await res.json();

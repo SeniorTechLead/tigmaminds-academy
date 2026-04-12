@@ -209,7 +209,7 @@ export default function BootcampCurriculumPage() {
             Small cohorts, hands-on projects every week, and direct employer introductions.
           </p>
           <p className="text-sm text-gray-400 dark:text-gray-500 mt-3">
-            Looking for the school program? See the <Link href="/curriculum" className="text-amber-600 dark:text-amber-400 hover:underline">12-Month Curriculum</Link>.
+            Looking for the 12-month program? See the <Link href="/curriculum" className="text-amber-600 dark:text-amber-400 hover:underline">12-Month Curriculum</Link>.
           </p>
         </div>
 

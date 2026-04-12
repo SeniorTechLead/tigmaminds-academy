@@ -334,7 +334,7 @@ export default function LessonsIndexPage() {
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-                          <span>{lesson.track === 'school' ? 'School Program' : lesson.track === 'bootcamp' ? 'Bootcamp' : 'All Tracks'}</span>
+                          <span>{lesson.track === 'school' ? '12-Month Curriculum' : lesson.track === 'bootcamp' ? 'Bootcamp' : 'All Tracks'}</span>
                           {lesson.estimatedHours && (
                             <span className="flex items-center gap-1">
                               <Clock className="w-3 h-3" /> {lesson.estimatedHours}h

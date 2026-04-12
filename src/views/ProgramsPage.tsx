@@ -553,7 +553,7 @@ export default function ProgramsPage() {
             Three ways to learn
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-2">
-            Self-paced online, 12-month school program, or 24-week career bootcamp.
+            Self-paced online, 12-month mentored curriculum, or 24-week career bootcamp.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             All paths start free. Upgrade when you are ready.
@@ -597,7 +597,7 @@ export default function ProgramsPage() {
               </Link>
             </div>
 
-            {/* School Program */}
+            {/* 12-Month Curriculum */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-emerald-200 dark:border-emerald-800 flex flex-col">
               <span className="text-3xl mb-3">🏫</span>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">12-Month Curriculum</h3>
@@ -677,9 +677,9 @@ export default function ProgramsPage() {
               )}
             </div>
 
-            {/* School Program */}
+            {/* 12-Month Curriculum */}
             <div className="rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 p-6 bg-white dark:bg-gray-800 text-center">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">School Program</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">12-Month Curriculum</h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹9,999' : '$59'}<span className="text-base font-normal text-gray-500">/mo</span></p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">12 months &middot; Grades 6-12</p>
               <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">

@@ -129,7 +129,7 @@ export default function ParentPaymentsPage() {
         </div>
 
         <h1 className="text-2xl font-bold text-gray-900 mb-1">Payments</h1>
-        <p className="text-sm text-gray-500 mb-4">{enrollment.cohorts?.name || 'School Program'}</p>
+        <p className="text-sm text-gray-500 mb-4">{enrollment.cohorts?.name || '12-Month Curriculum'}</p>
 
         {/* Ward selector */}
         {enrollments.length > 1 && (

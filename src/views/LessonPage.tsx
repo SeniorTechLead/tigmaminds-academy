@@ -716,7 +716,7 @@ plt.show()`}</pre>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-white mb-4">Ready to Build This?</h2>
             <p className="text-lg text-white/90 mb-8">
-              This lesson is part of our {lesson.track === 'school' ? '12-Month Curriculum' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Bootcamp and School Program'}. Apply now and start building.
+              This lesson is part of our {lesson.track === 'school' ? '12-Month Curriculum' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Bootcamp and 12-Month Curriculum'}. Apply now and start building.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/auth" className="inline-flex items-center justify-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all">
