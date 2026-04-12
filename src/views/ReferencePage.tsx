@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import GuideCard from '../components/reference/GuideCard';
 import { REFERENCE_CATEGORIES, type ReferenceGuide, type CategoryGroup } from '../data/reference';
 import { referenceMeta } from '../data/reference-meta';
+import { loadGuideBySlug } from '../data/reference/loader';
 import searchIndex from '../data/reference-search-index.json';
 
 export type ReferenceLevel = 0 | 1 | 2;  // 0=Listener, 1=Explorer/Builder, 2=Engineer/Creator
@@ -129,14 +130,11 @@ export default function ReferencePage() {
 
   const loadGuide = useCallback(async (guideSlug: string): Promise<ReferenceGuide | null> => {
     if (guideCacheRef.current[guideSlug]) return guideCacheRef.current[guideSlug];
-    try {
-      const mod = await import(`../data/reference/${guideSlug}`);
-      const guide = mod.guide as ReferenceGuide;
+    const guide = await loadGuideBySlug(guideSlug);
+    if (guide) {
       setGuideCache(prev => ({ ...prev, [guideSlug]: guide }));
-      return guide;
-    } catch {
-      return null;
     }
+    return guide;
   }, []);
 
   // Pre-load the guide when navigating to /library/slug
