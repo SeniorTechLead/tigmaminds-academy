@@ -4,6 +4,10 @@ import HtmlPlayground from '../components/HtmlPlayground';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useBasicsProgress } from '../contexts/BasicsProgressContext';
+import { useAuth } from '../contexts/AuthContext';
+import SignUpGate from '../components/SignUpGate';
+
+const FREE_LESSONS = 3;
 import { HTMLTagsDiagram, HTMLStructureDiagram, CSSBoxModelDiagram, FlexboxDiagram, DOMManipulationDiagram, EventListenerDiagram, ComponentDiagram, TodoDataFlowDiagram } from '../components/diagrams/WebBasicsDiagrams';
 
 const lessons = [
@@ -1224,6 +1228,7 @@ const COURSE_SLUG = 'web-basics' as const;
 
 export default function WebBasicsPage() {
   const { markLessonComplete, isLessonComplete, getCompletedCount, isCourseComplete } = useBasicsProgress();
+  const { user } = useAuth();
   const [expandedLesson, setExpandedLesson] = useState<number | null>(null);
   const completedCount = getCompletedCount(COURSE_SLUG);
   const courseComplete = isCourseComplete(COURSE_SLUG, lessons.length);
@@ -1328,7 +1333,14 @@ export default function WebBasicsPage() {
 
               {/* Expanded lesson content */}
               {expandedLesson === i && (
-                <div className="mt-4 ml-2 space-y-6">
+                <div className={`mt-4 ml-2 space-y-6 relative ${!user && i >= FREE_LESSONS ? 'max-h-[400px] overflow-hidden' : ''}`}>
+                  {!user && i >= FREE_LESSONS && (
+                    <div className="absolute inset-0 z-10 flex items-end justify-center bg-gradient-to-t from-white via-white/95 to-transparent dark:from-gray-950 dark:via-gray-950/95">
+                      <div className="pb-8 w-full max-w-md mx-auto">
+                        <SignUpGate message={`Sign up free to unlock lesson ${i + 1} and all remaining lessons`} />
+                      </div>
+                    </div>
+                  )}
                   {/* Concept */}
                   <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
