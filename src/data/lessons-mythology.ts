@@ -152,9 +152,11 @@ And for a science student, the story is a goldmine. An ocean of milk being separ
         { slug: 'chemical-reactions', reason: 'How reactants transform into products — the chemistry behind both poisons and useful compounds' },
       ],
       nextLessons: [
-        { slug: 'cloud-refused-rain', reason: 'Explores evaporation, condensation, and cloud seeding — the same phase changes that power distillation' },
+        { slug: 'cloud-refused-rain', reason: 'Same phase change simulation code — extends your distillation model to evaporation, condensation, and cloud seeding physics' },
+        { slug: 'the-little-boat', reason: 'Same density calculation code — extends your solution chemistry to buoyancy and displacement on the Brahmaputra' },
+      ],
+      relatedStories: [
         { slug: 'why-the-muga-silk-is-golden', reason: 'The chemistry of natural materials — how silk proteins and dyes interact at the molecular level' },
-        { slug: 'the-little-boat', reason: 'Buoyancy and fluid dynamics on the Brahmaputra — the same density physics that makes objects sink or float' },
       ],
       codeTeaser: `# Density Layer Calculator
 liquids = {
@@ -336,9 +338,13 @@ That, he realised, was the part that lasted.
         { slug: 'patterns-in-nature', reason: 'How symmetry and fractal patterns appear in snowflakes, honeycombs, shells, and galaxies' },
       ],
       nextLessons: [
-        { slug: 'the-magic-japi-hat', reason: 'The japi hat uses hexagonal tessellations at 60° angles — the same geometry that fills mandala rings' },
-        { slug: 'basket-weavers-song', reason: 'Weaving patterns are tessellations from counting rules — mathematical art from a different tradition' },
-        { slug: 'honey-hunters-lesson', reason: 'Bees build hexagonal honeycomb — nature solving the same tessellation problem' },
+        { slug: 'the-magic-japi-hat', reason: 'Same tessellation geometry code — extends your mandala ring patterns to hexagonal 60° angle tessellations in the japi hat' },
+        { slug: 'basket-weavers-song', reason: 'Same pattern generation code — extends your mandala symmetry model to weaving counting rules and over-under tessellations' },
+        { slug: 'honey-hunters-lesson', reason: 'Same hexagonal geometry code — extends your mandala tessellation to bee honeycomb optimisation calculations' },
+      ],
+      relatedStories: [
+        { slug: 'basket-weavers-song', reason: 'Programming — you\'ll compare symmetry algorithms for mandala and weave pattern generation in Python, computing rotational and reflective symmetries' },
+        { slug: 'the-magic-japi-hat', reason: 'Programming — you\'ll model geometric tiling rules in Python, comparing mandala radial patterns to japi hat triaxial weaves' },
       ],
       codeTeaser: `import turtle
 t = turtle.Turtle()
@@ -510,9 +516,13 @@ He knew the physics. He just knew it in his hands.
         { slug: 'energy-and-work', reason: 'Deep dive into kinetic energy, potential energy, and the work-energy theorem' },
       ],
       nextLessons: [
-        { slug: 'woodpeckers-drum', reason: 'A woodpecker\'s skull absorbs 1000g impacts — the same impulse and pressure physics, evolved as protection' },
-        { slug: 'kite-festival', reason: 'Kites fly because of aerodynamic forces and angles — the same interplay of forces and trajectory' },
-        { slug: 'bamboo-taught-wind', reason: 'Bamboo bends under force without breaking — a different response to the same force and energy principles' },
+        { slug: 'woodpeckers-drum', reason: 'Same impulse and pressure simulation code — extends your projectile impact model to biological shock absorption at 1000g' },
+        { slug: 'kite-festival', reason: 'Same force and trajectory simulation — extends your projectile code to aerodynamic lift and angle-of-attack calculations' },
+        { slug: 'bamboo-taught-wind', reason: 'Same force and energy simulation code — extends your impact model to elastic bending and stress-strain in bamboo' },
+      ],
+      relatedStories: [
+        { slug: 'kite-festival', reason: 'Programming — you\'ll simulate projectile trajectories and air resistance in Python, extending sling physics to kite aerodynamics' },
+        { slug: 'bamboo-taught-wind', reason: 'Programming — you\'ll model impact force and material deformation in Python, comparing stone impact to bamboo bending under wind load' },
       ],
       codeTeaser: `import numpy as np
 import matplotlib.pyplot as plt
@@ -703,9 +713,13 @@ Zahra looked at her tiles, then at the crystal drawings. The same geometry — o
         { slug: 'patterns-in-nature', reason: 'How tessellation and symmetry principles appear in honeycombs, snowflakes, and crystal structures' },
       ],
       nextLessons: [
-        { slug: 'basket-weavers-song', reason: 'Weaving patterns are tessellations too — counting rules and over-under sequences create repeating designs' },
-        { slug: 'the-magic-japi-hat', reason: 'The japi hat uses a triaxial hexagonal weave — a tessellation with 6-fold rotational symmetry' },
-        { slug: 'honey-hunters-lesson', reason: 'Bees build hexagonal honeycomb — nature\'s most famous tessellation, the 120° rule in action' },
+        { slug: 'basket-weavers-song', reason: 'Same tessellation generation code — extends your kolam symmetry model to weaving pattern counting rules' },
+        { slug: 'the-magic-japi-hat', reason: 'Same tessellation geometry code — extends your kolam rotational symmetry to triaxial hexagonal weave at 120°' },
+        { slug: 'honey-hunters-lesson', reason: 'Same hexagonal tessellation code — extends your kolam 120° rule to bee honeycomb optimisation geometry' },
+      ],
+      relatedStories: [
+        { slug: 'basket-weavers-song', reason: 'Programming — you\'ll code wallpaper group symmetry classifiers in Python, detecting which of the 17 symmetry types a given pattern uses' },
+        { slug: 'the-magic-japi-hat', reason: 'Programming — you\'ll compare Islamic tessellation algorithms to NE Indian weave geometry, computing tiling angles and coverage ratios' },
       ],
       codeTeaser: `import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -880,8 +894,10 @@ The most powerful systems combine both: serial reasoning for complex decisions, 
         { slug: 'neural-networks-intro', reason: 'Step-by-step introduction to artificial neural networks, weights, biases, and training' },
       ],
       nextLessons: [
-        { slug: 'girl-who-spoke-to-elephants', reason: 'Machine learning in wildlife tracking — neural networks applied to real elephant communication data' },
-        { slug: 'the-firefly-festival', reason: 'Synchronisation and signalling — fireflies solve a parallel coordination problem that mirrors GPU thread sync' },
+        { slug: 'girl-who-spoke-to-elephants', reason: 'Same neural network classification code — extends your GPU parallel processing model to real elephant communication audio data' },
+        { slug: 'the-firefly-festival', reason: 'Same parallel synchronisation simulation — extends your GPU thread model to firefly flash coordination algorithms' },
+      ],
+      relatedStories: [
         { slug: 'churning-of-the-ocean', reason: 'Chemistry and fluid dynamics — a different Hindu mythology story mapped to different STEM fields' },
       ],
       codeTeaser: `import time, threading
@@ -1072,7 +1088,9 @@ And the first thing Noah did on dry land was plant a vineyard. After a year on a
         { slug: 'classification-of-life', reason: 'The full taxonomy hierarchy from domains to species, with examples from every kingdom' },
       ],
       nextLessons: [
-        { slug: 'the-little-boat', reason: 'Buoyancy and hull design on the Brahmaputra — the same displacement physics that keeps any vessel afloat' },
+        { slug: 'the-little-boat', reason: 'Same buoyancy and displacement simulation code — extends your species density calculations to hull design physics' },
+      ],
+      relatedStories: [
         { slug: 'honey-hunters-lesson', reason: 'Bee colony ecology and keystone pollinator species — biodiversity in action' },
         { slug: 'churning-of-the-ocean', reason: 'Density and fluid dynamics from a different mythological tradition — overlapping physics, different story' },
       ],
@@ -1244,7 +1262,9 @@ The Bodhi Tree offers no easy answers. But it has been asking the right question
         { slug: 'genetics-and-heredity', reason: 'How genes are inherited, why offspring differ from parents, and the basics of Mendelian genetics' },
       ],
       nextLessons: [
-        { slug: 'banyan-tree-stories', reason: 'The banyan tree also clones itself through aerial roots — natural asexual reproduction on a massive scale' },
+        { slug: 'banyan-tree-stories', reason: 'Same clonal reproduction simulation code — extends your vegetative propagation model to the banyan\'s aerial root cloning system' },
+      ],
+      relatedStories: [
         { slug: 'honey-hunters-lesson', reason: 'Bees and pollination — the sexual reproduction side of the story, and why bees are essential for seed-producing plants' },
         { slug: 'sand-mandala', reason: 'The sand mandala explores symmetry and self-similarity — patterns that repeat identically, like DNA in clones' },
       ],
@@ -1452,9 +1472,13 @@ Zahra held the astrolabe up to the sky and sighted Polaris. Thirty-two degrees. 
         { slug: 'geometry-essentials', reason: 'Circles, angles, and projections — the geometric foundations of stereographic mapping' },
       ],
       nextLessons: [
-        { slug: 'geometry-of-alhambra', reason: 'Islamic geometric art uses the same compass-and-straightedge techniques that astrolabe makers mastered' },
-        { slug: 'stars-above-ziro', reason: 'Stellar observation, magnitude scales, and light pollution — the same stars the astrolabe maps' },
-        { slug: 'map-makers-mountain', reason: 'Cartography and projection — mapping the Earthu2019s surface uses the same projection mathematics as mapping the sky' },
+        { slug: 'geometry-of-alhambra', reason: 'Same compass-and-straightedge construction code — extends your astrolabe geometry to Islamic geometric art tessellations' },
+        { slug: 'stars-above-ziro', reason: 'Same coordinate projection code — extends your astrolabe sky-mapping to stellar magnitude scales and light pollution analysis' },
+        { slug: 'map-makers-mountain', reason: 'Same projection mathematics code — extends your celestial sphere mapping to Earth surface cartographic projections' },
+      ],
+      relatedStories: [
+        { slug: 'stars-ziro-valley', reason: 'Programming — you\'ll code celestial coordinate transformations in Python, converting between horizon and equatorial systems for star observation' },
+        { slug: 'map-makers-granddaughter', reason: 'Programming + Database — you\'ll store astronomical observation data and code latitude calculations from star angle measurements' },
       ],
       codeTeaser: `import numpy as np
 
@@ -1654,7 +1678,9 @@ Hanuman's strength was divine. But the real miracle is knowledge — and that is
         { slug: 'classification-and-taxonomy', reason: 'The system biologists use to name and organise every living species, from kingdom to species' },
       ],
       nextLessons: [
-        { slug: 'churning-of-the-ocean', reason: 'The chemistry of separation — density, distillation, and purification — the same science used to extract active compounds from plants' },
+        { slug: 'churning-of-the-ocean', reason: 'Same separation and purification simulation code — extends your plant extract chemistry to density-based distillation and phase separation' },
+      ],
+      relatedStories: [
         { slug: 'snow-leopard-breathless-peak', reason: 'Altitude physiology and mountain ecology — how animals and plants adapt to thin air and extreme cold' },
         { slug: 'the-witch-doctors-garden', reason: 'Ethnobotany and traditional medicine — how indigenous knowledge of plants connects to modern pharmacology' },
       ],
@@ -1852,8 +1878,10 @@ Dorji reached up and placed his palm on Sangha’s cold surface. Somewhere insid
         { slug: 'interference-and-beats', reason: 'How two waves of close frequencies create beat patterns — the physics behind a cracked bell’s unpleasant sound' },
       ],
       nextLessons: [
-        { slug: 'bamboo-flute-of-nagaland', reason: 'Explores resonance in tubes — the same standing wave physics applied to wind instruments instead of bells' },
-        { slug: 'woodpeckers-drum', reason: 'Impact forces and vibration — how a woodpecker uses resonance while protecting its brain' },
+        { slug: 'bamboo-flute-of-nagaland', reason: 'Same standing wave simulation code — extends your bell harmonic model to resonance in tube air columns' },
+        { slug: 'woodpeckers-drum', reason: 'Same vibration and resonance simulation — extends your bell mode analysis to impact force absorption in biological structures' },
+      ],
+      relatedStories: [
         { slug: 'sand-mandala', reason: 'Symmetry and geometry — the mathematical patterns that also govern how bell surfaces vibrate in standing wave modes' },
       ],
       codeTeaser: `# Bell Harmonic Calculator
@@ -2026,7 +2054,9 @@ The Pushpaka Vimana flew by divine will. Real aircraft fly by engineering. But t
         { slug: 'pressure', reason: 'Pressure in fluids — the physics behind Bernoulli’s principle and how wings generate lift' },
       ],
       nextLessons: [
-        { slug: 'david-and-goliath', reason: 'Projectile motion and circular mechanics — the same physics of forces and trajectories, applied to a sling' },
+        { slug: 'david-and-goliath', reason: 'Same force and trajectory simulation code — extends your centripetal pressure model to projectile motion and circular mechanics' },
+      ],
+      relatedStories: [
         { slug: 'churning-of-the-ocean', reason: 'Fluid dynamics and density — another Hindu mythology story mapped to physics and chemistry' },
         { slug: 'hanuman-lifted-mountain', reason: 'Geology and altitude science — the mountains the Vimana flew over on its journey from Lanka to Ayodhya' },
       ],
@@ -2225,8 +2255,10 @@ They did not call it chemistry. They called it Agni.
         { slug: 'chemical-reactions', reason: 'Balancing equations, reaction types, and energy changes in chemical reactions' },
       ],
       nextLessons: [
-        { slug: 'churning-of-the-ocean', reason: 'Chemistry of separation and density — building on combustion with more chemical reactions and phase changes' },
-        { slug: 'orange-sunsets-assam', reason: 'Light and spectroscopy — how wavelengths of light interact with matter, connecting flame colours to atmospheric optics' },
+        { slug: 'churning-of-the-ocean', reason: 'Same chemical reaction simulation code — extends your combustion model to density separation and phase change calculations' },
+        { slug: 'orange-sunsets-assam', reason: 'Same spectroscopy simulation code — extends your flame color wavelength model to atmospheric Rayleigh scattering' },
+      ],
+      relatedStories: [
         { slug: 'firefly-festival-of-majuli', reason: 'Bioluminescence — light without heat, the opposite of fire, and the chemistry of cold light' },
       ],
       codeTeaser: `# Combustion Energy Calculator
@@ -2394,9 +2426,13 @@ The Dharma Wheel encodes these principles in its very design. It turns. It persi
         { slug: 'energy-and-work', reason: 'Understand kinetic energy, potential energy, and energy conservation — essential for flywheel energy storage' },
       ],
       nextLessons: [
-        { slug: 'churning-of-the-ocean', reason: 'The churning uses a mountain as a spinning rod on a tortoise pivot — torque and rotational mechanics in Hindu mythology' },
-        { slug: 'david-and-goliath', reason: 'David’s sling converts circular motion into projectile motion — angular momentum released as linear momentum' },
-        { slug: 'sand-mandala', reason: 'Mandala symmetry is rotational symmetry — the mathematics of patterns that look the same after rotation' },
+        { slug: 'churning-of-the-ocean', reason: 'Same torque and rotational mechanics simulation — extends your lever model to spinning rod physics with angular momentum' },
+        { slug: 'david-and-goliath', reason: 'Same angular momentum simulation code — extends your rotational energy model to circular-to-projectile motion conversion in a sling' },
+        { slug: 'sand-mandala', reason: 'Same symmetry transformation code — mandala symmetry is rotational symmetry — the mathematics of patterns that look the same after rotation' },
+      ],
+      relatedStories: [
+        { slug: 'tortoise-and-hare', reason: 'Programming — you\'ll simulate circular and cycloid motion in Python, modelling how wheel geometry translates rotation into distance' },
+        { slug: 'little-train', reason: 'Programming — you\'ll model rolling friction and gradient forces in Python, calculating energy efficiency for wheel-based transport' },
       ],
       codeTeaser: `# Flywheel Energy Calculator
 import math
@@ -2583,7 +2619,9 @@ The murderer became a saint. Not through magic. Through practice.
         { slug: 'ai-and-machine-learning', reason: 'Introduction to how machines learn, including supervised, unsupervised, and reinforcement learning' },
       ],
       nextLessons: [
-        { slug: 'ravanas-ten-heads', reason: 'Explores parallel processing in the brain and CPU/GPU architecture — the computational side of neuroscience' },
+        { slug: 'ravanas-ten-heads', reason: 'Same parallel processing simulation code — extends your neural network model to CPU/GPU architecture and multi-head computation' },
+      ],
+      relatedStories: [
         { slug: 'bodhi-tree', reason: 'Another Buddhist story exploring botanical science — how living things grow and propagate through DNA' },
         { slug: 'sand-mandala', reason: 'The geometry of impermanence — patterns that are created and destroyed, like neural pathways that form and fade' },
       ],
@@ -2748,9 +2786,13 @@ Today, we have both. The Burj Khalifa stands 828 metres tall. Machine translatio
         { slug: 'energy-and-work', reason: 'Understanding energy transfer, potential energy, and kinetic energy in structural systems' },
       ],
       nextLessons: [
-        { slug: 'david-and-goliath', reason: 'Projectile physics and impact forces — another story where physics determines the outcome of human ambition' },
-        { slug: 'noahs-ark', reason: 'Buoyancy and structural engineering for Noah’s vessel — a different construction challenge from the same biblical tradition' },
-        { slug: 'churning-of-the-ocean', reason: 'Material science and separation — the chemistry of the materials that ancient builders used' },
+        { slug: 'david-and-goliath', reason: 'Same projectile and impact force simulation — extends your structural load model to trajectory physics and kinetic energy transfer' },
+        { slug: 'noahs-ark', reason: 'Same structural engineering simulation code — extends your Tower of Babel load model to buoyancy, displacement, and hull stress calculations' },
+        { slug: 'churning-of-the-ocean', reason: 'Same material science simulation code — extends your construction material model to chemical separation and ancient material properties' },
+      ],
+      relatedStories: [
+        { slug: 'bridge-that-grew', reason: 'Programming — you\'ll simulate structural load limits in Python, calculating how height increases compression stress and failure risk' },
+        { slug: 'monsoon-home', reason: 'Programming — you\'ll model wind load on tall structures in Python, simulating how height and shape affect aerodynamic forces' },
       ],
       codeTeaser: `# Tower Stress Calculator
 height = 100        # metres
@@ -2917,8 +2959,10 @@ That idea changed everything.
         { slug: 'algorithms-and-flowcharts', reason: 'How to design, describe, and analyse step-by-step procedures — the computer science side of al-Khwarizmi’s legacy' },
       ],
       nextLessons: [
-        { slug: 'geometry-of-alhambra', reason: 'Islamic geometric patterns use the same algebraic symmetry principles — algebra meets visual art' },
-        { slug: 'the-astrolabe', reason: 'Another Islamic mathematical instrument — al-Khwarizmi’s contemporaries used algebra and trigonometry to build astrolabes' },
+        { slug: 'geometry-of-alhambra', reason: 'Same algebraic symmetry code — extends your al-Khwarizmi algorithm model to Islamic geometric pattern generation' },
+        { slug: 'the-astrolabe', reason: 'Same trigonometry and algebra code — extends your algorithm model to astrolabe calculation routines used by al-Khwarizmi\'s contemporaries' },
+      ],
+      relatedStories: [
         { slug: 'sand-mandala', reason: 'The geometry of the mandala uses symmetry and pattern — mathematical concepts that algebra helps describe' },
       ],
       codeTeaser: `# Al-Khwarizmi's Balance Method
@@ -3084,9 +3128,11 @@ For a science student, this story opens a universe of questions. How do we measu
         { slug: 'waves-and-light', reason: 'Understanding electromagnetic radiation — how starlight travels across space and how we measure it' },
       ],
       nextLessons: [
-        { slug: 'the-astrolabe', reason: 'The Magi’s primary instrument — the astrolabe performs the same coordinate transforms you learn here' },
+        { slug: 'the-astrolabe', reason: 'Same coordinate transform simulation code — extends your stellar navigation model to astrolabe projection calculations' },
+        { slug: 'monastery-bells', reason: 'Same harmonic analysis code — extends your wave pattern model to bell acoustics and overtone frequency calculations' },
+      ],
+      relatedStories: [
         { slug: 'noahs-ark', reason: 'Another story where observation of the natural world (animals, floods, ecology) drives the narrative' },
-        { slug: 'monastery-bells', reason: 'Sound waves and harmonics — another physical phenomenon understood through mathematical patterns' },
       ],
       codeTeaser: `# Kepler's Third Law verifier
 import math
@@ -3244,8 +3290,10 @@ The sea did not need to break the laws of physics to part. It needed the right w
         { slug: 'waves-and-light', reason: 'Wave mechanics and how energy propagates through water — essential for understanding tides and storm surge' },
       ],
       nextLessons: [
+        { slug: 'david-and-goliath', reason: 'Same physics simulation code — extends your water wave model to projectile motion and biomechanics calculations' },
+      ],
+      relatedStories: [
         { slug: 'noahs-ark', reason: 'Another story involving water and survival — explores ecology, biodiversity, and carrying capacity' },
-        { slug: 'david-and-goliath', reason: 'The physics of projectile motion and biomechanics — another Bible story with hidden STEM' },
       ],
       codeTeaser: `# Wind Setdown Calculator
 import math
@@ -3413,8 +3461,10 @@ This is the story of all groundwater. It is the story of a hidden, patient cycle
         { slug: 'states-of-matter', reason: 'How water moves through porous media depends on its properties as a liquid — viscosity, surface tension, and capillarity' },
       ],
       nextLessons: [
-        { slug: 'muezzins-call', reason: 'Another Islamic story with deep STEM — architectural acoustics and sound propagation from minarets' },
-        { slug: 'parting-red-sea', reason: 'More water science — tidal physics and fluid dynamics from the biblical tradition' },
+        { slug: 'muezzins-call', reason: 'Same wave propagation simulation code — extends your phase change model to architectural acoustics and sound transmission from minarets' },
+        { slug: 'parting-red-sea', reason: 'Same fluid dynamics simulation code — extends your phase change model to tidal physics and large-scale water movement' },
+      ],
+      relatedStories: [
         { slug: 'noahs-ark', reason: 'Ecology, biodiversity, and carrying capacity — water and life intertwined in another ancient flood narrative' },
       ],
       codeTeaser: `# Darcy's Law Calculator
@@ -3579,8 +3629,12 @@ The Muezzin’s call connects acoustic physics, architectural engineering, and s
         { slug: 'forces-and-motion', reason: 'Speaker design relies on electromagnetism and Newton’s laws to convert electrical energy into mechanical vibration' },
       ],
       nextLessons: [
-        { slug: 'monastery-bells', reason: 'Sound physics in a different tradition — bell acoustics, harmonics, and resonance in a Buddhist monastery' },
-        { slug: 'tower-of-babel', reason: 'Structural engineering and the physics of building tall — what the minaret and the tower have in common' },
+        { slug: 'monastery-bells', reason: 'Same vibration and harmonic simulation code — extends your minaret acoustics model to bell resonance and overtone patterns' },
+        { slug: 'tower-of-babel', reason: 'Same structural load simulation code — extends your minaret height calculations to the physics of building tall structures' },
+      ],
+      relatedStories: [
+        { slug: 'mountain-echoes', reason: 'Programming — you\'ll simulate sound propagation and reflection in Python, modelling how tower height and surface geometry shape echo patterns' },
+        { slug: 'dhol-drum', reason: 'Programming — you\'ll model vocal resonance vs membrane vibration in Python, comparing two different sound production mechanisms' },
       ],
       codeTeaser: `# Inverse Square Law: Minaret vs Ground Level
 import math

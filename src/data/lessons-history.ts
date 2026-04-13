@@ -160,6 +160,12 @@ The Great Wall of China is not one wall. It is a 21,000-kilometre textbook in ma
         'The Han Dynasty sections of the wall, built from reed-and-gravel layers in the Gobi Desert, still stand after 2,000 years — in one of the harshest environments on Earth.',
       ],
       offlineActivity: 'Test freeze-thaw destruction yourself. Take two small pieces of terracotta or unglazed clay pot (from a garden centre). Soak both in water for 24 hours. Put one in the freezer overnight, then take it out and let it thaw completely. Repeat this freeze-thaw cycle for 5 days. Leave the other piece at room temperature as your control. After 5 cycles, compare them — the frozen piece should show visible cracks, chips, or crumbling. You\'ve just demonstrated the same process that destroyed the ancient sections of the Great Wall.',
+      nextLessons: [
+      { slug: 'building-the-pyramids', reason: 'Programming — you\'ll calculate structural compression loads and plot wall stability curves, comparing rammed earth to limestone block engineering' },
+      ],
+      relatedStories: [
+      { slug: 'inca-road-system', reason: 'Database — you\'ll build a fortification database and query construction timelines across ancient civilisations' },
+      ],
     },
     skillTags: [{ discipline: 'Scientific Modeling', skill: 'Physics simulation', tools: ['Mechanics'] }, { discipline: 'Programming', skill: 'Python', tools: ['Python 3'] }],
     learningTracks: ['Science & Lab' as Track],
@@ -333,6 +339,12 @@ paragraphs: [
         'The original locks, built in 1914, are still in operation. A third, wider set of locks was added in 2016 to accommodate modern container ships that are too large for the original chambers.',
       ],
       offlineActivity: 'Build a working canal lock model from two plastic containers and cardboard. Cut both ends off a milk carton to make a "lock chamber." Place it between two plastic tubs at different heights (use books to raise one). Seal the gaps with modelling clay. Make small gates from cardboard that can be opened and closed. Float a toy boat in the lower tub, close the gates, pour water from the higher tub into the lock chamber, and watch the boat rise. When the water level matches the upper tub, open the upper gate and push the boat through.',
+      nextLessons: [
+      { slug: 'roman-aqueducts', reason: 'Programming — you\'ll code fluid flow calculations, modelling lock chamber volumes and water pressure differentials' },
+      ],
+      relatedStories: [
+      { slug: 'mesopotamian-irrigation', reason: 'Programming — you\'ll compare canal engineering across millennia, plotting how water management scaled from ditches to shipping lanes' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -502,6 +514,12 @@ paragraphs: [
         'The Internet Archive stores over 99 petabytes of data — roughly equivalent to 99 billion books — making it the closest modern equivalent to the Library of Alexandria.',
       ],
       offlineActivity: 'Build a mini catalogue system. Gather 20-30 items from around your house (books, toys, utensils, clothes). First, try to find a specific item by looking through the pile one by one — time yourself. Then organize the items into categories (kitchen, bedroom, entertainment, etc.) and sort alphabetically within each category. Time yourself finding the same item using your catalogue. Compare the two times. You\'ve just demonstrated why the Library of Alexandria needed the Pinakes.',
+      nextLessons: [
+      { slug: 'gutenberg-printing-press', reason: 'Database — you\'ll build a document catalogue and code search algorithms, comparing scroll indexing to full-text search' },
+      ],
+      relatedStories: [
+      { slug: 'ibn-al-haytham-optics', reason: 'Programming — you\'ll trace knowledge transmission, plotting citation networks across centuries of scholarship' },
+      ],
     },
     learningTracks: ['Programming' as Track],
     estimatedHours: 12,
@@ -668,6 +686,12 @@ Every modern GPS satellite, every smartphone compass, every inertial navigation 
         'Viking longships had a draft (depth below waterline) of only about 50 cm, allowing them to sail up rivers and land directly on beaches — a military advantage no other European ship could match.',
       ],
       offlineActivity: 'Make a simple sundial compass. Push a straight stick (about 30 cm) vertically into the ground in a sunny spot. Mark the tip of its shadow with a pebble. Wait 15-20 minutes and mark the shadow tip again. Draw a line between the two pebble markers — this line runs roughly east-west (the first mark is west, the second is east). Draw a line perpendicular to it — that\'s your north-south line. You\'ve just used the same solar observation that Viking navigators used to determine direction.',
+      nextLessons: [
+      { slug: 'polynesian-wayfinding', reason: 'Programming — you\'ll code celestial navigation algorithms, calculating latitude from star angles and longitude from wave patterns' },
+      ],
+      relatedStories: [
+      { slug: 'zheng-he-fleet', reason: 'Database — you\'ll build a voyage database and plot ocean routes, calculating dead-reckoning drift errors' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -857,6 +881,18 @@ The Great Pyramid is not a mystery. It is a logistics problem, solved with extra
         'The original outer casing of the Great Pyramid was smooth, polished white Tura limestone that would have gleamed in the sunlight. Most of it was stripped off over centuries and used to build Cairo\'s mosques and fortifications.',
       ],
       offlineActivity: 'Test the wet sand friction effect. Fill a shallow tray with dry sand. Place a small heavy object (like a full tin can) on a piece of cardboard and drag it across the dry sand with a string. Note how hard you have to pull. Now sprinkle water over the sand (just enough to dampen it — don\'t make mud) and try again. You should feel a clear reduction in resistance. If you have a kitchen scale with a hook, you can even measure the pulling force in both cases and calculate the percentage reduction.',
+      nextLessons: [
+      { slug: 'gothic-cathedrals', reason: 'Programming — you\'ll calculate structural forces, comparing pyramid compression-only design to cathedral flying buttress tension systems' },
+      ],
+      relatedStories: [
+      { slug: 'great-wall-of-china', reason: 'Programming — you\'ll plot construction logistics, comparing labour force and build rates across ancient megaprojects' },
+      ],
+      nextLessons: [
+      { slug: 'viking-navigation', reason: 'Database — you\'ll build a historical fleet database with ship dimensions and cargo capacity, querying scale comparisons across naval expeditions' },
+      ],
+      relatedStories: [
+      { slug: 'silk-road-network', reason: 'Programming — you\'ll plot maritime vs overland trade routes, comparing voyage duration and network efficiency calculations' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -1025,6 +1061,18 @@ paragraphs: [
         'The total Apollo program cost $25.4 billion (about $200 billion today) and produced 12 astronauts who walked on the Moon and 382 kg of lunar rock and soil.',
       ],
       offlineActivity: 'Demonstrate the "rendezvous problem" with a friend. Stand 10 metres apart. Have your friend walk in a circle (representing the Moon\'s orbit). Your job is to throw a ball (gently!) so it arrives at the point in the circle where your friend will be — not where they are when you throw. Try it 10 times and count how many successful "rendezvous" you achieve. Notice that you must throw ahead of your friend, not at them — the same principle as the Hohmann transfer orbit.',
+      nextLessons: [
+      { slug: 'manhattan-project', reason: 'Programming — you\'ll code orbital mechanics, plotting trajectory curves and calculating delta-v for Earth-to-Moon transfer orbits' },
+      ],
+      relatedStories: [
+      { slug: 'mayan-astronomy', reason: 'Programming — you\'ll compare ancient sky observation to modern spaceflight, plotting how orbital mechanics understanding evolved' },
+      ],
+      nextLessons: [
+      { slug: 'building-the-pyramids', reason: 'Programming — you\'ll code flying buttress force calculations, modelling how pointed arches redirect structural weight' },
+      ],
+      relatedStories: [
+      { slug: 'leonardo-machines', reason: 'Programming — you\'ll compare medieval to Renaissance engineering, plotting how structural height-to-base ratios improved over centuries' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 14,
@@ -1195,6 +1243,12 @@ paragraphs: [
         'A single bacterium can produce a population of 1 billion in just 10 hours — about 30 doublings at 20 minutes each.',
       ],
       offlineActivity: 'Demonstrate exponential growth with paper folding. Take a piece of paper and fold it in half. Fold it again. And again. Each fold doubles the thickness. After 7 folds (most paper can\'t fold more), the thickness has increased from about 0.1 mm to about 12.8 mm (128 layers). If you could fold it 42 times (you can\'t, but imagine), the stack would reach the Moon. This is the power of exponential growth — the same mathematics that makes bacterial infections so dangerous.',
+      nextLessons: [
+      { slug: 'the-black-death', reason: 'AI — you\'ll train a classification model on bacterial growth data, predicting antibiotic effectiveness from colony morphology' },
+      ],
+      relatedStories: [
+      { slug: 'egyptian-embalming', reason: 'Database — you\'ll build a medical discovery timeline and query how preservation chemistry led to pharmaceutical breakthroughs' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -1373,6 +1427,18 @@ Gutenberg didn't just invent a machine. He changed the economics of knowledge it
         'Gutenberg died in poverty in 1468 — his investor, Johann Fust, had sued him and taken control of the printing operation. The man who changed the world never profited from his invention.',
       ],
       offlineActivity: 'Make your own printing press. Carve a simple word or shape (your initials work well) into a halved potato or a foam block — carve the MIRROR IMAGE, since printing reverses left and right. Press the carved face into an ink pad (or paint applied with a brush), then stamp it onto paper. Make 10 copies. Time yourself. Now hand-write the same word 10 times and compare. Notice how the "press" gets faster per copy as you go — setup is slow but each print is quick. This is the Gutenberg revolution in miniature.',
+      nextLessons: [
+      { slug: 'leonardo-machines', reason: 'Programming — you\'ll code mechanical advantage calculations for press, gear, and lever systems' },
+      ],
+      relatedStories: [
+      { slug: 'library-of-alexandria', reason: 'Database — you\'ll model information spread rates, comparing hand-copying vs printing press output' },
+      ],
+      nextLessons: [
+      { slug: 'penicillin-discovery', reason: 'AI — you\'ll train an epidemic spread model on historical plague data, predicting infection rates from population density and trade routes' },
+      ],
+      relatedStories: [
+      { slug: 'egyptian-embalming', reason: 'Database — you\'ll build a historical mortality database, querying geographic spread patterns and mapping transmission routes' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -1540,6 +1606,18 @@ This is the same architecture used in modern computer networks: redundant paths,
         'At the top of the Inca road network\'s highest pass (over 5,000 metres), the air pressure is about half that at sea level, and water boils at about 83°C instead of 100°C.',
       ],
       offlineActivity: 'Build a quipu. Cut 5 pieces of string (about 30 cm each) in different colours. Tie them to a longer horizontal cord. Choose 5 categories (hours of sleep, pages read, glasses of water, etc.) and assign one colour to each. Record today\'s data by tying knots: position on the string indicates place value (bottom = ones, higher = tens). Zero is represented by an empty space. Tomorrow, add a new set of strings for the next day\'s data. After a week, you\'ll have a visual data record — your own quipu.',
+      nextLessons: [
+      { slug: 'silk-road-network', reason: 'Programming — you\'ll code shortest-path algorithms on mountain terrain, calculating optimal routes accounting for altitude' },
+      ],
+      relatedStories: [
+      { slug: 'roman-aqueducts', reason: 'Programming — you\'ll compare infrastructure engineering, plotting construction scale vs terrain difficulty across civilisations' },
+      ],
+      nextLessons: [
+      { slug: 'gutenberg-printing-press', reason: 'Programming — you\'ll code mechanical advantage simulations for gears, pulleys, and lever systems, calculating force multiplication ratios' },
+      ],
+      relatedStories: [
+      { slug: 'gothic-cathedrals', reason: 'Programming — you\'ll compare theoretical designs to built structures, modelling how sketches translate to load-bearing capacity' },
+      ],
     },
     learningTracks: ['Programming' as Track],
     estimatedHours: 14,
@@ -1713,6 +1791,18 @@ paragraphs: [
         'Enrico Fermi built the world\'s first nuclear reactor under a squash court at the University of Chicago. There were no safety shields. The "safety system" was a man standing on a platform with an axe, ready to cut a rope that would drop a neutron-absorbing rod into the reactor if things went wrong.',
       ],
       offlineActivity: 'Demonstrate a chain reaction with dominoes or matchboxes. Set up dominoes in a branching pattern: 1 domino knocks over 2, each of those knocks over 2 more, etc. After 5 levels, the last row should have 16 dominoes. This shows exponential growth — from 1 to 16 in 5 steps. Now try it with the dominoes spaced far apart (some miss). This shows subcritical conditions — the "neutrons" (dominoes) miss too many targets, and the chain reaction dies out. Spacing them closer (like increasing the density of uranium) makes the chain reaction work.',
+      nextLessons: [
+      { slug: 'apollo-moon-landing', reason: 'Programming — you\'ll code fission chain reaction simulations, calculating critical mass and energy release' },
+      ],
+      relatedStories: [
+      { slug: 'chinese-gunpowder', reason: 'Programming — you\'ll compare explosive energy density across history, from gunpowder to nuclear' },
+      ],
+      nextLessons: [
+      { slug: 'inca-road-system', reason: 'Programming — you\'ll code weighted graph algorithms for trade route optimisation, accounting for terrain difficulty and oasis spacing' },
+      ],
+      relatedStories: [
+      { slug: 'zheng-he-fleet', reason: 'Database — you\'ll build a commodity price database across Silk Road cities, querying how distance affected spice valuations' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 14,
@@ -1861,6 +1951,12 @@ paragraphs: [
         'The word "plumbing" comes from Latin "plumbum" (lead) — because Roman water pipes were made of lead. Modern concerns about lead poisoning are partly validated by analysis of Roman skeletons, which show elevated lead levels.',
       ],
       offlineActivity: 'Demonstrate the siphon principle. Fill a glass with water and place it on a stack of books (elevated). Place an empty glass on the table below. Take a flexible tube (a drinking straw works for short distances), fill it completely with water (submerge it), cover both ends with your thumbs, place one end in the upper glass and the other in the lower glass, and release. Water will flow uphill over the rim of the upper glass and down into the lower glass — powered by the weight of water in the descending section. This is the same principle the Romans used in their inverted siphons.',
+      nextLessons: [
+      { slug: 'panama-canal', reason: 'Programming — you\'ll code gravity-fed flow simulations, calculating flow rate from gradient and channel dimensions' },
+      ],
+      relatedStories: [
+      { slug: 'mesopotamian-irrigation', reason: 'Programming — you\'ll compare water engineering across 3,000 years, plotting capacity improvements' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -2028,6 +2124,12 @@ paragraphs: [
         'Despite centuries of research by modern chemists, no one has produced a substance that matches ALL the described properties of Greek Fire simultaneously.',
       ],
       offlineActivity: 'Demonstrate the fire triangle with three candles (do this with an adult). Light all three. Candle 1: blow it out (removed heat). Candle 2: cover it with a glass jar and watch it go out as the oxygen is consumed (removed oxygen). Candle 3: pinch the wick with wet fingers to remove it from the wax pool (removed fuel). Each time, you\'re removing one side of the fire triangle — proving that all three are necessary.',
+      nextLessons: [
+      { slug: 'chinese-gunpowder', reason: 'Programming — you\'ll code combustion chemistry, calculating flame temperature and burn rate from fuel composition' },
+      ],
+      relatedStories: [
+      { slug: 'indian-wootz-steel', reason: 'Programming — you\'ll compare ancient material science secrets and their military applications' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -2176,6 +2278,12 @@ paragraphs: [
         'The internal organs (liver, lungs, stomach, intestines) were removed because they decay fastest — they contain the highest concentration of digestive enzymes and bacteria.',
       ],
       offlineActivity: 'Demonstrate osmosis with an egg. Dissolve the shell of a raw egg by soaking it in vinegar for 24-48 hours (the acid dissolves the calcium carbonate shell, leaving only the membrane). Now place the shell-less egg in a glass of salt water (4 tablespoons salt per glass). After several hours, the egg will have shrunk — water has been pulled out through the membrane by osmosis. Place it in plain water and it will swell back up. This is the same process that natron used to dehydrate mummies.',
+      nextLessons: [
+      { slug: 'penicillin-discovery', reason: 'Programming — you\'ll code chemical preservation simulations, calculating how natron dehydration prevents decomposition' },
+      ],
+      relatedStories: [
+      { slug: 'persian-ice-houses', reason: 'Programming — you\'ll compare preservation technologies, plotting decay rates under different temperature and chemical treatments' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -2323,6 +2431,18 @@ paragraphs: [
         'Modern smokeless powder (used in all modern firearms) replaced traditional gunpowder in the late 19th century. It produces much less smoke and more gas, making it more powerful per gram.',
       ],
       offlineActivity: 'Demonstrate gas expansion safely. Drop a fizzing antacid tablet (like Alka-Seltzer) into a small plastic canister (film canister or similar with a snap-on lid) with a tablespoon of water. Snap the lid on quickly and stand back. In a few seconds, the CO₂ gas produced by the reaction builds enough pressure to pop the lid off — launching the canister into the air. This is the same principle as gunpowder: a chemical reaction produces gas, containment builds pressure, and sudden release produces motion.',
+      nextLessons: [
+      { slug: 'manhattan-project', reason: 'Programming — you\'ll code reaction energy calculations, comparing deflagration to fission energy per kilogram' },
+      ],
+      relatedStories: [
+      { slug: 'greek-fire', reason: 'Programming — you\'ll compare incendiary weapon chemistry, plotting burn temperature and fuel efficiency' },
+      ],
+      nextLessons: [
+      { slug: 'egyptian-embalming', reason: 'Programming — you\'ll code radiative cooling simulations, calculating how yakhchal geometry produces sub-zero temperatures from desert night sky radiation' },
+      ],
+      relatedStories: [
+      { slug: 'roman-aqueducts', reason: 'Programming — you\'ll compare ancient climate engineering, modelling how different civilisations solved temperature and water challenges' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -2467,6 +2587,12 @@ paragraphs: [
         'The sweet potato — a South American plant — was grown across Polynesia before any European contact, providing strong evidence that Polynesians reached the Americas centuries before Columbus.',
       ],
       offlineActivity: 'Build a simple star compass. On a clear night, face east. Hold a cardboard circle (about 30 cm diameter) in front of you, level with the horizon. As stars rise above the horizon, mark their position on the edge of your circle with a pen and label each one (use a star chart app on your phone to identify them). After an hour, you\'ll have 5-10 star rising points marked on your circle — the beginning of a star compass. Each of those points is a consistent compass bearing you can use for direction.',
+      nextLessons: [
+      { slug: 'viking-navigation', reason: 'AI — you\'ll train a wave pattern classifier from ocean swell data, building pattern recognition for navigation' },
+      ],
+      relatedStories: [
+      { slug: 'mayan-astronomy', reason: 'Programming — you\'ll code star position calculators, comparing Southern and Northern Hemisphere navigation' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 14,
@@ -2598,6 +2724,12 @@ The lesson of Mesopotamia is the lesson of unintended consequences: the technolo
         'Sumerian cuneiform tablets from 4,000 years ago document agricultural yields, irrigation schedules, and the switch from wheat to barley — the earliest known agricultural records.',
       ],
       offlineActivity: 'Demonstrate salinisation. Fill two identical plant pots with soil and plant the same type of seed in each. Water one pot with plain tap water. Water the other with salt water (1 teaspoon of salt per litre of water). Over 2-3 weeks, observe the difference. The salt-watered plant will grow more slowly, may wilt, and may develop brown leaf edges. You may also see white salt crystals forming on the soil surface. This is the same process that destroyed Mesopotamian agriculture — in fast-forward.',
+      nextLessons: [
+      { slug: 'roman-aqueducts', reason: 'Programming — you\'ll code canal flow rate calculations, modelling how slope and cross-section determine water delivery' },
+      ],
+      relatedStories: [
+      { slug: 'panama-canal', reason: 'Programming — you\'ll compare irrigation channels to ship canal locks, plotting water control evolution over 5,000 years' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -2732,6 +2864,12 @@ paragraphs: [
         'Carbon nanotubes were "discovered" by Sumio Iijima in 1991. Indian steelmakers had been producing them for 2,000 years without knowing it.',
       ],
       offlineActivity: 'Demonstrate the hardness-toughness trade-off. Get three pencil leads: HB (standard), 2B (soft, high graphite/carbon), and 2H (hard, low graphite/carbon). Try to scratch a piece of glass with each — the 2H lead scratches more easily because it\'s harder. Now try bending each — the 2B lead bends; the 2H snaps. This is the same trade-off as in steel: more carbon (graphite) = harder but more brittle. Engineers choose the balance based on the application.',
+      nextLessons: [
+      { slug: 'greek-fire', reason: 'Programming — you\'ll code iron-carbon phase diagrams, calculating how crucible temperature produces Damascus steel patterns' },
+      ],
+      relatedStories: [
+      { slug: 'egyptian-embalming', reason: 'Programming — you\'ll compare material transformations, modelling how controlled heating changes properties in metallurgy vs mummification' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -2879,6 +3017,12 @@ paragraphs: [
         'The Maya Tzolkin calendar (260 days) closely matches the human gestation period (266 days) — though whether this is intentional or coincidental remains debated.',
       ],
       offlineActivity: 'Track Venus yourself. For the next month (if Venus is currently visible — check a star chart app), record Venus\'s position relative to the horizon each evening at the same time. Note its height above the horizon (in finger-widths at arm\'s length) and its compass bearing. Over weeks, you\'ll see it drift along the horizon — the same observations the Maya made, night after night, for centuries. You\'re beginning a Venus table.',
+      nextLessons: [
+      { slug: 'polynesian-wayfinding', reason: 'Programming — you\'ll code calendar algorithms, converting between Mayan Long Count, solar, and Venus cycles with modular arithmetic' },
+      ],
+      relatedStories: [
+      { slug: 'apollo-moon-landing', reason: 'Programming — you\'ll compare naked-eye observation to modern telescopes, plotting measurement precision over 2,000 years' },
+      ],
     },
     estimatedHours: 12,
 },
@@ -3030,6 +3174,12 @@ paragraphs: [
         'Evaporative coolers ("swamp coolers") are used today in dry-climate regions worldwide — they use 75% less electricity than conventional air conditioning.',
       ],
       offlineActivity: 'Demonstrate evaporative cooling. Wrap a wet cloth around a thermometer (or tape a wet paper towel to your phone\'s temperature sensor). Fan it vigorously for 2 minutes. The temperature reading will drop — by as much as 5-10°C if the air is dry. Now try the same thing on a humid day (or in a steamy bathroom). The temperature drop is smaller. You\'ve just proven why Persian wind catchers worked in the dry desert but wouldn\'t work in a tropical rainforest.',
+      nextLessons: [
+        { slug: 'egyptian-embalming', reason: 'Programming — you\'ll code radiative cooling simulations, calculating how yakhchal geometry produces sub-zero temperatures from desert night sky radiation' },
+      ],
+      relatedStories: [
+        { slug: 'roman-aqueducts', reason: 'Programming — you\'ll compare ancient climate engineering, modelling how different civilisations solved temperature and water challenges' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -3191,6 +3341,12 @@ paragraphs: [
         'In 1525, the Chenghua Emperor ordered the destruction of all records of Zheng He\'s voyages — one of history\'s greatest acts of intentional knowledge destruction.',
       ],
       offlineActivity: 'Demonstrate the importance of bulkheads. Take two identical plastic containers (like rectangular food containers). In one, glue cardboard dividers to create 3 sealed compartments (use hot glue or waterproof tape to make them watertight). Leave the other as one open container. Float both in a bathtub. Now poke a small hole in one end of each container. The undivided container fills with water and sinks. The divided container floods only one compartment — the other two stay dry, and the container stays afloat (tilted, but floating). You\'ve just demonstrated why Chinese ships survived damage that sank European ones.',
+      nextLessons: [
+        { slug: 'viking-navigation', reason: 'Database — you\'ll build a historical fleet database with ship dimensions and cargo capacity, querying scale comparisons across naval expeditions' },
+      ],
+      relatedStories: [
+        { slug: 'silk-road-network', reason: 'Programming — you\'ll plot maritime vs overland trade routes, comparing voyage duration and network efficiency calculations' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -3354,6 +3510,12 @@ paragraphs: [
         'More than 80 Gothic cathedrals were built in France alone between 1140 and 1300 — an explosion of construction fueled by religious devotion and engineering competition between cities.',
       ],
       offlineActivity: 'Test the arch principle. Stack rectangular blocks (LEGO, wooden blocks, or even sugar cubes) in an arch shape between two stacks of books. Start with the two book stacks about 15 cm apart. Build upward from each side, angling each block slightly inward, and place a final "keystone" block at the top. If built carefully, the arch holds itself up by compression alone. Now push gently on the top — the arch transmits the force to the sides. Finally, remove the keystone — the arch collapses. You\'ve just demonstrated the fundamental mechanics of every cathedral, bridge, and doorway arch ever built.',
+      nextLessons: [
+        { slug: 'building-the-pyramids', reason: 'Programming — you\'ll compare compression-only pyramid design to cathedral tension systems, calculating how flying buttresses redistribute load vectors' },
+      ],
+      relatedStories: [
+        { slug: 'leonardo-machines', reason: 'Programming — you\'ll compare medieval to Renaissance structural engineering, plotting how height-to-base ratios improved across centuries' },
+      ],
     },
 },
 {
@@ -3519,6 +3681,18 @@ paragraphs: [
         'Ibn al-Haytham studied atmospheric refraction and calculated that twilight occurs because the atmosphere bends sunlight below the horizon — an insight that wouldn\'t be independently reached in Europe for centuries.',
       ],
       offlineActivity: 'Build a camera obscura. Take a cardboard box (a shoebox works well). Cut a small square hole (about 2 cm) in one end. Cover the hole with aluminium foil and poke a tiny pinhole in the foil with a needle. Cut a large opening in the other end and cover it with wax paper or tracing paper (this is your "screen"). Go into a dark room, point the pinhole end at a bright window or lamp, and look at the wax paper screen. You\'ll see an upside-down image of whatever the pinhole is pointing at — projected by straight-line light rays passing through the hole. This is exactly Ibn al-Haytham\'s experiment from 1015 CE.',
+      nextLessons: [
+      { slug: 'inca-road-system', reason: 'Programming — you\'ll code weighted graph algorithms for trade route optimisation, calculating shortest paths with terrain costs' },
+      ],
+      relatedStories: [
+      { slug: 'zheng-he-fleet', reason: 'Database — you\'ll build a commodity price database across Silk Road cities, querying distance-scarcity pricing effects' },
+      ],
+      nextLessons: [
+      { slug: 'leonardo-machines', reason: 'Programming — you\'ll code pinhole camera ray-tracing, modelling how al-Haytham proved light travels in straight lines' },
+      ],
+      relatedStories: [
+      { slug: 'library-of-alexandria', reason: 'Programming — you\'ll compare optical experiments across cultures, plotting how understanding of light evolved' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 12,
@@ -3684,6 +3858,12 @@ paragraphs: [
         'The first quarantine station was established in Dubrovnik (then Ragusa) in 1377, requiring travelers from plague-affected areas to isolate for 30 days (later extended to 40).',
       ],
       offlineActivity: 'Simulate a supply chain markup. Start with a small item valued at $1 (a pencil, a pebble — the object doesn\'t matter). Pass it through 5 "intermediaries" (family members or friends). Each person adds a 50% markup to whatever they received and writes down their selling price. Starting at $1: Person 1 sells for $1.50. Person 2 for $2.25. Person 3 for $3.38. Person 4 for $5.06. Person 5 for $7.59. The final "consumer" pays 7.6× the original price — and nobody cheated. This is how supply chains work.',
+      nextLessons: [
+        { slug: 'inca-road-system', reason: 'Programming — you\'ll code weighted graph algorithms for trade route optimisation, accounting for terrain difficulty and oasis spacing' },
+      ],
+      relatedStories: [
+        { slug: 'zheng-he-fleet', reason: 'Database — you\'ll build a commodity price database across Silk Road cities, querying how distance affected spice valuations' },
+      ],
     },
     learningTracks: ['Programming' as Track],
     estimatedHours: 14,
@@ -3854,6 +4034,12 @@ paragraphs: [
         'Leonardo\'s observations of water turbulence — vortices, eddies, and chaotic flow — were the first systematic studies of what remains one of the unsolved problems in physics (turbulence was named a Millennium Prize Problem by the Clay Institute in 2000).',
       ],
       offlineActivity: 'Test lift with a paper wing. Cut a strip of paper (3 cm × 25 cm). Fold it in half but offset the edges slightly — one side about 1 cm shorter than the other. Tape the edges together so the longer side bulges upward, creating a **cambered airfoil** shape. Thread a straw through the loop (as a spar). Hold the straw horizontally and blow at the leading edge. The paper wing lifts upward — demonstrating how camber creates a pressure difference. Now try a flat strip (no camber) — it flutters but doesn\'t lift consistently. Camber is the key.',
+      nextLessons: [
+        { slug: 'gutenberg-printing-press', reason: 'Programming — you\'ll code mechanical advantage simulations for gears, pulleys, and lever systems, calculating force multiplication ratios' },
+      ],
+      relatedStories: [
+        { slug: 'gothic-cathedrals', reason: 'Programming — you\'ll compare theoretical designs to built structures, modelling how sketches translate to load-bearing capacity' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 14,
@@ -4033,6 +4219,12 @@ paragraphs: [
         'The Doomsday Clock, created by scientists from the Manhattan Project, measures proximity to global catastrophe. Pandemics, alongside nuclear war and climate change, are among the factors that move the clock.',
       ],
       offlineActivity: 'Simulate an epidemic with dice. Get 10 coins (or paper squares) — each represents a person. All start as "Susceptible" (heads up). Roll a die for Person 1: if you roll 1-4, they become "Infected" (flip to tails). Now roll for each Susceptible person who is "near" the Infected person (adjacent in a line). Each time you roll 1-3, that person becomes Infected. After one "round," Infected people Recover (remove from the game). Play 5 rounds. Count how many got infected. Now repeat with "quarantine" — Infected people are immediately removed, so they can only infect during one round instead of two. Compare the total infected in both scenarios.',
+      nextLessons: [
+        { slug: 'penicillin-discovery', reason: 'AI — you\'ll train an epidemic spread model on historical plague data, predicting infection rates from population density and trade routes' },
+      ],
+      relatedStories: [
+        { slug: 'egyptian-embalming', reason: 'Database — you\'ll build a historical mortality database, querying geographic spread patterns and mapping transmission routes' },
+      ],
     },
     learningTracks: ['Science & Lab' as Track],
     estimatedHours: 14,

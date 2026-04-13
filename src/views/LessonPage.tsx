@@ -46,6 +46,17 @@ export default function LessonPage() {
   const [clientReady, setClientReady] = useState(false);
   useEffect(() => setClientReady(true), []);
 
+  // Restore level tab from URL hash (e.g. #level-explorer after sign-in redirect)
+  useEffect(() => {
+    const match = window.location.hash.match(/^#level-(\w+)$/);
+    if (match) {
+      const lvl = match[1] as Level;
+      if (['listener', 'explorer', 'builder', 'engineer', 'creator'].includes(lvl)) {
+        setActiveLevelRaw(lvl);
+      }
+    }
+  }, []);
+
   // Levels 1-4 require sign-in; Level 0 is always free
   const isLevelLocked = (lvl: Level) => {
     if (lvl === 'listener') return false;
@@ -252,14 +263,7 @@ export default function LessonPage() {
               const prereqDone = basicsProgress.getCompletedCount(codingPrereq.courseSlug);
               const prereqComplete = prereqDone >= codingPrereq.total;
 
-              // Find stories that list this one in their nextLessons (= this story's prerequisites)
-              const priorStories = lessons.filter(l =>
-                l.level0?.nextLessons?.some((nl: { slug: string }) => nl.slug === lesson.slug)
-              ).slice(0, 3);
-
-              const hasPrereqs = priorStories.length > 0;
-
-              return hasPrereqs ? (
+              return (
                 <div className="mb-10 p-5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
                   <h3 className="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3 flex items-center gap-2">
                     <ListChecks className="w-4 h-4" /> Before you start
@@ -281,23 +285,9 @@ export default function LessonPage() {
                       </div>
                       {prereqComplete ? <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" /> : <ArrowRight className="w-4 h-4 text-gray-400" />}
                     </Link>
-                    {priorStories.map(ps => {
-                      const reason = ps.level0?.nextLessons?.find((nl: { slug: string; reason: string }) => nl.slug === lesson.slug)?.reason;
-                      return (
-                        <Link key={ps.slug} href={`/lessons/${ps.slug}`}
-                          className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:border-emerald-400 dark:hover:border-emerald-600 transition-colors">
-                          <span className="text-emerald-500">📖</span>
-                          <div className="flex-1">
-                            <p className="text-sm font-medium text-gray-900 dark:text-white">{ps.story.title}</p>
-                            {reason && <p className="text-xs text-gray-500 dark:text-gray-400">{reason}</p>}
-                          </div>
-                          <ArrowRight className="w-4 h-4 text-gray-400" />
-                        </Link>
-                      );
-                    })}
                   </div>
                 </div>
-              ) : null;
+              );
             })()}
 
             <div className="flex items-center gap-3 mb-4">
@@ -348,7 +338,7 @@ export default function LessonPage() {
                 if (!isSignedIn) {
                   return (
                     <div className="max-w-lg mx-auto">
-                      <SignUpGate message="Sign up free to access Levels 1-4 with hands-on coding projects, mentorship, and real-world builds" />
+                      <SignUpGate message="Sign up free to access Levels 1-4 with hands-on coding projects, mentorship, and real-world builds" returnTo={`/lessons/${lesson.slug}#level-${activeLevel}`} />
                     </div>
                   );
                 }
