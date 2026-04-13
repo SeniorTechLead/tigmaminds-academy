@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import {
   ArrowRight, BookOpen, Code2, Sparkles, Lock, Unlock,
   ChevronDown, GraduationCap, Lightbulb, Wrench, Rocket,
@@ -521,18 +521,25 @@ function SchoolProgramCard({ isIndia }: { isIndia: boolean }) {
 export default function ProgramsPage() {
   const { user } = useAuth();
   const { hasActiveSubscription, plan: currentPlan } = useSubscription();
-  const paymentResult = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('payment') : null;
+  const searchParams = useSearchParams();
+  const paymentResult = searchParams.get('payment');
+  const highlightPlan = searchParams.get('plan');
   const pathname = usePathname();
 
-  // Scroll to hash anchor (e.g., #bootcamp, #school-program)
+  // Scroll to highlighted plan card or hash anchor
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.hash) {
-      setTimeout(() => {
+    const timer = setTimeout(() => {
+      if (highlightPlan) {
+        const planEl = document.getElementById(`plan-${highlightPlan}`);
+        if (planEl) { planEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+      }
+      if (typeof window !== 'undefined' && window.location.hash) {
         const el = document.querySelector(window.location.hash);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    }
-  }, [pathname]);
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [pathname, highlightPlan]);
 
   // Detect India via timezone
   const isIndia = (() => {
@@ -587,7 +594,7 @@ export default function ProgramsPage() {
               <span className="text-3xl mb-3">📚</span>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Self-Paced Online</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
-                {lessons.length}+ story-driven lessons. Start free with Level 0, upgrade for full coding access. Learn at your own speed.
+                {lessons.length}+ story-driven lessons and {problemMeta.length}+ coding challenges. Start free with Level 0 and easy problems, upgrade for full access. Learn at your own speed.
               </p>
               <div className="text-sm text-gray-500 mb-4">
                 <span className="font-semibold text-gray-900 dark:text-white">Free</span> or <span className="font-semibold text-gray-900 dark:text-white">{isIndia ? '₹1,999' : '$24'}/mo</span>
@@ -656,7 +663,7 @@ export default function ProgramsPage() {
             </div>
 
             {/* Online */}
-            <div className="rounded-2xl border-2 border-amber-400 dark:border-amber-600 p-6 bg-amber-50/50 dark:bg-amber-900/10 text-center relative">
+            <div id="plan-online" className={`rounded-2xl border-2 border-amber-400 dark:border-amber-600 p-6 bg-amber-50/50 dark:bg-amber-900/10 text-center relative ${highlightPlan === 'online' ? 'ring-4 ring-amber-400/50 animate-pulse' : ''}`}>
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 mt-1">Online</h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹1,999' : '$24'}<span className="text-base font-normal text-gray-500">/mo</span></p>
@@ -664,7 +671,7 @@ export default function ProgramsPage() {
               <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Everything in Free, plus:</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> All 5 levels per story</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> {problemMeta.length}+ coding problems</li>
+                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> {problemMeta.length}+ coding problems — all tiers, all difficulties</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Full reference library</li>
                 <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Progress tracking &amp; certificates</li>
               </ul>
@@ -741,9 +748,9 @@ export default function ProgramsPage() {
       <section id="enroll" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Enroll Your Ward</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Enroll Now</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Fill out the form below and our team will get back to you within 2 business days to discuss the best program for your ward.
+              Fill out the form below and our team will get back to you within 2 business days to discuss the best program for you.
             </p>
           </div>
           <EnrollmentRequestForm />

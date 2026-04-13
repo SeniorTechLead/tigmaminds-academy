@@ -270,7 +270,7 @@ export default function CurriculumPage() {
               </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-3">
                 The complete journey: learn Python AND Arduino together. Code the algorithm, wire the hardware, build the robot.
-                By month 12, your ward presents an <span className="font-semibold text-gray-900 dark:text-white">AI-powered autonomous robot</span> they built from scratch.
+                By month 12, learners present an <span className="font-semibold text-gray-900 dark:text-white">AI-powered autonomous robot</span> they built from scratch.
               </p>
               <div className="flex flex-wrap gap-2 text-xs">
                 <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Python</span>
@@ -289,7 +289,7 @@ export default function CurriculumPage() {
 
           {/* Visual journey */}
           <div className="mt-4 pt-4 border-t border-amber-200/50 dark:border-amber-800/50">
-            <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-4">What your ward will build — month by month</p>
+            <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-4">What you will build — month by month</p>
             <BuildJourneyVisual />
           </div>
         </div>
@@ -330,7 +330,7 @@ export default function CurriculumPage() {
               <div className="space-y-3">
                 <Link href="/programs#enroll"
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white rounded-xl font-semibold shadow-lg shadow-amber-500/25 transition-all">
-                  Enroll Your Ward <ChevronRight className="w-4 h-4" />
+                  Enroll Now <ChevronRight className="w-4 h-4" />
                 </Link>
                 <Link href="/partner"
                   className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white rounded-xl font-medium transition-all text-sm">
@@ -346,8 +346,8 @@ export default function CurriculumPage() {
 
           {/* Right: Enrollment request form */}
           <div className="p-8 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Enroll Your Ward</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Fill this out and we'll contact you within 2 business days.</p>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Enroll Now</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Fill this out and we\'ll contact you within 2 business days.</p>
             <EnrollmentRequestForm />
           </div>
         </div>

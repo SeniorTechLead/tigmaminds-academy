@@ -145,13 +145,21 @@ function SqlMiniTable({ json, isDark, color }: { json: string; isDark: boolean; 
 /* ══════════════════════════════════════════
    Problem Solver — the code editor + test runner
    ══════════════════════════════════════════ */
-function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: ProblemTier; onBack: () => void }) {
+function ProblemSolver({ problem, tier, onBack, onTierChange, isTierLocked, user, hasActiveSubscription }: { problem: Problem; tier: ProblemTier; onBack: () => void; onTierChange: (t: ProblemTier) => void; isTierLocked: (t: ProblemTier) => boolean; user: any; hasActiveSubscription: boolean }) {
   const { editorTheme, setEditorTheme } = usePrefs();
   const isDark = editorTheme === 'dark';
   const [code, setCode] = useState(tier.starterCode);
   const [running, setRunning] = useState(false);
   const [results, setResults] = useState<TestResult[]>([]);
   const [output, setOutput] = useState('');
+
+  // Reset state when tier changes
+  useEffect(() => {
+    setCode(tier.starterCode);
+    setResults([]);
+    setOutput('');
+    setSqlResultDisplay(null);
+  }, [tier]);
   const [sqlResultDisplay, setSqlResultDisplay] = useState<{ columns: string[]; rows: any[][] } | null>(null);
   const [schemaOpen, setSchemaOpen] = useState(false);
   const [schemaData, setSchemaData] = useState<{ table: string; columns: { name: string; type: string; pk: boolean; notnull: boolean }[] }[]>([]);
@@ -650,16 +658,49 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
         </Link>
       </div>
 
-      {/* Tier info */}
-      <div className="flex items-center gap-3 mb-4">
-        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${tierColors[tier.tier]} flex items-center justify-center`}>
-          <TierIcon className="w-4 h-4 text-white" />
-        </div>
-        <div>
-          <p className="text-sm font-bold text-gray-900 dark:text-white">Tier {tier.tier}: {tier.tierName}</p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">{tier.goal}</p>
-        </div>
-      </div>
+      {/* Tier switcher */}
+      {(() => {
+        const anyLocked = problem.tiers.some(t => isTierLocked(t));
+        return (
+          <>
+            <div className="flex gap-2 mb-2">
+              {problem.tiers.map((t) => {
+                const TIcon = tierIcons[t.tier];
+                const active = t.tier === tier.tier;
+                const locked = isTierLocked(t);
+                return (
+                  <button
+                    key={t.tier}
+                    onClick={() => { if (!active && !locked) onTierChange(t); }}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                      active
+                        ? `bg-gradient-to-br ${tierColors[t.tier]} text-white shadow-sm`
+                        : locked
+                        ? 'bg-gray-100 dark:bg-gray-800 text-gray-300 dark:text-gray-600 cursor-default'
+                        : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                    }`}
+                  >
+                    <TIcon className="w-4 h-4" />
+                    Tier {t.tier}
+                    {locked && <Lock className="w-3 h-3" />}
+                  </button>
+                );
+              })}
+            </div>
+            {anyLocked && (
+              <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
+                {!user
+                  ? <><Link href={`/auth?returnTo=${encodeURIComponent(`/playground?problem=${problem.slug}`)}`} className="text-amber-600 dark:text-amber-400 hover:underline font-medium">Sign up free</Link> to unlock higher tiers</>
+                  : !hasActiveSubscription
+                  ? <><Link href={`/programs?plan=online&returnTo=${encodeURIComponent(`/playground?problem=${problem.slug}`)}#pricing`} className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Subscribe</Link> to unlock all tiers</>
+                  : null
+                }
+              </p>
+            )}
+          </>
+        );
+      })()}
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">{tier.goal}</p>
       {/* Hint with expandable Library content */}
       <HintPanel tier={tier} />
 
@@ -964,6 +1005,10 @@ export default function PlaygroundPage() {
             problem={selectedProblem}
             tier={selectedTier}
             onBack={() => { setSelectedProblem(null); setSelectedTier(null); }}
+            onTierChange={(t) => setSelectedTier(t)}
+            isTierLocked={(t) => !canAccessAllTiers(selectedProblem) && t.tier > 1}
+            user={user}
+            hasActiveSubscription={hasActiveSubscription}
           />
         </section>
         <Footer />
@@ -1032,7 +1077,7 @@ export default function PlaygroundPage() {
                     {locked && user && !hasActiveSubscription && (
                       <div className="mt-2 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/80 dark:bg-purple-900/20 p-3 text-center">
                         <p className="text-sm text-purple-700 dark:text-purple-300 mb-2">Subscribe to unlock all tiers</p>
-                        <Link href="/pricing" className="inline-flex items-center gap-1.5 px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors">
+                        <Link href={`/programs?returnTo=${encodeURIComponent(`/playground?problem=${selectedProblem.slug}`)}#pricing`} className="inline-flex items-center gap-1.5 px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors">
                           View plans
                         </Link>
                       </div>
@@ -1220,7 +1265,7 @@ export default function PlaygroundPage() {
             <div className="mt-8 rounded-2xl bg-gradient-to-br from-purple-500/10 to-amber-500/10 border border-purple-200 dark:border-purple-800 p-8 text-center">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Want the hard problems?</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Subscribe to unlock {problemMeta.filter(p => p.difficulty === 'hard').length} hard problems with advanced tiers</p>
-              <Link href="/pricing" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-amber-600 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity">
+              <Link href={`/programs?plan=online&returnTo=${encodeURIComponent('/playground')}#pricing`} className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-amber-600 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity">
                 View plans
               </Link>
             </div>
