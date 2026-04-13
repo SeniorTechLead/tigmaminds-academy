@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { usePyodide } from '../contexts/PyodideContext';
 import { useBasicsProgress } from '../contexts/BasicsProgressContext';
+import { useAuth } from '../contexts/AuthContext';
+import SignUpGate from '../components/SignUpGate';
 import {
   PrintDiagram, VariableDiagram, ListDiagram, LoopDiagram,
   ConditionalDiagram, FunctionDiagram, NumpyDiagram, PlotDiagram,
@@ -581,9 +583,12 @@ print("\\nYou are now ready for Level 1 of any story!")`,
 
 const COURSE_SLUG = 'python-basics' as const;
 
+const FREE_LESSONS = 3;
+
 export default function PythonBasicsPage() {
   const { ready: pyReady } = usePyodide();
   const { markLessonComplete, isLessonComplete, getCompletedCount, isCourseComplete } = useBasicsProgress();
+  const { user } = useAuth();
   const [expandedLesson, setExpandedLesson] = useState<number | null>(null);
   const searchParams = useSearchParams();
   const fromSlug = searchParams.get('from');
@@ -697,7 +702,14 @@ export default function PythonBasicsPage() {
 
               {/* Expanded lesson content */}
               {expandedLesson === i && (
-                <div className="mt-4 ml-2">
+                <div className={`mt-4 ml-2 relative ${!user && i >= FREE_LESSONS ? 'max-h-[400px] overflow-hidden' : ''}`}>
+                  {!user && i >= FREE_LESSONS && (
+                    <div className="absolute inset-0 z-10 flex items-end justify-center bg-gradient-to-t from-white via-white/95 to-transparent dark:from-gray-950 dark:via-gray-950/95">
+                      <div className="pb-8 w-full max-w-md mx-auto">
+                        <SignUpGate message={`Sign up free to unlock lesson ${i + 1} and all remaining lessons`} />
+                      </div>
+                    </div>
+                  )}
                   <MiniLesson
                     number={i + 1}
                     title={lesson.title}

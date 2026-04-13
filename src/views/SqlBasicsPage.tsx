@@ -4,6 +4,8 @@ import SqlPlayground from '../components/SqlPlayground';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useBasicsProgress } from '../contexts/BasicsProgressContext';
+import { useAuth } from '../contexts/AuthContext';
+import SignUpGate from '../components/SignUpGate';
 import {
   SelectWhereDiagram, OrderByDiagram, GroupByDiagram,
   JoinDiagram, SubqueryDiagram, MutateDiagram,
@@ -244,8 +246,11 @@ SELECT * FROM patrols;`,
 
 const COURSE_SLUG = 'sql-basics' as const;
 
+const FREE_LESSONS = 3;
+
 export default function SqlBasicsPage() {
   const { markLessonComplete, isLessonComplete, getCompletedCount, isCourseComplete } = useBasicsProgress();
+  const { user } = useAuth();
   const [expandedLesson, setExpandedLesson] = useState<number | null>(null);
   const completedCount = getCompletedCount(COURSE_SLUG);
   const courseComplete = isCourseComplete(COURSE_SLUG, lessons.length);
@@ -350,7 +355,14 @@ export default function SqlBasicsPage() {
 
               {/* Expanded lesson content */}
               {expandedLesson === i && (
-                <div className="mt-4 ml-2 space-y-6">
+                <div className={`mt-4 ml-2 space-y-6 relative ${!user && i >= FREE_LESSONS ? 'max-h-[400px] overflow-hidden' : ''}`}>
+                  {!user && i >= FREE_LESSONS && (
+                    <div className="absolute inset-0 z-10 flex items-end justify-center bg-gradient-to-t from-white via-white/95 to-transparent dark:from-gray-950 dark:via-gray-950/95">
+                      <div className="pb-8 w-full max-w-md mx-auto">
+                        <SignUpGate message={`Sign up free to unlock lesson ${i + 1} and all remaining lessons`} />
+                      </div>
+                    </div>
+                  )}
                   {/* Interactive diagram */}
                   {[<SelectWhereDiagram />, <OrderByDiagram />, <GroupByDiagram />,
                     <JoinDiagram />, <SubqueryDiagram />, <MutateDiagram />][i]}
