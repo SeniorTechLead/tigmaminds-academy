@@ -689,9 +689,15 @@ plt.show()`}</pre>
                 <p className="text-amber-400 font-bold mb-1">Enrolled</p>
                 <p className="text-white text-sm font-semibold mb-2">Levels 1-4</p>
                 <p className="text-gray-400 text-xs mb-3">Python, NumPy, Matplotlib, real projects, mentorship.</p>
-                <Link href="/auth" className="inline-flex items-center gap-1 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">
-                  Sign Up Free <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                {isSignedIn ? (
+                  <Link href="/programs" className="inline-flex items-center gap-1 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">
+                    Explore Programs <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                ) : (
+                  <Link href="/auth" className="inline-flex items-center gap-1 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors">
+                    Sign Up Free <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
               </div>
               <div className="bg-gray-800 rounded-xl p-5 text-center">
                 <p className="text-amber-400 font-bold mb-1">Stay Updated</p>
@@ -719,12 +725,20 @@ plt.show()`}</pre>
               This lesson is part of our {lesson.track === 'school' ? '12-Month Curriculum' : lesson.track === 'bootcamp' ? '24-Week Bootcamp' : 'Bootcamp and 12-Month Curriculum'}. Apply now and start building.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/auth" className="inline-flex items-center justify-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all">
-                Sign Up Free <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link href="/programs" className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-amber-600 transition-all">
-                View All Programs
-              </Link>
+              {isSignedIn ? (
+                <Link href="/programs" className="inline-flex items-center justify-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all">
+                  Explore Programs <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              ) : (
+                <>
+                  <Link href="/auth" className="inline-flex items-center justify-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all">
+                    Sign Up Free <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                  <Link href="/programs" className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-amber-600 transition-all">
+                    View All Programs
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </section>
