@@ -444,8 +444,6 @@ print(f"Danger level: {'EXTREME' if storm_surge > 3 else 'HIGH'}")`,
         { slug: 'waves-and-properties', reason: 'How waves carry energy — the same physics applies to ocean waves, storm surge, and sound' },
       ],
       nextLessons: [
-        { slug: 'cloud-refused-rain', reason: 'Explores cloud seeding and rain formation — the water cycle that feeds cyclones' },
-        { slug: 'the-little-boat', reason: 'Fluid dynamics and buoyancy on the Brahmaputra — how boats survive river currents and floods' },
         { slug: 'monsoon-home', reason: 'Architecture designed for monsoon climate — the human response to the storms you just learned about' },
       ],
       quiz: [
@@ -626,9 +624,8 @@ print(f"A snow leopard thrives here. You would gasp.")`,
         { slug: 'human-body-systems', reason: 'How lungs, blood, and the heart work together to deliver oxygen to your body' },
       ],
       nextLessons: [
-        { slug: 'cloud-weaver-of-tawang', reason: 'Mountain weather and orographic precipitation — the climate that shapes snow leopard habitat' },
-        { slug: 'red-panda-mask', reason: 'Another high-altitude animal with cold-weather adaptations — fur, coloration, and thermoregulation' },
-        { slug: 'turtle-mountain', reason: 'A different approach to mountains — slow, steady, and ectothermic vs the snow leopard’s speed' },
+        { slug: ‘cloud-weaver-of-tawang’, reason: ‘Mountain weather and orographic precipitation — the climate that shapes snow leopard habitat’ },
+        { slug: ‘red-panda-mask’, reason: ‘Another high-altitude animal with cold-weather adaptations — fur, coloration, and thermoregulation’ },
       ],
       quiz: [
         { question: 'Why is it hard to breathe at high altitude?', options: ['There is less oxygen in the air', 'Air pressure is lower so there are fewer oxygen molecules per breath', 'The air is too cold to breathe', 'Wind blows the oxygen away'], answer: 1 },
@@ -1560,7 +1557,6 @@ print(f"         for about {flower_distance}m")
         { slug: 'food-webs-energy-flow', reason: 'See how nectar energy flows from flowers to bees to honey — and what happens when a link in the chain breaks' },
       ],
       nextLessons: [
-        { slug: 'the-magic-japi-hat', reason: 'The honeycomb is made of hexagons — the same shape that appears in the japi hat, and for a related geometric reason' },
         { slug: 'firefly-festival-of-majuli', reason: 'Another insect story — fireflies communicate with light flashes, just as bees communicate with dances' },
         { slug: 'girl-grew-forest', reason: 'Explores what happens to ecosystems when habitats grow — and why pollinators are the first to benefit' },
       ],
@@ -2148,9 +2144,7 @@ print(f"Signal length: {len(signal)} samples")
         { slug: 'machine-learning', reason: 'How neural networks learn from labelled data — the same AI that classifies elephant calls' },
       ],
       nextLessons: [
-        { slug: 'frogs-sing-rain', reason: 'Another animal that communicates with sound — frogs use frequency and timing to find mates after rain' },
         { slug: 'river-dolphins-secret', reason: 'Dolphins use sonar (echolocation) to navigate murky river water — sound as a sensor, not just communication' },
-        { slug: 'cuckoo-calls-dawn', reason: 'Bird calls follow circadian rhythms — another layer of information encoded in animal sound' },
       ],
       quiz: [
         { question: 'What is infrasound?', options: ['Very loud sound', 'Sound below 20 Hz — too low for humans to hear', 'Sound that only travels underground', 'Sound produced by electronic devices'], answer: 1 },
@@ -2575,9 +2569,8 @@ plt.show()  # What shape is the room?`,
         { slug: 'forces-and-motion', reason: 'The distance formula (d = v × t) used in sonar is the same equation that governs all motion' },
       ],
       nextLessons: [
-        { slug: 'the-little-boat', reason: 'Explores water physics and navigation — the environment where dolphin sonar operates' },
-        { slug: 'bamboo-flute-of-nagaland', reason: 'Dives deeper into sound waves, frequency, and resonance — the physics behind the dolphin’s clicks' },
-        { slug: 'girl-who-spoke-to-elephants', reason: 'Uses sound analysis (infrasound) for wildlife tracking — the same sensor-to-data pipeline but for elephants' },
+        { slug: ‘bamboo-flute-of-nagaland’, reason: ‘Dives deeper into sound waves, frequency, and resonance — the physics behind the dolphin’s clicks’ },
+        { slug: ‘girl-who-spoke-to-elephants’, reason: ‘Uses sound analysis (infrasound) for wildlife tracking — the same sensor-to-data pipeline but for elephants’ },
       ],
       quiz: [
         { question: 'What is echolocation?', options: ['Seeing objects using reflected light', 'Navigating by sending sound clicks and listening for the echo', 'Feeling vibrations through water currents', 'Using Earth\'s magnetic field to navigate'], answer: 1 },
@@ -2770,7 +2763,6 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
       ],
       nextLessons: [
         { slug: 'postman-hills', reason: 'Route optimisation through Meghalaya — algorithms and sorting, the same logic behind search' },
-        { slug: 'dragonfly-and-the-paddy-field', reason: 'Computer vision and data processing — another way technology serves farming communities' },
       ],
       quiz: [
         { question: 'What are the three languages every website uses?', options: ['Python, Java, C++', 'HTML, CSS, JavaScript', 'SQL, PHP, Ruby', 'React, Angular, Vue'], answer: 1 },
@@ -4393,7 +4385,6 @@ print(f"Capacity lost: {carrying_capacity - new_capacity}")`,
       nextLessons: [
         { slug: 'bridge-that-grew', reason: 'Another NE India story about how humans interact with living ecosystems — but this time building with nature instead of against it' },
         { slug: 'girl-grew-forest', reason: 'If Loktak shows what happens when habitat is destroyed, this story shows what happens when someone grows it back' },
-        { slug: 'boy-counted-butterflies', reason: 'Population monitoring in action — the same census techniques used for the Sangai apply to butterfly surveys' },
       ],
       quiz: [
         { question: 'What is a phumdi?', options: ['A type of deer found only in Manipur', 'A floating island of tangled vegetation and trapped gas', 'A fishing boat used on Loktak Lake', 'A dam built to control water levels'], answer: 1 },
@@ -4594,9 +4585,8 @@ print(f"If the single root breaks: 0 N. Total failure.")`,
         { slug: 'plant-biology', reason: 'How roots, xylem, and lignin work — the biology behind the bridge’s strength' },
       ],
       nextLessons: [
-        { slug: 'banyan-tree-of-japi', reason: 'Another story about extraordinary tree biology — how the banyan grows, photosynthesises, and supports entire ecosystems' },
-        { slug: 'girl-grew-forest', reason: 'One person planted a forest on a Brahmaputra sandbar — reforestation and carbon sequestration' },
-        { slug: 'monsoon-home', reason: 'Architecture designed for Meghalaya’s extreme rainfall — the same climate that shaped root bridges' },
+        { slug: ‘banyan-tree-of-japi’, reason: ‘Another story about extraordinary tree biology — how the banyan grows, photosynthesises, and supports entire ecosystems’ },
+        { slug: ‘monsoon-home’, reason: ‘Architecture designed for Meghalaya’s extreme rainfall — the same climate that shaped root bridges’ },
       ],
       quiz: [
         { question: 'What biological process allows separate roots to fuse into one structure?', options: ['Photosynthesis', 'Inosculation', 'Germination', 'Transpiration'], answer: 1 },
@@ -5558,9 +5548,8 @@ print(f"The population evolved toward the background!")`,
         { slug: 'human-body-systems', reason: 'The red panda’s counter-current heat exchange uses the same circulatory principles that keep your own extremities warm' },
       ],
       nextLessons: [
-        { slug: 'snow-leopard', reason: 'Another high-altitude Himalayan animal with remarkable camouflage — spots that match rocky terrain' },
-        { slug: 'clouded-leopard', reason: 'Cloud-shaped spots as disruptive coloration in a forest canopy — a different camouflage solution in a different habitat' },
-        { slug: 'takin-face', reason: 'The takin’s bizarre body plan as a case study in how morphology evolves from accumulated adaptations' },
+        { slug: ‘snow-leopard’, reason: ‘Another high-altitude Himalayan animal with remarkable camouflage — spots that match rocky terrain’ },
+        { slug: ‘takin-face’, reason: ‘The takin’s bizarre body plan as a case study in how morphology evolves from accumulated adaptations’ },
       ],
       quiz: [
         { question: 'What are the three main camouflage strategies?', options: ['Running, hiding, and fighting', 'Crypsis (matching background), disruptive coloration (breaking outline), and mimicry (copying a dangerous species)', 'Color change, shape change, and size change', 'Day camouflage, night camouflage, and water camouflage'], answer: 1 },
@@ -5768,7 +5757,6 @@ y_est = (d_A**2 - d_C**2 + 25 + 75.0) / (2 * 8.66)
         { slug: 'data-analysis-basics', reason: 'GPS and camera trap data require cleaning, plotting, and statistical analysis — core data skills' },
       ],
       nextLessons: [
-        { slug: 'elephant-corridor', reason: 'Explores wildlife corridors for elephants — the same conservation strategy needed for clouded leopards' },
         { slug: 'snow-leopard', reason: 'Another endangered cat tracked with GPS and camera traps in high-altitude terrain' },
         { slug: 'red-panda-mask', reason: 'Camouflage and conservation of another elusive Himalayan species using modern tracking technology' },
       ],
@@ -5934,8 +5922,6 @@ plt.show()  # What shape is this relationship?`,
         { slug: 'light-and-color', reason: 'Thin-film interference and structural color — the physics behind iridescent feather colors' },
       ],
       nextLessons: [
-        { slug: 'kingfisher-blue', reason: 'Another story about structural color in feathers — nanostructures, not pigments, produce the blue' },
-        { slug: 'cuckoo-calls-dawn', reason: 'Bird behavior and circadian rhythms — another signal system in the avian world' },
         { slug: 'frogs-sing-rain', reason: 'Animal communication through sound — vocal sacs as resonating chambers, like peacock infrasound' },
       ],
       quiz: [
@@ -6517,7 +6503,6 @@ plt.show()  # How many minutes before sunrise does it call?`,
       ],
       nextLessons: [
         { slug: 'girl-who-spoke-to-elephants', reason: 'Animal communication through sound — elephants use infrasound, cuckoos use precisely timed calls' },
-        { slug: 'frogs-sing-rain', reason: 'Another species that times its calls to environmental cues — frogs sing when barometric pressure drops' },
         { slug: 'peacocks-dance', reason: 'Bird signaling and display behavior — another layer of information encoded in avian communication' },
       ],
       quiz: [
@@ -8028,7 +8013,6 @@ for sides in range(3, 13):
         { slug: 'patterns-in-nature', reason: 'Explore how the same hexagonal patterns appear in honeycombs, snowflakes, and basalt columns' },
       ],
       nextLessons: [
-        { slug: 'basket-weavers-song', reason: 'Another Assamese weaving tradition — explores the mathematics of over-under patterns and how counting sequences create designs' },
         { slug: 'honey-hunters-lesson', reason: 'Hexagons again — but this time built by bees, with a completely different reason (maximum storage, minimum wax)' },
       ],
     },
@@ -8220,9 +8204,8 @@ print(f"  {0.5 * 1 * 40000**2:.2e} J — that is 4x more energy!")`,
         { slug: 'solar-system-and-space', reason: 'Explore the wider context: asteroids, comets, and planetary formation — where meteoroids come from' },
       ],
       nextLessons: [
-        { slug: 'stars-ziro-valley', reason: 'Look deeper into stellar astronomy — star magnitudes, light pollution, and what you can see from a dark sky site' },
-        { slug: 'orange-sunsets-assam', reason: 'The same atmospheric physics that makes meteors glow also explains why Assam’s sunsets are orange — Rayleigh scattering' },
-        { slug: 'fishermans-daughter-storm', reason: 'Atmospheric forces at a larger scale — the energy in storms compared to the energy in impacts' },
+        { slug: ‘orange-sunsets-assam’, reason: ‘The same atmospheric physics that makes meteors glow also explains why Assam’s sunsets are orange — Rayleigh scattering’ },
+        { slug: ‘fishermans-daughter-storm’, reason: ‘Atmospheric forces at a larger scale — the energy in storms compared to the energy in impacts’ },
       ],
       quiz: [
         { question: 'What makes a meteor glow as it enters the atmosphere?', options: ['Friction with air molecules', 'Compression heating — the meteor compresses air ahead of it to extreme temperatures', 'Chemical reactions with oxygen', 'Reflected sunlight'], answer: 1 },
@@ -9151,7 +9134,6 @@ plt.show()  # What happens at the quartz inversion line?`,
       ],
       nextLessons: [
         { slug: 'golden-muga-silk', reason: 'Another material science story \u2014 how silk proteins create golden fibres through molecular self-assembly' },
-        { slug: 'festival-lights', reason: 'Energy and heat science continues \u2014 how different light sources convert energy at different efficiencies' },
         { slug: 'grandmother-remembered', reason: 'A different kind of preservation \u2014 how the brain stores memories with neural "firing" of its own' },
       ],
       quiz: [
@@ -9679,11 +9661,7 @@ print(f"This gap drives monsoon winds from sea to land!")`,
         { slug: 'weather-and-climate', reason: 'Full guide to atmospheric pressure, wind systems, and how weather patterns form and move' },
         { slug: 'waves-and-properties', reason: 'How energy travels through the atmosphere — radiation that heats land and ocean differently' },
       ],
-      nextLessons: [
-        { slug: 'fishermans-daughter-storm', reason: 'Cyclones are powered by the same warm ocean that drives the monsoon — the most violent expression of tropical weather' },
-        { slug: 'boy-who-talked-to-clouds', reason: 'Clouds form when monsoon air rises and cools — this lesson explains the cloud physics that produces monsoon rain' },
-        { slug: 'cloud-refused-rain', reason: 'What happens when monsoon clouds form but refuse to rain — cloud seeding and the water cycle' },
-      ],
+      nextLessons: [],
       quiz: [
         { question: 'Why does land heat up faster than the ocean under the same sunlight?', options: ['Land is closer to the sun', 'Land has lower specific heat capacity than water', 'The ocean reflects all sunlight', 'Land is darker in colour'], answer: 1 },
         { question: 'What causes the monsoon winds to reverse between summer and winter?', options: ['The Himalayas change shape', 'The ITCZ shifts north in summer and south in winter', 'Ocean currents reverse direction', 'The jet stream disappears entirely'], answer: 1 },
@@ -9839,7 +9817,6 @@ plt.show()  # Which line would Yaruini's storytelling follow?`,
         { slug: 'data-and-statistics', reason: 'Learn to plot data, fit curves, and analyze your own memory experiment results' },
       ],
       nextLessons: [
-        { slug: 'little-potter', reason: 'Another transformation story \u2014 potters transform clay with heat, brains transform experiences into memories' },
         { slug: 'angulimala-monk', reason: 'Directly explores neuroplasticity \u2014 how the brain rewires itself through changed behaviour' },
         { slug: 'music-dimasa', reason: 'Music and rhythm engage the brain\'s memory circuits deeply \u2014 learn why songs are easier to remember than lists' },
       ],
@@ -10565,7 +10542,6 @@ print(f"Total distance: {total:.1f} units")  # Can you beat this?`,
         { slug: 'maps-and-navigation', reason: 'How GPS, map projections, and GIS use these algorithms' },
       ],
       nextLessons: [
-        { slug: 'map-makers-granddaughter', reason: 'Mapping Meghalaya\u2019s terrain \u2014 the geographic foundation for route optimization' },
         { slug: 'the-little-train', reason: 'Hill railways solve the same terrain problem with gears and switchbacks' },
         { slug: 'seven-sisters', reason: 'Geography of NE India \u2014 the terrain that makes delivery challenging' },
       ],
@@ -11100,9 +11076,8 @@ plt.show()  # Which color is brightest? What happens if the platelet is thicker?
         { slug: 'waves-and-properties', reason: 'How waves work — frequency, wavelength, interference — the foundation behind thin-film color' },
       ],
       nextLessons: [
-        { slug: 'kingfisher-blue', reason: 'The kingfisher’s feathers use the same structural color physics — nanostructures, not pigment' },
-        { slug: 'orange-sunsets-assam', reason: 'Another light-and-color story: why Assam sunsets are orange (Rayleigh scattering, a different mechanism)' },
-        { slug: 'golden-deer-kamakhya', reason: 'Explores reflection, refraction, and optical illusions — extending the optics you learned here' },
+        { slug: ‘kingfisher-blue’, reason: ‘The kingfisher’s feathers use the same structural color physics — nanostructures, not pigment’ },
+        { slug: ‘golden-deer-kamakhya’, reason: ‘Explores reflection, refraction, and optical illusions — extending the optics you learned here’ },
       ],
       concepts: [
         {
@@ -12071,8 +12046,6 @@ plt.show()  # At what thickness do you get blue?`,
       ],
       nextLessons: [
         { slug: 'peacocks-dance', reason: 'Another bird with structural color — peacock feathers use photonic crystals instead of spongy keratin' },
-        { slug: 'rainbow-fish', reason: 'Iridescence in fish scales — thin-film interference in an aquatic context' },
-        { slug: 'orange-sunsets-assam', reason: 'More light physics — Rayleigh scattering explains red sunsets, a different mechanism from structural color' },
       ],
       quiz: [
         { question: 'Why does a ground-up kingfisher feather appear brown, not blue?', options: ['The dye washes out', 'Structural color depends on intact nanostructure — destroy it and the color vanishes', 'Blue pigment degrades in air', 'The powder is too small to see'], answer: 1 },
@@ -12580,7 +12553,6 @@ plt.show()  # Can you see how the octave fits exactly 2 cycles where the fundame
       nextLessons: [
         { slug: 'singing-bamboo', reason: 'Bamboo groves that sing \u2014 resonance in natural tubes uses the same standing wave physics as Dijou\'s flute' },
         { slug: 'bamboo-flute-nagaland', reason: 'Build a real bamboo flute and learn how finger hole placement determines pitch through standing waves' },
-        { slug: 'grandmother-remembered', reason: 'Why songs are easier to remember than lists \u2014 rhythm and melody engage the brain\'s memory circuits' },
       ],
       quiz: [
         { question: 'What determines the pitch of a sound?', options: ['Its volume', 'Its frequency (cycles per second)', 'Its duration', 'The material it passes through'], answer: 1 },
@@ -13105,7 +13077,6 @@ plt.show()  # Charcoal is 7,700x slower than copper!`,
         { slug: 'states-of-matter', reason: 'How molecules move in solids, liquids, and gases — the basis of thermal energy' },
       ],
       nextLessons: [
-        { slug: 'lotus-float', reason: 'Another surface physics story — how lotus leaves repel water using nanostructure' },
         { slug: 'orange-sunsets-assam', reason: 'Light and energy physics — electromagnetic energy interacting with matter' },
         { slug: 'kingfisher-blue', reason: 'More material science — nanostructures in feathers interact with light' },
       ],
@@ -14397,7 +14368,6 @@ plt.show()  # Why is the flying squirrel's ratio lower than a hang glider?`,
         { slug: 'evolution-and-adaptation', reason: 'How gliding evolved independently six times \u2014 convergent evolution driven by the same physics' },
       ],
       nextLessons: [
-        { slug: 'kite-festival', reason: 'Kites use the same aerodynamic forces as flying squirrels \u2014 lift, drag, and angle of attack' },
         { slug: 'vimana-flying-chariot', reason: 'From gliding to powered flight \u2014 the physics of thrust, lift, and how airplanes stay up' },
         { slug: 'monkey-bridge', reason: 'Another story about animals solving physics problems \u2014 monkeys creating a living bridge across a ravine' },
       ],
@@ -16650,9 +16620,8 @@ for year in range(1, 21):
         { slug: 'conservation-biology', reason: 'Why species decline and what science-based strategies protect them' },
       ],
       nextLessons: [
-        { slug: 'why-fish-jump', reason: 'Why fish leap in the Barak River — aquatic ecosystems, dissolved oxygen, and fish behaviour' },
-        { slug: 'river-that-ran-away', reason: 'River erosion and the Brahmaputra’s shifting course — the geology that shapes hilsa habitat' },
-        { slug: 'cloud-refused-rain', reason: 'Weather and rainfall patterns — the monsoon that triggers hilsa migration upstream' },
+        { slug: ‘river-that-ran-away’, reason: ‘River erosion and the Brahmaputra’s shifting course — the geology that shapes hilsa habitat’ },
+        { slug: ‘cloud-refused-rain’, reason: ‘Weather and rainfall patterns — the monsoon that triggers hilsa migration upstream’ },
       ],
       quiz: [
         { question: 'Why does the hilsa migrate from sea to river?', options: ['To escape ocean predators', 'To spawn — it migrates upstream burning stored fat as fuel', 'To find warmer water', 'To follow food sources'], answer: 1 },
@@ -17133,7 +17102,6 @@ print(f"Measured speed: {avg_speed:.0f} m/s (vs 343)")`,
         { slug: 'sonar-echolocation', reason: 'How echoes power sonar, ultrasound, and biological echolocation' },
       ],
       nextLessons: [
-        { slug: 'dhol-drum', reason: 'How sound is produced by vibrating membranes' },
         { slug: 'bamboo-flute-nagaland', reason: 'Standing waves in tubes \u2014 sound reflection inside an instrument' },
         { slug: 'river-dolphins-secret', reason: 'Echolocation in action \u2014 dolphins use echoes to navigate' },
       ],
@@ -17530,7 +17498,6 @@ plt.show()  # Where is the sweet spot?`,
         { slug: 'adaptation-and-evolution', reason: 'Epiphytic life is an adaptation \u2014 velamen roots and aerial moisture capture evolved under canopy selection pressures' },
       ],
       nextLessons: [
-        { slug: 'seed-travel', reason: 'Orchid seeds are the ultimate wind-dispersed seeds \u2014 dust-like particles that float on air currents to find new host trees' },
         { slug: 'orchid-colors', reason: 'From how orchids grow to why they are colorful \u2014 pigments, pollination, and co-evolution with insects' },
         { slug: 'pitcher-plant', reason: 'Another extreme plant adaptation from NE India \u2014 carnivorous plants that evolved to trap insects for nutrients' },
       ],

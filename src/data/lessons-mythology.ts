@@ -3246,7 +3246,6 @@ The sea did not need to break the laws of physics to part. It needed the right w
       nextLessons: [
         { slug: 'noahs-ark', reason: 'Another story involving water and survival — explores ecology, biodiversity, and carrying capacity' },
         { slug: 'david-and-goliath', reason: 'The physics of projectile motion and biomechanics — another Bible story with hidden STEM' },
-        { slug: 'well-of-zamzam', reason: 'Water science from the Islamic tradition — groundwater hydrology and aquifer dynamics' },
       ],
       codeTeaser: `# Wind Setdown Calculator
 import math
@@ -3580,7 +3579,6 @@ The Muezzin’s call connects acoustic physics, architectural engineering, and s
         { slug: 'forces-and-motion', reason: 'Speaker design relies on electromagnetism and Newton’s laws to convert electrical energy into mechanical vibration' },
       ],
       nextLessons: [
-        { slug: 'well-of-zamzam', reason: 'Another Islamic tradition with deep STEM — hydrology and groundwater physics from a different angle' },
         { slug: 'monastery-bells', reason: 'Sound physics in a different tradition — bell acoustics, harmonics, and resonance in a Buddhist monastery' },
         { slug: 'tower-of-babel', reason: 'Structural engineering and the physics of building tall — what the minaret and the tower have in common' },
       ],
