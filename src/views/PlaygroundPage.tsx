@@ -973,25 +973,39 @@ export default function PlaygroundPage() {
             <div className="space-y-4">
               {selectedProblem.tiers.map((t) => {
                 const TIcon = tierIcons[t.tier];
+                const locked = !user && t.tier > 1;
                 return (
-                  <button
-                    key={t.tier}
-                    onClick={() => setSelectedTier(t)}
-                    className="w-full text-left bg-white dark:bg-gray-800 rounded-xl p-5 border-2 border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-600 transition-all group"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tierColors[t.tier]} flex items-center justify-center flex-shrink-0`}>
-                        <TIcon className="w-6 h-6 text-white" />
+                  <div key={t.tier} className="relative">
+                    <button
+                      onClick={() => !locked && setSelectedTier(t)}
+                      className={`w-full text-left bg-white dark:bg-gray-800 rounded-xl p-5 border-2 transition-all group ${
+                        locked
+                          ? 'border-gray-200 dark:border-gray-700 opacity-60 cursor-default'
+                          : 'border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-600'
+                      }`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${tierColors[t.tier]} flex items-center justify-center flex-shrink-0`}>
+                          <TIcon className="w-6 h-6 text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-base font-bold text-gray-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                            Tier {t.tier}: {t.tierName}
+                          </p>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">{t.goal}</p>
+                        </div>
+                        {locked
+                          ? <Lock className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                          : <ArrowRight className="w-5 h-5 text-gray-300 dark:text-gray-600 group-hover:text-amber-500 transition-colors flex-shrink-0" />
+                        }
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-base font-bold text-gray-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                          Tier {t.tier}: {t.tierName}
-                        </p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{t.goal}</p>
+                    </button>
+                    {locked && (
+                      <div className="mt-2">
+                        <SignUpGate compact message="Sign up free to unlock higher tiers" />
                       </div>
-                      <ArrowRight className="w-5 h-5 text-gray-300 dark:text-gray-600 group-hover:text-amber-500 transition-colors flex-shrink-0" />
-                    </div>
-                  </button>
+                    )}
+                  </div>
                 );
               })}
             </div>

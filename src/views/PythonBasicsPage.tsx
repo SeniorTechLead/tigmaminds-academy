@@ -595,6 +595,15 @@ export default function PythonBasicsPage() {
   const completedCount = getCompletedCount(COURSE_SLUG);
   const courseComplete = isCourseComplete(COURSE_SLUG, lessons.length);
 
+  useEffect(() => {
+    const match = window.location.hash.match(/^#lesson-(\d+)$/);
+    if (match) {
+      const idx = parseInt(match[1]);
+      setExpandedLesson(idx);
+      setTimeout(() => document.getElementById(`lesson-${idx}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col">
       <Header />
@@ -706,7 +715,7 @@ export default function PythonBasicsPage() {
                   {!user && i >= FREE_LESSONS && (
                     <div className="absolute inset-0 z-10 flex items-end justify-center bg-gradient-to-t from-white via-white/95 to-transparent dark:from-gray-950 dark:via-gray-950/95">
                       <div className="pb-8 w-full max-w-md mx-auto">
-                        <SignUpGate message={`Sign up free to unlock lesson ${i + 1} and all remaining lessons`} />
+                        <SignUpGate message={`Sign up free to unlock lesson ${i + 1} and all remaining lessons`} returnTo={`/learn/python-basics#lesson-${i}`} />
                       </div>
                     </div>
                   )}
