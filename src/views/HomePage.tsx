@@ -200,7 +200,7 @@ export default function HomePage() {
               From Blinking LED to <span className="text-gradient">Autonomous Robot</span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              In 12 months, your ward learns Python AND Arduino — and builds a robot that sees, thinks, and moves on its own.
+              12 months. Python AND Arduino. Build a robot that sees, thinks, and moves on its own.
             </p>
           </div>
 
