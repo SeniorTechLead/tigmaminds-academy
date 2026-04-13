@@ -12,6 +12,7 @@ import SignUpGate from '../components/SignUpGate';
 import SectionRenderer from '../components/reference/SectionRenderer';
 import { usePrefs } from '../contexts/PrefsContext';
 import { useAuth } from '../contexts/AuthContext';
+import { useSubscription } from '../contexts/SubscriptionContext';
 import { usePyodide } from '../contexts/PyodideContext';
 import { useSqlJs } from '../contexts/SqlJsContext';
 import { useTs } from '../contexts/TsContext';
@@ -20,7 +21,6 @@ import { problemMeta, type ProblemMeta } from '../data/playground-meta';
 import { loadProblem } from '../data/playground/index';
 import { lookupSection } from '../utils/referenceLookup';
 
-const FREE_PROBLEM_COUNT = 5;
 
 /* ── Test result type ── */
 interface TestResult {
@@ -888,6 +888,7 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
    ══════════════════════════════════════════ */
 export default function PlaygroundPage() {
   const { user } = useAuth();
+  const { hasActiveSubscription } = useSubscription();
   const searchParams = useSearchParams();
   const [selectedProblem, setSelectedProblem] = useState<Problem | null>(null);
   const [selectedTier, setSelectedTier] = useState<ProblemTier | null>(null);
@@ -898,8 +899,20 @@ export default function PlaygroundPage() {
   const [filterLanguage, setFilterLanguage] = useState<Language | 'all'>('all');
   const [visibleCount, setVisibleCount] = useState(24);
 
-  const isFree = (p: { id: number }) => p.id <= FREE_PROBLEM_COUNT;
-  const canAccess = (p: { id: number }) => !!user || isFree(p);
+  // Access tiers:
+  // - Anon: easy problems only (tier 1 gated at tier selection)
+  // - Signed in (free): easy + medium problems (tier 1 gated for medium at tier selection)
+  // - Paid subscriber: everything
+  const canAccessProblem = (p: { difficulty: string }) => {
+    if (hasActiveSubscription) return true;
+    if (user) return p.difficulty !== 'hard';
+    return p.difficulty === 'easy';
+  };
+  const canAccessAllTiers = (p: { difficulty: string }) => {
+    if (hasActiveSubscription) return true;
+    if (user) return p.difficulty === 'easy';
+    return false;
+  };
 
   const selectProblem = useCallback(async (meta: ProblemMeta) => {
     setLoadingProblem(true);
@@ -984,7 +997,7 @@ export default function PlaygroundPage() {
             <div className="space-y-4">
               {selectedProblem.tiers.map((t) => {
                 const TIcon = tierIcons[t.tier];
-                const locked = !user && t.tier > 1;
+                const locked = !canAccessAllTiers(selectedProblem) && t.tier > 1;
                 return (
                   <div key={t.tier}>
                     <button
@@ -1011,9 +1024,17 @@ export default function PlaygroundPage() {
                         }
                       </div>
                     </button>
-                    {locked && (
+                    {locked && !user && (
                       <div className="mt-2">
                         <SignUpGate compact message="Sign up free to unlock higher tiers" returnTo={`/playground?problem=${selectedProblem.slug}`} />
+                      </div>
+                    )}
+                    {locked && user && !hasActiveSubscription && (
+                      <div className="mt-2 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50/80 dark:bg-purple-900/20 p-3 text-center">
+                        <p className="text-sm text-purple-700 dark:text-purple-300 mb-2">Subscribe to unlock all tiers</p>
+                        <Link href="/pricing" className="inline-flex items-center gap-1.5 px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors">
+                          View plans
+                        </Link>
                       </div>
                     )}
                   </div>
@@ -1115,7 +1136,7 @@ export default function PlaygroundPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {visible.map((p) => {
-              const locked = !canAccess(p);
+              const locked = !canAccessProblem(p);
               return (
                 <button
                   key={p.id}
@@ -1189,10 +1210,19 @@ export default function PlaygroundPage() {
             </div>
           )}
 
-          {/* Sign-up gate after free problems */}
-          {!user && filtered.some(p => !isFree(p)) && (
+          {/* Sign-up / subscribe gate */}
+          {!user && (
             <div className="mt-8">
-              <SignUpGate message={`Sign up free to unlock all ${problemMeta.length}+ problems`} />
+              <SignUpGate message="Sign up free to unlock medium problems and more tiers" />
+            </div>
+          )}
+          {user && !hasActiveSubscription && filtered.some(p => p.difficulty === 'hard') && (
+            <div className="mt-8 rounded-2xl bg-gradient-to-br from-purple-500/10 to-amber-500/10 border border-purple-200 dark:border-purple-800 p-8 text-center">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Want the hard problems?</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Subscribe to unlock {problemMeta.filter(p => p.difficulty === 'hard').length} hard problems with advanced tiers</p>
+              <Link href="/pricing" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-amber-600 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                View plans
+              </Link>
             </div>
           )}
 
