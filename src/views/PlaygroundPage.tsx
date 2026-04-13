@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import {
   Play, RotateCcw, Loader2, CheckCircle, XCircle, Terminal, Lock,
   ChevronDown, ChevronUp, Filter, Search, BookOpen, Zap, Sparkles,
@@ -887,6 +888,7 @@ function ProblemSolver({ problem, tier, onBack }: { problem: Problem; tier: Prob
    ══════════════════════════════════════════ */
 export default function PlaygroundPage() {
   const { user } = useAuth();
+  const searchParams = useSearchParams();
   const [selectedProblem, setSelectedProblem] = useState<Problem | null>(null);
   const [selectedTier, setSelectedTier] = useState<ProblemTier | null>(null);
   const [loadingProblem, setLoadingProblem] = useState(false);
@@ -905,6 +907,15 @@ export default function PlaygroundPage() {
     if (full) setSelectedProblem(full);
     setLoadingProblem(false);
   }, []);
+
+  // Auto-select problem from ?problem=slug (used by returnTo after sign-in)
+  useEffect(() => {
+    const slug = searchParams.get('problem');
+    if (slug) {
+      const meta = problemMeta.find(p => p.slug === slug);
+      if (meta) selectProblem(meta);
+    }
+  }, [searchParams, selectProblem]);
 
   const filtered = problemMeta.filter(p => {
     if (filterDifficulty !== 'all' && p.difficulty !== filterDifficulty) return false;
@@ -1002,7 +1013,7 @@ export default function PlaygroundPage() {
                     </button>
                     {locked && (
                       <div className="mt-2">
-                        <SignUpGate compact message="Sign up free to unlock higher tiers" />
+                        <SignUpGate compact message="Sign up free to unlock higher tiers" returnTo={`/playground?problem=${selectedProblem.slug}`} />
                       </div>
                     )}
                   </div>
