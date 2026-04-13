@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { BookOpen, ChevronRight, CheckCircle, Circle, Code2, Sparkles, ArrowLeft } from 'lucide-react';
 import MiniLesson from '../components/MiniLesson';
