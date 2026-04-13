@@ -211,6 +211,10 @@ In science class, these concepts appear in the study of waves, oscillations, and
       { slug: 'singing-bamboo', reason: 'Bamboo in Mizoram again — but this time the physics is acoustic resonance rather than periodic motion' },
       { slug: 'monastery-bells', reason: 'Sound waves, harmonics, and resonance — the physics of the Tawang monastery bells extends the wave concepts from this lesson' },
     ],
+    relatedStories: [
+      { slug: 'bamboo-flute-of-nagaland', reason: 'Programming — you\'ll code a beat detection algorithm that analyses audio recordings, extracting tempo, syncopation, and rhythmic patterns from Cheraw dance music' },
+      { slug: 'bamboo-taught-wind', reason: 'Robotics — you\'ll build an Arduino impact sensor that measures vibration frequency when bamboo poles are struck, comparing resonant frequencies across pole lengths' },
+    ],
     codeTeaser: `# Cheraw Bamboo Dance Simulator
 import math
 
@@ -416,6 +420,10 @@ The Mizo people will be ready.
     nextLessons: [
       { slug: 'singing-bamboo', reason: 'The same Mizoram bamboo — but exploring its acoustic properties rather than its ecological cycle' },
       { slug: 'seed-keeper-of-nagaland', reason: 'Another Northeast India story about seeds and genetic diversity — the human side of preserving plant varieties' },
+    ],
+    relatedStories: [
+      { slug: 'bamboo-grows-fast', reason: 'Programming — you\'ll model bamboo flowering cycles in Python, simulating 48-year mast seeding events and their cascading ecological effects' },
+      { slug: 'boy-counted-butterflies', reason: 'Programming — you\'ll code population explosion models in Python, simulating how rodent numbers surge when bamboo seeds provide unlimited food' },
     ],
     codeTeaser: `# Rat Population Boom-Bust Model
 import math
@@ -627,6 +635,10 @@ Pu Remruata smiled. "I already have. You just watched a mountain become a blade.
     nextLessons: [
       { slug: 'churning-of-the-ocean', reason: 'Another chemistry-focused lesson — density, separation, and reactions from the Samudra Manthan' },
     ],
+    relatedStories: [
+      { slug: 'little-potter', reason: 'Programming — you\'ll compare heat treatment curves in Python, modelling how temperature profiles differ between forging iron and firing ceramics' },
+      { slug: 'festival-lights', reason: 'Robotics — you\'ll model electrical resistance in metals using Arduino sensor circuits, comparing conductivity across different alloys' },
+    ],
     codeTeaser: `# Iron-Carbon Phase Predictor
 carbon_pct = float(input("Carbon %: ") or "0.5")
 
@@ -829,6 +841,10 @@ Pu Lalrinawma smiled. "Start by watching the hawks. They've been designing glide
     ],
     nextLessons: [
       { slug: 'pushpaka-vimana', reason: 'The mythology of flight — from the Pushpaka Vimana to modern aerodynamics, covering Bernoulli\'s principle and wing design' },
+    ],
+    relatedStories: [
+      { slug: 'kite-festival', reason: 'Programming — you\'ll simulate raptor soaring dynamics in Python, comparing thermal updraft gliding to kite aerodynamic lift calculations' },
+      { slug: 'flying-squirrel', reason: 'Programming — you\'ll model predator flight energetics in Python, calculating pursuit speed and turning radius from wing loading data' },
     ],
     codeTeaser: `# Hawk Soaring Range Calculator
 altitude = 400     # metres gained in thermal
@@ -1033,6 +1049,10 @@ Sawmi picked up her notebook. "Then we'd better start climbing."
       { slug: 'bodhi-tree', reason: 'Plant biology from a different angle — cloning, vegetative propagation, and the genetics of the Bodhi tree' },
       { slug: 'seed-keeper-of-nagaland', reason: 'Preserving plant genetic diversity — the human side of the biodiversity that orchids represent' },
     ],
+    relatedStories: [
+      { slug: 'wild-orchids-trees', reason: 'Programming — you\'ll model epiphyte distribution patterns in Python, simulating how altitude and humidity gradients affect orchid species diversity' },
+      { slug: 'seed-travel', reason: 'Programming — you\'ll simulate orchid seed dispersal distances in Python, modelling how microscopic seeds achieve long-range wind transport' },
+    ],
     codeTeaser: `# Pollination Strategy Comparison
 import random
 
@@ -1232,6 +1252,10 @@ His teacher held up his report. "This," she said, "is what heritage looks like w
     nextLessons: [
       { slug: 'tower-of-babel', reason: 'Structural engineering from a different tradition — compression, tension, and why tall structures need wide bases' },
       { slug: 'well-of-zamzam', reason: 'Another hydraulic engineering story — groundwater, aquifers, and water management across millennia' },
+    ],
+    relatedStories: [
+      { slug: 'lost-temple', reason: 'Programming + Database — you\'ll build an archaeological site database and code spatial queries to analyse historical settlement patterns' },
+      { slug: 'bridge-that-grew', reason: 'Programming — you\'ll simulate structural load calculations in Python, comparing ancient fort wall stability to living bridge tensile strength' },
     ],
     codeTeaser: `# Moat Volume Calculator
 length = 2000  # metres (perimeter)
@@ -1439,6 +1463,10 @@ Today, Guru Ibomcha\'s gymnasium is one of about fifty schools in Manipur keepin
       { slug: 'dharma-wheel', reason: 'Rotational physics from the Buddhist Dharma wheel — angular momentum, torque, and gyroscopic stability' },
       { slug: 'ras-lila-manipur', reason: 'Another Manipur lesson on circular motion — centripetal force in the Ras Lila dance' },
     ],
+    relatedStories: [
+      { slug: 'tortoise-and-hare', reason: 'Programming — you\'ll model biomechanical force vectors in Python, calculating strike speed, momentum, and energy transfer in martial arts movements' },
+      { slug: 'monkey-bridge', reason: 'Programming — you\'ll simulate body balance and centre-of-gravity calculations in Python, modelling how stance width affects stability' },
+    ],
     codeTeaser: `# Thang-Ta Blade Speed Calculator
 import math
 
@@ -1643,6 +1671,10 @@ But Yaima knew. She was a planet in orbit, held by forces she could now calculat
     nextLessons: [
       { slug: 'pushpaka-vimana', reason: 'Flight and orbital mechanics — from the Vimana myth to Bernoulli\'s principle and escape velocity' },
       { slug: 'dharma-wheel', reason: 'Rotational physics from the Buddhist Dharma wheel — angular momentum, torque, and gyroscopic stability' },
+    ],
+    relatedStories: [
+      { slug: 'peacocks-dance', reason: 'Programming — you\'ll model circular motion and angular velocity in Python, comparing dance rotation dynamics to bird display choreography' },
+      { slug: 'music-dimasa', reason: 'Programming — you\'ll simulate rhythm and beat synchronisation in Python, modelling how multiple dancers maintain temporal coordination' },
     ],
     codeTeaser: `# Ras Lila Centripetal Force Calculator
 import math
@@ -1849,6 +1881,10 @@ He pointed out several features that economists would recognise:
     nextLessons: [
       { slug: 'geometry-of-alhambra', reason: 'Pattern and structure from a different tradition — where the Alhambra uses geometric patterns, Ima Keithel uses economic patterns' },
     ],
+    relatedStories: [
+      { slug: 'night-market-imphal', reason: 'Programming + Database — you\'ll build a market economics database and code supply-demand equilibrium models for women-led trading' },
+      { slug: 'market-day-tura', reason: 'Programming — you\'ll simulate market network graph algorithms in Python, modelling how seller location affects pricing and customer flow' },
+    ],
     codeTeaser: `# Supply-Demand Price Finder
 supply_kg = 500    # tomatoes available today
 demand_kg = 600    # tomatoes wanted by customers
@@ -2054,6 +2090,10 @@ But the game began in Manipur. With Manipuri Ponies. On a field no bigger than a
       { slug: 'david-and-goliath', reason: 'Projectile motion from a different tradition — the physics of David\'s sling combines centripetal force and ballistics' },
       { slug: 'dharma-wheel', reason: 'Rotational physics — angular momentum and torque, extending the rotation concepts from the mallet swing' },
     ],
+    relatedStories: [
+      { slug: 'tortoise-and-hare', reason: 'Programming — you\'ll simulate projectile trajectories in Python, modelling how mallet angle and horse speed affect ball launch dynamics' },
+      { slug: 'boy-raced-brahmaputra', reason: 'Programming — you\'ll model race strategy optimisation in Python, calculating optimal speed-endurance trade-offs for competitive sport' },
+    ],
     codeTeaser: `# Polo Shot Range Calculator
 import math
 
@@ -2244,6 +2284,10 @@ Debashree's project concluded with a structural assessment: which sections were 
       { slug: 'noahs-ark', reason: 'Buoyancy and naval architecture — how big must a boat be to float with a given cargo?' },
       { slug: 'tower-of-babel', reason: 'Structural engineering on land — compression, tension, and building tall' },
     ],
+    relatedStories: [
+      { slug: 'lotus-float', reason: 'Programming — you\'ll simulate buoyancy and foundation load calculations in Python, modelling how structures are supported by water and lake-bed soil' },
+      { slug: 'monsoon-home', reason: 'Programming — you\'ll model flood level dynamics in Python, simulating how seasonal water rise affects palace structural loads' },
+    ],
     codeTeaser: `# Water Palace Force Calculator
 rho = 1000     # water density (kg/m³)
 g = 9.8        # gravity (m/s²)
@@ -2429,6 +2473,10 @@ The ancient tribes of Tripura knew eclipses were coming. They didn't know orbita
     nextLessons: [
       { slug: 'star-of-bethlehem', reason: 'Astronomy from a different tradition — planetary conjunctions, star magnitudes, and celestial navigation' },
       { slug: 'astrolabe', reason: 'How medieval astronomers mapped the sky onto a handheld instrument — practical celestial mechanics' },
+    ],
+    relatedStories: [
+      { slug: 'star-fell-deepor', reason: 'Programming — you\'ll code celestial alignment calculations in Python, modelling how astronomical events map to cultural calendar systems' },
+      { slug: 'stars-ziro-valley', reason: 'Programming — you\'ll simulate night sky observations in Python, plotting star positions and calculating rising/setting times for temple orientations' },
     ],
     codeTeaser: `# Moon Phase Calculator
 from datetime import datetime, timedelta
@@ -2633,6 +2681,10 @@ Chemistry connects them.
       { slug: 'iron-smiths-lushai', reason: 'Another materials science story — the chemistry of turning ore into steel mirrors the chemistry of turning latex into rubber' },
       { slug: 'why-the-muga-silk-is-golden', reason: 'Natural material chemistry — how silk proteins and rubber polymers both derive remarkable properties from molecular chain structure' },
     ],
+    relatedStories: [
+      { slug: 'bamboo-grows-fast', reason: 'Programming — you\'ll plot stress-strain curves before and after vulcanisation, calculating how cross-link density changes rubber\'s elastic modulus' },
+      { slug: 'eri-silk', reason: 'Programming — you\'ll compare natural material properties in Python, plotting stress-strain curves for rubber elasticity vs silk tensile strength' },
+    ],
     codeTeaser: `# Rubber Cross-Link Properties
 cross_links = int(input("Cross-links per 100 units (1-50): ") or "5")
 
@@ -2834,6 +2886,10 @@ That was the highest praise Hamjabai could imagine.
       { slug: 'geometry-of-alhambra', reason: 'The 17 wallpaper groups in Islamic tile art — the same mathematical framework applied to architecture instead of weaving' },
       { slug: 'sand-mandala', reason: 'Geometric pattern construction from the Buddhist tradition — symmetry, fractals, and compass-and-straightedge geometry' },
     ],
+    relatedStories: [
+      { slug: 'basket-weavers-song', reason: 'Programming — you\'ll compare cane and bamboo weave geometries in Python, computing structural strength from fibre angle and diameter' },
+      { slug: 'the-magic-japi-hat', reason: 'Programming — you\'ll model 3D curved surface weaving in Python, simulating how flat strips create rigid curved forms' },
+    ],
     codeTeaser: `# Weaving Pattern Generator
 over, under, shift = 2, 1, 1
 width, height = 20, 10
@@ -3007,6 +3063,10 @@ Nikhil calculated: if the layers were deposited over 10 million years at a rate 
     ],
     nextLessons: [
       { slug: 'hanuman-lifted-mountain', reason: 'Geology from a different tradition — how mountains form through tectonic forces, the same physics that created Tripura\'s ridges' },
+    ],
+    relatedStories: [
+      { slug: 'lost-temple', reason: 'Programming + Database — you\'ll build a temple architecture database and code geometric proportion analysis for sacred building designs' },
+      { slug: 'geometry-of-alhambra', reason: 'Programming — you\'ll compare Hindu temple symmetry to Islamic tessellation in Python, computing symmetry group classifications for both traditions' },
     ],
     codeTeaser: `# Erosion Simulator: Hard vs Soft Rock
 import random
@@ -3195,6 +3255,10 @@ Five million lilies, found nowhere else on Earth, blooming for two weeks in a va
       { slug: 'orchids-phawngpui', reason: 'Another botanical story from the Northeast — orchid specialisation in Mizoram\'s cloud forests' },
       { slug: 'hanuman-lifted-mountain', reason: 'Mountain botany from a different tradition — why rare plants grow only at certain altitudes' },
     ],
+    relatedStories: [
+      { slug: 'night-jasmine', reason: 'Programming — you\'ll model seasonal flowering triggers in Python, simulating how temperature and daylight thresholds control bloom timing' },
+      { slug: 'orchid-colors', reason: 'Programming — you\'ll simulate pigment biosynthesis pathways in Python, modelling how enzyme cascades produce the lily\'s unique colour' },
+    ],
     codeTeaser: `# Altitude Effects Calculator
 import math
 
@@ -3377,6 +3441,10 @@ Simple machines. Simple names. Not so simple to use when the stone weighs as muc
     nextLessons: [
       { slug: 'tower-of-babel', reason: 'Structural engineering and construction physics from a different tradition — building tall with limited technology' },
       { slug: 'david-and-goliath', reason: 'Another lesson where small forces achieve big results — the physics of the sling uses centripetal force as a simple machine' },
+    ],
+    relatedStories: [
+      { slug: 'bridge-that-grew', reason: 'Programming — you\'ll simulate friction and force calculations in Python, modelling how team size and rope angle affect the force needed to move megaliths' },
+      { slug: 'little-train', reason: 'Programming — you\'ll model gradient and rolling resistance in Python, comparing stone-dragging energy to wheeled transport efficiency' },
     ],
     codeTeaser: `# Megalith-Moving Force Calculator
 import math
@@ -3572,6 +3640,10 @@ Mhasilie looked at the casque in her hands with new respect. It wasn't decoratio
       { slug: 'hawk-blue-mountain', reason: 'Bird flight physics from Mizoram — aerodynamics and wing design, another angle on bird engineering' },
       { slug: 'the-hornbills-crown', reason: 'The hornbill in Naga folklore — how it earned its crown through wisdom, with the biology of bird communication' },
     ],
+    relatedStories: [
+      { slug: 'the-hornbills-crown', reason: 'Programming — you\'ll model casque aerodynamics in Python, simulating how the bony helmet affects flight drag and energy costs' },
+      { slug: 'flying-squirrel', reason: 'Programming — you\'ll compare powered flight to gliding in Python, calculating energy-per-kilometre for hornbill flapping vs squirrel gliding' },
+    ],
     codeTeaser: `# Impact Force: With vs Without Casque
 mass = 3.0       # kg (hornbill)
 speed = 10.0     # m/s
@@ -3759,6 +3831,10 @@ Sheangha's daos use medium-high-carbon steel (0.5–0.8% C), properly heat-treat
     nextLessons: [
       { slug: 'iron-smiths-lushai', reason: 'Iron smelting in Mizoram — the same metallurgy from raw ore rather than scrap steel' },
       { slug: 'churning-of-the-ocean', reason: 'Chemistry of materials transformation — acids, bases, and phase changes' },
+    ],
+    relatedStories: [
+      { slug: 'iron-smiths-lushai', reason: 'Programming — you\'ll model iron carbon-phase diagrams in Python, simulating how tempering temperature affects blade hardness and brittleness' },
+      { slug: 'little-potter', reason: 'Programming — you\'ll compare heat treatment profiles in Python, plotting temperature-time curves for metalwork quenching vs ceramic kiln firing' },
     ],
     codeTeaser: `# Blade Edge Pressure Calculator
 force = 500       # Newtons (chopping swing)
@@ -3950,6 +4026,10 @@ Sir Tshering nodded. "That's why ice core research matters. We're reading the pl
       { slug: 'cloud-refused-rain', reason: 'The water cycle from a different angle — evaporation, cloud formation, and the chemistry of rain' },
       { slug: 'tripura-sundari-temple', reason: 'Geology from Tripura — plate tectonics and erosion that shaped both Kanchenjunga and the temple hillock' },
     ],
+    relatedStories: [
+      { slug: 'snow-leopards-promise', reason: 'Programming — you\'ll simulate altitude-dependent climate zones in Python, modelling how temperature, oxygen, and precipitation change with elevation' },
+      { slug: 'turtle-mountain', reason: 'Programming — you\'ll model tectonic uplift rates in Python, simulating how the Himalayas grow millimetres per year against erosion' },
+    ],
     codeTeaser: `# Simple Glacier Mass Balance Model
 accumulation = 2.0   # metres of ice per year (snowfall)
 base_melt = 1.8      # metres of ice melted per year
@@ -4122,6 +4202,10 @@ Karma Doma pictured the red panda she had glimpsed — curled in a ball, tail wr
     nextLessons: [
       { slug: 'snow-leopards-promise', reason: 'Another Sikkim animal adapting to altitude — the snow leopard\'s survival strategies in even harsher conditions' },
       { slug: 'agni-science-of-fire', reason: 'Heat transfer from the mythological tradition — combustion, conduction, convection, and radiation' },
+    ],
+    relatedStories: [
+      { slug: 'red-panda-mask', reason: 'AI — you\'ll train a camera-trap image classifier to identify red pandas from coat pattern features and body pose data' },
+      { slug: 'snow-leopards-promise', reason: 'Programming — you\'ll model altitude-habitat overlap in Python, simulating how red panda and snow leopard ranges intersect with climate change' },
     ],
     codeTeaser: `# Red Panda Heat Budget
 body_temp = 38      # °C
@@ -4316,6 +4400,10 @@ Some volatile compounds are lost during drying (heat evaporates them). Others ar
       { slug: 'churning-of-the-ocean', reason: 'Separation chemistry — density, distillation, and extraction from the Samudra Manthan' },
       { slug: 'why-the-muga-silk-is-golden', reason: 'Natural product chemistry — how silk proteins and cardamom oils both derive from specific molecular structures' },
     ],
+    relatedStories: [
+      { slug: 'night-jasmine', reason: 'Programming — you\'ll model essential oil biosynthesis in Python, simulating how altitude and temperature affect cardamom flavour compound concentrations' },
+      { slug: 'seed-keeper', reason: 'Database — you\'ll build a spice cultivar database and code genetic diversity queries to compare cardamom varieties across elevation gradients' },
+    ],
     codeTeaser: `# Cardamom Essential Oil Composition
 compounds = {
     "1,8-Cineole":       {"pct": 35, "bp": 176, "note": "camphor/fresh"},
@@ -4500,6 +4588,10 @@ And that was exactly right.
     nextLessons: [
       { slug: 'sand-mandala', reason: 'Impermanence from a different angle — the Buddhist sand mandala is intentionally destroyed, connecting to the prayer flag\'s designed decay' },
       { slug: 'agni-science-of-fire', reason: 'Energy and molecular destruction from a Hindu tradition — combustion breaks bonds just as UV does' },
+    ],
+    relatedStories: [
+      { slug: 'kite-festival', reason: 'Programming — you\'ll simulate wind load and fabric flutter dynamics in Python, modelling how altitude wind speed affects flag degradation rates' },
+      { slug: 'paper-umbrella', reason: 'Programming — you\'ll compare material weathering rates in Python, modelling how UV exposure and monsoon rain degrade natural fibre vs synthetic fabrics' },
     ],
     codeTeaser: `# Prayer Flag Fading Simulator
 import math

@@ -154,6 +154,7 @@ export interface Lesson {
     offlineActivityDiagram?: string;
     referenceLinks?: { slug: string; reason: string }[];
     nextLessons?: { slug: string; reason: string }[];
+    relatedStories?: { slug: string; reason: string }[];
     codeTeaser?: string;
     quiz?: { question: string; options: string[]; answer: number }[];
   };

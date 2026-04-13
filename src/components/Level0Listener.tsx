@@ -255,7 +255,7 @@ export default function Level0Listener({ lesson }: Props) {
       {/* ===== SIGN-UP GATE (after first 2 concepts for non-signed-in users) ===== */}
       {!isSignedIn && concepts && concepts.length > 2 && (
         <div className="relative">
-          <SignUpGate message="Access all 130+ lessons, quizzes, interactive tools, and offline activities" />
+          <SignUpGate message="Access all 130+ lessons, quizzes, interactive tools, and offline activities" returnTo={`/lessons/${lesson.slug}#level-listener`} />
           {/* Blurred teaser of remaining content */}
           <div className="mt-4 relative overflow-hidden" style={{ maxHeight: '100px' }}>
             <div className="pointer-events-none select-none" style={{ filter: 'blur(6px)' }}>
@@ -393,16 +393,19 @@ export default function Level0Listener({ lesson }: Props) {
         </ConceptCard>
       )}
 
-      {/* ===== NEXT LESSONS ===== */}
+      {/* ===== SKILL PROGRESSION ===== */}
       {lesson.level0?.nextLessons && lesson.level0.nextLessons.length > 0 && (
-        <ConceptCard title="What to Learn Next" icon={<Compass className="w-6 h-6 text-emerald-500" />}>
+        <ConceptCard title="Build on These Skills" icon={<Compass className="w-6 h-6 text-emerald-500" />}>
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-            You now understand the concepts in this lesson. These stories build on what you have learned:
+            These lessons use the programming and science skills you just learned:
           </p>
           <div className="space-y-3">
             {lesson.level0.nextLessons.map((next: { slug: string; reason: string }) => {
               const nextLesson = getLessonBySlug(next.slug);
               if (!nextLesson) return null;
+              const parts = next.reason.split(' — ');
+              const skill = parts[0];
+              const detail = parts.length > 1 ? parts.slice(1).join(' — ') : '';
               return (
                 <Link
                   key={next.slug}
@@ -413,7 +416,39 @@ export default function Level0Listener({ lesson }: Props) {
                   <ArrowRight className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold text-sm text-emerald-700 dark:text-emerald-300 group-hover:underline">{nextLesson.story.title}</span>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{next.reason}</p>
+                    <p className="text-xs mt-1">
+                      <span className="font-semibold text-emerald-600 dark:text-emerald-400">{skill}</span>
+                      {detail && <span className="text-gray-500 dark:text-gray-400"> — {detail}</span>}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </ConceptCard>
+      )}
+
+      {/* ===== RELATED STORIES ===== */}
+      {lesson.level0?.relatedStories && lesson.level0.relatedStories.length > 0 && (
+        <ConceptCard title="Explore Related Stories" icon={<BookOpen className="w-6 h-6 text-sky-500" />}>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+            These stories explore similar science topics from a different angle:
+          </p>
+          <div className="space-y-3">
+            {lesson.level0.relatedStories.map((rel: { slug: string; reason: string }) => {
+              const relLesson = getLessonBySlug(rel.slug);
+              if (!relLesson) return null;
+              return (
+                <Link
+                  key={rel.slug}
+                  href={`/lessons/${rel.slug}`}
+                  target="_blank"
+                  className="flex items-start gap-3 p-3 rounded-xl bg-sky-50 dark:bg-sky-900/20 border border-sky-100 dark:border-sky-800 hover:border-sky-300 dark:hover:border-sky-600 transition-colors group"
+                >
+                  <BookOpen className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-sm text-sky-700 dark:text-sky-300 group-hover:underline">{relLesson.story.title}</span>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{rel.reason}</p>
                   </div>
                 </Link>
               );

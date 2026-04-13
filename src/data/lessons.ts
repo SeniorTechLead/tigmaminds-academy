@@ -262,6 +262,10 @@ plt.show()  # What does this plot tell you?`,
         { slug: 'rainbow-fish', reason: 'Explores how water and thin films split light into colours — the same spectrum you learned about here' },
         { slug: 'the-girl-who-painted-rain', reason: 'Connects light, colour, and pigment mixing — what happens when you go from physics to art' },
       ],
+      relatedStories: [
+        { slug: 'haflong-blue-mountains', reason: 'Programming — you\'ll plot atmospheric scattering intensity vs distance, comparing why distant mountains look blue and sunsets look orange' },
+        { slug: 'the-girl-who-painted-rain', reason: 'Programming — you\'ll code subtractive colour mixing simulations, comparing light-splitting physics to pigment absorption' },
+      ],
       quiz: [
         { question: 'What is white light made of?', options: ['A single wavelength of light', 'A mixture of all visible colours', 'Only red and blue light', 'Invisible electromagnetic waves'], answer: 1 },
         { question: 'Why does the sky appear blue rather than violet?', options: ['Blue light has the longest wavelength', 'The atmosphere filters out violet light completely', 'The sun produces less violet light and our eyes are less sensitive to it', 'Blue is the only colour that scatters'], answer: 2 },
@@ -446,6 +450,11 @@ print(f"Danger level: {'EXTREME' if storm_surge > 3 else 'HIGH'}")`,
       nextLessons: [
         { slug: 'monsoon-home', reason: 'Architecture designed for monsoon climate — the human response to the storms you just learned about' },
       ],
+      relatedStories: [
+        { slug: 'monsoon-home', reason: 'Programming — you\'ll calculate rainfall intensity from weather station data and plot structural load distributions on traditional Meghalaya stilt houses' },
+        { slug: 'cloud-refused-rain', reason: 'Programming — you\'ll code a cloud seeding simulation, calculating silver iodide nucleation rates and plotting droplet growth curves with matplotlib' },
+        { slug: 'star-fell-deepor', reason: 'AI — you\'ll analyse impact crater dimensions to estimate meteorite mass and velocity, training a regression model on known impact data' },
+      ],
       quiz: [
         { question: 'What powers a cyclone?', options: ['Cold ocean water freezing', 'Warm ocean water evaporating and condensing, releasing heat', 'Earthquakes under the ocean', 'Wind from nearby mountains'], answer: 1 },
         { question: 'Why does a cyclone spin?', options: ['Ocean currents push it in circles', 'The Coriolis effect from Earth\'s rotation deflects the inflowing winds', 'Lightning inside the storm creates rotation', 'The eye of the storm acts like a drain'], answer: 1 },
@@ -627,6 +636,10 @@ print(f"A snow leopard thrives here. You would gasp.")`,
         { slug: 'cloud-weaver-of-tawang', reason: 'Mountain weather and orographic precipitation — the climate that shapes snow leopard habitat' },
         { slug: 'red-panda-mask', reason: 'Another high-altitude animal with cold-weather adaptations — fur, coloration, and thermoregulation' },
       ],
+      relatedStories: [
+        { slug: 'cloud-weaver-of-tawang', reason: 'Programming — you\'ll model orographic cloud formation at high altitude, simulating the weather systems that shape snow leopard habitat' },
+        { slug: 'red-panda-mask', reason: 'AI — you\'ll train a camera-trap image classifier to identify Himalayan species from pelage patterns and body shape features' },
+      ],
       quiz: [
         { question: 'Why is it hard to breathe at high altitude?', options: ['There is less oxygen in the air', 'Air pressure is lower so there are fewer oxygen molecules per breath', 'The air is too cold to breathe', 'Wind blows the oxygen away'], answer: 1 },
         { question: 'What percentage of oxygen is in the air at the top of Mount Everest?', options: ['About 5%', 'About 10%', 'About 20.9% — the same as sea level', 'About 50%'], answer: 2 },
@@ -792,6 +805,10 @@ print(f"Straight-line distance: {total:.0f} km")`,
         { slug: 'seven-sisters', reason: 'Geography of all seven NE Indian states — maps, biodiversity, and why each state is unique' },
         { slug: 'postman-hills', reason: 'Route optimisation through Meghalaya’s hills — graph theory applied to real geography' },
         { slug: 'silk-route', reason: 'Trade routes as geographic networks — how maps shaped commerce across centuries' },
+      ],
+      relatedStories: [
+        { slug: 'seven-sisters', reason: 'Database — you\'ll build a geographic database of NE Indian states and query elevation, area, and population data' },
+        { slug: 'lost-temple', reason: 'Programming — you\'ll code archaeological site mapping algorithms, plotting ruins on terrain elevation maps' },
       ],
       quiz: [
         { question: 'What do latitude and longitude measure?', options: ['Height above sea level and depth below it', 'North-south position from the equator and east-west position from London', 'Distance between two cities', 'The size of a country'], answer: 1 },
@@ -967,6 +984,10 @@ print(f"That is {carbon * 3.67:.0f} kg of CO2 pulled from the air!")`,
         { slug: 'girl-grew-forest', reason: 'One person planted a forest on a Brahmaputra sandbar — reforestation and carbon sequestration in action' },
         { slug: 'bridge-that-grew', reason: 'Living root bridges of Meghalaya — another story of trees as engineering solutions' },
         { slug: 'wild-orchids-trees', reason: 'Orchids that grow on banyan branches — epiphytic ecology and symbiosis' },
+      ],
+      relatedStories: [
+        { slug: 'bamboo-grows-fast', reason: 'Programming — you\'ll compare centuries-slow tree growth to weeks-fast bamboo growth, plotting carbon accumulation curves for both strategies' },
+        { slug: 'girl-grew-forest', reason: 'Programming — you\'ll plot forest succession models, comparing single ancient tree ecosystems to planted forest diversity curves' },
       ],
       quiz: [
         { question: 'Where does a tree get most of its mass?', options: ['From the soil through its roots', 'From water absorbed by the roots', 'From carbon dioxide in the air, converted by photosynthesis', 'From sunlight energy stored in leaves'], answer: 2 },
@@ -1156,6 +1177,10 @@ plt.show()`,
         { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants detect ground vibrations through their feet — another animal sensory system' },
         { slug: 'river-dolphins-secret', reason: 'Dolphins use sonar instead of whiskers — a different solution to sensing in darkness' },
         { slug: 'woodpeckers-drum', reason: 'Impact absorption in the woodpecker skull — another biomimicry story' },
+      ],
+      relatedStories: [
+        { slug: 'clouded-leopard', reason: 'AI — you\'ll compare GPS tracking data analysis for two big cats, training movement classifiers for different hunting styles' },
+        { slug: 'elephant-corridor', reason: 'Database — you\'ll query wildlife corridor databases, comparing tiger and elephant habitat connectivity requirements' },
       ],
       quiz: [
         { question: 'What are vibrissae?', options: ['A type of muscle', 'The scientific name for whiskers', 'A fur pattern', 'Tiny jaw bones'], answer: 1 },
@@ -1361,6 +1386,10 @@ for row in range(rows):
         { slug: 'the-magic-japi-hat', reason: 'The japi hat uses a triaxial weave at 60° — a more advanced version of the same interlacing you learned about here' },
         { slug: 'honey-hunters-lesson', reason: 'Bees build hexagonal honeycomb — nature\'s own tessellation, using the same geometry that appears in woven baskets' },
       ],
+      relatedStories: [
+        { slug: 'the-magic-japi-hat', reason: 'Programming — you\'ll calculate structural strength from weave angles and bamboo strip dimensions, comparing flat and conical geometries' },
+        { slug: 'honey-hunters-lesson', reason: 'Programming — you\'ll model hexagonal tessellation optimisation in Python, comparing human weave patterns to bee honeycomb efficiency' },
+      ],
       quiz: [
         { question: 'What is an algorithm?', options: ['A type of computer chip', 'A list of steps followed in order to complete a task', 'A mathematical equation', 'A programming language'], answer: 1 },
         { question: 'Why does weaving turn weak strips into a strong structure?', options: ['The strips are glued together', 'Each crossing point locks the strips in place, creating rigidity', 'The pattern makes the material heavier', 'Weaving compresses the fibres permanently'], answer: 1 },
@@ -1560,6 +1589,10 @@ print(f"         for about {flower_distance}m")
         { slug: 'firefly-festival-of-majuli', reason: 'Another insect story — fireflies communicate with light flashes, just as bees communicate with dances' },
         { slug: 'girl-grew-forest', reason: 'Explores what happens to ecosystems when habitats grow — and why pollinators are the first to benefit' },
       ],
+      relatedStories: [
+        { slug: 'firefly-festival-of-majuli', reason: 'Robotics — you\'ll program Arduino LEDs to simulate insect communication patterns, comparing bee waggle dances to firefly flashes' },
+        { slug: 'night-jasmine', reason: 'Programming — you\'ll model pollinator-plant interaction networks in Python, simulating how bee foraging routes connect flower populations' },
+      ],
       quiz: [
         { question: 'Why do hexagons tessellate but pentagons do not?', options: ['Hexagons are bigger', 'Hexagon angles (120°) divide evenly into 360°', 'Pentagons have too many sides', 'Hexagons are stronger'], answer: 1 },
         { question: 'How many lines of symmetry does a regular hexagon have?', options: ['3', '4', '6', '8'], answer: 2 },
@@ -1756,6 +1789,10 @@ print(f"Thinner object = higher pitch (same wind)")`,
         { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate through ground vibrations at infrasonic frequencies — the same wave physics, applied to seismic communication' },
         { slug: 'bamboo-flute-of-nagaland', reason: 'From the physics of bamboo sound to actually building and playing a bamboo flute — hands-on acoustics' },
       ],
+      relatedStories: [
+        { slug: 'dhol-drum', reason: 'Programming — you\'ll compare vibration modes in bamboo vs drum membranes, plotting frequency spectra for both sound sources' },
+        { slug: 'singing-bamboo', reason: 'Programming — you\'ll compare forced vs natural bamboo vibration, modelling how wind speed changes the harmonic spectrum' },
+      ],
       quiz: [
         { question: 'Why does bamboo sing in the wind?', options: ['Wind vibrates the leaves like guitar strings', 'Alternating vortices create pressure pulses at a specific frequency', 'Air gets trapped inside the hollow bamboo', 'The bamboo bends and snaps back, creating sound'], answer: 1 },
         { question: 'What is resonance?', options: ['Sound echoing off walls', 'When a forcing frequency matches an object\'s natural frequency, causing vibration to grow dramatically', 'The speed of sound in different materials', 'A type of musical instrument'], answer: 1 },
@@ -1939,6 +1976,10 @@ print(f"more g-force but feels {hu_force/wp_force:.0f}x less force!")`,
         { slug: 'honey-hunters-lesson', reason: 'Another animal with remarkable biology — bees build structures and communicate in ways that inspire human engineering' },
         { slug: 'bamboo-taught-wind', reason: 'Bamboo bends without breaking in the wind — a different strategy for handling force, but the same physics principle' },
         { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate through ground vibrations — another example of animals using physics in ways humans are just beginning to understand' },
+      ],
+      relatedStories: [
+        { slug: 'bamboo-flute-of-nagaland', reason: 'Programming — you\'ll compare impact-driven vs air-column sound production, plotting frequency and amplitude for both mechanisms' },
+        { slug: 'the-hornbills-crown', reason: 'Programming — you\'ll compare skull biomechanics, calculating impact absorption in woodpecker vs hornbill casque structures' },
       ],
       quiz: [
         { question: 'How many g-forces does a woodpecker experience when pecking?', options: ['About 10 g', 'About 100 g', 'About 1,200 g', 'About 10,000 g'], answer: 2 },
@@ -2145,6 +2186,10 @@ print(f"Signal length: {len(signal)} samples")
       ],
       nextLessons: [
         { slug: 'river-dolphins-secret', reason: 'Dolphins use sonar (echolocation) to navigate murky river water — sound as a sensor, not just communication' },
+      ],
+      relatedStories: [
+        { slug: 'river-dolphins-secret', reason: 'Robotics — you\'ll program Arduino sonar sensors to detect underwater objects, comparing dolphin echolocation to elephant seismic communication' },
+        { slug: 'frogs-sing-rain', reason: 'AI — you\'ll train an audio classifier to distinguish animal species from sound recordings, extending your elephant infrasound model to frog calls' },
       ],
       quiz: [
         { question: 'What is infrasound?', options: ['Very loud sound', 'Sound below 20 Hz — too low for humans to hear', 'Sound that only travels underground', 'Sound produced by electronic devices'], answer: 1 },
@@ -2374,6 +2419,10 @@ for step in range(20):
         { slug: 'fireflies-dont-burn', reason: 'A deeper dive into bioluminescence — explores other glowing organisms beyond fireflies' },
         { slug: 'stars-ziro-valley', reason: 'Another story about light and darkness — how light pollution steals the stars, just as it threatens firefly habitats' },
       ],
+      relatedStories: [
+        { slug: 'festival-lights', reason: 'Robotics — you\'ll compare LED circuit designs for different light displays, calculating power consumption and brightness patterns' },
+        { slug: 'night-jasmine', reason: 'Programming — you\'ll compare nocturnal biological signals, plotting light emission timing in fireflies vs scent release timing in flowers' },
+      ],
       quiz: [
         { question: 'How do fireflies produce light?', options: ['They have tiny light bulbs in their bodies', 'Through a chemical reaction: luciferin + oxygen produces light', 'By reflecting moonlight with special scales', 'By generating electricity like an electric eel'], answer: 1 },
         { question: 'How efficient is a firefly\'s light production compared to a light bulb?', options: ['About the same efficiency', 'The firefly is about 2 times more efficient', 'The firefly is about 98% efficient vs 5% for a light bulb', 'Light bulbs are more efficient'], answer: 2 },
@@ -2572,6 +2621,10 @@ plt.show()  # What shape is the room?`,
         { slug: 'bamboo-flute-of-nagaland', reason: 'Dives deeper into sound waves, frequency, and resonance — the physics behind the dolphin\'s clicks' },
         { slug: 'girl-who-spoke-to-elephants', reason: 'Uses sound analysis (infrasound) for wildlife tracking — the same sensor-to-data pipeline but for elephants' },
       ],
+      relatedStories: [
+        { slug: 'the-little-boat', reason: 'Programming — you\'ll model underwater acoustics in Python, simulating how sound waves propagate through river water at different depths' },
+        { slug: 'mishing-fish', reason: 'Robotics + AI — you\'ll build an Arduino sonar sensor array and train a detection model to identify fish vs debris from echo signatures' },
+      ],
       quiz: [
         { question: 'What is echolocation?', options: ['Seeing objects using reflected light', 'Navigating by sending sound clicks and listening for the echo', 'Feeling vibrations through water currents', 'Using Earth\'s magnetic field to navigate'], answer: 1 },
         { question: 'How fast does sound travel in water compared to air?', options: ['About the same speed', 'About 2 times faster in water', 'About 4.3 times faster in water', 'About 10 times faster in water'], answer: 2 },
@@ -2763,6 +2816,10 @@ His mother smiled. "You didn't build it from nothing, Dipankar. You built it fro
       ],
       nextLessons: [
         { slug: 'postman-hills', reason: 'Route optimisation through Meghalaya — algorithms and sorting, the same logic behind search' },
+      ],
+      relatedStories: [
+        { slug: 'postman-hills', reason: 'Programming + Database — you\'ll code search and sort algorithms in Python, applying the same data organisation principles to route optimisation' },
+        { slug: 'map-makers-granddaughter', reason: 'Database — you\'ll build a geographic data store and code coordinate-based queries, extending web development to spatial applications' },
       ],
       quiz: [
         { question: 'What are the three languages every website uses?', options: ['Python, Java, C++', 'HTML, CSS, JavaScript', 'SQL, PHP, Ruby', 'React, Angular, Vue'], answer: 1 },
@@ -2962,6 +3019,10 @@ print(is_plant(pixel_sick))     # False`,
       nextLessons: [
         { slug: 'girl-who-spoke-to-elephants', reason: 'Another story where AI meets wildlife — classifying elephant rumbles from sensor data' },
         { slug: 'boy-who-built-a-library', reason: 'Web development and databases — building tech for communities' },
+      ],
+      relatedStories: [
+        { slug: 'boy-counted-butterflies', reason: 'AI — you\'ll train an insect detection model from aerial images, extending your drone computer vision pipeline to population surveys' },
+        { slug: 'kaziranga-grass', reason: 'AI — you\'ll apply your vegetation detection algorithm to grassland health monitoring, classifying plant species from multispectral drone imagery' },
       ],
       quiz: [
         { question: 'How does a quadcopter drone steer?', options: ['It tilts its wings', 'It changes the speed of individual rotors', 'It uses a rudder', 'It shifts its weight'], answer: 1 },
@@ -3181,6 +3242,10 @@ plt.show()  # Muga is strong AND golden AND biodegradable`,
         { slug: 'the-magic-japi-hat', reason: 'Another traditional craft from Northeast India — the japi hat uses geometry to create strength from woven bamboo, just as silk uses molecular structure' },
         { slug: 'honey-hunters-lesson', reason: 'Bees and silkworms both produce remarkable materials (honey and silk) through biological processes that humans cannot fully replicate' },
         { slug: 'tejimola-the-girl-who-became-a-plant', reason: 'Explores plant biology in depth — including the som tree that feeds the muga silkworm' },
+      ],
+      relatedStories: [
+        { slug: 'eri-silk', reason: 'Programming — you\'ll compare silk protein structures, plotting tensile strength and elasticity for muga vs eri fibre types' },
+        { slug: 'cloud-weaver-of-tawang', reason: 'Programming — you\'ll compare weaving traditions, modelling how different fibre properties affect loom tension and fabric drape' },
       ],
       quiz: [
         { question: 'What type of material is silk?', options: ['A plant fibre like cotton', 'A protein fibre produced by caterpillars', 'A synthetic material', 'A mineral fibre'], answer: 1 },
@@ -3414,6 +3479,10 @@ plt.show()
         { slug: 'golden-deer-of-kamakhya', reason: 'Explores animal genetics and inheritance patterns — the next step after plant genetics' },
         { slug: 'muga-silk-golden', reason: 'Connects plant biology to the som tree that feeds muga silkworms — biology meets materials science' },
       ],
+      relatedStories: [
+        { slug: 'seed-travel', reason: 'Programming — you\'ll simulate vegetative propagation rates vs seed dispersal distances in Python, comparing two plant reproduction strategies' },
+        { slug: 'bamboo-grows-fast', reason: 'Programming — you\'ll model meristematic growth dynamics in Python, comparing regeneration from cuttings to growth from seed' },
+      ],
       quiz: [
         { question: 'What is the main advantage of sexual reproduction (seeds) over vegetative propagation (cloning)?', options: ['It is faster', 'It produces genetic diversity', 'The offspring are stronger', 'It requires less energy'], answer: 1 },
         { question: 'Which base always pairs with adenine (A) in DNA?', options: ['Cytosine (C)', 'Guanine (G)', 'Thymine (T)', 'Uracil (U)'], answer: 2 },
@@ -3618,6 +3687,13 @@ The spring still flows. If you climb Nilachal Hill past the Kamakhya temple and 
         { question: 'Why do movies appear as smooth motion?', options: ['Cameras record continuous movement', 'Persistence of vision — your retina holds each image for about 1/25th of a second', 'The screen refreshes faster than light', 'Your brain ignores the gaps between frames'], answer: 1 },
         { question: 'What is the visible spectrum?', options: ['All electromagnetic radiation', 'The narrow band of wavelengths (380-700 nm) that human eyes can detect', 'Light that is visible only in daylight', 'X-rays and ultraviolet combined'], answer: 1 },
       ],
+      nextLessons: [
+        { slug: 'kingfisher-blue', reason: 'Programming — you\'ll code a light wavelength simulation in Python, modelling how nanostructures create iridescent colour without pigment' },
+        { slug: 'rainbow-fish', reason: 'Programming — you\'ll extend your refraction code to simulate thin-film interference in fish scales using numpy arrays' },
+      ],
+      relatedStories: [
+        { slug: 'orange-sunsets-assam', reason: 'Programming — you\'ll build a Rayleigh scattering simulator in Python, plotting how sunlight splits across wavelengths at different atmospheric depths' },
+      ],
     },
   },
   {
@@ -3801,6 +3877,10 @@ print(f"Or about      {water_mass_kg / 2500:.0f} Olympic pools")
         { slug: 'fishermans-daughter-storm', reason: 'Cyclones are powered by the same condensation process — cloud formation on a massive, spinning scale' },
         { slug: 'monsoon-home', reason: 'The monsoon that drenches Meghalaya starts with clouds exactly like the ones you just learned about' },
         { slug: 'how-majuli-island-was-born', reason: 'All that rain from Mawsynram’s clouds feeds the Brahmaputra — the river that created and is eroding Majuli' },
+      ],
+      relatedStories: [
+        { slug: 'cloud-namer', reason: 'AI — you\'ll train a cloud type classifier from weather station images, identifying cumulus, stratus, and cirrus from shape and altitude features' },
+        { slug: 'cloud-refused-rain', reason: 'Programming — you\'ll compare cloud formation conditions, plotting when clouds produce rain vs when they don\'t based on humidity and nuclei density' },
       ],
       quiz: [
         { question: 'What must be present for a cloud to form?', options: ['Cold wind and high altitude only', 'Water vapour cooling to the dew point and condensation nuclei (tiny particles)', 'Rain falling from a higher cloud', 'Direct sunlight hitting the ocean'], answer: 1 },
@@ -3994,6 +4074,10 @@ plt.show()  # Can you fit a trendline and predict when area = 0?`,
         { slug: 'fishermans-storm-lesson', reason: 'Cyclones and monsoons drive the extreme floods that erode Majuli — learn the atmospheric physics behind them' },
         { slug: 'girl-grew-forest', reason: 'Jadav Payeng grew a forest near Majuli — explore how trees stabilize ecosystems and fight erosion' },
       ],
+      relatedStories: [
+        { slug: 'river-braid', reason: 'Programming — you\'ll compare braided vs single-channel river dynamics, plotting sediment erosion rates that create and destroy islands' },
+        { slug: 'siang-river', reason: 'Programming — you\'ll compare gentle floodplain vs steep gorge river physics, calculating how gradient affects sediment transport' },
+      ],
       quiz: [
         { question: 'Where does a river deposit sediment?', options: ['Where it flows the fastest', 'Where it slows down', 'Only at the ocean', 'Only on steep slopes'], answer: 1 },
         { question: 'How did Majuli island form?', options: ['Volcanic eruption created it', 'The Brahmaputra shifted its channel, leaving a body of river-deposited sediment surrounded by water', 'Humans built it from sandbags', 'An earthquake pushed land above water'], answer: 1 },
@@ -4180,6 +4264,10 @@ plt.show()  # What pattern do you see?`,
         { slug: 'singing-bamboo', reason: 'The same bamboo physics but in nature — how wind creates sound in bamboo groves through vortex shedding' },
         { slug: 'woodpeckers-drum', reason: 'Another story about sound and vibration — the woodpecker creates drumming rhythms through controlled impacts' },
         { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants communicate using infrasound (below 20 Hz) — the same wave physics, applied to frequencies too low for humans to hear' },
+      ],
+      relatedStories: [
+        { slug: 'dhol-drum', reason: 'Programming — you\'ll compare air-column standing waves to membrane vibration modes, plotting harmonic series for flutes vs drums' },
+        { slug: 'mountain-echoes', reason: 'Programming — you\'ll model how flute sound propagates through mountain valleys, calculating echo delay and amplitude decay' },
       ],
       quiz: [
         { question: 'How does a tube produce a musical note?', options: ['By vibrating its walls', 'Air bouncing back and forth inside creates a standing wave', 'Wind blowing over the top creates a vacuum', 'The material of the tube determines the note'], answer: 1 },
@@ -4386,6 +4474,10 @@ print(f"Capacity lost: {carrying_capacity - new_capacity}")`,
         { slug: 'bridge-that-grew', reason: 'Another NE India story about how humans interact with living ecosystems — but this time building with nature instead of against it' },
         { slug: 'girl-grew-forest', reason: 'If Loktak shows what happens when habitat is destroyed, this story shows what happens when someone grows it back' },
       ],
+      relatedStories: [
+        { slug: 'secret-garden-loktak', reason: 'Programming + Database — you\'ll build a wetland biodiversity database and model species interaction networks in the Loktak ecosystem' },
+        { slug: 'girl-grew-forest', reason: 'Programming — you\'ll simulate habitat restoration timelines in Python, modelling how deer population recovers as wetland habitat expands' },
+      ],
       quiz: [
         { question: 'What is a phumdi?', options: ['A type of deer found only in Manipur', 'A floating island of tangled vegetation and trapped gas', 'A fishing boat used on Loktak Lake', 'A dam built to control water levels'], answer: 1 },
         { question: 'How many Sangai deer are estimated to remain?', options: ['About 50', 'About 260', 'About 1,000', 'About 5,000'], answer: 1 },
@@ -4588,6 +4680,10 @@ print(f"If the single root breaks: 0 N. Total failure.")`,
         { slug: 'banyan-tree-of-japi', reason: 'Another story about extraordinary tree biology — how the banyan grows, photosynthesises, and supports entire ecosystems' },
         { slug: 'monsoon-home', reason: 'Architecture designed for Meghalaya\'s extreme rainfall — the same climate that shaped root bridges' },
       ],
+      relatedStories: [
+        { slug: 'bamboo-taught-wind', reason: 'Programming — you\'ll model material stress-strain curves in Python, comparing root fibre flexibility to bamboo under wind loading' },
+        { slug: 'monsoon-home', reason: 'Programming — you\'ll simulate rainfall runoff and structural drainage in Python, modelling how bridges and buildings handle monsoon water loads' },
+      ],
       quiz: [
         { question: 'What biological process allows separate roots to fuse into one structure?', options: ['Photosynthesis', 'Inosculation', 'Germination', 'Transpiration'], answer: 1 },
         { question: 'Why are root bridges built as suspension structures (roots hanging in a curve)?', options: ['Roots are strongest in compression', 'The curve looks more beautiful', 'Roots evolved to resist tension (pulling forces)', 'It uses less root material'], answer: 2 },
@@ -4768,6 +4864,10 @@ print(f"Safety margin: {freeboard_ratio*100:.1f}%")`,
         { slug: 'river-dolphins-secret', reason: 'The Brahmaputra’s river dolphins navigate the same shifting channels — using echolocation instead of sight' },
         { slug: 'fishermans-daughter-storm', reason: 'What happens when the wind and waves get extreme — cyclone physics and survival on the water' },
         { slug: 'kite-festival-of-dimapur', reason: 'The same forces (lift and drag) that move a boat through water also fly a kite through air' },
+      ],
+      relatedStories: [
+        { slug: 'ferrymans-riddle', reason: 'Programming — you\'ll compare boat crossing strategies in different current conditions, optimising angle and speed calculations' },
+        { slug: 'moonlit-boat-race', reason: 'Programming — you\'ll compare calm-water racing to current-crossing physics, modelling how conditions change optimal strategy' },
       ],
       quiz: [
         { question: 'Why does a hollow steel ship float while a solid steel bolt sinks?', options: ['Steel becomes lighter when shaped into a ship', 'The hollow hull traps air, reducing the average density below water’s', 'Ships are coated with a special floating material', 'The ocean pushes ships up with waves'], answer: 1 },
@@ -4952,6 +5052,10 @@ print(f"Maximum dispersal: \${distances.max():.1f} km")
         { slug: 'banyan-tree-of-japi', reason: 'Another story about trees and the ecosystems they support — the banyan’s aerial roots and forest architecture' },
         { slug: 'girl-grew-forest', reason: 'One person planted an entire forest on a Brahmaputra sandbar — the reverse of the ecological cascade you learned about here' },
         { slug: 'the-woodpeckers-drum', reason: 'Another bird with extraordinary skull engineering — how woodpeckers survive 1,200 g impacts without brain damage' },
+      ],
+      relatedStories: [
+        { slug: 'flying-squirrel', reason: 'Programming — you\'ll compare powered flight to gliding energetics, calculating cost per kilometre for hornbill flapping vs squirrel gliding' },
+        { slug: 'cuckoo-calls-dawn', reason: 'Programming — you\'ll compare bird display strategies, modelling visual (casque) vs acoustic (dawn chorus) signalling energy costs' },
       ],
       quiz: [
         { question: 'What is the hornbill’s casque primarily made of?', options: ['Solid bone', 'Keratin (same protein as fingernails)', 'Calcium carbonate (like seashells)', 'Cartilage (like your nose)'], answer: 1 },
@@ -5142,6 +5246,10 @@ plt.show()  # At what temperature do fish start struggling?`,
         { slug: 'river-that-ran-away', reason: 'River erosion and the Brahmaputra’s shifting course — the geology that shapes fish habitats' },
         { slug: 'golden-hilsa', reason: 'The hilsa fish’s epic migration and the science of sustainable fishing in the Brahmaputra' },
         { slug: 'cloud-refused-rain', reason: 'Weather and rainfall patterns — the monsoon that controls river levels and dissolved oxygen' },
+      ],
+      relatedStories: [
+        { slug: 'golden-hilsa', reason: 'Database — you\'ll query fish migration databases, comparing jump biomechanics data across species and river conditions' },
+        { slug: 'mishing-fish', reason: 'Programming — you\'ll compare fish behaviour across NE Indian communities, modelling how traditional knowledge maps to biomechanics data' },
       ],
       quiz: [
         { question: 'How do fish breathe?', options: ['They surface to gulp air', 'Through dissolved oxygen in water, extracted by their gills', 'Through their skin only', 'They hold their breath between surfaces'], answer: 1 },
@@ -5347,6 +5455,10 @@ plt.show()  # Who wins at 300 seconds?`,
         { slug: 'red-panda-mask', reason: 'Evolution and adaptation — why animals develop the traits (speed, endurance, camouflage) they do' },
         { slug: 'woodpecker-headache', reason: 'Biomechanics of impact — uses F = ma and deceleration, the same physics from this lesson' },
       ],
+      relatedStories: [
+        { slug: 'turtle-slow', reason: 'Programming — you\'ll compare reptile metabolic scaling, plotting speed-lifespan trade-offs across chelonian species' },
+        { slug: 'elephant-mud-bath', reason: 'Programming — you\'ll compare thermoregulation across body sizes, plotting surface-area-to-volume ratios for tortoise shell vs elephant skin cooling' },
+      ],
       quiz: [
         { question: 'What is the difference between speed and velocity?', options: ['There is no difference', 'Speed has direction, velocity does not', 'Speed is distance over time (no direction); velocity is displacement over time (with direction)', 'Velocity is always faster than speed'], answer: 2 },
         { question: 'What is acceleration?', options: ['How fast something is moving', 'How quickly velocity changes over time', 'The total distance covered', 'The force applied to an object'], answer: 1 },
@@ -5550,6 +5662,10 @@ print(f"The population evolved toward the background!")`,
       nextLessons: [
         { slug: 'snow-leopard', reason: 'Another high-altitude Himalayan animal with remarkable camouflage — spots that match rocky terrain' },
         { slug: 'takin-face', reason: 'The takin\'s bizarre body plan as a case study in how morphology evolves from accumulated adaptations' },
+      ],
+      relatedStories: [
+        { slug: 'snow-leopards-promise', reason: 'Programming — you\'ll model altitude-adaptation trade-offs in Python, comparing thermoregulation strategies across Himalayan species' },
+        { slug: 'clouded-leopard', reason: 'AI — you\'ll extend your camera-trap identification model to classify multiple cat species from coat pattern features' },
       ],
       quiz: [
         { question: 'What are the three main camouflage strategies?', options: ['Running, hiding, and fighting', 'Crypsis (matching background), disruptive coloration (breaking outline), and mimicry (copying a dangerous species)', 'Color change, shape change, and size change', 'Day camouflage, night camouflage, and water camouflage'], answer: 1 },
@@ -5760,6 +5876,10 @@ y_est = (d_A**2 - d_C**2 + 25 + 75.0) / (2 * 8.66)
         { slug: 'snow-leopard', reason: 'Another endangered cat tracked with GPS and camera traps in high-altitude terrain' },
         { slug: 'red-panda-mask', reason: 'Camouflage and conservation of another elusive Himalayan species using modern tracking technology' },
       ],
+      relatedStories: [
+        { slug: 'elephant-corridor', reason: 'Programming + Database — you\'ll build a habitat connectivity database and model wildlife corridor effectiveness using graph algorithms' },
+        { slug: 'red-panda-mask', reason: 'AI — you\'ll train a species identification classifier from GPS telemetry movement patterns, distinguishing predator vs prey behaviour' },
+      ],
       quiz: [
         { question: 'How does GPS determine location?', options: ['By connecting to cell phone towers', 'By trilateration — measuring distances from three satellites to find where three spheres intersect', 'By using a compass and map', 'By bouncing signals off the ground'], answer: 1 },
         { question: 'How do camera traps detect animals?', options: ['They use motion-sensing video', 'Passive infrared sensors detect the heat signature of moving animals', 'Sound microphones trigger when an animal calls', 'They take photos at random intervals'], answer: 1 },
@@ -5923,6 +6043,10 @@ plt.show()  # What shape is this relationship?`,
       ],
       nextLessons: [
         { slug: 'frogs-sing-rain', reason: 'Animal communication through sound — vocal sacs as resonating chambers, like peacock infrasound' },
+      ],
+      relatedStories: [
+        { slug: 'orange-sunsets-assam', reason: 'Programming — you\'ll compare structural colour to atmospheric scattering, plotting both interference and Rayleigh spectra on the same matplotlib graph' },
+        { slug: 'cuckoo-calls-dawn', reason: 'AI — you\'ll extend your visual signal analysis to audio signals, building classifiers for both plumage display and vocal communication patterns' },
       ],
       quiz: [
         { question: 'Why did Darwin say the peacock\'s tail "made him sick"?', options: ['He thought it was ugly', 'It contradicted natural selection — a costly trait that hinders survival', 'He was allergic to feathers', 'It was too colorful to study'], answer: 1 },
@@ -6117,6 +6241,10 @@ print("Level 1 builds the full simulation with mud bathing.")`,
         { slug: 'girl-who-spoke-to-elephants', reason: 'Uses AI and data science to track elephant herds in the wild' },
         { slug: 'elephant-corridor', reason: 'Explores elephant migration corridors and conservation challenges' },
       ],
+      relatedStories: [
+        { slug: 'tortoise-and-hare', reason: 'Programming — you\'ll model surface-area-to-volume scaling in Python, comparing thermoregulation strategies across body sizes' },
+        { slug: 'takin-face', reason: 'Programming — you\'ll simulate heat loss rates for different body plans in Python, comparing mud-coating to fur insulation strategies' },
+      ],
       quiz: [
         { question: 'Why do elephants take mud baths?', options: ['For fun and play', 'Mud serves as a cooling system, sunscreen, and parasite shield', 'To clean their skin', 'To mark their territory'], answer: 1 },
         { question: 'What are the four ways heat moves?', options: ['Burning, melting, freezing, and boiling', 'Conduction, convection, radiation, and evaporation', 'Fast, slow, medium, and stopped', 'Up, down, sideways, and through'], answer: 1 },
@@ -6305,6 +6433,10 @@ plt.show()  # Watch the average climb!`,
         { slug: 'seed-keeper-of-nagaland', reason: 'Applies the same selection principles to crops \u2014 seed keepers are plant breeders using the same logic' },
         { slug: 'dancing-deer-loktak', reason: 'Explores another culturally important NE Indian animal and its conservation challenges' },
         { slug: 'red-panda-mask', reason: 'Connects natural selection and evolution to camouflage \u2014 the wild version of what breeders do artificially' },
+      ],
+      relatedStories: [
+        { slug: 'elephant-corridor', reason: 'Database — you\'ll compare domesticated vs wild animal habitat databases, querying how human-wildlife coexistence strategies differ' },
+        { slug: 'takin-face', reason: 'Programming — you\'ll compare highland bovine adaptations, plotting body mass vs altitude tolerance for mithun and takin' },
       ],
       quiz: [
         { question: 'What is the wild ancestor of the mithun?', options: ['Yak', 'Gaur (Bos gaurus)', 'Water buffalo', 'Bison'], answer: 1 },
@@ -6504,6 +6636,10 @@ plt.show()  # How many minutes before sunrise does it call?`,
       nextLessons: [
         { slug: 'girl-who-spoke-to-elephants', reason: 'Animal communication through sound — elephants use infrasound, cuckoos use precisely timed calls' },
         { slug: 'peacocks-dance', reason: 'Bird signaling and display behavior — another layer of information encoded in avian communication' },
+      ],
+      relatedStories: [
+        { slug: 'frogs-sing-rain', reason: 'AI — you\'ll train an audio classifier to distinguish dawn chorus species by frequency signature, extending your circadian timing analysis' },
+        { slug: 'girl-who-spoke-to-elephants', reason: 'AI — you\'ll apply your bird call FFT pipeline to elephant infrasound, classifying animal communications across the frequency spectrum' },
       ],
       quiz: [
         { question: 'What is a circadian rhythm?', options: ['A type of music', 'A roughly 24-hour internal biological cycle', 'A seasonal migration pattern', 'A heartbeat rhythm'], answer: 1 },
@@ -6723,6 +6859,10 @@ plt.show()  # Which colors are LEFT for your eye?`,
         { slug: 'kingfisher-blue', reason: 'Structural color in feathers uses similar physics to orchid petal nanostructures' },
         { slug: 'honey-hunters-cliff', reason: 'The bee’s perspective — how bee colonies navigate to flowers using the very UV patterns you learned about here' },
       ],
+      relatedStories: [
+        { slug: 'night-jasmine', reason: 'Programming — you\'ll compare pollinator attraction strategies, modelling how visual (orchid pigment) vs chemical (jasmine scent) signals reach different pollinators' },
+        { slug: 'wild-orchids-trees', reason: 'Programming — you\'ll compare orchid ecology across habitats, plotting species diversity vs canopy height and humidity gradients' },
+      ],
       quiz: [
         { question: 'What determines the color of a flower petal?', options: ['The temperature of the air around the flower', 'Which wavelengths of light the pigment absorbs versus reflects', 'The color of the soil the plant grows in', 'How much water the plant receives'], answer: 1 },
         { question: 'Why can bees see UV nectar guides on flowers but humans cannot?', options: ['Bees have larger eyes than humans', 'Bees have a UV-sensitive receptor that humans lack', 'Nectar guides only appear when bees are nearby', 'Humans see the guides but ignore them'], answer: 1 },
@@ -6923,6 +7063,10 @@ plt.show()  # Why is carnivory worth the cost?`,
         { slug: 'tejimola-lives-again', reason: 'Explores plant biology from a different angle — vegetative propagation and how plant cells rebuild entire organisms' },
         { slug: 'wild-orchids-clouds', reason: 'Another Meghalaya story about plants with remarkable adaptations — orchids that grow on trees without soil' },
       ],
+      relatedStories: [
+        { slug: 'night-jasmine', reason: 'Programming — you\'ll compare enzyme kinetics in Python, simulating digestive enzyme rates in pitcher fluid vs scent enzyme production in flowers' },
+        { slug: 'witch-doctor', reason: 'Database — you\'ll build a medicinal compound database and query molecular properties to compare pitcher plant chemistry to traditional remedies' },
+      ],
       quiz: [
         { question: 'Why do pitcher plants eat insects?', options: ['For energy from photosynthesis', 'For nitrogen — a mineral nutrient scarce in their waterlogged soils', 'To prevent insects from eating their leaves', 'For water stored inside the insects'], answer: 1 },
         { question: 'What are the four zones of a pitcher trap?', options: ['Root, stem, leaf, flower', 'Nectar-baited lid, hydroplaning rim, wax-crystal wall, acidic enzyme pool', 'Outer wall, inner wall, water pool, lid', 'Colour zone, scent zone, grip zone, digestion zone'], answer: 1 },
@@ -7105,6 +7249,10 @@ plt.show()  # On which day is growth fastest?`,
         { slug: 'old-banyan-trees-stories', reason: 'A tree that grows for centuries vs bamboo that grows in months — two opposite strategies for survival' },
         { slug: 'kaziranga-grass', reason: 'Another fast-growing plant using C4 photosynthesis — elephant grass in Kaziranga' },
         { slug: 'bamboo-taught-wind', reason: 'The physics of bamboo — resonance, flexibility, and why bamboo bends without breaking' },
+      ],
+      relatedStories: [
+        { slug: 'old-banyan-trees-stories', reason: 'Programming — you\'ll compare fast vs slow growth strategies, plotting carbon investment curves for bamboo\'s 48-year cycle vs banyan\'s 400-year lifespan' },
+        { slug: 'sal-tree', reason: 'Programming — you\'ll compare timber hardwood growth to bamboo, modelling how wood density changes with growth rate' },
       ],
       quiz: [
         { question: 'Why can bamboo grow so much faster than most trees?', options: ['It has deeper roots', 'It has meristems at every node, all growing simultaneously', 'It absorbs more sunlight', 'It has no leaves to slow it down'], answer: 1 },
@@ -7301,6 +7449,10 @@ plt.show()  # What pattern do you see?`,
         { slug: 'girl-who-grew-forest', reason: 'Explores forest ecology, succession, and carbon storage \u2014 the bigger picture of why forests like sal matter' },
         { slug: 'bamboo-taught-wind', reason: 'Compares bamboo\'s flexibility with sal\'s rigidity \u2014 two completely different material strategies for the same forest' },
       ],
+      relatedStories: [
+        { slug: 'bamboo-grows-fast', reason: 'Programming — you\'ll compare hardwood vs grass growth kinetics, plotting how cell wall lignification rates differ between timber trees and bamboo' },
+        { slug: 'bridge-that-grew', reason: 'Programming — you\'ll compare sal timber properties to living root fibre, modelling tensile strength for construction applications' },
+      ],
       quiz: [
         { question: 'Which part of a tree trunk is strongest and most rot-resistant?', options: ['Bark', 'Sapwood', 'Heartwood', 'Pith (center)'], answer: 2 },
         { question: 'What two substances make wood strong, like reinforced concrete?', options: ['Water and minerals', 'Cellulose (tension) and lignin (compression)', 'Chlorophyll and starch', 'Resin and bark'], answer: 1 },
@@ -7495,6 +7647,10 @@ plt.show()  # What happens to the ratio as size shrinks?`,
         { slug: 'boy-counted-butterflies', reason: 'Uses biodiversity surveys and species counting — the same field skills used to discover new tiny frogs' },
         { slug: 'pitcher-plant', reason: 'Another NE India rainforest organism that exploits a specialized niche — carnivorous plants vs miniature frogs' },
       ],
+      relatedStories: [
+        { slug: 'boy-counted-butterflies', reason: 'Programming — you\'ll compare population survey methods for micro vs macro fauna, adapting mark-recapture code for cryptic miniature species' },
+        { slug: 'pitcher-plant', reason: 'Programming — you\'ll compare leaf-litter microhabitat ecology, modelling predator-prey dynamics between frogs and carnivorous plants' },
+      ],
       quiz: [
         { question: 'What happens to surface tension at very small scales?', options: ['It becomes weaker', 'It becomes the dominant force — raindrops become cannonballs and water films become traps', 'It disappears completely', 'It works the same as at large scales'], answer: 1 },
         { question: 'What does the cube-square law explain?', options: ['Why cubes are stronger than spheres', 'Why small animals are relatively strong and large animals are relatively weak — weight grows faster than strength', 'Why squares have more area than circles', 'Why temperature increases with altitude'], answer: 1 },
@@ -7637,6 +7793,13 @@ If you ever visit Cherrapunji and it's raining — which it almost certainly wil
         'Tulsi (holy basil) contains eugenol, a natural antiseptic. Traditional medicine used it for centuries — modern science has confirmed its antimicrobial properties.',
       ],
       offlineActivity: 'Take a cutting from a plant (a small piece of stem with a few leaves). Place it in a glass of water on a windowsill. Check every day — within a week, you should see tiny roots forming. You\'re witnessing vegetative propagation — the same process that makes Tejimola\'s story biologically plausible.',
+      nextLessons: [
+        { slug: 'orange-sunsets-assam', reason: 'Programming — you\'ll code a light scattering simulation in Python, modelling how atmospheric particles split white light into sunset colours' },
+      ],
+      relatedStories: [
+        { slug: 'kingfisher-blue', reason: 'Programming — you\'ll simulate structural colour in Python, comparing pigment-based mixing to nanostructure-based colour generation' },
+        { slug: 'holi-tea-gardens', reason: 'Programming — you\'ll model pigment absorption spectra in Python, plotting how different chemical compounds produce different colours' },
+      ],
     },
   },
   {
@@ -7823,6 +7986,10 @@ plt.show()  # Try making a twill pattern!`,
         { slug: 'muga-silk-golden', reason: 'Muga silk weaving uses these same principles with a unique natural fiber \u2014 biology meets textile engineering' },
         { slug: 'the-magic-japi-hat', reason: 'Explores bamboo weaving geometry \u2014 a different weaving tradition from the same region with mathematical patterns' },
         { slug: 'the-girl-who-painted-rain', reason: 'Connects art and science in Meghalaya \u2014 another story about creating beauty from local materials' },
+      ],
+      relatedStories: [
+        { slug: 'basket-weavers-song', reason: 'Programming — you\'ll compare weave pattern geometry, modelling how altitude humidity affects fibre tension and optimal weave spacing' },
+        { slug: 'eri-silk', reason: 'Programming — you\'ll compare natural fibre properties across NE Indian textiles, plotting tensile strength vs moisture absorption for silk, cotton, and wool' },
       ],
       quiz: [
         { question: 'What are the two thread systems in every woven fabric?', options: ['Top and bottom', 'Warp (vertical) and weft (horizontal)', 'Strong and weak', 'Cotton and silk'], answer: 1 },
@@ -8015,6 +8182,10 @@ for sides in range(3, 13):
       nextLessons: [
         { slug: 'honey-hunters-lesson', reason: 'Hexagons again — but this time built by bees, with a completely different reason (maximum storage, minimum wax)' },
       ],
+      relatedStories: [
+        { slug: 'basket-weavers-song', reason: 'Programming — you\'ll compare weave geometry calculations, modelling how 2D flat weaves and 3D conical structures distribute forces differently' },
+        { slug: 'paper-umbrella', reason: 'Programming — you\'ll simulate water runoff dynamics on conical surfaces in Python, modelling how hat angle and material affect rain protection' },
+      ],
     },
   },
   {
@@ -8206,6 +8377,10 @@ print(f"  {0.5 * 1 * 40000**2:.2e} J — that is 4x more energy!")`,
       nextLessons: [
         { slug: 'orange-sunsets-assam', reason: 'The same atmospheric physics that makes meteors glow also explains why Assam\'s sunsets are orange — Rayleigh scattering' },
         { slug: 'fishermans-daughter-storm', reason: 'Atmospheric forces at a larger scale — the energy in storms compared to the energy in impacts' },
+      ],
+      relatedStories: [
+        { slug: 'stars-ziro-valley', reason: 'Programming — you\'ll code stellar observation simulations in Python, calculating magnitude, distance, and apparent brightness from telescope data' },
+        { slug: 'fishermans-daughter-storm', reason: 'Programming — you\'ll compare atmospheric entry energy to cyclone energy in Python, plotting kinetic energy calculations at different scales' },
       ],
       quiz: [
         { question: 'What makes a meteor glow as it enters the atmosphere?', options: ['Friction with air molecules', 'Compression heating — the meteor compresses air ahead of it to extreme temperatures', 'Chemical reactions with oxygen', 'Reflected sunlight'], answer: 1 },
@@ -8422,6 +8597,10 @@ plt.show()  # What happens at high wind speeds?`,
         { slug: 'flying-squirrel', reason: 'How a flying squirrel uses a skin membrane as an airfoil — nature’s kite, with angle of attack and glide ratio' },
         { slug: 'fishermans-daughter-storm', reason: 'Wind at its most powerful — cyclone physics, the Beaufort scale pushed to its limits' },
       ],
+      relatedStories: [
+        { slug: 'flying-squirrel', reason: 'Programming — you\'ll compare human-designed and animal-evolved gliding, plotting lift-to-drag ratios for kite shapes vs membrane wing profiles' },
+        { slug: 'kite-eagle-dimapur', reason: 'Programming — you\'ll compare kite aerodynamics to raptor soaring, modelling how wing loading affects turning radius and stability' },
+      ],
       quiz: [
         { question: 'What makes a kite fly?', options: ['Hot air inside the kite lifts it up', 'The kite is tilted into the wind (angle of attack), deflecting air downward and creating lift', 'The string pulls the kite up', 'Wind pushes the kite from behind'], answer: 1 },
         { question: 'What happens if the angle of attack is too steep?', options: ['The kite flies higher', 'The kite stalls — it loses lift', 'The kite spins in circles', 'Nothing changes'], answer: 1 },
@@ -8614,6 +8793,10 @@ plt.show()`,
         { slug: 'golden-hilsa', reason: 'Another food story — fish migration and why hilsa tastes different in different seasons' },
         { slug: 'honey-hunters-lesson', reason: 'Honey is a product of bee chemistry — the same biology that makes pitha batter rise' },
       ],
+      relatedStories: [
+        { slug: 'little-chef', reason: 'Programming — you\'ll model Maillard reaction kinetics in Python, simulating how temperature and time affect browning and flavour compound production' },
+        { slug: 'golden-hilsa', reason: 'Programming — you\'ll compare fermentation chemistry to fish lipid chemistry in Python, modelling how biological processes transform food flavour' },
+      ],
       quiz: [
         { question: 'What is the Maillard reaction?', options: ['Sugar melting', 'A reaction between amino acids and sugars above 140C producing browning and flavour', 'Fermentation by yeast', 'Starch absorbing water'], answer: 1 },
         { question: 'How is Maillard different from caramelization?', options: ['They are the same', 'Maillard needs sugars AND amino acids; caramelization uses only sugars', 'Caramelization is at lower temperature', 'Maillard produces no browning'], answer: 1 },
@@ -8767,6 +8950,10 @@ plt.show()  # Where does Madan Kamdev fall on this curve?`,
         { slug: 'seven-sisters', reason: 'Explore the geography of Northeast India — the land where Madan Kamdev was built' },
         { slug: 'girl-grew-forest', reason: 'How forests reclaim land — the process that hid Madan Kamdev for centuries' },
         { slug: 'boy-counted-butterflies', reason: 'Systematic data collection — the same careful recording archaeologists use' },
+      ],
+      relatedStories: [
+        { slug: 'seven-sisters', reason: 'Database — you\'ll build an archaeological site database for NE India, querying construction dates, materials, and geographic distribution' },
+        { slug: 'map-makers-granddaughter', reason: 'Programming — you\'ll code terrain analysis algorithms to identify likely temple locations from elevation and river proximity data' },
       ],
       quiz: [
         { question: 'What does the law of superposition tell us?', options: ['Bigger objects are older', 'Deeper layers are generally older', 'All rocks are the same age', 'Fossils are always at the surface'], answer: 1 },
@@ -8943,6 +9130,10 @@ plt.show()  # Which state is most densely populated?`,
         { slug: 'snow-leopard-mystery', reason: 'Uses GPS tracking and maps to study wildlife \u2014 applies the map-reading skills you learned here' },
         { slug: 'map-maker-and-compass', reason: 'Goes deeper into cartography, projections, and how maps are made from raw data' },
         { slug: 'turtle-who-carried-mountain', reason: 'Explores the plate tectonics that created NE India\'s mountains \u2014 the geological story behind the geography' },
+      ],
+      relatedStories: [
+        { slug: 'map-makers-granddaughter', reason: 'Database — you\'ll query geographic databases for each NE Indian state, comparing area, population, elevation, and biodiversity metrics' },
+        { slug: 'guwahati-name', reason: 'Programming — you\'ll code place-name etymology analysis, mapping how languages and geography shaped NE Indian city names' },
       ],
       quiz: [
         { question: 'What is the main difference between a political map and a physical map?', options: ['Political maps are in color, physical maps are black and white', 'Political maps show borders and capitals, physical maps show terrain and elevation', 'Physical maps are more accurate', 'There is no real difference'], answer: 1 },
@@ -9136,6 +9327,10 @@ plt.show()  # What happens at the quartz inversion line?`,
         { slug: 'golden-muga-silk', reason: 'Another material science story \u2014 how silk proteins create golden fibres through molecular self-assembly' },
         { slug: 'grandmother-remembered', reason: 'A different kind of preservation \u2014 how the brain stores memories with neural "firing" of its own' },
       ],
+      relatedStories: [
+        { slug: 'festival-lights', reason: 'Robotics — you\'ll wire an Arduino temperature sensor to monitor kiln firing, comparing heat transfer in ceramics to heat dissipation in LED circuits' },
+        { slug: 'grandmother-remembered', reason: 'Programming — you\'ll model material transformation in Python, comparing clay sintering temperatures to neural memory consolidation processes' },
+      ],
       quiz: [
         { question: 'Why can wet clay be shaped?', options: ['Because it is a liquid', 'Because water between flat particles lets them slide over each other', 'Because clay is made of rubber-like molecules', 'Because the potter\'s wheel spins it into shape'], answer: 1 },
         { question: 'What is sintering?', options: ['Melting clay into liquid', 'Mixing clay with water', 'Heat causing particles to fuse at contact points without fully melting', 'Adding glaze to a pot'], answer: 2 },
@@ -9304,6 +9499,13 @@ In Namdapha, the people of Assam and Arunachal Pradesh tell this story when the 
         'Assamese macaques have been observed using tools, washing food, and even applying crushed insects to wounds — suggesting a level of cultural learning that passes knowledge between generations.',
       ],
       offlineActivity: 'Build a simple model of a forest canopy food web. On a large sheet of paper, draw a tree with four layers: emergent (top), canopy, understory, and forest floor. In each layer, draw or write the names of at least three animals that live there. Then draw arrows showing who eats whom. Notice how many connections lead to the canopy layer — this shows why protecting the canopy protects the entire forest ecosystem.',
+      nextLessons: [
+        { slug: 'bridge-that-grew', reason: 'Programming — you\'ll simulate structural load distribution in Python, calculating tensile forces and safety factors for bridge designs' },
+      ],
+      relatedStories: [
+        { slug: 'flying-squirrel', reason: 'Programming — you\'ll calculate wing loading and glide angles for different body plans, plotting lift-to-drag curves with matplotlib' },
+        { slug: 'tortoise-and-hare', reason: 'Programming — you\'ll code speed-distance-energy trade-off simulations comparing different animal locomotion strategies' },
+      ],
     },
   },
 
@@ -9469,6 +9671,10 @@ print(f"95% CI: {estimated_population - 1.96*se:.0f} to {estimated_population + 
         { slug: 'kaziranga-grass', reason: 'Another NE India ecosystem — grasslands support megafauna, the opposite end of the biodiversity spectrum' },
         { slug: 'girl-grew-forest', reason: 'Reforestation creates new habitat — and butterfly surveys can measure whether it is working' },
         { slug: 'dancing-deer-of-loktak-lake', reason: 'The endangered Sangai deer of Loktak Lake — population monitoring uses the same census techniques' },
+      ],
+      relatedStories: [
+        { slug: 'tiny-frog', reason: 'Programming — you\'ll adapt your mark-recapture code for cryptic miniature species, comparing detection probability across body sizes' },
+        { slug: 'dancing-deer-of-loktak-lake', reason: 'Database — you\'ll compare population databases across habitats, querying how survey methods differ for wetland vs forest species' },
       ],
       quiz: [
         { question: 'What is the Lincoln-Petersen formula used for?', options: ['Measuring butterfly wingspan', 'Estimating total population size from mark-recapture data', 'Calculating migration distance', 'Identifying butterfly species'], answer: 1 },
@@ -9661,7 +9867,14 @@ print(f"This gap drives monsoon winds from sea to land!")`,
         { slug: 'weather-and-climate', reason: 'Full guide to atmospheric pressure, wind systems, and how weather patterns form and move' },
         { slug: 'waves-and-properties', reason: 'How energy travels through the atmosphere — radiation that heats land and ocean differently' },
       ],
-      nextLessons: [],
+      nextLessons: [
+        { slug: 'bridge-that-grew', reason: 'Programming — you\'ll reuse your structural load calculations to simulate how living root bridges handle monsoon rainfall forces' },
+        { slug: 'fishermans-daughter-storm', reason: 'Programming — you\'ll extend your monsoon pressure model to cyclone-scale simulations, modelling how seasonal patterns become extreme weather events' },
+      ],
+      relatedStories: [
+        { slug: 'boy-who-talked-to-clouds', reason: 'Programming — you\'ll model cloud classification algorithms in Python, identifying the cloud types that drive monsoon precipitation' },
+        { slug: 'how-majuli-island-was-born', reason: 'Programming — you\'ll simulate river flood dynamics in Python, modelling how monsoon runoff erodes and reshapes Majuli island' },
+      ],
       quiz: [
         { question: 'Why does land heat up faster than the ocean under the same sunlight?', options: ['Land is closer to the sun', 'Land has lower specific heat capacity than water', 'The ocean reflects all sunlight', 'Land is darker in colour'], answer: 1 },
         { question: 'What causes the monsoon winds to reverse between summer and winter?', options: ['The Himalayas change shape', 'The ITCZ shifts north in summer and south in winter', 'Ocean currents reverse direction', 'The jet stream disappears entirely'], answer: 1 },
@@ -9819,6 +10032,10 @@ plt.show()  # Which line would Yaruini's storytelling follow?`,
       nextLessons: [
         { slug: 'angulimala-monk', reason: 'Directly explores neuroplasticity \u2014 how the brain rewires itself through changed behaviour' },
         { slug: 'music-dimasa', reason: 'Music and rhythm engage the brain\'s memory circuits deeply \u2014 learn why songs are easier to remember than lists' },
+      ],
+      relatedStories: [
+        { slug: 'music-dimasa', reason: 'Programming — you\'ll model neural oscillation patterns in Python, comparing memory encoding rhythms to musical rhythm mathematics' },
+        { slug: 'cuckoo-calls-dawn', reason: 'AI — you\'ll train a pattern recognition model on temporal sequences, comparing memory recall patterns to circadian timing signals' },
       ],
       quiz: [
         { question: 'What is the hippocampus?', options: ['A type of sea creature', 'A brain structure that converts short-term experiences into long-term memories', 'The part of the brain that controls movement', 'A chemical messenger between neurons'], answer: 1 },
@@ -10008,6 +10225,13 @@ Vala never felt lonely on his hilltop again. He had a whole orchestra growing in
           keyIdea: 'Bamboo is a natural functionally graded composite — hollow, lightweight, and structurally optimized. Its nodes, fiber density gradient, and hollow geometry all contribute to its remarkable acoustic and mechanical properties.',
         },
       ],
+      nextLessons: [
+        { slug: 'bamboo-flute-of-nagaland', reason: 'Programming — you\'ll code a standing wave simulator in Python, calculating resonant frequencies for different tube lengths and diameters' },
+        { slug: 'bamboo-taught-wind', reason: 'Programming — you\'ll simulate vortex shedding and resonance in Python, modelling how wind speed and bamboo diameter determine vibration frequency' },
+      ],
+      relatedStories: [
+        { slug: 'mountain-echoes', reason: 'Robotics — you\'ll build an Arduino ultrasonic sensor that measures echo delay to calculate distance, the same principle behind bat echolocation' },
+      ],
     },
   },
 
@@ -10147,6 +10371,10 @@ plt.show()  # How many times more efficient is an LED than an oil lamp?`,
         { slug: 'firefly-festival-majuli', reason: 'Fireflies are nature\'s LEDs \u2014 bioluminescence achieves near-100% light efficiency, better than any human technology' },
         { slug: 'little-potter', reason: 'The clay diyas in this story are made using material science \u2014 learn the ceramics behind the lamp' },
         { slug: 'orange-sunsets-assam', reason: 'Why the oil lamp\'s orange glow looks like a sunset \u2014 the same physics of light wavelengths and colour temperature' },
+      ],
+      relatedStories: [
+        { slug: 'firefly-festival-of-majuli', reason: 'Robotics — you\'ll compare Arduino LED circuit patterns for festival displays vs firefly bioluminescence timing' },
+        { slug: 'firewalker', reason: 'Programming — you\'ll compare heat and light energy conversion, plotting efficiency curves for oil lamps, LEDs, and Leidenfrost cooling' },
       ],
       quiz: [
         { question: 'How does an LED produce light?', options: ['By heating a filament until it glows', 'By burning a chemical fuel', 'Through electroluminescence \u2014 electrons emit photons at a semiconductor junction', 'By reflecting sunlight'], answer: 2 },
@@ -10341,6 +10569,10 @@ plt.show()  # What happens at 8%?`,
       nextLessons: [
         { slug: 'postman-hills', reason: 'Uses graph theory and optimisation to plan delivery routes through the same mountain terrain this train navigates' },
         { slug: 'fishermans-daughter-storm', reason: 'Explores atmospheric pressure and forces at sea — the same physics of pressure that drives a steam piston' },
+      ],
+      relatedStories: [
+        { slug: 'postman-hills', reason: 'Programming — you\'ll code gradient and friction calculations in Python, optimising routes through hilly terrain for minimum energy consumption' },
+        { slug: 'kite-festival', reason: 'Programming — you\'ll model aerodynamic drag on moving objects in Python, comparing train air resistance to kite lift forces' },
       ],
       concepts: [
         {
@@ -10545,6 +10777,10 @@ print(f"Total distance: {total:.1f} units")  # Can you beat this?`,
         { slug: 'the-little-train', reason: 'Hill railways solve the same terrain problem with gears and switchbacks' },
         { slug: 'seven-sisters', reason: 'Geography of NE India \u2014 the terrain that makes delivery challenging' },
       ],
+      relatedStories: [
+        { slug: 'silk-route', reason: 'Programming + Database — you\'ll store route network data and code weighted graph algorithms to optimise trade routes across NE India' },
+        { slug: 'map-makers-granddaughter', reason: 'Database — you\'ll build a geographic elevation database and code terrain-aware pathfinding algorithms for delivery optimisation' },
+      ],
       quiz: [
         { question: 'What is a graph in graph theory?', options: ['A bar chart', 'A network of nodes connected by edges', 'An equation', 'A photograph'], answer: 1 },
         { question: 'What does Dijkstra\u2019s algorithm guarantee?', options: ['Fastest computation', 'Shortest path from start to all nodes', 'Every node visited once', 'Cheapest cost'], answer: 1 },
@@ -10748,6 +10984,13 @@ He decided, right then, that when he grew up, he would tell the world about Ima 
           keyIdea: 'The informal economy employs the vast majority of workers in developing countries, operating outside government registration and taxation. It provides essential services and acts as a safety net for those excluded from formal markets.',
         },
       ],
+      nextLessons: [
+        { slug: 'map-makers-granddaughter', reason: 'Programming + Database — you\'ll build a market location database and code route optimisation algorithms in Python using graph theory' },
+      ],
+      relatedStories: [
+        { slug: 'postman-hills', reason: 'Programming — you\'ll code shortest-path algorithms in Python to optimise delivery routes through hilly terrain' },
+        { slug: 'silk-route', reason: 'Database — you\'ll store trade route data and query optimal paths using weighted graph algorithms in Python' },
+      ],
     },
   },
   {
@@ -10884,6 +11127,10 @@ plt.show()  # When did the collision happen?`,
         { slug: 'snow-leopards-promise', reason: 'Snow leopards live in the mountains that plate tectonics created' },
         { slug: 'cloud-weaver-of-tawang', reason: 'Mountain weather shaped by tectonically built terrain' },
         { slug: 'why-rivers-bend', reason: 'Rivers erode the mountains that tectonics push up \u2014 the cycle of uplift and erosion' },
+      ],
+      relatedStories: [
+        { slug: 'snow-leopards-promise', reason: 'Programming — you\'ll compare geological uplift to biological adaptation rates, plotting how mountain building timescales shape species evolution' },
+        { slug: 'little-monk-tawang', reason: 'Programming — you\'ll model altitude effects on both geology and ecology, calculating how elevation changes temperature, pressure, and biodiversity' },
       ],
       quiz: [
         { question: 'What are Earth\u2019s four main layers?', options: ['Crust, mantle, outer core, inner core', 'Soil, rock, magma, iron', 'Surface, middle, deep, center', 'Atmosphere, crust, mantle, core'], answer: 0 },
@@ -11078,6 +11325,10 @@ plt.show()  # Which color is brightest? What happens if the platelet is thicker?
       nextLessons: [
         { slug: 'kingfisher-blue', reason: 'The kingfisher\'s feathers use the same structural color physics — nanostructures, not pigment' },
         { slug: 'golden-deer-kamakhya', reason: 'Explores reflection, refraction, and optical illusions — extending the optics you learned here' },
+      ],
+      relatedStories: [
+        { slug: 'orange-sunsets-assam', reason: 'Programming — you\'ll compare thin-film interference to Rayleigh scattering in Python, plotting both spectra to show how different physics produce different colours' },
+        { slug: 'haflong-blue-mountains', reason: 'Programming — you\'ll model how distance and atmosphere affect perceived colour in Python, simulating both aquatic and atmospheric optical effects' },
       ],
       concepts: [
         {
@@ -11285,6 +11536,10 @@ plt.show()  # Which pH range is neutral?`,
         { slug: 'muga-silk-golden', reason: 'Muga silk\u2019s golden color comes from pigments in the silk protein \u2014 same dye chemistry, different application' },
         { slug: 'kaziranga-grass', reason: 'Tea garden ecology connects to Holi celebrations \u2014 the same workers, the same land, the same chemistry' },
       ],
+      relatedStories: [
+        { slug: 'orchid-colors', reason: 'Programming — you\'ll compare natural pigment chemistry, modelling how plant species produce different colour compounds for flowers, leaves, and dyes' },
+        { slug: 'kaziranga-grass', reason: 'Programming — you\'ll compare tea garden and grassland ecology, plotting how monoculture vs wild biodiversity affects ecosystem services' },
+      ],
       quiz: [
         { question: 'What is the difference between natural and synthetic dyes?', options: ['Natural dyes are always brighter', 'Natural dyes come from plants/insects/minerals; synthetic dyes are made from petroleum chemicals', 'Synthetic dyes are always safer', 'There is no difference'], answer: 1 },
         { question: 'Why does turmeric turn red when you add baking soda?', options: ['Baking soda is a pigment', 'The base changes curcumin\u2019s molecular structure, shifting which wavelengths it absorbs', 'It gets hotter', 'The yellow pigment evaporates'], answer: 1 },
@@ -11475,6 +11730,10 @@ plt.show()  # How many days until the grass recovers?`,
         { slug: 'old-banyan-trees-stories', reason: 'From grassland to ancient trees \u2014 how carbon storage works in very different plant lifespans' },
         { slug: 'honey-hunters-lesson', reason: 'Bees depend on flowering grasslands \u2014 explore how pollinators and plants co-depend' },
       ],
+      relatedStories: [
+        { slug: 'boy-counted-butterflies', reason: 'Programming — you\'ll compare grassland vs forest population survey methods, adapting your census code for megafauna in tall grass habitats' },
+        { slug: 'elephant-corridor', reason: 'Database — you\'ll query grassland habitat connectivity databases, modelling how Kaziranga links to surrounding forest reserves for elephant movement' },
+      ],
       quiz: [
         { question: 'Why do Kaziranga park managers deliberately set fire to grasslands?', options: ['To kill invasive animals', 'To remove dead thatch and return nutrients to the soil', 'To clear land for farming', 'To create firebreaks around villages'], answer: 1 },
         { question: 'What happens to grass roots during a controlled burn?', options: ['They burn completely', 'They survive underground and send up new shoots within days', 'They turn into charcoal', 'They absorb the heat energy'], answer: 1 },
@@ -11659,6 +11918,10 @@ plt.show()  # What happened around 1960?`,
         { slug: 'orchid-colors', reason: 'Explores plant biology from a different angle — how orchids use pigments and shape to attract pollinators' },
         { slug: 'girl-grew-forest', reason: 'From saving seeds to planting forests — how one person can restore an entire ecosystem' },
         { slug: 'first-rice', reason: 'The origin story of rice cultivation in Northeast India — from wild grass to the staple crop that feeds billions' },
+      ],
+      relatedStories: [
+        { slug: 'seed-travel', reason: 'Programming — you\'ll compare seed conservation to seed dispersal, modelling how genetic diversity changes under storage vs natural spread conditions' },
+        { slug: 'first-rice', reason: 'Database — you\'ll build a crop variety database, querying how traditional seed-saving practices maintain genetic diversity vs commercial monoculture' },
       ],
       concepts: [
         {
@@ -11867,6 +12130,13 @@ The clouds, of course, don't answer. But Dawan is certain they appreciate being 
           keyIdea: 'Clouds cool Earth by reflecting sunlight but warm it by trapping infrared radiation. How these competing effects change as climate warms is the largest uncertainty in predicting future temperatures.',
         },
       ],
+      nextLessons: [
+        { slug: 'boy-who-talked-to-clouds', reason: 'Programming + AI — you\'ll code a cloud classification system in Python, training a model to identify cloud types from altitude, shape, and weather data' },
+        { slug: 'cloud-refused-rain', reason: 'Programming — you\'ll simulate cloud formation physics in Python, modelling condensation nuclei and droplet growth rates' },
+      ],
+      relatedStories: [
+        { slug: 'fishermans-daughter-storm', reason: 'Programming — you\'ll extend cloud physics to cyclone-scale pressure systems, simulating how clouds become storms' },
+      ],
     },
   },
   {
@@ -12047,6 +12317,10 @@ plt.show()  # At what thickness do you get blue?`,
       nextLessons: [
         { slug: 'peacocks-dance', reason: 'Another bird with structural color — peacock feathers use photonic crystals instead of spongy keratin' },
       ],
+      relatedStories: [
+        { slug: 'haflong-blue-mountains', reason: 'Programming — you\'ll simulate how nanostructure dimensions affect reflected wavelength in Python, extending your model from feather-scale to landscape-scale blue' },
+        { slug: 'peacocks-dance', reason: 'Programming — you\'ll compare single-layer structural colour to multi-layer iridescence in Python, modelling how thin-film stack count changes the spectrum' },
+      ],
       quiz: [
         { question: 'Why does a ground-up kingfisher feather appear brown, not blue?', options: ['The dye washes out', 'Structural color depends on intact nanostructure — destroy it and the color vanishes', 'Blue pigment degrades in air', 'The powder is too small to see'], answer: 1 },
         { question: 'What is thin-film interference?', options: ['Light bending around objects', 'Light reflecting off closely spaced surfaces, reinforcing some wavelengths and canceling others', 'Light absorbed by thin films', 'Light passing through colored filters'], answer: 1 },
@@ -12186,6 +12460,10 @@ plt.show()  # Which works in starlight?`,
         { slug: 'bamboo-taught-wind', reason: 'Sound physics \u2014 bamboo vibration vs the frequencies owls detect' },
         { slug: 'woodpeckers-drum', reason: 'Woodpecker biomechanics \u2014 a different adaptation story' },
         { slug: 'girl-who-spoke-to-elephants', reason: 'Elephants use infrasound \u2014 compare with owl\u2019s high-frequency specialization' },
+      ],
+      relatedStories: [
+        { slug: 'cuckoo-calls-dawn', reason: 'Programming — you\'ll compare nocturnal vs diurnal bird sensory systems, modelling how eye size and retinal rod density adapt to different light levels' },
+        { slug: 'tigers-whisker', reason: 'AI — you\'ll compare predator detection algorithms for owl silent flight vs tiger whisker vibration sensing, building classifiers for different hunting modalities' },
       ],
       quiz: [
         { question: 'What photoreceptor enables owl night vision?', options: ['Cone cells', 'Rod cells at extreme density', 'UV cells', 'Infrared cells'], answer: 1 },
@@ -12365,6 +12643,10 @@ plt.show()  # When does Pfr cross the threshold?`,
         { slug: 'honey-hunters-lesson', reason: 'Bees are daytime pollinators \u2014 compare with the moths that pollinate night jasmine' },
         { slug: 'firefly-festival-of-majuli', reason: 'Fireflies also use timing to communicate \u2014 another story of biological clocks' },
         { slug: 'cuckoo-calls-dawn', reason: 'Bird calls follow circadian rhythms too \u2014 the same clock genes control dawn chorus timing' },
+      ],
+      relatedStories: [
+        { slug: 'orchid-colors', reason: 'Programming — you\'ll compare scent-based vs colour-based pollinator attraction, modelling how volatile compound concentration decreases with distance' },
+        { slug: 'honey-hunters-lesson', reason: 'Programming — you\'ll compare pollinator-plant networks, modelling how nocturnal moth and diurnal bee foraging patterns connect different flower species' },
       ],
       quiz: [
         { question: 'What does night jasmine measure to decide when to bloom?', options: ['Temperature drop', 'Humidity increase', 'Duration of uninterrupted darkness', 'Wind speed'], answer: 2 },
@@ -12553,6 +12835,10 @@ plt.show()  # Can you see how the octave fits exactly 2 cycles where the fundame
       nextLessons: [
         { slug: 'singing-bamboo', reason: 'Bamboo groves that sing \u2014 resonance in natural tubes uses the same standing wave physics as Dijou\'s flute' },
         { slug: 'bamboo-flute-nagaland', reason: 'Build a real bamboo flute and learn how finger hole placement determines pitch through standing waves' },
+      ],
+      relatedStories: [
+        { slug: 'dhol-drum', reason: 'Programming — you\'ll model drum membrane vibration modes in Python, extending your Dimasa rhythm analysis to the physics of percussion' },
+        { slug: 'mountain-echoes', reason: 'Programming — you\'ll simulate sound propagation and reflection in Python, modelling how musical performances interact with landscape acoustics' },
       ],
       quiz: [
         { question: 'What determines the pitch of a sound?', options: ['Its volume', 'Its frequency (cycles per second)', 'Its duration', 'The material it passes through'], answer: 1 },
@@ -12755,6 +13041,13 @@ They never argued about which silk was best again. Because the answer, they now 
           keyIdea: 'Wealth concentrates at transportation nodes due to positive feedback between market access and economic activity. Geographic connectivity — not just natural resources — determines regional economic development.',
         },
       ],
+      nextLessons: [
+        { slug: 'map-makers-granddaughter', reason: 'Programming + Database — you\'ll code coordinate geometry algorithms and store route waypoints in a queryable data structure' },
+        { slug: 'postman-hills', reason: 'Programming — you\'ll implement Dijkstra\'s shortest-path algorithm in Python to optimise trade routes through mountainous terrain' },
+      ],
+      relatedStories: [
+        { slug: 'why-the-muga-silk-is-golden', reason: 'Programming — you\'ll simulate silk protein molecular structure in Python, modelling how amino acid sequences produce golden colour' },
+      ],
     },
   },
   {
@@ -12884,6 +13177,10 @@ print(f"That offsets ~{offset_cars:.0f} cars every year!")`,
         { slug: 'banyan-tree-witness', reason: 'A single banyan can cover an acre — explore how trees grow, store carbon, and support entire ecosystems' },
         { slug: 'honey-hunters-climb', reason: 'Bees pollinate the trees that make forests possible — the hidden link between insects and reforestation' },
         { slug: 'bridge-that-grew', reason: 'Living root bridges of Meghalaya — another story of trees as engineering solutions' },
+      ],
+      relatedStories: [
+        { slug: 'old-banyan-trees-stories', reason: 'Programming — you\'ll compare planted forest succession to ancient tree ecosystems, plotting species diversity curves over restoration timescales' },
+        { slug: 'kaziranga-grass', reason: 'Programming — you\'ll compare forest vs grassland carbon storage, modelling how different ecosystems sequester carbon at different rates' },
       ],
       quiz: [
         { question: 'What is the correct order of ecological succession?', options: ['Forest → shrubs → grass → bare land', 'Bare land → grasses → shrubs → forest', 'Shrubs → bare land → forest → grass', 'Forest → bare land → grass → shrubs'], answer: 1 },
@@ -13080,6 +13377,10 @@ plt.show()  # Charcoal is 7,700x slower than copper!`,
         { slug: 'orange-sunsets-assam', reason: 'Light and energy physics — electromagnetic energy interacting with matter' },
         { slug: 'kingfisher-blue', reason: 'More material science — nanostructures in feathers interact with light' },
       ],
+      relatedStories: [
+        { slug: 'little-potter', reason: 'Programming — you\'ll extend your heat transfer model to ceramic firing, comparing Leidenfrost effect temperatures to clay sintering temperatures' },
+        { slug: 'festival-lights', reason: 'Robotics — you\'ll build an Arduino temperature sensor circuit and code thermal safety thresholds, applying heat physics to real-time monitoring' },
+      ],
       quiz: [
         { question: 'Why does a metal spoon in hot water feel hotter than a wooden spoon?', options: ['Metal is at a higher temperature', 'Metal has higher thermal conductivity — transfers heat to your hand faster', 'Metal absorbs more heat', 'Wood keeps water cooler'], answer: 1 },
         { question: 'What is the Leidenfrost effect?', options: ['Metal expanding when heated', 'A water droplet floating on a steam cushion above a very hot surface', 'Heat traveling through a vacuum', 'Ice melting faster on metal'], answer: 1 },
@@ -13262,6 +13563,10 @@ plt.show()  # Why don't these species drown each other out?`,
         { slug: 'cuckoo-calls-dawn', reason: 'Bird vocalization and circadian timing — another species whose calling is driven by environmental cues' },
         { slug: 'bamboo-flute-of-nagaland', reason: 'Resonance in bamboo tubes — the same physics that makes a frog vocal sac amplify specific frequencies' },
       ],
+      relatedStories: [
+        { slug: 'cuckoo-calls-dawn', reason: 'Programming — you\'ll compare amphibian and avian vocal systems, modelling how body size and vocal sac volume determine call frequency' },
+        { slug: 'girl-who-spoke-to-elephants', reason: 'AI — you\'ll extend your frog call classifier to elephant infrasound, training models across the entire animal frequency spectrum' },
+      ],
       quiz: [
         { question: 'How does a frog\'s vocal sac amplify its call?', options: ['It vibrates like a drum', 'It acts as a resonating chamber, like a guitar body, amplifying specific frequencies', 'It stores extra air for louder bursts', 'It changes the pitch of the call'], answer: 1 },
         { question: 'What environmental cue often triggers intense frog calling?', options: ['Bright sunlight', 'Dropping barometric pressure and rising humidity', 'Cold temperatures', 'Full moon'], answer: 1 },
@@ -13396,6 +13701,10 @@ plt.show()  # Try adding strength and biodeg!`,
         { slug: 'muga-silk-golden', reason: 'Explores muga silk \u2014 the other famous Assam silk with its golden color from a different protein structure' },
         { slug: 'wild-orchids-trees', reason: 'Another story of organisms living in harmony with their environment \u2014 epiphytes that grow without harming their host' },
         { slug: 'seed-keeper-nagaland', reason: 'Connects to biodiversity preservation \u2014 seed saving and genetic diversity parallel the ethics of sustainable silk' },
+      ],
+      relatedStories: [
+        { slug: 'why-the-muga-silk-is-golden', reason: 'Programming — you\'ll compare silk protein structures, plotting how amino acid composition determines colour, strength, and elasticity differences' },
+        { slug: 'cloud-weaver-of-tawang', reason: 'Programming — you\'ll compare silk and wool fibre properties, modelling how different protein structures respond to humidity and tension' },
       ],
       quiz: [
         { question: 'What makes eri silk "ahimsa" (non-violent)?', options: ['The silkworm is anaesthetised before processing', 'The moth is allowed to emerge alive before the cocoon is harvested', 'The silk is synthetic and no worms are used', 'The cocoon is dissolved in acid instead of boiled'], answer: 1 },
@@ -13584,6 +13893,13 @@ So the next time you see a river braid, know this: it is not confused, and it is
           keyIdea: 'Rivers continuously adjust their channels by eroding outer banks and depositing on inner banks. The Brahmaputra\'s dramatic avulsion of 1787 shifted its course 100 km, demonstrating that even the largest rivers are geologically unstable.',
         },
       ],
+      nextLessons: [
+        { slug: 'how-majuli-island-was-born', reason: 'Programming — you\'ll simulate river erosion and sediment deposition in Python, modelling how braided channels create and destroy islands' },
+        { slug: 'ferrymans-riddle', reason: 'Programming — you\'ll code fluid dynamics simulations in Python, calculating flow velocity and Reynolds number for different channel geometries' },
+      ],
+      relatedStories: [
+        { slug: 'the-little-boat', reason: 'Programming — you\'ll calculate optimal ferry crossing angles accounting for current speed, plotting vector diagrams of boat velocity vs river flow' },
+      ],
     },
   },
   {
@@ -13728,6 +14044,10 @@ plt.show()  # Why is the lotus bar so much higher?`,
         { slug: 'firewalker', reason: 'More surface physics — material properties determine what happens at contact' },
         { slug: 'boat-brahmaputra', reason: 'Buoyancy in boats — the same Archimedes principle that helps lotus float' },
       ],
+      relatedStories: [
+        { slug: 'dancer-floating-market', reason: 'Programming — you\'ll compare natural buoyancy to engineered floating platforms, calculating load capacity from surface area and material density' },
+        { slug: 'the-little-boat', reason: 'Programming — you\'ll compare biological and engineered floating, modelling how lotus leaf microstructure and boat hull shape both exploit water surface tension' },
+      ],
       quiz: [
         { question: 'What makes lotus leaves superhydrophobic?', options: ['Oil coating', 'Dual-scale roughness: microscale bumps + nanoscale wax', 'Perfect smoothness', 'Electric charge that repels water'], answer: 1 },
         { question: 'What percentage of a lotus leaf does water actually touch?', options: ['About 50%', 'About 25%', 'Less than 3%', 'About 75%'], answer: 2 },
@@ -13871,6 +14191,10 @@ plt.legend(); plt.show()`,
         { slug: 'seed-keeper-nagaland', reason: 'Directly continues the theme of seed saving and genetic diversity \u2014 how Nagaland\u2019s seed keepers preserve what the Green Revolution lost' },
         { slug: 'kaziranga-grass', reason: 'Explores grassland ecology \u2014 rice is a grass, and understanding grass biology deepens your rice knowledge' },
         { slug: 'grandmother-pitha', reason: 'What happens to rice after harvest \u2014 the chemistry of cooking rice into pitha (Assamese rice cakes)' },
+      ],
+      relatedStories: [
+        { slug: 'seed-keeper', reason: 'Database — you\'ll build a rice cultivar database, querying how paddy genetics changed during 10,000 years of selective breeding' },
+        { slug: 'grandmothers-pitha', reason: 'Programming — you\'ll compare raw and cooked rice chemistry, modelling how heat transforms starch molecular structure during traditional cooking' },
       ],
       quiz: [
         { question: 'What key trait did early farmers select for when domesticating wild rice?', options: ['Taller stems', 'Non-shattering seeds (grains stay on the stalk)', 'Colorful flowers', 'Thorns for defense'], answer: 1 },
@@ -14069,6 +14393,10 @@ plt.show()`,
         { slug: 'mountain-echoes', reason: 'What happens after the drumbeat leaves the drum and bounces' },
         { slug: 'monastery-bells-tawang', reason: 'Bell vibrations \u2014 similar physics in 3D shells' },
       ],
+      relatedStories: [
+        { slug: 'bamboo-flute-of-nagaland', reason: 'Programming — you\'ll compare percussion and wind instrument acoustics, plotting harmonic series for membrane vibration vs air column resonance' },
+        { slug: 'music-dimasa', reason: 'Programming — you\'ll compare drum and vocal rhythm analysis, coding beat detection algorithms for different NE Indian musical traditions' },
+      ],
       quiz: [
         { question: 'Why do drums produce indefinite pitch (unlike guitars)?', options: ['Too loud to detect pitch', 'Overtones are non-harmonic', 'Only one frequency', 'Shell absorbs harmonics'], answer: 1 },
         { question: 'What happens when salt is sprinkled on a vibrating drum?', options: ['Melts', 'Bounces off entirely', 'Collects on nodal lines', 'Spreads evenly'], answer: 2 },
@@ -14230,6 +14558,13 @@ Majoni thought about it and nodded. The secret wasn't a special ingredient or a 
           diagram: 'FermentationDiagram',
         },
       ],
+      nextLessons: [
+        { slug: 'grandmothers-pitha', reason: 'Programming — you\'ll simulate fermentation chemistry in Python, modelling how temperature and time affect yeast activity and CO2 production' },
+        { slug: 'little-potter', reason: 'Programming — you\'ll code heat transfer simulations in Python, modelling how temperature changes material properties during cooking and firing' },
+      ],
+      relatedStories: [
+        { slug: 'golden-hilsa', reason: 'Database — you\'ll build a seasonal fish catch database and query fat content trends across months, plotting migration-flavour correlations with matplotlib' },
+      ],
     },
   },
   {
@@ -14370,6 +14705,10 @@ plt.show()  # Why is the flying squirrel's ratio lower than a hang glider?`,
       nextLessons: [
         { slug: 'vimana-flying-chariot', reason: 'From gliding to powered flight \u2014 the physics of thrust, lift, and how airplanes stay up' },
         { slug: 'monkey-bridge', reason: 'Another story about animals solving physics problems \u2014 monkeys creating a living bridge across a ravine' },
+      ],
+      relatedStories: [
+        { slug: 'kite-eagle-dimapur', reason: 'Programming — you\'ll compare bird powered flight to squirrel gliding in Python, modelling how wing loading and aspect ratio affect flight performance' },
+        { slug: 'the-hornbills-crown', reason: 'Programming — you\'ll model flight energetics in Python, comparing glide efficiency to flapping flight energy costs across species' },
       ],
       quiz: [
         { question: 'What is the difference between gliding and flying?', options: ['There is no difference', 'Gliding always descends with no energy input; flying adds thrust to gain altitude', 'Gliding is faster than flying', 'Flying uses membranes while gliding uses feathers'], answer: 1 },
@@ -14570,6 +14909,13 @@ Junmoni grinned. She couldn't wait.
           diagram: 'WavelengthSpectrum',
         },
       ],
+      nextLessons: [
+        { slug: 'firefly-festival-of-majuli', reason: 'Robotics — you\'ll program Arduino LEDs to mimic firefly flash patterns, building a bioluminescence simulator circuit' },
+        { slug: 'festival-lights', reason: 'Robotics + Programming — you\'ll compare LED efficiency to bioluminescence by coding energy calculations and wiring Arduino light circuits' },
+      ],
+      relatedStories: [
+        { slug: 'night-jasmine', reason: 'Programming — you\'ll code Michaelis-Menten enzyme kinetics, plotting reaction velocity curves and comparing bioluminescence efficiency to LED output' },
+      ],
     },
   },
   {
@@ -14710,6 +15056,10 @@ plt.show()  # What shape is this curve?`,
         { slug: 'wild-orchids-trees', reason: 'Orchids produce the tiniest seeds of any plant \u2014 their dust-like seeds are the ultimate wind dispersal strategy' },
         { slug: 'seed-keeper-nagaland', reason: 'From dispersal to conservation \u2014 how communities protect seed diversity through traditional seed banks' },
         { slug: 'girl-grew-forest', reason: 'After seeds disperse, forests grow \u2014 this story covers succession from seed to mature ecosystem' },
+      ],
+      relatedStories: [
+        { slug: 'coconut-jackfruit', reason: 'Programming — you\'ll compare seed dispersal mechanics across fruit types, modelling how size, weight, and shape affect wind and water transport range' },
+        { slug: 'wild-orchids-trees', reason: 'Programming — you\'ll compare macro-seed and dust-seed dispersal strategies, modelling how orchid micro-seeds achieve kilometre-scale transport' },
       ],
       quiz: [
         { question: 'Why do plants need to disperse their seeds away from the parent?', options: ['Seeds need sunlight to germinate', 'To avoid competition with the parent for light, water, and nutrients', 'Because wind always blows seeds away', 'Seeds cannot grow near adult trees'], answer: 1 },
@@ -14896,6 +15246,13 @@ The Siang chose the hard path, and the hard path chose her back. That is the sto
           diagram: 'EarthLayersDiagram',
         },
       ],
+      nextLessons: [
+        { slug: 'ferrymans-riddle', reason: 'Programming — you\'ll code fluid dynamics simulations in Python, calculating flow rates and turbulence in gorge-like channel geometries' },
+        { slug: 'river-braid', reason: 'Programming — you\'ll simulate sediment transport in Python, modelling how river gradient affects erosion and deposition patterns' },
+      ],
+      relatedStories: [
+        { slug: 'the-little-boat', reason: 'Programming — you\'ll model boat navigation through rapids, calculating forces from current speed and channel width in Python' },
+      ],
     },
   },
   {
@@ -15065,6 +15422,13 @@ The Great Maker, watching from the top of Kanchenjunga, smiled. The takin was he
           diagram: 'NaturalSelectionDiagram',
         },
       ],
+      nextLessons: [
+        { slug: 'red-panda-mask', reason: 'Programming + AI — you\'ll code animal identification algorithms in Python, using morphological feature data to classify species from camera trap images' },
+        { slug: 'elephant-mud-bath', reason: 'Programming — you\'ll simulate thermoregulation strategies in Python, comparing surface-area-to-volume ratios across different body plans' },
+      ],
+      relatedStories: [
+        { slug: 'snow-leopards-promise', reason: 'Programming — you\'ll model altitude-adaptation trade-offs in Python, plotting how body mass and fur density change with elevation' },
+      ],
     },
   },
   {
@@ -15181,6 +15545,13 @@ The people of Assam still tell Hira's story when someone asks how Hajo stays pea
           keyIdea: "Vocal learning — hearing a sound and learning to reproduce it — requires specialized brain circuits and has evolved independently in only a handful of animal lineages, making parrots and humans surprising neural cousins.",
           diagram: 'EcholocationDiagram',
         },
+      ],
+      nextLessons: [
+        { slug: 'girl-who-spoke-to-elephants', reason: 'AI — you\'ll train a sound classification model in Python to distinguish animal vocalisations from audio spectrograms' },
+        { slug: 'cuckoo-calls-dawn', reason: 'AI + Programming — you\'ll code audio frequency analysis in Python, building an FFT pipeline to extract pitch and timing patterns from bird calls' },
+      ],
+      relatedStories: [
+        { slug: 'frogs-sing-rain', reason: 'Programming — you\'ll simulate sound propagation in Python, modelling how vocal frequency and amplitude vary with body size and environment' },
       ],
     },
   },
@@ -15325,6 +15696,13 @@ Tomba grew up to become a healer himself — one who always asked before he pick
           keyIdea: "Wetlands support disproportionate biodiversity because they contain many distinct microhabitats in a small area and sit at the ecotone between land and water ecosystems.",
           diagram: 'NEIndiaBiomesDiagram',
         },
+      ],
+      nextLessons: [
+        { slug: 'dancing-deer-of-loktak-lake', reason: 'Programming + Database — you\'ll build a species database and code population dynamics simulations for the Loktak wetland ecosystem' },
+        { slug: 'boy-counted-butterflies', reason: 'Programming — you\'ll code mark-recapture population estimation algorithms in Python using pandas DataFrames' },
+      ],
+      relatedStories: [
+        { slug: 'girl-grew-forest', reason: 'Programming — you\'ll simulate ecosystem recovery curves in Python, modelling how species diversity changes during habitat restoration' },
       ],
     },
   },
@@ -15515,6 +15893,10 @@ print(f"That's roughly {total_stars:,} visible stars!")
         { slug: 'orange-sunsets-assam', reason: 'Uses the same Rayleigh scattering that makes stars twinkle to explain why Assam sunsets glow orange' },
         { slug: 'kingfisher-blue', reason: 'Another story where light physics creates beauty — structural colour in feathers instead of pigment' },
       ],
+      relatedStories: [
+        { slug: 'star-fell-deepor', reason: 'Programming — you\'ll compare stellar observation to meteorite tracking, calculating how apparent magnitude and trajectory data reveal different object properties' },
+        { slug: 'mayan-astronomy', reason: 'Programming — you\'ll compare NE Indian and Mesoamerican sky observation traditions, plotting how latitude affects visible star catalogues' },
+      ],
       quiz: [
         { question: 'In the magnitude scale, which star is brighter — magnitude 1 or magnitude 5?', options: ['Magnitude 5 is brighter', 'Magnitude 1 is brighter — smaller numbers mean brighter stars', 'They are equally bright', 'It depends on the star\'s colour'], answer: 1 },
         { question: 'How much brighter is a star that is 5 magnitudes brighter than another?', options: ['5 times brighter', '25 times brighter', '100 times brighter', '1,000 times brighter'], answer: 2 },
@@ -15647,6 +16029,13 @@ To this day, the Mishing people of Assam are among the finest river fishers in a
           diagram: 'RiverErosionDiagram',
         },
       ],
+      nextLessons: [
+        { slug: 'golden-hilsa', reason: 'Programming + Database — you\'ll store fish migration data and code seasonal pattern analysis in Python using pandas time-series tools' },
+        { slug: 'why-fish-jump', reason: 'Programming — you\'ll simulate fish biomechanics in Python, calculating jump force, drag, and energy expenditure' },
+      ],
+      relatedStories: [
+        { slug: 'river-dolphins-secret', reason: 'Robotics — you\'ll program Arduino sonar sensors to detect underwater objects, mimicking dolphin echolocation' },
+      ],
     },
   },
   {
@@ -15777,6 +16166,13 @@ And in that garden in Jorhat, no coconut ever envied a jackfruit again — becau
           diagram: 'EnergyProfileDiagram',
         },
       ],
+      nextLessons: [
+        { slug: 'seed-travel', reason: 'Programming — you\'ll simulate seed dispersal trajectories in Python, modelling how fruit size and weight affect wind and water transport distances' },
+        { slug: 'bamboo-grows-fast', reason: 'Programming — you\'ll code plant growth rate comparisons in Python, plotting growth curves for tropical species using exponential models' },
+      ],
+      relatedStories: [
+        { slug: 'grandmothers-pitha', reason: 'Programming — you\'ll track Maillard reaction rates at different temperatures, plotting colour change and flavour compound concentration over time' },
+      ],
     },
   },
   {
@@ -15905,6 +16301,13 @@ In Sualkuchi, the silk umbrella tradition continues. Every monsoon, the patchwor
           ],
           keyIdea: "Material testing quantifies properties like tensile strength, water absorption, and fold endurance — allowing engineers to choose the right material for each application based on evidence, not intuition.",
         },
+      ],
+      nextLessons: [
+        { slug: 'the-magic-japi-hat', reason: 'Programming — you\'ll code geometric analysis algorithms in Python, calculating structural strength from weave patterns and material properties' },
+        { slug: 'basket-weavers-song', reason: 'Programming — you\'ll simulate tessellation patterns in Python, modelling how repetition and symmetry create structural integrity' },
+      ],
+      relatedStories: [
+        { slug: 'monsoon-home', reason: 'Programming — you\'ll calculate rainfall kinetic energy at different drop sizes and plot runoff volume vs roof angle for bamboo, thatch, and tin materials' },
       ],
     },
   },
@@ -16036,6 +16439,13 @@ When Oja Mahir was too old to tend his garden, Hambir took over. He expanded it,
           keyIdea: "Traditional medicine is empirical knowledge accumulated over centuries — it tells modern science where to look for drugs, while modern methods reveal why they work and how to optimize them.",
         },
       ],
+      nextLessons: [
+        { slug: 'pitcher-plant', reason: 'Programming + Database — you\'ll build a medicinal compound database and code molecular property queries to compare traditional and modern medicines' },
+        { slug: 'night-jasmine', reason: 'Programming — you\'ll simulate enzyme-substrate reactions in Python, modelling how plant compounds interact with biological targets' },
+      ],
+      relatedStories: [
+        { slug: 'honey-hunters-lesson', reason: 'Database — you\'ll build a medicinal compound properties database and query inhibition zones, comparing honey antibacterial effectiveness across concentrations' },
+      ],
     },
   },
   {
@@ -16159,6 +16569,13 @@ And that is why, to this very day, turtles are slow on land but fast in water. T
           keyIdea: "Metabolic rate scales with body mass to the 0.75 power (Kleiber's law) — this mathematical relationship connects body size to heart rate, lifespan, and aging across the entire animal kingdom.",
           diagram: 'PopulationGrowthCurve',
         },
+      ],
+      nextLessons: [
+        { slug: 'tortoise-and-hare', reason: 'Programming — you\'ll code speed-energy trade-off simulations in Python, plotting metabolic rate against velocity for different body plans' },
+        { slug: 'elephant-mud-bath', reason: 'Programming — you\'ll simulate thermoregulation in Python, comparing how shell insulation and mud coating affect heat loss rates' },
+      ],
+      relatedStories: [
+        { slug: 'tiny-frog', reason: 'Database — you\'ll query a species database of body mass, metabolic rate, and lifespan, plotting allometric scaling laws across 50+ animal species' },
       ],
     },
   },
@@ -16291,6 +16708,13 @@ The next Saturday, Rikme went back to the market with her fifty rupees — found
           keyIdea: "Elasticity measures how much demand changes when price changes — necessities are inelastic (people buy them regardless), luxuries are elastic (small price changes cause big demand shifts), and this governs everything from market strategy to tax policy.",
           diagram: 'LinearGraphDiagram',
         },
+      ],
+      nextLessons: [
+        { slug: 'postman-hills', reason: 'Programming — you\'ll code route optimisation algorithms in Python, finding shortest paths through market networks using graph theory' },
+        { slug: 'night-market-imphal', reason: 'Programming + Database — you\'ll build a supply-demand model and store transaction data for market simulation analysis' },
+      ],
+      relatedStories: [
+        { slug: 'silk-route', reason: 'Database — you\'ll build a trade route database with distance, terrain difficulty, and commodity prices, then query optimal routes using graph algorithms' },
       ],
     },
   },
@@ -16449,6 +16873,10 @@ print(f"Cheapest column path: {costs.min(axis=0).sum()}")
         { slug: 'girl-who-spoke-to-elephants', reason: 'Understanding elephant communication helps design corridors — rumbles reveal movement patterns and stress levels' },
         { slug: 'kaziranga-grass', reason: 'Kaziranga grasslands are a key elephant habitat patch — corridors connect it to surrounding forest reserves' },
         { slug: 'clouded-leopard', reason: 'Another species that depends on habitat connectivity — clouded leopards need forest corridors between fragmented patches' },
+      ],
+      relatedStories: [
+        { slug: 'dancing-deer-of-loktak-lake', reason: 'Database — you\'ll compare habitat connectivity databases for elephants and deer, querying how corridor width and vegetation type affect movement success' },
+        { slug: 'kaziranga-grass', reason: 'Programming — you\'ll model how grassland habitat patches connect through corridors, calculating minimum viable corridor width from elephant body size and movement data' },
       ],
       quiz: [
         { question: 'What is habitat fragmentation?', options: ['Habitats getting larger', 'Habitats being broken into isolated patches by roads, farms, and settlements', 'Animals choosing to live in smaller areas', 'Forest fires splitting habitats temporarily'], answer: 1 },
@@ -16623,6 +17051,10 @@ for year in range(1, 21):
         { slug: 'river-that-ran-away', reason: 'River erosion and the Brahmaputra\'s shifting course — the geology that shapes hilsa habitat' },
         { slug: 'cloud-refused-rain', reason: 'Weather and rainfall patterns — the monsoon that triggers hilsa migration upstream' },
       ],
+      relatedStories: [
+        { slug: 'mishing-fish', reason: 'Programming + Database — you\'ll build a fish migration database and code seasonal catch pattern analysis using pandas time-series tools' },
+        { slug: 'river-dolphins-secret', reason: 'Programming — you\'ll model underwater acoustics in Python, simulating how dolphins detect fish in murky river water using echolocation' },
+      ],
       quiz: [
         { question: 'Why does the hilsa migrate from sea to river?', options: ['To escape ocean predators', 'To spawn — it migrates upstream burning stored fat as fuel', 'To find warmer water', 'To follow food sources'], answer: 1 },
         { question: 'How do fish navigate back to their birth river?', options: ['By following ocean currents', 'By smelling their birth river\'s unique chemical signature at parts-per-billion concentrations', 'By using magnetic fields', 'By following other fish'], answer: 1 },
@@ -16766,6 +17198,10 @@ print(f"That is why Meghi could hold rain for so long!")`,
         { slug: 'fishermans-daughter-storm', reason: 'Cyclones are powered by the same condensation process — cloud formation on a massive, spinning scale' },
         { slug: 'monsoon-home', reason: 'The monsoon that drenches Meghalaya starts with clouds exactly like the ones you just learned about' },
         { slug: 'boy-who-talked-to-clouds', reason: 'Another perspective on clouds and weather — different story, same atmospheric science' },
+      ],
+      relatedStories: [
+        { slug: 'boy-who-talked-to-clouds', reason: 'Programming — you\'ll compare cloud formation conditions that produce rain vs those that don\'t, modelling humidity thresholds and nuclei density requirements' },
+        { slug: 'fishermans-daughter-storm', reason: 'Programming — you\'ll compare gentle rain to extreme cyclone precipitation, modelling how the same condensation physics operates at vastly different scales' },
       ],
       concepts: [
         {
@@ -16972,6 +17408,13 @@ They built a wider bridge, strong enough for adults and carts. But they kept the
           keyIdea: "Load distribution traces how force flows from the point of application through the structure to the ground — every bridge type solves this problem differently, and every element must be strong enough for its role in the chain.",
         },
       ],
+      nextLessons: [
+        { slug: 'bridge-that-grew', reason: 'Programming — you\'ll simulate structural forces in Python, calculating load capacity, tensile strength, and safety factors for bridge designs' },
+      ],
+      relatedStories: [
+        { slug: 'bamboo-taught-wind', reason: 'Programming — you\'ll plot stress-strain curves from tensile test data, comparing Young\'s modulus values for bamboo, wood, and steel' },
+        { slug: 'monsoon-home', reason: 'Programming — you\'ll code rainfall impact simulations, modelling how structural design handles monsoon wind and water forces' },
+      ],
     },
   },
   {
@@ -17104,6 +17547,10 @@ print(f"Measured speed: {avg_speed:.0f} m/s (vs 343)")`,
       nextLessons: [
         { slug: 'bamboo-flute-nagaland', reason: 'Standing waves in tubes \u2014 sound reflection inside an instrument' },
         { slug: 'river-dolphins-secret', reason: 'Echolocation in action \u2014 dolphins use echoes to navigate' },
+      ],
+      relatedStories: [
+        { slug: 'dhol-drum', reason: 'Programming — you\'ll model drum sound production in Python, simulating the source signal before it bounces off mountain surfaces' },
+        { slug: 'singing-bamboo', reason: 'Programming — you\'ll compare echo reflection to resonance in Python, modelling two different ways landscapes interact with sound waves' },
       ],
       quiz: [
         { question: 'What minimum distance is needed for a distinct echo?', options: ['About 5 m', 'About 17 m', 'About 100 m', 'About 1 km'], answer: 1 },
@@ -17254,6 +17701,13 @@ Tombi's phumdi didn't sink. It grew. New vegetation knit itself to the old edges
           keyIdea: "Balance is a feedback loop — vestibular, proprioceptive, and visual sensors detect deviation, and the brain commands muscles to correct it — dancing on a moving boat forces the brain to separate self-movement from platform movement.",
         },
       ],
+      nextLessons: [
+        { slug: 'lotus-float', reason: 'Programming — you\'ll simulate buoyancy and surface tension in Python, calculating how floating platforms support weight on water' },
+      ],
+      relatedStories: [
+        { slug: 'dancing-deer-of-loktak-lake', reason: 'Programming + Database — you\'ll build a wetland species database and model population dynamics on floating island ecosystems' },
+        { slug: 'the-little-boat', reason: 'Programming — you\'ll code boat stability calculations in Python, modelling hull displacement and centre of gravity on water' },
+      ],
     },
   },
   {
@@ -17370,6 +17824,10 @@ for angle in [0, 15, 37, 50, 90]:
         { slug: 'little-boat-brahmaputra', reason: 'Buoyancy and hull design \u2014 complements current-crossing physics' },
         { slug: 'fishermans-daughter-storm', reason: 'Storm physics on the Brahmaputra' },
         { slug: 'river-braid', reason: 'Why the Brahmaputra braids \u2014 sediment dynamics creating shifting channels' },
+      ],
+      relatedStories: [
+        { slug: 'the-little-boat', reason: 'Programming — you\'ll compare crossing and downstream navigation strategies, modelling how current speed and boat power determine optimal approaches' },
+        { slug: 'river-braid', reason: 'Programming — you\'ll compare ferry crossing challenges in single-channel vs braided river sections, modelling how shifting sandbars change navigation routes' },
       ],
       quiz: [
         { question: 'What determines laminar vs turbulent flow?', options: ['Fluid color', 'The Reynolds number', 'Temperature only', 'Whether water or air'], answer: 1 },
@@ -17500,6 +17958,10 @@ plt.show()  # Where is the sweet spot?`,
       nextLessons: [
         { slug: 'orchid-colors', reason: 'From how orchids grow to why they are colorful \u2014 pigments, pollination, and co-evolution with insects' },
         { slug: 'pitcher-plant', reason: 'Another extreme plant adaptation from NE India \u2014 carnivorous plants that evolved to trap insects for nutrients' },
+      ],
+      relatedStories: [
+        { slug: 'seed-travel', reason: 'Programming — you\'ll simulate orchid dust-seed dispersal distances in Python, modelling how microscopic seeds achieve kilometre-scale wind transport' },
+        { slug: 'pitcher-plant', reason: 'Programming — you\'ll compare epiphyte nutrient strategies to carnivorous plant strategies in Python, modelling two opposite solutions to nutrient-poor environments' },
       ],
       quiz: [
         { question: 'What is the difference between an epiphyte and a parasite?', options: ['Epiphytes are smaller than parasites', 'Epiphytes use the host only for physical support; parasites steal nutrients', 'Epiphytes live on the ground; parasites live on trees', 'There is no difference'], answer: 1 },
@@ -17675,6 +18137,13 @@ Among the people of Assam, a tamul-paan offered with both hands is still the war
           keyIdea: "Place names are historical fossils encoded in language — \"Guwahati\" likely preserves the memory of a betel nut market, and layers of place names across Northeast India record successive waves of culture and migration.",
         },
       ],
+      nextLessons: [
+        { slug: 'map-makers-granddaughter', reason: 'Programming + Database — you\'ll code geographic coordinate systems and build a place-name database with etymology and location data' },
+      ],
+      relatedStories: [
+        { slug: 'seven-sisters', reason: 'Programming — you\'ll plot NE India state boundaries with matplotlib and calculate area and population density from coordinate data' },
+        { slug: 'lost-temple', reason: 'Programming — you\'ll code archaeological site mapping algorithms, plotting historical locations on terrain elevation maps' },
+      ],
     },
   },
   {
@@ -17821,6 +18290,13 @@ It is still growing. Because the story garden never closes, and the stories of N
           ],
           keyIdea: "Oral tradition is a sophisticated memory technology using rhythm, repetition, spatial embedding, and narrative structure to transmit knowledge accurately across generations — every lost tradition is a burned library.",
         },
+      ],
+      nextLessons: [
+        { slug: 'girl-grew-forest', reason: 'Programming — you\'ll simulate ecosystem growth curves in Python, modelling how biodiversity increases as habitats mature over decades' },
+      ],
+      relatedStories: [
+        { slug: 'old-banyan-trees-stories', reason: 'Database — you\'ll query a tree measurement database to calculate carbon storage per species, plotting cumulative biomass curves for banyans over 400 years' },
+        { slug: 'seed-travel', reason: 'Programming — you\'ll code a Monte Carlo seed dispersal simulation, randomising wind direction and speed to plot seed landing probability maps' },
       ],
     },
   },
@@ -17978,6 +18454,13 @@ And if Dawa happened to be nearby — old and fat and purring — she would blin
         'The eastern Himalayas contain over 10,000 plant species, 1,600 bird species, and 300 mammal species, making them one of the most biodiverse mountain regions in the world.',
       ],
       offlineActivity: 'Fill a glass with ice water and another with room-temperature water. Hold one hand in each glass for 30 seconds, then remove both and touch your cheeks. Notice how the cold hand feels — that is rapid heat transfer. Now wrap a cloth around your cold hand and dip it in ice water again. The cloth insulates your skin, just as fur insulates mountain animals. How long can you hold each hand in the ice water — bare vs. wrapped? This demonstrates why insulation is critical for mountain survival.',
+      nextLessons: [
+        { slug: 'snow-leopards-promise', reason: 'Programming — you\'ll simulate altitude adaptation in Python, modelling how air pressure and oxygen levels change with elevation' },
+      ],
+      relatedStories: [
+        { slug: 'cloud-weaver-of-tawang', reason: 'Programming — you\'ll model orographic cloud formation in Python, simulating how mountain altitude forces air upward to create precipitation' },
+        { slug: 'turtle-mountain', reason: 'Programming — you\'ll animate 50 million years of tectonic plate movement, plotting collision force vectors and mountain height over geological time' },
+      ],
     },
   },
   {
@@ -18179,6 +18662,10 @@ plt.show()  # Why does the curve flatten?`,
         { slug: 'siang-river', reason: 'From the river\u2019s surface to its geology \u2014 how the Siang carved one of the world\u2019s deepest gorges' },
         { slug: 'fishermans-daughter-storm', reason: 'From calm boat racing to storm survival \u2014 the same fluid dynamics in extreme conditions' },
       ],
+      relatedStories: [
+        { slug: 'boy-raced-brahmaputra', reason: 'Programming — you\'ll compare race pacing strategies under different river conditions, modelling how moonlight visibility and current speed affect optimal speed' },
+        { slug: 'the-little-boat', reason: 'Programming — you\'ll compare racing vs transport boat physics, modelling how hull design priorities differ between speed and cargo capacity' },
+      ],
       quiz: [
         { question: 'What is the thalweg?', options: ['The side of a boat', 'The line of deepest and fastest flow in a river channel', 'A type of rowing stroke', 'The wake behind a boat'], answer: 1 },
         { question: 'Why does drag increase with the square of speed?', options: ['Because water is twice as dense at high speeds', 'Because faster movement pushes more water aside and creates more friction per unit time', 'Because gravity increases with speed', 'Because boats get heavier at high speed'], answer: 1 },
@@ -18352,6 +18839,13 @@ That is Nini. Still small. Still clear. Still perfectly herself.
         'At the "Meeting of the Waters" near Manaus, Brazil, the dark Rio Negro and sandy Amazon flow side by side for 6 km without mixing — the same physics applies at confluences in the Brahmaputra system.',
       ],
       offlineActivity: 'After a rain, go outside and find a spot where two small streams of water meet — on a sidewalk, a dirt path, or in a gutter. Watch the confluence point carefully: do the two streams mix instantly, or can you see them flowing side by side? If one stream carries mud and the other is clear, you can see the mixing boundary. Measure how far downstream the boundary persists. This is the same phenomenon that happens when tributaries join the Brahmaputra.',
+      nextLessons: [
+        { slug: 'river-braid', reason: 'Programming — you\'ll simulate river confluence dynamics in Python, modelling how tributary flow rates combine and affect downstream velocity' },
+        { slug: 'ferrymans-riddle', reason: 'Programming — you\'ll code fluid dynamics simulations, calculating how channel width and depth affect current speed at river junctions' },
+      ],
+      relatedStories: [
+        { slug: 'how-majuli-island-was-born', reason: 'Programming — you\'ll code a 2D sediment deposition grid, calculating where sand accumulates when two river flows merge at different velocities' },
+      ],
     },
   },
   {
@@ -18542,6 +19036,10 @@ plt.show()  # How steep is this curve?`,
         { slug: 'orange-sunsets-assam', reason: 'The same Rayleigh scattering that makes mountains blue makes sunsets orange \u2014 two sides of the same physics' },
         { slug: 'kingfisher-blue', reason: 'Not all blue comes from scattering \u2014 kingfisher feathers use nanostructures to create structural color without pigment' },
         { slug: 'rainbow-fish', reason: 'From atmospheric optics to thin-film optics \u2014 how light splits into colors in water and on surfaces' },
+      ],
+      relatedStories: [
+        { slug: 'orange-sunsets-assam', reason: 'Programming — you\'ll compare Rayleigh scattering at horizontal vs vertical viewing angles, plotting how atmospheric depth determines whether you see blue or orange' },
+        { slug: 'kingfisher-blue', reason: 'Programming — you\'ll compare atmospheric blue to structural blue, modelling two completely different physics that produce the same perceived colour' },
       ],
       quiz: [
         { question: 'Why do the mountains of Haflong appear blue?', options: ['They are covered in blue flowers', 'Blue minerals in the rock reflect blue light', 'Rayleigh scattering adds a blue veil of scattered light between you and the distant mountains', 'The sky reflects off the mountainside'], answer: 2 },
@@ -18742,6 +19240,10 @@ print(f"That feeds a family for {days_fed:.0f} days")
         { slug: 'elephant-corridor', reason: 'From python coexistence to elephant corridors — how communities create safe passages for wildlife through human landscapes' },
         { slug: 'wild-orchids-trees', reason: 'From animal symbiosis to plant symbiosis — orchids living on trees without harming them, another form of peaceful coexistence' },
       ],
+      relatedStories: [
+        { slug: 'clouded-leopard', reason: 'AI — you\'ll compare snake and cat detection algorithms from camera trap data, training classifiers that distinguish ambush predators by movement pattern' },
+        { slug: 'elephant-corridor', reason: 'Database — you\'ll compare reptile and mammal habitat databases, querying how corridor design requirements differ for cold-blooded vs warm-blooded species' },
+      ],
       quiz: [
         { question: 'What does ectotherm mean?', options: ['An animal that generates its own body heat', 'An animal that relies on external heat sources to regulate body temperature', 'A cold animal that cannot survive in warm climates', 'An animal that lives underground'], answer: 1 },
         { question: 'Why do pythons need only 10% of the food a same-sized mammal needs?', options: ['They have smaller stomachs', 'They do not burn calories to generate body heat', 'They only eat once a year', 'They are more efficient at digestion'], answer: 1 },
@@ -18895,6 +19397,13 @@ The people of Assam and the Northeast have a saying: *the sky is big enough for 
         'Thermals can carry dust and small insects to altitudes of 3,000 meters or more. Migrating birds intentionally catch thermals to gain altitude, then glide toward their destination, using a fraction of the energy that continuous flapping would require.',
       ],
       offlineActivity: 'Make a simple paper airplane and a paper kite (a diamond shape with string attached). Take both outside on a windy day. Throw the airplane and watch its flight — it relies on its own speed and wing shape for lift, and quickly lands when speed drops. Now fly the kite — it uses the wind\'s energy and the string\'s tension for lift, and can stay up as long as there is wind. Compare the two: the airplane is like the eagle (self-powered), while the kite is like a glider tethered to the wind. Which stays up longer? Why?',
+      nextLessons: [
+        { slug: 'kite-festival', reason: 'Programming — you\'ll code aerodynamic lift and drag simulations in Python, comparing bird wing profiles to kite designs' },
+        { slug: 'flying-squirrel', reason: 'Programming — you\'ll simulate glide ratio calculations in Python, modelling how wing area and body mass determine flight performance' },
+      ],
+      relatedStories: [
+        { slug: 'the-hornbills-crown', reason: 'Programming — you\'ll calculate power-to-weight ratios for hornbill flight, plotting how the casque\'s added mass increases wing-beat frequency and energy cost' },
+      ],
     },
   },
   {
@@ -19051,6 +19560,13 @@ Among the people of Assam, the Brahmaputra is not just a river. It is a teacher.
         'The Saraighat Bridge, where Rupam finished his ride, was completed in 1962 and was the first bridge across the Brahmaputra in Assam — before it, crossing the 1.2 km-wide river required a ferry.',
       ],
       offlineActivity: 'Test the "steady beats fast" principle yourself. Mark a 100-meter course in a field or park. First, sprint the first 50 meters as fast as you can, then walk the remaining 50 meters (simulating Rupam\'s fast-start fatigue). Time the total. Then try again, but jog at a steady, comfortable pace for the entire 100 meters. Compare your total times. In most cases, the steady jog will be faster overall — the same principle that let the river beat the cyclist. Try it at 200 meters too and see if the difference grows.',
+      nextLessons: [
+        { slug: 'the-little-boat', reason: 'Programming — you\'ll simulate boat hydrodynamics in Python, calculating drag forces and optimal hull shapes for river racing' },
+        { slug: 'ferrymans-riddle', reason: 'Programming — you\'ll code river current simulations, modelling how flow velocity varies across the channel width' },
+      ],
+      relatedStories: [
+        { slug: 'moonlit-boat-race', reason: 'AI — you\'ll train a pacing optimisation model from historical race data, predicting the fastest split strategy for different river current conditions' },
+      ],
     },
   },
 ];
