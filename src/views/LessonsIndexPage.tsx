@@ -73,10 +73,13 @@ export default function LessonsIndexPage() {
     const matchesSubject = !selectedSubject || lesson.subjects?.includes(selectedSubject);
     const matchesDiscipline = filterType !== 'discipline' || matchesDisciplineFilter(lesson);
     const matchesTradition = !selectedTradition || getLessonOrigin(lesson).label === selectedTradition;
-    const matchesSearch = !searchQuery ||
-      lesson.story.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lesson.stem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      lesson.story.tagline.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = !searchQuery || (() => {
+      const q = searchQuery.toLowerCase();
+      return lesson.story.title.toLowerCase().includes(q) ||
+        lesson.stem.title.toLowerCase().includes(q) ||
+        lesson.story.tagline.toLowerCase().includes(q) ||
+        lesson.story.content?.toLowerCase().includes(q);
+    })();
     return matchesSubject && matchesDiscipline && matchesTradition && matchesSearch;
   });
 

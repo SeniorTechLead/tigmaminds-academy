@@ -78,10 +78,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     // Normal flow: get existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) fetchProfile(session.user.id);
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error && (error.message?.includes('Refresh Token') || error.message?.includes('refresh_token'))) {
+        // Stale/invalid refresh token — clear local session silently
+        supabase.auth.signOut().catch(() => {});
+        setSession(null);
+        setUser(null);
+      } else {
+        setSession(session);
+        setUser(session?.user ?? null);
+        if (session?.user) fetchProfile(session.user.id);
+      }
+      setLoading(false);
+    }).catch(() => {
+      // Network/other failure — don't block the UI
       setLoading(false);
     });
 
