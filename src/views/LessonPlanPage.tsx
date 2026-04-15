@@ -391,7 +391,10 @@ export default function LessonPlanPage() {
     if (filterDiscipline && !l.skillTags?.some(t => t.discipline === filterDiscipline)) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      return l.story.title.toLowerCase().includes(q) || l.stem.title.toLowerCase().includes(q) ||
+      return l.story.title.toLowerCase().includes(q) ||
+        l.story.tagline?.toLowerCase().includes(q) ||
+        l.story.content?.toLowerCase().includes(q) ||
+        l.stem.title.toLowerCase().includes(q) ||
         l.stem.skills.some(s => s.toLowerCase().includes(q));
     }
     return true;
