@@ -4,7 +4,9 @@ import { Award, Download, ArrowLeft } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useProgress } from '../contexts/ProgressContext';
-import { lessons, SUBJECTS, Subject } from '../data/lessons';
+import { lessonsMeta } from '../data/lessons-meta';
+import { SUBJECTS } from '../data/lesson-constants';
+import type { Subject } from '../data/lesson-types';
 
 export default function CertificatePage() {
   const { studentName, setStudentName, progress, getCompletedCount } = useProgress();
@@ -13,13 +15,13 @@ export default function CertificatePage() {
 
   const completedStories = Object.entries(progress)
     .filter(([_, p]) => p.level1Complete && p.level2Complete)
-    .map(([slug]) => lessons.find(l => l.slug === slug))
+    .map(([slug]) => lessonsMeta.find(l => l.slug === slug))
     .filter(Boolean);
 
   const subjectCompletions = SUBJECTS.map(s => ({
     ...s,
     completed: completedStories.filter(l => l?.subjects?.includes(s.key)).length,
-    total: lessons.filter(l => l.subjects?.includes(s.key)).length,
+    total: lessonsMeta.filter(l => l.subjects?.includes(s.key)).length,
   })).filter(s => s.completed > 0);
 
   const totalCompleted = getCompletedCount();

@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'music-theory-physics',
   title: 'Music Theory & the Physics of Sound',
   category: 'music-arts',
+  tags: ['physics', 'math'],
+  keywords: ['frequency', 'harmonics', 'overtones', 'sine wave', 'resonance', 'interval', 'octave', 'waveform'],
   icon: '🎵',
   tagline: 'Pitch, rhythm, harmony, and the science hiding inside every song.',
   relatedStories: ['basket-weavers-song', 'music-dimasa', 'bamboo-flute-of-nagaland'],

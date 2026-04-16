@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { lessons } from '../../data/lessons';
+import { lessonsMeta } from '../../data/lessons-meta';
 
 interface Props {
   slugs: string[];
@@ -10,12 +10,12 @@ export default function StoryLinks({ slugs }: Props) {
 
   const matched = slugs
     .map((slug) => {
-      const lesson = lessons.find((l) => l.slug === slug);
+      const lesson = lessonsMeta.find((l) => l.slug === slug);
       if (!lesson) return null;
       return {
         slug,
-        title: lesson.story.title,
-        icon: lesson.stem.icon,
+        title: lesson.storyTitle,
+        icon: lesson.stemIcon,
       };
     })
     .filter(Boolean) as { slug: string; title: string; icon: React.ComponentType<{ className?: string }> }[];

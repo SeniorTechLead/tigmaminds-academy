@@ -3,30 +3,30 @@ import Link from 'next/link';
 import { ArrowRight, Code2, Trophy, Clock, Target } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons } from '../data/lessons';
+import { lessonsMeta } from '../data/lessons-meta';
 import { getLevelComponents } from '../components/levels';
 
 /* ── Extract capstone projects from all lessons that have Level 4 ── */
 function getCapstoneProjects() {
-  return lessons
+  return lessonsMeta
     .filter(l => {
       const comps = getLevelComponents(l.slug);
       return !!comps.Level4;
     })
     .map(l => ({
       slug: l.slug,
-      storyTitle: l.story.title,
-      stemTitle: l.stem.title,
-      projectTitle: l.stem.project.title,
-      projectDescription: l.stem.project.description,
-      steps: l.stem.project.steps,
-      color: l.stem.color,
-      icon: l.stem.icon,
+      storyTitle: l.storyTitle,
+      stemTitle: l.stemTitle,
+      projectTitle: l.projectTitle ?? '',
+      projectDescription: l.projectDescription ?? '',
+      steps: l.projectSteps ?? [],
+      color: l.stemColor,
+      icon: l.stemIcon,
       subjects: l.subjects || [],
       skillTags: l.skillTags || [],
       estimatedHours: l.estimatedHours || 12,
       tradition: l.tradition,
-      complexity: rateComplexity(l.stem.project.steps, l.stem.project.description, l.skillTags || [], l.estimatedHours || 12),
+      complexity: rateComplexity(l.projectSteps ?? [], l.projectDescription ?? '', l.skillTags || [], l.estimatedHours || 12),
       technologies: detectTechnologies(l.toolSkills || [], l.skillTags || []),
     }));
 }

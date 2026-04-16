@@ -59,6 +59,9 @@ function getMatchingSnippets(guide: ReferenceGuide, query: string): { sectionTit
 export default function GuideCard({ guide, defaultTab = 'understand', expandedSlug, searchQuery = '', level = 0, onExpand }: Props) {
   const [isExpanded, setIsExpanded] = useState(expandedSlug === guide.slug);
   const pendingScrollRef = useRef<number | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [showFloatingNav, setShowFloatingNav] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   // Re-expand when expandedSlug changes
   useEffect(() => {
@@ -129,8 +132,52 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
     }
   }, [isExpanded, guide]);
 
+  // Track which section is currently in view
+  useEffect(() => {
+    if (!isExpanded || allSections.length < 2) return;
+    const ids = allSections.map((s, i) => s.id || `section-${guide.slug}-${i}`);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const idx = ids.indexOf(entry.target.id);
+            if (idx >= 0) setActiveSection(allSections[idx].title);
+          }
+        }
+      },
+      { rootMargin: '-120px 0px -60% 0px', threshold: 0 }
+    );
+    // Small delay to let sections render
+    const timer = setTimeout(() => {
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }, 300);
+    return () => { clearTimeout(timer); observer.disconnect(); };
+  }, [isExpanded, guide.slug, allSections.length]);
+
+  // Show floating nav when card header scrolls out of view
+  useEffect(() => {
+    if (!isExpanded || allSections.length < 2) {
+      setShowFloatingNav(false);
+      return;
+    }
+    const onScroll = () => {
+      const el = cardRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      // Show when the top of the card is above the viewport (scrolled past header)
+      // and the bottom is still below the viewport (still inside the card)
+      setShowFloatingNav(rect.top < -100 && rect.bottom > 200);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isExpanded, allSections.length]);
+
   return (
     <div
+      ref={cardRef}
       id={`ref-${guide.slug}`}
       className={`scroll-mt-32 rounded-2xl border transition-all duration-300 ${
         isExpanded
@@ -193,8 +240,8 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
 
       {/* Expanded content */}
       <div
-        className={`overflow-hidden transition-all duration-300 ${
-          isExpanded ? 'max-h-none opacity-100' : 'max-h-0 opacity-0'
+        className={`transition-all duration-300 ${
+          isExpanded ? 'max-h-none opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
         }`}
       >
         <div className="px-4 pb-5">
@@ -244,8 +291,35 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
               <StoryLinks slugs={guide.relatedStories} />
             </div>
           )}
+
         </div>
       </div>
+
+      {/* Floating nav — fixed in bottom-right corner when scrolled deep into guide */}
+      {showFloatingNav && (
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2 items-end">
+          {/* Current location breadcrumb */}
+          <div className="bg-white dark:bg-gray-800 shadow-xl rounded-xl px-4 py-2.5 border border-gray-200 dark:border-gray-700 max-w-xs">
+            <div className="flex items-center gap-2 text-sm">
+              <span className="flex-shrink-0">{guide.icon}</span>
+              <span className="font-semibold text-gray-900 dark:text-white truncate">{guide.title}</span>
+            </div>
+            {activeSection && (
+              <p className="text-xs text-amber-600 dark:text-amber-400 mt-0.5 truncate">{activeSection}</p>
+            )}
+          </div>
+          {/* Back to top button */}
+          <button
+            onClick={() => document.getElementById(`ref-${guide.slug}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            className="bg-amber-500 hover:bg-amber-600 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-xl transition-colors"
+            title="Back to top of guide"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

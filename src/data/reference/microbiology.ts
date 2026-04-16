@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'microbiology',
   title: 'Microbiology',
   category: 'biology',
+  tags: ['chemistry'],
+  keywords: ['bacteria', 'virus', 'fungi', 'fermentation', 'antibiotic', 'enzyme', 'pathogen', 'immune'],
   icon: '🦠',
   tagline: 'The invisible world — bacteria, viruses, and fungi that shape health, soil, and fermentation.',
   relatedStories: ['witch-doctor', 'grandmothers-pitha', 'first-rice', 'little-chef'],

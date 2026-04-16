@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'numpy',
   title: 'NumPy',
   category: 'data-science',
+  tags: ['math'],
+  keywords: ['linear algebra', 'matrix', 'vector', 'eigenvalue', 'dot product', 'broadcasting', 'gaussian'],
   icon: '🔢',
   tagline: 'Fast math on arrays of numbers',
   relatedStories: ['girl-who-spoke-to-elephants', 'bamboo-flute-of-nagaland', 'how-majuli-island-was-born', 'why-the-muga-silk-is-golden'],

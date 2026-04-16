@@ -146,16 +146,21 @@ export default function ReferencePage() {
   const searchLower = searchQuery.toLowerCase().trim();
   const searchWords = searchLower.split(/[\s&]+/).filter(w => w.length > 0);
 
+  // Check if a guide matches the selected category (primary or via tags)
+  const matchesCategory = (category: string, tags?: string[]) =>
+    !selectedCategory || category === selectedCategory || (tags?.includes(selectedCategory) ?? false);
+
   const filteredSlugs = new Set(
     searchWords.length > 0
       ? searchIndex
           .filter(entry => {
-            if (selectedCategory && entry.category !== selectedCategory) return false;
+            const meta = referenceMeta.find(m => m.slug === entry.slug);
+            if (!matchesCategory(entry.category, meta?.tags)) return false;
             return searchWords.every(w => entry.searchText.includes(w));
           })
           .map(e => e.slug)
       : referenceMeta
-          .filter(g => !selectedCategory || g.category === selectedCategory)
+          .filter(g => matchesCategory(g.category, g.tags))
           .map(g => g.slug)
   );
 
@@ -186,7 +191,7 @@ export default function ReferencePage() {
   const CategoryPills = ({ cats }: { cats: typeof REFERENCE_CATEGORIES }) => (
     <>
       {cats.map(cat => {
-        const count = referenceMeta.filter(r => r.category === cat.key).length;
+        const count = referenceMeta.filter(r => r.category === cat.key || r.tags?.includes(cat.key)).length;
         if (count === 0) return null;
         return (
           <button key={cat.key}
@@ -417,7 +422,7 @@ export default function ReferencePage() {
             // Flat list when a specific category is selected
             <div className="space-y-3">
               {filtered.map(guide => (
-                <GuideCard key={guide.slug} guide={guide} expandedSlug={slug || forceExpandSlug || null} searchQuery={searchQuery} level={level} />
+                <GuideCard key={guide.slug} guide={guide} expandedSlug={slug || forceExpandSlug || null} searchQuery={searchQuery} level={level} onExpand={loadGuide} />
               ))}
             </div>
           ) : (

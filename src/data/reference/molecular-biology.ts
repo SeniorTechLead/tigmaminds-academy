@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'molecular-biology',
   title: 'Molecular Biology & Protein Synthesis',
   category: 'biology',
+  tags: ['chemistry'],
+  keywords: ['DNA', 'RNA', 'transcription', 'translation', 'amino acid', 'ribosome', 'codon', 'protein folding'],
   icon: '🧬',
   tagline: 'From gene to protein — how cells read DNA instructions and build the machinery of life.',
   relatedStories: ['why-the-muga-silk-is-golden', 'eri-silk'],

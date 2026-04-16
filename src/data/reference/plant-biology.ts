@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'plant-biology',
   title: 'Plant Biology',
   category: 'botany',
+  tags: ['chemistry'],
+  keywords: ['photosynthesis', 'chlorophyll', 'transpiration', 'xylem', 'phloem', 'auxin', 'stomata'],
   icon: '🌱',
   tagline: 'How plants make food from sunlight, grow toward the sky, and reproduce.',
   relatedStories: ['old-banyan-trees-stories', 'tejimola-the-girl-who-became-a-plant', 'orchid-colors', 'pitcher-plant', 'bamboo-grows-fast', 'girl-grew-forest'],

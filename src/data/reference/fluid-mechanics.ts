@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'fluid-mechanics',
   title: 'Fluid Mechanics',
   category: 'physics',
+  tags: ['math', 'engineering'],
+  keywords: ['bernoulli', 'viscosity', 'reynolds number', 'pressure', 'buoyancy', 'archimedes', 'navier-stokes', 'laminar', 'turbulent'],
   icon: '💧',
   tagline: "Why boats float, planes fly, and the Brahmaputra carves its path.",
   relatedStories: ['the-little-boat', 'ferrymans-riddle', 'lotus-float', 'siang-river'],

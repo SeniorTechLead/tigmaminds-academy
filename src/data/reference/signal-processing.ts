@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'signal-processing',
   title: 'Signals & Frequencies',
   category: 'data-science',
+  tags: ['math', 'physics'],
+  keywords: ['fourier transform', 'frequency spectrum', 'sine wave', 'sampling', 'nyquist', 'convolution', 'filtering', 'FFT'],
   icon: '🌊',
   tagline: 'Understand the waves hidden in data',
   relatedStories: ['girl-who-spoke-to-elephants', 'bamboo-flute-of-nagaland', 'river-dolphins-secret', 'bamboo-taught-wind', 'mountain-echoes'],

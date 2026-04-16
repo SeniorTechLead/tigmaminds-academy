@@ -14,7 +14,8 @@ import { useSubscription } from '../contexts/SubscriptionContext';
 import { useAuth } from '../contexts/AuthContext';
 import { FEATURES } from '../config/features';
 import EnrollmentRequestForm from '../components/EnrollmentRequestForm';
-import { lessons, SUBJECTS } from '../data/lessons';
+import { lessonsMeta as lessons } from '../data/lessons-meta';
+import { SUBJECTS } from '../data/lesson-constants';
 import { problemMeta } from '../data/playground-meta';
 import { getLessonOrigin } from '../data/lesson-types';
 

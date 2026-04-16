@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'algorithms-data-structures',
   title: 'Algorithms & Data Structures',
   category: 'language',
+  tags: ['math'],
+  keywords: ['big O', 'binary search', 'sorting', 'hash table', 'graph', 'tree', 'recursion', 'dynamic programming', 'complexity'],
   icon: '💻',
   tagline: 'The recipes and containers of programming — how to organize data and solve problems efficiently.',
 

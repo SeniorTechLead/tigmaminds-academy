@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'rotational-mechanics',
   title: 'Rotational Mechanics',
   category: 'physics',
+  tags: ['math', 'engineering'],
+  keywords: ['torque', 'angular momentum', 'moment of inertia', 'centripetal', 'angular velocity', 'gyroscope'],
   icon: '⚙️',
   tagline: 'Why wheels changed everything, figure skaters spin faster with arms in, and gears trade speed for force.',
   relatedStories: ['wheel-of-dharma', 'potters-first-bowl', 'kite-festival'],

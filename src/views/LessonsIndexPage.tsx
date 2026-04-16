@@ -1,11 +1,13 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { ArrowRight, Clock, CheckCircle, BookOpen, Search, Code2, ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, SUBJECTS, Subject, DISCIPLINES, Discipline } from '../data/lessons';
-import { getLessonOrigin } from '../data/lesson-types';
+import { lessonsMeta } from '../data/lessons-meta';
+import { SUBJECTS, DISCIPLINES } from '../data/lesson-constants';
+import { getLessonOrigin, type Subject, type Discipline } from '../data/lesson-types';
+import { loadLessonsSearchIndex, type LessonSearchEntry } from '../data/lessons-search';
 import { useProgress } from '../contexts/ProgressContext';
 
 function highlightMatch(text: string, query: string): React.ReactNode {
@@ -52,11 +54,23 @@ export default function LessonsIndexPage() {
 
   useEffect(() => { syncParams(); }, [syncParams]);
 
+  // Lazy-loaded full-text search index — fetched on first search-input focus
+  const [searchIndex, setSearchIndex] = useState<LessonSearchEntry[] | null>(null);
+  const indexRequested = useRef(false);
+  const ensureSearchIndex = useCallback(() => {
+    if (indexRequested.current) return;
+    indexRequested.current = true;
+    loadLessonsSearchIndex().then(setSearchIndex).catch(() => { indexRequested.current = false; });
+  }, []);
+
+  // If the page lands with an initial ?q= param, eagerly fetch the deep index
+  useEffect(() => { if (searchQuery) ensureSearchIndex(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Culture/origin options derived from data — uses label from origin
-  const originLabels = Array.from(new Set(lessons.map(l => getLessonOrigin(l).label))).sort();
+  const originLabels = Array.from(new Set(lessonsMeta.map(l => getLessonOrigin(l).label))).sort();
 
   // Discipline filter matching
-  const matchesDisciplineFilter = (lesson: typeof lessons[0]) => {
+  const matchesDisciplineFilter = (lesson: typeof lessonsMeta[0]) => {
     if (!selectedDiscipline) return true;
     const tags = lesson.skillTags;
     if (!tags || tags.length === 0) return false;
@@ -69,24 +83,37 @@ export default function LessonsIndexPage() {
     return tags.some(t => t.discipline === selectedDiscipline);
   };
 
-  const filtered = lessons.filter((lesson) => {
+  // Build the slug set of deep-content matches (only when index is loaded)
+  const deepMatchSlugs = (() => {
+    if (!searchQuery || !searchIndex) return null;
+    const q = searchQuery.toLowerCase();
+    const set = new Set<string>();
+    for (const e of searchIndex) {
+      if (e.searchText.includes(q) || e.stemSkillsText.includes(q)) set.add(e.slug);
+    }
+    return set;
+  })();
+
+  const filtered = lessonsMeta.filter((lesson) => {
     const matchesSubject = !selectedSubject || lesson.subjects?.includes(selectedSubject);
     const matchesDiscipline = filterType !== 'discipline' || matchesDisciplineFilter(lesson);
     const matchesTradition = !selectedTradition || getLessonOrigin(lesson).label === selectedTradition;
     const matchesSearch = !searchQuery || (() => {
       const q = searchQuery.toLowerCase();
-      return lesson.story.title.toLowerCase().includes(q) ||
-        lesson.stem.title.toLowerCase().includes(q) ||
-        lesson.story.tagline.toLowerCase().includes(q) ||
-        lesson.story.content?.toLowerCase().includes(q);
+      if (
+        lesson.storyTitle.toLowerCase().includes(q) ||
+        lesson.stemTitle.toLowerCase().includes(q) ||
+        lesson.tagline.toLowerCase().includes(q)
+      ) return true;
+      return deepMatchSlugs?.has(lesson.slug) ?? false;
     })();
     return matchesSubject && matchesDiscipline && matchesTradition && matchesSearch;
   });
 
   // Compute counts for discipline drill-down
-  const disciplineCount = (d: Discipline) => lessons.filter(l => l.skillTags?.some(t => t.discipline === d)).length;
-  const skillCount = (d: Discipline, skill: string) => lessons.filter(l => l.skillTags?.some(t => t.discipline === d && t.skill === skill)).length;
-  const toolCount = (d: Discipline, skill: string, tool: string) => lessons.filter(l => l.skillTags?.some(t => t.discipline === d && t.skill === skill && t.tools?.includes(tool))).length;
+  const disciplineCount = (d: Discipline) => lessonsMeta.filter(l => l.skillTags?.some(t => t.discipline === d)).length;
+  const skillCount = (d: Discipline, skill: string) => lessonsMeta.filter(l => l.skillTags?.some(t => t.discipline === d && t.skill === skill)).length;
+  const toolCount = (d: Discipline, skill: string, tool: string) => lessonsMeta.filter(l => l.skillTags?.some(t => t.discipline === d && t.skill === skill && t.tools?.includes(tool))).length;
 
   const clearAllFilters = () => {
     setSelectedSubject(null);
@@ -104,12 +131,12 @@ export default function LessonsIndexPage() {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">All Lessons</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-4">
-            {lessons.length}+ stories and growing, each with interactive STEM lessons. Filter by subject or search for a topic.
+            {lessonsMeta.length}+ stories and growing, each with interactive STEM lessonsMeta. Filter by subject or search for a topic.
           </p>
           {getCompletedCount() > 0 && (
             <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 px-4 py-2 rounded-full text-sm font-semibold mb-4">
               <CheckCircle className="w-4 h-4" />
-              {getCompletedCount()} of {lessons.length} stories completed
+              {getCompletedCount()} of {lessonsMeta.length} stories completed
             </div>
           )}
 
@@ -118,7 +145,8 @@ export default function LessonsIndexPage() {
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={ensureSearchIndex}
+              onChange={(e) => { ensureSearchIndex(); setSearchQuery(e.target.value); }}
               placeholder="Search stories or topics..."
               className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
             />
@@ -141,11 +169,11 @@ export default function LessonsIndexPage() {
           <div className="flex flex-wrap gap-2 justify-center mb-4">
             <button onClick={clearAllFilters}
               className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${!selectedSubject && !selectedDiscipline ? 'bg-amber-500 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'}`}>
-              All ({lessons.length})
+              All ({lessonsMeta.length})
             </button>
 
             {filterType === 'subject' && SUBJECTS.map(s => {
-              const count = lessons.filter(l => l.subjects?.includes(s.key)).length;
+              const count = lessonsMeta.filter(l => l.subjects?.includes(s.key)).length;
               if (count === 0) return null;
               return (
                 <button key={s.key} onClick={() => setSelectedSubject(selectedSubject === s.key ? null : s.key)}
@@ -177,7 +205,7 @@ export default function LessonsIndexPage() {
             <div className="flex flex-wrap gap-1.5 justify-center mb-4">
               <span className="text-xs text-gray-400 dark:text-gray-500 self-center mr-1">Culture:</span>
               {originLabels.map(label => {
-                const count = lessons.filter(l => getLessonOrigin(l).label === label).length;
+                const count = lessonsMeta.filter(l => getLessonOrigin(l).label === label).length;
                 return (
                   <button key={label} onClick={() => setSelectedTradition(selectedTradition === label ? null : label)}
                     className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${selectedTradition === label ? 'bg-purple-500 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'}`}>
@@ -268,7 +296,7 @@ export default function LessonsIndexPage() {
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((lesson) => {
-                const Icon = lesson.stem.icon;
+                const Icon = lesson.stemIcon;
                 return (
                   <Link
                     key={lesson.slug}
@@ -278,11 +306,11 @@ export default function LessonsIndexPage() {
                     <div className="relative h-40 overflow-hidden">
                       <img
                         src={`${lesson.illustration}?v=2`}
-                        alt={lesson.story.title}
+                        alt={lesson.storyTitle}
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-                      <div className={`absolute top-3 left-3 bg-gradient-to-r ${lesson.stem.color} w-9 h-9 rounded-full flex items-center justify-center shadow-lg`}>
+                      <div className={`absolute top-3 left-3 bg-gradient-to-r ${lesson.stemColor} w-9 h-9 rounded-full flex items-center justify-center shadow-lg`}>
                         <Icon className="w-4 h-4 text-white" />
                       </div>
                       {isStoryComplete(lesson.slug) && (
@@ -302,14 +330,14 @@ export default function LessonsIndexPage() {
                     <div className="p-5">
                       <div className="flex items-center gap-2 mb-2">
                         <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wide">
-                          {highlightMatch(lesson.stem.title, searchQuery)}
+                          {highlightMatch(lesson.stemTitle, searchQuery)}
                         </p>
                       </div>
                       <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                        {highlightMatch(lesson.story.title, searchQuery)}
+                        {highlightMatch(lesson.storyTitle, searchQuery)}
                       </h3>
                       <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-2 mb-3">
-                        {highlightMatch(lesson.story.tagline, searchQuery)}
+                        {highlightMatch(lesson.tagline, searchQuery)}
                       </p>
 
                       {/* Subject tags */}

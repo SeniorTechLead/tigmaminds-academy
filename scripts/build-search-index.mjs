@@ -45,22 +45,44 @@ async function buildIndex() {
     const icon = iconMatch?.[1] || '';
     const tagline = taglineMatch?.[1] || taglineMatch?.[2] || '';
 
-    // Extract ALL quoted strings (the actual content)
+    // Extract explicit keywords array from guide
+    const keywordsMatch = content.match(/keywords:\s*\[([^\]]*)\]/);
+    const keywords = keywordsMatch
+      ? keywordsMatch[1].match(/'([^']+)'/g)?.map(s => s.slice(1, -1)) || []
+      : [];
+
+    // Extract section titles (highest search value)
+    const sectionTitles = [];
+    const sectionTitleRegex = /title:\s*'([^']{10,})'/g;
+    let tm;
+    while ((tm = sectionTitleRegex.exec(content)) !== null) {
+      sectionTitles.push(stripMarkdown(tm[1]));
+    }
+
+    // Extract bold terms — these are key concepts (**term**)
+    const boldTerms = [];
+    const boldRegex = /\*\*([^*]{3,80})\*\*/g;
+    let bm;
+    while ((bm = boldRegex.exec(content)) !== null) {
+      boldTerms.push(bm[1].toLowerCase().trim());
+    }
+
+    // Extract ALL quoted strings (the body text)
     const textParts = [];
     const stringRegex = /'((?:[^'\\]|\\.)*)'/g;
     let match;
     while ((match = stringRegex.exec(content)) !== null) {
       const s = match[1];
-      // Skip short technical strings (import paths, prop names, etc.)
       if (s.length < 10) continue;
-      // Skip things that look like code/imports
       if (s.startsWith('./') || s.startsWith('../') || s.startsWith('http')) continue;
       textParts.push(stripMarkdown(s));
     }
 
-    // Deduplicate and join, cap at 8KB per guide
-    const searchText = [...new Set([title, tagline, ...textParts])]
-      .join(' ')
+    // Priority order: title, tagline, section titles, bold terms (always included),
+    // then body text capped at 8KB
+    const priority = [...new Set([title, tagline, ...keywords, ...sectionTitles, ...boldTerms])].join(' ');
+    const body = [...new Set(textParts)].join(' ');
+    const searchText = (priority + ' ' + body)
       .toLowerCase()
       .replace(/\s+/g, ' ')
       .slice(0, 8000);

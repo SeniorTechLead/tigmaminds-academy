@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'heat-and-thermodynamics',
   title: 'Heat & Thermodynamics',
   category: 'physics',
+  tags: ['math', 'engineering'],
+  keywords: ['entropy', 'enthalpy', 'carnot', 'specific heat', 'conduction', 'convection', 'radiation', 'boltzmann'],
   icon: '🌡️',
   tagline: "Why tea cools, metals expand, and the monsoon drives weather across Assam.",
   relatedStories: ['grandmothers-pitha', 'holi-tea-gardens', 'little-chef', 'monsoon-home'],

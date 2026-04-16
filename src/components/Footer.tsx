@@ -42,7 +42,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-2">
                 <Mail className="h-5 w-5 text-amber-400 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">hello@tigmaminds.academy</span>
+                <span className="text-sm break-all">hello@tigmaminds.academy</span>
               </li>
             </ul>
           </div>
