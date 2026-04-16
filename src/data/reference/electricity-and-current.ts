@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'electricity-and-current',
   title: 'Electricity & Current',
   category: 'physics',
+  tags: ['math', 'engineering'],
+  keywords: ['ohms law', 'resistance', 'capacitance', 'inductance', 'kirchhoff', 'coulomb', 'voltage divider'],
   icon: '⚡',
   tagline: 'How electrons flow, circuits work, and lightning strikes over the Brahmaputra.',
   relatedStories: ['firefly-festival-of-majuli', 'festival-lights', 'fireflies-dont-burn'],

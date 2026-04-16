@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft, Clock, BookOpen, CheckCircle, Plus, X, ArrowRight,
@@ -8,7 +8,10 @@ import {
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons, SUBJECTS, type Subject, getLessonBySlug, type Lesson, DISCIPLINES, type Discipline } from '../data/lessons';
+import { lessonsMeta, getLessonMetaBySlug, type LessonMeta } from '../data/lessons-meta';
+import { SUBJECTS, DISCIPLINES } from '../data/lesson-constants';
+import type { Subject, Discipline } from '../data/lesson-types';
+import { loadLessonsSearchIndex, type LessonSearchEntry } from '../data/lessons-search';
 import { useProgress } from '../contexts/ProgressContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useBasicsProgress, type BasicsCourseSlug } from '../contexts/BasicsProgressContext';
@@ -28,7 +31,7 @@ function loadPlanLocal(): PlanMap {
     if (typeof raw[0] === 'string') {
       const map: PlanMap = new Map();
       for (const slug of raw as string[]) {
-        const lesson = getLessonBySlug(slug);
+        const lesson = getLessonMetaBySlug(slug);
         if (lesson) map.set(slug, { id: lesson.id, addedAt: now });
       }
       return map;
@@ -36,7 +39,7 @@ function loadPlanLocal(): PlanMap {
     if (raw[0].slug && !raw[0].id) {
       const map: PlanMap = new Map();
       for (const entry of raw) {
-        const lesson = getLessonBySlug(entry.slug);
+        const lesson = getLessonMetaBySlug(entry.slug);
         if (lesson) map.set(entry.slug, { id: lesson.id, addedAt: entry.addedAt || now });
       }
       return map;
@@ -186,12 +189,12 @@ const MILESTONES = [
 
 /* ── Auto-generated discipline goals ── */
 const DISCIPLINE_GOALS = DISCIPLINES.filter(d => {
-  return lessons.some(l => l.skillTags?.some(t => t.discipline === d.key));
+  return lessonsMeta.some(l => l.skillTags?.some(t => t.discipline === d.key));
 }).map(d => {
-  const matchingLessons = lessons.filter(l => l.skillTags?.some(t => t.discipline === d.key));
+  const matchingLessons = lessonsMeta.filter(l => l.skillTags?.some(t => t.discipline === d.key));
   // Pick top 5-6 lessons by estimated hours (prioritize fully-built lessons)
   const sorted = matchingLessons
-    .filter(l => l.level0)
+    .filter(l => l.hasLevel0)
     .slice(0, 6);
   const skills = d.skills.map(s => s.name);
   return {
@@ -292,6 +295,13 @@ export default function LessonPlanPage() {
   const [filterSubject, setFilterSubject] = useState<Subject | null>(null);
   const [filterDiscipline, setFilterDiscipline] = useState<Discipline | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchIndex, setSearchIndex] = useState<LessonSearchEntry[] | null>(null);
+  const indexRequested = useRef(false);
+  const ensureSearchIndex = useCallback(() => {
+    if (indexRequested.current) return;
+    indexRequested.current = true;
+    loadLessonsSearchIndex().then(setSearchIndex).catch(() => { indexRequested.current = false; });
+  }, []);
   const [expandedGoal, setExpandedGoal] = useState<string | null>(null);
   const [goalTab, setGoalTab] = useState<'curated' | 'discipline'>('curated');
   const { isStoryComplete, isLevelComplete, getStoryProgress } = useProgress();
@@ -338,7 +348,7 @@ export default function LessonPlanPage() {
       const next = new Map(prev);
       if (next.has(slug)) { next.delete(slug); }
       else {
-        const lesson = getLessonBySlug(slug);
+        const lesson = getLessonMetaBySlug(slug);
         if (lesson) {
           next.set(slug, { id: lesson.id, addedAt: new Date().toISOString() });
           recordActivity(); // streak: user took action today
@@ -356,7 +366,7 @@ export default function LessonPlanPage() {
       let added = false;
       for (const slug of slugs) {
         if (!next.has(slug)) {
-          const lesson = getLessonBySlug(slug);
+          const lesson = getLessonMetaBySlug(slug);
           if (lesson) { next.set(slug, { id: lesson.id, addedAt: now }); added = true; }
         }
       }
@@ -368,7 +378,7 @@ export default function LessonPlanPage() {
 
   const clearAll = () => { const empty: PlanMap = new Map(); setPlanMap(empty); savePlan(empty); };
 
-  const selectedLessons = lessons.filter(l => selectedSlugs.has(l.slug));
+  const selectedLessons = lessonsMeta.filter(l => selectedSlugs.has(l.slug));
   const totalHours = selectedLessons.reduce((sum, l) => sum + (l.estimatedHours || 12), 0);
   const completedInPlan = selectedLessons.filter(l => isStoryComplete(l.slug)).length;
   const nextLesson = selectedLessons.find(l => !isStoryComplete(l.slug));
@@ -386,19 +396,31 @@ export default function LessonPlanPage() {
     return sum + ((l.estimatedHours || 12) * (1 - pct / 100));
   }, 0);
 
-  const filteredLessons = useMemo(() => lessons.filter(l => {
+  const deepMatchSlugs = useMemo(() => {
+    if (!searchQuery || !searchIndex) return null;
+    const q = searchQuery.toLowerCase();
+    const set = new Set<string>();
+    for (const e of searchIndex) {
+      if (e.searchText.includes(q) || e.stemSkillsText.includes(q)) set.add(e.slug);
+    }
+    return set;
+  }, [searchQuery, searchIndex]);
+
+  const filteredLessons = useMemo(() => lessonsMeta.filter(l => {
     if (filterSubject && !l.subjects?.includes(filterSubject)) return false;
     if (filterDiscipline && !l.skillTags?.some(t => t.discipline === filterDiscipline)) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      return l.story.title.toLowerCase().includes(q) ||
-        l.story.tagline?.toLowerCase().includes(q) ||
-        l.story.content?.toLowerCase().includes(q) ||
-        l.stem.title.toLowerCase().includes(q) ||
-        l.stem.skills.some(s => s.toLowerCase().includes(q));
+      if (
+        l.storyTitle.toLowerCase().includes(q) ||
+        l.tagline?.toLowerCase().includes(q) ||
+        l.stemTitle.toLowerCase().includes(q) ||
+        l.stemSkills.some(s => s.toLowerCase().includes(q))
+      ) return true;
+      return deepMatchSlugs?.has(l.slug) ?? false;
     }
     return true;
-  }), [filterSubject, filterDiscipline, searchQuery]);
+  }), [filterSubject, filterDiscipline, searchQuery, deepMatchSlugs]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
@@ -515,7 +537,7 @@ export default function LessonPlanPage() {
                       {selectedLessons.map((lesson, i) => {
                         const complete = isStoryComplete(lesson.slug);
                         const isNext = !complete && (i === 0 || isStoryComplete(selectedLessons[i - 1]?.slug));
-                        const Icon = lesson.stem.icon;
+                        const Icon = lesson.stemIcon;
                         return (
                           <div key={lesson.slug} className={`relative pl-14 ${complete ? 'opacity-80' : ''}`}>
                             {/* Timeline dot */}
@@ -535,14 +557,14 @@ export default function LessonPlanPage() {
                               'border-gray-200 dark:border-gray-700'
                             }`}>
                               <div className="flex items-start gap-4">
-                                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${lesson.stem.color} flex items-center justify-center flex-shrink-0`}>
+                                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${lesson.stemColor} flex items-center justify-center flex-shrink-0`}>
                                   <Icon className="w-5 h-5 text-white" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-start justify-between gap-2">
                                     <div>
                                       <Link href={`/lessons/${lesson.slug}`} className="text-base font-bold text-gray-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400">
-                                        {lesson.story.title}
+                                        {lesson.storyTitle}
                                       </Link>
                                       {complete && <span className="ml-2 text-xs text-emerald-500 font-semibold">Completed</span>}
                                       {isNext && <span className="ml-2 text-xs text-amber-500 font-semibold">Up next</span>}
@@ -551,11 +573,11 @@ export default function LessonPlanPage() {
                                       <X className="w-4 h-4" />
                                     </button>
                                   </div>
-                                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{lesson.stem.title}</p>
+                                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{lesson.stemTitle}</p>
                                   <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                                    <strong>You'll build:</strong> {lesson.stem.project.title}
+                                    <strong>You'll build:</strong> {lesson.projectTitle}
                                   </p>
-                                  <p className="text-xs text-gray-400 dark:text-gray-500">{lesson.stem.project.description}</p>
+                                  <p className="text-xs text-gray-400 dark:text-gray-500">{lesson.projectDescription}</p>
                                   <div className="flex flex-wrap items-center gap-1.5 mt-3">
                                     <LevelDots slug={lesson.slug} isLevelComplete={isLevelComplete} />
                                     {lesson.skillTags?.filter(t => t.discipline !== 'Programming').slice(0, 2).map((t, i) => (
@@ -624,7 +646,7 @@ export default function LessonPlanPage() {
                   {goalTab === 'discipline' && (
                     <div className="space-y-4 mb-4">
                       {DISCIPLINE_GOALS.map(goal => {
-                        const goalLessons = goal.slugs.map(s => getLessonBySlug(s)).filter(Boolean) as Lesson[];
+                        const goalLessons = goal.slugs.map(s => getLessonMetaBySlug(s)).filter(Boolean) as LessonMeta[];
                         const inPlan = goal.slugs.filter(s => selectedSlugs.has(s)).length;
                         const isExpanded = expandedGoal === goal.id;
 
@@ -705,8 +727,8 @@ export default function LessonPlanPage() {
                                           {complete || selected ? <CheckCircle className="w-4 h-4" /> : <Plus className="w-4 h-4 text-gray-400" />}
                                         </button>
                                         <div className="flex-1 min-w-0">
-                                          <Link href={`/lessons/${lesson.slug}`} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-amber-600 truncate block">{lesson.story.title}</Link>
-                                          <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{lesson.stem.title}</p>
+                                          <Link href={`/lessons/${lesson.slug}`} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-amber-600 truncate block">{lesson.storyTitle}</Link>
+                                          <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{lesson.stemTitle}</p>
                                         </div>
                                         <LevelDots slug={lesson.slug} isLevelComplete={isLevelComplete} />
                                       </div>
@@ -723,7 +745,7 @@ export default function LessonPlanPage() {
 
                 <div className={`space-y-4 ${goalTab !== 'curated' ? 'hidden' : ''}`}>
                   {LEARNING_GOALS.map(goal => {
-                    const goalLessons = goal.slugs.map(s => getLessonBySlug(s)).filter(Boolean) as Lesson[];
+                    const goalLessons = goal.slugs.map(s => getLessonMetaBySlug(s)).filter(Boolean) as LessonMeta[];
                     const inPlan = goal.slugs.filter(s => selectedSlugs.has(s)).length;
                     const goalComplete = goal.slugs.filter(s => isStoryComplete(s)).length;
                     const isExpanded = expandedGoal === goal.id;
@@ -818,11 +840,11 @@ export default function LessonPlanPage() {
                                       <div className="flex items-center gap-2">
                                         <span className="text-xs text-gray-400 dark:text-gray-500 font-mono w-5">{i + 1}.</span>
                                         <Link href={`/lessons/${lesson.slug}`} className="text-sm font-semibold text-gray-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400 truncate">
-                                          {lesson.story.title}
+                                          {lesson.storyTitle}
                                         </Link>
                                       </div>
                                       <p className="text-xs text-gray-500 dark:text-gray-400 ml-7 truncate">
-                                        {lesson.stem.title}
+                                        {lesson.stemTitle}
                                       </p>
                                     </div>
                                     <div className="text-right flex-shrink-0">
@@ -849,7 +871,8 @@ export default function LessonPlanPage() {
                       <input
                         type="text"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onFocus={ensureSearchIndex}
+                        onChange={(e) => { ensureSearchIndex(); setSearchQuery(e.target.value); }}
                         placeholder="Search stories or topics..."
                         className="w-full pl-9 pr-4 py-2.5 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                       />
@@ -870,7 +893,7 @@ export default function LessonPlanPage() {
                       className="px-3 py-2.5 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm"
                     >
                       <option value="">All Subjects</option>
-                      {SUBJECTS.filter(s => lessons.some(l => l.subjects?.includes(s.key))).map(s => (
+                      {SUBJECTS.filter(s => lessonsMeta.some(l => l.subjects?.includes(s.key))).map(s => (
                         <option key={s.key} value={s.key}>{s.icon} {s.key}</option>
                       ))}
                     </select>
@@ -894,10 +917,10 @@ export default function LessonPlanPage() {
                           </button>
                           <div className="flex-1 min-w-0">
                             <Link href={`/lessons/${lesson.slug}`} className="text-sm font-bold text-gray-900 dark:text-white hover:text-amber-600 dark:hover:text-amber-400">
-                              {lesson.story.title}
+                              {lesson.storyTitle}
                             </Link>
-                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{lesson.stem.title}</p>
-                            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 line-clamp-1">{lesson.stem.project.title}: {lesson.stem.project.description}</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{lesson.stemTitle}</p>
+                            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 line-clamp-1">{lesson.projectTitle}: {lesson.projectDescription}</p>
                             <div className="flex flex-wrap items-center gap-1 mt-2">
                               <LevelDots slug={lesson.slug} isLevelComplete={isLevelComplete} />
                               {lesson.skillTags?.filter(t => t.discipline !== 'Programming').slice(0, 2).map((t, i) => (
@@ -981,7 +1004,7 @@ export default function LessonPlanPage() {
                               <div className="flex items-center gap-2 min-w-0 flex-1">
                                 {complete ? <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" /> : <div className="w-4 h-4 rounded-full border-2 border-amber-400 flex-shrink-0" />}
                                 <Link href={`/lessons/${lesson.slug}`} className="text-xs text-gray-700 dark:text-gray-300 truncate hover:text-amber-600 dark:hover:text-amber-400 flex-1 min-w-0">
-                                  {lesson.story.title}
+                                  {lesson.storyTitle}
                                 </Link>
                                 <LevelDots slug={lesson.slug} isLevelComplete={isLevelComplete} />
                               </div>
@@ -997,7 +1020,7 @@ export default function LessonPlanPage() {
                       {nextLesson ? (
                         <Link href={`/lessons/${nextLesson.slug}`}
                           className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
-                          Start: {nextLesson.story.title.length > 22 ? nextLesson.story.title.slice(0, 22) + '...' : nextLesson.story.title}
+                          Start: {nextLesson.storyTitle.length > 22 ? nextLesson.storyTitle.slice(0, 22) + '...' : nextLesson.storyTitle}
                           <ArrowRight className="w-4 h-4" />
                         </Link>
                       ) : (

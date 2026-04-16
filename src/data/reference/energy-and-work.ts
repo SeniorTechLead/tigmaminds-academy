@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'energy-and-work',
   title: 'Energy & Work',
   category: 'physics',
+  tags: ['math', 'engineering'],
+  keywords: ['kinetic energy', 'potential energy', 'conservation of energy', 'joule', 'watt', 'power', 'efficiency'],
   icon: '💪',
   tagline: "The currency of the universe — from a falling mango to a hydroelectric dam.",
   relatedStories: ['honey-hunters-lesson', 'kite-festival', 'the-little-boat', 'ferrymans-riddle'],

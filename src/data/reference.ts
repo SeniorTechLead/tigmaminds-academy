@@ -73,6 +73,8 @@ export interface ReferenceGuide {
   slug: string;
   title: string;
   category: ReferenceCategory;
+  tags?: ReferenceCategory[];        // additional categories this guide is findable under (filtered view only — no duplicates in grouped "All" view)
+  keywords?: string[];               // searchable terms not in the title/tagline (e.g. section names, key concepts)
   icon: string;
   tagline: string;
   understand: ReferenceSection[];    // no-code, visual

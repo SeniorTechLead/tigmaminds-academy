@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'materials-and-chemistry',
   title: 'Materials & Chemistry',
   category: 'materials-science',
+  tags: ['chemistry', 'physics'],
+  keywords: ['polymer', 'crystal', 'alloy', 'tensile strength', 'silk protein', 'ceramic', 'composite', 'bonding'],
   icon: '🧪',
   tagline: 'Silk proteins, clay minerals, bamboo composites — the chemistry of everyday materials.',
   relatedStories: ['why-the-muga-silk-is-golden', 'eri-silk', 'little-potter', 'grandmothers-pitha', 'holi-tea-gardens', 'paper-umbrella'],

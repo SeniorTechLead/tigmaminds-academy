@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'machine-learning',
   title: 'Machine Learning',
   category: 'ai',
+  tags: ['math', 'data-science'],
+  keywords: ['gaussian', 'multivariate', 'normal distribution', 'gradient descent', 'linear algebra', 'probability', 'loss function', 'backpropagation', 'eigenvalue', 'covariance matrix', 'KL divergence', 'cross-entropy', 'softmax', 'confusion matrix', 'precision', 'recall', 'PCA'],
   icon: '🤖',
   tagline: 'Teach computers to learn from examples — not by writing rules, but by showing patterns.',
   relatedStories: ['girl-who-spoke-to-elephants', 'dragonfly-and-the-paddy-field', 'golden-deer-of-kamakhya', 'dancing-deer-of-loktak-lake', 'clouded-leopard'],

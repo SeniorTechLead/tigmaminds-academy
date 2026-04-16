@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'aerodynamics-and-flight',
   title: 'Aerodynamics & Flight',
   category: 'engineering',
+  tags: ['physics', 'math'],
+  keywords: ['bernoulli', 'lift', 'drag', 'reynolds number', 'boundary layer', 'navier-stokes', 'terminal velocity'],
   icon: '✈️',
   tagline: 'Why birds soar, planes stay up, and skydivers stop accelerating.',
   relatedStories: ['kite-festival', 'flying-squirrel'],

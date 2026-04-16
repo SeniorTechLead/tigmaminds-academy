@@ -55,13 +55,15 @@ const difficultyColors: Record<Difficulty, string> = {
 function HintPanel({ tier }: { tier: ProblemTier }) {
   const [expanded, setExpanded] = useState(false);
   const [sectionData, setSectionData] = useState<{ section: any; guideTitle: string } | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  // Load section data on demand when expanded
+  // Load section data on demand when first expanded
   useEffect(() => {
-    if (expanded && !sectionData && tier.hintRef?.section) {
-      lookupSection(tier.hintRef.section).then(setSectionData);
+    if (expanded && !sectionData && !loading && tier.hintRef?.section) {
+      setLoading(true);
+      lookupSection(tier.hintRef.section).then(d => { setSectionData(d); setLoading(false); }).catch(() => setLoading(false));
     }
-  }, [expanded, tier.hintRef?.section]);
+  }, [expanded, sectionData, loading, tier.hintRef?.section]);
 
   return (
     <div className="mb-4">
@@ -71,7 +73,7 @@ function HintPanel({ tier }: { tier: ProblemTier }) {
           <Sparkles className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
           <div className="text-sm flex-1">
             <span className="text-gray-700 dark:text-gray-300">{tier.hint}</span>
-            {tier.hintRef && sectionData && (
+            {tier.hintRef && (
               <button
                 onClick={() => setExpanded(!expanded)}
                 className="ml-2 inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 hover:underline font-medium"
@@ -80,27 +82,25 @@ function HintPanel({ tier }: { tier: ProblemTier }) {
                 <ChevronDown className={`w-3 h-3 transition-transform ${expanded ? 'rotate-180' : ''}`} />
               </button>
             )}
-            {tier.hintRef && !sectionData && (
-              <Link href={`/library/${tier.hintRef.slug}${tier.hintRef.section ? '#' + tier.hintRef.section : ''}`}
-                className="ml-2 inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 hover:underline font-medium"
-              >
-                {tier.hintRef.label} <ArrowRight className="w-3 h-3" />
-              </Link>
-            )}
           </div>
         </div>
 
         {/* Expanded Library content */}
-        {expanded && sectionData && (
+        {expanded && (
           <div className="border-t border-amber-200 dark:border-amber-800 px-4 py-4 bg-white dark:bg-gray-800/50">
-            <div className="flex items-center gap-2 mb-3">
-              <BookOpen className="w-4 h-4 text-amber-500" />
-              <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wide">
-                From the Library: {sectionData.guideTitle}
-              </p>
-            </div>
-            <SectionRenderer section={sectionData.section} level={1} />
-            <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700">
+            {loading && <p className="text-sm text-gray-500 dark:text-gray-400">Loading...</p>}
+            {sectionData && (
+              <>
+                <div className="flex items-center gap-2 mb-3">
+                  <BookOpen className="w-4 h-4 text-amber-500" />
+                  <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wide">
+                    From the Library: {sectionData.guideTitle}
+                  </p>
+                </div>
+                <SectionRenderer section={sectionData.section} level={1} />
+              </>
+            )}
+            <div className={`${sectionData ? 'mt-3 pt-3 border-t border-gray-100 dark:border-gray-700' : 'mt-2'}`}>
               <Link href={`/library/${tier.hintRef!.slug}${tier.hintRef!.section ? '#' + tier.hintRef!.section : ''}`}
                 target="_blank"
                 className="text-xs text-amber-600 dark:text-amber-400 hover:underline font-medium inline-flex items-center gap-1"
@@ -213,7 +213,7 @@ function ProblemSolver({ problem, tier, onBack, onTierChange, isTierLocked, user
 
   const runPythonTests = useCallback(async () => {
     const pyodide = pyodideRef.current || (await loadPyodide());
-    if (!pyodide) return;
+    if (!pyodide) { setOutput('Failed to load Python runtime. Check your internet connection and try again.'); return; }
 
     setRunning(true);
     setResults([]);
@@ -266,7 +266,7 @@ function ProblemSolver({ problem, tier, onBack, onTierChange, isTierLocked, user
 
   const runSqlTests = useCallback(async () => {
     const db = await loadSqlJs();
-    if (!db) return;
+    if (!db) { setOutput('Failed to load SQL engine. Check your internet connection and try again.'); return; }
 
     setRunning(true);
     setResults([]);

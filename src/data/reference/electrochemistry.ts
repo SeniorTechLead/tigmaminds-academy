@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'electrochemistry',
   title: 'Electrochemistry',
   category: 'chemistry',
+  tags: ['physics'],
+  keywords: ['redox', 'electrode', 'electrolysis', 'galvanic cell', 'nernst equation', 'oxidation', 'reduction', 'battery'],
   icon: '⚗️',
   tagline: 'Where chemistry meets electricity — batteries, corrosion, and electroplating.',
   relatedStories: ['firefly-festival-of-majuli', 'festival-lights'],

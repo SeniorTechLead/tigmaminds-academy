@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'circuits-basics',
   title: 'Circuits & Electronics',
   category: 'electronics',
+  tags: ['physics', 'math'],
+  keywords: ['resistor', 'capacitor', 'LED', 'series', 'parallel', 'ohms law', 'voltage divider', 'breadboard'],
   icon: '⚡',
   tagline: 'The foundation of every electronic device',
   relatedStories: ['firefly-festival-of-majuli', 'river-dolphins-secret', 'bridge-that-grew', 'festival-lights'],

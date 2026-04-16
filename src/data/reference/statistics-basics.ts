@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'statistics-basics',
   title: 'Statistical Thinking',
   category: 'data-science',
+  tags: ['math'],
+  keywords: ['p-value', 'confidence interval', 'hypothesis testing', 'sampling', 'central limit theorem', 'regression', 'multivariate', 'bayesian'],
   icon: '📐',
   tagline: 'Sampling, confidence intervals, p-values, and the replication crisis — thinking critically about data.',
   relatedStories: ['girl-who-spoke-to-elephants', 'why-the-muga-silk-is-golden', 'boy-who-talked-to-clouds', 'dancing-deer-of-loktak-lake'],

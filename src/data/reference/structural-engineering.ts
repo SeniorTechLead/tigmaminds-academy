@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'structural-engineering',
   title: 'Structural Engineering',
   category: 'engineering',
+  tags: ['physics', 'math'],
+  keywords: ['stress', 'strain', 'moment of inertia', 'tensile strength', 'gaussian', 'load distribution', 'truss', 'beam'],
   icon: '🏗️',
   tagline: 'Why buildings don\'t fall down, bridges use triangles, and skyscrapers sway on purpose.',
   relatedStories: ['bridge-that-grew', 'boy-who-built-a-library'],

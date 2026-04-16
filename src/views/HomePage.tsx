@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, Sparkles, Bot, Code2 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { lessons } from '../data/lessons';
+import { lessonsMeta } from '../data/lessons-meta';
 import { useLessonMeta } from '../contexts/LessonMetaContext';
 
 function shuffleArray<T>(arr: T[]): T[] {
@@ -35,7 +35,7 @@ const tracks = [
 export default function HomePage() {
   const { isDemoStory } = useLessonMeta();
   const featuredStories = useMemo(() => {
-    const demos = lessons.filter(l => isDemoStory(l.slug));
+    const demos = lessonsMeta.filter(l => isDemoStory(l.slug));
     return shuffleArray(demos).slice(0, 6);
   }, [isDemoStory]);
 
@@ -104,7 +104,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredStories.map((lesson, index) => {
-              const Icon = lesson.stem.icon;
+              const Icon = lesson.stemIcon;
               return (
                 <Link href={`/lessons/${lesson.slug}`}
                   key={lesson.slug}
@@ -114,11 +114,11 @@ export default function HomePage() {
                   <div className="relative h-48 overflow-hidden">
                     <img
                       src={lesson.illustration}
-                      alt={lesson.story.title}
+                      alt={lesson.storyTitle}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-                    <div className={`absolute top-4 left-4 bg-gradient-to-r ${lesson.stem.color} w-10 h-10 rounded-full flex items-center justify-center shadow-lg`}>
+                    <div className={`absolute top-4 left-4 bg-gradient-to-r ${lesson.stemColor} w-10 h-10 rounded-full flex items-center justify-center shadow-lg`}>
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                   </div>
@@ -127,13 +127,13 @@ export default function HomePage() {
                       Story &rarr; Lesson
                     </p>
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                      {lesson.story.title}
+                      {lesson.storyTitle}
                     </h3>
-                    <p className={`text-sm font-semibold bg-gradient-to-r ${lesson.stem.color} bg-clip-text text-transparent mb-3`}>
-                      &rarr; {lesson.stem.title}
+                    <p className={`text-sm font-semibold bg-gradient-to-r ${lesson.stemColor} bg-clip-text text-transparent mb-3`}>
+                      &rarr; {lesson.stemTitle}
                     </p>
                     <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                      {lesson.stem.description}
+                      {lesson.stemDescription}
                     </p>
                   </div>
                 </Link>
@@ -145,7 +145,7 @@ export default function HomePage() {
             <Link href="/lessons"
               className="inline-flex items-center text-amber-600 dark:text-amber-400 font-semibold text-lg hover:text-amber-700 dark:hover:text-amber-300 transition-colors"
             >
-              Browse All {lessons.length} Lessons
+              Browse All {lessonsMeta.length} Lessons
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>

@@ -109,7 +109,7 @@ async function saveToSupabase(userId: string, slug: string, progress: LessonProg
 
     const { error } = await supabase.from('user_progress').upsert(row, { onConflict: 'user_id,lesson_slug' });
 
-    if (error && !error.message.includes('foreign key')) {
+    if (error && !error.message.includes('foreign key') && !error.message.includes('row-level security')) {
       console.error(`[Progress] Failed to save ${slug}:`, error.message);
     }
   } catch (err) {
@@ -186,14 +186,17 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
           setProgress(merged);
           saveLocal(merged);
 
-          // Push merged back to Supabase
-          for (const [slug, p] of Object.entries(merged)) {
+          // Only push LOCAL-ONLY entries to Supabase (not everything)
+          const dbSlugs = new Set(Object.keys(dbProgress));
+          const localOnly = Object.entries(merged).filter(([slug]) => !dbSlugs.has(slug));
+          for (const [slug, p] of localOnly) {
             await saveToSupabase(user.id, slug, p);
           }
         } else {
-          // No DB data — push local to Supabase
+          // No DB data — push local to Supabase (but only entries with actual progress)
           const local = loadLocal();
-          for (const [slug, p] of Object.entries(local)) {
+          const withProgress = Object.entries(local).filter(([, p]) => p.levelsCompleted.length > 0);
+          for (const [slug, p] of withProgress) {
             await saveToSupabase(user.id, slug, p);
           }
         }

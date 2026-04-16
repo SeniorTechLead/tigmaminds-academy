@@ -4,6 +4,8 @@ export const guide: ReferenceGuide = {
   slug: 'light-and-color',
   title: 'Light & Color',
   category: 'physics',
+  tags: ['math'],
+  keywords: ['rayleigh scattering', 'refraction', 'snells law', 'wavelength', 'electromagnetic spectrum', 'diffraction'],
   icon: '🌈',
   tagline: 'Why the sky is blue, sunsets glow orange, and rainbows have seven bands.',
   relatedStories: ['orange-sunsets-assam', 'the-girl-who-painted-rain', 'rainbow-fish', 'kingfisher-blue', 'stars-ziro-valley', 'golden-deer-of-kamakhya'],
