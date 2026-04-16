@@ -130,13 +130,13 @@ export default function DiagramZoom({ children }: DiagramZoomProps) {
 
           {/* Diagram area — the real DOM node gets moved here */}
           <div
-            className="flex-1 overflow-auto flex items-center justify-center"
+            className={`flex-1 overflow-auto flex items-center justify-center ${modalDark ? 'bg-slate-950' : 'bg-white'}`}
             onClick={(e) => e.stopPropagation()}
             onWheel={onWheel}
           >
             <div
               ref={modalContentRef}
-              className="relative m-auto p-6 w-[80vw] max-w-4xl [&_>_*]:!max-w-none"
+              className={`relative m-auto p-6 w-[80vw] max-w-4xl [&_>_*]:!max-w-none rounded-2xl ${modalDark ? 'bg-gray-900 dark' : 'bg-white'}`}
               style={{ transform: `scale(${scale})`, transformOrigin: 'center center', transition: 'transform 0.15s ease' }}
             >
               {/* diagram node gets moved here by the useEffect */}
