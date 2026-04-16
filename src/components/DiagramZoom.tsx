@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef, type ReactNode } from 'react';
+import { Sun, Moon } from 'lucide-react';
 
 interface DiagramZoomProps {
   children: ReactNode;
@@ -11,6 +12,9 @@ interface DiagramZoomProps {
 export default function DiagramZoom({ children }: DiagramZoomProps) {
   const [open, setOpen] = useState(false);
   const [scale, setScale] = useState(1);
+  const [modalDark, setModalDark] = useState(() =>
+    typeof document !== 'undefined' && document.documentElement.classList.contains('dark'),
+  );
   const diagramRef = useRef<HTMLDivElement>(null);
   const inlinePlaceholderRef = useRef<HTMLDivElement>(null);
   const modalContentRef = useRef<HTMLDivElement>(null);
@@ -105,15 +109,24 @@ export default function DiagramZoom({ children }: DiagramZoomProps) {
 
       {/* Modal overlay */}
       {open && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-white dark:bg-slate-950" onClick={close}>
-          {/* Close button */}
-          <button
-            onClick={(e) => { e.stopPropagation(); close(); }}
-            className="absolute top-4 right-4 z-20 w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white text-lg"
-            aria-label="Close"
-          >
-            ✕
-          </button>
+        <div className={`fixed inset-0 z-50 flex flex-col ${modalDark ? 'bg-slate-950' : 'bg-white'}`} onClick={close}>
+          {/* Close + theme toggle */}
+          <div className="absolute top-4 right-4 z-20 flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setModalDark(!modalDark)}
+              className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${modalDark ? 'bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900'}`}
+              aria-label="Toggle theme"
+            >
+              {modalDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={close}
+              className={`w-9 h-9 flex items-center justify-center rounded-full text-lg transition-colors ${modalDark ? 'bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900'}`}
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
 
           {/* Diagram area — the real DOM node gets moved here */}
           <div
@@ -143,14 +156,14 @@ export default function DiagramZoom({ children }: DiagramZoomProps) {
 
           {/* Zoom controls */}
           <div
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-2 rounded-full bg-gray-100/90 dark:bg-slate-800/90 border border-gray-300 dark:border-slate-700 shadow-lg"
+            className={`absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-2 rounded-full shadow-lg ${modalDark ? 'bg-slate-800/90 border border-slate-700' : 'bg-gray-100/90 border border-gray-300'}`}
             onClick={(e) => e.stopPropagation()}
           >
-            <button onClick={zoomOut} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200 text-lg font-bold" aria-label="Zoom out">−</button>
-            <span className="text-gray-600 dark:text-slate-300 text-sm font-mono w-12 text-center">{Math.round(scale * 100)}%</span>
-            <button onClick={zoomIn} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200 text-lg font-bold" aria-label="Zoom in">+</button>
-            <div className="w-px h-5 bg-gray-300 dark:bg-slate-600" />
-            <button onClick={() => setScale(1)} className="px-2 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-500 dark:text-slate-400 text-xs">Reset</button>
+            <button onClick={zoomOut} className={`w-8 h-8 flex items-center justify-center rounded-full text-lg font-bold ${modalDark ? 'hover:bg-slate-700 text-slate-200' : 'hover:bg-gray-200 text-gray-700'}`} aria-label="Zoom out">−</button>
+            <span className={`text-sm font-mono w-12 text-center ${modalDark ? 'text-slate-300' : 'text-gray-600'}`}>{Math.round(scale * 100)}%</span>
+            <button onClick={zoomIn} className={`w-8 h-8 flex items-center justify-center rounded-full text-lg font-bold ${modalDark ? 'hover:bg-slate-700 text-slate-200' : 'hover:bg-gray-200 text-gray-700'}`} aria-label="Zoom in">+</button>
+            <div className={`w-px h-5 ${modalDark ? 'bg-slate-600' : 'bg-gray-300'}`} />
+            <button onClick={() => setScale(1)} className={`px-2 h-8 flex items-center justify-center rounded-full text-xs ${modalDark ? 'hover:bg-slate-700 text-slate-400' : 'hover:bg-gray-200 text-gray-500'}`}>Reset</button>
           </div>
         </div>
       )}
