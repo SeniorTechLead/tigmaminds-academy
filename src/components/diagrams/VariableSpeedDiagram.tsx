@@ -50,21 +50,21 @@ export default function VariableSpeedDiagram() {
   const gaugePercent = ((2000 - speed) / 1900) * 100;
 
   return (
-    <div className="w-full bg-gray-900 rounded-xl p-6 text-white font-mono select-none">
+    <div className="w-full bg-white dark:bg-gray-900 rounded-xl p-6 text-gray-900 dark:text-white font-mono select-none">
       <h3 className="text-center text-lg font-bold text-cyan-400 mb-4">
         Variables Control Everything
       </h3>
 
       {/* Variable box */}
       <div className="flex justify-center mb-6">
-        <div className="bg-gray-800 border-2 border-cyan-500 rounded-lg px-6 py-3 text-center">
-          <p className="text-xs text-gray-400 mb-1">Variable declaration:</p>
+        <div className="bg-gray-100 dark:bg-gray-800 border-2 border-cyan-500 rounded-lg px-6 py-3 text-center">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Variable declaration:</p>
           <p className="text-2xl">
             <span className="text-blue-400">int</span>{' '}
             <span className="text-yellow-400">speed</span>{' '}
-            <span className="text-gray-400">=</span>{' '}
+            <span className="text-gray-500 dark:text-gray-400">=</span>{' '}
             <span className="text-green-400 font-bold text-3xl">{speed}</span>
-            <span className="text-gray-400">;</span>
+            <span className="text-gray-500 dark:text-gray-400">;</span>
           </p>
         </div>
       </div>
@@ -115,7 +115,7 @@ export default function VariableSpeedDiagram() {
 
           {/* Slider */}
           <div className="w-full max-w-xs">
-            <label className="text-xs text-gray-400 block mb-1 text-center">
+            <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1 text-center">
               Or drag to set speed:
             </label>
             <input
@@ -127,7 +127,7 @@ export default function VariableSpeedDiagram() {
               onChange={e => handleSlider(Number(e.target.value))}
               className="w-full accent-cyan-400 cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-gray-500">
+            <div className="flex justify-between text-[10px] text-gray-500 dark:text-gray-500">
               <span>100ms (fast!)</span>
               <span>2000ms (slow)</span>
             </div>
@@ -183,7 +183,7 @@ export default function VariableSpeedDiagram() {
 
           {/* History trail */}
           <div className="mt-2 w-full">
-            <p className="text-xs text-gray-500 mb-1 text-center">Speed history:</p>
+            <p className="text-xs text-gray-500 dark:text-gray-500 mb-1 text-center">Speed history:</p>
             <div className="flex gap-1 justify-center flex-wrap">
               {history.slice(-10).map((v, i) => (
                 <span
@@ -191,7 +191,7 @@ export default function VariableSpeedDiagram() {
                   className={`text-[10px] px-1.5 py-0.5 rounded ${
                     i === history.slice(-10).length - 1
                       ? 'bg-cyan-800 text-cyan-300 font-bold'
-                      : 'bg-gray-800 text-gray-500'
+                      : 'bg-gray-200 dark:bg-gray-800 text-gray-500'
                   }`}
                 >
                   {v}
@@ -203,7 +203,7 @@ export default function VariableSpeedDiagram() {
       </div>
 
       {/* Live code */}
-      <div className="bg-gray-950 rounded-lg p-4 border border-gray-700 text-sm">
+      <div className="bg-gray-50 dark:bg-gray-950 rounded-lg p-4 border border-gray-300 dark:border-gray-700 text-sm">
         <p className="text-gray-500 mb-2">// Arduino Code (updates live!):</p>
         <pre className="text-green-300 whitespace-pre-wrap leading-relaxed">
 {`int speed = ${speed};  // ← this variable controls timing
@@ -225,7 +225,7 @@ void loop() {
         </pre>
       </div>
 
-      <div className="mt-4 bg-gray-800 rounded-lg p-3 text-sm text-gray-300 leading-relaxed">
+      <div className="mt-4 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
         <p className="text-cyan-400 font-bold mb-1">Key idea:</p>
         <p>A <span className="text-yellow-400">variable</span> is a named box that holds a number. Instead of writing <code className="text-green-400">delay(1000)</code> everywhere, we write <code className="text-green-400">delay(speed)</code> and change <code className="text-yellow-400">speed</code> whenever we want. One variable controls the whole program!</p>
       </div>

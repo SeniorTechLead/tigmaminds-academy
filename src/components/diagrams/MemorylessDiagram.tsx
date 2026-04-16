@@ -82,7 +82,7 @@ export default function MemorylessDiagram() {
         role="img"
         aria-label="Memoryless property of exponential distribution"
       >
-        <rect width={W} height={H} rx="8" className="fill-slate-900" />
+        <rect width={W} height={H} rx="8" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
         <text x={W / 2} y={18} textAnchor="middle" fill="#f59e0b" fontSize="11" fontWeight="700" fontFamily="system-ui, sans-serif">

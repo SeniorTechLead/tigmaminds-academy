@@ -4,7 +4,7 @@ import { useState } from 'react';
 /**
  * Computing Chi-Squared Step by Step.
  * Observed coin flips vs expected. Adjustable observed values.
- * Steps: Observe → Expected → Difference → Square & divide → Sum = χ².
+ * Steps: Observe -> Expected -> Difference -> Square & divide -> Sum = chi-squared.
  */
 
 type Step = 1 | 2 | 3 | 4 | 5;
@@ -14,12 +14,16 @@ const STEP_LABELS: { key: Step; label: string }[] = [
   { key: 2, label: '2. Expected' },
   { key: 3, label: '3. Difference' },
   { key: 4, label: '4. Square & Divide' },
-  { key: 5, label: '5. Sum = χ²' },
+  { key: 5, label: '5. Sum = \u03c7\u00b2' },
 ];
 
 const TOTAL = 100;
 const EXPECTED = 50;
-const CRITICAL = 3.84; // df=1, α=0.05
+const CRITICAL = 3.84; // df=1, alpha=0.05
+
+const INACTIVE_BTN = 'bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-slate-300 hover:bg-gray-300 dark:hover:bg-slate-600';
+const TEXT_MID = 'fill-gray-500 dark:fill-gray-400';
+const TEXT_SUBTLE = 'fill-gray-500 dark:fill-gray-500';
 
 export default function ChiSquaredStepsDiagram() {
   const [step, setStep] = useState<Step>(1);
@@ -50,7 +54,7 @@ export default function ChiSquaredStepsDiagram() {
     const xMax = 10;
     for (let i = 0; i <= 80; i++) {
       const x = (i / 80) * xMax;
-      // df=1 chi-squared pdf: f(x) = (1/(√(2πx))) * e^(-x/2)
+      // df=1 chi-squared pdf: f(x) = (1/(sqrt(2*pi*x))) * e^(-x/2)
       const fx = x < 0.05 ? 0 : (1 / Math.sqrt(2 * Math.PI * x)) * Math.exp(-x / 2);
       const normFx = Math.min(fx, 3) / 3; // normalize
       pts.push(`${curveX + (i / 80) * curveW},${curveY - normFx * curveH}`);
@@ -67,7 +71,7 @@ export default function ChiSquaredStepsDiagram() {
             key={s.key}
             onClick={() => setStep(s.key)}
             className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
-              step === s.key ? 'bg-blue-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              step === s.key ? 'bg-blue-600 text-white' : INACTIVE_BTN
             }`}
           >
             {s.label}
@@ -76,14 +80,14 @@ export default function ChiSquaredStepsDiagram() {
       </div>
 
       {/* Adjustable observed values */}
-      <div className="flex gap-3 mb-2 justify-center items-center text-xs text-slate-300">
+      <div className="flex gap-3 mb-2 justify-center items-center text-xs text-gray-600 dark:text-slate-300">
         <span>Heads:</span>
-        <button onClick={() => setHeads(h => Math.max(0, h - 5))} className="px-2 py-0.5 bg-slate-700 rounded hover:bg-slate-600">-5</button>
-        <button onClick={() => setHeads(h => Math.max(0, h - 1))} className="px-2 py-0.5 bg-slate-700 rounded hover:bg-slate-600">-1</button>
+        <button onClick={() => setHeads(h => Math.max(0, h - 5))} className={`px-2 py-0.5 rounded ${INACTIVE_BTN}`}>-5</button>
+        <button onClick={() => setHeads(h => Math.max(0, h - 1))} className={`px-2 py-0.5 rounded ${INACTIVE_BTN}`}>-1</button>
         <span className="font-bold text-blue-400 w-8 text-center">{heads}</span>
-        <button onClick={() => setHeads(h => Math.min(TOTAL, h + 1))} className="px-2 py-0.5 bg-slate-700 rounded hover:bg-slate-600">+1</button>
-        <button onClick={() => setHeads(h => Math.min(TOTAL, h + 5))} className="px-2 py-0.5 bg-slate-700 rounded hover:bg-slate-600">+5</button>
-        <span className="text-slate-500">Tails: {tails}</span>
+        <button onClick={() => setHeads(h => Math.min(TOTAL, h + 1))} className={`px-2 py-0.5 rounded ${INACTIVE_BTN}`}>+1</button>
+        <button onClick={() => setHeads(h => Math.min(TOTAL, h + 5))} className={`px-2 py-0.5 rounded ${INACTIVE_BTN}`}>+5</button>
+        <span className="text-gray-500 dark:text-slate-500">Tails: {tails}</span>
       </div>
 
       <svg
@@ -93,17 +97,17 @@ export default function ChiSquaredStepsDiagram() {
         role="img"
         aria-label="Chi-squared test step by step"
       >
-        <rect width={W} height={H} rx="8" className="fill-slate-900" />
+        <rect width={W} height={H} rx="8" className="fill-gray-50 dark:fill-slate-900" />
 
         {/* Steps 1-4: Bar chart area */}
         {step <= 4 && (
           <>
             {/* Baseline */}
-            <line x1={mx} y1={barBaseY} x2={W - mr} y2={barBaseY} stroke="#475569" strokeWidth="1" />
+            <line x1={mx} y1={barBaseY} x2={W - mr} y2={barBaseY} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth="1" />
 
             {/* Labels */}
-            <text x={headsCx} y={barBaseY + 15} textAnchor="middle" fill="#94a3b8" fontSize="10" fontFamily="system-ui, sans-serif">Heads</text>
-            <text x={tailsCx} y={barBaseY + 15} textAnchor="middle" fill="#94a3b8" fontSize="10" fontFamily="system-ui, sans-serif">Tails</text>
+            <text x={headsCx} y={barBaseY + 15} textAnchor="middle" className={TEXT_MID} fontSize="10" fontFamily="system-ui, sans-serif">Heads</text>
+            <text x={tailsCx} y={barBaseY + 15} textAnchor="middle" className={TEXT_MID} fontSize="10" fontFamily="system-ui, sans-serif">Tails</text>
 
             {/* Step 1+: Observed bars */}
             <rect x={headsCx - barW / 2} y={barBaseY - barH(heads)} width={barW} height={barH(heads)} fill="#3b82f6" opacity="0.7" rx="2" />
@@ -150,7 +154,7 @@ export default function ChiSquaredStepsDiagram() {
                 )}
                 <defs>
                   <marker id="chi-arrow" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-                    <polygon points="0 0, 6 2, 0 4" fill="#94a3b8" />
+                    <polygon points="0 0, 6 2, 0 4" className="fill-gray-400 dark:fill-gray-400" />
                   </marker>
                 </defs>
               </>
@@ -160,10 +164,10 @@ export default function ChiSquaredStepsDiagram() {
             {step === 4 && (
               <>
                 <text x={headsCx} y={barBaseY + 32} textAnchor="middle" fill="#f59e0b" fontSize="8" fontFamily="system-ui, sans-serif">
-                  ({diffH})²/{EXPECTED} = {chiH.toFixed(1)}
+                  ({diffH})\u00b2/{EXPECTED} = {chiH.toFixed(1)}
                 </text>
                 <text x={tailsCx} y={barBaseY + 32} textAnchor="middle" fill="#f59e0b" fontSize="8" fontFamily="system-ui, sans-serif">
-                  ({diffT})²/{EXPECTED} = {chiT.toFixed(1)}
+                  ({diffT})\u00b2/{EXPECTED} = {chiT.toFixed(1)}
                 </text>
               </>
             )}
@@ -185,7 +189,7 @@ export default function ChiSquaredStepsDiagram() {
               <polyline points={pts} fill="none" stroke="#3b82f6" strokeWidth="1.5" />
 
               {/* Baseline */}
-              <line x1={curveX} y1={curveY} x2={curveX + curveW} y2={curveY} stroke="#475569" strokeWidth="1" />
+              <line x1={curveX} y1={curveY} x2={curveX + curveW} y2={curveY} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth="1" />
 
               {/* Critical value marker */}
               <line x1={critX} y1={curveY - 45} x2={critX} y2={curveY + 5} stroke="#ef4444" strokeWidth="1.5" strokeDasharray="4,2" />
@@ -199,22 +203,22 @@ export default function ChiSquaredStepsDiagram() {
               {/* Our chi-squared value */}
               <line x1={chiX} y1={curveY - 50} x2={chiX} y2={curveY} stroke="#f59e0b" strokeWidth="2" />
               <text x={chiX} y={curveY - 55} textAnchor="middle" fill="#f59e0b" fontSize="9" fontWeight="700" fontFamily="system-ui, sans-serif">
-                χ² = {chiSq.toFixed(1)}
+                {'\u03c7\u00b2'} = {chiSq.toFixed(1)}
               </text>
 
               {/* Sum formula */}
-              <text x={W / 2} y={35} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="system-ui, sans-serif">
-                χ² = {chiH.toFixed(1)} + {chiT.toFixed(1)} = {chiSq.toFixed(1)}
+              <text x={W / 2} y={35} textAnchor="middle" className={TEXT_MID} fontSize="9" fontFamily="system-ui, sans-serif">
+                {'\u03c7\u00b2'} = {chiH.toFixed(1)} + {chiT.toFixed(1)} = {chiSq.toFixed(1)}
               </text>
 
               {/* Verdict */}
               <text x={W / 2} y={55} textAnchor="middle" fill={reject ? '#ef4444' : '#22c55e'} fontSize="10" fontWeight="700" fontFamily="system-ui, sans-serif">
-                {chiSq.toFixed(1)} {reject ? '>' : '≤'} {CRITICAL} → {reject ? 'Reject H₀ — coin likely unfair!' : 'Fail to reject H₀ — consistent with fair coin.'}
+                {chiSq.toFixed(1)} {reject ? '>' : '\u2264'} {CRITICAL} {'\u2192'} {reject ? 'Reject H\u2080 \u2014 coin likely unfair!' : 'Fail to reject H\u2080 \u2014 consistent with fair coin.'}
               </text>
 
               {/* Axis labels */}
               {[0, 2, 4, 6, 8, 10].map(v => (
-                <text key={v} x={curveX + (v / xMax) * curveW} y={curveY + 16} textAnchor="middle" fill="#64748b" fontSize="7" fontFamily="system-ui, sans-serif">
+                <text key={v} x={curveX + (v / xMax) * curveW} y={curveY + 16} textAnchor="middle" className={TEXT_SUBTLE} fontSize="7" fontFamily="system-ui, sans-serif">
                   {v}
                 </text>
               ))}
@@ -224,28 +228,28 @@ export default function ChiSquaredStepsDiagram() {
 
         {/* Step descriptions */}
         {step === 1 && (
-          <text x={W / 2} y={H - 15} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="system-ui, sans-serif">
+          <text x={W / 2} y={H - 15} textAnchor="middle" className={TEXT_MID} fontSize="9" fontFamily="system-ui, sans-serif">
             We flipped a coin {TOTAL} times: {heads} heads, {tails} tails. Is it fair?
           </text>
         )}
         {step === 2 && (
-          <text x={W / 2} y={H - 15} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="system-ui, sans-serif">
+          <text x={W / 2} y={H - 15} textAnchor="middle" className={TEXT_MID} fontSize="9" fontFamily="system-ui, sans-serif">
             If fair, we expect 50 heads, 50 tails. Dashed lines = expected.
           </text>
         )}
         {step === 3 && (
-          <text x={W / 2} y={H - 15} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="system-ui, sans-serif">
+          <text x={W / 2} y={H - 15} textAnchor="middle" className={TEXT_MID} fontSize="9" fontFamily="system-ui, sans-serif">
             Differences: how far is each from expected?
           </text>
         )}
         {step === 4 && (
-          <text x={W / 2} y={H - 15} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="system-ui, sans-serif">
-            Square each difference and divide by expected: (O−E)²/E
+          <text x={W / 2} y={H - 15} textAnchor="middle" className={TEXT_MID} fontSize="9" fontFamily="system-ui, sans-serif">
+            Square each difference and divide by expected: (O-E){'\u00b2'}/E
           </text>
         )}
         {step === 5 && (
-          <text x={W / 2} y={H - 8} textAnchor="middle" fill="#64748b" fontSize="8" fontFamily="system-ui, sans-serif">
-            df=1, α=0.05. Adjust heads with +/- buttons to explore!
+          <text x={W / 2} y={H - 8} textAnchor="middle" className={TEXT_SUBTLE} fontSize="8" fontFamily="system-ui, sans-serif">
+            df=1, {'\u03b1'}=0.05. Adjust heads with +/- buttons to explore!
           </text>
         )}
       </svg>

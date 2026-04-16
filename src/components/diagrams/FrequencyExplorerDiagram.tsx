@@ -22,13 +22,13 @@ const NOTES: { name: string; freq: number; color: string }[] = [
 ];
 
 const REAL_WORLD = [
-  { label: 'Thunder rumble', freq: 40, emoji: '⛈️' },
-  { label: 'Bass guitar', freq: 80, emoji: '🎸' },
-  { label: 'Human voice', freq: 200, emoji: '🗣️' },
-  { label: 'Middle C (piano)', freq: 262, emoji: '🎹' },
-  { label: 'Smoke alarm', freq: 3000, emoji: '🚨' },
-  { label: 'Mosquito buzz', freq: 600, emoji: '🦟' },
-  { label: 'Bird chirp', freq: 4000, emoji: '🐦' },
+  { label: 'Thunder rumble', freq: 40, emoji: '\u26c8\ufe0f' },
+  { label: 'Bass guitar', freq: 80, emoji: '\ud83c\udfb8' },
+  { label: 'Human voice', freq: 200, emoji: '\ud83d\udde3\ufe0f' },
+  { label: 'Middle C (piano)', freq: 262, emoji: '\ud83c\udfb9' },
+  { label: 'Smoke alarm', freq: 3000, emoji: '\ud83d\udea8' },
+  { label: 'Mosquito buzz', freq: 600, emoji: '\ud83e\udd9f' },
+  { label: 'Bird chirp', freq: 4000, emoji: '\ud83d\udc26' },
 ];
 
 export default function FrequencyExplorerDiagram() {
@@ -90,10 +90,10 @@ export default function FrequencyExplorerDiagram() {
   })();
 
   return (
-    <div className="bg-gray-900 rounded-2xl p-5 space-y-4">
+    <div className="bg-white dark:bg-gray-900 rounded-2xl p-5 space-y-4">
       {/* Title */}
       <div className="flex items-center justify-between">
-        <h3 className="text-white font-bold text-sm">Frequency Explorer — Click to hear!</h3>
+        <h3 className="text-gray-900 dark:text-white font-bold text-sm">Frequency Explorer — Click to hear!</h3>
         {playing && (
           <button onClick={stopSound} className="text-xs bg-red-600 text-white px-3 py-1 rounded-full">
             Stop
@@ -103,7 +103,7 @@ export default function FrequencyExplorerDiagram() {
 
       {/* Piano keys */}
       <div>
-        <p className="text-xs text-gray-400 mb-2">Tap a key — hear the frequency, see the wave change:</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Tap a key — hear the frequency, see the wave change:</p>
         <div className="flex gap-1">
           {NOTES.map(note => (
             <button
@@ -111,34 +111,34 @@ export default function FrequencyExplorerDiagram() {
               onClick={() => playFreq(note.freq, 500)}
               className="flex-1 py-3 rounded-lg text-center transition-all hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: freq === note.freq && playing ? note.color : 'rgba(255,255,255,0.1)',
-                color: freq === note.freq && playing ? 'white' : '#9ca3af',
+                backgroundColor: freq === note.freq && playing ? note.color : undefined,
+                color: freq === note.freq && playing ? 'white' : undefined,
               }}
             >
-              <div className="text-xs font-bold">{note.name}</div>
-              <div className="text-[10px]">{note.freq} Hz</div>
+              <div className={`text-xs font-bold ${freq === note.freq && playing ? '' : 'text-gray-600 dark:text-gray-400'}`}>{note.name}</div>
+              <div className={`text-[10px] ${freq === note.freq && playing ? '' : 'text-gray-500 dark:text-gray-500'}`}>{note.freq} Hz</div>
             </button>
           ))}
         </div>
       </div>
 
       {/* Waveform visualization */}
-      <div className="bg-gray-800 rounded-xl p-3">
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-3">
         <svg viewBox="0 0 300 60" className="w-full h-16">
           <polyline
             points={wavePoints}
             fill="none"
-            stroke={playing ? '#22c55e' : '#4b5563'}
+            stroke={playing ? '#22c55e' : '#9ca3af'}
             strokeWidth="2"
           />
           {/* Center line */}
-          <line x1="0" y1="30" x2="300" y2="30" stroke="#374151" strokeWidth="0.5" strokeDasharray="4" />
+          <line x1="0" y1="30" x2="300" y2="30" className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.5" strokeDasharray="4" />
         </svg>
         <div className="flex items-center justify-between text-xs">
-          <span className="text-gray-500">
+          <span className="text-gray-500 dark:text-gray-500">
             {playing ? `Playing: ${freq} Hz` : 'Click a key or drag the slider'}
           </span>
-          <span className="text-gray-500">
+          <span className="text-gray-500 dark:text-gray-500">
             {freq < 200 ? 'Low pitch' : freq < 500 ? 'Medium pitch' : freq < 1000 ? 'High pitch' : 'Very high pitch'}
           </span>
         </div>
@@ -147,7 +147,7 @@ export default function FrequencyExplorerDiagram() {
       {/* Frequency slider */}
       <div>
         <div className="flex items-center gap-3">
-          <span className="text-xs text-gray-400 w-12">20 Hz</span>
+          <span className="text-xs text-gray-600 dark:text-gray-400 w-12">20 Hz</span>
           <input
             type="range"
             min="20"
@@ -163,37 +163,37 @@ export default function FrequencyExplorerDiagram() {
             className="flex-1 h-2 rounded-full appearance-none cursor-pointer"
             style={{ accentColor: '#22c55e' }}
           />
-          <span className="text-xs text-gray-400 w-16 text-right">2000 Hz</span>
+          <span className="text-xs text-gray-600 dark:text-gray-400 w-16 text-right">2000 Hz</span>
         </div>
         <div className="text-center mt-1">
           <span className="text-2xl font-bold font-mono text-emerald-400">{freq}</span>
-          <span className="text-sm text-gray-500 ml-1">Hz</span>
+          <span className="text-sm text-gray-500 dark:text-gray-500 ml-1">Hz</span>
         </div>
       </div>
 
       {/* Real-world sounds comparison */}
       <div>
-        <p className="text-xs text-gray-400 mb-2">Real-world sounds at different frequencies:</p>
+        <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">Real-world sounds at different frequencies:</p>
         <div className="flex flex-wrap gap-1.5">
           {REAL_WORLD.map(s => (
             <button
               key={s.label}
               onClick={() => playFreq(s.freq, 600)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-800 hover:bg-gray-700 rounded-lg text-xs text-gray-300 transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-xs text-gray-700 dark:text-gray-300 transition-colors"
             >
               <span>{s.emoji}</span>
               <span>{s.label}</span>
-              <span className="text-gray-500">{s.freq} Hz</span>
+              <span className="text-gray-500 dark:text-gray-500">{s.freq} Hz</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Arduino code equivalent */}
-      <div className="bg-gray-800 rounded-lg p-3">
-        <p className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">Arduino equivalent</p>
-        <code className="text-sm font-mono text-emerald-400">
-          tone(5, {freq});  <span className="text-gray-500">// Play {freq} Hz on pin 5</span>
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3">
+        <p className="text-[10px] text-gray-500 dark:text-gray-500 uppercase tracking-wide mb-1">Arduino equivalent</p>
+        <code className="text-sm font-mono text-emerald-600 dark:text-emerald-400">
+          tone(5, {freq});  <span className="text-gray-500 dark:text-gray-500">// Play {freq} Hz on pin 5</span>
         </code>
       </div>
     </div>

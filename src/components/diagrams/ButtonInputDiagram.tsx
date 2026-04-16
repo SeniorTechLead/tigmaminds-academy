@@ -90,8 +90,8 @@ export default function ButtonInputDiagram() {
   const pinState = buttonPressed ? 'HIGH' : 'LOW';
 
   return (
-    <div className="w-full bg-gray-900 rounded-xl p-6 text-white font-mono select-none">
-      <h3 className="text-center text-lg font-bold text-orange-400 mb-4">
+    <div className="w-full bg-white dark:bg-gray-900 rounded-xl p-6 text-gray-900 dark:text-white font-mono select-none">
+      <h3 className="text-center text-lg font-bold text-orange-500 dark:text-orange-400 mb-4">
         Reading Input — Buttons and Decisions
       </h3>
 
@@ -107,12 +107,12 @@ export default function ButtonInputDiagram() {
             onClick={() => switchMode(m)}
             className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${
               mode === m
-                ? 'bg-orange-600 ring-2 ring-orange-400'
-                : 'bg-gray-700 hover:bg-gray-600'
+                ? 'bg-orange-600 text-white ring-2 ring-orange-400'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
             }`}
           >
             <span>{label}</span>
-            <span className="block text-[10px] font-normal text-gray-300">{desc}</span>
+            <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-300">{desc}</span>
           </button>
         ))}
       </div>
@@ -130,29 +130,29 @@ export default function ButtonInputDiagram() {
             disabled={blinking}
             className={`w-20 h-20 rounded-xl border-4 font-bold text-sm transition-all active:scale-95 ${
               buttonPressed
-                ? 'bg-orange-500 border-orange-300 shadow-lg shadow-orange-500/50 translate-y-1'
-                : 'bg-gray-700 border-gray-500 hover:bg-gray-600'
+                ? 'bg-orange-500 border-orange-300 shadow-lg shadow-orange-500/50 translate-y-1 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 border-gray-400 dark:border-gray-500 hover:bg-gray-300 dark:hover:bg-gray-600'
             } ${blinking ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           >
             {buttonPressed ? 'PRESSED' : 'PUSH'}
           </button>
-          <span className="text-xs text-gray-400">Pin 7 (input)</span>
-          <span className="text-xs text-gray-500">{mode === 'direct' ? 'Hold to light' : mode === 'toggle' ? 'Click to toggle' : 'Click to count'}</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400">Pin 7 (input)</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500">{mode === 'direct' ? 'Hold to light' : mode === 'toggle' ? 'Click to toggle' : 'Click to count'}</span>
         </div>
 
         {/* Wire */}
         <div className="flex flex-col items-center">
           <div className="w-16 h-1 bg-orange-400 rounded" />
-          <span className="text-[9px] text-orange-300 mt-1">signal</span>
+          <span className="text-[9px] text-orange-400 dark:text-orange-300 mt-1">signal</span>
         </div>
 
         {/* Arduino logic */}
-        <div className="bg-blue-900/50 rounded-lg p-3 border border-blue-700 text-center">
-          <p className="text-[10px] text-blue-300 mb-1">Arduino decides:</p>
-          <p className="text-xs text-green-300">
+        <div className="bg-blue-100 dark:bg-blue-900/50 rounded-lg p-3 border border-blue-300 dark:border-blue-700 text-center">
+          <p className="text-[10px] text-blue-600 dark:text-blue-300 mb-1">Arduino decides:</p>
+          <p className="text-xs text-green-600 dark:text-green-300">
             if (pin7 == {pinState})
           </p>
-          <p className="text-xs text-yellow-300">
+          <p className="text-xs text-yellow-600 dark:text-yellow-300">
             → {ledOn ? 'LED ON' : 'LED OFF'}
           </p>
         </div>
@@ -165,45 +165,45 @@ export default function ButtonInputDiagram() {
           <div
             className="w-20 h-20 rounded-full border-4 transition-all duration-75"
             style={{
-              borderColor: ledOn ? '#22c55e' : '#374151',
-              backgroundColor: ledOn ? '#22c55e' : '#111827',
+              borderColor: ledOn ? '#22c55e' : '#9ca3af',
+              backgroundColor: ledOn ? '#22c55e' : '#f3f4f6',
               boxShadow: ledOn
                 ? '0 0 35px 12px rgba(34,197,94,0.5), 0 0 70px 25px rgba(34,197,94,0.2)'
                 : 'none',
             }}
           />
-          <span className="text-xs text-gray-400">Pin 2 (output)</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400">Pin 2 (output)</span>
         </div>
       </div>
 
       {/* Pin state display */}
       <div className="flex justify-center gap-8 mb-4">
         <div className={`px-4 py-2 rounded-lg text-sm font-bold ${
-          buttonPressed ? 'bg-orange-900/50 text-orange-300 ring-1 ring-orange-500' : 'bg-gray-800 text-gray-500'
+          buttonPressed ? 'bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 ring-1 ring-orange-500' : 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500'
         }`}>
-          Pin 7: <span className={buttonPressed ? 'text-orange-400' : 'text-gray-400'}>{pinState}</span>
+          Pin 7: <span className={buttonPressed ? 'text-orange-500 dark:text-orange-400' : 'text-gray-400'}>{pinState}</span>
         </div>
         <div className={`px-4 py-2 rounded-lg text-sm font-bold ${
-          ledOn ? 'bg-green-900/50 text-green-300 ring-1 ring-green-500' : 'bg-gray-800 text-gray-500'
+          ledOn ? 'bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 ring-1 ring-green-500' : 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500'
         }`}>
-          Pin 2: <span className={ledOn ? 'text-green-400' : 'text-gray-400'}>{ledOn ? 'HIGH' : 'LOW'}</span>
+          Pin 2: <span className={ledOn ? 'text-green-500 dark:text-green-400' : 'text-gray-400'}>{ledOn ? 'HIGH' : 'LOW'}</span>
         </div>
         {mode === 'counter' && (
-          <div className="px-4 py-2 rounded-lg text-sm font-bold bg-purple-900/50 text-purple-300 ring-1 ring-purple-500">
-            Count: <span className="text-purple-400 text-lg">{blinking ? blinksLeft : counter}</span>
+          <div className="px-4 py-2 rounded-lg text-sm font-bold bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 ring-1 ring-purple-500">
+            Count: <span className="text-purple-500 dark:text-purple-400 text-lg">{blinking ? blinksLeft : counter}</span>
           </div>
         )}
         {mode === 'toggle' && (
-          <div className="px-4 py-2 rounded-lg text-sm font-bold bg-cyan-900/50 text-cyan-300 ring-1 ring-cyan-500">
-            State: <span className="text-cyan-400">{toggleState ? 'ON' : 'OFF'}</span>
+          <div className="px-4 py-2 rounded-lg text-sm font-bold bg-cyan-100 dark:bg-cyan-900/50 text-cyan-700 dark:text-cyan-300 ring-1 ring-cyan-500">
+            State: <span className="text-cyan-500 dark:text-cyan-400">{toggleState ? 'ON' : 'OFF'}</span>
           </div>
         )}
       </div>
 
       {/* Live code */}
-      <div className="bg-gray-950 rounded-lg p-4 border border-gray-700 text-sm">
-        <p className="text-gray-500 mb-2">// Arduino Code — {mode} mode:</p>
-        <pre className="text-green-300 whitespace-pre-wrap leading-relaxed">
+      <div className="bg-gray-100 dark:bg-gray-950 rounded-lg p-4 border border-gray-300 dark:border-gray-700 text-sm">
+        <p className="text-gray-500 dark:text-gray-500 mb-2">// Arduino Code — {mode} mode:</p>
+        <pre className="text-green-700 dark:text-green-300 whitespace-pre-wrap leading-relaxed">
 {mode === 'direct' ? `void setup() {
   pinMode(7, INPUT);   // button
   pinMode(2, OUTPUT);  // LED
@@ -245,9 +245,9 @@ void loop() {
         </pre>
       </div>
 
-      <div className="mt-4 bg-gray-800 rounded-lg p-3 text-sm text-gray-300 leading-relaxed">
-        <p className="text-orange-400 font-bold mb-1">Key idea:</p>
-        <p><code className="text-green-400">digitalRead(pin)</code> checks if a button is pressed (<span className="text-orange-400">HIGH</span>) or not (<span className="text-gray-400">LOW</span>). Your code uses <code className="text-green-400">if</code> statements to decide what to do based on the input. This is how Arduino reacts to the real world!</p>
+      <div className="mt-4 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+        <p className="text-orange-500 dark:text-orange-400 font-bold mb-1">Key idea:</p>
+        <p><code className="text-green-600 dark:text-green-400">digitalRead(pin)</code> checks if a button is pressed (<span className="text-orange-500 dark:text-orange-400">HIGH</span>) or not (<span className="text-gray-500 dark:text-gray-400">LOW</span>). Your code uses <code className="text-green-600 dark:text-green-400">if</code> statements to decide what to do based on the input. This is how Arduino reacts to the real world!</p>
       </div>
     </div>
   );

@@ -36,38 +36,38 @@ const StarCompassDiagram = () => {
 
         {/* Background */}
         <rect width="420" height="360" rx="8"
-          className="fill-slate-950 stroke-slate-700" strokeWidth="1" />
+          className="fill-gray-50 dark:fill-slate-950 stroke-gray-300 dark:stroke-slate-700" strokeWidth="1" />
 
         {/* Title */}
         <text x="210" y="24" textAnchor="middle"
-          className="title-text" fill="#e2e8f0">
+          className="title-text fill-gray-700 dark:fill-gray-200">
           Star Compass — Horizon Bearings
         </text>
 
         {/* Horizon circle */}
         <circle cx={cx} cy={cy} r={r}
-          fill="none" stroke="#475569" strokeWidth="1.5" />
+          fill="none" className="stroke-gray-400 dark:stroke-gray-600" strokeWidth="1.5" />
 
         {/* Compass directions */}
         <text x={cx} y={cy - r - 8} textAnchor="middle"
-          className="label-text" fill="#94a3b8" fontWeight="600">N (0°)</text>
+          className="label-text fill-gray-500 dark:fill-gray-400" fontWeight="600">N (0°)</text>
         <text x={cx + r + 12} y={cy + 4} textAnchor="start"
-          className="label-text" fill="#94a3b8" fontWeight="600">E (90°)</text>
+          className="label-text fill-gray-500 dark:fill-gray-400" fontWeight="600">E (90°)</text>
         <text x={cx} y={cy + r + 16} textAnchor="middle"
-          className="label-text" fill="#94a3b8" fontWeight="600">S (180°)</text>
+          className="label-text fill-gray-500 dark:fill-gray-400" fontWeight="600">S (180°)</text>
         <text x={cx - r - 12} y={cy + 4} textAnchor="end"
-          className="label-text" fill="#94a3b8" fontWeight="600">W (270°)</text>
+          className="label-text fill-gray-500 dark:fill-gray-400" fontWeight="600">W (270°)</text>
 
         {/* Cross lines */}
         <line x1={cx} y1={cy - r} x2={cx} y2={cy + r}
-          stroke="#334155" strokeWidth="0.5" strokeDasharray="4 4" />
+          className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.5" strokeDasharray="4 4" />
         <line x1={cx - r} y1={cy} x2={cx + r} y2={cy}
-          stroke="#334155" strokeWidth="0.5" strokeDasharray="4 4" />
+          className="stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.5" strokeDasharray="4 4" />
 
         {/* Observer at center */}
-        <circle cx={cx} cy={cy} r="5" fill="#94a3b8" />
+        <circle cx={cx} cy={cy} r="5" className="fill-gray-500 dark:fill-gray-400" />
         <text x={cx} y={cy + 18} textAnchor="middle"
-          className="label-text" fill="#94a3b8" style={{ fontSize: '9px' }}>
+          className="label-text fill-gray-500 dark:fill-gray-400" style={{ fontSize: '9px' }}>
           Observer
         </text>
 
@@ -97,11 +97,11 @@ const StarCompassDiagram = () => {
 
         {/* Bottom note */}
         <text x="210" y="335" textAnchor="middle"
-          className="label-text" fill="#94a3b8" style={{ fontStyle: 'italic' }}>
+          className="label-text fill-gray-500 dark:fill-gray-400" style={{ fontStyle: 'italic' }}>
           Each star rises and sets at a fixed bearing — a natural compass
         </text>
         <text x="210" y="350" textAnchor="middle"
-          className="label-text" fill="#64748b" style={{ fontSize: '9px' }}>
+          className="label-text fill-gray-500 dark:fill-gray-500" style={{ fontSize: '9px' }}>
           Polynesian navigators memorised ~200 star positions
         </text>
       </svg>

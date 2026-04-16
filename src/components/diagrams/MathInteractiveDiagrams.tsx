@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
-const DARK_BG = 'bg-gray-900';
+const DARK_BG = 'bg-white dark:bg-gray-900';
 const LABEL = 'text-[10px] font-bold uppercase tracking-wider';
+const SVG_BG = 'fill-gray-50 dark:fill-gray-900';
+const PANEL_BG = 'bg-gray-100 dark:bg-gray-800';
+const TEXT_MUTED = 'text-gray-500 dark:text-gray-500';
+const TEXT_SECONDARY = 'text-gray-600 dark:text-gray-400';
+const TEXT_BODY = 'text-gray-700 dark:text-gray-300';
 
 /* ════════════════════════════════════════════
    1. AngleExplorer — drag to change angle, see classification
@@ -54,15 +59,15 @@ export function AngleExplorer() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Angle Explorer</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Angle Explorer</span>
         <span className={`font-mono text-sm font-bold ${classColor(angle)}`}>{classify(angle)}</span>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full mb-3">
-        <rect width={W} height={H} rx={4} fill="#111827" />
+        <rect width={W} height={H} rx={4} className={SVG_BG} />
 
         {/* Ray 1 — horizontal */}
-        <line x1={cx} y1={cy} x2={ray1X} y2={ray1Y} stroke="#6b7280" strokeWidth={2} strokeLinecap="round" />
+        <line x1={cx} y1={cy} x2={ray1X} y2={ray1Y} className="stroke-gray-400 dark:stroke-gray-500" strokeWidth={2} strokeLinecap="round" />
 
         {/* Ray 2 — at angle */}
         <line x1={cx} y1={cy} x2={ray2X} y2={ray2Y} stroke="#22c55e" strokeWidth={2} strokeLinecap="round" />
@@ -97,12 +102,12 @@ export function AngleExplorer() {
       </svg>
 
       <div className="flex items-center gap-3">
-        <span className="text-xs text-gray-400 w-12">0°</span>
+        <span className={`text-xs ${TEXT_SECONDARY} w-12`}>0°</span>
         <input type="range" min={0} max={360} value={angle} onChange={e => setAngle(+e.target.value)}
           className="flex-1 accent-emerald-500" />
-        <span className="text-xs text-gray-400 w-12 text-right">360°</span>
+        <span className={`text-xs ${TEXT_SECONDARY} w-12 text-right`}>360°</span>
       </div>
-      <p className="text-xs text-gray-500 mt-2 text-center">
+      <p className={`text-xs ${TEXT_MUTED} mt-2 text-center`}>
         {angle}° is {classify(angle).toLowerCase()}
         {angle === 90 && ' — perpendicular lines form right angles'}
         {angle === 180 && ' — a straight line'}
@@ -186,14 +191,14 @@ export function TriangleExplorer() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Triangle Explorer</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Triangle Explorer</span>
         {valid && (
           <span className="font-mono text-sm text-emerald-400">{classifyShape()} &middot; {classifyAngle()}</span>
         )}
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full mb-3">
-        <rect width={W} height={H} rx={4} fill="#111827" />
+        <rect width={W} height={H} rx={4} className={SVG_BG} />
 
         {valid && pts.length === 3 ? (
           <>
@@ -237,7 +242,7 @@ export function TriangleExplorer() {
 
       <div className="grid grid-cols-2 gap-3 mb-2">
         <div>
-          <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+          <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
             <span>Angle A</span><span className="font-mono text-sky-400">{a}°</span>
           </div>
           <input type="range" min={1} max={178} value={a}
@@ -245,7 +250,7 @@ export function TriangleExplorer() {
             className="w-full accent-sky-500" />
         </div>
         <div>
-          <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+          <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
             <span>Angle B</span><span className="font-mono text-violet-400">{b}°</span>
           </div>
           <input type="range" min={1} max={178} value={b}
@@ -255,7 +260,7 @@ export function TriangleExplorer() {
       </div>
 
       <div className="flex items-center justify-center gap-2 text-xs">
-        <span className="text-gray-500">A + B + C =</span>
+        <span className={TEXT_MUTED}>A + B + C =</span>
         <span className="font-mono text-emerald-400 font-bold">{a} + {b} + {c} = 180°</span>
       </div>
     </div>
@@ -280,9 +285,9 @@ function DiceFace({ value, x, y, size }: { value: number; x: number; y: number; 
   const dots = DICE_DOTS[value] || [];
   return (
     <g>
-      <rect x={x} y={y} width={size} height={size} rx={size * 0.12} fill="#1f2937" stroke="#4b5563" strokeWidth={1.5} />
+      <rect x={x} y={y} width={size} height={size} rx={size * 0.12} className="fill-gray-200 dark:fill-gray-800 stroke-gray-400 dark:stroke-gray-600" strokeWidth={1.5} />
       {dots.map(([col, row], i) => (
-        <circle key={i} cx={x + pad + col * step} cy={y + pad + row * step} r={size * 0.07} fill="white" />
+        <circle key={i} cx={x + pad + col * step} cy={y + pad + row * step} r={size * 0.07} className="fill-gray-800 dark:fill-white" />
       ))}
     </g>
   );
@@ -330,8 +335,8 @@ export function ProbabilityDice() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Dice Probability</span>
-        <span className="text-xs text-gray-500">{totalRolls} rolls</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Dice Probability</span>
+        <span className={`text-xs ${TEXT_MUTED}`}>{totalRolls} rolls</span>
       </div>
 
       {/* Dice display */}
@@ -339,11 +344,11 @@ export function ProbabilityDice() {
         <svg viewBox="0 0 50 50" className="w-12 h-12">
           <DiceFace value={die1} x={2} y={2} size={46} />
         </svg>
-        <span className="text-lg font-bold text-gray-500">+</span>
+        <span className={`text-lg font-bold ${TEXT_MUTED}`}>+</span>
         <svg viewBox="0 0 50 50" className="w-12 h-12">
           <DiceFace value={die2} x={2} y={2} size={46} />
         </svg>
-        <span className="text-lg font-bold text-gray-500">=</span>
+        <span className={`text-lg font-bold ${TEXT_MUTED}`}>=</span>
         <span className="text-2xl font-mono font-bold text-amber-400">{die1 + die2}</span>
       </div>
 
@@ -358,14 +363,14 @@ export function ProbabilityDice() {
           Roll 100x
         </button>
         <button onClick={reset}
-          className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-700 hover:bg-gray-600 text-gray-300 transition-colors">
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 ${TEXT_BODY} transition-colors`}>
           Reset
         </button>
       </div>
 
       {/* Frequency bar chart */}
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
-        <rect width={W} height={H} rx={4} fill="#111827" />
+        <rect width={W} height={H} rx={4} className={SVG_BG} />
         {Array.from({ length: 11 }, (_, i) => i + 2).map((sum, i) => {
           const f = freq[sum] || 0;
           const barH = totalRolls > 0 ? (f / maxFreq) * barArea : 0;
@@ -383,12 +388,12 @@ export function ProbabilityDice() {
                   stroke="#f59e0b" strokeWidth={1.5} strokeDasharray="3 2" />
               )}
               {/* Sum label */}
-              <text x={x + barW / 2} y={H - 5} fill="#9ca3af" fontSize={8} textAnchor="middle" fontFamily="monospace">
+              <text x={x + barW / 2} y={H - 5} className="fill-gray-500 dark:fill-gray-400" fontSize={8} textAnchor="middle" fontFamily="monospace">
                 {sum}
               </text>
               {/* Count */}
               {f > 0 && (
-                <text x={x + barW / 2} y={H - 22 - barH} fill="#d1d5db" fontSize={7} textAnchor="middle" fontFamily="monospace">
+                <text x={x + barW / 2} y={H - 22 - barH} className="fill-gray-700 dark:fill-gray-300" fontSize={7} textAnchor="middle" fontFamily="monospace">
                   {f}
                 </text>
               )}
@@ -397,7 +402,7 @@ export function ProbabilityDice() {
         })}
       </svg>
 
-      <div className="flex items-center justify-center gap-4 mt-2 text-xs text-gray-500">
+      <div className={`flex items-center justify-center gap-4 mt-2 text-xs ${TEXT_MUTED}`}>
         <span className="flex items-center gap-1">
           <span className="inline-block w-3 h-2 bg-emerald-500 rounded-sm opacity-70" /> Actual
         </span>
@@ -467,12 +472,12 @@ export function GaussianExplorer() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Gaussian / Normal Distribution</span>
-        <span className="font-mono text-xs text-gray-400">68-95-99.7 Rule</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Gaussian / Normal Distribution</span>
+        <span className={`font-mono text-xs ${TEXT_SECONDARY}`}>68-95-99.7 Rule</span>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full mb-3">
-        <rect width={W} height={H} rx={4} fill="#111827" />
+        <rect width={W} height={H} rx={4} className={SVG_BG} />
 
         {/* Sigma shaded regions */}
         {regions.map(({ from, to, color, opacity, label }) => (
@@ -480,7 +485,7 @@ export function GaussianExplorer() {
         ))}
 
         {/* X axis */}
-        <line x1={PAD} y1={scaleY(0)} x2={W - PAD} y2={scaleY(0)} stroke="#374151" strokeWidth={1} />
+        <line x1={PAD} y1={scaleY(0)} x2={W - PAD} y2={scaleY(0)} className="stroke-gray-300 dark:stroke-gray-700" strokeWidth={1} />
 
         {/* Sigma markers */}
         {[-3, -2, -1, 0, 1, 2, 3].map(n => {
@@ -488,8 +493,8 @@ export function GaussianExplorer() {
           if (x < lo || x > hi) return null;
           return (
             <g key={n}>
-              <line x1={scaleX(x)} y1={scaleY(0) - 3} x2={scaleX(x)} y2={scaleY(0) + 3} stroke="#6b7280" strokeWidth={1} />
-              <text x={scaleX(x)} y={scaleY(0) + 14} fill="#6b7280" fontSize={7} textAnchor="middle" fontFamily="monospace">
+              <line x1={scaleX(x)} y1={scaleY(0) - 3} x2={scaleX(x)} y2={scaleY(0) + 3} className="stroke-gray-400 dark:stroke-gray-500" strokeWidth={1} />
+              <text x={scaleX(x)} y={scaleY(0) + 14} className="fill-gray-500 dark:fill-gray-500" fontSize={7} textAnchor="middle" fontFamily="monospace">
                 {n === 0 ? 'μ' : `${n > 0 ? '+' : ''}${n}σ`}
               </text>
             </g>
@@ -507,14 +512,14 @@ export function GaussianExplorer() {
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+          <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
             <span>Mean (μ)</span><span className="font-mono text-emerald-400">{mu.toFixed(1)}</span>
           </div>
           <input type="range" min={-3} max={3} step={0.1} value={mu} onChange={e => setMu(+e.target.value)}
             className="w-full accent-emerald-500" />
         </div>
         <div>
-          <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+          <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
             <span>Std Dev (σ)</span><span className="font-mono text-amber-400">{sigma.toFixed(1)}</span>
           </div>
           <input type="range" min={0.3} max={3} step={0.1} value={sigma} onChange={e => setSigma(+e.target.value)}
@@ -522,7 +527,7 @@ export function GaussianExplorer() {
         </div>
       </div>
 
-      <p className="text-xs text-gray-500 mt-2 text-center">
+      <p className={`text-xs ${TEXT_MUTED} mt-2 text-center`}>
         μ = {mu.toFixed(1)}, σ = {sigma.toFixed(1)} — about 68% of data falls within 1σ of the mean
       </p>
     </div>
@@ -580,31 +585,31 @@ export function DerivativeVisualizer() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Derivative Visualizer</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Derivative Visualizer</span>
         <select value={funcKey} onChange={e => setFuncKey(e.target.value)}
-          className="px-2 py-1 bg-gray-800 border border-gray-700 rounded text-xs text-white">
+          className="px-2 py-1 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-xs text-gray-900 dark:text-white">
           {Object.keys(FUNCTIONS).map(k => <option key={k} value={k}>f(x) = {k}</option>)}
         </select>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full mb-3">
-        <rect width={W} height={H} rx={4} fill="#111827" />
+        <rect width={W} height={H} rx={4} className={SVG_BG} />
 
         {/* Grid lines at integer positions */}
         {Array.from({ length: 7 }, (_, i) => i - 3).map(n => (
           <g key={`g${n}`}>
             {n >= xMin && n <= xMax && (
-              <line x1={sx(n)} y1={PAD} x2={sx(n)} y2={H - PAD} stroke="#1f2937" strokeWidth={0.5} />
+              <line x1={sx(n)} y1={PAD} x2={sx(n)} y2={H - PAD} className="stroke-gray-200 dark:stroke-gray-800" strokeWidth={0.5} />
             )}
           </g>
         ))}
 
         {/* Axes */}
         {xMin <= 0 && xMax >= 0 && (
-          <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={H - PAD} stroke="#4b5563" strokeWidth={1} />
+          <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={H - PAD} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth={1} />
         )}
         {yMin <= 0 && yMax >= 0 && (
-          <line x1={PAD} y1={sy(0)} x2={W - PAD} y2={sy(0)} stroke="#4b5563" strokeWidth={1} />
+          <line x1={PAD} y1={sy(0)} x2={W - PAD} y2={sy(0)} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth={1} />
         )}
 
         {/* Curve */}
@@ -624,7 +629,7 @@ export function DerivativeVisualizer() {
       </svg>
 
       <div className="mb-2">
-        <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+        <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
           <span>Point x</span>
           <span className="font-mono text-sky-400">{t.toFixed(1)}</span>
         </div>
@@ -632,14 +637,14 @@ export function DerivativeVisualizer() {
           className="w-full accent-sky-500" />
       </div>
 
-      <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-800">
-        <span className="text-xs text-gray-400">f({t.toFixed(1)}) = {yAtT.toFixed(3)}</span>
-        <span className="text-xs text-gray-400">
+      <div className={`flex items-center justify-between px-3 py-2 rounded-lg ${PANEL_BG}`}>
+        <span className={`text-xs ${TEXT_SECONDARY}`}>f({t.toFixed(1)}) = {yAtT.toFixed(3)}</span>
+        <span className={`text-xs ${TEXT_SECONDARY}`}>
           f'({t.toFixed(1)}) = <span className="font-bold text-amber-400">{slope.toFixed(3)}</span>
         </span>
       </div>
 
-      <p className="text-xs text-gray-500 mt-2 text-center">
+      <p className={`text-xs ${TEXT_MUTED} mt-2 text-center`}>
         The dashed line is tangent to f(x) = {label} at x = {t.toFixed(1)} — its slope is the derivative
       </p>
     </div>
@@ -721,22 +726,22 @@ export function AreaUnderCurve() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Area Under Curve (Integration)</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Area Under Curve (Integration)</span>
         <select value={funcKey} onChange={e => setFuncKey(e.target.value)}
-          className="px-2 py-1 bg-gray-800 border border-gray-700 rounded text-xs text-white">
+          className="px-2 py-1 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-xs text-gray-900 dark:text-white">
           {Object.keys(INTEG_FNS).map(k => <option key={k} value={k}>f(x) = {k}</option>)}
         </select>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full mb-3">
-        <rect width={W} height={H} rx={4} fill="#111827" />
+        <rect width={W} height={H} rx={4} className={SVG_BG} />
 
         {/* Axes */}
         {xMin <= 0 && xMax >= 0 && (
-          <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={H - PAD} stroke="#4b5563" strokeWidth={1} />
+          <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={H - PAD} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth={1} />
         )}
         {yMin <= 0 && yMax >= 0 && (
-          <line x1={PAD} y1={sy(0)} x2={W - PAD} y2={sy(0)} stroke="#4b5563" strokeWidth={1} />
+          <line x1={PAD} y1={sy(0)} x2={W - PAD} y2={sy(0)} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth={1} />
         )}
 
         {/* Riemann rectangles */}
@@ -776,7 +781,7 @@ export function AreaUnderCurve() {
 
         {/* Axis tick labels */}
         {Array.from({ length: xMax - xMin + 1 }, (_, i) => xMin + i).map(n => (
-          <text key={n} x={sx(n)} y={H - PAD + 14} fill="#6b7280" fontSize={7} textAnchor="middle" fontFamily="monospace">
+          <text key={n} x={sx(n)} y={H - PAD + 14} className="fill-gray-500 dark:fill-gray-500" fontSize={7} textAnchor="middle" fontFamily="monospace">
             {n}
           </text>
         ))}
@@ -784,7 +789,7 @@ export function AreaUnderCurve() {
 
       <div className="grid grid-cols-2 gap-3 mb-2">
         <div>
-          <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+          <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
             <span>Lower bound (a)</span><span className="font-mono text-amber-400">{aVal.toFixed(1)}</span>
           </div>
           <input type="range" min={-0.5} max={3} step={0.1} value={aVal}
@@ -792,7 +797,7 @@ export function AreaUnderCurve() {
             className="w-full accent-amber-500" />
         </div>
         <div>
-          <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+          <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
             <span>Upper bound (b)</span><span className="font-mono text-rose-400">{bVal.toFixed(1)}</span>
           </div>
           <input type="range" min={0} max={3.5} step={0.1} value={bVal}
@@ -803,12 +808,12 @@ export function AreaUnderCurve() {
 
       {/* Rectangle count selector */}
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs text-gray-400">Rectangles (N):</span>
+        <span className={`text-xs ${TEXT_SECONDARY}`}>Rectangles (N):</span>
         <div className="flex gap-1">
           {N_OPTIONS.map(n => (
             <button key={n} onClick={() => setNRects(n)}
               className={`px-2 py-0.5 rounded text-xs font-mono transition-colors ${
-                n === nRects ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'
+                n === nRects ? 'bg-blue-600 text-white' : `${PANEL_BG} ${TEXT_SECONDARY} hover:text-gray-900 dark:hover:text-white`
               }`}>
               {n}
             </button>
@@ -816,16 +821,16 @@ export function AreaUnderCurve() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-800 text-xs">
-        <span className="text-gray-400">
+      <div className={`flex items-center justify-between px-3 py-2 rounded-lg ${PANEL_BG} text-xs`}>
+        <span className={TEXT_SECONDARY}>
           Riemann ({nRects}): <span className="font-mono text-blue-400 font-bold">{riemannSum.toFixed(4)}</span>
         </span>
-        <span className="text-gray-400">
+        <span className={TEXT_SECONDARY}>
           Exact: <span className="font-mono text-emerald-400 font-bold">{exactArea.toFixed(4)}</span>
         </span>
       </div>
 
-      <p className="text-xs text-gray-500 mt-2 text-center">
+      <p className={`text-xs ${TEXT_MUTED} mt-2 text-center`}>
         More rectangles = closer approximation to the exact integral of {label} from {aVal.toFixed(1)} to {bVal.toFixed(1)}
       </p>
     </div>

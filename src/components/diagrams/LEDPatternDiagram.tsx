@@ -92,7 +92,7 @@ export default function LEDPatternDiagram() {
   const activeIndex = pattern === 'chase' || pattern === 'bounce' ? stepIndex : -1;
 
   return (
-    <div className="w-full bg-gray-900 rounded-xl p-6 text-white font-mono select-none">
+    <div className="w-full bg-white dark:bg-gray-900 rounded-xl p-6 text-gray-900 dark:text-white font-mono select-none">
       <h3 className="text-center text-lg font-bold text-purple-400 mb-4">
         Multiple LEDs in Sequence
       </h3>
@@ -111,14 +111,14 @@ export default function LEDPatternDiagram() {
                   : 'none',
               }}
             />
-            <span className="text-[10px] text-gray-500">Pin {LED_PINS[i]}</span>
+            <span className="text-[10px] text-gray-500 dark:text-gray-500">Pin {LED_PINS[i]}</span>
           </div>
         ))}
       </div>
 
       {/* Array visualization */}
-      <div className="bg-gray-800 rounded-lg p-3 mb-4 text-center">
-        <p className="text-xs text-gray-400 mb-2">The array in memory:</p>
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 mb-4 text-center">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">The array in memory:</p>
         <div className="flex justify-center gap-1 items-end">
           <span className="text-blue-400 text-sm">int leds[] = {'{'}</span>
           {LED_PINS.map((pin, i) => (
@@ -127,12 +127,12 @@ export default function LEDPatternDiagram() {
                 className={`inline-block px-2 py-1 rounded text-sm font-bold transition-all ${
                   activeIndex === i
                     ? 'bg-yellow-500 text-black scale-110'
-                    : 'bg-gray-700 text-gray-300'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                 }`}
               >
                 {pin}
               </span>
-              {i < 5 && <span className="text-gray-500">, </span>}
+              {i < 5 && <span className="text-gray-500 dark:text-gray-500">, </span>}
             </span>
           ))}
           <span className="text-blue-400 text-sm">{'}'}</span>
@@ -157,8 +157,8 @@ export default function LEDPatternDiagram() {
             onClick={() => { setPattern(p); resetAll(); }}
             className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${
               pattern === p
-                ? 'bg-purple-600 ring-2 ring-purple-400'
-                : 'bg-gray-700 hover:bg-gray-600'
+                ? 'bg-purple-600 ring-2 ring-purple-400 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300'
             }`}
           >
             {label}
@@ -167,7 +167,7 @@ export default function LEDPatternDiagram() {
       </div>
 
       {/* Description of current pattern */}
-      <p className="text-center text-xs text-gray-400 mb-4">
+      <p className="text-center text-xs text-gray-500 dark:text-gray-400 mb-4">
         {pattern === 'chase' && 'LEDs light up one after another, left to right, then repeat.'}
         {pattern === 'bounce' && 'The lit LED bounces back and forth like a ping-pong ball.'}
         {pattern === 'allFlash' && 'All 6 LEDs flash on and off together in unison.'}
@@ -189,15 +189,15 @@ export default function LEDPatternDiagram() {
           disabled={running}
           className={`px-6 py-2 rounded-lg font-bold transition-all ${
             running
-              ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700'
+              ? 'bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700 text-white'
           }`}
         >
           Step →
         </button>
         <button
           onClick={resetAll}
-          className="px-6 py-2 rounded-lg font-bold bg-gray-600 hover:bg-gray-700 transition-all"
+          className="px-6 py-2 rounded-lg font-bold bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all"
         >
           Reset
         </button>
@@ -205,7 +205,7 @@ export default function LEDPatternDiagram() {
 
       {/* Speed slider */}
       <div className="w-full max-w-xs mx-auto mb-6">
-        <label className="text-xs text-gray-400 block mb-1 text-center">
+        <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1 text-center">
           Animation speed: <span className="text-purple-400 font-bold">{speed}ms</span>
         </label>
         <input
@@ -217,14 +217,14 @@ export default function LEDPatternDiagram() {
           onChange={e => setSpeed(Number(e.target.value))}
           className="w-full accent-purple-400 cursor-pointer"
         />
-        <div className="flex justify-between text-[10px] text-gray-500">
+        <div className="flex justify-between text-[10px] text-gray-500 dark:text-gray-500">
           <span>Fast</span>
           <span>Slow</span>
         </div>
       </div>
 
       {/* Live code */}
-      <div className="bg-gray-950 rounded-lg p-4 border border-gray-700 text-sm">
+      <div className="bg-gray-50 dark:bg-gray-950 rounded-lg p-4 border border-gray-300 dark:border-gray-700 text-sm">
         <p className="text-gray-500 mb-2">// Arduino Code for &ldquo;{pattern}&rdquo; pattern:</p>
         <pre className="text-green-300 whitespace-pre-wrap leading-relaxed">
 {pattern === 'chase' ? `int leds[] = {2, 3, 4, 5, 6, 7};
@@ -267,7 +267,7 @@ void loop() {
         </pre>
       </div>
 
-      <div className="mt-4 bg-gray-800 rounded-lg p-3 text-sm text-gray-300 leading-relaxed">
+      <div className="mt-4 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
         <p className="text-purple-400 font-bold mb-1">Key idea:</p>
         <p>An <span className="text-yellow-400">array</span> stores multiple values in one variable. <code className="text-green-400">leds[0]</code> is pin 2, <code className="text-green-400">leds[1]</code> is pin 3, and so on. A <code className="text-green-400">for</code> loop walks through each index to control all LEDs with just a few lines of code.</p>
       </div>

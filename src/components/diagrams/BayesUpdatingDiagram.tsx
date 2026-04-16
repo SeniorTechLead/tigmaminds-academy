@@ -17,6 +17,10 @@ function oddsToProb(o: number) { return o / (1 + o); }
 
 interface TestResult { type: '+' | '-'; priorP: number; posteriorP: number; odds: number; }
 
+const INACTIVE_BTN = 'bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-slate-300 hover:bg-gray-300 dark:hover:bg-slate-600';
+const TEXT_MID = 'fill-gray-500 dark:fill-gray-400';
+const TEXT_SUBTLE = 'fill-gray-500 dark:fill-gray-500';
+
 export default function BayesUpdatingDiagram() {
   const [tests, setTests] = useState<TestResult[]>([]);
 
@@ -83,7 +87,7 @@ export default function BayesUpdatingDiagram() {
         </button>
         <button
           onClick={reset}
-          className="px-3 py-1 rounded text-xs font-medium bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors"
+          className={`px-3 py-1 rounded text-xs font-medium transition-colors ${INACTIVE_BTN}`}
         >
           Reset
         </button>
@@ -96,7 +100,7 @@ export default function BayesUpdatingDiagram() {
         role="img"
         aria-label="Bayesian updating visualization"
       >
-        <rect width={W} height={H} rx="8" className="fill-slate-900" />
+        <rect width={W} height={H} rx="8" className="fill-gray-50 dark:fill-slate-900" />
 
         {/* Title */}
         <text x={W / 2} y={20} textAnchor="middle" fill="#f59e0b" fontSize="11" fontWeight="700" fontFamily="system-ui, sans-serif">
@@ -104,7 +108,7 @@ export default function BayesUpdatingDiagram() {
         </text>
 
         {/* Probability bar background */}
-        <rect x={mx} y={barY} width={barW} height={barH} rx="4" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <rect x={mx} y={barY} width={barW} height={barH} rx="4" className="fill-gray-200 dark:fill-slate-800 stroke-gray-400 dark:stroke-gray-600" strokeWidth="1" />
 
         {/* Filled portion */}
         <rect x={mx} y={barY} width={Math.max(2, probToX(currentProb) - mx)} height={barH} rx="4" fill="#3b82f6" opacity="0.6" />
@@ -115,8 +119,8 @@ export default function BayesUpdatingDiagram() {
         {/* Log scale labels */}
         {logTicks.map(p => (
           <g key={p}>
-            <line x1={probToX(p)} y1={barY + barH} x2={probToX(p)} y2={barY + barH + 4} stroke="#64748b" strokeWidth="0.5" />
-            <text x={probToX(p)} y={barY + barH + 14} textAnchor="middle" fill="#64748b" fontSize="6" fontFamily="system-ui, sans-serif">
+            <line x1={probToX(p)} y1={barY + barH} x2={probToX(p)} y2={barY + barH + 4} className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="0.5" />
+            <text x={probToX(p)} y={barY + barH + 14} textAnchor="middle" className={TEXT_SUBTLE} fontSize="6" fontFamily="system-ui, sans-serif">
               {(p * 100) < 1 ? (p * 100).toFixed(1) + '%' : (p * 100 >= 99 ? (p * 100).toFixed(1) : Math.round(p * 100)) + '%'}
             </text>
           </g>
@@ -128,33 +132,33 @@ export default function BayesUpdatingDiagram() {
         </text>
 
         {/* Stats panel */}
-        <rect x={mx} y={120} width={barW} height={52} rx="4" fill="#0f172a" stroke="#334155" strokeWidth="0.5" />
+        <rect x={mx} y={120} width={barW} height={52} rx="4" className="fill-gray-100 dark:fill-slate-950 stroke-gray-300 dark:stroke-gray-700" strokeWidth="0.5" />
 
-        <text x={mx + 10} y={136} fill="#94a3b8" fontSize="8" fontFamily="system-ui, sans-serif">
+        <text x={mx + 10} y={136} className={TEXT_MID} fontSize="8" fontFamily="system-ui, sans-serif">
           Prior: {pctStr(tests.length > 0 ? tests[tests.length - 1].priorP : INITIAL_PRIOR)}
         </text>
-        <text x={mx + 130} y={136} fill="#94a3b8" fontSize="8" fontFamily="system-ui, sans-serif">
+        <text x={mx + 130} y={136} className={TEXT_MID} fontSize="8" fontFamily="system-ui, sans-serif">
           Odds: {oddsStr(currentOdds)}
         </text>
-        <text x={mx + 260} y={136} fill="#94a3b8" fontSize="8" fontFamily="system-ui, sans-serif">
+        <text x={mx + 260} y={136} className={TEXT_MID} fontSize="8" fontFamily="system-ui, sans-serif">
           Posterior: {pctStr(currentProb)}
         </text>
-        <text x={mx + 380} y={136} fill="#94a3b8" fontSize="8" fontFamily="system-ui, sans-serif">
+        <text x={mx + 380} y={136} className={TEXT_MID} fontSize="8" fontFamily="system-ui, sans-serif">
           Tests: {tests.length}
         </text>
 
         {/* Test sequence */}
-        <text x={mx + 10} y={155} fill="#64748b" fontSize="8" fontFamily="system-ui, sans-serif">
-          LR: {tests.length > 0 && tests[tests.length - 1].type === '+' ? `×${LR_POS}` : tests.length > 0 ? `×${(1 / LR_POS).toFixed(4)}` : '—'}
+        <text x={mx + 10} y={155} className={TEXT_SUBTLE} fontSize="8" fontFamily="system-ui, sans-serif">
+          LR: {tests.length > 0 && tests[tests.length - 1].type === '+' ? `\u00d7${LR_POS}` : tests.length > 0 ? `\u00d7${(1 / LR_POS).toFixed(4)}` : '\u2014'}
         </text>
-        <text x={mx + 130} y={155} fill="#64748b" fontSize="8" fontFamily="system-ui, sans-serif">
+        <text x={mx + 130} y={155} className={TEXT_SUBTLE} fontSize="8" fontFamily="system-ui, sans-serif">
           Sequence: {tests.length === 0 ? '(none)' : tests.map(t => t.type).join(' ')}
         </text>
 
         {/* History timeline */}
         {tests.length > 0 && (
           <>
-            <text x={mx + 10} y={192} fill="#94a3b8" fontSize="8" fontWeight="600" fontFamily="system-ui, sans-serif">
+            <text x={mx + 10} y={192} className={TEXT_MID} fontSize="8" fontWeight="600" fontFamily="system-ui, sans-serif">
               Update history:
             </text>
             {/* Show initial + each step */}
@@ -168,7 +172,7 @@ export default function BayesUpdatingDiagram() {
                 const cx = mx + spacing * (i + 1);
                 const cy = 220;
                 if (item.prob < 0) {
-                  return <text key={i} x={cx} y={cy} textAnchor="middle" fill="#64748b" fontSize="9" fontFamily="system-ui, sans-serif">...</text>;
+                  return <text key={i} x={cx} y={cy} textAnchor="middle" className={TEXT_SUBTLE} fontSize="9" fontFamily="system-ui, sans-serif">...</text>;
                 }
                 const isPositive = item.label.includes('+');
                 const isNegative = item.label.includes('-');
@@ -178,12 +182,12 @@ export default function BayesUpdatingDiagram() {
                     <text x={cx} y={cy - 2} textAnchor="middle" fill="white" fontSize="6" fontWeight="600" fontFamily="system-ui, sans-serif">
                       {item.label.includes('Start') ? 'S' : item.label.includes('+') ? '+' : '-'}
                     </text>
-                    <text x={cx} y={cy + 14} textAnchor="middle" fill="#94a3b8" fontSize="6" fontFamily="system-ui, sans-serif">
+                    <text x={cx} y={cy + 14} textAnchor="middle" className={TEXT_MID} fontSize="6" fontFamily="system-ui, sans-serif">
                       {pctStr(item.prob)}
                     </text>
                     {/* Arrow between nodes */}
                     {i < shown.length - 1 && (
-                      <line x1={cx + 10} y1={cy - 5} x2={cx + spacing - 10} y2={cy - 5} stroke="#475569" strokeWidth="0.5" markerEnd="url(#bu-arrow)" />
+                      <line x1={cx + 10} y1={cy - 5} x2={cx + spacing - 10} y2={cy - 5} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth="0.5" markerEnd="url(#bu-arrow)" />
                     )}
                   </g>
                 );
@@ -191,7 +195,7 @@ export default function BayesUpdatingDiagram() {
             })()}
             <defs>
               <marker id="bu-arrow" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto">
-                <polygon points="0 0, 5 2, 0 4" fill="#475569" />
+                <polygon points="0 0, 5 2, 0 4" className="fill-gray-400 dark:fill-gray-600" />
               </marker>
             </defs>
           </>
@@ -200,20 +204,20 @@ export default function BayesUpdatingDiagram() {
         {/* Instructions when empty */}
         {tests.length === 0 && (
           <>
-            <text x={W / 2} y={200} textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="system-ui, sans-serif">
+            <text x={W / 2} y={200} textAnchor="middle" className={TEXT_MID} fontSize="9" fontFamily="system-ui, sans-serif">
               Start with prior P(disease) = 0.1%. Click &quot;+ Positive Test&quot; to update.
             </text>
-            <text x={W / 2} y={215} textAnchor="middle" fill="#64748b" fontSize="8" fontFamily="system-ui, sans-serif">
+            <text x={W / 2} y={215} textAnchor="middle" className={TEXT_SUBTLE} fontSize="8" fontFamily="system-ui, sans-serif">
               Each positive test multiplies odds by {LR_POS} (likelihood ratio).
             </text>
-            <text x={W / 2} y={228} textAnchor="middle" fill="#64748b" fontSize="8" fontFamily="system-ui, sans-serif">
+            <text x={W / 2} y={228} textAnchor="middle" className={TEXT_SUBTLE} fontSize="8" fontFamily="system-ui, sans-serif">
               Try: 3 positives? 2 positives + 1 negative? See how beliefs shift!
             </text>
           </>
         )}
 
         {/* Bottom description */}
-        <text x={W / 2} y={H - 10} textAnchor="middle" fill="#64748b" fontSize="8" fontFamily="system-ui, sans-serif">
+        <text x={W / 2} y={H - 10} textAnchor="middle" className={TEXT_SUBTLE} fontSize="8" fontFamily="system-ui, sans-serif">
           Sensitivity = 99%, False positive rate = 1% → Likelihood ratio = 99
         </text>
       </svg>

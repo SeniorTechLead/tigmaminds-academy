@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
-const DARK_BG = 'bg-gray-900';
+const DARK_BG = 'bg-white dark:bg-gray-900';
 const LABEL = 'text-[10px] font-bold uppercase tracking-wider';
+const SVG_BG = 'fill-gray-50 dark:fill-gray-900';
+const PANEL_BG = 'bg-gray-100 dark:bg-gray-800';
+const TEXT_MUTED = 'text-gray-500 dark:text-gray-500';
+const TEXT_SECONDARY = 'text-gray-600 dark:text-gray-400';
+const TEXT_BODY = 'text-gray-700 dark:text-gray-300';
 
 /* ════════════════════════════════════════════
    1. ExpressionEvaluator — plug in x, see the result
@@ -17,11 +22,11 @@ export function ExpressionEvaluator() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Expression Evaluator</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Expression Evaluator</span>
       </div>
 
       <div className="flex items-center gap-3 mb-4">
-        <span className="text-sm text-gray-400">x =</span>
+        <span className={`text-sm ${TEXT_SECONDARY}`}>x =</span>
         <input type="range" min={-10} max={10} value={x} onChange={e => setX(+e.target.value)}
           className="flex-1 accent-emerald-500" />
         <span className="text-lg font-mono font-bold text-emerald-400 w-8 text-center">{x}</span>
@@ -29,14 +34,14 @@ export function ExpressionEvaluator() {
 
       <div className="space-y-2">
         {expressions.map(({ expr, fn }) => (
-          <div key={expr} className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-800">
-            <span className="font-mono text-sm text-gray-300">{expr}</span>
-            <span className="text-sm text-gray-500">=</span>
+          <div key={expr} className={`flex items-center justify-between px-3 py-2 rounded-lg ${PANEL_BG}`}>
+            <span className={`font-mono text-sm ${TEXT_BODY}`}>{expr}</span>
+            <span className={`text-sm ${TEXT_MUTED}`}>=</span>
             <span className="font-mono text-lg font-bold text-amber-400">{fn(x)}</span>
           </div>
         ))}
       </div>
-      <p className="text-xs text-gray-500 mt-3 text-center">Drag the slider to change x — watch all expressions update</p>
+      <p className={`text-xs ${TEXT_MUTED} mt-3 text-center`}>Drag the slider to change x — watch all expressions update</p>
     </div>
   );
 }
@@ -60,43 +65,43 @@ export function EquationBalanceScale() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Solving: 2x + 3 = 11</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Solving: 2x + 3 = 11</span>
         <div className="flex gap-1">
           <button onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0}
-            className="px-2 py-1 rounded text-xs bg-gray-800 text-gray-400 hover:text-white disabled:opacity-30">←</button>
+            className={`px-2 py-1 rounded text-xs ${PANEL_BG} ${TEXT_SECONDARY} hover:text-gray-900 dark:hover:text-white disabled:opacity-30`}>&#x2190;</button>
           <button onClick={() => setStep(Math.min(steps.length - 1, step + 1))} disabled={step === steps.length - 1}
-            className="px-2 py-1 rounded text-xs bg-gray-800 text-gray-400 hover:text-white disabled:opacity-30">→</button>
+            className={`px-2 py-1 rounded text-xs ${PANEL_BG} ${TEXT_SECONDARY} hover:text-gray-900 dark:hover:text-white disabled:opacity-30`}>&#x2192;</button>
         </div>
       </div>
 
       {/* Balance scale visualization */}
       <div className="flex items-center justify-center gap-4 mb-3">
         <div className={`flex-1 text-center px-4 py-3 rounded-lg border-2 font-mono text-lg transition-all duration-300 ${
-          s.highlight === 'check' ? 'border-emerald-500 bg-emerald-900/20 text-emerald-300'
-          : step === steps.length - 2 ? 'border-amber-500 bg-amber-900/20 text-amber-300'
-          : 'border-blue-500 bg-blue-900/20 text-blue-300'
+          s.highlight === 'check' ? 'border-emerald-500 bg-emerald-100/40 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300'
+          : step === steps.length - 2 ? 'border-amber-500 bg-amber-100/40 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300'
+          : 'border-blue-500 bg-blue-100/40 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
         }`}>
           {s.left}
         </div>
-        <span className="text-xl text-gray-500 font-bold">=</span>
+        <span className={`text-xl ${TEXT_MUTED} font-bold`}>=</span>
         <div className={`flex-1 text-center px-4 py-3 rounded-lg border-2 font-mono text-lg transition-all duration-300 ${
-          s.highlight === 'check' ? 'border-emerald-500 bg-emerald-900/20 text-emerald-300'
-          : step === steps.length - 2 ? 'border-amber-500 bg-amber-900/20 text-amber-300'
-          : 'border-blue-500 bg-blue-900/20 text-blue-300'
+          s.highlight === 'check' ? 'border-emerald-500 bg-emerald-100/40 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300'
+          : step === steps.length - 2 ? 'border-amber-500 bg-amber-100/40 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300'
+          : 'border-blue-500 bg-blue-100/40 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300'
         }`}>
           {s.right}
         </div>
       </div>
 
       <p className={`text-sm text-center font-medium ${
-        s.highlight === 'check' ? 'text-emerald-400' : 'text-gray-300'
+        s.highlight === 'check' ? 'text-emerald-600 dark:text-emerald-400' : `${TEXT_BODY}`
       }`}>{s.action}</p>
 
       {/* Step dots */}
       <div className="flex justify-center gap-1.5 mt-3">
         {steps.map((_, i) => (
           <button key={i} onClick={() => setStep(i)}
-            className={`w-2 h-2 rounded-full transition-all ${i === step ? 'bg-emerald-400 scale-125' : i < step ? 'bg-emerald-700' : 'bg-gray-700'}`} />
+            className={`w-2 h-2 rounded-full transition-all ${i === step ? 'bg-emerald-400 scale-125' : i < step ? 'bg-emerald-700' : 'bg-gray-300 dark:bg-gray-700'}`} />
         ))}
       </div>
     </div>
@@ -120,13 +125,13 @@ export function InequalityNumberLine() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Inequality Visualizer</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>Inequality Visualizer</span>
       </div>
 
       <div className="flex items-center gap-3 mb-3">
-        <span className="text-sm text-gray-400">x</span>
+        <span className={`text-sm ${TEXT_SECONDARY}`}>x</span>
         <select value={operator} onChange={e => setOperator(e.target.value as any)}
-          className="px-2 py-1 bg-gray-800 border border-gray-700 rounded text-sm text-white">
+          className="px-2 py-1 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded text-sm text-gray-900 dark:text-white">
           <option value="<">&lt;</option>
           <option value=">">&gt;</option>
           <option value="≤">≤</option>
@@ -138,16 +143,16 @@ export function InequalityNumberLine() {
       </div>
 
       <svg viewBox={`0 0 ${W} 50`} className="w-full">
-        <rect width={W} height={50} rx={4} fill="#111827" />
+        <rect width={W} height={50} rx={4} className={SVG_BG} />
 
         {/* Number line */}
-        <line x1={PAD} y1={25} x2={W - PAD} y2={25} stroke="#374151" strokeWidth={2} />
+        <line x1={PAD} y1={25} x2={W - PAD} y2={25} className="stroke-gray-300 dark:stroke-gray-700" strokeWidth={2} />
 
         {/* Tick marks */}
         {Array.from({ length: 21 }, (_, i) => i - 10).map(n => (
           <g key={n}>
-            <line x1={scale(n)} y1={20} x2={scale(n)} y2={30} stroke="#4b5563" strokeWidth={1} />
-            {n % 2 === 0 && <text x={scale(n)} y={42} textAnchor="middle" fill="#6b7280" fontSize={8}>{n}</text>}
+            <line x1={scale(n)} y1={20} x2={scale(n)} y2={30} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth={1} />
+            {n % 2 === 0 && <text x={scale(n)} y={42} textAnchor="middle" className="fill-gray-500 dark:fill-gray-500" fontSize={8}>{n}</text>}
           </g>
         ))}
 
@@ -166,7 +171,7 @@ export function InequalityNumberLine() {
         )}
 
         {/* Threshold point */}
-        <circle cx={scale(threshold)} cy={25} r={5} fill={isFilled ? '#f59e0b' : '#111827'} stroke="#f59e0b" strokeWidth={2} />
+        <circle cx={scale(threshold)} cy={25} r={5} fill={isFilled ? '#f59e0b' : 'currentColor'} className={isFilled ? '' : 'text-gray-50 dark:text-gray-900'} stroke="#f59e0b" strokeWidth={2} />
 
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
@@ -175,7 +180,7 @@ export function InequalityNumberLine() {
         </defs>
       </svg>
 
-      <p className="text-xs text-center text-gray-400 mt-2">
+      <p className={`text-xs text-center ${TEXT_SECONDARY} mt-2`}>
         x {operator} {value} — {isFilled ? 'filled' : 'open'} circle ({isFilled ? 'includes' : 'excludes'} {value})
       </p>
     </div>
@@ -199,24 +204,24 @@ export function SlopeExplorer() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-2">
-        <span className={`${LABEL} text-gray-500`}>y = mx + b</span>
+        <span className={`${LABEL} ${TEXT_MUTED}`}>y = mx + b</span>
         <span className="font-mono text-sm text-emerald-400">y = {m}x {b >= 0 ? '+' : ''} {b}</span>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full mb-3">
-        <rect width={W} height={H} rx={4} fill="#111827" />
+        <rect width={W} height={H} rx={4} className={SVG_BG} />
 
         {/* Grid */}
         {Array.from({ length: 11 }, (_, i) => i - 5).map(n => (
           <g key={n}>
-            <line x1={scaleX(n)} y1={PAD} x2={scaleX(n)} y2={H - PAD} stroke="#1f2937" strokeWidth={0.5} />
-            <line x1={PAD} y1={scaleY(n)} x2={W - PAD} y2={scaleY(n)} stroke="#1f2937" strokeWidth={0.5} />
+            <line x1={scaleX(n)} y1={PAD} x2={scaleX(n)} y2={H - PAD} className="stroke-gray-200 dark:stroke-gray-800" strokeWidth={0.5} />
+            <line x1={PAD} y1={scaleY(n)} x2={W - PAD} y2={scaleY(n)} className="stroke-gray-200 dark:stroke-gray-800" strokeWidth={0.5} />
           </g>
         ))}
 
         {/* Axes */}
-        <line x1={scaleX(0)} y1={PAD} x2={scaleX(0)} y2={H - PAD} stroke="#4b5563" strokeWidth={1.5} />
-        <line x1={PAD} y1={scaleY(0)} x2={W - PAD} y2={scaleY(0)} stroke="#4b5563" strokeWidth={1.5} />
+        <line x1={scaleX(0)} y1={PAD} x2={scaleX(0)} y2={H - PAD} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth={1.5} />
+        <line x1={PAD} y1={scaleY(0)} x2={W - PAD} y2={scaleY(0)} className="stroke-gray-400 dark:stroke-gray-600" strokeWidth={1.5} />
 
         {/* Line */}
         <line x1={scaleX(x1)} y1={scaleY(y1)} x2={scaleX(x2)} y2={scaleY(y2)}
@@ -239,14 +244,14 @@ export function SlopeExplorer() {
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+          <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
             <span>Slope (m)</span><span className="font-mono text-emerald-400">{m}</span>
           </div>
           <input type="range" min={-4} max={4} step={0.5} value={m} onChange={e => setM(+e.target.value)}
             className="w-full accent-emerald-500" />
         </div>
         <div>
-          <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+          <div className={`flex items-center justify-between text-xs ${TEXT_SECONDARY} mb-1`}>
             <span>Y-intercept (b)</span><span className="font-mono text-amber-400">{b}</span>
           </div>
           <input type="range" min={-4} max={4} step={0.5} value={b} onChange={e => setB(+e.target.value)}

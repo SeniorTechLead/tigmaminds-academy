@@ -109,7 +109,7 @@ export default function SerialLoggerDiagram() {
   const lastReading = readings.length > 0 ? readings[readings.length - 1] : null;
 
   return (
-    <div className="w-full bg-gray-900 rounded-xl p-6 text-white font-mono select-none">
+    <div className="w-full bg-white dark:bg-gray-900 rounded-xl p-6 text-gray-900 dark:text-white font-mono select-none">
       <h3 className="text-center text-lg font-bold text-teal-400 mb-4">
         Talking to the Computer — Serial Monitor
       </h3>
@@ -121,7 +121,7 @@ export default function SerialLoggerDiagram() {
             key={s}
             onClick={() => switchSensor(s)}
             className={`px-4 py-2 rounded-lg font-bold text-sm transition-all ${
-              sensor === s ? 'bg-teal-600 ring-2 ring-teal-400' : 'bg-gray-700 hover:bg-gray-600'
+              sensor === s ? 'bg-teal-600 ring-2 ring-teal-400 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300'
             }`}
           >
             {SENSOR_CONFIG[s].label}
@@ -132,19 +132,19 @@ export default function SerialLoggerDiagram() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* Serial monitor terminal */}
         <div className="flex flex-col">
-          <div className="flex items-center justify-between bg-gray-800 rounded-t-lg px-3 py-1.5 border-b border-gray-700">
-            <span className="text-xs text-gray-400">Serial Monitor — 9600 baud</span>
+          <div className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 rounded-t-lg px-3 py-1.5 border-b border-gray-300 dark:border-gray-700">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Serial Monitor — 9600 baud</span>
             <div className="flex gap-2">
-              <div className={`w-2 h-2 rounded-full ${running ? 'bg-green-500 animate-pulse' : 'bg-gray-600'}`} />
-              <button onClick={clearTerminal} className="text-xs text-gray-400 hover:text-white transition-colors">Clear</button>
+              <div className={`w-2 h-2 rounded-full ${running ? 'bg-green-500 animate-pulse' : 'bg-gray-400 dark:bg-gray-600'}`} />
+              <button onClick={clearTerminal} className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Clear</button>
             </div>
           </div>
           <div
             ref={terminalRef}
-            className="bg-black rounded-b-lg p-3 h-64 overflow-y-auto text-xs leading-relaxed border border-gray-800"
+            className="bg-white dark:bg-black rounded-b-lg p-3 h-64 overflow-y-auto text-xs leading-relaxed border border-gray-200 dark:border-gray-800"
           >
             {readings.length === 0 && (
-              <p className="text-gray-600">// Waiting for data...</p>
+              <p className="text-gray-400 dark:text-gray-600">// Waiting for data...</p>
             )}
             {readings.map(r => (
               <div key={r.id} className={r.alert ? 'text-red-400' : 'text-green-400'}>
@@ -160,10 +160,10 @@ export default function SerialLoggerDiagram() {
 
         {/* Live chart */}
         <div className="flex flex-col">
-          <div className="bg-gray-800 rounded-t-lg px-3 py-1.5 border-b border-gray-700">
-            <span className="text-xs text-gray-400">Live Chart (last 20 readings)</span>
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-t-lg px-3 py-1.5 border-b border-gray-300 dark:border-gray-700">
+            <span className="text-xs text-gray-500 dark:text-gray-400">Live Chart (last 20 readings)</span>
           </div>
-          <div className="bg-gray-950 rounded-b-lg p-2 border border-gray-800 flex-1 flex items-center justify-center">
+          <div className="bg-gray-50 dark:bg-gray-950 rounded-b-lg p-2 border border-gray-200 dark:border-gray-800 flex-1 flex items-center justify-center">
             <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full h-auto">
               {/* Grid */}
               <rect x={chartPadX} y={chartPadY} width={plotW} height={plotH} fill="none" stroke="#1f2937" strokeWidth="1" />
@@ -212,7 +212,7 @@ export default function SerialLoggerDiagram() {
         </button>
 
         <div className="flex flex-col items-center">
-          <label className="text-[10px] text-gray-500">Read speed: {speed}ms</label>
+          <label className="text-[10px] text-gray-500 dark:text-gray-500">Read speed: {speed}ms</label>
           <input
             type="range"
             min={200}
@@ -225,7 +225,7 @@ export default function SerialLoggerDiagram() {
         </div>
 
         <div className="flex flex-col items-center">
-          <label className="text-[10px] text-gray-500">
+          <label className="text-[10px] text-gray-500 dark:text-gray-500">
             Alert threshold: {threshold}{config.unit}
           </label>
           <input
@@ -243,7 +243,7 @@ export default function SerialLoggerDiagram() {
       {/* Current reading display */}
       {lastReading && (
         <div className={`text-center mb-4 py-2 rounded-lg ${
-          lastReading.alert ? 'bg-red-900/30 border border-red-700' : 'bg-gray-800 border border-gray-700'
+          lastReading.alert ? 'bg-red-900/30 border border-red-700' : 'bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700'
         }`}>
           <span className={`text-2xl font-bold ${lastReading.alert ? 'text-red-400' : 'text-teal-400'}`}>
             {lastReading.value}{config.unit}
@@ -253,7 +253,7 @@ export default function SerialLoggerDiagram() {
       )}
 
       {/* Live code */}
-      <div className="bg-gray-950 rounded-lg p-4 border border-gray-700 text-sm">
+      <div className="bg-gray-50 dark:bg-gray-950 rounded-lg p-4 border border-gray-300 dark:border-gray-700 text-sm">
         <p className="text-gray-500 mb-2">// Arduino Code:</p>
         <pre className="text-green-300 whitespace-pre-wrap leading-relaxed">
 {`void setup() {
@@ -284,7 +284,7 @@ void loop() {
         </pre>
       </div>
 
-      <div className="mt-4 bg-gray-800 rounded-lg p-3 text-sm text-gray-300 leading-relaxed">
+      <div className="mt-4 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
         <p className="text-teal-400 font-bold mb-1">Key idea:</p>
         <p><code className="text-green-400">Serial.println(value)</code> sends data from your Arduino to your computer. The Serial Monitor shows it as text, just like a chat window. This is how you <span className="text-teal-400">debug your code</span> and <span className="text-teal-400">see sensor values</span> in real time. Set the baud rate to <code className="text-green-400">9600</code> in both your code and the monitor.</p>
       </div>
