@@ -43,7 +43,7 @@ const idealCandidate = [
   { icon: GraduationCap, text: 'STEM background — engineering, science, or computer science degree or equivalent experience' },
   { icon: BookOpen, text: 'Genuine enthusiasm for teaching — you light up when explaining how things work' },
   { icon: Users, text: 'Comfort working with children and teenagers in a classroom setting' },
-  { icon: MapPin, text: 'Based in Guwahati or Thiruvananthapuram (or willing to relocate)' },
+  { icon: MapPin, text: 'Based in Guwahati, Hyderabad, or Thiruvananthapuram (or willing to relocate)' },
 ];
 
 export default function CareersPage() {
@@ -88,7 +88,7 @@ export default function CareersPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full mb-6 text-sm font-semibold">
             <GraduationCap className="w-4 h-4" />
-            Now hiring in Guwahati &amp; Thiruvananthapuram
+            Now hiring in Guwahati, Hyderabad &amp; Thiruvananthapuram
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             Teach With Us
@@ -188,10 +188,15 @@ export default function CareersPage() {
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Guwahati, Assam</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">Where our stories come from. We're building our first workshops here.</p>
             </div>
+            <div className="rounded-2xl bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 border border-violet-200 dark:border-violet-800 p-8 text-center">
+              <MapPin className="w-8 h-8 text-violet-600 dark:text-violet-400 mx-auto mb-3" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Hyderabad, Telangana</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">India's tech hub. Deep talent pool, thriving STEM culture.</p>
+            </div>
             <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 p-8 text-center">
               <MapPin className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3" />
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Thiruvananthapuram, Kerala</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Expanding to Kerala's capital. Strong STEM ecosystem, growing demand.</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Kerala's capital. Strong STEM ecosystem, growing demand.</p>
             </div>
           </div>
         </div>
@@ -264,6 +269,7 @@ export default function CareersPage() {
                 <select name="city" value={form.city} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent">
                   <option value="">Select city</option>
                   <option value="Guwahati">Guwahati</option>
+                  <option value="Hyderabad">Hyderabad</option>
                   <option value="Thiruvananthapuram">Thiruvananthapuram</option>
                 </select>
               </div>

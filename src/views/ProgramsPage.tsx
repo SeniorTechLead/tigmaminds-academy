@@ -170,7 +170,7 @@ function WaitlistForm({ isIndia }: { isIndia: boolean }) {
         <h3 className="text-xl font-bold text-gray-900 dark:text-white">Join the Workshop Waitlist</h3>
       </div>
       <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-        Mentor-led workshops in Guwahati and Thiruvananthapuram — 24-week bootcamps for career changers and 12-month programs for students. Small cohorts, dedicated mentors, real outcomes.
+        Mentor-led workshops in Guwahati, Hyderabad, and Thiruvananthapuram — 24-week bootcamps for career changers and 12-month programs for students. Small cohorts, dedicated mentors, real outcomes.
       </p>
 
       {status === 'error' && (
@@ -218,6 +218,7 @@ function WaitlistForm({ isIndia }: { isIndia: boolean }) {
             <select name="city" value={form.city} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
               <option value="">Select city</option>
               <option value="Guwahati">Guwahati</option>
+              <option value="Hyderabad">Hyderabad</option>
               <option value="Thiruvananthapuram">Thiruvananthapuram</option>
             </select>
           </div>
