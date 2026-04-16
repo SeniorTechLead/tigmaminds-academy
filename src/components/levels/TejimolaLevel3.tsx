@@ -88,7 +88,8 @@ ax.set_xlabel('log₁₀[Auxin] (mg/L)', color='white')
 ax.set_ylabel('log₁₀[Cytokinin] (mg/L)', color='white')
 ax.set_title('Root Formation Probability', color='white', fontsize=11)
 ax.plot([0.5, 2], [-2, 0], 'w--', linewidth=1, alpha=0.5)
-ax.annotate('High auxin →\\nROOTS', xy=(1.5, -1.5), color='white', fontsize=9, fontweight='bold')
+ax.annotate('High auxin →\
+ROOTS', xy=(1.5, -1.5), color='white', fontsize=9, fontweight='bold')
 
 # Plot 2: Shoot probability map
 ax = axes[0, 1]
@@ -98,7 +99,8 @@ plt.colorbar(im2, ax=ax, label='P(shoot)')
 ax.set_xlabel('log₁₀[Auxin] (mg/L)', color='white')
 ax.set_ylabel('log₁₀[Cytokinin] (mg/L)', color='white')
 ax.set_title('Shoot Formation Probability', color='white', fontsize=11)
-ax.annotate('High cytokinin →\\nSHOOTS', xy=(-1.5, 1.5), color='white', fontsize=9, fontweight='bold')
+ax.annotate('High cytokinin →\
+SHOOTS', xy=(-1.5, 1.5), color='white', fontsize=9, fontweight='bold')
 
 # Plot 3: Callus probability map
 ax = axes[0, 2]
@@ -108,7 +110,8 @@ plt.colorbar(im3, ax=ax, label='P(callus)')
 ax.set_xlabel('log₁₀[Auxin] (mg/L)', color='white')
 ax.set_ylabel('log₁₀[Cytokinin] (mg/L)', color='white')
 ax.set_title('Callus Formation Probability', color='white', fontsize=11)
-ax.annotate('Equal ratio →\\nCALLUS', xy=(-0.3, 0), color='white', fontsize=9, fontweight='bold')
+ax.annotate('Equal ratio →\
+CALLUS', xy=(-0.3, 0), color='white', fontsize=9, fontweight='bold')
 
 # Plot 4: Cell fate diagram (1D slice at fixed total hormone)
 ax = axes[1, 0]
@@ -126,7 +129,12 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 5: Tissue culture timeline
 ax = axes[1, 1]
-stages = ['Explant\\n(day 0)', 'Callus\\n(week 2)', 'Shoots\\n(week 6)', 'Roots\\n(week 10)', 'Plantlet\\n(week 14)']
+stages = ['Explant\
+(day 0)', 'Callus\
+(week 2)', 'Shoots\
+(week 6)', 'Roots\
+(week 10)', 'Plantlet\
+(week 14)']
 sizes = [1, 5, 15, 25, 40]  # relative size
 colors_stage = ['#64748b', '#f59e0b', '#3b82f6', '#22c55e', '#a855f7']
 for i, (stage, size, color) in enumerate(zip(stages, sizes, colors_stage)):
@@ -145,12 +153,18 @@ ax.set_xticks([]); ax.set_yticks([])
 # Plot 6: Historical milestones
 ax = axes[1, 2]
 milestones = [
-    (1902, 'Haberlandt:\\ntotipotency concept'),
-    (1934, 'White: root\\nculture success'),
-    (1958, 'Steward: carrot\\nfrom single cell'),
-    (1962, 'Murashige & Skoog:\\nMS medium'),
-    (1983, 'First transgenic\\nplant'),
-    (2012, 'CRISPR gene\\nediting in plants'),
+    (1902, 'Haberlandt:\
+totipotency concept'),
+    (1934, 'White: root\
+culture success'),
+    (1958, 'Steward: carrot\
+from single cell'),
+    (1962, 'Murashige & Skoog:\
+MS medium'),
+    (1983, 'First transgenic\
+plant'),
+    (2012, 'CRISPR gene\
+editing in plants'),
 ]
 for i, (year, label) in enumerate(milestones):
     ax.plot(year, i, 'o', color='#f59e0b', markersize=10, markeredgecolor='white')
@@ -323,7 +337,8 @@ ax.set_xlabel('Meristem size (mm)', color='white')
 ax.set_ylabel('Percentage (%)', color='white')
 ax.set_title('Meristem Size: Virus-Free vs Survival', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Optimal: 0.2-0.3 mm\\n(best trade-off)', xy=(0.25, 70),
+ax.annotate('Optimal: 0.2-0.3 mm\
+(best trade-off)', xy=(0.25, 70),
             color='#f59e0b', fontsize=9, fontweight='bold')
 
 # Plot 5: Tunica-corpus meristem structure
@@ -343,7 +358,8 @@ for r, label, color in [(3.0, 'L1 (epidermis)', '#22c55e'),
 for angle in [0.3, 2.8]:
     lx = 3.5 * np.cos(angle)
     ly = 3.5 * np.sin(angle)
-    ax.annotate('Leaf\\nprimordium', xy=(lx, ly), xytext=(lx + 1.5 * np.sign(np.cos(angle)), ly + 1),
+    ax.annotate('Leaf\
+primordium', xy=(lx, ly), xytext=(lx + 1.5 * np.sign(np.cos(angle)), ly + 1),
                 arrowprops=dict(arrowstyle='->', color='white'), color='white', fontsize=8)
 
 ax.set_xlim(-5, 5)
@@ -540,8 +556,10 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 4: Methods comparison table
 ax = axes[1, 0]
-methods = ['Stolons', 'Rhizomes', 'Tubers', 'Cuttings', 'Grafting', 'Tissue\\nculture']
-metrics = ['Speed', 'Cost', 'Fidelity', 'Scale', 'Skill\\nneeded']
+methods = ['Stolons', 'Rhizomes', 'Tubers', 'Cuttings', 'Grafting', 'Tissue\
+culture']
+metrics = ['Speed', 'Cost', 'Fidelity', 'Scale', 'Skill\
+needed']
 scores = np.array([
     [0.9, 0.7, 0.7, 0.4, 0.3, 1.0],  # Speed
     [0.9, 0.8, 0.9, 0.8, 0.5, 0.2],  # Cost (low = good)
@@ -591,7 +609,11 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 6: Grafting combinations
 ax = axes[1, 2]
 # Show rootstock-scion compatibility matrix
-rootstocks = ['Vigorous\\nwild type', 'Dwarf\\nrootstock', 'Disease-\\nresistant', 'Drought-\\ntolerant']
+rootstocks = ['Vigorous\
+wild type', 'Dwarf\
+rootstock', 'Disease-\
+resistant', 'Drought-\
+tolerant']
 scions = ['High yield', 'Best flavor', 'Early fruit', 'Ornamental']
 compat = np.array([
     [0.95, 0.90, 0.85, 0.70],
@@ -723,12 +745,15 @@ for cat, data, label in [(macro, 'Macronutrients', 'left'), (micro, 'Micronutrie
         ax.bar(x, conc, 0.6, bottom=bottom, color=colors_m[i], label=nutrient if x == 0 else None,
                edgecolor='none')
         if conc > 100:
-            ax.text(x, bottom + conc/2, f'{nutrient}\\n{conc}', ha='center',
+            ax.text(x, bottom + conc/2, f'{nutrient}\
+{conc}', ha='center',
                     color='white', fontsize=6)
         bottom += conc
     x += 1
 ax.set_xticks([0, 1])
-ax.set_xticklabels(['Macronutrients\\n(mg/L)', 'Micronutrients\\n(mg/L)'], color='white', fontsize=9)
+ax.set_xticklabels(['Macronutrients\
+(mg/L)', 'Micronutrients\
+(mg/L)'], color='white', fontsize=9)
 ax.set_ylabel('Concentration (mg/L)', color='white')
 ax.set_title('MS Medium Composition', color='white', fontsize=11)
 
@@ -785,8 +810,10 @@ steps = [
     ('Sterilize', 0, 0.5, '#ef4444'),
     ('Inoculate', 0.5, 1, '#f59e0b'),
     ('Callus', 1, 4, '#22c55e'),
-    ('Shoot\\ninduction', 4, 8, '#3b82f6'),
-    ('Root\\ninduction', 8, 11, '#a855f7'),
+    ('Shoot\
+induction', 4, 8, '#3b82f6'),
+    ('Root\
+induction', 8, 11, '#a855f7'),
     ('Acclimate', 11, 14, '#ec4899'),
 ]
 for label, start, end, color in steps:
@@ -802,7 +829,9 @@ ax.text(7, 0.3, '~14 weeks from explant to acclimatized plant',
 
 # Plot 6: Contamination sources
 ax = axes[1, 2]
-contam_sources = ['Bacteria', 'Fungi', 'Mites', 'Endogenous\\ncontam.', 'Lab\\nerror']
+contam_sources = ['Bacteria', 'Fungi', 'Mites', 'Endogenous\
+contam.', 'Lab\
+error']
 prevalence = [40, 35, 5, 15, 5]
 colors_contam = ['#ef4444', '#f59e0b', '#a855f7', '#3b82f6', '#64748b']
 wedges, texts, autotexts = ax.pie(prevalence, labels=contam_sources, autopct='%1.0f%%',
@@ -957,7 +986,8 @@ ax.set_xlabel('Weeks', color='white')
 ax.set_ylabel('FLC gene expression (%)', color='white')
 ax.set_title('Vernalization: Cold → Epigenetic Silencing', color='white', fontsize=11)
 ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.annotate('Cold silences FLC\\nvia histone methylation', xy=(10, 40),
+ax.annotate('Cold silences FLC\
+via histone methylation', xy=(10, 40),
             color='#06b6d4', fontsize=9, fontweight='bold')
 
 # Plot 5: Somaclonal variation in clones
@@ -984,9 +1014,15 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 6: Epigenetic mechanisms overview
 ax = axes[1, 2]
-mechanisms = ['DNA\\nmethylation', 'Histone\\nacetylation', 'Histone\\nmethylation',
-              'siRNA\\nsilencing', 'Chromatin\\nremodeling']
-effect = ['Gene OFF', 'Gene ON', 'Gene OFF\\nor ON', 'Gene OFF', 'Variable']
+mechanisms = ['DNA\
+methylation', 'Histone\
+acetylation', 'Histone\
+methylation',
+              'siRNA\
+silencing', 'Chromatin\
+remodeling']
+effect = ['Gene OFF', 'Gene ON', 'Gene OFF\
+or ON', 'Gene OFF', 'Variable']
 heritability = [0.9, 0.5, 0.7, 0.8, 0.3]
 colors_mech = ['#ef4444', '#22c55e', '#3b82f6', '#a855f7', '#f59e0b']
 bars = ax.barh(range(len(mechanisms)), heritability, color=colors_mech,
@@ -1153,7 +1189,8 @@ for seq in genome_seqs:
     mm = sum(1 for a, b in zip(target, seq) if a != b)
     if mm <= 3:
         mismatch_counts[mm] += 1
-ax.bar(['0\\n(on-target)', '1 mismatch', '2 mismatches', '3 mismatches'],
+ax.bar(['0\
+(on-target)', '1 mismatch', '2 mismatches', '3 mismatches'],
        mismatch_counts, color=['#22c55e', '#f59e0b', '#ef4444', '#a855f7'],
        edgecolor='none', width=0.6)
 ax.set_ylabel('Number of genomic sites', color='white')
@@ -1163,7 +1200,12 @@ for i, c in enumerate(mismatch_counts):
 
 # Plot 4: CRISPR crop applications
 ax = axes[1, 0]
-crops = ['Rice\\n(blast resist.)', 'Wheat\\n(low gluten)', 'Tomato\\n(longer shelf)', 'Maize\\n(drought tol.)', 'Banana\\n(TR4 resist.)']
+crops = ['Rice\
+(blast resist.)', 'Wheat\
+(low gluten)', 'Tomato\
+(longer shelf)', 'Maize\
+(drought tol.)', 'Banana\
+(TR4 resist.)']
 progress = [8, 6, 7, 5, 4]  # Technology Readiness Level
 years_to_market = [2, 5, 3, 6, 7]
 colors_crop = ['#22c55e', '#f59e0b', '#ef4444', '#3b82f6', '#a855f7']
@@ -1178,7 +1220,11 @@ ax.invert_yaxis()
 
 # Plot 5: Conventional breeding vs CRISPR timeline
 ax = axes[1, 1]
-methods = ['Conventional\\nbreeding', 'Mutation\\nbreeding', 'Transgenic\\n(GMO)', 'CRISPR\\nediting']
+methods = ['Conventional\
+breeding', 'Mutation\
+breeding', 'Transgenic\
+(GMO)', 'CRISPR\
+editing']
 time_years = [12, 8, 6, 3]
 precision = [0.2, 0.1, 0.9, 0.95]
 colors_method = ['#64748b', '#f59e0b', '#ef4444', '#22c55e']
@@ -1191,13 +1237,21 @@ ax.set_xlabel('Time to new variety (years)', color='white')
 ax.set_ylabel('Precision of genetic change', color='white')
 ax.set_title('Breeding Methods Compared', color='white', fontsize=11)
 ax.invert_xaxis()
-ax.annotate('CRISPR: fastest\\nAND most precise', xy=(3.5, 0.9),
+ax.annotate('CRISPR: fastest\
+AND most precise', xy=(3.5, 0.9),
             color='#22c55e', fontsize=9, fontweight='bold')
 
 # Plot 6: Regulatory landscape
 ax = axes[1, 2]
 countries = ['USA', 'Japan', 'Brazil', 'Australia', 'India', 'EU', 'China']
-regulation = ['Product-\\nbased', 'Product-\\nbased', 'Product-\\nbased', 'Process-\\nbased', 'Under\\nreview', 'Process-\\nbased', 'Process-\\nbased']
+regulation = ['Product-\
+based', 'Product-\
+based', 'Product-\
+based', 'Process-\
+based', 'Under\
+review', 'Process-\
+based', 'Process-\
+based']
 strictness = [2, 2, 2, 7, 5, 9, 7]  # 1-10 strictness
 colors_reg = ['#22c55e' if s < 5 else '#f59e0b' if s < 7 else '#ef4444' for s in strictness]
 ax.barh(range(len(countries)), strictness, color=colors_reg, edgecolor='none', height=0.6)

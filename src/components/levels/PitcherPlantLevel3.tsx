@@ -143,7 +143,8 @@ print("Annual nitrogen budget:")
 print(f"  Soil supply: {total_soil:.1f} mg N/year")
 print(f"  Insect supply: {total_insect:.1f} mg N/year")
 print(f"  Insect N is {total_insect/(total_soil+total_insect)*100:.0f}% of total intake")
-print(f"\\nFinal biomass:")
+print(f"\
+Final biomass:")
 print(f"  Pitcher plant: {biomass_carn[-1]:.1f} (started at {biomass_carn[0]:.1f})")
 print(f"  Normal plant: {biomass_norm[-1]:.1f} (started at {biomass_norm[0]:.1f})")
 print(f"  Advantage: {(biomass_carn[-1]/biomass_norm[-1] - 1)*100:.0f}% more biomass from carnivory")`,
@@ -309,10 +310,12 @@ print("Annual nitrogen availability:")
 print(f"  Normal soil: {avail_n.mean():.1f} mg N/kg (mean)")
 print(f"  Bog soil: {avail_b.mean():.1f} mg N/kg (mean)")
 print(f"  Ratio: {avail_n.mean()/max(avail_b.mean(),0.01):.1f}x more in normal soil")
-print(f"\\nOrganic matter trend:")
+print(f"\
+Organic matter trend:")
 print(f"  Normal: {org_n[-1]:.0f} mg/kg (decomposition keeps up)")
 print(f"  Bog: {org_b[-1]:.0f} mg/kg (accumulating -> peat formation)")
-print(f"\\nThis nitrogen scarcity is why pitcher plants evolved carnivory.")`,
+print(f"\
+This nitrogen scarcity is why pitcher plants evolved carnivory.")`,
       challenge: 'Add a "pH effect" parameter: in bogs, pH is 3.5 (vs 6.5 in normal soil). Enzyme activity drops exponentially below pH 5. How does explicit pH modeling change the nitrogen availability gap?',
       successHint: 'Bogs are nitrogen prisons: organic matter accumulates because decomposition is blocked, and the nitrogen locked inside cannot be recycled. Carnivorous plants bypass this bottleneck entirely by harvesting nitrogen from mobile animals.',
     },
@@ -997,7 +1000,12 @@ axes[1, 1].set_title('Niche width: specialist vs generalist', color='white', fon
 axes[1, 1].legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # 6: Multidimensional niche summary
-dims = ['Nitrogen\\n(low)', 'Moisture\\n(high)', 'pH\\n(acidic)', 'Light\\n(high)', 'Prey\\n(insects)']
+dims = ['Nitrogen\
+(low)', 'Moisture\
+(high)', 'pH\
+(acidic)', 'Light\
+(high)', 'Prey\
+(insects)']
 pitcher_scores = [0.9, 0.85, 0.8, 0.7, 0.9]
 sundew_scores = [0.8, 0.8, 0.75, 0.65, 0.7]
 grass_scores = [0.3, 0.5, 0.4, 0.6, 0]

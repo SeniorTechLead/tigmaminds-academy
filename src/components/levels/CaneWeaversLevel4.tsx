@@ -108,7 +108,8 @@ print("=" * 70)
 for p in cur.execute('SELECT p.id, p.name, p.village, p.wallpaper_group FROM patterns p'):
     props = {r[0]: r[1] for r in cur.execute('SELECT metric, value FROM properties WHERE pattern_id=?', (p[0],))}
     info = {r[0]: r[1] for r in cur.execute('SELECT field, info FROM cultural_info WHERE pattern_id=?', (p[0],))}
-    print(f"\\n[{p[0]}] {p[1]} — {p[2]} (Group: {p[3]})")
+    print(f"\
+[{p[0]}] {p[1]} — {p[2]} (Group: {p[3]})")
     print(f"    Density: {props.get('density',0)*100:.0f}% | Max float: {props.get('max_float',0):.0f} | Symmetry: {props.get('symmetry_score',0)*100:.0f}%")
     print(f"    {info.get('meaning','')} | Used for: {info.get('occasion','')}")
 
@@ -116,7 +117,8 @@ for p in cur.execute('SELECT p.id, p.name, p.village, p.wallpaper_group FROM pat
 best = cur.execute('SELECT pattern_a, pattern_b, score FROM similarity ORDER BY score DESC LIMIT 1').fetchone()
 na = cur.execute('SELECT name FROM patterns WHERE id=?', (best[0],)).fetchone()[0]
 nb = cur.execute('SELECT name FROM patterns WHERE id=?', (best[1],)).fetchone()[0]
-print(f"\\nMost similar pair: {na} & {nb} ({best[2]*100:.0f}% match)")`,
+print(f"\
+Most similar pair: {na} & {nb} ({best[2]*100:.0f}% match)")`,
       challenge: 'Add a search function: given a target density and symmetry requirement, find the matching patterns. Which pattern best matches "high density, high symmetry"?',
       successHint: 'A pattern database preserves cultural knowledge in a form that can be searched, analysed, and shared globally. This is digital heritage preservation at its most practical.',
     },
@@ -212,7 +214,8 @@ print("PATTERN RECOMMENDATIONS")
 print("=" * 65)
 
 for app_name, weights in applications.items():
-    print(f"\\nApplication: {app_name}")
+    print(f"\
+Application: {app_name}")
     print("-" * 50)
 
     scores = []
@@ -239,7 +242,8 @@ for app_name, weights in applications.items():
         print(f"  #{rank}: {name:20s} (score: {score:.3f}) — {reason}")
 
 db.commit()
-print(f"\\nTotal recommendations stored: {cur.execute('SELECT COUNT(*) FROM recommendations').fetchone()[0]}")`,
+print(f"\
+Total recommendations stored: {cur.execute('SELECT COUNT(*) FROM recommendations').fetchone()[0]}")`,
       challenge: 'Add a "custom" application where the user specifies their own weights. Implement interactive weight adjustment and see how recommendations change.',
       successHint: 'Recommendation engines transform expert knowledge into accessible tools. A young weaver can now get pattern advice that previously required decades of experience.',
     },
@@ -357,7 +361,8 @@ for name, sym, constraints in specs:
     valid = len(issues) == 0
 
     # Display
-    print(f"\\n{name} (group: {sym}, attempts: {attempts})")
+    print(f"\
+{name} (group: {sym}, attempts: {attempts})")
     print(f"  Constraints: {constraints}")
     print(f"  Status: {'VALID' if valid else 'BEST EFFORT (' + str(issues) + ')'}")
     print(f"  Density: {grid.mean():.2f}")
@@ -379,7 +384,8 @@ for name, sym, constraints in specs:
 db.commit()
 total = cur.execute('SELECT COUNT(*) FROM generated').fetchone()[0]
 valid_count = cur.execute('SELECT COUNT(*) FROM generated WHERE valid=1').fetchone()[0]
-print(f"\\nGenerated: {total} patterns, {valid_count} valid")`,
+print(f"\
+Generated: {total} patterns, {valid_count} valid")`,
       challenge: 'Add an "aesthetic score" constraint based on block entropy (must be > 2.5 bits). How much harder does generation become with this additional constraint?',
       successHint: 'Constraint satisfaction is how computers solve design problems. From circuit layout to building architecture to weave patterns, the approach is the same: define what you need, and let the algorithm find a solution.',
     },
@@ -472,7 +478,8 @@ cur.executemany('INSERT INTO applications VALUES (?,?,?,?,?,?)', apps)
 db.commit()
 
 # Display catalogue
-print(f"\\nCATALOGUE ({cur.execute('SELECT COUNT(*) FROM catalogue').fetchone()[0]} patterns)")
+print(f"\
+CATALOGUE ({cur.execute('SELECT COUNT(*) FROM catalogue').fetchone()[0]} patterns)")
 print("-" * 70)
 print(f"{'Name':<16} {'Origin':<14} {'Cat':<12} {'Group':>5} {'Dens':>5} {'MF':>3} {'Cplx':>5} {'Str':>5}")
 print("-" * 70)
@@ -480,10 +487,12 @@ for r in cur.execute('SELECT name,origin,category,symmetry_group,density,max_flo
     print(f"{r[0]:<16} {r[1]:<14} {r[2]:<12} {r[3]:>5} {r[4]:>5.2f} {r[5]:>3} {r[6]:>5.2f} {r[7]:>5.2f}")
 
 # Recommendation engine
-print("\\nRECOMMENDATIONS BY APPLICATION")
+print("\
+RECOMMENDATIONS BY APPLICATION")
 print("=" * 70)
 for app in cur.execute('SELECT * FROM applications'):
-    print(f"\\n{app[1]}:")
+    print(f"\
+{app[1]}:")
     matches = cur.execute('''
         SELECT name, density, max_float, strength_score, complexity
         FROM catalogue
@@ -502,7 +511,8 @@ for app in cur.execute('SELECT * FROM applications'):
 
 # Summary statistics
 db.commit()
-print(f"\\n{'='*70}")
+print(f"\
+{'='*70}")
 print("SYSTEM SUMMARY")
 print(f"Patterns in catalogue: {cur.execute('SELECT COUNT(*) FROM catalogue').fetchone()[0]}")
 print(f"Applications defined: {cur.execute('SELECT COUNT(*) FROM applications').fetchone()[0]}")

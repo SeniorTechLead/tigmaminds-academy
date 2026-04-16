@@ -75,7 +75,8 @@ ax = axes[0, 0]
 ax.plot(years, diameter_cm, color='#22c55e', linewidth=2.5)
 ax.axhline(y=10, color='#f59e0b', linestyle='--', alpha=0.6, label='Walkable bridge threshold (~10 cm)')
 ax.axvline(x=30, color='gray', linestyle=':', alpha=0.5)
-ax.text(32, 2, 'First foot traffic\\n(~30 years)', color='gray', fontsize=8)
+ax.text(32, 2, 'First foot traffic\
+(~30 years)', color='gray', fontsize=8)
 ax.set_xlabel('Years', color='white', fontsize=11)
 ax.set_ylabel('Root diameter (cm)', color='white', fontsize=11)
 ax.set_title('Root diameter growth (logistic model)', color='white', fontsize=13)
@@ -399,7 +400,11 @@ for ax in axes.flat:
 
 # Plot 1: Composite structure stiffness
 ax = axes[0, 0]
-components = ['Cellulose\\n(fibers)', 'Hemicellulose\\n(matrix)', 'Lignin\\n(filler)', 'Root wood\\n(composite)']
+components = ['Cellulose\
+(fibers)', 'Hemicellulose\
+(matrix)', 'Lignin\
+(filler)', 'Root wood\
+(composite)']
 moduli = [cellulose_E/1000, hemicellulose_E/1000, lignin_E/1000, E_parallel/1000]
 colors_comp = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444']
 ax.bar(components, moduli, color=colors_comp, edgecolor='none', width=0.6)
@@ -414,7 +419,8 @@ ax = axes[0, 1]
 ax.plot(mfa_degrees, sigma_real, color='#ef4444', linewidth=2.5, label='Predicted real strength')
 ax.axhline(y=45, color='#22c55e', linestyle='--', alpha=0.6, label='Measured Ficus root (~45 MPa)')
 ax.axvline(x=15, color='#3b82f6', linestyle=':', alpha=0.5)
-ax.text(17, 35, 'Root wood MFA\\n(10-20\°)', color='#3b82f6', fontsize=9)
+ax.text(17, 35, 'Root wood MFA\
+(10-20\°)', color='#3b82f6', fontsize=9)
 ax.fill_between(mfa_degrees, 0, sigma_real, alpha=0.1, color='#ef4444')
 ax.set_xlabel('Microfibril angle (degrees)', color='white', fontsize=11)
 ax.set_ylabel('Tensile strength (MPa)', color='white', fontsize=11)
@@ -682,7 +688,8 @@ ax.set_xlabel('Span position (m)', color='white', fontsize=11)
 ax.set_ylabel('Deflection shape', color='white', fontsize=11)
 ax.set_title('Catenary (roots) vs Beam (rigid bridge)', color='white', fontsize=12)
 ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.text(10, 1.5, 'Catenary = zero bending\\nstress (all tension)',
+ax.text(10, 1.5, 'Catenary = zero bending\
+stress (all tension)',
         color='#22c55e', fontsize=9, ha='center')
 
 plt.tight_layout()
@@ -837,7 +844,12 @@ ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 4: Sustainability scorecard
 ax = axes[1, 1]
-categories = ['Cost\\n(200yr)', 'Carbon\\nfootprint', 'Resilience', 'Self-\\nrepair', 'Biodiversity\\nsupport', 'Local\\nmaterials']
+categories = ['Cost\
+(200yr)', 'Carbon\
+footprint', 'Resilience', 'Self-\
+repair', 'Biodiversity\
+support', 'Local\
+materials']
 scores = {
     'Living root bridge':       [10, 10, 9, 10, 10, 10],
     'Steel truss bridge':       [3,  3,  6, 0,  1,  1],
@@ -979,10 +991,13 @@ materials = {
     'Steel': 1800,
     'Aluminum': 8000,
     'Glass': 1200,
-    'Timber (sustainably\\nharvested)': -500,
+    'Timber (sustainably\
+harvested)': -500,
     'Mycelium composite': -20,
-    'Living root\\nstructure': -150,
-    'Bacterial\\nbio-cement': 50,
+    'Living root\
+structure': -150,
+    'Bacterial\
+bio-cement': 50,
 }
 names = list(materials.keys())
 values = list(materials.values())
@@ -1002,12 +1017,16 @@ for bar, v in zip(bars, values):
 ax = axes[1, 1]
 technologies = [
     ('Green roofs/walls', 9, 2010),
-    ('Timber mass construction\\n(CLT)', 8, 2015),
+    ('Timber mass construction\
+(CLT)', 8, 2015),
     ('Mycelium insulation', 6, 2020),
-    ('Living root bridges\\n(traditional)', 10, 1800),
+    ('Living root bridges\
+(traditional)', 10, 1800),
     ('Bacterial bio-cement', 4, 2030),
-    ('CRISPR-modified\\nstructural plants', 2, 2040),
-    ('Fully grown\\nbuildings', 1, 2060),
+    ('CRISPR-modified\
+structural plants', 2, 2040),
+    ('Fully grown\
+buildings', 1, 2060),
 ]
 
 tech_names = [t[0] for t in technologies]

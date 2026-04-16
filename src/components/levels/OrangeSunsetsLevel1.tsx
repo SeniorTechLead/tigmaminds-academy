@@ -377,7 +377,8 @@ plt.grid(axis='x', alpha=0.3)
 plt.show()
 
 spread = max(exit_angles) - min(exit_angles)
-print(f"\\nThe whole rainbow spans just {spread:.1f}° — a tiny difference")
+print(f"\
+The whole rainbow spans just {spread:.1f}° — a tiny difference")
 print("in refractive index creates the entire colour band!")
 print()
 print("Red is on the outside (42°), violet on the inside (40.5°).")

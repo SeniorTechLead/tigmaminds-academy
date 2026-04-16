@@ -51,7 +51,8 @@ ax.axvline(x=2450, color='#f59e0b', linestyle='--', alpha=0.7)
 
 ax.scatter([2450], [P0 * (1 - L * 2450 / T0) ** exponent / 1000],
            color='#f59e0b', s=100, zorder=5)
-ax.annotate('Dzukou Valley\\n2,450 m, 75.1 kPa',
+ax.annotate('Dzukou Valley\
+2,450 m, 75.1 kPa',
             xy=(2450, P0 * (1 - L * 2450 / T0) ** exponent / 1000),
             xytext=(3200, 85), color='#f59e0b', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -194,9 +195,11 @@ ax1.fill_between(wavelengths, 0, np.where((wavelengths > 260) & (wavelengths < 4
                  np.minimum(absorption, uv_threat * absorption.max() / uv_threat.max()), 0),
                  alpha=0.4, color='#fbbf24', label='Protection zone')
 
-ax1.annotate('UV peak\\n(280 nm)', xy=(280, 0.7), xytext=(200, 0.85),
+ax1.annotate('UV peak\
+(280 nm)', xy=(280, 0.7), xytext=(200, 0.85),
              color='#a78bfa', fontsize=9, arrowprops=dict(arrowstyle='->', color='#a78bfa'))
-ax1.annotate('Visible peak\\n(520 nm)', xy=(520, 1.0), xytext=(580, 0.85),
+ax1.annotate('Visible peak\
+(520 nm)', xy=(520, 1.0), xytext=(580, 0.85),
              color='#a78bfa', fontsize=9, arrowprops=dict(arrowstyle='->', color='#a78bfa'))
 
 ax1.set_xlabel('Wavelength (nm)', color='white', fontsize=12)

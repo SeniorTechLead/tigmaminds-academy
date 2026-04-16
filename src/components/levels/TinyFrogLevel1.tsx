@@ -32,7 +32,10 @@ NE India is an amphibian hotspot with over 100 described frog species, including
 import matplotlib.pyplot as plt
 
 # Amphibian diversity and decline
-orders = ['Frogs\\n(Anura)', 'Salamanders\\n(Urodela)', 'Caecilians\\n(Gymnophiona)']
+orders = ['Frogs\
+(Anura)', 'Salamanders\
+(Urodela)', 'Caecilians\
+(Gymnophiona)']
 species_counts = [7300, 750, 215]
 threatened_pct = [41, 51, 45]
 
@@ -72,7 +75,8 @@ ax2.plot(decades, pop_index, color='#22c55e', linewidth=2)
 ax2.fill_between(decades, pop_index, alpha=0.15, color='#22c55e')
 ax2.axhline(100, color='gray', linestyle=':', linewidth=0.5)
 
-ax2.annotate('Chytrid fungus\\nspread globally', xy=(1990, pop_index[10]),
+ax2.annotate('Chytrid fungus\
+spread globally', xy=(1990, pop_index[10]),
              xytext=(1995, 80), color='#ef4444', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -138,7 +142,8 @@ ax1.set_facecolor('#111827')
 ax1.plot(days, thyroid, color='#ef4444', linewidth=2, label='Thyroid hormone (T3/T4)')
 ax1.fill_between(days, thyroid, alpha=0.15, color='#ef4444')
 ax1.axvspan(30, 45, alpha=0.1, color='#f59e0b')
-ax1.text(37.5, 8, 'Metamorphic\\nclimax', ha='center', color='#f59e0b', fontsize=9)
+ax1.text(37.5, 8, 'Metamorphic\
+climax', ha='center', color='#f59e0b', fontsize=9)
 
 ax1.set_xlabel('Days after hatching', color='white')
 ax1.set_ylabel('Hormone level (relative)', color='white')
@@ -235,9 +240,12 @@ ax1.plot(body_length, water_loss / water_loss[0] * 100, color='#3b82f6', linewid
 
 # Mark key species sizes
 species = [
-    (7.7, 'Paedophryne\\n(smallest)', '#ef4444'),
-    (12, 'NE India\\nminiature', '#f59e0b'),
-    (30, 'Common\\ntree frog', '#22c55e'),
+    (7.7, 'Paedophryne\
+(smallest)', '#ef4444'),
+    (12, 'NE India\
+miniature', '#f59e0b'),
+    (30, 'Common\
+tree frog', '#22c55e'),
     (80, 'Bullfrog', '#3b82f6'),
 ]
 for size, name, color in species:
@@ -254,7 +262,12 @@ ax1.tick_params(colors='gray')
 
 # What miniaturized frogs lose
 ax2.set_facecolor('#111827')
-features = ['Toe\\ncount', 'Teeth', 'Middle\\near bone', 'Finger\\npads', 'Egg\\ncount', 'Color\\npatterns']
+features = ['Toe\
+count', 'Teeth', 'Middle\
+ear bone', 'Finger\
+pads', 'Egg\
+count', 'Color\
+patterns']
 normal_frog = [10, 10, 10, 10, 10, 10]
 mini_frog = [7, 3, 2, 6, 2, 5]
 
@@ -348,7 +361,8 @@ ax1.tick_params(colors='gray')
 
 # Mark animals
 animals = [(2, 'Flea'), (8, 'Tiny frog'), (30, 'Tree frog'),
-           (80, 'Bullfrog'), (150, 'Human\\n(scaled)')]
+           (80, 'Bullfrog'), (150, 'Human\
+(scaled)')]
 for size, name in animals:
     idx = np.argmin(np.abs(body_length - size))
     ax1.plot(size, volume[idx]/volume[0], 'o', color='#f59e0b', markersize=6)
@@ -435,12 +449,18 @@ import matplotlib.pyplot as plt
 
 # Poison frog toxicity comparison
 frogs = {
-    'Golden poison\\nfrog (Colombia)': {'toxin': 'Batrachotoxin', 'ld50': 0.002, 'size': 45, 'medical': 3},
-    'Blue poison\\nfrog (Suriname)': {'toxin': 'Pumiliotoxin', 'ld50': 0.5, 'size': 40, 'medical': 5},
-    'Strawberry\\nfrog (C. America)': {'toxin': 'Pumiliotoxin', 'ld50': 2.0, 'size': 20, 'medical': 4},
-    'Phantasmal\\nfrog (Ecuador)': {'toxin': 'Epibatidine', 'ld50': 1.0, 'size': 22, 'medical': 9},
-    'NE India\\nmini frog': {'toxin': 'Mild alkaloids', 'ld50': 50, 'size': 12, 'medical': 2},
-    'Common frog\\n(non-toxic)': {'toxin': 'None', 'ld50': 1000, 'size': 60, 'medical': 0},
+    'Golden poison\
+frog (Colombia)': {'toxin': 'Batrachotoxin', 'ld50': 0.002, 'size': 45, 'medical': 3},
+    'Blue poison\
+frog (Suriname)': {'toxin': 'Pumiliotoxin', 'ld50': 0.5, 'size': 40, 'medical': 5},
+    'Strawberry\
+frog (C. America)': {'toxin': 'Pumiliotoxin', 'ld50': 2.0, 'size': 20, 'medical': 4},
+    'Phantasmal\
+frog (Ecuador)': {'toxin': 'Epibatidine', 'ld50': 1.0, 'size': 22, 'medical': 9},
+    'NE India\
+mini frog': {'toxin': 'Mild alkaloids', 'ld50': 50, 'size': 12, 'medical': 2},
+    'Common frog\
+(non-toxic)': {'toxin': 'None', 'ld50': 1000, 'size': 60, 'medical': 0},
 }
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
@@ -482,11 +502,14 @@ ax2.set_title('Toxicity vs Medical Potential (bubble = body size)', color='white
 ax2.tick_params(colors='gray')
 
 for name, ld50, med, color in zip(names, ld50s, medical, colors):
-    ax2.annotate(name.replace('\\n', ' '), xy=(ld50, med),
+    ax2.annotate(name.replace('\
+', ' '), xy=(ld50, med),
                  xytext=(ld50*1.5, med+0.3), color=color, fontsize=7)
 
 # Highlight epibatidine
-ax2.annotate('Epibatidine:\\n200x more potent\\nthan morphine', xy=(1.0, 9),
+ax2.annotate('Epibatidine:\
+200x more potent\
+than morphine', xy=(1.0, 9),
              xytext=(5, 8), color='#a855f7', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#a855f7'))
 
@@ -534,12 +557,16 @@ import matplotlib.pyplot as plt
 
 # Biodiversity hotspot data (selected)
 hotspots = {
-    'Indo-Burma\\n(incl. NE India)': {'plant_spp': 13500, 'endemic': 7000, 'habitat_left': 5, 'vertebrates': 2185},
-    'Sundaland\\n(SE Asia)': {'plant_spp': 25000, 'endemic': 15000, 'habitat_left': 7, 'vertebrates': 1800},
+    'Indo-Burma\
+(incl. NE India)': {'plant_spp': 13500, 'endemic': 7000, 'habitat_left': 5, 'vertebrates': 2185},
+    'Sundaland\
+(SE Asia)': {'plant_spp': 25000, 'endemic': 15000, 'habitat_left': 7, 'vertebrates': 1800},
     'Tropical Andes': {'plant_spp': 30000, 'endemic': 15000, 'habitat_left': 25, 'vertebrates': 3400},
     'Madagascar': {'plant_spp': 12000, 'endemic': 9700, 'habitat_left': 10, 'vertebrates': 370},
-    'Western Ghats\\n(India)': {'plant_spp': 5916, 'endemic': 3049, 'habitat_left': 7, 'vertebrates': 1073},
-    'Eastern\\nHimalayas': {'plant_spp': 10000, 'endemic': 3160, 'habitat_left': 25, 'vertebrates': 977},
+    'Western Ghats\
+(India)': {'plant_spp': 5916, 'endemic': 3049, 'habitat_left': 7, 'vertebrates': 1073},
+    'Eastern\
+Himalayas': {'plant_spp': 10000, 'endemic': 3160, 'habitat_left': 25, 'vertebrates': 977},
 }
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
@@ -552,13 +579,15 @@ colors = ['#ef4444', '#f59e0b', '#22c55e', '#a855f7', '#3b82f6', '#6366f1']
 for i, (name, data) in enumerate(hotspots.items()):
     ax1.scatter(data['habitat_left'], data['plant_spp'], s=data['endemic']/30,
                 color=colors[i], edgecolor='white', linewidth=1, zorder=5)
-    ax1.annotate(name.replace('\\n', ' '), xy=(data['habitat_left'], data['plant_spp']),
+    ax1.annotate(name.replace('\
+', ' '), xy=(data['habitat_left'], data['plant_spp']),
                  xytext=(data['habitat_left']+1, data['plant_spp']+500),
                  color=colors[i], fontsize=7)
 
 ax1.set_xlabel('Original habitat remaining (%)', color='white')
 ax1.set_ylabel('Total plant species', color='white')
-ax1.set_title('Biodiversity Hotspots: Species vs Habitat Loss\\n(bubble = endemic species)',
+ax1.set_title('Biodiversity Hotspots: Species vs Habitat Loss\
+(bubble = endemic species)',
               color='white', fontsize=11)
 ax1.tick_params(colors='gray')
 ax1.invert_xaxis()  # Less habitat = worse

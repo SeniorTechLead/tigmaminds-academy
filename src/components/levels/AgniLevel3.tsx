@@ -46,11 +46,13 @@ known = {
 path_direct = known["C + O2 -> CO2"]
 path_two_step = known["C + 0.5O2 -> CO"] + known["CO + 0.5O2 -> CO2"]
 
-print("=== Hess’s Law Verification ===\\n")
+print("=== Hess’s Law Verification ===\
+")
 print(f"Direct path:  C + O₂ → CO₂       = {path_direct:.1f} kJ")
 print(f"Two-step:     C → CO → CO₂     = {path_two_step:.1f} kJ")
 print(f"Difference:   {abs(path_direct - path_two_step):.1f} kJ")
-print(f"Match: {'YES ✅' if abs(path_direct - path_two_step) < 1 else 'NO ❌'}\\n")
+print(f"Match: {'YES ✅' if abs(path_direct - path_two_step) < 1 else 'NO ❌'}\
+")
 
 # Energy level diagram
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -69,15 +71,18 @@ for energy, x, label, color in levels:
 # Arrows
 ax.annotate('', xy=(1.5, -110.5), xytext=(1.5, 0),
             arrowprops=dict(arrowstyle='->', color='#fbbf24', linewidth=2))
-ax.text(1.7, -55, 'ΔH₁\\n-111 kJ', fontsize=9, color='#fbbf24')
+ax.text(1.7, -55, 'ΔH₁\
+-111 kJ', fontsize=9, color='#fbbf24')
 
 ax.annotate('', xy=(2.5, -393.5), xytext=(2.5, -110.5),
             arrowprops=dict(arrowstyle='->', color='#86efac', linewidth=2))
-ax.text(2.7, -252, 'ΔH₂\\n-283 kJ', fontsize=9, color='#86efac')
+ax.text(2.7, -252, 'ΔH₂\
+-283 kJ', fontsize=9, color='#86efac')
 
 ax.annotate('', xy=(0.5, -393.5), xytext=(0.5, 0),
             arrowprops=dict(arrowstyle='->', color='#ef4444', linewidth=2))
-ax.text(0.15, -197, 'ΔH₃\\n-394 kJ', fontsize=9, color='#ef4444')
+ax.text(0.15, -197, 'ΔH₃\
+-394 kJ', fontsize=9, color='#ef4444')
 
 ax.set_ylabel('Enthalpy (kJ/mol)', fontsize=12)
 ax.set_title('Hess’s Law: Path Independence of Enthalpy', fontsize=14)
@@ -144,7 +149,8 @@ plt.tight_layout()
 plt.show()
 
 # Print values at 25°C (298 K)
-print("At 25°C (298 K):\\n")
+print("At 25°C (298 K):\
+")
 print(f"{'Reaction':<20} {'ΔH (kJ)':>10} {'ΔS (J/K)':>10} {'ΔG (kJ)':>10} {'Spontaneous?':>14}")
 print("-" * 66)
 for rxn in reactions:
@@ -191,7 +197,8 @@ conditions = [
 
 gravity_values = [9.81, 9.81, 9.81, 9.81, 0.0001]  # ISS ~0
 
-print("=== Flame Fluid Dynamics ===\\n")
+print("=== Flame Fluid Dynamics ===\
+")
 print(f"{'Condition':<22} {'Gr':>14} {'Flow type':<18} {'Flame shape'}")
 print("-" * 72)
 
@@ -222,7 +229,8 @@ plt.grid(axis='x', alpha=0.2)
 plt.tight_layout()
 plt.show()
 
-print("\\nHigher Gr = stronger convection = taller, more turbulent flames")
+print("\
+Higher Gr = stronger convection = taller, more turbulent flames")
 print("ISS: Gr ≈ 0 → no convection → spherical flame (diffusion only)")`,
       challenge: 'On Mars, gravity is 3.72 m/s² (vs 9.81 on Earth). Calculate Gr for a candle on Mars and predict the flame shape. Would Martian flames be taller or shorter than Earth flames?',
       successHint: 'The Grashof number connects combustion to fluid dynamics. Understanding how buoyancy and viscosity compete allows engineers to design efficient burners, predict wildfire behaviour, and even plan fire safety for spacecraft.',
@@ -265,9 +273,11 @@ unknown_peaks = [589.1, 589.5, 510.8, 515.1, 330.0]
 # Match unknown peaks against database
 tolerance = 2.0  # nm
 
-print("=== Spectral Analysis: Unknown Flame ===\\n")
+print("=== Spectral Analysis: Unknown Flame ===\
+")
 print(f"Observed peaks (nm): {unknown_peaks}")
-print(f"Matching tolerance: ±{tolerance} nm\\n")
+print(f"Matching tolerance: ±{tolerance} nm\
+")
 
 matches = {}
 for peak in unknown_peaks:
@@ -310,7 +320,8 @@ plt.grid(alpha=0.2)
 plt.tight_layout()
 plt.show()
 
-print(f"\\nVerdict: This flame contains {' + '.join(matches.keys())}!")`,
+print(f"\
+Verdict: This flame contains {' + '.join(matches.keys())}!")`,
       challenge: 'Create a second "unknown" flame with peaks at [670.5, 610.1, 460.5, 650.2, 688.0]. Run the same analysis. Which elements does it contain? How confident is the identification?',
       successHint: 'Spectral matching is used in astronomy, forensics, environmental monitoring, and quality control. The algorithm you built — peak detection + database comparison — is the core of every spectrometer software package.',
     },
@@ -364,7 +375,8 @@ plt.tight_layout()
 plt.show()
 
 # Calculate time to reach specific temperature
-print("Time to cool to 50°C:\\n")
+print("Time to cool to 50°C:\
+")
 for obj in objects:
     if obj["T0"] > 50:
         t_cool = -np.log((50 - T_env) / (obj["T0"] - T_env)) / obj["k"]
@@ -372,7 +384,8 @@ for obj in objects:
     else:
         print(f"  {obj['name']:<22}: already below 50°C")
 
-print("\\nKey insight: objects with small k (good insulators) cool MUCH slower.")
+print("\
+Key insight: objects with small k (good insulators) cool MUCH slower.")
 print("This is why clay pots keep food warm and metal pots cool quickly.")`,
       challenge: 'Add a "Thermos flask" with T0=90°C and k=0.001 (excellent insulation). How long does it take to reach 50°C? Compare to the cup of tea. Also: what happens if you set T_env to -10°C (winter outdoors)?',
       successHint: 'Newton’s cooling law is used in forensics (time of death), food science (cooling curves), engineering (heat sink design), and climate modelling. The exponential decay pattern appears throughout physics wherever a driving force diminishes as equilibrium is approached.',
@@ -408,7 +421,8 @@ r = 10        # compression ratio (V_max / V_min)
 # Efficiency of ideal Otto cycle
 eta = 1 - 1 / r**(gamma - 1)
 print(f"Compression ratio: {r}:1")
-print(f"Ideal Otto efficiency: {eta*100:.1f}%\\n")
+print(f"Ideal Otto efficiency: {eta*100:.1f}%\
+")
 
 # PV diagram
 V_max = 1.0    # arbitrary units (cm³ normalised)

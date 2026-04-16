@@ -93,7 +93,8 @@ lst = (gmst + lon / 15) % 24
 
 print(f"=== Sky Simulation: {year}-{month:02d}-{day:02d} {hour}:00 ===")
 print(f"Location: {lat}°N, {abs(lon)}°W (Hawaii)")
-print(f"JD: {jd:.2f} | GMST: {gmst:.2f}h | LST: {lst:.2f}h\\n")
+print(f"JD: {jd:.2f} | GMST: {gmst:.2f}h | LST: {lst:.2f}h\
+")
 
 visible = []
 for name, ra, dec, mag in catalogue:
@@ -111,7 +112,8 @@ for name, alt, az, mag in visible:
     direction = min(dirs, key=lambda d: abs(d[0]-az))[1]
     print(f"{name:<16} {alt:>5.1f}° {az:>5.1f}° {mag:>4.1f} {direction:>10}")
 
-print(f"\\n{len(visible)} of {len(catalogue)} catalogue stars visible")
+print(f"\
+{len(visible)} of {len(catalogue)} catalogue stars visible")
 print(f"Brightest visible: {min(visible, key=lambda s: s[3])[0]}")
 print(f"Highest visible: {visible[0][0]} at {visible[0][1]:.1f}°")`,
       challenge: 'Run the simulation for the same time from Tahiti (17.5°S, 149.5°W) and compare the visible stars. Which stars are visible from Hawaii but not Tahiti, and vice versa? This difference is what a navigator monitors during a north-south voyage — the changing star visibility tells them their latitude.',
@@ -194,7 +196,8 @@ nav = BayesianNavigator(
 
 print("=== Bayesian Navigation: One Night of Observations ===")
 print(f"True position: {true_lat}°, {true_lon}°")
-print(f"Initial estimate: {nav.lat:.1f}°, {nav.lon:.1f}° (±{nav.uncertainty:.0f} nm)\\n")
+print(f"Initial estimate: {nav.lat:.1f}°, {nav.lon:.1f}° (±{nav.uncertainty:.0f} nm)\
+")
 
 # Observation 1: Star altitude (noisy measurement of latitude)
 star_lat = true_lat + np.random.normal(0, 0.3)  # ±0.3° error
@@ -222,7 +225,8 @@ for i, (lat, lon, unc, event) in enumerate(nav.history):
     err = np.sqrt((lat - true_lat)**2 + (lon - true_lon)**2) * 60
     print(f"{i:<4} {event:<16} {lat:>7.2f}° {lon:>8.2f}° {unc:>8.1f} nm  (err: {err:.0f} nm)")
 
-print(f"\\nFinal estimate: {nav.lat:.2f}°, {nav.lon:.2f}°")
+print(f"\
+Final estimate: {nav.lat:.2f}°, {nav.lon:.2f}°")
 print(f"True position:  {true_lat}°, {true_lon}°")
 final_err = np.sqrt((nav.lat-true_lat)**2 + (nav.lon-true_lon)**2) * 60
 print(f"Final error: {final_err:.0f} nm ({final_err*1.852:.0f} km)")
@@ -284,7 +288,8 @@ cognates = {
     ("Tongan", "Maori"): 0.50,
 }
 
-print("=== Linguistic Distance Matrix (divergence time in years) ===\\n")
+print("=== Linguistic Distance Matrix (divergence time in years) ===\
+")
 
 poly_langs = ["Tongan", "Samoan", "Tahitian", "Hawaiian", "Maori", "Rapanui"]
 
@@ -307,7 +312,9 @@ for l1 in poly_langs:
     print(row)
 
 # Build a simple tree using UPGMA (Unweighted Pair Group Method)
-print("\\n=== Phylogenetic Tree (UPGMA clustering) ===\\n")
+print("\
+=== Phylogenetic Tree (UPGMA clustering) ===\
+")
 
 # Find closest pairs iteratively
 remaining = list(poly_langs)
@@ -345,7 +352,8 @@ print("Merge order (earliest to most recent):")
 for l1, l2, dist in sorted(merge_history, key=lambda x: -x[2]):
     print(f"  {dist:>5.0f} years ago: {l1} ←→ {l2}")
 
-print("\\nThis tree matches the archaeological migration sequence:")
+print("\
+This tree matches the archaeological migration sequence:")
 print("  Tonga/Samoa (~3000 ya) → Tahiti/Marquesas (~1500 ya)")
 print("  → Hawaii, NZ, Rapa Nui (~800-1000 ya)")`,
       challenge: 'Add Malay to the tree. It should branch off much earlier than the Polynesian languages (3,000-5,000 years ago). Does the tree correctly place Malay as an outgroup? This outgroup relationship confirms that Polynesian languages evolved from a western Austronesian ancestor — supporting the "out of Taiwan" migration theory.',
@@ -415,11 +423,13 @@ sail_area = 55       # m² (crab-claw sail)
 wetted_area = 2 * length * (beam + 2 * draft) * 0.7  # two hulls
 
 print("=== Hōkūleʻa Performance Analysis ===")
-print(f"Length: {length}m | Displacement: {displacement}kg | Sail: {sail_area}m²\\n")
+print(f"Length: {length}m | Displacement: {displacement}kg | Sail: {sail_area}m²\
+")
 
 # Hull speed
 hull_speed = 1.34 * np.sqrt(length * 3.281)  # convert m to ft
-print(f"Theoretical hull speed: {hull_speed:.1f} knots\\n")
+print(f"Theoretical hull speed: {hull_speed:.1f} knots\
+")
 
 # Resistance vs speed
 print("=== Total Hull Resistance ===")
@@ -435,7 +445,8 @@ for speed in np.arange(1, 12, 1):
     print(f"{speed:>5.0f}kt {Ff:>8.0f}N {Fw:>8.0f}N {total:>8.0f}N {power_kw:>6.1f}kW{marker}")
 
 # Sail performance at different wind angles
-print("\\n=== Sail Performance (15 knot wind) ===")
+print("\
+=== Sail Performance (15 knot wind) ===")
 print(f"{'Wind Angle':>11} {'Drive':>8} {'Side':>8} {'L/D':>6} {'Eq. Speed':>10}")
 print("-" * 45)
 
@@ -554,7 +565,8 @@ scenarios = [
      ["green_flash", "wind_steady", "red_sunset"]),
 ]
 
-print("=== Bayesian Weather Predictor ===\\n")
+print("=== Bayesian Weather Predictor ===\
+")
 
 for desc, obs in scenarios:
     posteriors = predictor.predict(obs)
@@ -573,7 +585,8 @@ for desc, obs in scenarios:
 
 # How many observations are needed?
 print("=== Confidence vs Number of Observations ===")
-print("(Storm scenario: progressively adding evidence)\\n")
+print("(Storm scenario: progressively adding evidence)\
+")
 storm_obs = ["cirrus_west", "wind_backing", "swell_change", "cumulus_towers", "halo_moon"]
 for n in range(1, len(storm_obs) + 1):
     posteriors = predictor.predict(storm_obs[:n])

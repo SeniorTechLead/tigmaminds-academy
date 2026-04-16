@@ -495,7 +495,10 @@ forest_daily_liters = total_trees * daily_total
 forest_daily_mm = forest_daily_liters / (forest_area * 1e6) * 1  # mm
 
 # Water cycle budget
-components = ['Rainfall\\n(monsoon)', 'Transpiration', 'Evaporation\\n(soil)', 'Runoff', 'Groundwater\\nrecharge']
+components = ['Rainfall\
+(monsoon)', 'Transpiration', 'Evaporation\
+(soil)', 'Runoff', 'Groundwater\
+recharge']
 fluxes = [8, forest_daily_mm, 1.5, 3, 1.5]  # mm/day during monsoon
 colors = ['#3b82f6', '#22c55e', '#f59e0b', '#a855f7', '#6b7280']
 bars = ax.bar(components, fluxes, color=colors, edgecolor='none', width=0.6)
@@ -666,10 +669,13 @@ ax = axes[1, 1]
 # Radial strip showing tissue layers
 tissues = [
     ('Outer bark', 5, '#6b4c3b'),
-    ('Inner bark\\n(phloem)', 3, '#8b6c5c'),
+    ('Inner bark\
+(phloem)', 3, '#8b6c5c'),
     ('Cambium', 0.5, '#22c55e'),
-    ('Sapwood\\n(active xylem)', 15, '#c4a882'),
-    ('Heartwood\\n(dead xylem)', 25, '#8b7355'),
+    ('Sapwood\
+(active xylem)', 15, '#c4a882'),
+    ('Heartwood\
+(dead xylem)', 25, '#8b7355'),
     ('Pith', 2, '#ddd'),
 ]
 left = 0
@@ -686,7 +692,11 @@ ax.set_yticks([])
 
 # Plot 6: Earlywood vs latewood comparison
 ax = axes[1, 2]
-cell_types = ['Earlywood\\nvessel', 'Latewood\\nvessel', 'Earlywood\\nfiber', 'Latewood\\nfiber']
+cell_types = ['Earlywood\
+vessel', 'Latewood\
+vessel', 'Earlywood\
+fiber', 'Latewood\
+fiber']
 diameters = [200, 80, 30, 15]  # micrometers
 wall_thickness = [3, 8, 4, 10]  # micrometers
 colors = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444']
@@ -1046,7 +1056,10 @@ ax.set_title('Carbon Accumulation per Tree', color='white', fontsize=11)
 
 # Plot 3: Carbon pools (pie chart style)
 ax = axes[0, 2]
-pools = ['Aboveground\\nbiomass', 'Belowground\\n(roots)', 'Soil organic\\ncarbon', 'Dead wood', 'Litter']
+pools = ['Aboveground\
+biomass', 'Belowground\
+(roots)', 'Soil organic\
+carbon', 'Dead wood', 'Litter']
 pool_values = [agb_per_ha, bgb_per_ha, soil_c_per_ha, deadwood_per_ha, litter_per_ha]
 colors = ['#22c55e', '#8b6c5c', '#6b4c3b', '#a855f7', '#f59e0b']
 bars = ax.bar(pools, pool_values, color=colors, edgecolor='none', width=0.6)

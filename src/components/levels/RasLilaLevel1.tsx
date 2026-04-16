@@ -35,7 +35,8 @@ n_dancers = 12
 
 print("=== Ras Lila Circular Motion ===")
 print(f"Period: {period} seconds per revolution")
-print(f"Dancers: {n_dancers}\\n")
+print(f"Dancers: {n_dancers}\
+")
 
 print(f"{'Radius (m)':>11} {'Speed (m/s)':>12} {'Spacing (m)':>12} {'Circum. (m)':>12}")
 print("-" * 50)
@@ -50,9 +51,11 @@ for radius in [2, 3, 4, 5, 6, 8, 10]:
 # How fast would dancers need to move in a 20m radius circle?
 big_radius = 20
 big_speed = 2 * math.pi * big_radius / period
-print(f"\\nAt {big_radius}m radius: speed = {big_speed:.2f} m/s ({big_speed * 3.6:.1f} km/h)")
+print(f"\
+At {big_radius}m radius: speed = {big_speed:.2f} m/s ({big_speed * 3.6:.1f} km/h)")
 print("That's jogging speed — impossible to maintain graceful dance!")
-print(f"\\nThe 5m radius keeps speed at {2*math.pi*5/period:.2f} m/s — a gentle walking pace.")`,
+print(f"\
+The 5m radius keeps speed at {2*math.pi*5/period:.2f} m/s — a gentle walking pace.")`,
       challenge: 'If the period changes to 20 seconds (faster dance), recalculate all speeds. At what radius does the speed become faster than walking (1.4 m/s)?',
       successHint: 'The relationship v = 2*pi*r/T connects three fundamental quantities of circular motion. Knowing any two lets you calculate the third.',
     },
@@ -80,7 +83,8 @@ import math
 
 g = 9.8  # gravity for comparison
 
-print("=== Centripetal Acceleration in Dance ===\\n")
+print("=== Centripetal Acceleration in Dance ===\
+")
 print(f"{'Radius':>7} {'Speed':>7} {'a_c':>8} {'vs gravity':>10} {'Lean angle':>11}")
 print("-" * 48)
 
@@ -95,10 +99,12 @@ for radius in [2, 3, 5, 8]:
         if radius == 5 or period == 30:  # show subset
             print(f"{radius:>5}m  {speed:>5.2f}  {a_c:>7.3f}  {ratio:>8.1%}  {lean_deg:>8.1f}°")
 
-print(f"\\n--- Key insight ---")
+print(f"\
+--- Key insight ---")
 print(f"At walking speed (1 m/s), 5m radius: lean = {math.degrees(math.atan(1/5/g)):.1f}°")
 print(f"At running speed (3 m/s), 2m radius: lean = {math.degrees(math.atan(9/2/g)):.1f}°")
-print("\\nFast, tight circles demand visible body lean!")
+print("\
+Fast, tight circles demand visible body lean!")
 print("This is why Ras Lila uses gentle speeds in wide circles — elegance requires low acceleration.")`,
       challenge: 'At what speed in a 3m radius circle would the lean angle reach 45 degrees? (Hint: tan(45) = 1, so a_c = g). What would that speed be in km/h?',
       successHint: 'Centripetal acceleration is not a "force" — it is the acceleration that describes the rate of direction change. Any circular motion, from dancers to planets, experiences it.',
@@ -158,17 +164,22 @@ tangent_path_y = [leave_y + speed * tangent_dy * t * 0.3 for t in range(time_ste
 radial_path_x = [leave_x + speed * radial_dx * t * 0.3 for t in range(time_steps)]
 radial_path_y = [leave_y + speed * radial_dy * t * 0.3 for t in range(time_steps)]
 
-print("=== The Centrifugal Myth ===\\n")
+print("=== The Centrifugal Myth ===\
+")
 print(f"Dancer leaves circle at ({leave_x:.1f}, {leave_y:.1f})")
 print(f"Moving in direction: ({tangent_dx:.1f}, {tangent_dy:.1f}) — tangential")
 print(f"NOT in direction: ({radial_dx:.1f}, {radial_dy:.1f}) — radial")
-print(f"\\nSpeed at departure: {speed:.2f} m/s")
-print(f"\\nAfter 1 second:")
+print(f"\
+Speed at departure: {speed:.2f} m/s")
+print(f"\
+After 1 second:")
 print(f"  Tangent path: ({leave_x + speed*tangent_dx:.1f}, {leave_y + speed*tangent_dy:.1f})")
 print(f"  Radial path:  ({leave_x + speed*radial_dx:.1f}, {leave_y + speed*radial_dy:.1f})")
-print(f"\\nThe tangent path moves SIDEWAYS, not outward!")
+print(f"\
+The tangent path moves SIDEWAYS, not outward!")
 print(f"Distance from centre after 1s (tangent): {math.sqrt((leave_x+speed*tangent_dx)**2 + (leave_y+speed*tangent_dy)**2):.2f}m")
-print("\\nThe dancer drifts slightly outward over time because the")
+print("\
+The dancer drifts slightly outward over time because the")
 print("tangent line diverges from the circle — but the initial")
 print("motion is perpendicular to the radius, NOT along it.")`,
       challenge: 'Calculate the dancer\'s distance from the centre at t=0, 1, 2, 3 seconds after leaving the circle tangentially. The distance increases — but slowly at first and then faster. This gradual increase creates the ILLUSION of outward force.',
@@ -213,7 +224,8 @@ planets = [
     ('Neptune', 4.50e12),
 ]
 
-print("=== Planetary Orbital Speeds ===\\n")
+print("=== Planetary Orbital Speeds ===\
+")
 print(f"{'Planet':<10} {'Radius (AU)':>11} {'Speed (km/s)':>13} {'Period (yrs)':>13}")
 print("-" * 50)
 
@@ -228,12 +240,14 @@ for name, r in planets:
     print(f"{name:<10} {r/AU:>10.2f}  {v/1000:>11.1f}  {T_years:>11.2f}")
 
 # The Ras Lila connection
-print("\\n--- Ras Lila Comparison ---")
+print("\
+--- Ras Lila Comparison ---")
 dance_radius = 5.0
 dance_speed = 2 * math.pi * dance_radius / 30
 print(f"Ras Lila dancer: r={dance_radius}m, v={dance_speed:.2f} m/s")
 print(f"Earth orbit:     r={1.50e11/1000:.0e}km, v={math.sqrt(G*M_sun/1.50e11)/1000:.1f} km/s")
-print(f"\\nSame physics, vastly different scales!")
+print(f"\
+Same physics, vastly different scales!")
 print(f"Both need centripetal force = mv²/r to stay in their circles.")`,
       challenge: 'If a new planet were discovered at 10 AU from the Sun, what would its orbital speed and period be? How does this compare to Neptune?',
       successHint: 'Orbital mechanics is just circular motion with gravity as the centripetal force. You can calculate the speed and period of any orbiting object if you know the mass being orbited and the orbital radius.',
@@ -274,7 +288,8 @@ planets = [
     ('Neptune', 30.07, 59800),
 ]
 
-print("=== Kepler's Third Law: T² ∝ r³ ===\\n")
+print("=== Kepler's Third Law: T² ∝ r³ ===\
+")
 print(f"{'Planet':<10} {'r (AU)':>8} {'T (days)':>9} {'T² (yr²)':>10} {'r³ (AU³)':>10} {'T²/r³':>8}")
 print("-" * 58)
 
@@ -288,13 +303,15 @@ for name, r_au, T_days in planets:
 
     print(f"{name:<10} {r_au:>7.3f} {T_days:>8.0f} {T_sq:>9.2f} {r_cube:>9.2f} {ratio:>7.3f}")
 
-print(f"\\nIf Kepler's law holds, T²/r³ should be 1.000 for all planets")
+print(f"\
+If Kepler's law holds, T²/r³ should be 1.000 for all planets")
 print(f"(when T is in years and r is in AU)")
 
 # Predict: if a comet has r = 50 AU, what is its period?
 r_comet = 50
 T_comet = math.sqrt(r_comet**3)  # T² = r³ when using AU and years
-print(f"\\nPrediction: comet at {r_comet} AU has period = {T_comet:.0f} years")
+print(f"\
+Prediction: comet at {r_comet} AU has period = {T_comet:.0f} years")
 print(f"It was last near the Sun in {2024 - int(T_comet)} and will return in {2024 + int(T_comet)}")`,
       challenge: 'Use Kepler\'s third law to calculate the orbital radius of the International Space Station (period = 92 minutes, orbiting Earth with M = 5.97e24 kg). How high above Earth\'s surface is it?',
       successHint: 'Kepler\'s laws are among the most beautiful results in physics. They were discovered empirically by Kepler and later derived from first principles by Newton. You just verified them with code.',

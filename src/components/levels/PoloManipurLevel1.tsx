@@ -32,7 +32,8 @@ ball_mass = 0.13  # kg (bamboo root ball)
 # Polo stick head
 stick_mass = 0.5  # kg
 
-print("=== Momentum in Sagol Kangjei ===\\n")
+print("=== Momentum in Sagol Kangjei ===\
+")
 
 # Different scenarios
 scenarios = [
@@ -51,8 +52,10 @@ for name, mass, speed in scenarios:
     ball_speed = p / ball_mass
     print(f"{name:<18} {mass:>4.1f}kg {speed:>5.0f}m/s {p:>8.1f}kg⋅m/s {ball_speed:>9.0f}m/s")
 
-print("\\n* Theoretical max ball speed (perfect momentum transfer)")
-print(f"\\nNote: {30 * 3.6:.0f} km/h stick swing → {0.5*30/0.13*3.6:.0f} km/h ball speed!")
+print("\
+* Theoretical max ball speed (perfect momentum transfer)")
+print(f"\
+Note: {30 * 3.6:.0f} km/h stick swing → {0.5*30/0.13*3.6:.0f} km/h ball speed!")
 print("This is why polo balls travel so fast from a seemingly")
 print("moderate swing — the mass ratio amplifies the speed.")
 
@@ -61,7 +64,8 @@ horse_mass = 450  # kg
 rider_mass = 70   # kg
 gallop_speed = 12  # m/s (about 43 km/h)
 combined = (horse_mass + rider_mass) * gallop_speed
-print(f"\\nHorse + rider at gallop: {combined:,.0f} kg⋅m/s")
+print(f"\
+Horse + rider at gallop: {combined:,.0f} kg⋅m/s")
 print(f"That's {combined / (ball_mass * 50):.0f}x more than the ball at full speed!")`,
       challenge: 'A Manipuri pony is smaller (350 kg) than a standard polo horse (450 kg). If both gallop at the same speed, how much less momentum does the Manipuri pony have? Does this affect the game?',
       successHint: 'Momentum is the fundamental quantity in collision physics. Every time a stick hits a ball, a car hits a wall, or a meteor hits Earth, momentum is the key to understanding what happens.',
@@ -89,7 +93,8 @@ If the collision is **elastic** (no energy lost), we can calculate both final ve
 m_stick = 0.5    # kg
 m_ball = 0.13    # kg
 
-print("=== Momentum Conservation: Stick Hits Ball ===\\n")
+print("=== Momentum Conservation: Stick Hits Ball ===\
+")
 
 # Ball starts stationary, stick swings at various speeds
 for v_stick in [10, 20, 30, 40]:
@@ -148,8 +153,10 @@ import math
 g = 9.8
 v0 = 30  # initial speed (m/s)
 
-print("=== Polo Ball Trajectories ===\\n")
-print(f"Launch speed: {v0} m/s ({v0*3.6:.0f} km/h)\\n")
+print("=== Polo Ball Trajectories ===\
+")
+print(f"Launch speed: {v0} m/s ({v0*3.6:.0f} km/h)\
+")
 print(f"{'Angle':>6} {'Range':>8} {'Max Height':>11} {'Time':>7} {'Practical?':>11}")
 print("-" * 48)
 
@@ -175,7 +182,8 @@ for angle_deg in range(5, 85, 5):
     if angle_deg % 10 == 0 or angle_deg in [15, 25, 35, 45]:
         print(f"{angle_deg:>4}° {R:>7.1f}m {H:>9.1f}m {T:>5.1f}s {practical:>11}")
 
-print(f"\\nMax range at {best_angle}° = {best_range:.1f}m")
+print(f"\
+Max range at {best_angle}° = {best_range:.1f}m")
 print(f"But polo players use 20-30° for practical reasons:")
 print(f"  At 25°: range = {v0**2*math.sin(math.radians(50))/g:.1f}m, height = {(v0*math.sin(math.radians(25)))**2/(2*g):.1f}m")
 print(f"  Ball stays low and arrives quickly!")`,
@@ -208,9 +216,11 @@ ball_mass = 0.13  # kg
 target_speed = 30  # m/s
 impulse = ball_mass * target_speed  # fixed
 
-print("=== Impulse in Polo: Same Result, Different Forces ===\\n")
+print("=== Impulse in Polo: Same Result, Different Forces ===\
+")
 print(f"Target ball speed: {target_speed} m/s")
-print(f"Required impulse: {impulse:.2f} N⋅s\\n")
+print(f"Required impulse: {impulse:.2f} N⋅s\
+")
 
 print(f"{'Hit Style':<20} {'Contact time':>13} {'Peak Force':>11} {'Wrist Stress':>12}")
 print("-" * 60)
@@ -228,12 +238,15 @@ for name, dt, stress in styles:
     force_kg = force / 9.8  # equivalent weight
     print(f"{name:<20} {dt*1000:>10.0f} ms {force:>9.0f} N {stress:>12}")
 
-print(f"\\nSame impulse ({impulse:.2f} N⋅s) achieves the same ball speed ({target_speed} m/s)")
+print(f"\
+Same impulse ({impulse:.2f} N⋅s) achieves the same ball speed ({target_speed} m/s)")
 print("But the FORCE varies by 12x depending on contact time!")
-print("\\nPro polo tip: always follow through!")
+print("\
+Pro polo tip: always follow through!")
 
 # Compare: what impulse for different ball speeds?
-print(f"\\nImpulse required for different ball speeds:")
+print(f"\
+Impulse required for different ball speeds:")
 for v in [10, 20, 30, 40, 50]:
     J = ball_mass * v
     F_typical = J / 0.02  # typical 20ms contact

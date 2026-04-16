@@ -50,14 +50,17 @@ ax1.fill_between(al2o3, liquidus, 2200, alpha=0.2, color='#ef4444')
 ax1.fill_between(al2o3, 0, liquidus, alpha=0.1, color='#3b82f6')
 
 ax1.text(50, 2000, 'ALL LIQUID', color='#ef4444', fontsize=12, ha='center')
-ax1.text(50, 1200, 'SOLID\\n(mullite + cristobalite)', color='#3b82f6', fontsize=10, ha='center')
+ax1.text(50, 1200, 'SOLID\
+(mullite + cristobalite)', color='#3b82f6', fontsize=10, ha='center')
 
 ax1.plot(5.5, 1587, '*', color='#f59e0b', markersize=15, zorder=5)
-ax1.annotate('Eutectic\\n(1587°C, 5.5% Al₂O₃)', xy=(5.5, 1587), xytext=(25, 1500),
+ax1.annotate('Eutectic\
+(1587°C, 5.5% Al₂O₃)', xy=(5.5, 1587), xytext=(25, 1500),
             color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 ax1.axvline(60, color='#22c55e', linestyle='--', linewidth=1, alpha=0.5)
-ax1.text(62, 800, 'Mullite\\n(3Al₂O₃·2SiO₂)', color='#22c55e', fontsize=8)
+ax1.text(62, 800, 'Mullite\
+(3Al₂O₃·2SiO₂)', color='#22c55e', fontsize=8)
 
 potter_rect = plt.Rectangle((10, 700), 25, 600, fill=False, edgecolor='#f59e0b',
                               linewidth=2, linestyle='--')
@@ -162,7 +165,8 @@ ax1.plot(temp, glaze_matched * 100, color='#3b82f6', linewidth=2, label='Matched
 ax1.plot(temp, glaze_high * 100, color='#f59e0b', linewidth=2, label='High-CTE glaze', linestyle='--')
 
 ax1.axvline(573, color='#ef4444', linestyle=':', linewidth=1)
-ax1.annotate('QUARTZ INVERSION\\n573°C (0.45% jump!)', xy=(573, 0.5), xytext=(650, 0.15),
+ax1.annotate('QUARTZ INVERSION\
+573°C (0.45% jump!)', xy=(573, 0.5), xytext=(650, 0.15),
             color='#ef4444', fontsize=9, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#ef4444'))
 

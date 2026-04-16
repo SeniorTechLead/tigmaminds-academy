@@ -112,7 +112,8 @@ animals_data = {
 }
 
 categories = ['speed', 'armor', 'brain', 'repro', 'senses', 'reserve']
-cat_labels = ['Speed', 'Armor', 'Brain', 'Reproduction', 'Senses', 'Energy\\nreserve']
+cat_labels = ['Speed', 'Armor', 'Brain', 'Reproduction', 'Senses', 'Energy\
+reserve']
 n = len(categories)
 
 fig, axes = plt.subplots(2, 3, figsize=(15, 10), subplot_kw=dict(polar=True))
@@ -303,7 +304,10 @@ ax1.legend(handles=legend_elements, facecolor='#1f2937', edgecolor='gray', label
 
 # Convergent traits comparison
 ax2.set_facecolor('#111827')
-traits = ['Body coverage\\n(%)', 'Flexibility', 'Weight\\n(relative)', 'Regrowth\\nability']
+traits = ['Body coverage\
+(%)', 'Flexibility', 'Weight\
+(relative)', 'Regrowth\
+ability']
 turtle_traits = [95, 2, 8, 1]
 armadillo_traits = [70, 7, 5, 1]
 pangolin_traits = [80, 8, 4, 6]

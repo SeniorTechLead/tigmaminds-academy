@@ -56,12 +56,18 @@ ax.tick_params(colors='gray')
 ax = axes[0, 1]
 ax.set_facecolor('#111827')
 signals = {
-    'Bee waggle\\n(direction)': 360,  # continuous direction
-    'Peacock display\\n(multi-modal)': 96,
-    'Vervet alarm\\n(3 calls)': 3,
-    'Firefly flash\\n(on/off pattern)': 16,
-    'Dog body\\n(posture states)': 12,
-    'Whale song\\n(phrase combos)': 200,
+    'Bee waggle\
+(direction)': 360,  # continuous direction
+    'Peacock display\
+(multi-modal)': 96,
+    'Vervet alarm\
+(3 calls)': 3,
+    'Firefly flash\
+(on/off pattern)': 16,
+    'Dog body\
+(posture states)': 12,
+    'Whale song\
+(phrase combos)': 200,
 }
 
 names = list(signals.keys())
@@ -136,7 +142,8 @@ ax.set_ylabel('Error rate (%)', color='white')
 ax.set_title(f'Redundancy Reduces Errors (noise={noise_level*100:.0f}%)', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 
-ax.annotate('Peacock: ~150 eyespots\\n= massive redundancy', xy=(7, error_rates[6]),
+ax.annotate('Peacock: ~150 eyespots\
+= massive redundancy', xy=(7, error_rates[6]),
             xytext=(3, 15), color='#f59e0b', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -257,7 +264,8 @@ ax.plot(freqs, traffic_noise, color='#ef4444', linewidth=2, label='Traffic')
 
 # Peacock call frequency band
 ax.axvspan(300, 700, alpha=0.2, color='#f59e0b')
-ax.text(500, max(traffic_noise) * 0.8, 'Peacock\\ncall', ha='center', color='#f59e0b', fontsize=9)
+ax.text(500, max(traffic_noise) * 0.8, 'Peacock\
+call', ha='center', color='#f59e0b', fontsize=9)
 
 ax.set_xlabel('Frequency (Hz)', color='white')
 ax.set_ylabel('Noise power', color='white')
@@ -365,7 +373,8 @@ ax.plot(wavelengths, human_S, color='#3b82f6', linewidth=2, label='S (blue)')
 ax.plot(wavelengths, human_M, color='#22c55e', linewidth=2, label='M (green)')
 ax.plot(wavelengths, human_L, color='#ef4444', linewidth=2, label='L (red)')
 ax.axvspan(300, 380, alpha=0.1, color='white')
-ax.text(340, 0.9, 'UV\\n(invisible)', color='gray', fontsize=8, ha='center')
+ax.text(340, 0.9, 'UV\
+(invisible)', color='gray', fontsize=8, ha='center')
 ax.set_xlabel('Wavelength (nm)', color='white')
 ax.set_ylabel('Sensitivity', color='white')
 ax.set_title('Human Vision (3 cones)', color='white', fontsize=10)
@@ -390,7 +399,8 @@ ax.set_facecolor('#111827')
 ax.fill_between(wavelengths, feather_reflectance, alpha=0.3, color='#f59e0b')
 ax.plot(wavelengths, feather_reflectance, color='#f59e0b', linewidth=2)
 ax.axvspan(300, 380, alpha=0.2, color='#8b5cf6')
-ax.annotate('UV peak\\n(invisible to humans)', xy=(370, 0.32), xytext=(420, 0.7),
+ax.annotate('UV peak\
+(invisible to humans)', xy=(370, 0.32), xytext=(420, 0.7),
             color='#8b5cf6', fontsize=9, arrowprops=dict(arrowstyle='->', color='#8b5cf6'))
 ax.set_xlabel('Wavelength (nm)', color='white')
 ax.set_title('Peacock Feather Reflectance', color='white', fontsize=10)
@@ -434,10 +444,14 @@ ax2.tick_params(colors='gray')
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
 visual_systems = {
-    'Dichromat\\n(most mammals)': 2,
-    'Human\\n(trichromat)': 3,
-    'Bird\\n(tetrachromat)': 4,
-    'Mantis shrimp\\n(16 types)': 16,
+    'Dichromat\
+(most mammals)': 2,
+    'Human\
+(trichromat)': 3,
+    'Bird\
+(tetrachromat)': 4,
+    'Mantis shrimp\
+(16 types)': 16,
 }
 
 names_vs = list(visual_systems.keys())
@@ -602,8 +616,13 @@ ax.tick_params(colors='gray')
 # 4. Biomimetic applications
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-applications = ['Morpho butterfly\\ndisplay tech', 'Peacock-inspired\\nanti-counterfeit', 'Beetle-inspired\\ncolor-shift paint',
-                'Opal-inspired\\nphotonic crystals', 'Bird-feather\\nfabric dyes']
+applications = ['Morpho butterfly\
+display tech', 'Peacock-inspired\
+anti-counterfeit', 'Beetle-inspired\
+color-shift paint',
+                'Opal-inspired\
+photonic crystals', 'Bird-feather\
+fabric dyes']
 trl = [7, 6, 8, 5, 4]  # Technology Readiness Level
 market_size = [500, 200, 1000, 300, 150]  # millions USD
 
@@ -789,7 +808,8 @@ for i in range(2):
         ax.text(j, i, f'{payoff_matrix[i,j]}', ha='center', va='center',
                 color='white', fontsize=16, fontweight='bold')
 
-ax.text(0.5, -0.3, 'Nash equilibrium: both cheat (2,2) BUT\\ncostly signaling + detection restores honesty',
+ax.text(0.5, -0.3, 'Nash equilibrium: both cheat (2,2) BUT\
+costly signaling + detection restores honesty',
         transform=ax.transAxes, ha='center', color='#f59e0b', fontsize=9)
 
 plt.tight_layout()

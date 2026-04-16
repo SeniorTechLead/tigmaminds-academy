@@ -144,7 +144,8 @@ configs = {
         'I_total': I_led * num_leds,  # high current
         'survive_one_fail': num_leds - 1,
     },
-    'Series-Parallel\\n(3s × 4p)': {
+    'Series-Parallel\
+(3s × 4p)': {
         'V_supply': V_led * 3,  # 3 in series
         'I_total': I_led * 4,  # 4 parallel groups
         'survive_one_fail': num_leds - 3,  # one group fails
@@ -246,7 +247,9 @@ ax1.fill_between(wavelengths, solar_spectrum, where=wavelengths > bandgap_wavele
                  alpha=0.4, color='#ef4444', label='Transmitted (below bandgap)')
 ax1.plot(wavelengths, solar_spectrum, color='#f59e0b', linewidth=1.5, label='Solar spectrum')
 ax1.axvline(bandgap_wavelength, color='white', linestyle='--', linewidth=1.5)
-ax1.annotate(f'Si bandgap\\n{bandgap_wavelength:.0f} nm\\n({bandgap_eV} eV)',
+ax1.annotate(f'Si bandgap\
+{bandgap_wavelength:.0f} nm\
+({bandgap_eV} eV)',
              xy=(bandgap_wavelength, 1.2), color='white', fontsize=9, fontweight='bold')
 ax1.set_xlabel('Wavelength (nm)', color='white')
 ax1.set_ylabel('Spectral irradiance (arb.)', color='white')
@@ -329,12 +332,17 @@ import matplotlib.pyplot as plt
 
 # Energy storage technologies
 techs = {
-    'Li-ion\\nbattery': {'density': 250, 'efficiency': 92, 'cycles': 2000, 'cost': 150, 'duration': 4},
-    'Pumped\\nhydro': {'density': 1, 'efficiency': 80, 'cycles': 50000, 'cost': 20, 'duration': 12},
-    'Flow\\nbattery': {'density': 30, 'efficiency': 75, 'cycles': 15000, 'cost': 80, 'duration': 10},
-    'Compressed\\nair': {'density': 5, 'efficiency': 65, 'cycles': 30000, 'cost': 50, 'duration': 24},
+    'Li-ion\
+battery': {'density': 250, 'efficiency': 92, 'cycles': 2000, 'cost': 150, 'duration': 4},
+    'Pumped\
+hydro': {'density': 1, 'efficiency': 80, 'cycles': 50000, 'cost': 20, 'duration': 12},
+    'Flow\
+battery': {'density': 30, 'efficiency': 75, 'cycles': 15000, 'cost': 80, 'duration': 10},
+    'Compressed\
+air': {'density': 5, 'efficiency': 65, 'cycles': 30000, 'cost': 50, 'duration': 24},
     'Hydrogen': {'density': 400, 'efficiency': 35, 'cycles': 100000, 'cost': 300, 'duration': 168},
-    'Molten\\nsalt': {'density': 50, 'efficiency': 70, 'cycles': 30000, 'cost': 25, 'duration': 15},
+    'Molten\
+salt': {'density': 50, 'efficiency': 70, 'cycles': 30000, 'cost': 25, 'duration': 15},
 }
 
 fig, axes = plt.subplots(2, 3, figsize=(15, 8))
@@ -369,7 +377,8 @@ for name, color in zip(names, colors_tech):
     t = techs[name]
     ax6.scatter(t['cost'], t['efficiency'], color=color, s=t['duration']*20, alpha=0.8,
                 edgecolors='white', linewidth=0.5)
-    ax6.annotate(name.replace('\\n', ' '), xy=(t['cost'], t['efficiency']),
+    ax6.annotate(name.replace('\
+', ' '), xy=(t['cost'], t['efficiency']),
                  xytext=(t['cost']+5, t['efficiency']+1), color=color, fontsize=7)
 ax6.set_xlabel('Cost ($/kWh)', color='white')
 ax6.set_ylabel('Efficiency (%)', color='white')
@@ -580,7 +589,8 @@ ax1.plot(distances_km, solar_10yr / 100000, color='#22c55e', linewidth=2, label=
 breakeven_idx = np.argmin(np.abs(grid_10yr - solar_10yr))
 breakeven_dist = distances_km[breakeven_idx]
 ax1.axvline(breakeven_dist, color='#f59e0b', linestyle='--', linewidth=1.5)
-ax1.annotate(f'Break-even:\\n{breakeven_dist:.0f} km', xy=(breakeven_dist, solar_10yr[breakeven_idx]/100000),
+ax1.annotate(f'Break-even:\
+{breakeven_dist:.0f} km', xy=(breakeven_dist, solar_10yr[breakeven_idx]/100000),
              xytext=(breakeven_dist + 10, solar_10yr[breakeven_idx]/100000 + 50),
              color='#f59e0b', fontsize=10, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -593,7 +603,8 @@ ax1.tick_params(colors='gray')
 
 # Energy access metrics for NE India
 ax2.set_facecolor('#111827')
-states = ['Assam', 'Meghalaya', 'Nagaland', 'Mizoram', 'Manipur', 'Tripura', 'Arunachal\\nPradesh', 'Sikkim']
+states = ['Assam', 'Meghalaya', 'Nagaland', 'Mizoram', 'Manipur', 'Tripura', 'Arunachal\
+Pradesh', 'Sikkim']
 electrification = [97, 92, 85, 88, 82, 95, 78, 99]
 reliability_hours = [18, 14, 12, 15, 11, 16, 10, 20]
 

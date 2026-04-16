@@ -138,9 +138,11 @@ ax2.set_ylabel('% of perpendicular wind rainfall', color='white')
 ax2.set_title('Rainfall Sensitivity to Wind Direction', color='white', fontsize=11)
 ax2.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
-ax2.annotate('Perpendicular\\n(maximum rain)', xy=(0, 100), xytext=(15, 95),
+ax2.annotate('Perpendicular\
+(maximum rain)', xy=(0, 100), xytext=(15, 95),
             color='#fbbf24', fontsize=9, arrowprops=dict(arrowstyle='->', color='#fbbf24'))
-ax2.annotate('Parallel\\n(minimal rain)', xy=(90, peak_rain[-1]/peak_rain[0]*100),
+ax2.annotate('Parallel\
+(minimal rain)', xy=(90, peak_rain[-1]/peak_rain[0]*100),
             xytext=(70, 30), color='#fbbf24', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#fbbf24'))
 
@@ -212,7 +214,8 @@ plt.show()
 print("=" * 65)
 print("  OROGRAPHIC RAINFALL MODEL — TAWANG HIMALAYAN FRONT")
 print("=" * 65)
-print(f"\\nModel parameters:")
+print(f"\
+Model parameters:")
 print(f"  Terrain: Himalayan profile, peak = {terrain.max():.0f}m")
 print(f"  Initial conditions: T=28°C, moisture=18 g/kg")
 print(f"  Reference wind: 12 m/s (perpendicular)")

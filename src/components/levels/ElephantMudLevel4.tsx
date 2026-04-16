@@ -139,7 +139,8 @@ prev_act = ''
 for i, (h, act) in enumerate(zip(hours, activities)):
     if act != prev_act:
         ax.axvline(h, color='gray', linewidth=0.5, alpha=0.5)
-        ax.text(h + 0.2, max(heat_profile) * 0.95, act.replace('_', '\\n'),
+        ax.text(h + 0.2, max(heat_profile) * 0.95, act.replace('_', '\
+'),
                 color='white', fontsize=6, rotation=45, va='top')
         prev_act = act
 
@@ -1145,7 +1146,8 @@ colors_bar = ['#22c55e', '#f59e0b', '#ef4444']
 bars = ax.bar(categories, pcts, color=colors_bar, edgecolor='none')
 for bar, pct, cnt in zip(bars, pcts, counts):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-            f'{pct:.0f}%\\n({cnt} cells)', ha='center', color='white', fontsize=9)
+            f'{pct:.0f}%\
+({cnt} cells)', ha='center', color='white', fontsize=9)
 ax.set_ylabel('Percentage of corridor', color='white')
 ax.set_title('Corridor thermal composition', color='white', fontsize=11)
 ax.set_ylim(0, 70)

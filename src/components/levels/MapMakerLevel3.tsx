@@ -25,7 +25,8 @@ export default function MapMakerLevel3() {
       code: `import numpy as np
 
 # --- Map projections — the mathematics of flattening a sphere ---
-print("=== Map Projections: Flattening a Sphere ===\\n")
+print("=== Map Projections: Flattening a Sphere ===\
+")
 
 # The fundamental problem: you cannot flatten a sphere without distortion.
 # Different projections choose WHAT to distort.
@@ -63,7 +64,8 @@ for name, (lat, lon) in places.items():
     print(f"{name:<14s} {lat:>7.2f} {lon:>7.2f} | {mx:>11.1f} {my:>11.1f} | {ex:>11.1f} {ey:>10.1f}")
 
 # Show area distortion at different latitudes
-print("\\nMercator area distortion by latitude:")
+print("\
+Mercator area distortion by latitude:")
 print("(ratio = how many times larger areas appear vs reality)")
 for lat in [0, 15, 26, 45, 60, 75]:
     # Mercator scale factor = sec(lat)
@@ -85,11 +87,13 @@ mx1, my1 = mercator(lat1, lon1)
 mx2, my2 = mercator(lat2, lon2)
 merc_dist = np.sqrt((mx2-mx1)**2 + (my2-my1)**2)
 
-print(f"\\nGuwahati -> Dibrugarh:")
+print(f"\
+Guwahati -> Dibrugarh:")
 print(f"  Great-circle (true): {true_dist:.1f} km")
 print(f"  Mercator straight-line: {merc_dist:.1f} km")
 print(f"  Error: {abs(merc_dist - true_dist):.1f} km ({abs(merc_dist - true_dist)/true_dist*100:.1f}%)")
-print(f"\\nKey insight: At 26 degrees N (NE India), Mercator inflates areas by")
+print(f"\
+Key insight: At 26 degrees N (NE India), Mercator inflates areas by")
 print(f"~1.24x. This is modest, but at 60 degrees it becomes 4x. That is why")
 print(f"Greenland looks as big as Africa on Google Maps (Mercator), when Africa")
 print(f"is actually 14 times larger.")`,
@@ -107,7 +111,8 @@ print(f"is actually 14 times larger.")`,
       code: `import numpy as np
 
 # --- Coordinate transformations — converting between geographic systems ---
-print("=== Coordinate Transformations ===\\n")
+print("=== Coordinate Transformations ===\
+")
 
 # Geographic coordinates (lat/lon in degrees) vs UTM (meters on a flat grid)
 # NE India falls in UTM Zone 46N
@@ -149,7 +154,8 @@ for name, (lat, lon) in places.items():
     print(f"{name:<12s} {lat:>7.2f} {lon:>7.2f} | {e:>12.0f} {n:>12.0f}")
 
 # Demonstrate advantage: distances in meters are just Pythagorean theorem
-print("\\nDistances using UTM coordinates (Pythagorean theorem):")
+print("\
+Distances using UTM coordinates (Pythagorean theorem):")
 pairs = [("Guwahati", "Shillong"), ("Guwahati", "Tezpur"), ("Tezpur", "Jorhat")]
 for a, b in pairs:
     dx = utm_coords[b][0] - utm_coords[a][0]
@@ -168,13 +174,15 @@ def dms_to_decimal(degrees, minutes, seconds, direction):
 # Example: Kaziranga National Park entrance
 kaz_lat = dms_to_decimal(26, 34, 48, 'N')
 kaz_lon = dms_to_decimal(93, 10, 12, 'E')
-print(f"\\nDMS -> Decimal example:")
+print(f"\
+DMS -> Decimal example:")
 print(f"  Kaziranga: 26d 34m 48s N, 93d 10m 12s E")
 print(f"  = ({kaz_lat:.4f}, {kaz_lon:.4f}) decimal degrees")
 e, n = latlon_to_utm46(kaz_lat, kaz_lon)
 print(f"  = UTM 46N: ({e:.0f} E, {n:.0f} N)")
 
-print("\\nKey insight: UTM coordinates let you measure distances with simple")
+print("\
+Key insight: UTM coordinates let you measure distances with simple")
 print("arithmetic (Pythagoras), while lat/lon requires the haversine formula.")
 print("But UTM zones are only 6 degrees wide — crossing zone boundaries")
 print("requires a zone-to-zone transformation.")`,
@@ -192,7 +200,8 @@ print("requires a zone-to-zone transformation.")`,
       code: `import numpy as np
 
 # --- Spatial data structures — quadtrees for efficient queries ---
-print("=== Quadtree: Spatial Indexing ===\\n")
+print("=== Quadtree: Spatial Indexing ===\
+")
 
 np.random.seed(42)
 
@@ -276,7 +285,8 @@ print(f"Tree has {qt.count_nodes()} nodes (capacity=2 per leaf)")
 # Range query: find places near Kaziranga (within ~1 degree box)
 qx0, qy0, qx1, qy1 = 92.0, 26.0, 94.5, 27.5
 results = qt.query_range(qx0, qy0, qx1, qy1)
-print(f"\\nRange query: lon [{qx0},{qx1}], lat [{qy0},{qy1}]")
+print(f"\
+Range query: lon [{qx0},{qx1}], lat [{qy0},{qy1}]")
 print(f"Found {len(results)} locations:")
 for x, y, name in results:
     print(f"  {name}: ({y:.2f}N, {x:.2f}E)")
@@ -284,9 +294,11 @@ for x, y, name in results:
 # Compare: brute-force search checks all N points
 # Quadtree prunes entire branches
 brute_checks = len(locations)
-print(f"\\nBrute-force search: {brute_checks} comparisons")
+print(f"\
+Brute-force search: {brute_checks} comparisons")
 print(f"Quadtree: ~{int(np.log2(qt.count_nodes()))+len(results)} node visits (logarithmic)")
-print(f"\\nWith 1 million map features, quadtree reduces query time from")
+print(f"\
+With 1 million map features, quadtree reduces query time from")
 print(f"O(N)=1,000,000 checks to O(log N)=~20 node visits. That is the")
 print(f"difference between 1 second and 0.00002 seconds per query.")`,
       challenge: "Extend this model by adding a second variable and exploring how the interaction changes the results.",
@@ -303,7 +315,8 @@ print(f"difference between 1 second and 0.00002 seconds per query.")`,
       code: `import numpy as np
 
 # --- Distance calculations — great circle vs Euclidean on curved surfaces ---
-print("=== Great Circle vs Euclidean Distance ===\\n")
+print("=== Great Circle vs Euclidean Distance ===\
+")
 
 R = 6371.0  # Earth radius in km
 
@@ -344,7 +357,8 @@ for name1, lat1, lon1, name2, lat2, lon2 in pairs:
     route = f"{name1}->{name2}"
     print(f"{route:<28s} {gc:>9.1f}km {eu:>9.1f}km {err:>6.1f}km {pct:>6.1f}%")
 
-print("\\nError grows with distance because the Euclidean approximation")
+print("\
+Error grows with distance because the Euclidean approximation")
 print("ignores Earth's curvature. The pattern:")
 print("  < 50 km:  error < 0.1% (flat Earth is fine)")
 print("  50-300 km: error 0.1-1% (noticeable for precision work)")
@@ -358,7 +372,8 @@ def initial_bearing(lat1, lon1, lat2, lon2):
     y = np.cos(lat1)*np.sin(lat2) - np.sin(lat1)*np.cos(lat2)*np.cos(dlon)
     return (np.degrees(np.arctan2(x, y)) + 360) % 360
 
-print("\\nInitial bearings from Guwahati:")
+print("\
+Initial bearings from Guwahati:")
 for name1, lat1, lon1, name2, lat2, lon2 in pairs:
     bearing = initial_bearing(lat1, lon1, lat2, lon2)
     dist = haversine(lat1, lon1, lat2, lon2)
@@ -378,7 +393,8 @@ for name1, lat1, lon1, name2, lat2, lon2 in pairs:
       code: `import numpy as np
 
 # --- Thematic mapping — choropleth, proportional symbol, and heat maps ---
-print("=== Thematic Mapping: Data Classification ===\\n")
+print("=== Thematic Mapping: Data Classification ===\
+")
 
 np.random.seed(42)
 
@@ -409,7 +425,8 @@ print(f"Mean: {values.mean():.0f}, Median: {np.median(values):.0f}, Std: {values
 n_classes = 4
 interval = (values.max() - values.min()) / n_classes
 breaks_equal = [values.min() + i * interval for i in range(n_classes + 1)]
-print(f"\\n--- Equal Interval ({n_classes} classes) ---")
+print(f"\
+--- Equal Interval ({n_classes} classes) ---")
 print(f"Breaks: {[round(b) for b in breaks_equal]}")
 for i in range(n_classes):
     lo, hi = breaks_equal[i], breaks_equal[i+1]
@@ -418,7 +435,8 @@ for i in range(n_classes):
 
 # METHOD 2: Quantile classification (equal count per class)
 quantiles = np.percentile(values, [0, 25, 50, 75, 100])
-print(f"\\n--- Quantile ({n_classes} classes) ---")
+print(f"\
+--- Quantile ({n_classes} classes) ---")
 print(f"Breaks: {[round(q) for q in quantiles]}")
 for i in range(n_classes):
     lo, hi = quantiles[i], quantiles[i+1]
@@ -436,7 +454,8 @@ for idx in break_positions:
     jenks_breaks.append((sorted_vals[idx] + sorted_vals[idx+1]) / 2)
 jenks_breaks.append(sorted_vals[-1])
 
-print(f"\\n--- Natural Breaks (Jenks-like) ---")
+print(f"\
+--- Natural Breaks (Jenks-like) ---")
 print(f"Breaks: {[round(b) for b in jenks_breaks]}")
 for i in range(n_classes):
     lo, hi = jenks_breaks[i], jenks_breaks[i+1]
@@ -444,7 +463,8 @@ for i in range(n_classes):
     print(f"  Class {i+1} [{lo:.0f}-{hi:.0f}]: {len(members)} districts")
 
 # Proportional symbol sizing
-print("\\n--- Proportional Symbol Sizes ---")
+print("\
+--- Proportional Symbol Sizes ---")
 min_radius = 3
 max_radius = 20
 for name in sorted(districts, key=districts.get, reverse=True)[:6]:
@@ -452,7 +472,8 @@ for name in sorted(districts, key=districts.get, reverse=True)[:6]:
     radius = min_radius + (max_radius - min_radius) * (val - values.min()) / (values.max() - values.min())
     print(f"  {name:<18s}: density={val:>5d}, symbol radius={radius:.1f}px")
 
-print("\\nKey insight: The classification method changes the story the map tells.")
+print("\
+Key insight: The classification method changes the story the map tells.")
 print("Equal interval emphasizes Kamrup Metro as an outlier; quantile shows")
 print("a more balanced picture; natural breaks respects the data's own clusters.")`,
       challenge: "Extend this model by adding a second variable and exploring how the interaction changes the results.",
@@ -469,7 +490,8 @@ print("a more balanced picture; natural breaks respects the data's own clusters.
       code: `import numpy as np
 
 # --- Spatial interpolation — IDW for mapping between sample points ---
-print("=== Spatial Interpolation: IDW ===\\n")
+print("=== Spatial Interpolation: IDW ===\
+")
 
 np.random.seed(42)
 
@@ -509,7 +531,8 @@ query_points = [
     ("Morigaon", 92.34, 26.25),
 ]
 
-print(f"\\nIDW Interpolation (power=2) at unknown locations:")
+print(f"\
+IDW Interpolation (power=2) at unknown locations:")
 print(f"{'Location':<12s} {'Lat':>6s} {'Lon':>6s} {'Est Temp':>9s}")
 print("-" * 37)
 for name, lon, lat in query_points:
@@ -518,7 +541,8 @@ for name, lon, lat in query_points:
     print(f"{name:<12s} {lat:>6.2f} {lon:>6.2f} {est_temp:>8.1f} C{suffix}")
 
 # Show effect of power parameter
-print("\\nEffect of IDW power parameter at Kaziranga:")
+print("\
+Effect of IDW power parameter at Kaziranga:")
 print("(Higher power = nearer stations dominate more)")
 qlon, qlat = 93.17, 26.58
 for p in [0.5, 1, 2, 3, 5]:
@@ -526,7 +550,8 @@ for p in [0.5, 1, 2, 3, 5]:
     print(f"  power={p:.1f}: {est:.1f} C")
 
 # Cross-validation: leave one station out, predict it
-print("\\nLeave-one-out cross-validation:")
+print("\
+Leave-one-out cross-validation:")
 errors = []
 for left_out in stations:
     remaining = {k: v for k, v in stations.items() if k != left_out}
@@ -536,9 +561,11 @@ for left_out in stations:
     errors.append(err)
     print(f"  Left out {left_out:<12s}: true={true_temp:.1f}, predicted={pred:.1f}, error={err:.1f} C")
 
-print(f"\\nMean absolute error: {np.mean(errors):.2f} C")
+print(f"\
+Mean absolute error: {np.mean(errors):.2f} C")
 print(f"Max error: {max(errors):.2f} C")
-print(f"\\nKey insight: IDW assumes closer stations are more informative.")
+print(f"\
+Key insight: IDW assumes closer stations are more informative.")
 print(f"Shillong (1700m elevation) has very different temperatures from")
 print(f"nearby lowland stations, causing large errors. A better model")
 print(f"would include elevation as a predictor variable.")`,

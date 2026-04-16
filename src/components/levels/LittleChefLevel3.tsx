@@ -113,7 +113,8 @@ for T in [100, 130, 160, 180, 200, 220]:
     r = arrhenius_rate(T)
     t = -np.log(0.4) / (r * 60) if r > 0 else float('inf')
     print(f"{T:>5}°C {r:>12.4e} {min(t,999):>12.1f} min")
-print(f"\\nRate increase per 10°C (at 180°C): {arrhenius_rate(190)/arrhenius_rate(180):.1f}x")`,
+print(f"\
+Rate increase per 10°C (at 180°C): {arrhenius_rate(190)/arrhenius_rate(180):.1f}x")`,
       challenge: "Add water activity as a variable: Maillard rate peaks at water activity ~0.6 and decreases at both lower and higher values. Model this with a bell-shaped multiplier and find the optimal combination of temperature and water activity for maximum browning rate.",
       successHint: "You can now model the kinetics of food browning — the foundational chemistry behind every cooked flavor.",
     },
@@ -511,7 +512,8 @@ plt.show()
 
 for name, r in results.items():
     cal = r['nutrients']['calories']
-    print(f"\\n{name} ({cal:.0f} kcal):")
+    print(f"\
+{name} ({cal:.0f} kcal):")
     for k in ['protein', 'iron', 'calcium', 'vitC']:
         print(f"  {k}: {r['nutrients'][k]:.1f} ({r['rdi'][k]:.0f}% RDI)")`,
       challenge: "Add a \"meal optimizer\": given a calorie target and minimum RDI percentages for protein, iron, and vitamin C, find the combination of ingredients from the database that meets all constraints at minimum cost (assign a price per 100g to each ingredient).",
@@ -814,11 +816,13 @@ plt.tight_layout()
 plt.show()
 
 print(f"Optimization: evaluated {n_evaluated:,} feasible recipes")
-print(f"\\nBest recipe (score={best_score:.3f}):")
+print(f"\
+Best recipe (score={best_score:.3f}):")
 for name, amount in zip(names, best_recipe):
     if amount > 0:
         print(f"  {name}: {amount}g")
-print(f"\\nNutrition: {totals['cal']:.0f} cal, {totals['protein']:.1f}g protein, ")
+print(f"\
+Nutrition: {totals['cal']:.0f} cal, {totals['protein']:.1f}g protein, ")
 print(f"  {totals['iron']:.1f}mg iron, {totals['vitC']:.1f}mg vitamin C")
 print(f"  Cost: {totals['cost']:.1f} units")`,
       challenge: "Add a \"meal plan\" mode: optimize three meals per day (breakfast, lunch, dinner) where the daily totals must meet RDI targets, but each meal can be unbalanced. Does this flexibility improve the overall nutrition score compared to requiring each meal to be balanced?",

@@ -197,7 +197,8 @@ print(f"  Total species: {len(data['status'])}")
 for cat in cat_order:
     n = np.sum(data['status'] == cat)
     print(f"  {cat}: {n} ({100*n/len(data['status']):.0f}%)")
-print(f"\\nFeatures: {len(feature_names)}")
+print(f"\
+Features: {len(feature_names)}")
 print(f"Most predictive: {feature_names[sort_idx[0]]} (r={corr_with_status[sort_idx[0]]:.3f})")`,
       challenge: 'Add two more features: (1) island_endemic (boolean, 0 or 1 — island species are more vulnerable) and (2) specialized_diet (0-1, specialists are more at risk). Regenerate the dataset and check if these features improve prediction of threat status.',
       successHint: 'A good dataset with well-chosen features is 80% of any ML project. The remaining 20% is choosing and tuning the model. Never skip the data exploration stage.',
@@ -439,7 +440,8 @@ print(f"Decision tree results (max_depth=5):")
 print(f"  Train accuracy: {train_acc:.1%}")
 print(f"  Test accuracy:  {test_acc:.1%}")
 print(f"  Most important feature: {feat_names[np.argmax(imp)]}")
-print(f"\\nPer-class accuracy:")
+print(f"\
+Per-class accuracy:")
 for cat, acc in zip(cat_names, per_class):
     print(f"  {cat}: {acc:.1%}")`,
       challenge: 'Print the decision path for a specific species (the red panda: population=10000, range=15000, habitat_loss=3, human_pressure=40, gen_years=6, fragmentation=0.5). Trace which features the tree uses to classify it. Does the reasoning make biological sense?',
@@ -625,7 +627,8 @@ fig.patch.set_facecolor('#1f2937')
 # Accuracy comparison
 ax = axes[0, 0]
 ax.set_facecolor('#111827')
-models = ['Single tree', 'Random forest\\n(50 trees)', 'RF OOB']
+models = ['Single tree', 'Random forest\
+(50 trees)', 'RF OOB']
 accs = [tree_acc, rf_acc, rf.oob_accuracy]
 colors = ['#f59e0b', '#22c55e', '#3b82f6']
 bars = ax.bar(models, accs, color=colors, edgecolor='none', width=0.5)
@@ -880,20 +883,32 @@ ax.tick_params(colors='gray')
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.axis('off')
-report = "SPECIES THREAT CLASSIFIER REPORT\\n"
-report += "=" * 45 + "\\n"
-report += f"{'Category':<8} {'Prec':>6} {'Recall':>7} {'F1':>6} {'Support':>8}\\n"
-report += "-" * 45 + "\\n"
+report = "SPECIES THREAT CLASSIFIER REPORT\
+"
+report += "=" * 45 + "\
+"
+report += f"{'Category':<8} {'Prec':>6} {'Recall':>7} {'F1':>6} {'Support':>8}\
+"
+report += "-" * 45 + "\
+"
 for c in range(5):
     m = metrics[c]
-    report += f"{cat_names[c]:<8} {m['precision']:>6.2f} {m['recall']:>7.2f} {m['f1']:>6.2f} {m['support']:>8}\\n"
-report += "-" * 45 + "\\n"
+    report += f"{cat_names[c]:<8} {m['precision']:>6.2f} {m['recall']:>7.2f} {m['f1']:>6.2f} {m['support']:>8}\
+"
+report += "-" * 45 + "\
+"
 acc = np.mean(y_pred == yte)
-report += f"{'Overall':<8} {'':>6} {'':>7} {'':>6} {len(yte):>8}\\n"
-report += f"Accuracy: {acc:.1%}\\n\\n"
-report += "CONSERVATION RECOMMENDATION:\\n"
-report += f"Use threshold {opt_thresh:.2f} for screening\\n"
-report += f"This gives {recalls[np.argmin(np.abs(thresholds-opt_thresh))]:.0%} recall\\n"
+report += f"{'Overall':<8} {'':>6} {'':>7} {'':>6} {len(yte):>8}\
+"
+report += f"Accuracy: {acc:.1%}\
+\
+"
+report += "CONSERVATION RECOMMENDATION:\
+"
+report += f"Use threshold {opt_thresh:.2f} for screening\
+"
+report += f"This gives {recalls[np.argmin(np.abs(thresholds-opt_thresh))]:.0%} recall\
+"
 report += f"for threatened species detection"
 ax.text(0.05, 0.95, report, transform=ax.transAxes, fontsize=9,
         verticalalignment='top', fontfamily='monospace', color='#22c55e')
@@ -905,7 +920,8 @@ print("Per-class metrics:")
 for c in range(5):
     m = metrics[c]
     print(f"  {cat_names[c]}: prec={m['precision']:.2f} recall={m['recall']:.2f} F1={m['f1']:.2f} (n={m['support']})")
-print(f"\\nOptimal threshold (cost-sensitive): {opt_thresh:.2f}")
+print(f"\
+Optimal threshold (cost-sensitive): {opt_thresh:.2f}")
 print(f"Conservation principle: NEVER sacrifice recall for threatened species.")`,
       challenge: 'Change the cost ratio: set FN_cost = 1000 (extinction is permanent) and FP_cost = 1. How does the optimal threshold change? At what point would you classify EVERY species as threatened just to avoid missing any?',
       successHint: 'Understanding the precision-recall trade-off in the context of conservation is perhaps the most important machine learning lesson. The cost of a missed endangered species is permanent and irreversible.',
@@ -1086,24 +1102,39 @@ ax.tick_params(colors='gray')
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.axis('off')
-report = "PREDICTIVE RED LIST SCREENING REPORT\\n"
-report += "=" * 50 + "\\n"
-report += f"Species screened: {n_un}\\n"
-report += f"Model: Ensemble classifier (100 models)\\n\\n"
-report += "PREDICTED STATUS DISTRIBUTION:\\n"
+report = "PREDICTIVE RED LIST SCREENING REPORT\
+"
+report += "=" * 50 + "\
+"
+report += f"Species screened: {n_un}\
+"
+report += f"Model: Ensemble classifier (100 models)\
+\
+"
+report += "PREDICTED STATUS DISTRIBUTION:\
+"
 for c in range(5):
     n_c = np.sum(predicted == c)
-    report += f"  {cat_names[c]}: {n_c} species\\n"
-report += f"\\nHIGH-PRIORITY SPECIES (predicted EN/CR):\\n"
+    report += f"  {cat_names[c]}: {n_c} species\
+"
+report += f"\
+HIGH-PRIORITY SPECIES (predicted EN/CR):\
+"
 for i in priority_order:
     if predicted[i] >= 3:
         report += f"  {unassessed_names[i]}: {cat_names[predicted[i]]} "
-        report += f"({confidence[i]:.0%} conf)\\n"
-report += f"\\nUNCERTAIN (confidence < 50%):\\n"
+        report += f"({confidence[i]:.0%} conf)\
+"
+report += f"\
+UNCERTAIN (confidence < 50%):\
+"
 uncertain = np.where(confidence < 0.5)[0]
 for i in uncertain[:5]:
-    report += f"  {unassessed_names[i]}: needs expert review\\n"
-report += f"\\nRECOMMENDATION: Formal IUCN assessment\\n"
+    report += f"  {unassessed_names[i]}: needs expert review\
+"
+report += f"\
+RECOMMENDATION: Formal IUCN assessment\
+"
 report += f"for {np.sum(predicted >= 3)} high-priority species"
 
 ax.text(0.02, 0.98, report, transform=ax.transAxes, fontsize=8,

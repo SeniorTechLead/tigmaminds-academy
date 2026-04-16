@@ -495,7 +495,8 @@ class PambanBridgeSimulator:
         return {"seismic_force_kN": F_seismic}
 
     def full_assessment(self, scenario):
-        print(f"\\n{'='*60}")
+        print(f"\
+{'='*60}")
         print(f"  SCENARIO: {scenario['name']}")
         print(f"{'='*60}")
 
@@ -503,7 +504,8 @@ class PambanBridgeSimulator:
         forces, wind_f = self.static_analysis(
             scenario["train_mass_kg"], scenario["wind_kmh"])
 
-        print("\\n  STATIC ANALYSIS:")
+        print("\
+  STATIC ANALYSIS:")
         min_fos = float('inf')
         crit_member = ""
         for member, force in forces.items():
@@ -517,7 +519,8 @@ class PambanBridgeSimulator:
         # 2. Fatigue
         fatigue = self.fatigue_check(
             scenario["stress_range_mpa"], scenario["age"], scenario["trains_per_day"])
-        print(f"\\n  FATIGUE: {fatigue['life_remaining']} [{fatigue['status']}]")
+        print(f"\
+  FATIGUE: {fatigue['life_remaining']} [{fatigue['status']}]")
 
         # 3. Corrosion
         corrosion = self.corrosion_check(
@@ -539,7 +542,8 @@ class PambanBridgeSimulator:
         print(f"  SEISMIC: {seismic['seismic_force_kN']:.0f} kN on pier")
 
         # Overall verdict
-        print(f"\\n  OVERALL ASSESSMENT:")
+        print(f"\
+  OVERALL ASSESSMENT:")
         print(f"    Critical member: {crit_member}")
         print(f"    Raw FOS: {min_fos:.2f}")
         print(f"    Corrosion-adjusted FOS: {adjusted_fos:.2f}")

@@ -382,7 +382,8 @@ for erosion in erosion_amounts:
     retained = rebound / erosion * 100
     print(f"  Erode {erosion:>5}m → rebound {rebound:>5.0f}m → net loss {net_loss:>5.0f}m ({retained:.0f}% retained)")
 
-print(f"\\nIsostatic amplification factor: {rho_crust / (rho_mantle - rho_crust):.2f}")
+print(f"\
+Isostatic amplification factor: {rho_crust / (rho_mantle - rho_crust):.2f}")
 print("Mountains are remarkably persistent thanks to isostatic rebound.")`,
       challenge: 'Model the time-dependent isostatic rebound after a sudden erosion event. The mantle viscosity controls the rebound timescale (typically 10,000-100,000 years). Implement the exponential relaxation model.',
       successHint: 'Isostasy is why mountains persist for hundreds of millions of years despite relentless erosion. The floating continent principle means that removing rock from the top causes the crust to rise from below — a geological perpetual motion machine.',

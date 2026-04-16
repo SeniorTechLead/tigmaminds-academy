@@ -304,7 +304,8 @@ colors = ['#86efac' if s["mode"] == "Deflagration" else
 ax1.barh(names, speeds, color=colors)
 ax1.set_xscale('log')
 ax1.axvline(343, color='white', linewidth=1.5, linestyle='--', alpha=0.5)
-ax1.text(343, -0.5, 'Speed of\\nsound', fontsize=9, color='lightgray', ha='center')
+ax1.text(343, -0.5, 'Speed of\
+sound', fontsize=9, color='lightgray', ha='center')
 ax1.set_xlabel('Flame speed (m/s) — log scale', fontsize=11)
 ax1.set_title('Flame Propagation Speed', fontsize=13)
 ax1.grid(alpha=0.2)
@@ -419,7 +420,8 @@ plt.tight_layout()
 plt.show()
 
 # Calculate safe distances
-print("\\n=== Safe Distance Calculator ===")
+print("\
+=== Safe Distance Calculator ===")
 print(f"{'Fire':<22} {'Power (kW)':>12} {'Pain dist (m)':>14} {'Ignition dist (m)':>18}")
 print("-" * 68)
 for fire in fires:
@@ -457,7 +459,8 @@ def analyse_combustion(C, H, fuel_name="Unknown"):
     """Full combustion analysis for CxHy fuels."""
     print(f"{'='*50}")
     print(f"COMBUSTION ANALYSIS: {fuel_name} (C{C}H{H})")
-    print(f"{'='*50}\\n")
+    print(f"{'='*50}\
+")
 
     # 1. Balance equation: CxHy + (x + y/4)O2 -> xCO2 + (y/2)H2O
     o2_coeff = C + H / 4
@@ -465,7 +468,8 @@ def analyse_combustion(C, H, fuel_name="Unknown"):
     h2o_coeff = H / 2
 
     print(f"1. BALANCED EQUATION:")
-    print(f"   C{C}H{H} + {o2_coeff}O₂ → {co2_coeff}CO₂ + {h2o_coeff}H₂O\\n")
+    print(f"   C{C}H{H} + {o2_coeff}O₂ → {co2_coeff}CO₂ + {h2o_coeff}H₂O\
+")
 
     # 2. Bond energies (kJ/mol)
     E_CH = 413
@@ -484,7 +488,8 @@ def analyse_combustion(C, H, fuel_name="Unknown"):
     print(f"2. ENERGY (Bond Energy Estimate):")
     print(f"   Bonds broken: {broken:.0f} kJ")
     print(f"   Bonds formed: {formed:.0f} kJ")
-    print(f"   ΔH = {dH:.0f} kJ/mol (negative = exothermic)\\n")
+    print(f"   ΔH = {dH:.0f} kJ/mol (negative = exothermic)\
+")
 
     # 3. Adiabatic flame temperature estimate
     # T_ad = T_initial + |dH| / (n_products * Cp)
@@ -493,7 +498,8 @@ def analyse_combustion(C, H, fuel_name="Unknown"):
     T_ad = 298 + abs(dH) * 1000 / (n_products * Cp_avg)
 
     print(f"3. FLAME TEMPERATURE (Adiabatic):")
-    print(f"   T_ad ≈ {T_ad:.0f} K ({T_ad - 273:.0f}°C)\\n")
+    print(f"   T_ad ≈ {T_ad:.0f} K ({T_ad - 273:.0f}°C)\
+")
 
     # 4. Radiation
     sigma = 5.67e-8
@@ -503,7 +509,8 @@ def analyse_combustion(C, H, fuel_name="Unknown"):
 
     print(f"4. RADIATION (for {A_flame} m² flame):")
     print(f"   Radiated power: {P_rad:.1f} W")
-    print(f"   Safe distance (pain): {r_safe:.2f} m\\n")
+    print(f"   Safe distance (pain): {r_safe:.2f} m\
+")
 
     return {"dH": dH, "T_ad": T_ad, "P_rad": P_rad, "name": fuel_name}
 
@@ -545,9 +552,11 @@ plt.suptitle('Comparative Combustion Analysis', fontsize=14, y=1.02)
 plt.tight_layout()
 plt.show()
 
-print("\\nFrom methane to octane: larger molecules release more total energy")
+print("\
+From methane to octane: larger molecules release more total energy")
 print("but flame temperatures are similar (limited by product heat capacity).")
-print("\\nYou have built a combustion engineer’s toolkit — Agni, quantified.")`,
+print("\
+You have built a combustion engineer’s toolkit — Agni, quantified.")`,
       challenge: 'Extend the tool to handle oxygenated fuels (CxHyOz) like ethanol (C₂H₆O). The balanced equation becomes: CxHyOz + (x + y/4 - z/2)O₂ → xCO₂ + (y/2)H₂O. Add ethanol and methanol to the comparison.',
       successHint: 'You have built a complete combustion analysis pipeline from first principles. This integrates stoichiometry, bond energies, thermodynamics, and radiation physics into a single tool. Real combustion engineering software (CHEMKIN, Cantera) does exactly this at much higher fidelity. The Vedic Agni — fire as transformer — is now fully quantified.',
     },

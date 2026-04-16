@@ -386,12 +386,15 @@ for zeta, color in zip(zeta_values, colors):
 
 ax1.axhline(1, color='white', linestyle='--', alpha=0.3)
 ax1.axvline(np.sqrt(2), color='white', linestyle=':', alpha=0.3)
-ax1.text(np.sqrt(2) + 0.05, 5, 'r = √2\\n(isolation begins)', color='white', fontsize=8)
+ax1.text(np.sqrt(2) + 0.05, 5, 'r = √2\
+(isolation begins)', color='white', fontsize=8)
 
 ax1.fill_between([0, np.sqrt(2)], 0.01, 100, alpha=0.05, color='#ef4444')
 ax1.fill_between([np.sqrt(2), 5], 0.01, 100, alpha=0.05, color='#22c55e')
-ax1.text(0.5, 0.015, 'AMPLIFICATION\\nzone', ha='center', color='#ef4444', fontsize=9)
-ax1.text(3, 0.015, 'ISOLATION\\nzone', ha='center', color='#22c55e', fontsize=9)
+ax1.text(0.5, 0.015, 'AMPLIFICATION\
+zone', ha='center', color='#ef4444', fontsize=9)
+ax1.text(3, 0.015, 'ISOLATION\
+zone', ha='center', color='#22c55e', fontsize=9)
 
 ax1.set_xlabel('Frequency ratio (r = ω/ωn)', color='white')
 ax1.set_ylabel('Transmissibility |T|', color='white')
@@ -539,7 +542,8 @@ for mode in modes:
     fn = mode['fn']
     idx = np.argmin(np.abs(freq - fn))
     ax.plot(fn, spectrum[idx], 'o', color='#f59e0b', markersize=10)
-    ax.annotate(f'Mode: {fn} Hz\\nζ={mode["zeta"]}',
+    ax.annotate(f'Mode: {fn} Hz\
+ζ={mode["zeta"]}',
                 (fn, spectrum[idx]), xytext=(fn+5, spectrum[idx]*0.8),
                 color='#f59e0b', fontsize=9,
                 arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -647,7 +651,8 @@ ax1.plot(q / np.pi, omega_2 / (2*np.pi), color='#ef4444', linewidth=2, label='Op
 gap_bottom = np.max(omega_1) / (2*np.pi)
 gap_top = np.min(omega_2) / (2*np.pi)
 ax1.axhspan(gap_bottom, gap_top, alpha=0.2, color='#f59e0b')
-ax1.text(0.5, (gap_bottom + gap_top)/2, f'BAND GAP\\n({gap_bottom:.1f} - {gap_top:.1f} Hz)',
+ax1.text(0.5, (gap_bottom + gap_top)/2, f'BAND GAP\
+({gap_bottom:.1f} - {gap_top:.1f} Hz)',
          ha='center', va='center', color='#f59e0b', fontsize=10, fontweight='bold')
 
 ax1.axhline(omega_r / (2*np.pi), color='#22c55e', linestyle='--', alpha=0.5, label=f'Resonator freq ({omega_r/(2*np.pi):.1f} Hz)')
@@ -679,7 +684,8 @@ transmission = np.clip(transmission, 0, 1)
 ax2.plot(freq_test, transmission, color='#22c55e', linewidth=2)
 ax2.fill_between(freq_test, transmission, alpha=0.15, color='#22c55e')
 ax2.axvspan(gap_bottom, gap_top, alpha=0.15, color='#f59e0b')
-ax2.text((gap_bottom + gap_top)/2, 0.5, 'Band gap\\n(no transmission)',
+ax2.text((gap_bottom + gap_top)/2, 0.5, 'Band gap\
+(no transmission)',
          ha='center', color='#f59e0b', fontsize=10)
 
 ax2.set_xlabel('Frequency (Hz)', color='white')

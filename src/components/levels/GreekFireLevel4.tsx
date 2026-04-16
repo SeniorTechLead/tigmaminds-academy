@@ -119,25 +119,29 @@ fire = FireSpread(contact_angle_deg=15, fuel_adhesion=0.85)
 
 # System overview
 print("=== Greek Fire Combustion Simulator ===")
-print("Architecture designed. Components:\\n")
+print("Architecture designed. Components:\
+")
 print("FUEL LIBRARY:")
 for f in fuels:
     print(f"  {f.name:<14} {f.fraction*100:>4.0f}%  ΔH={f.heat_comb:>6.0f} kJ/mol  "
           f"Ea={f.Ea/1000:.0f} kJ/mol")
 
-print(f"\\nSIPHON:")
+print(f"\
+SIPHON:")
 print(f"  Exit velocity: {siphon.exit_velocity():.1f} m/s")
 print(f"  Flow rate: {siphon.flow_rate_Ls():.2f} L/s")
 print(f"  Firing duration: {siphon.firing_duration():.0f} seconds")
 
-print(f"\\nFIRE SPREAD:")
+print(f"\
+FIRE SPREAD:")
 print(f"  Contact angle: {fire.contact_angle}°")
 print(f"  Adhesion factor: {fire.adhesion}")
 for temp in [200, 400, 600, 800, 1000]:
     p = fire.ignition_probability(25, temp)
     print(f"  P(ignition) at {temp}°C: {p:.2f}")
 
-print("\\nNext: Build the reaction engine with quicklime-water feedback.")`,
+print("\
+Next: Build the reaction engine with quicklime-water feedback.")`,
       challenge: 'Add a method to the Fuel class that calculates the adiabatic flame temperature — the temperature reached if all combustion heat goes into heating the products with no losses. For naphtha: T_ad = T_initial + ΔH / (mass × Cp). What temperature does Greek Fire reach theoretically?',
       successHint: 'Good system design makes everything else easier. You defined four classes with clear responsibilities and clean interfaces — the same architecture pattern used in physics simulations (GEANT4), game engines (Unity), and industrial control systems. Design first, code second.',
     },
@@ -250,7 +254,8 @@ for step in range(2000):
 peak_normal = engine.temperature - 273.15
 
 # Simulation 2: Water dousing at t=10s
-print("\\n=== Combustion Simulation: Water Dousing at 10s ===")
+print("\
+=== Combustion Simulation: Water Dousing at 10s ===")
 engine2 = CombustionEngine()
 
 print(f"{'Time (s)':<10} {'Temp (°C)':>10} {'Fuel %':>8} {'Q (kJ)':>8} {'Event':>16}")
@@ -275,7 +280,8 @@ for step in range(2000):
         break
 
 peak_water = engine2.temperature - 273.15
-print(f"\\nPeak temp (no water): {peak_normal:.0f}°C")
+print(f"\
+Peak temp (no water): {peak_normal:.0f}°C")
 print(f"Peak temp (water doused): {peak_water:.0f}°C")
 print(f"Water made fire {'HOTTER' if peak_water > peak_normal else 'cooler'} "
       f"by {abs(peak_water - peak_normal):.0f}°C")`,
@@ -388,7 +394,8 @@ print(f"Weber number: {siphon.weber_number():.0f}")
 print(f"Jet breakup length: {siphon.breakup_length():.1f} m")
 
 # Trajectory analysis
-print(f"\\n=== Trajectory vs Launch Angle ===")
+print(f"\
+=== Trajectory vs Launch Angle ===")
 print(f"{'Angle':>6} {'Range (m)':>10} {'Max height (m)':>14} {'Flight (s)':>12}")
 print("-" * 44)
 for angle in [10, 15, 20, 25, 30, 35, 40, 45]:
@@ -398,7 +405,8 @@ for angle in [10, 15, 20, 25, 30, 35, 40, 45]:
     print(f"{angle:>5}° {rng:>9.1f} {max_h:>12.1f} {t_flight:>10.2f}")
 
 # Nozzle diameter trade-off
-print(f"\\n=== Nozzle Diameter Trade-off ===")
+print(f"\
+=== Nozzle Diameter Trade-off ===")
 print(f"{'Diameter':>10} {'Velocity':>10} {'Flow (L/s)':>12} {'Range 30° (m)':>14} {'Breakup (m)':>12}")
 print("-" * 60)
 for d in [10, 15, 20, 25, 30, 40, 50]:
@@ -408,7 +416,8 @@ for d in [10, 15, 20, 25, 30, 40, 50]:
     print(f"{d:>8}mm {s.exit_velocity():>9.1f} {s.flow_rate()*1000:>10.2f} "
           f"{rng:>12.1f} {s.breakup_length():>10.1f}")
 
-print("\\nSmall nozzle: fast jet, long range, thin stream.")
+print("\
+Small nozzle: fast jet, long range, thin stream.")
 print("Large nozzle: slow jet, short range, heavy coverage.")
 print("25mm was a good compromise — reaching ~35m with solid coverage.")`,
       challenge: 'Add a "pre-pressurised chamber" mode: the pump builds pressure in a sealed chamber before firing (like a Super Soaker). If the chamber stores 5 litres at 400 kPa, calculate the initial burst velocity and how it decays as pressure drops. This is how real siphons achieved their maximum range in the first seconds of firing.',
@@ -522,7 +531,8 @@ ship.apply_greek_fire(4, 16, radius=3)
 
 print("=== Ship Fire Spread Simulation ===")
 print(f"Ship deck: {ship.rows}×{ship.cols} grid | Wind: east")
-print(f". = safe | ~ = covered | * = burning | # = destroyed\\n")
+print(f". = safe | ~ = covered | * = burning | # = destroyed\
+")
 
 print(f"{'Step':>4} {'Safe%':>6} {'Covered%':>9} {'Burning%':>9} {'Destroyed%':>11}")
 print("-" * 41)
@@ -535,20 +545,23 @@ for step in range(30):
     ship.step(wind_dir=(0, 1), wind_strength=0.4)
 
     if s["safe"] < 20:
-        print(f"\\nShip lost at step {step}: {s['destroyed']:.0f}% destroyed, "
+        print(f"\
+Ship lost at step {step}: {s['destroyed']:.0f}% destroyed, "
               f"{s['burning']:.0f}% still burning")
         break
 
 # Final state
 final = ship.stats()
-print(f"\\nFinal state:")
+print(f"\
+Final state:")
 print(f"  Safe:      {final['safe']:.1f}%")
 print(f"  Burning:   {final['burning']:.1f}%")
 print(f"  Destroyed: {final['destroyed']:.1f}%")
 print(f"  Total damage: {final['burning'] + final['destroyed']:.1f}%")
 
 # Compare with/without wind
-print("\\n=== Wind Effect on Fire Spread ===")
+print("\
+=== Wind Effect on Fire Spread ===")
 for wind in [0, 0.2, 0.4, 0.6, 0.8]:
     ship2 = ShipFireModel(16, 24)
     ship2.apply_greek_fire(8, 6, 4)

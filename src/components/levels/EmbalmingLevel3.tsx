@@ -85,7 +85,8 @@ intact = simulate_multilayer(
 )
 
 print("=== Multi-Compartment Desiccation Model ===")
-print("Intact body (no incisions)\\n")
+print("Intact body (no incisions)\
+")
 print(f"{'Layer':<22} {'Thick':>6} {'D':>6} {'Day 0':>6} {'Day 10':>7} {'Day 20':>7} {'Day 40':>7} {'Day 60':>7}")
 print("-" * 68)
 for layer in intact:
@@ -97,7 +98,8 @@ for layer in intact:
           " ".join(f"{v:>6.1f}%" for v in vals))
 
 # Now simulate with incision (bypasses skin + fat)
-print("\\n=== With Embalming Incision (bypasses skin + fat) ===")
+print("\
+=== With Embalming Incision (bypasses skin + fat) ===")
 incised_layers = [
     TissueLayer("Outer muscle",     2.0, 0.50, 75),  # exposed directly
     TissueLayer("Deep muscle",      3.0, 0.45, 75),
@@ -118,7 +120,8 @@ for layer in incised:
 # Compare average moisture at day 40
 intact_avg = np.mean([l.history[min(40, len(l.history)-1)] for l in intact])
 incised_avg = np.mean([l.history[min(40, len(l.history)-1)] for l in incised])
-print(f"\\nAverage moisture at 40 days — Intact: {intact_avg:.1f}%  Incised: {incised_avg:.1f}%")
+print(f"\
+Average moisture at 40 days — Intact: {intact_avg:.1f}%  Incised: {incised_avg:.1f}%")
 print(f"Incision reduces desiccation time by bypassing the low-D skin/fat barrier.")`,
       challenge: 'Add a "natron packing inside body cavity" condition: after evisceration, natron is placed inside the abdominal cavity, so the deep muscle is attacked from BOTH sides (outside surface AND internal cavity). Model this as reducing the effective thickness by half. How much faster does the deep muscle reach the 15% target?',
       successHint: 'Multi-compartment models are used throughout biomedical engineering: drug delivery (skin/blood/tissue compartments), pharmacokinetics (absorption/distribution/metabolism), and dialysis (blood/membrane/dialysate). You just built the same type of model that pharmaceutical companies use to design transdermal patches.',
@@ -208,7 +211,8 @@ samples = [
     ("Modern forensic reference",       50,   0.95, "blood"),
 ]
 
-print("=== Ancient DNA Extraction Simulation ===\\n")
+print("=== Ancient DNA Extraction Simulation ===\
+")
 print(f"{'Sample':<38} {'Age':>6} {'Qual':>5} {'Total Frags':>12} {'Endog%':>7} "
       f"{'Usable':>8} {'MeanBP':>7} {'Coverage':>9}")
 print("-" * 96)
@@ -223,7 +227,8 @@ for name, age, quality, sample_type in samples:
           f"{analysis['mean_usable_length']:>6.0f} {analysis['genome_coverage']:>8.3f}×")
 
 # Deamination authentication check
-print("\\n=== Deamination Authentication ===")
+print("\
+=== Deamination Authentication ===")
 print("(C→T substitution rate at fragment ends — higher = more ancient)")
 for name, age, quality, _ in samples:
     sample = AncientDNASample(age, quality, "bone")
@@ -232,7 +237,8 @@ for name, age, quality, _ in samples:
     authentic = "AUTHENTIC" if deam > 0.10 else "SUSPECT" if deam > 0.05 else "LIKELY MODERN"
     print(f"  {name:<38} Deamination: {deam:.1%}  — {authentic}")
 
-print("\\nKey: >10% terminal deamination strongly suggests genuine ancient DNA.")
+print("\
+Key: >10% terminal deamination strongly suggests genuine ancient DNA.")
 print("Modern contamination shows <2% deamination at fragment ends.")`,
       challenge: 'To increase genome coverage, researchers sequence the same sample multiple times and combine results. If one sequencing run gives 0.5x coverage, how many runs are needed for 10x coverage (the standard for reliable variant calling)? Model diminishing returns: each additional run adds slightly less NEW coverage due to overlapping fragments.',
       successHint: 'Ancient DNA analysis combines molecular biology, chemistry, statistics, and computational genomics. The same bioinformatic pipeline you just simulated is used in medical genomics (cancer sequencing uses similar fragment-assembly methods), forensics, and conservation genetics (extracting DNA from museum specimens).',
@@ -337,7 +343,8 @@ for cls in ["Royal", "Elite", "Artisan", "Laborer"]:
     print(f"{cls:<12} {len(subset):>3} {mean_c:>9.1f}‰ {mean_n:>9.1f}‰ {interp}")
 
 # Migration detection
-print("\\n=== Migration Detection (Strontium Mismatch) ===")
+print("\
+=== Migration Detection (Strontium Mismatch) ===")
 migrants = [m for m in mummies if m["migrant"]]
 locals_ = [m for m in mummies if not m["migrant"]]
 
@@ -346,7 +353,8 @@ print(f"Probable migrants: {len(migrants)} ({len(migrants)/len(mummies)*100:.0f}
 print(f"Local residents: {len(locals_)} ({len(locals_)/len(mummies)*100:.0f}%)")
 
 if migrants:
-    print(f"\\n{'ID':>4} {'Class':<10} {'Bone ⁸⁷Sr':>10} {'Tooth ⁸⁷Sr':>11} {'ΔSr':>8} {'Likely Origin'}")
+    print(f"\
+{'ID':>4} {'Class':<10} {'Bone ⁸⁷Sr':>10} {'Tooth ⁸⁷Sr':>11} {'ΔSr':>8} {'Likely Origin'}")
     print("-" * 56)
     for m in migrants[:8]:
         delta_sr = abs(m["Sr_bone"] - m["Sr_tooth"])
@@ -359,7 +367,8 @@ if migrants:
               f"{delta_sr:>7.4f} {best_match[0]}")
 
 # Geographic clustering
-print("\\n=== Geographic Origin Clusters (δ¹⁸O vs ⁸⁷Sr/⁸⁶Sr) ===")
+print("\
+=== Geographic Origin Clusters (δ¹⁸O vs ⁸⁷Sr/⁸⁶Sr) ===")
 for origin in ["Thebes", "Memphis", "Nubia", "Levant"]:
     subset = [m for m in mummies if m["origin"] == origin]
     if not subset:
@@ -435,14 +444,16 @@ environments = [
     PreservationEnvironment("Tropical forest (control)",28, 6.5, 21, 90, 1.0),
 ]
 
-print("=== Comparative Preservation Analysis ===\\n")
+print("=== Comparative Preservation Analysis ===\
+")
 print(f"{'Environment':<32} {'T°C':>5} {'pH':>5} {'O₂%':>5} {'RH%':>5}")
 print("-" * 54)
 for env in environments:
     print(f"{env.name:<32} {env.temp:>4} {env.pH:>5.1f} {env.oxygen:>4} {env.humidity:>4}")
 
 # Decay pathway analysis
-print(f"\\n{'Environment':<32} {'Enzyme':>8} {'Bacteria':>9} {'Oxidation':>10} {'Hydrolysis':>10}")
+print(f"\
+{'Environment':<32} {'Enzyme':>8} {'Bacteria':>9} {'Oxidation':>10} {'Hydrolysis':>10}")
 print("-" * 70)
 for env in environments:
     rates = env.decay_rates()
@@ -450,7 +461,8 @@ for env in environments:
           f"{rates['oxidative']:>9.2f} {rates['hydrolytic']:>9.2f}")
 
 # Preservation quality over time
-print(f"\\n=== Preservation Quality Over Time (%) ===")
+print(f"\
+=== Preservation Quality Over Time (%) ===")
 time_points = [10, 100, 500, 1000, 3000, 5000]
 header = f"{'Environment':<32} " + " ".join(f"{t:>6}yr" for t in time_points)
 print(header)
@@ -462,7 +474,8 @@ for env in environments:
     print(row)
 
 # Tissue-specific preservation
-print("\\n=== Tissue Preservation by Environment ===")
+print("\
+=== Tissue Preservation by Environment ===")
 print(f"{'Environment':<32} {'Skin':>6} {'Muscle':>8} {'Bone':>6} {'Organs':>8} {'Hair':>6}")
 print("-" * 68)
 tissue_data = {
@@ -580,7 +593,8 @@ segments = segment_ct(ct)
 
 # Count voxels per tissue type
 print("=== Mummy CT Scan — Cross-Section Analysis ===")
-print("Simulated axial slice through the torso\\n")
+print("Simulated axial slice through the torso\
+")
 
 unique, counts = np.unique(segments, return_counts=True)
 total_voxels = ct.size
@@ -596,7 +610,8 @@ for tissue, count in sorted(zip(unique, counts), key=lambda x: -x[1]):
     print(f"{tissue:<14} {count:>7} {pct:>9.1f}% {mean_hu:>7.0f} {std_hu:>6.0f}")
 
 # Hounsfield unit histogram
-print("\\n=== HU Distribution (non-air voxels) ===")
+print("\
+=== HU Distribution (non-air voxels) ===")
 non_air = ct[segments != "Air"]
 bins = [(-500, -50, "Fat/lipid"), (-50, 20, "Water"), (20, 80, "Soft tissue"),
         (80, 250, "Resin"), (250, 1500, "Bone"), (1500, 5000, "Metal")]
@@ -612,7 +627,8 @@ if np.any(metal_mask):
     metal_coords = np.argwhere(metal_mask)
     centroid = metal_coords.mean(axis=0)
     max_hu = np.max(ct[metal_mask])
-    print(f"\\n=== Amulet Detection ===")
+    print(f"\
+=== Amulet Detection ===")
     print(f"Metal object detected at position ({centroid[0]:.0f}, {centroid[1]:.0f})")
     print(f"Peak density: {max_hu:.0f} HU")
     print(f"Size: ~{len(metal_coords)} voxels")
@@ -621,7 +637,8 @@ if np.any(metal_mask):
 # Resin volume estimation
 resin_mask = segments == "Resin"
 resin_pct = np.sum(resin_mask) / body_voxels * 100
-print(f"\\n=== Resin Analysis ===")
+print(f"\
+=== Resin Analysis ===")
 print(f"Resin volume: {np.sum(resin_mask)} voxels ({resin_pct:.1f}% of body)")
 print(f"Mean resin density: {np.mean(ct[resin_mask]):.0f} HU")
 print(f"Location: abdominal cavity (consistent with post-evisceration filling)")`,

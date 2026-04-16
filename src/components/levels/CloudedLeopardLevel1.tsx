@@ -827,10 +827,14 @@ years = np.arange(0, 20)
 annual_tourism = 30000  # Rs per year (tourist fees, guide income)
 cumulative_tourism = np.cumsum(np.full(20, annual_tourism))
 
-ax.bar(['Poaching\\n(one-time)'], [pelt_value], color='#ef4444', width=0.4)
-ax.bar(['Tourism\\n(5 year)'], [annual_tourism * 5], color='#22c55e', width=0.4)
-ax.bar(['Tourism\\n(10 year)'], [annual_tourism * 10], color='#3b82f6', width=0.4)
-ax.bar(['Tourism\\n(20 year)'], [annual_tourism * 20], color='#8b5cf6', width=0.4)
+ax.bar(['Poaching\
+(one-time)'], [pelt_value], color='#ef4444', width=0.4)
+ax.bar(['Tourism\
+(5 year)'], [annual_tourism * 5], color='#22c55e', width=0.4)
+ax.bar(['Tourism\
+(10 year)'], [annual_tourism * 10], color='#3b82f6', width=0.4)
+ax.bar(['Tourism\
+(20 year)'], [annual_tourism * 20], color='#8b5cf6', width=0.4)
 ax.set_ylabel('Value (Rs)', color='white')
 ax.set_title('Value of a Clouded Leopard: Dead vs Alive', color='white', fontsize=11)
 ax.tick_params(colors='gray')
@@ -841,7 +845,10 @@ for i, val in enumerate([pelt_value, annual_tourism*5, annual_tourism*10, annual
 # 2. Community income sources with/without conservation
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
-categories = ['Agriculture', 'Timber\\n(unsustainable)', 'Poaching', 'Ecotourism', 'NTFP\\n(sustainable)', 'Conservation\\njobs']
+categories = ['Agriculture', 'Timber\
+(unsustainable)', 'Poaching', 'Ecotourism', 'NTFP\
+(sustainable)', 'Conservation\
+jobs']
 no_conservation = [40, 25, 15, 0, 15, 5]
 with_conservation = [35, 5, 0, 30, 20, 10]
 
@@ -886,7 +893,11 @@ ax.tick_params(colors='gray')
 # 4. Conflict resolution effectiveness
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-interventions = ['No action', 'Compensation\\nonly', 'Predator-proof\\nenclosures', 'Compensation\\n+ enclosures', 'Full program\\n(+ tourism)']
+interventions = ['No action', 'Compensation\
+only', 'Predator-proof\
+enclosures', 'Compensation\
++ enclosures', 'Full program\
+(+ tourism)']
 livestock_loss = [100, 100, 20, 20, 15]  # % of baseline losses
 retaliatory_kills = [100, 60, 50, 25, 5]  # % of baseline
 

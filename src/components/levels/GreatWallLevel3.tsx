@@ -63,7 +63,8 @@ for i in range(n_layers):
         print(f"{h:>10.1f} {width:>8.2f} {cumulative_weight:>16.1f} {stress_kpa:>12.1f}")
 
 # Arrow slit stress concentration
-print("\\n=== Stress Concentration at Arrow Slit ===")
+print("\
+=== Stress Concentration at Arrow Slit ===")
 slit_width = 0.15  # 15 cm wide slit
 slit_height = 5.0  # at 5m height
 wall_width_at_slit = base_width_m - (base_width_m - top_width_m) * (slit_height / height_m)
@@ -142,7 +143,8 @@ print("Note: starch reduces stiffness but INCREASES toughness.")
 print("This is the classic composite trade-off: stiffness vs toughness.")
 
 # The optimal composite
-print("\\n=== Optimal Design ===")
+print("\
+=== Optimal Design ===")
 best_toughness = 0
 best_frac = 0
 for frac in starch_fractions:
@@ -224,7 +226,8 @@ def simulate_wall_lifespan(
 
 # Run simulations for different brick types
 print("=== Monte Carlo Wall Lifespan Analysis ===")
-print(f"(1,000 simulations each)\\n")
+print(f"(1,000 simulations each)\
+")
 
 for name, porosity, strength in [
     ("Rammed earth", 35, 2),
@@ -302,7 +305,8 @@ for thickness in np.arange(1.0, 4.0, 0.5):
                     best_design = results[-1]
 
 print("=== Wall Design Optimisation ===")
-print(f"Searched {len(results):,} combinations\\n")
+print(f"Searched {len(results):,} combinations\
+")
 
 print("Top 5 designs (by efficiency = lifespan / cost):")
 print(f"{'Thick':>6} {'Poro%':>6} {'Starch%':>8} {'Height':>7} {'Cost':>6} {'Life':>6} {'Score':>6}")
@@ -312,7 +316,8 @@ sorted_results = sorted(results, key=lambda r: r[7], reverse=True)
 for r in sorted_results[:5]:
     print(f"{r[0]:>5.1f}m {r[1]:>5.0f}% {r[2]:>7.0f}% {r[3]:>6.0f}m {r[4]:>5.0f} {r[5]:>5.0f}y {r[7]:>5.1f}")
 
-print(f"\\nOptimal design:")
+print(f"\
+Optimal design:")
 print(f"  Thickness: {best_design[0]:.1f} m")
 print(f"  Porosity: {best_design[1]:.0f}%")
 print(f"  Starch content: {best_design[2]:.0f}%")
@@ -374,7 +379,8 @@ for s in sections:
 # Summary statistics
 conditions = [s["condition"] for s in sections]
 print("=== Great Wall Satellite Condition Assessment ===")
-print(f"Total sections analysed: {n_sections}\\n")
+print(f"Total sections analysed: {n_sections}\
+")
 
 for level in ["GOOD", "FAIR", "POOR", "CRITICAL"]:
     count = conditions.count(level)
@@ -385,7 +391,8 @@ for level in ["GOOD", "FAIR", "POOR", "CRITICAL"]:
 critical = sorted([s for s in sections if s["condition"] == "CRITICAL"],
                    key=lambda s: s["missing_pct"], reverse=True)
 
-print(f"\\n=== Top 5 Priority Sections for Restoration ===")
+print(f"\
+=== Top 5 Priority Sections for Restoration ===")
 print(f"{'Section':>8} {'NDVI':>6} {'Moist%':>7} {'Cracks/m':>9} {'Missing%':>9}")
 print("-" * 41)
 for s in critical[:5]:
@@ -396,7 +403,8 @@ for s in critical[:5]:
 ndvi_vals = np.array([s["ndvi"] for s in sections])
 crack_vals = np.array([s["crack_density"] for s in sections])
 corr = np.corrcoef(ndvi_vals, crack_vals)[0, 1]
-print(f"\\nCorrelation: NDVI vs crack density = {corr:.2f}")
+print(f"\
+Correlation: NDVI vs crack density = {corr:.2f}")
 print("(Positive = more vegetation where more cracks — plants invade damaged areas)")`,
       challenge: 'Add a "cost to restore" estimate for each section based on its condition metrics. Then create a "budget allocation" model: given a total budget of 10 million units, which sections should be restored first to save the most wall? This is the real-world prioritisation problem facing heritage conservationists.',
       successHint: 'You just built a remote sensing analysis pipeline — the same type of tool used to monitor deforestation (NDVI), assess flood damage (moisture), and plan urban development (change detection). Satellite data analysis is one of the fastest-growing fields in environmental science.',

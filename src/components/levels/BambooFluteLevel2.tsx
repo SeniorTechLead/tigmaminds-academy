@@ -244,7 +244,8 @@ for freq, name in peaks:
     idx = np.argmin(np.abs(fft_freqs - freq))
     mag = fft_magnitude[idx]
     if mag > 0.05:
-        ax2.annotate(f'{name}\\n{freq:.0f} Hz', xy=(freq, mag),
+        ax2.annotate(f'{name}\
+{freq:.0f} Hz', xy=(freq, mag),
                     xytext=(freq + 40, mag + 0.05),
                     color='#f59e0b', fontsize=8,
                     arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -537,11 +538,16 @@ ax4.set_facecolor('#111827')
 # File sizes for 3 minutes of mono audio
 duration_sec = 180
 configs = [
-    ('8kHz/8bit\\n(phone)', 8000, 8),
-    ('22kHz/16bit\\n(radio)', 22050, 16),
-    ('44.1kHz/16bit\\n(CD)', 44100, 16),
-    ('96kHz/24bit\\n(studio)', 96000, 24),
-    ('192kHz/32bit\\n(master)', 192000, 32),
+    ('8kHz/8bit\
+(phone)', 8000, 8),
+    ('22kHz/16bit\
+(radio)', 22050, 16),
+    ('44.1kHz/16bit\
+(CD)', 44100, 16),
+    ('96kHz/24bit\
+(studio)', 96000, 24),
+    ('192kHz/32bit\
+(master)', 192000, 32),
 ]
 
 names = [c[0] for c in configs]
@@ -569,7 +575,8 @@ for name, sr, bits in [(n, s, b) for n, s, b in configs]:
     max_freq = sr // 2
     dyn_range = bits * 6.02
     size_per_min = sr * (bits/8) / (1024*1024) * 60
-    clean_name = name.replace('\\n', ' ')
+    clean_name = name.replace('\
+', ' ')
     print(f"{clean_name:<25s} {max_freq:<12,d} Hz {dyn_range:<15.0f} dB {size_per_min:<10.1f} MB")`,
       challenge: 'Calculate the total storage needed for every song on Spotify (~100 million songs, average 3.5 minutes) at CD quality vs. MP3 320kbps. Why does compression matter at scale?',
       successHint: 'The tension between quality and file size drives the entire digital audio industry. CD quality was the gold standard for 30 years. Streaming services use compressed formats to save bandwidth. Audiophiles insist on lossless. The math you just explored is the foundation of every decision in that debate.',

@@ -86,7 +86,8 @@ t3, B3, H3 = simulate_competition(
 )
 
 print("=== BANYAN vs HOST COMPETITION MODEL ===")
-print("\\nScenario 1: Banyan on OLD host (typical success)")
+print("\
+Scenario 1: Banyan on OLD host (typical success)")
 print(f"  Start: Banyan={B1[0]:.1f}, Host={H1[0]:.1f}")
 print(f"  Year 50: Banyan={B1[500]:.1f}, Host={H1[500]:.1f}")
 print(f"  Year 100: Banyan={B1[1000]:.1f}, Host={H1[1000]:.1f}")
@@ -94,7 +95,8 @@ print(f"  Year 200: Banyan={B1[-1]:.1f}, Host={H1[-1]:.1f}")
 winner1 = "Banyan wins" if B1[-1] > H1[-1] else "Host wins"
 print(f"  Outcome: {winner1}")
 
-print("\\nScenario 2: Banyan on YOUNG host (typical failure)")
+print("\
+Scenario 2: Banyan on YOUNG host (typical failure)")
 print(f"  Start: Banyan={B2[0]:.1f}, Host={H2[0]:.1f}")
 print(f"  Year 50: Banyan={B2[500]:.1f}, Host={H2[500]:.1f}")
 print(f"  Year 100: Banyan={B2[1000]:.1f}, Host={H2[1000]:.1f}")
@@ -102,11 +104,13 @@ print(f"  Year 200: Banyan={B2[-1]:.1f}, Host={H2[-1]:.1f}")
 winner2 = "Banyan wins" if B2[-1] > H2[-1] else "Host wins"
 print(f"  Outcome: {winner2}")
 
-print("\\nScenario 3: Equal competitors (stalemate)")
+print("\
+Scenario 3: Equal competitors (stalemate)")
 print(f"  Start: Banyan={B3[0]:.1f}, Host={H3[0]:.1f}")
 print(f"  Year 200: Banyan={B3[-1]:.1f}, Host={H3[-1]:.1f}")
 
-print("\\nKey insight: alpha={0} >> beta={1} means the banyan".format(1.8, 0.3))
+print("\
+Key insight: alpha={0} >> beta={1} means the banyan".format(1.8, 0.3))
 print("suppresses the host far more than the host suppresses the banyan.")
 print("But this asymmetry only matters when the host is already weakening.")`,
       challenge: 'Add environmental stochasticity: multiply each growth rate by (1 + noise) where noise is drawn from a normal distribution each year. Run 100 simulations and plot the distribution of outcomes. What fraction of the time does the banyan win on a young host?',
@@ -197,7 +201,8 @@ for h in [5, 8, 10, 12, 15]:
     roots.append((h, root, history))
 
 print("=== AERIAL ROOT BIOMECHANICS ===")
-print(f"\\n{'Branch ht':>10} {'Grounding yr':>13} {'Final diam':>11} {'Buckling load':>14} {'Safety factor':>14}")
+print(f"\
+{'Branch ht':>10} {'Grounding yr':>13} {'Final diam':>11} {'Buckling load':>14} {'Safety factor':>14}")
 print("-" * 66)
 for h, root, history in roots:
     ground_year = next((yr for yr, d, l, g in history if g), None)
@@ -207,14 +212,16 @@ for h, root, history in roots:
     sf_str = f"{sf:.1f}" if sf < 1e6 else "inf"
     print(f"{h:>9}m {ground_year:>12} yr {root.diameter*100:>9.1f} cm {P_cr:>12.0f} N {sf_str:>14}")
 
-print("\\nPhase transitions:")
+print("\
+Phase transitions:")
 for h, root, history in roots:
     ground_year = next((yr for yr, d, l, g in history if g), None)
     if ground_year:
         _, d_at_ground, _, _ = history[ground_year]
         print(f"  {h}m branch: pendant for {ground_year} yrs (diam {d_at_ground*100:.1f}cm at grounding), then pillar growth to {root.diameter*100:.1f}cm")
 
-print("\\nKey insight: taller branches take longer to ground but produce")
+print("\
+Key insight: taller branches take longer to ground but produce")
 print("the same final diameter. Shorter roots ground faster and become")
 print("load-bearing pillars sooner — structural stability favors low branches.")`,
       challenge: 'Simulate 50 aerial roots at different branch heights (4-15m) with random variation in growth rates. Plot the distribution of grounding times and final diameters. Which branch height produces the most structurally effective pillars?',
@@ -403,7 +410,8 @@ plt.show()
 
 # Compute canopy stats per generation
 print("=== BANYAN CANOPY EXPANSION (L-SYSTEM MODEL) ===")
-print(f"\\n{'Generation':>10} {'Branches':>10} {'Roots':>8} {'Grounded':>10} {'Supports':>10} {'Max radius':>11}")
+print(f"\
+{'Generation':>10} {'Branches':>10} {'Roots':>8} {'Grounded':>10} {'Supports':>10} {'Max radius':>11}")
 print("-" * 63)
 for g in range(6):
     gen_branches = [b for b in tree.branches if b[4] <= g]
@@ -420,11 +428,13 @@ all_tips = [(b[2], b[3]) for b in tree.branches]
 canopy_r = max(np.sqrt(x**2 + y**2) for x, y in all_tips)
 canopy_area = np.pi * canopy_r**2
 
-print(f"\\nFinal canopy radius: {canopy_r:.1f} m")
+print(f"\
+Final canopy radius: {canopy_r:.1f} m")
 print(f"Estimated canopy area: {canopy_area:.0f} m^2")
 print(f"Total branches: {total_branches}, Aerial roots: {total_roots}, Grounded: {grounded_roots}")
 print(f"Support points: {len(tree.support_points)} (including trunk)")
-print(f"\\nPositive feedback: each grounded root enables longer branches,")
+print(f"\
+Positive feedback: each grounded root enables longer branches,")
 print(f"which create more root-drop points, which produce more roots.")`,
       challenge: 'Add wind bias: make branches grow preferentially in the downwind direction (e.g., add +0.3 to the angle for branches growing eastward). How does persistent wind affect canopy symmetry and root distribution?',
       successHint: 'You can now model fractal canopy expansion with aerial root feedback — capturing the positive loop that makes banyans the largest single-organism canopies on Earth.',
@@ -549,8 +559,10 @@ for a, b, s, t in interactions:
 
 # --- Simulate removal of different species ---
 print("=== KEYSTONE SPECIES ANALYSIS ===")
-print(f"\\nNetwork: {len(net.species)} species, {len(net.interactions)} interactions")
-print(f"\\n{'Species removed':<22} {'Lost':>6} {'Surviving':>10} {'Cascade rounds':>15} {'Keystoneness':>13}")
+print(f"\
+Network: {len(net.species)} species, {len(net.interactions)} interactions")
+print(f"\
+{'Species removed':<22} {'Lost':>6} {'Surviving':>10} {'Cascade rounds':>15} {'Keystoneness':>13}")
 print("-" * 70)
 
 keystoneness = {}
@@ -561,10 +573,12 @@ for sp in sorted(net.species.keys()):
     print(f"{sp:<22} {len(lost):>6} {len(surviving):>10} {rounds:>15} {score:>11.1f}%")
 
 top = sorted(keystoneness.items(), key=lambda x: -x[1])[:3]
-print(f"\\nTop 3 keystone species:")
+print(f"\
+Top 3 keystone species:")
 for name, score in top:
     print(f"  {name}: removing it causes {score:.1f}% of species to be lost")
-print(f"\\nThe banyan is the keystone — its removal cascades through the network,")
+print(f"\
+The banyan is the keystone — its removal cascades through the network,")
 print(f"collapsing species that depend on it for food, habitat, or pollination.")`,
       challenge: 'Add redundancy: for each species, add a second, weaker interaction to a different food source. How does redundancy change the banyan keystoneness score? At what redundancy level does the banyan stop being the top keystone species?',
       successHint: 'You can now quantify ecological keystoneness through network analysis and cascade simulation — the scientific foundation for conservation prioritization.',
@@ -650,7 +664,8 @@ def fit_power_law(x, y):
 
 # --- Fit allometric relationships ---
 print("=== ALLOMETRIC SCALING: PREDICTING BANYAN AGE ===")
-print(f"\\nDataset: {n_trees} banyans, ages {true_ages.min():.0f} to {true_ages.max():.0f} years")
+print(f"\
+Dataset: {n_trees} banyans, ages {true_ages.min():.0f} to {true_ages.max():.0f} years")
 
 measurements = [
     ('Canopy diameter (m)', canopy),
@@ -660,7 +675,8 @@ measurements = [
     ('Main trunk girth (m)', girth),
 ]
 
-print(f"\\n{'Predictor':<25} {'a':>10} {'b (exponent)':>13} {'R^2':>8} {'Power law':>20}")
+print(f"\
+{'Predictor':<25} {'a':>10} {'b (exponent)':>13} {'R^2':>8} {'Power law':>20}")
 print("-" * 80)
 for name, data in measurements:
     a, b, r2 = fit_power_law(true_ages, data)
@@ -670,7 +686,8 @@ for name, data in measurements:
 def predict_age_single(x, a, b):
     return (x / a) ** (1 / b)
 
-print("\\nAge predictions for 5 sample trees (actual vs predicted from each measurement):")
+print("\
+Age predictions for 5 sample trees (actual vs predicted from each measurement):")
 print(f"{'Actual':>8} {'Canopy':>8} {'Roots':>8} {'Basal':>8} {'Height':>8} {'Girth':>8} {'Ensemble':>10}")
 print("-" * 66)
 
@@ -685,7 +702,8 @@ for i in range(5):
     pred_strs = [f"{p:>8.0f}" for p in preds]
     print(f"{true_ages[i]:>8.0f} {''.join(pred_strs)} {ensemble:>10.0f}")
 
-print("\\nKey insight: no single measurement predicts age perfectly,")
+print("\
+Key insight: no single measurement predicts age perfectly,")
 print("but combining multiple allometric predictors reduces uncertainty.")
 print("Total basal area is the best single predictor for banyans because")
 print("it captures the distributed pillar root support system.")`,
@@ -801,8 +819,10 @@ scenarios = {
 }
 
 print("=== BANYAN POPULATION DYNAMICS UNDER THREATS ===")
-print(f"\\nStages: {BanyanPopulationModel.STAGES}")
-print(f"Time step: 1 decade\\n")
+print(f"\
+Stages: {BanyanPopulationModel.STAGES}")
+print(f"Time step: 1 decade\
+")
 print(f"{'Scenario':<35} {'lambda':>8} {'Outcome':>12} {'Stable distribution':>35}")
 print("-" * 95)
 
@@ -815,9 +835,11 @@ for name, params in scenarios.items():
     print(f"{name:<35} {lam:>8.4f} {outcome:>12} {dist_str:>35}")
 
 # --- Project population over 20 decades ---
-print("\\nPopulation projection over 200 years (starting: 100 seedlings, 20 juv, 10 mature, 2 ancient):")
+print("\
+Population projection over 200 years (starting: 100 seedlings, 20 juv, 10 mature, 2 ancient):")
 N0 = np.array([100, 20, 10, 2], dtype=float)
-print(f"\\n{'Decade':<8}", end="")
+print(f"\
+{'Decade':<8}", end="")
 for name in ['Baseline (healthy)', 'Urbanization (reduced survival)', 'Pollinator loss (no fecundity)']:
     print(f" {name[:20]:>22}", end="")
 print()
@@ -839,7 +861,8 @@ for decade in [0, 5, 10, 15, 20]:
         print(f" {projections[name][decade]:>22.0f}", end="")
     print()
 
-print("\\nKey insight: pollinator loss (lambda < 1) is terminal — the population")
+print("\
+Key insight: pollinator loss (lambda < 1) is terminal — the population")
 print("decays deterministically with zero recruitment. Urbanization reduces survival")
 print("but recovery is possible if conditions improve. Combined threats are catastrophic.")`,
       challenge: 'Implement a sensitivity analysis: vary each survival and fecundity parameter by ±20% one at a time and measure the change in λ. Which parameter has the largest effect on population growth? This identifies the most effective conservation intervention target.',

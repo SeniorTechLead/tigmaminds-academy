@@ -208,7 +208,8 @@ plt.show()
 
 print(f"ISS orbit: r = {r1/1e3:.0f} km, v = {v1_circ/1000:.2f} km/s")
 print(f"GEO orbit: r = {r2/1e3:.0f} km, v = {v2_circ/1000:.2f} km/s")
-print(f"\\nTransfer orbit:")
+print(f"\
+Transfer orbit:")
 print(f"  Semi-major axis: {a_transfer/1e6:.1f} x 10⁶ m")
 print(f"  Burn 1 (at ISS): Δv = {delta_v1/1000:.3f} km/s")
 print(f"  Burn 2 (at GEO): Δv = {delta_v2/1000:.3f} km/s")
@@ -397,7 +398,8 @@ print("Lagrange points (in AU from Sun):")
 for name, pos in lagrange.items():
     dist_from_earth = np.sqrt((pos[0]-1)**2 + pos[1]**2)
     print(f"  {name}: ({pos[0]:.4f}, {pos[1]:.4f}) — {dist_from_earth*149.6:.1f} million km from Earth")
-print(f"\\nL1 distance from Earth: {r_L1/1e6:.1f} x 10⁶ km = {r_L1/R*100:.2f}% of AU")
+print(f"\
+L1 distance from Earth: {r_L1/1e6:.1f} x 10⁶ km = {r_L1/R*100:.2f}% of AU")
 print("The James Webb Space Telescope orbits near L2!")`,
       challenge: 'The JWST is at L2. Calculate how far L2 is from Earth in km. How long does a signal take to travel from JWST to Earth at the speed of light?',
       successHint: 'Lagrange points are essential for space mission design. L2 hosts several telescopes (JWST, Planck, Gaia), and L4/L5 may become locations for future space stations. You just calculated these positions from first principles.',
@@ -482,10 +484,12 @@ plt.show()
 
 print("Jupiter Gravity Assist Analysis:")
 print(f"Initial speed: {v_spacecraft_initial/1000:.1f} km/s")
-print(f"Jupiter speed: {v_jupiter/1000:.2f} km/s\\n")
+print(f"Jupiter speed: {v_jupiter/1000:.2f} km/s\
+")
 for r, defl, dv in zip(r_jupiter_radii, deflections, delta_vs):
     print(f"  r_min = {r:.0f} Rj: deflection = {defl:.1f}°, Δv = {dv/1000:.1f} km/s")
-print(f"\\nMaximum theoretical Δv (180° deflection): {2*v_jupiter/1000:.1f} km/s")`,
+print(f"\
+Maximum theoretical Δv (180° deflection): {2*v_jupiter/1000:.1f} km/s")`,
       challenge: 'Calculate the slingshot for Saturn (v = 9.68 km/s, M = 5.68e26, R = 5.82e7 m). How does it compare to Jupiter? Which planet gives better gravity assists?',
       successHint: 'Gravitational slingshots are the most elegant trick in space travel — gaining enormous speed from nothing but gravity. Every outer solar system mission has used them, and you just calculated the physics behind them.',
     },

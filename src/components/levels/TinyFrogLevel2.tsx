@@ -66,7 +66,8 @@ ax.loglog(scale_factor, area, color='#3b82f6', linewidth=2, label='Area (~k²)')
 ax.loglog(scale_factor, volume, color='#ef4444', linewidth=2, label='Volume (~k³)')
 ax.loglog(scale_factor, strength, color='#22c55e', linewidth=2, label='Strength (~k²)')
 ax.axvline(1, color='gray', linestyle=':', linewidth=0.5)
-ax.text(1.1, 0.02, 'Reference\\n(30mm frog)', color='gray', fontsize=7)
+ax.text(1.1, 0.02, 'Reference\
+(30mm frog)', color='gray', fontsize=7)
 ax.set_xlabel('Scale factor (k)', color='white')
 ax.set_ylabel('Relative value', color='white')
 ax.set_title('Fundamental Scaling Laws', color='white', fontsize=11)
@@ -314,7 +315,8 @@ for name, props in frogs.items():
         ax1.plot(time[idx_16], 16, 'x', color=props['color'], markersize=10)
 
 ax1.axhline(16, color='#ef4444', linestyle='--', linewidth=0.5)
-ax1.text(250, 16.3, 'Near-lethal\\n(16C)', color='#ef4444', fontsize=8)
+ax1.text(250, 16.3, 'Near-lethal\
+(16C)', color='#ef4444', fontsize=8)
 ax1.axhline(T_env, color='gray', linestyle=':', linewidth=0.5)
 ax1.text(250, T_env + 0.3, f'Environment ({T_env}C)', color='gray', fontsize=8)
 
@@ -491,7 +493,8 @@ draw_branch(ax, 0, 0, np.pi/2, 3, 0, 8)
 ax.set_xlim(-5, 5)
 ax.set_ylim(-0.5, 7)
 ax.set_aspect('equal')
-ax.set_title('Fractal Vascular Network\\n(geometry behind 3/4 scaling)', color='white', fontsize=10)
+ax.set_title('Fractal Vascular Network\
+(geometry behind 3/4 scaling)', color='white', fontsize=10)
 ax.set_xticks([])
 ax.set_yticks([])
 
@@ -693,11 +696,16 @@ ax1.tick_params(colors='gray')
 
 # Mark biological and engineering examples
 ex = [
-    (1e-6, 'Bacteria\\nNanotech', '#a855f7'),
-    (1e-4, 'Insect\\nMEMS', '#3b82f6'),
-    (1e-2, 'Tiny frog\\nSmall drone', '#f59e0b'),
-    (1, 'Human\\nCar', '#ef4444'),
-    (100, 'Building\\nBridge', '#ef4444'),
+    (1e-6, 'Bacteria\
+Nanotech', '#a855f7'),
+    (1e-4, 'Insect\
+MEMS', '#3b82f6'),
+    (1e-2, 'Tiny frog\
+Small drone', '#f59e0b'),
+    (1, 'Human\
+Car', '#ef4444'),
+    (100, 'Building\
+Bridge', '#ef4444'),
 ]
 for x, label, color in ex:
     ax1.axvline(x, color=color, linestyle=':', linewidth=0.5, alpha=0.5)

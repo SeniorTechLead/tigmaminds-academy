@@ -325,7 +325,8 @@ ax.tick_params(colors='gray')
 # Summary metrics
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-metrics = ['R²', 'RMSE (°)', 'Features', 'Data needed\\nfor R²>0.8']
+metrics = ['R²', 'RMSE (°)', 'Features', 'Data needed\
+for R²>0.8']
 raw_vals = [r2_raw, rmse_raw, X_raw_poly.shape[1], 400]
 phys_vals = [r2_phys, rmse_phys, X_phys_poly.shape[1], 100]
 x_pos = np.arange(len(metrics))
@@ -513,7 +514,8 @@ ax.contour(H, S, P_grid, levels=[500], colors=['white'], linewidths=2, linestyle
 plt.colorbar(c, ax=ax, label='Contact angle (°)')
 ax.set_xlabel('Pillar height (μm)', color='white')
 ax.set_ylabel('Pillar spacing (μm)', color='white')
-ax.set_title('Design landscape (d=5μm, θ_Y=115°)\\nWhite line: robustness=500Pa', color='white', fontsize=10)
+ax.set_title('Design landscape (d=5μm, θ_Y=115°)\
+White line: robustness=500Pa', color='white', fontsize=10)
 ax.tick_params(colors='gray')
 
 plt.tight_layout()

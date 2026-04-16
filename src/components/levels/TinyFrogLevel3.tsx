@@ -98,7 +98,8 @@ for title, func, exp in traits:
     big = func(500)
     print(f"  {title:<25}: {tiny:.2f} vs {big:.2f} (ratio: {big/tiny:.1f}x)")
 
-print(f"\\nPer-gram metabolic rate:")
+print(f"\
+Per-gram metabolic rate:")
 print(f"  Tiny frog: {metabolic_rate(0.01)/0.01:.0f} mW/g")
 print(f"  Bullfrog: {metabolic_rate(500)/500:.2f} mW/g")
 print(f"  Tiny frog burns {metabolic_rate(0.01)/0.01 / (metabolic_rate(500)/500):.0f}x more energy per gram!")`,
@@ -391,7 +392,8 @@ for name in ['P. amauensis frog', 'Bullfrog', 'Human']:
     sp_bmr = bmr / m
     starv = fat_fraction*m*37e3 / (bmr*3600) / 24
     food = bmr*86400/(food_energy*1000)/(m*1000)*100
-    print(f"\\n  {name} ({m*1000:.1f}g):")
+    print(f"\
+  {name} ({m*1000:.1f}g):")
     print(f"    BMR: {bmr*1000:.2f} mW, Specific: {sp_bmr:.0f} W/kg")
     print(f"    Heart rate: {hr:.0f} bpm")
     print(f"    Starvation time: {starv:.1f} days")
@@ -535,7 +537,8 @@ print("Miniaturization analysis:")
 for mass_test in [0.01, 0.1, 1.0, 10.0, 100.0]:
     idx = np.argmin(np.abs(mass_g - mass_test))
     limiting = min(constraints.items(), key=lambda x: x[1][idx])
-    print(f"\\n  At {mass_test}g ({svl_mm[idx]:.0f}mm):")
+    print(f"\
+  At {mass_test}g ({svl_mm[idx]:.0f}mm):")
     for name, vals in constraints.items():
         status = "OK" if vals[idx] > 0.8 else ("STRESSED" if vals[idx] > 0.3 else "FAILING")
         print(f"    {name:<14}: {vals[idx]:.2f} [{status}]")
@@ -664,7 +667,8 @@ print("-" * 60)
 for i, name in enumerate(trait_names):
     print(f"{name:<18} {normal[-1,i]:>7.0f}% {prog_endpoint[i]:>9.0f}% {paedo_endpoint[i]:>11.0f}% {neotenic[-1,i]:>9.0f}%")
 
-print(f"\\nKey insight: paedomorphic frogs are not 'primitive' —")
+print(f"\
+Key insight: paedomorphic frogs are not 'primitive' —")
 print(f"they are normally developed organisms that stop developing early.")
 print(f"The trajectory is the same; only the endpoint differs.")`,
       challenge: 'Add a "peramorphic" trajectory where development continues to t=1.3 (30% longer than normal). This models giant amphibians like the Chinese giant salamander. Plot it alongside the other trajectories.',
@@ -807,7 +811,8 @@ peak_idx = np.argmax(richness)
 print(f"  Peak richness: {richness[peak_idx]:.0f} species at {elevations[peak_idx]}m")
 print(f"  Highest endemism: {endemism.max()*100:.0f}% at {elevations[np.argmax(endemism)]}m")
 print(f"  Conservation priority peak: {elevations[np.argmax(priority)]}m")
-print(f"\\n  NE India is exceptional because:")
+print(f"\
+  NE India is exceptional because:")
 print(f"    - 4 biogeographic realms converge")
 print(f"    - 4400m elevational gradient in 50km")
 print(f"    - Pleistocene refugia preserved ancient lineages")

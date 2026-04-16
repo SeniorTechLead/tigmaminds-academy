@@ -597,7 +597,8 @@ for p in patches:
     size = p['pop'] / 5
     ax.scatter(p['y'], p['x'], s=size, c='#3b82f6', edgecolors='white', linewidths=1, zorder=5)
     ax.text(p['y'] + 2, p['x'] + 2, p['name'][:6], color='white', fontsize=7)
-ax.set_title('Connectivity network\\n(green=Nm>=1, red=Nm<1)', color='white', fontsize=10)
+ax.set_title('Connectivity network\
+(green=Nm>=1, red=Nm<1)', color='white', fontsize=10)
 ax.tick_params(colors='gray')
 
 # Plot 4: Predicted migrants
@@ -651,7 +652,8 @@ for i in range(n):
 
 genetically_connected = sum(1 for i in range(n) for j in range(i+1,n) if Nm[i,j] >= 1)
 total_pairs = n * (n-1) // 2
-print(f"\\nGenetically connected pairs: {genetically_connected}/{total_pairs}")
+print(f"\
+Genetically connected pairs: {genetically_connected}/{total_pairs}")
 print("Pairs with Nm < 1 are at risk of genetic isolation and inbreeding depression.")`,
       challenge: 'Simulate what happens if you halve the corridor cost for the most isolated pair (reduce their lc_dist by 50%). Does it push them above the Nm >= 1 threshold? How much corridor improvement is needed?',
       successHint: 'This model connects landscape structure to population genetics. Real conservation uses exactly this approach: estimate corridor costs from GIS data, parameterize dispersal kernels from telemetry data, and predict gene flow to assess corridor effectiveness.',

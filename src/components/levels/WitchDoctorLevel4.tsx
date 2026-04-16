@@ -167,7 +167,8 @@ ax4.set_xticks(range(5))
 ax4.set_xticklabels(['Rank 1', 'Rank 2', 'Rank 3', 'Rank 4', 'Rank 5'], fontsize=8)
 for i in range(n_diseases):
     for j in range(5):
-        ax4.text(j, i, f'{rec_labels[i][j]}\\n{rec_matrix[i,j]:.0%}',
+        ax4.text(j, i, f'{rec_labels[i][j]}\
+{rec_matrix[i,j]:.0%}',
                 ha='center', va='center', color='white', fontsize=7, fontweight='bold')
 ax4.set_title('Top Plant Recommendations by Disease', color='white', fontsize=11, fontweight='bold')
 ax4.tick_params(colors='gray')
@@ -181,20 +182,25 @@ plt.show()
 print("=" * 65)
 print("    MEDICINAL PLANT DATABASE — CAPSTONE REPORT")
 print("=" * 65)
-print(f"\\nDatabase: {n_plants} plants, {n_features} chemical features, {n_diseases} disease targets")
+print(f"\
+Database: {n_plants} plants, {n_features} chemical features, {n_diseases} disease targets")
 print(f"Model: KNN (k=5) with cosine similarity")
-print(f"\\nLeave-one-out cross-validation results:")
+print(f"\
+Leave-one-out cross-validation results:")
 print(f"  Overall accuracy: {overall_acc:.1%}")
-print(f"\\nPer-disease accuracy:")
+print(f"\
+Per-disease accuracy:")
 for d, acc in sorted(zip(diseases, per_disease_acc), key=lambda x: -x[1]):
     print(f"  {d:<18}: {acc:.1%}")
-print(f"\\nTop recommendations for Anticancer:")
+print(f"\
+Top recommendations for Anticancer:")
 top_ac = np.argsort(predictions[:, 4])[::-1][:5]
 for rank, idx in enumerate(top_ac):
     print(f"  #{rank+1}: Plant_{idx+1} (confidence: {predictions[idx,4]:.0%})")
     top_features = np.argsort(X[idx])[::-1][:3]
     print(f"       Key compounds: {', '.join(feature_names[f] for f in top_features)}")
-print(f"\\nThe database bridges the witch doctor's empirical knowledge with")
+print(f"\
+The database bridges the witch doctor's empirical knowledge with")
 print(f"computational prediction — preserving wisdom and enabling discovery.")`,
       challenge: 'Implement a collaborative filtering approach: instead of using chemical features alone, also use the pattern of known therapeutic uses to predict missing uses (similar to how Netflix recommends movies). Compare the feature-based KNN with the use-based collaborative filter.',
       successHint: 'You have built a complete medicinal plant database with ML-powered prediction — a system that preserves traditional knowledge and extends it computationally. This is how modern ethnobotanical research works: bridging centuries of empirical knowledge with data science.',

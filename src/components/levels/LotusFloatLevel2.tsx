@@ -68,7 +68,8 @@ for r_um, label, color in scales:
     r_m = r_um * 1e-6
     p = 2 * gamma / r_m
     ax1.plot(r_um, p, 'o', color=color, markersize=8)
-    ax1.annotate(f'{label}\\n{p:.0f} Pa', xy=(r_um, p),
+    ax1.annotate(f'{label}\
+{p:.0f} Pa', xy=(r_um, p),
                  xytext=(10, 10), textcoords='offset points',
                  color=color, fontsize=8)
 
@@ -179,7 +180,8 @@ for name, r_um, color in plants:
     r_m = r_um * 1e-6
     h = 2 * gamma / (rho * g * r_m)
     ax1.plot(r_um, h, 'o', color=color, markersize=10)
-    ax1.annotate(f'{name}\\nr={r_um}um, h={h:.2f}m', xy=(r_um, h),
+    ax1.annotate(f'{name}\
+r={r_um}um, h={h:.2f}m', xy=(r_um, h),
                  xytext=(10, 10), textcoords='offset points', color=color, fontsize=9)
 
 ax1.set_xlabel('Tube radius (micrometers)', color='white')
@@ -190,7 +192,8 @@ ax1.tick_params(colors='gray')
 # Water transport in plants: capillary + transpiration
 ax2.set_facecolor('#111827')
 plant_heights = np.array([0.5, 1, 3, 10, 30, 100])  # meters
-plant_names = ['Grass', 'Lotus', 'Shrub', 'Apple\\ntree', 'Pine', 'Redwood']
+plant_names = ['Grass', 'Lotus', 'Shrub', 'Apple\
+tree', 'Pine', 'Redwood']
 capillary_reach = np.array([0.3, 0.3, 0.3, 0.3, 0.5, 0.75])
 root_pressure = np.array([0.2, 0.5, 0.5, 1.0, 0.5, 0.5])
 transpiration = plant_heights - capillary_reach - root_pressure
@@ -631,7 +634,11 @@ for bar, re in zip(bars3, Re_values):
 
 # Lab-on-chip applications
 ax4.set_facecolor('#111827')
-applications = ['Blood test', 'DNA\\nanalysis', 'Drug\\nscreening', 'Cell\\nsorting', 'Water\\ntesting']
+applications = ['Blood test', 'DNA\
+analysis', 'Drug\
+screening', 'Cell\
+sorting', 'Water\
+testing']
 sample_traditional = [5000, 1000, 10000, 5000, 50000]  # microliters needed
 sample_microfluidic = [1, 0.1, 10, 5, 100]
 
@@ -728,7 +735,11 @@ ax1.tick_params(colors='gray')
 
 # Cost comparison
 ax2.set_facecolor('#111827')
-treatment_types = ['Conventional\\nplant', 'Constructed\\nwetland', 'Hybrid\\n(conv + wetland)', 'Aquaporin\\nmembrane']
+treatment_types = ['Conventional\
+plant', 'Constructed\
+wetland', 'Hybrid\
+(conv + wetland)', 'Aquaporin\
+membrane']
 capital_cost = [1000, 200, 700, 1500]  # $/person
 operating_cost = [50, 5, 30, 20]  # $/person/year
 energy_use = [0.5, 0.02, 0.3, 0.1]  # kWh/m3
@@ -747,7 +758,8 @@ ax2.tick_params(colors='gray')
 
 # Plant species and their specialties
 ax3.set_facecolor('#111827')
-plants_wt = ['Reed', 'Water\\nhyacinth', 'Duckweed', 'Cattail', 'Lotus']
+plants_wt = ['Reed', 'Water\
+hyacinth', 'Duckweed', 'Cattail', 'Lotus']
 bod_removal = [85, 90, 80, 75, 70]
 n_removal = [60, 75, 85, 55, 50]
 metal_removal = [40, 70, 60, 30, 45]

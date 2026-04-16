@@ -145,15 +145,18 @@ for table in ['books', 'members', 'loans']:
     count = cursor.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0]
     print(f"{table}: {count} rows")
 
-print("\\n=== Sample Books ===")
+print("\
+=== Sample Books ===")
 for row in cursor.execute('SELECT id, title, author, genre FROM books LIMIT 5').fetchall():
     print(row)
 
-print("\\n=== Sample Members ===")
+print("\
+=== Sample Members ===")
 for row in cursor.execute('SELECT id, name, email FROM members LIMIT 5').fetchall():
     print(row)
 
-print("\\n=== Sample Loans ===")
+print("\
+=== Sample Loans ===")
 for row in cursor.execute('SELECT id, book_id, member_id, due_date, returned_date FROM loans LIMIT 5').fetchall():
     print(row)
 
@@ -287,7 +290,8 @@ for r in rows:
 # ============================================================
 # QUERY 2: Most popular authors (by total loans)
 # ============================================================
-print("\\n=== QUERY 2: Most Popular Authors ===")
+print("\
+=== QUERY 2: Most Popular Authors ===")
 rows = cursor.execute('''
     SELECT
         b.author,
@@ -305,7 +309,8 @@ for r in rows:
 # ============================================================
 # QUERY 3: Members who currently have unreturned books
 # ============================================================
-print("\\n=== QUERY 3: Members with Unreturned Books ===")
+print("\
+=== QUERY 3: Members with Unreturned Books ===")
 rows = cursor.execute('''
     SELECT
         m.name,
@@ -325,7 +330,8 @@ for r in rows:
 # ============================================================
 # QUERY 4: Genre popularity breakdown
 # ============================================================
-print("\\n=== QUERY 4: Genre Popularity ===")
+print("\
+=== QUERY 4: Genre Popularity ===")
 rows = cursor.execute('''
     SELECT
         b.genre,
@@ -345,7 +351,8 @@ for r in rows:
 # QUERY 5: Members who have NEVER borrowed a book
 # Uses LEFT JOIN: members with no matching loans get NULL
 # ============================================================
-print("\\n=== QUERY 5: Members Who Never Borrowed ===")
+print("\
+=== QUERY 5: Members Who Never Borrowed ===")
 rows = cursor.execute('''
     SELECT
         m.name,
@@ -364,7 +371,8 @@ else:
 # ============================================================
 # QUERY 6: Books borrowed more than once
 # ============================================================
-print("\\n=== QUERY 6: Books Borrowed More Than Once ===")
+print("\
+=== QUERY 6: Books Borrowed More Than Once ===")
 rows = cursor.execute('''
     SELECT
         b.title,
@@ -461,13 +469,16 @@ def generate_book_card(book):
             </article>"""
 
 # Build genre <option> tags
-genre_options = '\\n                    '.join(
+genre_options = '\
+                    '.join(
     [f'<option value="all">All Genres</option>'] +
     [f'<option value="{g}">{g}</option>' for g in genres]
 )
 
 # Build all book cards
-book_cards = "\\n\\n".join(generate_book_card(b) for b in books)
+book_cards = "\
+\
+".join(generate_book_card(b) for b in books)
 
 # Assemble the full HTML page
 html = f"""<!DOCTYPE html>
@@ -535,10 +546,12 @@ html = f"""<!DOCTYPE html>
 </html>"""
 
 print(html)
-print("\\n--- HTML generation complete ---")
+print("\
+--- HTML generation complete ---")
 print(f"Generated {len(books)} book cards from data.")
 print(f"Genres in filter: {', '.join(genres)}")
-print("\\nCopy this HTML into an index.html file to use it!")`,
+print("\
+Copy this HTML into an index.html file to use it!")`,
       challenge: 'Add a "Recently Returned" section below the catalog grid. Use an <aside> element with an ordered list (<ol>) showing the 3 most recently returned books. Each list item should include the title, who returned it, and the return date.',
       successHint: 'This HTML is production-grade. Every element has semantic meaning, every interactive element is accessible, and the data attributes make JavaScript filtering trivial. A screen reader can navigate this page. A search engine can index it. A developer can maintain it. That is the power of semantic HTML.',
     },
@@ -617,14 +630,16 @@ genre_colors = {
 
 def tokens_to_vars(tokens, indent="    "):
     """Convert a dict of tokens to CSS custom property declarations."""
-    return "\\n".join(f"{indent}--{k}: {v};" for k, v in tokens.items())
+    return "\
+".join(f"{indent}--{k}: {v};" for k, v in tokens.items())
 
 def generate_genre_badges(genres):
     """Generate CSS rules for genre badge colors."""
     rules = []
     for genre, (bg, fg) in genres.items():
         rules.append(f".genre-{genre}   {{ background: {bg}; color: {fg}; }}")
-    return "\\n".join(rules)
+    return "\
+".join(rules)
 
 # --- Assemble the full stylesheet ---
 css = f"""/* ============================================================
@@ -801,11 +816,13 @@ body {{
 print(css)
 
 # --- Summary ---
-print("\\n--- CSS generation complete ---")
+print("\
+--- CSS generation complete ---")
 print(f"Light theme: {len(light_theme)} tokens")
 print(f"Dark theme:  {len(dark_theme)} overrides")
 print(f"Genre badges: {len(genre_colors)} genres")
-print("\\nCopy this CSS into a styles.css file to use it!")`,
+print("\
+Copy this CSS into a styles.css file to use it!")`,
       challenge: 'Add a .book-card.featured class that gives featured books a left border of 4px solid gold and a subtle golden background tint. Then add a print stylesheet (@media print) that hides the nav, search form, and checkout buttons — only the book list should print.',
       successHint: 'This stylesheet uses every major CSS layout technique: Grid for the catalog, Flexbox for cards and nav, custom properties for theming, media queries for responsiveness and dark mode. This is the CSS you would write for a real production web application — no frameworks, no preprocessors, just clean modern CSS.',
     },
@@ -923,27 +940,32 @@ results = filter_books(query="ghosh")
 for b in results:
     print(f"  [{b['id']}] {b['title']} by {b['author']} ({b['available']} avail)")
 
-print("\\n=== FILTER: genre = 'Poetry' ===")
+print("\
+=== FILTER: genre = 'Poetry' ===")
 results = filter_books(genre="Poetry")
 for b in results:
     print(f"  [{b['id']}] {b['title']} by {b['author']} ({b['available']} avail)")
 
-print("\\n=== FILTER: genre = 'Fiction', query = 'roy' ===")
+print("\
+=== FILTER: genre = 'Fiction', query = 'roy' ===")
 results = filter_books(query="roy", genre="Fiction")
 for b in results:
     print(f"  [{b['id']}] {b['title']} by {b['author']} ({b['available']} avail)")
 
-print("\\n=== CHECKOUT SIMULATION ===")
+print("\
+=== CHECKOUT SIMULATION ===")
 print(checkout_book(3))   # Pita Putra — 1 copy, becomes 0
 print(checkout_book(3))   # Should say unavailable now
 print(checkout_book(5))   # The Shadow Lines — 2 copies, becomes 1
 print(checkout_book(99))  # Non-existent book
 
-print("\\n=== CHECKOUT LOG (like console.log in JS) ===")
+print("\
+=== CHECKOUT LOG (like console.log in JS) ===")
 for entry in checkout_log:
     print(f"  {json.dumps(entry)}")
 
-print("\\n=== ALL UNAVAILABLE BOOKS ===")
+print("\
+=== ALL UNAVAILABLE BOOKS ===")
 unavailable = [b for b in books if b["available"] == 0]
 for b in unavailable:
     print(f"  {b['title']} by {b['author']} — checked out")
@@ -951,7 +973,8 @@ for b in unavailable:
 # ========================================================
 # GENERATE app.js — the actual JavaScript for the browser
 # ========================================================
-print("\\n=== GENERATED app.js (copy to use in browser) ===")
+print("\
+=== GENERATED app.js (copy to use in browser) ===")
 js_code = """
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');

@@ -626,7 +626,8 @@ print("Mycorrhizal network effect on P availability:")
 print(f"  With mycorrhizae at year 50: P = {with_myc['P'][50]:.1f} kg/ha")
 print(f"  Without mycorrhizae at year 50: P = {no_myc['P'][50]:.1f} kg/ha")
 print(f"  Mycorrhizal P mining advantage: {with_myc['P'][50]/max(no_myc['P'][50],0.1):.1f}x")
-print(f"\\nRemnant trees accelerate forest development by ~{np.argmax(bare['biomass'] > 50) - np.argmax(with_remnant['biomass'] > 50)} years")`,
+print(f"\
+Remnant trees accelerate forest development by ~{np.argmax(bare['biomass'] > 50) - np.argmax(with_remnant['biomass'] > 50)} years")`,
       challenge: 'Add a "soil disturbance" event at year 30 (tilling destroys mycorrhizal network, resets myc_density to 0.1). How long does recovery take? This simulates the impact of converting forest to farmland and back.',
       successHint: 'Suzanne Simard\'s "Finding the Mother Tree" popularized mycorrhizal networks, but the science is rigorous and quantitative. Your model captures the core dynamics: mycorrhizae are not optional decorations — they are infrastructure that determines whether reforestation succeeds or fails.',
     },
@@ -849,7 +850,8 @@ print(f"Carbon stored at year 50:")
 print(f"  Miyawaki:      {miyawaki['total'][50]:.0f} tonnes C/ha ({miyawaki['total'][50]*co2_factor:.0f} tonnes CO₂)")
 print(f"  Conventional:  {conventional['total'][50]:.0f} tonnes C/ha ({conventional['total'][50]*co2_factor:.0f} tonnes CO₂)")
 print(f"  Natural:       {natural['total'][50]:.0f} tonnes C/ha ({natural['total'][50]*co2_factor:.0f} tonnes CO₂)")
-print(f"\\nMiyawaki advantage at 50 years: {(miyawaki['total'][50]/conventional['total'][50] - 1)*100:.0f}% more carbon")`,
+print(f"\
+Miyawaki advantage at 50 years: {(miyawaki['total'][50]/conventional['total'][50] - 1)*100:.0f}% more carbon")`,
       challenge: 'Model the carbon impact of cutting a 100-year-old forest and replanting with Miyawaki method. Calculate the "carbon payback period" — how many years until the new forest stores as much total carbon as the old forest had. This is the carbon debt concept.',
       successHint: 'Carbon accounting is the basis of REDD+ (Reducing Emissions from Deforestation and forest Degradation) and carbon credit markets. India\'s National REDD+ Strategy uses exactly these calculations. The girl who grew a forest is earning carbon credits, whether she knows it or not.',
     },
@@ -1294,7 +1296,8 @@ print("=" * 60)
 for res in site_results:
     print(f"  {res['site']:<15} {res['method']:<15} {res['area']:>6.0f} ha  {res['carbon']:>8.0f} tC  ₹{res['cost']/100:>5.1f}Cr")
 print(f"{'TOTAL':<31} {total_area:>6.0f} ha  {total_carbon:>8.0f} tC  ₹{total_cost/100:>5.1f}Cr")
-print(f"\\nCO₂ offset: {co2_total:.0f} tonnes ({co2_total/1000:.0f}k tonnes)")
+print(f"\
+CO₂ offset: {co2_total:.0f} tonnes ({co2_total/1000:.0f}k tonnes)")
 print(f"Equivalent to: ~{co2_total/5:.0f} people's lifetime emissions offset")`,
       challenge: 'Add a constraint: at least 100 ha must use the Miyawaki method (for biodiversity, not just carbon). How does this change the optimal allocation and the cost-effectiveness?',
       successHint: 'You have built a landscape-scale reforestation planner that integrates succession science, carbon accounting, biodiversity targets, and cost optimization. This is the exact tool needed to implement India\'s Green India Mission and contribute to global reforestation targets. The girl who grew a forest is now an architect of landscape-scale restoration.',

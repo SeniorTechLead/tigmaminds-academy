@@ -104,7 +104,8 @@ for name, alt in locations.items():
     frozen = "❄️ FROZEN" if temp < 0 else ""
     print(f"{name:25s} {alt:5d}m → {temp:6.1f}°C {frozen}")
 
-print(f"\\nFreezing line: {freezing_alt:.0f}m")
+print(f"\
+Freezing line: {freezing_alt:.0f}m")
 print("Everything above this line builds glaciers!")`,
       challenge: 'What if global warming raises sea-level temperature by 2°C? Recalculate the freezing line. How much higher does it move?',
       successHint: 'The lapse rate is one of the most important numbers in mountain science. A small change at sea level shifts the freezing line by hundreds of meters, potentially dooming glaciers that have existed for millennia.',
@@ -167,7 +168,8 @@ else:
     print(f"Glacier LOSES {total_melt - total_snow} cm this year ✗")
 
 monsoon = sum(snowfall[5:9])
-print(f"\\nMonsoon (Jun-Sep) delivers {monsoon} of {total_snow} cm = {monsoon/total_snow*100:.0f}% of annual snow")`,
+print(f"\
+Monsoon (Jun-Sep) delivers {monsoon} of {total_snow} cm = {monsoon/total_snow*100:.0f}% of annual snow")`,
       challenge: 'Increase each month\'s melt by 20% to simulate a warmer year. Does the glacier still gain mass? At what percentage increase does it start losing mass?',
       successHint: 'You have built a simple mass balance model. Real glaciologists do exactly this — they measure snow and melt month by month to determine if a glacier is healthy or dying. The monsoon dependence makes Kanchenjunga\'s glaciers especially vulnerable to changing rainfall patterns.',
     },

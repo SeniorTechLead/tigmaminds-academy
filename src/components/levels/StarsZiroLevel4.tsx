@@ -134,13 +134,15 @@ ax.legend(fontsize=8, facecolor='#1a1a2e', edgecolor='gray', labelcolor='white',
 plt.tight_layout()
 plt.show()
 
-print(f"\\nStudy region: {REGION['name']}")
+print(f"\
+Study region: {REGION['name']}")
 print(f"  Latitude:  {REGION['lat_min']}N to {REGION['lat_max']}N")
 print(f"  Longitude: {REGION['lon_min']}E to {REGION['lon_max']}E")
 print(f"  Grid: {info['lat_cells']} x {info['lon_cells']} = {info['total_pixels']:,} pixels")
 print(f"  Resolution: {mapper.resolution} deg (~{mapper.resolution * 111:.1f} km)")
 
-print(f"\\n--- Key Locations ({len(locations)} sites) ---")
+print(f"\
+--- Key Locations ({len(locations)} sites) ---")
 print(f"{'Site':<30} {'Lat':>7} {'Lon':>7} {'Type':>12} {'Pop':>12}")
 print("-" * 72)
 for name, data in sorted(locations.items()):
@@ -150,11 +152,13 @@ for name, data in sorted(locations.items()):
 
 dark_sites = [n for n, d in locations.items() if d['type'] == 'dark_site']
 city_sites = [n for n, d in locations.items() if d['type'] == 'city']
-print(f"\\nDark site candidates: {len(dark_sites)} ({', '.join(dark_sites)})")
+print(f"\
+Dark site candidates: {len(dark_sites)} ({', '.join(dark_sites)})")
 print(f"Light sources (cities): {len(city_sites)}")
 print(f"Total urban population in region: {sum(populations.values()):,}")
 
-print(f"\\nPipeline stages:")
+print(f"\
+Pipeline stages:")
 print(f"  1. Satellite data (VIIRS-DNB) -> radiance map")
 print(f"  2. Radiance -> mag/arcsec^2 conversion")
 print(f"  3. Spatial contour mapping + Bortle overlay")
@@ -247,9 +251,11 @@ sim = VIIRSSimulator((24.5, 29.0), (90.0, 97.0), resolution_deg=0.05)
 radiance, elevation = sim.generate_radiance_map(ne_cities)
 
 print("=== SYNTHETIC VIIRS-DNB NIGHTTIME RADIANCE MAP ===")
-print(f"\\nGrid: {radiance.shape[0]} x {radiance.shape[1]} pixels ({radiance.shape[0]*radiance.shape[1]:,} total)")
+print(f"\
+Grid: {radiance.shape[0]} x {radiance.shape[1]} pixels ({radiance.shape[0]*radiance.shape[1]:,} total)")
 print(f"Resolution: 0.05 deg (~5.5 km)")
-print(f"\\nRadiance statistics (nW/cm^2/sr):")
+print(f"\
+Radiance statistics (nW/cm^2/sr):")
 print(f"  Min:    {radiance.min():.3f} (darkest pixel)")
 print(f"  Median: {np.median(radiance):.3f}")
 print(f"  Mean:   {radiance.mean():.3f}")
@@ -281,7 +287,8 @@ ax.tick_params(colors='gray')
 plt.tight_layout()
 plt.show()
 
-print(f"\\n--- Radiance at Key Sites ---")
+print(f"\
+--- Radiance at Key Sites ---")
 print(f"{'Site':<20} {'Radiance':>12} {'Category':<20}")
 print("-" * 55)
 for name, (lat, lon) in key_sites.items():
@@ -293,7 +300,8 @@ for name, (lat, lon) in key_sites.items():
 
 pct_dark = np.sum(radiance < 0.5) / radiance.size * 100
 pct_bright = np.sum(radiance > 5) / radiance.size * 100
-print(f"\\n{pct_dark:.1f}% of pixels are dark (< 0.5 nW) — potential dark sky sites")
+print(f"\
+{pct_dark:.1f}% of pixels are dark (< 0.5 nW) — potential dark sky sites")
 print(f"{pct_bright:.1f}% of pixels are bright (> 5 nW) — urban areas")`,
       challenge: 'Add a cloud masking step: generate random cloud cover (more clouds during monsoon months), flag contaminated pixels, and show how monthly compositing with cloud rejection produces cleaner maps than simple averaging.',
       successHint: 'Working with satellite imagery is the foundation of modern environmental monitoring. The same skills apply to deforestation tracking, urbanization mapping, and disaster response. Nighttime lights are just one application of a universal remote sensing workflow.',
@@ -361,7 +369,8 @@ def radiance_to_bortle(radiance_nw, elevation_km=0, aerosol_tau=0.15):
 radiances = np.logspace(-1, 3, 500)  # 0.1 to 1000 nW/cm²/sr
 
 print("=== RADIANCE TO SKY BRIGHTNESS CONVERSION ===")
-print(f"\\n--- Direct Conversion (no atmospheric correction) ---")
+print(f"\
+--- Direct Conversion (no atmospheric correction) ---")
 print(f"{'Radiance (nW)':>14} {'Direct SB':>12} {'Ground SB':>12} {'Bortle':>7}")
 print("-" * 50)
 test_radiances = [0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10, 50, 100, 500]
@@ -370,7 +379,8 @@ for rad in test_radiances:
     sb, bortle = radiance_to_bortle(rad)
     print(f"{rad:>12.1f} {direct_sb:>11.2f} {sb:>11.2f} {bortle:>7}")
 
-print(f"\\n--- Effect of Elevation on Sky Brightness ---")
+print(f"\
+--- Effect of Elevation on Sky Brightness ---")
 print(f"(for radiance = 1.0 nW/cm^2/sr)")
 print(f"{'Elevation':>10} {'Ground SB':>10} {'Bortle':>7}")
 print("-" * 30)
@@ -378,7 +388,8 @@ for elev in [0, 0.5, 1.0, 1.5, 2.0, 3.0]:
     sb, bortle = radiance_to_bortle(1.0, elevation_km=elev)
     print(f"{elev:>8.1f} km {sb:>9.2f} {bortle:>7}")
 
-print(f"\\n--- Effect of Aerosol Loading ---")
+print(f"\
+--- Effect of Aerosol Loading ---")
 print(f"(for radiance = 1.0 nW/cm^2/sr, sea level)")
 print(f"{'Aerosol tau':>12} {'Condition':>14} {'Ground SB':>10} {'Bortle':>7}")
 print("-" * 47)
@@ -386,7 +397,8 @@ for tau, cond in [(0.05, 'Very clean'), (0.10, 'Clean'), (0.15, 'Average'), (0.2
     sb, bortle = radiance_to_bortle(1.0, aerosol_tau=tau)
     print(f"{tau:>12.2f} {cond:>14} {sb:>9.2f} {bortle:>7}")
 
-print(f"\\nKey insight: higher elevation = less atmosphere = less scattering")
+print(f"\
+Key insight: higher elevation = less atmosphere = less scattering")
 print(f"= darker sky. Ziro at 1500m benefits from both geography (hill")
 print(f"shielding) and altitude (thinner atmosphere above).")`,
       challenge: 'Implement the distance-dependent light pollution model: for each pixel, sum the contributions from ALL cities weighted by 1/d^2.5, then convert. Show how Itanagar (close) contributes more to Ziro\'s sky brightness than Guwahati (far) despite Guwahati being much larger.',
@@ -467,17 +479,20 @@ def sb_to_bortle(sb):
 bortle_map = np.vectorize(sb_to_bortle)(sky_brightness)
 
 print("=== SPATIAL CONTOUR ANALYSIS: SKY BRIGHTNESS MAP ===")
-print(f"\\nGrid: {sky_brightness.shape[0]} x {sky_brightness.shape[1]} pixels")
+print(f"\
+Grid: {sky_brightness.shape[0]} x {sky_brightness.shape[1]} pixels")
 print(f"Region: lat {lats[0]:.1f}-{lats[-1]:.1f}, lon {lons[0]:.1f}-{lons[-1]:.1f}")
 
-print(f"\\nSky brightness statistics (mag/arcsec^2):")
+print(f"\
+Sky brightness statistics (mag/arcsec^2):")
 print(f"  Darkest pixel:   {sky_brightness.max():.2f} (higher = darker)")
 print(f"  Brightest pixel: {sky_brightness.min():.2f}")
 print(f"  Median:          {np.median(sky_brightness):.2f}")
 
 # Area in each Bortle class
 deg_to_km2 = 111.0 * 111.0 * 0.02 * 0.02  # approximate km² per pixel
-print(f"\\n--- Area by Bortle Class ---")
+print(f"\
+--- Area by Bortle Class ---")
 print(f"{'Bortle':>7} {'Pixels':>8} {'Area (km^2)':>12} {'Fraction':>10}")
 print("-" * 40)
 for b in range(1, 10):
@@ -494,7 +509,8 @@ sites = {
     'Itanagar': (27.08, 93.62),
     'Guwahati': (26.14, 91.74),
 }
-print(f"\\n--- Site Sky Quality ---")
+print(f"\
+--- Site Sky Quality ---")
 print(f"{'Site':<20} {'SB (mag/arcsec^2)':>18} {'Bortle':>7}")
 print("-" * 48)
 for name, (lat, lon) in sites.items():
@@ -542,7 +558,8 @@ ax.set_title('Sky Brightness Contours & Bortle Classification — NE India',
 plt.tight_layout()
 plt.show()
 
-print(f"\\n--- Dark Sky Reserve Potential ---")
+print(f"\
+--- Dark Sky Reserve Potential ---")
 print(f"  Core zone (Bortle 1-2): {core_km2:.0f} km^2 ({core_pixels} pixels)")
 print(f"  Buffer zone (Bortle 1-4): {buffer_km2:.0f} km^2 ({buffer_pixels} pixels)")
 print(f"  IDA requirement: 2.83 km^2 (700 acres) minimum core")
@@ -635,10 +652,12 @@ key_points = {
 }
 
 print("=== MULTI-YEAR LIGHT POLLUTION TREND ANALYSIS ===")
-print(f"\\nYears: {years[0]} to {years[-1]} ({n_years} annual composites)")
+print(f"\
+Years: {years[0]} to {years[-1]} ({n_years} annual composites)")
 print(f"Grid: {len(lats)} x {len(lons)} pixels, {len(cities)} cities modeled")
 
-print(f"\\n--- Radiance Trends at Key Locations ---")
+print(f"\
+--- Radiance Trends at Key Locations ---")
 print(f"{'Location':<22} {'2014 rad':>9} {'2024 rad':>9} {'2030 rad':>9} {'Slope/yr':>9} {'R^2':>6} {'Growth':>8}")
 print("-" * 76)
 for name, (lat, lon) in key_points.items():
@@ -699,7 +718,8 @@ ax.legend(fontsize=8, facecolor='#1a1a2e', edgecolor='gray', labelcolor='white')
 plt.tight_layout()
 plt.show()
 
-print(f"\\n--- Regional Trend Summary ---")
+print(f"\
+--- Regional Trend Summary ---")
 brightening = np.sum(slopes > 0.001)
 stable = np.sum(np.abs(slopes) <= 0.001)
 total = slopes.size
@@ -716,13 +736,15 @@ ziro_2024 = annual_radiance[years.tolist().index(2024), zi, zj] if 2024 in years
 degradation_threshold = 2.0  # nW — noticeable sky degradation
 if ziro_slope > 0:
     years_to_degrade = (degradation_threshold - ziro_2024) / ziro_slope
-    print(f"\\nZiro Valley projection:")
+    print(f"\
+Ziro Valley projection:")
     print(f"  Current radiance (2024): {ziro_2024:.3f} nW")
     print(f"  Growth rate: {ziro_slope:.5f} nW/yr")
     print(f"  Years to reach {degradation_threshold} nW threshold: {years_to_degrade:.0f}")
     print(f"  Estimated degradation year: {2024 + years_to_degrade:.0f}")
 else:
-    print(f"\\nZiro Valley: stable or improving (slope = {ziro_slope:.5f})")`,
+    print(f"\
+Ziro Valley: stable or improving (slope = {ziro_slope:.5f})")`,
       challenge: 'Add seasonal decomposition: separate the annual signal into trend + seasonal + residual components. NE India has strong monsoon seasonality that affects satellite measurements. Show the monsoon dip in "measurable" radiance (clouds block ground lights) and demonstrate that deseasonalized trends give more accurate growth rates.',
       successHint: 'Trend analysis turns snapshots into narratives. A single map shows where light pollution is. A trend analysis shows where it is going. Projections with policy scenarios turn science into action items for decision-makers.',
     },
@@ -888,7 +910,8 @@ plt.tight_layout()
 plt.show()
 
 print("=== DARK SKY CONSERVATION PORTFOLIO ===")
-print(f"\\n--- Site Rankings ---")
+print(f"\
+--- Site Rankings ---")
 print(f"{'Rank':>4} {'Site':<18} {'Bortle':>7} {'SB':>7} {'Score':>7} {'Yrs to B3':>10} {'Nearest city':>18}")
 print("-" * 78)
 ranked = sorted(sites, key=lambda s: -s.conservation_score())
@@ -897,15 +920,18 @@ for rank, site in enumerate(ranked, 1):
     yrs_str = f"{abs(yrs):.0f}" if yrs < 1000 else "stable"
     print(f"{rank:>4} {site.name:<18} {site.current_bortle:>7} {site.current_sb:>6.2f} {site.conservation_score():>6.1f} {yrs_str:>10} {site.nearest_city:>14} ({site.city_dist:.0f}km)")
 
-print(f"\\n--- Recommendations per Site ---")
+print(f"\
+--- Recommendations per Site ---")
 for site in ranked:
     s = site.summary()
-    print(f"\\n  {s['name']} (score: {s['score']:.1f}/100):")
+    print(f"\
+  {s['name']} (score: {s['score']:.1f}/100):")
     for rec in s['recs']:
         print(f"    - {rec}")
 
 # Conservation scenarios
-print(f"\\n--- Conservation Scenarios for Ziro Valley ---")
+print(f"\
+--- Conservation Scenarios for Ziro Valley ---")
 ziro = sites[0]
 print(f"  Current: Bortle {ziro.current_bortle}, SB = {ziro.current_sb}")
 print(f"  No action:       Bortle 3 in {abs(ziro.years_to_bortle3()):.0f} years (trend: {ziro.trend_slope:.3f} mag/yr)")
@@ -913,7 +939,8 @@ mild = DarkSiteAssessment('Ziro (mild controls)', 27.59, 93.83, 21.72, 2, -0.008
 strong = DarkSiteAssessment('Ziro (strong controls)', 27.59, 93.83, 21.72, 2, -0.002, 180, 450, 'Itanagar', 55, 0.02)
 print(f"  Mild controls:   Bortle 3 in {abs(mild.years_to_bortle3()):.0f} years (shielded fixtures)")
 print(f"  Strong controls: Bortle 3 in {abs(strong.years_to_bortle3()):.0f} years (full lighting ordinance)")
-print(f"\\nConclusion: Ziro Valley and Mechuka are top candidates for India's")
+print(f"\
+Conclusion: Ziro Valley and Mechuka are top candidates for India's")
 print(f"first Dark Sky Reserve. Immediate action on Itanagar lighting can")
 print(f"extend Ziro's pristine sky by decades.")`,
       challenge: 'Add an economic analysis: estimate the eco-tourism potential of each dark sky site based on accessibility, existing infrastructure, and sky quality. Calculate the cost-benefit ratio of lighting ordinance enforcement versus tourism revenue from astro-tourism. Real dark sky reserves like NamibRand and Aoraki Mackenzie generate significant economic returns.',

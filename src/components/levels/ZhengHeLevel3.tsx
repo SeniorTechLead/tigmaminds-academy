@@ -56,7 +56,8 @@ for s in ships:
 
 # RAO analysis for treasure ship
 T_n_treasure = natural_roll_period(50, 3.0)
-print(f"\\n=== Roll RAO: Treasure Ship (T_natural = {T_n_treasure:.1f}s) ===")
+print(f"\
+=== Roll RAO: Treasure Ship (T_natural = {T_n_treasure:.1f}s) ===")
 print(f"{'Wave Period (s)':<16} {'RAO':>6} {'Roll in 2m wave':>16} {'Risk':>10}")
 print("-" * 50)
 
@@ -67,7 +68,8 @@ for T_wave in [4, 6, 8, 10, 12, 15, 18, 20, 22, 24, 28]:
     print(f"{T_wave:>13}s {rao:>7.1f} {roll_deg:>14.1f}° {risk:>10}")
 
 # Effect of loading condition on resonance
-print(f"\\n=== Loading Effect on Roll Resonance ===")
+print(f"\
+=== Loading Effect on Roll Resonance ===")
 print("Treasure ship with varying GM (cargo loading changes GM)")
 print(f"{'GM (m)':<8} {'T_natural (s)':>14} {'Danger wave (s)':>16} {'Ocean match?':>13}")
 print("-" * 53)
@@ -150,7 +152,8 @@ fleet = FleetProvision(crew_size=28000, voyage_days=60)
 reqs = fleet.total_requirements()
 
 print("=== Fleet Provisioning: Zheng He's Armada ===")
-print(f"Crew: {fleet.crew:,} | Voyage: {fleet.days} days\\n")
+print(f"Crew: {fleet.crew:,} | Voyage: {fleet.days} days\
+")
 
 total_tonnes = 0
 print(f"{'Provision':<20} {'Total (tonnes)':>14} {'Per ship (62 ships)':>20}")
@@ -161,7 +164,8 @@ for item, tonnes in reqs.items():
     total_tonnes += tonnes
 
 print(f"{'TOTAL':<20} {total_tonnes:>12.0f} {total_tonnes/62:>18.1f}")
-print(f"\\nTotal provisions: {total_tonnes:,.0f} tonnes")
+print(f"\
+Total provisions: {total_tonnes:,.0f} tonnes")
 
 # Ship allocation
 ship_capacity = 500  # tonnes per supply ship
@@ -170,7 +174,8 @@ print(f"Supply ships needed (@ {ship_capacity}t each): {ships_needed}")
 print(f"Remaining ships for cargo/military: {62 - ships_needed}")
 
 # Spoilage analysis
-print("\\n=== Spoilage Over Voyage ===")
+print("\
+=== Spoilage Over Voyage ===")
 spoilage = fleet.spoilage_model()
 print(f"{'Day':>4} {'Water %':>8} {'Rice %':>8} {'Protein %':>10} {'Veg %':>8}")
 print("-" * 40)
@@ -180,7 +185,8 @@ for s in spoilage:
               f"{s['protein_remaining']*100:>9.1f} {s['veg_remaining']*100:>7.1f}")
 
 # Maximum range analysis
-print("\\n=== Maximum Voyage Range ===")
+print("\
+=== Maximum Voyage Range ===")
 print("(Range limited by first provision to run out after spoilage)")
 for extra_factor in [1.0, 1.25, 1.5, 2.0]:
     # Find the day when any essential provision drops below crew needs
@@ -269,7 +275,8 @@ ships = [
                450, 2, 150, 120, 60, 6),
 ]
 
-print("=== Comparative Naval Architecture ===\\n")
+print("=== Comparative Naval Architecture ===\
+")
 
 # Performance matrix
 print(f"{'Ship':<28} {'Stab':>5} {'Cargo%':>7} {'Sail/t':>7} {'Surv%':>6} {'Wind°':>6} {'Spd':>4}")
@@ -280,7 +287,8 @@ for s in ships:
           f"{s.windward:>4.0f}° {s.max_speed:>3.0f}kt")
 
 # Scoring system (weighted comparison)
-print("\\n=== Weighted Scoring (mission-dependent) ===")
+print("\
+=== Weighted Scoring (mission-dependent) ===")
 missions = {
     "Trade (cargo volume)":   {"stab": 0.2, "cargo": 0.4, "surv": 0.2, "wind": 0.1, "speed": 0.1},
     "Exploration (range)":    {"stab": 0.15, "cargo": 0.15, "surv": 0.2, "wind": 0.3, "speed": 0.2},
@@ -289,7 +297,8 @@ missions = {
 }
 
 for mission, weights in missions.items():
-    print(f"\\n{mission}:")
+    print(f"\
+{mission}:")
     scores = []
     for s in ships:
         # Normalise each metric to 0-1 range
@@ -394,7 +403,8 @@ for L in [30, 40, 50, 60, 80, 100, 120, 140, 160]:
           f"{Z:>7.2f} {sigma:>7.1f} {status:>10}")
 
 # What saves the treasure ship?
-print("\\n=== Design Features That Extend the Limit ===")
+print("\
+=== Design Features That Extend the Limit ===")
 base_L = 120
 base_B = 50
 base_D = 10
@@ -412,8 +422,10 @@ features = [
     ("All features combined", 0.40),
 ]
 
-print(f"\\nBaseline stress at {base_L}m: {base_stress:.1f} MPa")
-print(f"Effective wood strength: {effective_strength} MPa\\n")
+print(f"\
+Baseline stress at {base_L}m: {base_stress:.1f} MPa")
+print(f"Effective wood strength: {effective_strength} MPa\
+")
 
 for name, reduction in features:
     effective_stress = base_stress * reduction
@@ -502,7 +514,8 @@ base_speed = 4.0  # knots (treasure ship cruising)
 
 # Compare departure months
 print("=== Monsoon Route Optimisation ===")
-print("Outbound: Nanjing to Mogadishu\\n")
+print("Outbound: Nanjing to Mogadishu\
+")
 
 for depart_month in [1, 3, 6, 9, 11]:
     month_names = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -527,7 +540,8 @@ for depart_month in [1, 3, 6, 9, 11]:
         print()
 
 # Detailed leg analysis for optimal departure (November)
-print("\\n=== Leg-by-Leg Analysis (November departure) ===")
+print("\
+=== Leg-by-Leg Analysis (November departure) ===")
 print(f"{'Leg':<25} {'Wind':>5} {'Dir':>5} {'Eff Spd':>8} {'Days':>6}")
 print("-" * 51)
 
@@ -544,7 +558,8 @@ for leg in route_legs:
     print(f"{name:<25} {w_spd:>4.0f}kt {d_str:>4} {eff:>6.1f}kt {days:>5.0f}")
     month = ((10 + int(total / 30)) % 12) + 1
 
-print(f"\\nTotal outbound: {total:.0f} days ({total/30:.1f} months)")`,
+print(f"\
+Total outbound: {total:.0f} days ({total/30:.1f} months)")`,
       challenge: 'Model the return voyage (Mogadishu to Nanjing) departing in different months. The optimal return uses the southwest monsoon (June-August). Calculate the complete round-trip time for the best departure combination. Zheng He\'s actual voyages took about 2 years — does your model agree?',
       successHint: 'You just built a seasonal routing optimiser — the same type of tool that modern shipping companies use to plan fuel-efficient routes based on weather forecasts. The mathematics of wind routing (vector decomposition, time-dependent optimisation) is used by every cargo ship, racing yacht, and transoceanic flight today.',
     },

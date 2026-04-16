@@ -151,9 +151,12 @@ species_f = [
     ('Tarsier', 0.9, '#ef4444'),
     ('Owl', 1.1, '#f59e0b'),
     ('Cat', 1.4, '#22c55e'),
-    ('Human\\n(dark)', 2.1, '#3b82f6'),
-    ('Human\\n(bright)', 5.7, '#a855f7'),
-    ('Camera\\nf/8', 8, '#ec4899'),
+    ('Human\
+(dark)', 2.1, '#3b82f6'),
+    ('Human\
+(bright)', 5.7, '#a855f7'),
+    ('Camera\
+f/8', 8, '#ec4899'),
 ]
 for name, fn, color in species_f:
     brightness = (1/fn)**2 / (1/2.0)**2
@@ -313,7 +316,9 @@ ax.tick_params(colors='gray')
 # 4. Sensor comparison table
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-params = ['QE (%)', 'Read noise (e⁻)', 'Dark current\\n(e⁻/pix/s)', 'Dynamic\\nrange (dB)', 'Speed']
+params = ['QE (%)', 'Read noise (e⁻)', 'Dark current\
+(e⁻/pix/s)', 'Dynamic\
+range (dB)', 'Speed']
 ccd_vals = [95, 3, 0.001, 80, 3]
 cmos_vals = [85, 2, 0.01, 75, 9]
 retina_vals = [10, 50, 10, 120, 8]
@@ -396,7 +401,8 @@ for idx, (n_photons, title) in enumerate(zip(photon_levels, titles)):
     noisy = np.random.poisson(clean * n_photons) / n_photons
     snr = np.sqrt(clean.mean() * n_photons)
     ax.imshow(noisy, cmap='gray', vmin=0, vmax=1.5)
-    ax.set_title(f'{title}\\nSNR≈{snr:.1f}', color='white', fontsize=10)
+    ax.set_title(f'{title}\
+SNR≈{snr:.1f}', color='white', fontsize=10)
     ax.axis('off')
 
 # Frame stacking demo
@@ -410,7 +416,8 @@ for _ in range(n_frames):
 stacked /= (n_frames * n_photons_per_frame)
 snr_stacked = np.sqrt(clean.mean() * n_photons_per_frame * n_frames)
 ax.imshow(stacked, cmap='gray', vmin=0, vmax=1.5)
-ax.set_title(f'{n_frames}× stacked (5 photons each)\\nSNR≈{snr_stacked:.1f}', color='white', fontsize=10)
+ax.set_title(f'{n_frames}× stacked (5 photons each)\
+SNR≈{snr_stacked:.1f}', color='white', fontsize=10)
 ax.axis('off')
 
 plt.suptitle('Photon Shot Noise: More Photons = Cleaner Image', color='white', fontsize=14, y=1.02)

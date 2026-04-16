@@ -223,7 +223,8 @@ ax1.set_ylabel('Synapse strength', fontsize=11)
 ax1.set_ylim(0.5, 2.5)
 ax1.legend(fontsize=10)
 ax1.grid(alpha=0.3)
-ax1.text(70, 2.2, 'Synapse stays stronger\\nfor hours to days',
+ax1.text(70, 2.2, 'Synapse stays stronger\
+for hours to days',
          fontsize=10, ha='center', color='#10b981')
 
 ax2.plot(time, ltd, linewidth=2.5, color='#ef4444')
@@ -235,7 +236,8 @@ ax2.set_xlabel('Time (minutes)', fontsize=11)
 ax2.set_ylim(0.5, 2.5)
 ax2.legend(fontsize=10)
 ax2.grid(alpha=0.3)
-ax2.text(70, 0.7, 'Synapse weakens\\nfrom disuse',
+ax2.text(70, 0.7, 'Synapse weakens\
+from disuse',
          fontsize=10, ha='center', color='#ef4444')
 
 plt.suptitle('The Two Sides of Neuroplasticity', fontsize=14)
@@ -291,9 +293,11 @@ plt.plot(dt, dw, linewidth=2.5, color='#8b5cf6')
 plt.axhline(0, color='gray', linewidth=1)
 plt.axvline(0, color='gray', linewidth=1, linestyle=':')
 
-plt.annotate('LTP: Pre fires BEFORE Post\\n(connection strengthens)',
+plt.annotate('LTP: Pre fires BEFORE Post\
+(connection strengthens)',
     xy=(10, 0.6), fontsize=10, color='#10b981', fontweight='bold')
-plt.annotate('LTD: Pre fires AFTER Post\\n(connection weakens)',
+plt.annotate('LTD: Pre fires AFTER Post\
+(connection weakens)',
     xy=(-45, -0.4), fontsize=10, color='#ef4444', fontweight='bold')
 
 plt.xlabel('Time difference: t_post - t_pre (ms)', fontsize=12)

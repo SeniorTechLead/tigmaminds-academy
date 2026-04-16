@@ -260,7 +260,11 @@ ax1.set_title('Osmotic Pressure vs Salinity', fontsize=12)
 ax1.grid(alpha=0.3)
 
 # Energy comparison of water sources
-sources = ['Zamzam\\n(groundwater)', 'Treated\\nwastewater', 'Brackish\\nRO', 'Seawater\\nRO', 'Distillation']
+sources = ['Zamzam\
+(groundwater)', 'Treated\
+wastewater', 'Brackish\
+RO', 'Seawater\
+RO', 'Distillation']
 energy = [0.1, 0.5, 1.5, 3.5, 10]  # kWh per m^3
 cost = [0.05, 0.30, 0.50, 1.00, 2.50]  # $/m^3
 

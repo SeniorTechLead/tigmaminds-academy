@@ -41,7 +41,10 @@ years = np.array([2001, 2005, 2010, 2015, 2018, 2020, 2022])
 forest_loss_mha = [5.8, 7.2, 7.0, 8.0, 7.5, 6.8, 6.6]  # million hectares/year
 
 # Causes of deforestation (global average)
-causes = ['Agriculture\\n(crops)', 'Agriculture\\n(livestock)', 'Logging', 'Infrastructure', 'Fire\\n(human-set)', 'Other']
+causes = ['Agriculture\
+(crops)', 'Agriculture\
+(livestock)', 'Logging', 'Infrastructure', 'Fire\
+(human-set)', 'Other']
 cause_pct = [35, 30, 15, 8, 7, 5]
 cause_colors = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7', '#6b7280']
 
@@ -60,7 +63,8 @@ ax1.tick_params(colors='gray')
 # Cumulative loss annotation
 cumulative = np.cumsum(forest_loss_mha) * 2  # approximate (gaps between data points)
 ax1.text(2015, max(forest_loss_mha) * 0.9,
-        f'~{sum(forest_loss_mha)*3:.0f}M ha lost\\n2001-2022',
+        f'~{sum(forest_loss_mha)*3:.0f}M ha lost\
+2001-2022',
         color='#f59e0b', fontsize=10, ha='center',
         bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#f59e0b'))
 
@@ -125,8 +129,13 @@ fig.patch.set_facecolor('#1f2937')
 
 # Natural carbon balance (pre-industrial)
 ax1.set_facecolor('#111827')
-reservoirs = ['Atmosphere\\n(590 Gt)', 'Plants\\n(550 Gt)', 'Soil\\n(1,500 Gt)',
-              'Ocean\\n(38,000 Gt)', 'Fossil fuels\\n(10,000 Gt)']
+reservoirs = ['Atmosphere\
+(590 Gt)', 'Plants\
+(550 Gt)', 'Soil\
+(1,500 Gt)',
+              'Ocean\
+(38,000 Gt)', 'Fossil fuels\
+(10,000 Gt)']
 sizes = [590, 550, 1500, 38000, 10000]
 colors_r = ['#ef4444', '#22c55e', '#f59e0b', '#3b82f6', '#6b7280']
 
@@ -165,8 +174,10 @@ ax2.legend(facecolor='#1f2937', labelcolor='white', fontsize=9)
 ax2.tick_params(colors='gray')
 
 # Annotate key periods
-ax2.annotate('Industrial\\nRevolution', xy=(1870, 290), color='#9ca3af', fontsize=8, ha='center')
-ax2.annotate('Post-WWII\\nacceleration', xy=(1950, 315), xytext=(1935, 340),
+ax2.annotate('Industrial\
+Revolution', xy=(1870, 290), color='#9ca3af', fontsize=8, ha='center')
+ax2.annotate('Post-WWII\
+acceleration', xy=(1950, 315), xytext=(1935, 340),
             color='#f59e0b', fontsize=8, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 plt.tight_layout()
@@ -243,7 +254,8 @@ stages = [(10, 'Sapling'), (25, 'Young tree'), (50, 'Mature'), (80, 'Old growth'
 for yr, label in stages:
     c = carbon[yr]
     ax1.plot(yr, c, 'o', color='#f59e0b', markersize=8)
-    ax1.annotate(f'{label}\\n{c:.0f} kg C', xy=(yr, c), xytext=(yr+3, c+200),
+    ax1.annotate(f'{label}\
+{c:.0f} kg C', xy=(yr, c), xytext=(yr+3, c+200),
                 color='#f59e0b', fontsize=9)
 
 ax1.set_ylabel('Mass stored (kg)', color='white')
@@ -262,7 +274,8 @@ ax2.tick_params(colors='gray')
 
 peak_year = np.argmax(annual_seq) + 1
 peak_rate = annual_seq.max()
-ax2.annotate(f'Peak: {peak_rate:.1f} kg C/yr\\nat age {peak_year}',
+ax2.annotate(f'Peak: {peak_rate:.1f} kg C/yr\
+at age {peak_year}',
             xy=(peak_year, peak_rate), xytext=(peak_year+15, peak_rate-5),
             color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -274,8 +287,10 @@ print(f"  At 10 years:  {carbon[10]:.0f} kg C ({co2_stored[10]:.0f} kg CO₂)")
 print(f"  At 25 years:  {carbon[25]:.0f} kg C ({co2_stored[25]:.0f} kg CO₂)")
 print(f"  At 50 years:  {carbon[50]:.0f} kg C ({co2_stored[50]:.0f} kg CO₂)")
 print(f"  At 100 years: {carbon[100]:.0f} kg C ({co2_stored[100]:.0f} kg CO₂)")
-print(f"\\nPeak sequestration: {peak_rate:.1f} kg C/yr at age {peak_year}")
-print("\\nYoung trees absorb carbon fastest.")
+print(f"\
+Peak sequestration: {peak_rate:.1f} kg C/yr at age {peak_year}")
+print("\
+Young trees absorb carbon fastest.")
 print("Old trees store the most total carbon.")
 print("Both are needed for climate strategy.")`,
       challenge: 'Model a forest of 1,000 trees planted in the same year. Add natural mortality (2% of trees die per year after age 20). How does this change the forest-level carbon curve compared to 1,000 immortal trees?',
@@ -311,7 +326,11 @@ print("Both are needed for climate strategy.")`,
 import matplotlib.pyplot as plt
 
 # Reforestation methods comparison
-methods = ['Natural\\nRegeneration', 'Direct\\nSeeding', 'Nursery\\nPlanting', 'Miyawaki\\nMethod', 'Agroforestry']
+methods = ['Natural\
+Regeneration', 'Direct\
+Seeding', 'Nursery\
+Planting', 'Miyawaki\
+Method', 'Agroforestry']
 
 # Scores (0-10 scale)
 cost_per_ha = [1, 3, 6, 9, 5]         # higher = more expensive
@@ -356,7 +375,8 @@ time = np.arange(0, 31)
 for i, (method, yrs, color) in enumerate(zip(methods, years_to_canopy, method_colors)):
     # Sigmoid canopy closure
     canopy = 100 / (1 + np.exp(-0.3 * (time - yrs)))
-    ax2.plot(time, canopy, color=color, linewidth=2, label=method.replace('\\n', ' '))
+    ax2.plot(time, canopy, color=color, linewidth=2, label=method.replace('\
+', ' '))
 
 ax2.axhline(80, color='#6b7280', linestyle='--', linewidth=0.5, alpha=0.5)
 ax2.text(28, 82, '80% canopy', color='#6b7280', fontsize=8, ha='right')
@@ -567,7 +587,10 @@ ax1.set_ylim(0, 105)
 
 # Benefits distribution
 ax2.set_facecolor('#111827')
-management = ['Open\\nAccess', 'Government', 'Community\\nForestry', 'Sacred\\nGrove']
+management = ['Open\
+Access', 'Government', 'Community\
+Forestry', 'Sacred\
+Grove']
 benefits = {
     'Timber income': [8, 5, 7, 0],
     'Forest products': [3, 2, 8, 1],

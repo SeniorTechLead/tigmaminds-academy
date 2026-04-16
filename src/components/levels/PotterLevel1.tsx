@@ -65,21 +65,27 @@ ax1.plot(water_content, strength, color='#ef4444', linewidth=2, label='Strength'
 ax1.plot(water_content, workability, color='#22c55e', linewidth=2, label='Workability')
 
 # Mark Atterberg limits
-for limit, name, color in [(shrinkage_limit, 'Shrinkage\\nlimit', '#f59e0b'),
-                             (plastic_limit, 'Plastic\\nlimit', '#3b82f6'),
-                             (liquid_limit, 'Liquid\\nlimit', '#a855f7')]:
+for limit, name, color in [(shrinkage_limit, 'Shrinkage\
+limit', '#f59e0b'),
+                             (plastic_limit, 'Plastic\
+limit', '#3b82f6'),
+                             (liquid_limit, 'Liquid\
+limit', '#a855f7')]:
     ax1.axvline(limit, color=color, linestyle='--', linewidth=1)
     ax1.text(limit, 105, name, ha='center', color=color, fontsize=8)
 
 # Mark behavior zones
 ax1.axvspan(0, shrinkage_limit, alpha=0.1, color='#ef4444')
-ax1.text(6, 50, 'Solid\\n(brittle)', ha='center', color='#ef4444', fontsize=9)
+ax1.text(6, 50, 'Solid\
+(brittle)', ha='center', color='#ef4444', fontsize=9)
 ax1.axvspan(shrinkage_limit, plastic_limit, alpha=0.1, color='#f59e0b')
 ax1.text(17, 50, 'Semi-solid', ha='center', color='#f59e0b', fontsize=9)
 ax1.axvspan(plastic_limit, liquid_limit, alpha=0.1, color='#22c55e')
-ax1.text(33, 50, 'PLASTIC\\n(workable!)', ha='center', color='#22c55e', fontsize=10, fontweight='bold')
+ax1.text(33, 50, 'PLASTIC\
+(workable!)', ha='center', color='#22c55e', fontsize=10, fontweight='bold')
 ax1.axvspan(liquid_limit, 60, alpha=0.1, color='#3b82f6')
-ax1.text(52, 50, 'Liquid\\n(slurry)', ha='center', color='#3b82f6', fontsize=9)
+ax1.text(52, 50, 'Liquid\
+(slurry)', ha='center', color='#3b82f6', fontsize=9)
 
 ax1.set_ylabel('Relative value (%)', color='white')
 ax1.set_title('Clay Behavior vs Water Content', color='white', fontsize=13)
@@ -311,8 +317,10 @@ ax2.fill_between(porosity, strength, alpha=0.15, color='#ef4444')
 
 # Mark pottery types
 pottery = [
-    (35, 'Green\\n(unfired)', '#3b82f6'),
-    (25, 'Dhubri\\nearthenware', '#f59e0b'),
+    (35, 'Green\
+(unfired)', '#3b82f6'),
+    (25, 'Dhubri\
+earthenware', '#f59e0b'),
     (10, 'Stoneware', '#22c55e'),
     (2, 'Porcelain', '#a855f7'),
 ]
@@ -387,10 +395,14 @@ ax1.fill_between(flux_pct, melting_point, 600, alpha=0.1, color='#ef4444')
 
 # Mark common glazes
 glazes = [
-    (10, 'High-fire porcelain\\n(1300°C)', '#a855f7'),
-    (20, 'Stoneware glaze\\n(1200°C)', '#22c55e'),
-    (35, 'Earthenware glaze\\n(1000°C)', '#f59e0b'),
-    (50, 'Raku glaze\\n(800°C)', '#3b82f6'),
+    (10, 'High-fire porcelain\
+(1300°C)', '#a855f7'),
+    (20, 'Stoneware glaze\
+(1200°C)', '#22c55e'),
+    (35, 'Earthenware glaze\
+(1000°C)', '#f59e0b'),
+    (50, 'Raku glaze\
+(800°C)', '#3b82f6'),
 ]
 for flux, label, color in glazes:
     mp = 1713 - 15 * flux - 0.05 * flux**2
@@ -540,7 +552,8 @@ ax1.plot(time, rpm_rim, color='#22c55e', linewidth=2, label=f'Rim-heavy (I={I_ri
 
 # Mark usable speed range (30-90 RPM for pottery)
 ax1.axhspan(30, 90, alpha=0.1, color='#f59e0b')
-ax1.text(10, 60, 'Usable range\\n(30-90 RPM)', color='#f59e0b', fontsize=9)
+ax1.text(10, 60, 'Usable range\
+(30-90 RPM)', color='#f59e0b', fontsize=9)
 
 # Calculate usable time
 usable_solid = (omega_0 - 30 * 2 * np.pi / 60) / alpha_solid

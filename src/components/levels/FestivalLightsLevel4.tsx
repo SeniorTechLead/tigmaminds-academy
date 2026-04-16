@@ -105,49 +105,49 @@ Each pair lets us create two "pixels" of full RGB color. The ADC reads 0-1023 (d
       checkQuestion: 'Why do we use a 10k ohm fixed resistor in the voltage divider with the LDR, rather than 100 ohms or 1M ohms?',
       checkAnswer: "The fixed resistor should match the LDR's mid-range resistance. An LDR varies from ~1k (bright) to ~100k (dim). A 10k resistor puts the divider output in the middle of the ADC range under typical indoor lighting. With 100 ohms, voltage would be near 5V for all but the brightest light. With 1M, voltage would be near 0V except in total darkness. 10k maximizes sensitivity across the useful range.",
       codeIntro: 'Set up the 6-LED RGB installation with a self-test that cycles through red, green, and blue.',
-      code: `// Festival Light Installation - System Setup\
-// 6 LEDs: 2 Red, 2 Green, 2 Blue (RGB pairs)\
-\
-void setup() {\
-  pinMode(2, OUTPUT);\
-  pinMode(3, OUTPUT);\
-  pinMode(4, OUTPUT);\
-  pinMode(5, OUTPUT);\
-  pinMode(6, OUTPUT);\
-  pinMode(7, OUTPUT);\
-  Serial.println("=== Festival Lights ===");\
-  Serial.println("Self-test: RGB channels...");\
-\
-  analogWrite(2, 200); analogWrite(3, 200);\
-  delay(400);\
-  analogWrite(2, 0); analogWrite(3, 0);\
-\
-  analogWrite(4, 200); analogWrite(5, 200);\
-  delay(400);\
-  analogWrite(4, 0); analogWrite(5, 0);\
-\
-  analogWrite(6, 200); analogWrite(7, 200);\
-  delay(400);\
-  analogWrite(6, 0); analogWrite(7, 0);\
-  Serial.println("Self-test OK");\
-}\
-\
-void loop() {\
-  int ambient = random(100, 900);\
-  int brightness = 255 - (ambient * 255 / 1023);\
-\
-  analogWrite(2, brightness);\
-  analogWrite(3, brightness);\
-  analogWrite(4, brightness);\
-  analogWrite(5, brightness);\
-  analogWrite(6, brightness);\
-  analogWrite(7, brightness);\
-\
-  Serial.print("Ambient: ");\
-  Serial.print(ambient);\
-  Serial.print(" -> Brightness: ");\
-  Serial.println(brightness);\
-  delay(300);\
+      code: `// Festival Light Installation - System Setup
+// 6 LEDs: 2 Red, 2 Green, 2 Blue (RGB pairs)
+
+void setup() {
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  Serial.println("=== Festival Lights ===");
+  Serial.println("Self-test: RGB channels...");
+
+  analogWrite(2, 200); analogWrite(3, 200);
+  delay(400);
+  analogWrite(2, 0); analogWrite(3, 0);
+
+  analogWrite(4, 200); analogWrite(5, 200);
+  delay(400);
+  analogWrite(4, 0); analogWrite(5, 0);
+
+  analogWrite(6, 200); analogWrite(7, 200);
+  delay(400);
+  analogWrite(6, 0); analogWrite(7, 0);
+  Serial.println("Self-test OK");
+}
+
+void loop() {
+  int ambient = random(100, 900);
+  int brightness = 255 - (ambient * 255 / 1023);
+
+  analogWrite(2, brightness);
+  analogWrite(3, brightness);
+  analogWrite(4, brightness);
+  analogWrite(5, brightness);
+  analogWrite(6, brightness);
+  analogWrite(7, brightness);
+
+  Serial.print("Ambient: ");
+  Serial.print(ambient);
+  Serial.print(" -> Brightness: ");
+  Serial.println(brightness);
+  delay(300);
 }`,
       ledCount: 6,
       challenge: 'Instead of white (all channels equal), try warm white: Red at full brightness, Green at 70%, Blue at 30%. This produces a candlelight tone more suitable for a festival atmosphere.',
@@ -168,60 +168,60 @@ We also apply **smoothing** — averaging the last few readings to avoid LED fli
       checkQuestion: 'If your LDR reads 50 in darkness and 900 in bright light, what ADC value corresponds to "twilight" (50% brightness)?',
       checkAnswer: 'The midpoint between 50 and 900 is (50 + 900) / 2 = 475. After mapping: map(475, 50, 900, 0, 255) = 127. So twilight maps to brightness level 127.',
       codeIntro: 'Implement LDR calibration and smoothed reading with visual feedback on the LEDs.',
-      code: `// LDR Calibration and Smoothed Reading\
-// 6 LEDs respond to simulated light level\
-\
-int ldrMin = 50;\
-int ldrMax = 900;\
-int smoothed = 128;\
-int tick = 0;\
-\
-void setup() {\
-  for (int i = 2; i <= 7; i++) {\
-    pinMode(i, OUTPUT);\
-  }\
-  Serial.println("=== LDR Calibration ===");\
-  Serial.println("raw,smoothed,mapped,leds_on");\
-}\
-\
-void loop() {\
-  int raw;\
-  int cycle = tick % 60;\
-  if (cycle < 20) {\
-    raw = ldrMin + (cycle * (ldrMax - ldrMin)) / 20;\
-  } else if (cycle < 40) {\
-    raw = ldrMax - ((cycle - 20) * 100) / 20;\
-  } else {\
-    raw = ldrMax - ((cycle - 40) * (ldrMax - ldrMin)) / 20;\
-  }\
-  raw += random(-20, 21);\
-\
-  smoothed = (smoothed * 4 + raw) / 5;\
-\
-  int mapped = (smoothed - ldrMin) * 255 / (ldrMax - ldrMin);\
-  if (mapped < 0) mapped = 0;\
-  if (mapped > 255) mapped = 255;\
-\
-  int brightness = 255 - mapped;\
-  int ledsOn = 1 + (brightness * 5) / 255;\
-  for (int i = 2; i <= 7; i++) {\
-    if (i - 2 < ledsOn) {\
-      analogWrite(i, brightness);\
-    } else {\
-      analogWrite(i, 0);\
-    }\
-  }\
-\
-  Serial.print(raw);\
-  Serial.print(",");\
-  Serial.print(smoothed);\
-  Serial.print(",");\
-  Serial.print(mapped);\
-  Serial.print(",");\
-  Serial.println(ledsOn);\
-\
-  tick++;\
-  delay(200);\
+      code: `// LDR Calibration and Smoothed Reading
+// 6 LEDs respond to simulated light level
+
+int ldrMin = 50;
+int ldrMax = 900;
+int smoothed = 128;
+int tick = 0;
+
+void setup() {
+  for (int i = 2; i <= 7; i++) {
+    pinMode(i, OUTPUT);
+  }
+  Serial.println("=== LDR Calibration ===");
+  Serial.println("raw,smoothed,mapped,leds_on");
+}
+
+void loop() {
+  int raw;
+  int cycle = tick % 60;
+  if (cycle < 20) {
+    raw = ldrMin + (cycle * (ldrMax - ldrMin)) / 20;
+  } else if (cycle < 40) {
+    raw = ldrMax - ((cycle - 20) * 100) / 20;
+  } else {
+    raw = ldrMax - ((cycle - 40) * (ldrMax - ldrMin)) / 20;
+  }
+  raw += random(-20, 21);
+
+  smoothed = (smoothed * 4 + raw) / 5;
+
+  int mapped = (smoothed - ldrMin) * 255 / (ldrMax - ldrMin);
+  if (mapped < 0) mapped = 0;
+  if (mapped > 255) mapped = 255;
+
+  int brightness = 255 - mapped;
+  int ledsOn = 1 + (brightness * 5) / 255;
+  for (int i = 2; i <= 7; i++) {
+    if (i - 2 < ledsOn) {
+      analogWrite(i, brightness);
+    } else {
+      analogWrite(i, 0);
+    }
+  }
+
+  Serial.print(raw);
+  Serial.print(",");
+  Serial.print(smoothed);
+  Serial.print(",");
+  Serial.print(mapped);
+  Serial.print(",");
+  Serial.println(ledsOn);
+
+  tick++;
+  delay(200);
 }`,
       ledCount: 6,
       challenge: 'Change the smoothing ratio from 4:1 (80/20) to 1:1 (50/50). The LEDs respond faster but flicker more. Then try 9:1 (90/10) — very smooth but sluggish.',
@@ -245,59 +245,59 @@ We map the LDR reading to RGB ratios:
       checkQuestion: 'Why does warm light (low color temperature) have MORE red and LESS blue, even though higher Kelvin numbers are called "cooler"?',
       checkAnswer: 'The naming comes from blackbody radiation. A metal heated to 1800K glows red-orange. At 6500K it glows blue-white. In interior design the meaning flipped: "warm" = cozy orange, "cool" = clinical blue.',
       codeIntro: 'Map ambient light to color temperature, with smooth RGB transitions across 6 LEDs.',
-      code: `// Color Temperature Mapping\
-// 6 LEDs shift from warm (dark) to cool (bright)\
-\
-int tick = 0;\
-\
-void setup() {\
-  for (int i = 2; i <= 7; i++) {\
-    pinMode(i, OUTPUT);\
-  }\
-  Serial.println("=== Color Temperature ===");\
-  Serial.println("ambient,R,G,B,temp_K");\
-}\
-\
-void loop() {\
-  int cycle = tick % 100;\
-  int ambient;\
-  if (cycle < 50) {\
-    ambient = cycle * 20;\
-  } else {\
-    ambient = (100 - cycle) * 20;\
-  }\
-\
-  int level = ambient * 255 / 1000;\
-  if (level > 255) level = 255;\
-\
-  int r = 255 - (level * 75 / 255);\
-  int g = 140 + (level * 80 / 255);\
-  int b = 20 + (level * 235 / 255);\
-\
-  int brightness = 255 - level;\
-  r = r * brightness / 255;\
-  g = g * brightness / 255;\
-  b = b * brightness / 255;\
-\
-  analogWrite(2, r); analogWrite(3, r);\
-  analogWrite(4, g); analogWrite(5, g);\
-  analogWrite(6, b); analogWrite(7, b);\
-\
-  int temp = 1800 + (level * 4700 / 255);\
-\
-  Serial.print(ambient);\
-  Serial.print(",R=");\
-  Serial.print(r);\
-  Serial.print(",G=");\
-  Serial.print(g);\
-  Serial.print(",B=");\
-  Serial.print(b);\
-  Serial.print(",");\
-  Serial.print(temp);\
-  Serial.println("K");\
-\
-  tick++;\
-  delay(150);\
+      code: `// Color Temperature Mapping
+// 6 LEDs shift from warm (dark) to cool (bright)
+
+int tick = 0;
+
+void setup() {
+  for (int i = 2; i <= 7; i++) {
+    pinMode(i, OUTPUT);
+  }
+  Serial.println("=== Color Temperature ===");
+  Serial.println("ambient,R,G,B,temp_K");
+}
+
+void loop() {
+  int cycle = tick % 100;
+  int ambient;
+  if (cycle < 50) {
+    ambient = cycle * 20;
+  } else {
+    ambient = (100 - cycle) * 20;
+  }
+
+  int level = ambient * 255 / 1000;
+  if (level > 255) level = 255;
+
+  int r = 255 - (level * 75 / 255);
+  int g = 140 + (level * 80 / 255);
+  int b = 20 + (level * 235 / 255);
+
+  int brightness = 255 - level;
+  r = r * brightness / 255;
+  g = g * brightness / 255;
+  b = b * brightness / 255;
+
+  analogWrite(2, r); analogWrite(3, r);
+  analogWrite(4, g); analogWrite(5, g);
+  analogWrite(6, b); analogWrite(7, b);
+
+  int temp = 1800 + (level * 4700 / 255);
+
+  Serial.print(ambient);
+  Serial.print(",R=");
+  Serial.print(r);
+  Serial.print(",G=");
+  Serial.print(g);
+  Serial.print(",B=");
+  Serial.print(b);
+  Serial.print(",");
+  Serial.print(temp);
+  Serial.println("K");
+
+  tick++;
+  delay(150);
 }`,
       ledCount: 6,
       challenge: 'Add a "sunset mode" — when ambient drops below 200, shift to deep orange (R=255, G=80, B=0) instead of the standard warm mapping.',
@@ -319,74 +319,74 @@ A button (simulated with a timer) cycles through modes. This pattern scales to a
       checkQuestion: 'Why use a state machine instead of nested if-else statements for multiple modes?',
       checkAnswer: 'A state machine separates "which mode am I in?" from "what does this mode do?" Each mode is independent. Adding a new mode means adding one case — not threading logic through if-else chains. It also makes debugging easier.',
       codeIntro: 'Implement a 4-mode state machine with automatic mode cycling.',
-      code: `// State Machine: 4 Display Modes\
-// Auto-cycles every 30 ticks for demo\
-// Beep on mode transitions, tone tracks brightness\
-\
-int mode = 0;\
-int tick = 0;\
-int breathStep = 0;\
-int hueStep = 0;\
-\
-void setup() {\
-  for (int i = 2; i <= 7; i++) {\
-    pinMode(i, OUTPUT);\
-  }\
-  Serial.println("=== Mode: Auto Brightness ===");\
-}\
-\
-void allOff() {\
-  for (int i = 2; i <= 7; i++) analogWrite(i, 0);\
-}\
-\
-void loop() {\
-  if (tick > 0 && tick % 30 == 0) {\
-    mode = (mode + 1) % 4;\
-    allOff();\
-    tone(8, 1000);\
-    delay(80);\
-    noTone(8);\
-    if (mode == 0) Serial.println("=== Mode: Auto Brightness ===");\
-    if (mode == 1) Serial.println("=== Mode: Color Temperature ===");\
-    if (mode == 2) Serial.println("=== Mode: Pulse ===");\
-    if (mode == 3) Serial.println("=== Mode: Rainbow ===");\
-  }\
-\
-  int ambient = 400 + random(-50, 51);\
-\
-  if (mode == 0) {\
-    int b = 255 - (ambient * 255 / 1023);\
-    for (int i = 2; i <= 7; i++) analogWrite(i, b);\
-    tone(8, 200 + b * 3);\
-  }\
-  else if (mode == 1) {\
-    int level = ambient * 255 / 1023;\
-    int r = (255 - level * 75 / 255) * (255 - level) / 255;\
-    int g = (140 + level * 80 / 255) * (255 - level) / 255;\
-    int b = (20 + level * 235 / 255) * (255 - level) / 255;\
-    analogWrite(2, r); analogWrite(3, r);\
-    analogWrite(4, g); analogWrite(5, g);\
-    analogWrite(6, b); analogWrite(7, b);\
-  }\
-  else if (mode == 2) {\
-    breathStep = (breathStep + 3) % 510;\
-    int b = (breathStep < 255) ? breathStep : (510 - breathStep);\
-    for (int i = 2; i <= 7; i++) analogWrite(i, b);\
-  }\
-  else if (mode == 3) {\
-    hueStep = (hueStep + 5) % 765;\
-    int r = 0, g = 0, b = 0;\
-    if (hueStep < 255) { r = 255 - hueStep; g = hueStep; }\
-    else if (hueStep < 510) { g = 510 - hueStep; b = hueStep - 255; }\
-    else { b = 765 - hueStep; r = hueStep - 510; }\
-    analogWrite(2, r); analogWrite(3, r);\
-    analogWrite(4, g); analogWrite(5, g);\
-    analogWrite(6, b); analogWrite(7, b);\
-  }\
-  if (mode != 0) noTone(8);\
-\
-  tick++;\
-  delay(100);\
+      code: `// State Machine: 4 Display Modes
+// Auto-cycles every 30 ticks for demo
+// Beep on mode transitions, tone tracks brightness
+
+int mode = 0;
+int tick = 0;
+int breathStep = 0;
+int hueStep = 0;
+
+void setup() {
+  for (int i = 2; i <= 7; i++) {
+    pinMode(i, OUTPUT);
+  }
+  Serial.println("=== Mode: Auto Brightness ===");
+}
+
+void allOff() {
+  for (int i = 2; i <= 7; i++) analogWrite(i, 0);
+}
+
+void loop() {
+  if (tick > 0 && tick % 30 == 0) {
+    mode = (mode + 1) % 4;
+    allOff();
+    tone(8, 1000);
+    delay(80);
+    noTone(8);
+    if (mode == 0) Serial.println("=== Mode: Auto Brightness ===");
+    if (mode == 1) Serial.println("=== Mode: Color Temperature ===");
+    if (mode == 2) Serial.println("=== Mode: Pulse ===");
+    if (mode == 3) Serial.println("=== Mode: Rainbow ===");
+  }
+
+  int ambient = 400 + random(-50, 51);
+
+  if (mode == 0) {
+    int b = 255 - (ambient * 255 / 1023);
+    for (int i = 2; i <= 7; i++) analogWrite(i, b);
+    tone(8, 200 + b * 3);
+  }
+  else if (mode == 1) {
+    int level = ambient * 255 / 1023;
+    int r = (255 - level * 75 / 255) * (255 - level) / 255;
+    int g = (140 + level * 80 / 255) * (255 - level) / 255;
+    int b = (20 + level * 235 / 255) * (255 - level) / 255;
+    analogWrite(2, r); analogWrite(3, r);
+    analogWrite(4, g); analogWrite(5, g);
+    analogWrite(6, b); analogWrite(7, b);
+  }
+  else if (mode == 2) {
+    breathStep = (breathStep + 3) % 510;
+    int b = (breathStep < 255) ? breathStep : (510 - breathStep);
+    for (int i = 2; i <= 7; i++) analogWrite(i, b);
+  }
+  else if (mode == 3) {
+    hueStep = (hueStep + 5) % 765;
+    int r = 0, g = 0, b = 0;
+    if (hueStep < 255) { r = 255 - hueStep; g = hueStep; }
+    else if (hueStep < 510) { g = 510 - hueStep; b = hueStep - 255; }
+    else { b = 765 - hueStep; r = hueStep - 510; }
+    analogWrite(2, r); analogWrite(3, r);
+    analogWrite(4, g); analogWrite(5, g);
+    analogWrite(6, b); analogWrite(7, b);
+  }
+  if (mode != 0) noTone(8);
+
+  tick++;
+  delay(100);
 }`,
       ledCount: 6,
       challenge: 'Add a 5th mode: "Strobe" — all LEDs flash on/off at maximum brightness. Remember to update the mode cycle count.',
@@ -409,101 +409,101 @@ On real hardware: 6 LEDs, an LDR, a 10k resistor, a pushbutton, and an Arduino U
       checkQuestion: 'How would you add a "sound reactive" mode that pulses LEDs to music?',
       checkAnswer: 'Add an electret microphone on an analog pin. Read amplitude, apply peak detection, and map peaks to LED brightness. For beat detection, compare current amplitude to a running average — spikes indicate beats.',
       codeIntro: 'The final capstone: full installation with sensor, smoothing, 4 modes, gamma correction, and logging.',
-      code: `// === FESTIVAL LIGHTS CAPSTONE ===\
-// LDR sensor + 4 modes + RGB + logging\
-\
-int mode = 0;\
-int tick = 0;\
-int smoothed = 500;\
-int breathStep = 0;\
-int hueStep = 0;\
-\
-int gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,\
-                  120, 161, 208, 255};\
-\
-int gc(int raw) {\
-  int idx = raw / 23;\
-  if (idx > 11) idx = 11;\
-  if (idx < 0) idx = 0;\
-  return gammaLUT[idx];\
-}\
-\
-void setup() {\
-  for (int i = 2; i <= 7; i++) pinMode(i, OUTPUT);\
-  Serial.println("=== Festival Lights Capstone ===");\
-  for (int i = 2; i <= 7; i++) {\
-    analogWrite(i, 180); delay(100); analogWrite(i, 0);\
-  }\
-  Serial.println("Self-test OK");\
-  Serial.println("ms,mode,ambient,r,g,b");\
-}\
-\
-void loop() {\
-  if (tick > 0 && tick % 40 == 0) {\
-    mode = (mode + 1) % 4;\
-    for (int i = 2; i <= 7; i++) analogWrite(i, 0);\
-    tone(8, 1000);\
-    delay(80);\
-    noTone(8);\
-  }\
-\
-  int cycle = tick % 80;\
-  int ambient;\
-  if (cycle < 40) ambient = 100 + cycle * 20;\
-  else ambient = 900 - (cycle - 40) * 20;\
-  ambient += random(-30, 31);\
-\
-  smoothed = (smoothed * 4 + ambient) / 5;\
-  int level = (smoothed - 50) * 255 / 850;\
-  if (level < 0) level = 0;\
-  if (level > 255) level = 255;\
-\
-  int r = 0, g = 0, b = 0;\
-\
-  if (mode == 0) {\
-    int brt = gc(255 - level);\
-    r = brt; g = brt; b = brt;\
-  }\
-  else if (mode == 1) {\
-    int brt = 255 - level;\
-    r = gc((255 - level * 75 / 255) * brt / 255);\
-    g = gc((140 + level * 80 / 255) * brt / 255);\
-    b = gc((20 + level * 235 / 255) * brt / 255);\
-  }\
-  else if (mode == 2) {\
-    int speed = 2 + level / 40;\
-    breathStep = (breathStep + speed) % 510;\
-    int brt = (breathStep < 255) ? breathStep : (510 - breathStep);\
-    r = gc(brt); g = gc(brt); b = gc(brt);\
-  }\
-  else if (mode == 3) {\
-    int speed = 3 + level / 30;\
-    hueStep = (hueStep + speed) % 765;\
-    if (hueStep < 255) { r = gc(255 - hueStep); g = gc(hueStep); }\
-    else if (hueStep < 510) { g = gc(510 - hueStep); b = gc(hueStep - 255); }\
-    else { b = gc(765 - hueStep); r = gc(hueStep - 510); }\
-  }\
-\
-  analogWrite(2, r); analogWrite(3, r);\
-  analogWrite(4, g); analogWrite(5, g);\
-  analogWrite(6, b); analogWrite(7, b);\
-\
-  if (tick % 4 == 0) {\
-    Serial.print(tick * 100);\
-    Serial.print(",");\
-    Serial.print(mode);\
-    Serial.print(",");\
-    Serial.print(smoothed);\
-    Serial.print(",");\
-    Serial.print(r);\
-    Serial.print(",");\
-    Serial.print(g);\
-    Serial.print(",");\
-    Serial.println(b);\
-  }\
-\
-  tick++;\
-  delay(100);\
+      code: `// === FESTIVAL LIGHTS CAPSTONE ===
+// LDR sensor + 4 modes + RGB + logging
+
+int mode = 0;
+int tick = 0;
+int smoothed = 500;
+int breathStep = 0;
+int hueStep = 0;
+
+int gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,
+                  120, 161, 208, 255};
+
+int gc(int raw) {
+  int idx = raw / 23;
+  if (idx > 11) idx = 11;
+  if (idx < 0) idx = 0;
+  return gammaLUT[idx];
+}
+
+void setup() {
+  for (int i = 2; i <= 7; i++) pinMode(i, OUTPUT);
+  Serial.println("=== Festival Lights Capstone ===");
+  for (int i = 2; i <= 7; i++) {
+    analogWrite(i, 180); delay(100); analogWrite(i, 0);
+  }
+  Serial.println("Self-test OK");
+  Serial.println("ms,mode,ambient,r,g,b");
+}
+
+void loop() {
+  if (tick > 0 && tick % 40 == 0) {
+    mode = (mode + 1) % 4;
+    for (int i = 2; i <= 7; i++) analogWrite(i, 0);
+    tone(8, 1000);
+    delay(80);
+    noTone(8);
+  }
+
+  int cycle = tick % 80;
+  int ambient;
+  if (cycle < 40) ambient = 100 + cycle * 20;
+  else ambient = 900 - (cycle - 40) * 20;
+  ambient += random(-30, 31);
+
+  smoothed = (smoothed * 4 + ambient) / 5;
+  int level = (smoothed - 50) * 255 / 850;
+  if (level < 0) level = 0;
+  if (level > 255) level = 255;
+
+  int r = 0, g = 0, b = 0;
+
+  if (mode == 0) {
+    int brt = gc(255 - level);
+    r = brt; g = brt; b = brt;
+  }
+  else if (mode == 1) {
+    int brt = 255 - level;
+    r = gc((255 - level * 75 / 255) * brt / 255);
+    g = gc((140 + level * 80 / 255) * brt / 255);
+    b = gc((20 + level * 235 / 255) * brt / 255);
+  }
+  else if (mode == 2) {
+    int speed = 2 + level / 40;
+    breathStep = (breathStep + speed) % 510;
+    int brt = (breathStep < 255) ? breathStep : (510 - breathStep);
+    r = gc(brt); g = gc(brt); b = gc(brt);
+  }
+  else if (mode == 3) {
+    int speed = 3 + level / 30;
+    hueStep = (hueStep + speed) % 765;
+    if (hueStep < 255) { r = gc(255 - hueStep); g = gc(hueStep); }
+    else if (hueStep < 510) { g = gc(510 - hueStep); b = gc(hueStep - 255); }
+    else { b = gc(765 - hueStep); r = gc(hueStep - 510); }
+  }
+
+  analogWrite(2, r); analogWrite(3, r);
+  analogWrite(4, g); analogWrite(5, g);
+  analogWrite(6, b); analogWrite(7, b);
+
+  if (tick % 4 == 0) {
+    Serial.print(tick * 100);
+    Serial.print(",");
+    Serial.print(mode);
+    Serial.print(",");
+    Serial.print(smoothed);
+    Serial.print(",");
+    Serial.print(r);
+    Serial.print(",");
+    Serial.print(g);
+    Serial.print(",");
+    Serial.println(b);
+  }
+
+  tick++;
+  delay(100);
 }`,
       ledCount: 6,
       challenge: 'On real hardware: connect an LDR + 10k voltage divider to A0, a pushbutton to pin 8, and replace the simulated ambient with analogRead(A0). Add debouncing for reliable mode switching.',

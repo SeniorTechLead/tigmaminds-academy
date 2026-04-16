@@ -92,11 +92,13 @@ modern_glider = Aircraft(
 )
 
 # System overview
-print("=== Flight Simulator — System Architecture ===\\n")
+print("=== Flight Simulator — System Architecture ===\
+")
 print(f"Atmospheres:")
 print(f"  {atm_sea}")
 print(f"  {atm_mountain}")
-print(f"\\nAircraft:")
+print(f"\
+Aircraft:")
 for ac in [leo_ornithopter, leo_glider, modern_glider]:
     print(f"  {ac}")
     print(f"    Wing: {ac.wing}")
@@ -182,7 +184,8 @@ for ac in aircraft_list:
           f"{f['load_factor']:>4.2f} {f['power_required']:>6.0f} {status:>8}")
 
 # Speed sweep for Leonardo's glider
-print("\\n=== Leonardo's Glider: Force vs Speed ===")
+print("\
+=== Leonardo's Glider: Force vs Speed ===")
 leo = aircraft_list[1]
 print(f"{'Speed':>7} {'Cl':>6} {'Lift':>7} {'Drag':>6} {'L/D':>6} {'Pwr':>7} {'Stall?':>7}")
 print("-" * 48)
@@ -197,7 +200,8 @@ for v in [5, 7, 9, 11, 13, 15, 18, 22]:
     print(f"{v:>5}m/s {f['cl']:>5.2f} {f['lift']:>6.0f} {f['drag']:>5.0f} "
           f"{f['ld_ratio']:>5.1f} {f['power_required']:>6.0f}W {stall_flag:>6}")
 
-print("\\nThe force engine reveals the complete performance envelope:")
+print("\
+The force engine reveals the complete performance envelope:")
 print("where the aircraft can fly, where it stalls, and how much power it needs.")`,
       challenge: 'Add a "gust response" calculation: if a vertical gust of 3 m/s hits the aircraft, the effective angle of attack increases by arctan(w_gust / V). Calculate the load factor spike for each aircraft at V = 12 m/s. The sailplane (low wing loading) will experience a larger load factor change than the heavier Wright Flyer — explaining why light aircraft are bumpier in turbulence.',
       successHint: 'You built the aerodynamic force engine — the core of every flight simulator. Lift, drag, and weight must balance for steady flight. Any imbalance causes acceleration. This force balance is the fundamental equation of flight.',
@@ -258,7 +262,8 @@ craft = [
 launch_height = 300  # Monte Ceceri elevation above valley
 
 print("=== Glide Performance Analysis ===")
-print(f"Launch height: {launch_height} m | Sea level conditions\\n")
+print(f"Launch height: {launch_height} m | Sea level conditions\
+")
 
 print(f"{'Aircraft':<24} {'Best L/D':>8} {'V_bg':>7} {'V_ms':>7} {'Sink_min':>9} {'Range':>7}")
 print("-" * 64)
@@ -280,7 +285,8 @@ for ac in craft:
           f"{min_sink_point['sink_rate']:>7.2f}ms {glide_range:>6.0f}m")
 
 # Detailed speed polar for Leonardo's glider
-print("\\n=== Leonardo's Glider: Speed Polar ===")
+print("\
+=== Leonardo's Glider: Speed Polar ===")
 leo_results = glide_analysis(craft[1])
 print(f"{'Speed':>7} {'Cl':>6} {'Cd':>7} {'L/D':>6} {'Sink':>7} {'Glide':>6} {'Range':>7}")
 print("-" * 48)
@@ -291,7 +297,8 @@ for r in leo_results:
               f"{r['ld']:>5.1f} {r['sink_rate']:>5.2f}ms {r['glide_angle_deg']:>4.1f}d {rng:>6.0f}m")
 
 # Effect of altitude (thinner air)
-print("\\n=== Altitude Effect on Glide Speed ===")
+print("\
+=== Altitude Effect on Glide Speed ===")
 leo = craft[1]
 for alt in [0, 1000, 2000, 3000]:
     T = 288.15 - 0.0065 * alt
@@ -372,7 +379,8 @@ for span in np.arange(6, 15.5, 0.5):
 
 print("=== Wing Design Optimisation ===")
 print(f"Searched {len(all_results):,} combinations")
-print(f"Feasible designs: {feasible_count} ({feasible_count/len(all_results)*100:.1f}%)\\n")
+print(f"Feasible designs: {feasible_count} ({feasible_count/len(all_results)*100:.1f}%)\
+")
 
 if best_design:
     d = best_design
@@ -388,7 +396,8 @@ if best_design:
     print(f"  RANGE from 300m: {d['range']:.0f} m")
 
 # Compare to Leonardo's actual design
-print("\\n=== Comparison: Leonardo vs Optimal ===")
+print("\
+=== Comparison: Leonardo vs Optimal ===")
 _, _, leo = evaluate_design(8, 1.5, 0.05, 0.08)
 print(f"{'Metric':<20} {'Leonardo':>10} {'Optimal':>10} {'Improvement':>12}")
 print("-" * 54)
@@ -481,7 +490,8 @@ skills = [
 for skill, detail in skills:
     print(f"  * {skill}: {detail}")
 
-print("\\n" + "=" * 64)
+print("\
+" + "=" * 64)
 print("  Leonardo da Vinci, Codex on the Flight of Birds, 1505:")
 print('  "Once you have tasted flight, you will forever walk the')
 print('   earth with your eyes turned skyward."')

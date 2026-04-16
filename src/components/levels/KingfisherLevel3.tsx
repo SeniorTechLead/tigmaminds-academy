@@ -359,10 +359,13 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Plot 6: Natural examples comparison
 ax = axes[1, 2]
 examples = [
-    ('Kingfisher\\n(amorphous)', 170, 0.15, '#3b82f6'),
-    ('Morpho\\nbutterfly', 200, 0.05, '#22c55e'),
+    ('Kingfisher\
+(amorphous)', 170, 0.15, '#3b82f6'),
+    ('Morpho\
+butterfly', 200, 0.05, '#22c55e'),
     ('Peacock', 140, 0.08, '#a855f7'),
-    ('Beetle\\n(jewel)', 250, 0.03, '#f59e0b'),
+    ('Beetle\
+(jewel)', 250, 0.03, '#f59e0b'),
 ]
 for name, spacing, disorder_val, color in examples:
     peak = bragg_wavelength(spacing, 0)
@@ -510,7 +513,10 @@ ax.set_aspect('equal')
 
 # Plot 5: Applications overview
 ax = axes[1, 1]
-apps = ['Fade-proof\\ncoatings', 'Anti-\\ncounterfeit', 'Sensors', 'Solar\\ncells', 'Displays', 'Stealth']
+apps = ['Fade-proof\
+coatings', 'Anti-\
+counterfeit', 'Sensors', 'Solar\
+cells', 'Displays', 'Stealth']
 readiness = [8, 7, 6, 4, 5, 3]  # Technology readiness level (1-9)
 market_size = [5, 3, 2, 8, 6, 4]  # Relative market potential
 colors_apps = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7', '#6b7280']
@@ -912,7 +918,12 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 5: Noise reduction
 ax = axes[1, 1]
-positions = ['200m before\\ntunnel', 'Tunnel\\nentrance', 'Inside\\ntunnel', 'Tunnel\\nexit', '200m after\\ntunnel']
+positions = ['200m before\
+tunnel', 'Tunnel\
+entrance', 'Inside\
+tunnel', 'Tunnel\
+exit', '200m after\
+tunnel']
 noise_old = [70, 95, 85, 100, 75]  # dB
 noise_new = [68, 78, 80, 75, 70]   # dB
 x_pos = np.arange(len(positions))

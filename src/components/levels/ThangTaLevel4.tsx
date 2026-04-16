@@ -81,7 +81,8 @@ for w_id in range(1, 7):
                   (w_id, t_id, max(1, base_score), max(1, speed), max(1, power), '2024-03-15'))
 
 # Analysis queries
-print("=== Thang-Ta Academy Performance Report ===\\n")
+print("=== Thang-Ta Academy Performance Report ===\
+")
 
 c.execute('''
     SELECT w.name, w.rank, w.years_training,
@@ -96,7 +97,8 @@ print("-" * 54)
 for row in c.fetchall():
     print(f"{row[0]:<12} {row[1]:<14} {row[2]:>4.1f} {row[3]:>5.1f} {row[4]:>5.1f} {row[5]:>5.1f}")
 
-print("\\nHardest techniques (lowest avg score):")
+print("\
+Hardest techniques (lowest avg score):")
 c.execute('''
     SELECT t.name, t.difficulty, ROUND(AVG(a.score),1) as avg_score
     FROM techniques t JOIN assessments a ON t.id = a.technique_id
@@ -187,7 +189,8 @@ def knn_classify(features, k=5):
     return best, confidence
 
 # Test with new data
-print("=== Thang-Ta Technique Classifier (kNN, k=5) ===\\n")
+print("=== Thang-Ta Technique Classifier (kNN, k=5) ===\
+")
 print(f"{'True Label':<20} {'Predicted':<20} {'Conf':>5} {'Result'}")
 print("-" * 55)
 
@@ -209,10 +212,12 @@ for tech, params in techniques.items():
                   (tech, pred, conf, int(is_correct)))
         print(f"{tech:<20} {pred:<20} {conf:>4.0%} {'OK' if is_correct else 'MISS'}")
 
-print(f"\\nAccuracy: {correct}/{total} = {correct/total:.0%}")
+print(f"\
+Accuracy: {correct}/{total} = {correct/total:.0%}")
 
 c.execute('SELECT true_label, SUM(correct), COUNT(*) FROM predictions GROUP BY true_label')
-print("\\nPer-technique accuracy:")
+print("\
+Per-technique accuracy:")
 for label, corr, tot in c.fetchall():
     print(f"  {label}: {corr}/{tot} ({corr/tot:.0%})")
 
@@ -301,7 +306,8 @@ n_byes = next_pow2 - n
 n_rounds = int(np.log2(next_pow2))
 
 print(f"=== Thang-Ta Championship — {n} Fighters ===")
-print(f"Rounds: {n_rounds}, Byes: {n_byes}\\n")
+print(f"Rounds: {n_rounds}, Byes: {n_byes}\
+")
 
 # Seed order: 1vN, 2v(N-1), etc.
 seeds = list(range(1, n + 1))
@@ -331,7 +337,8 @@ for rnd in range(2, n_rounds + 1):
                JOIN fighters f2 ON m.fighter2_id=f2.id
                JOIN fighters fw ON m.winner_id=fw.id
                WHERE m.round={rnd-1}''')
-    print(f"\\nRound {rnd-1} results:")
+    print(f"\
+Round {rnd-1} results:")
     for row in c.fetchall():
         marker = '*' if row[4] == row[0] else ' '
         print(f"  {row[1]:>20}{marker} vs {row[3]:<20}{'*' if row[4]==row[2] else ' '} Score: {row[6]}")
@@ -354,12 +361,14 @@ c.execute('''SELECT f1.name, f2.name, fw.name, m.score
            JOIN fighters fw ON m.winner_id=fw.id
            ORDER BY m.round DESC, m.match_num DESC LIMIT 1''')
 final = c.fetchone()
-print(f"\\n{'='*40}")
+print(f"\
+{'='*40}")
 print(f"FINAL: {final[0]} vs {final[1]}")
 print(f"CHAMPION: {final[2]} ({final[3]})")
 
 c.execute('SELECT COUNT(*) FROM matches')
-print(f"\\nTotal matches played: {c.fetchone()[0]}")
+print(f"\
+Total matches played: {c.fetchone()[0]}")
 
 db.close()`,
       challenge: 'Add a double-elimination format where a fighter must lose twice to be eliminated. This requires a "losers bracket" — a second chance for first-round losers.',
@@ -491,7 +500,8 @@ plt.show()
 
 print(f"Total designs: {len(ids)}")
 print(f"Pareto-optimal: {len(pareto_ids)} ({len(pareto_ids)/len(ids)*100:.1f}%)")
-print("\\nBest Pareto designs:")
+print("\
+Best Pareto designs:")
 c.execute('''SELECT length, material, mass, tip_speed, agility, durability
              FROM designs WHERE pareto_optimal=1
              ORDER BY tip_speed DESC LIMIT 5''')
@@ -623,7 +633,8 @@ def simulate_combat(f1, f2, max_rounds=20):
     return (f1.name if f1.health > f2.health else f2.name), max_rounds
 
 # Run tournament
-print("=== Thang-Ta Combat Simulation ===\\n")
+print("=== Thang-Ta Combat Simulation ===\
+")
 fighters_config = [
     ("Tomba (Power)", 85, 90, 70, 80),
     ("Bembem (Speed)", 80, 70, 95, 75),
@@ -642,7 +653,8 @@ for i in range(len(fighters_config)):
             if trial == 0:
                 print(f"{f1.name} vs {f2.name}: {winner} wins in {rounds} rounds")
 
-print("\\n--- Win Totals ---")
+print("\
+--- Win Totals ---")
 for name, w in sorted(wins.items(), key=lambda x: -x[1]):
     print(f"  {name}: {w} wins")
 
@@ -651,7 +663,8 @@ c.execute('''SELECT technique, COUNT(*) as uses,
              SUM(CASE WHEN result='HIT' THEN 1 ELSE 0 END) as hits,
              ROUND(AVG(damage),1) as avg_dmg
              FROM combat_log GROUP BY technique ORDER BY avg_dmg DESC''')
-print("\\n--- Technique Effectiveness ---")
+print("\
+--- Technique Effectiveness ---")
 print(f"{'Technique':<20} {'Uses':>5} {'Hits':>5} {'Hit%':>5} {'AvgDmg':>7}")
 for tech, uses, hits, avg_dmg in c.fetchall():
     print(f"{tech:<20} {uses:>5} {hits:>5} {hits/uses*100:>4.0f}% {avg_dmg:>6.1f}")

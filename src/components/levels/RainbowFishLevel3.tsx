@@ -222,10 +222,12 @@ ax2.set_ylabel('Optimal male brightness', color='white')
 ax2.set_title('Equilibrium Color vs Predation', color='white', fontsize=11)
 ax2.tick_params(colors='gray')
 # Mark scenarios
-ax2.annotate('Umiam Lake\\n(low predation)', xy=(0.5, optimal_brightness[5]),
+ax2.annotate('Umiam Lake\
+(low predation)', xy=(0.5, optimal_brightness[5]),
             xytext=(2, 0.85), color='#22c55e', fontsize=9, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#22c55e'))
-ax2.annotate('River\\n(high predation)', xy=(6, optimal_brightness[75]),
+ax2.annotate('River\
+(high predation)', xy=(6, optimal_brightness[75]),
             xytext=(5, 0.2), color='#ef4444', fontsize=9, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -451,11 +453,13 @@ print(f"  Lake type: Monomictic (one mixing period in winter)")
 print(f"  Maximum depth: ~30m")
 print(f"  Summer surface temp: ~28°C, Bottom temp: ~10°C")
 print(f"  Thermocline depth: ~8-12m")
-print(f"\\nFish habitat analysis (July):")
+print(f"\
+Fish habitat analysis (July):")
 print(f"  Optimal depth for rainbow fish: {optimal_depth:.0f}m")
 print(f"  Temperature there: {temp_july[np.argmax(total_suit)]:.1f}°C")
 print(f"  DO there: {do_july[np.argmax(total_suit)]:.1f} mg/L")
-print(f"\\nThe thermocline zone is the 'Goldilocks layer' —")
+print(f"\
+The thermocline zone is the 'Goldilocks layer' —")
 print(f"warm enough for metabolism, oxygen-rich enough for survival.")`,
       challenge: 'Model the effect of climate warming: increase surface temperature by 2°C and show how a deeper, stronger thermocline reduces the habitable zone for cold-water fish species. Calculate the volume of suitable habitat lost.',
       successHint: 'Lake stratification creates invisible but profound boundaries in aquatic ecosystems. Understanding the vertical structure of temperature and oxygen is essential for fisheries management, water supply planning, and predicting how lakes respond to climate change.',

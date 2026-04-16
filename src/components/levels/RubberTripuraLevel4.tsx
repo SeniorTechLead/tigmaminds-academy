@@ -112,7 +112,8 @@ db.commit()
 print("RUBBER FORMULATION DATABASE")
 print("=" * 65)
 for f in cur.execute('SELECT * FROM formulations'):
-    print(f"\\n[{f[0]}] {f[1]} ({f[3]})")
+    print(f"\
+[{f[0]}] {f[1]} ({f[3]})")
     print(f"    Application: {f[2]}")
     total_phr = f[4]
     for ing in cur.execute('SELECT ingredient, category, amount_phr FROM ingredients WHERE formulation_id=? ORDER BY amount_phr DESC', (f[0],)):
@@ -214,7 +215,8 @@ for f in cur.execute('SELECT id, name, polymer FROM formulations'):
 db.commit()
 
 # Find best formulation for a target
-print("\\nFIND BEST FOR TARGET: hardness=60±5, elongation>400%")
+print("\
+FIND BEST FOR TARGET: hardness=60±5, elongation>400%")
 print("-" * 60)
 for f in cur.execute('SELECT id, name FROM formulations'):
     props = predict_properties(f[0], cur)
@@ -337,7 +339,8 @@ for r in cur.execute('SELECT nr_frac,sbr_frac,br_frac,tensile,elongation,hardnes
     print(f"{r[0]*100:>3.0f}% {r[1]*100:>4.0f}% {r[2]*100:>3.0f}% | {r[3]:>5.1f} {r[4]:>6.0f} {r[5]:>5.0f} {r[6]:>4.0f} {r[7]:>4.0f} {r[8]:>5.0f} | {r[9]:>6.4f}")
 
 if best_blend:
-    print(f"\\nOPTIMAL: {best_blend[0]}% NR + {best_blend[1]}% SBR + {best_blend[2]}% BR")
+    print(f"\
+OPTIMAL: {best_blend[0]}% NR + {best_blend[1]}% SBR + {best_blend[2]}% BR")
     print(f"Score: {best_blend[4]:.4f}")`,
       challenge: 'Add a non-linear synergy term: NR+BR blends get a 10% resilience bonus (they are highly compatible). How does this change the optimal blend?',
       successHint: 'Blend optimisation is a real industrial problem. The algorithm explores hundreds of combinations to find what would take months of laboratory trial-and-error.',
@@ -441,7 +444,8 @@ print("RUBBER PRODUCT LIFECYCLE REPORT")
 print("=" * 70)
 
 for p in cur.execute('SELECT * FROM products'):
-    print(f"\\n{'='*70}")
+    print(f"\
+{'='*70}")
     print(f"PRODUCT: {p[1]} ({p[3]*100:.0f}% NR)")
     print(f"Application: {p[2]} | Produced: {p[4]} | Status: {p[5]}")
 
@@ -465,7 +469,8 @@ for p in cur.execute('SELECT * FROM products'):
         print(f"    {s[0]:25s}: {s[1]:>8.1f} {s[2]}")
 
 # Summary
-print(f"\\n{'='*70}")
+print(f"\
+{'='*70}")
 print("FLEET SUMMARY")
 total_nr = cur.execute("SELECT SUM(nr_fraction) FROM products").fetchone()[0]
 print(f"Products tracked: {cur.execute('SELECT COUNT(*) FROM products').fetchone()[0]}")

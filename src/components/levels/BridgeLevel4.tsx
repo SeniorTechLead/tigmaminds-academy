@@ -367,7 +367,8 @@ moduli_wet = [engine.youngs_modulus(a, 50) for a in ages]
 ax.plot(ages, moduli_dry, color='#22c55e', linewidth=2, label='Dry season (12% MC)')
 ax.plot(ages, moduli_wet, color='#3b82f6', linewidth=2, label='Monsoon (50% MC)')
 ax.fill_between(ages, moduli_wet, moduli_dry, alpha=0.15, color='#f59e0b')
-ax.text(100, (moduli_dry[100]+moduli_wet[100])/2, 'Seasonal\\nvariation',
+ax.text(100, (moduli_dry[100]+moduli_wet[100])/2, 'Seasonal\
+variation',
         color='#f59e0b', fontsize=10, ha='center')
 ax.set_xlabel('Root age (years)', color='white', fontsize=11)
 ax.set_ylabel("Young's modulus (GPa)", color='white', fontsize=11)
@@ -384,8 +385,10 @@ ax.set_xlabel('Root age (years)', color='white', fontsize=11)
 ax.set_ylabel('Microfibril angle (degrees)', color='white', fontsize=11)
 ax.set_title('MFA decreases with maturity', color='white', fontsize=12)
 ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
-ax.text(100, 20, 'Young wood:\\nflexible, weaker', color='gray', fontsize=9, ha='center')
-ax.text(150, 13, 'Mature wood:\\nstiff, strong', color='#22c55e', fontsize=9, ha='center')
+ax.text(100, 20, 'Young wood:\
+flexible, weaker', color='gray', fontsize=9, ha='center')
+ax.text(150, 13, 'Mature wood:\
+stiff, strong', color='#22c55e', fontsize=9, ha='center')
 
 # Plot 4: Anastomosis junction strength
 ax = axes[1, 1]
@@ -562,7 +565,8 @@ ax.fill_between(sag_ratios * 100, 0, capacities, alpha=0.15, color='#3b82f6')
 ax.axvline(x=15, color='#f59e0b', linestyle='--', alpha=0.5)
 ax.axvline(x=25, color='#f59e0b', linestyle='--', alpha=0.5)
 ax.axhspan(0, 0, color='gray')  # dummy
-ax.text(20, max(capacities)*0.5, 'Typical range\\n(15-25%)', color='#f59e0b',
+ax.text(20, max(capacities)*0.5, 'Typical range\
+(15-25%)', color='#f59e0b',
         fontsize=10, ha='center')
 ax.set_xlabel('Sag ratio (%)', color='white', fontsize=11)
 ax.set_ylabel('Safe capacity (persons)', color='white', fontsize=11)
@@ -744,7 +748,8 @@ class RiskModule:
             lines.append(f"  {name:15s}: {factor:.3f} ({reduction_pct:+.1f}% capacity)")
         lines.append(f"Combined factor: {self.combined_factor():.3f}")
         lines.append(f"Adjusted capacity: {self.adjusted_capacity()} persons")
-        return '\\n'.join(lines)
+        return '\
+'.join(lines)
 
 
 # --- Scenario analysis ---
@@ -908,7 +913,8 @@ for name, params in scenarios.items():
     risk.wind_factor(params['wind'])
     risk.seismic_factor(params['pga'])
     risk.disease_factor(params['age'], params['maint'])
-    print(f"\\n{name}:")
+    print(f"\
+{name}:")
     print(risk.report())
 
 print()
@@ -1014,7 +1020,8 @@ class BioBridgeModeler:
         """Generate complete 6-panel dashboard."""
         fig, axes = plt.subplots(2, 3, figsize=(18, 11))
         fig.patch.set_facecolor('#1f2937')
-        fig.suptitle(f'Bio-Bridge Strength Modeler: {self.species.replace("_", " ").title()}\\n'
+        fig.suptitle(f'Bio-Bridge Strength Modeler: {self.species.replace("_", " ").title()}\
+'
                      f'Age: {self.age}yr | Span: {self.span}m | Roots: {self.n_roots} x {self.root_diam_cm}cm',
                      color='white', fontsize=14, fontweight='bold')
         for ax in axes.flat:
@@ -1040,7 +1047,10 @@ class BioBridgeModeler:
         maturity = 1 - np.exp(-0.03 * self.age)
         mfa = self.sp['mfa_young'] - maturity * (self.sp['mfa_young'] - self.sp['mfa_mature'])
 
-        props = ['Tensile\\nstrength', 'MFA\\n(lower=better)', 'Maturity', 'Moisture\\neffect']
+        props = ['Tensile\
+strength', 'MFA\
+(lower=better)', 'Maturity', 'Moisture\
+effect']
         vals_pct = [
             current_tensile / max_tensile * 100,
             (1 - mfa / self.sp['mfa_young']) * 100,
@@ -1135,7 +1145,8 @@ class BioBridgeModeler:
         # PANEL 6: Comparison with conventional bridges
         ax = axes[1, 2]
         comparison = {
-            'Living root\\n(this bridge)': {'cost_200yr': 10500, 'carbon_200yr': -12000, 'color': '#22c55e'},
+            'Living root\
+(this bridge)': {'cost_200yr': 10500, 'carbon_200yr': -12000, 'color': '#22c55e'},
             'Steel truss': {'cost_200yr': 1000000, 'carbon_200yr': 200000, 'color': '#3b82f6'},
             'RC bridge': {'cost_200yr': 900000, 'carbon_200yr': 350000, 'color': '#f59e0b'},
         }

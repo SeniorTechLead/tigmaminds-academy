@@ -19,7 +19,8 @@ export default function MemoryGrandmaLevel3() {
       code: `import numpy as np
 
 # --- Ebbinghaus forgetting curve — modeling memory decay over time ---
-print("=== The Ebbinghaus Forgetting Curve ===\\n")
+print("=== The Ebbinghaus Forgetting Curve ===\
+")
 
 # Ebbinghaus (1885) discovered that memory decays exponentially:
 # R(t) = e^(-t/S) where R = retention, t = time, S = memory strength
@@ -50,13 +51,15 @@ for t, label in zip(time_hours, time_labels):
 # Key observations
 s_weak = 1
 s_strong = 24
-print(f"\\nAfter 24 hours:")
+print(f"\
+After 24 hours:")
 print(f"  Weak memory (S=1):    {forgetting_curve(24, s_weak)*100:.1f}% retained")
 print(f"  Strong memory (S=24): {forgetting_curve(24, s_strong)*100:.1f}% retained")
 
 # Half-life: time to forget 50%
 # R(t) = 0.5 -> t = S * ln(2)
-print(f"\\nHalf-life (time to 50% retention):")
+print(f"\
+Half-life (time to 50% retention):")
 for s in strengths:
     half_life = s * np.log(2)
     if half_life < 1:
@@ -67,13 +70,15 @@ for s in strengths:
         print(f"  S={s:>3d}: {half_life/24:.1f} days")
 
 # Practical example: learning vocabulary
-print(f"\\nPractical example — learning 20 new words:")
+print(f"\
+Practical example — learning 20 new words:")
 words_learned = 20
 for t, label in [(1, "1 hour"), (24, "1 day"), (168, "1 week")]:
     retained = int(words_learned * forgetting_curve(t, 5))
     print(f"  After {label}: ~{retained}/{words_learned} words remembered (S=5)")
 
-print(f"\\nKey insight: The curve is steepest in the first hour. If you review")
+print(f"\
+Key insight: The curve is steepest in the first hour. If you review")
 print(f"within that window, you reset the curve AND increase S (strength).")
 print(f"This is exactly what the grandmother in the story did intuitively —")
 print(f"she retold stories soon after the first telling.")`,
@@ -91,7 +96,8 @@ print(f"she retold stories soon after the first telling.")`,
       code: `import numpy as np
 
 # --- Hippocampal encoding — simulating how memories form and consolidate ---
-print("=== Hippocampal Encoding Simulation ===\\n")
+print("=== Hippocampal Encoding Simulation ===\
+")
 
 np.random.seed(42)
 
@@ -113,7 +119,8 @@ stories = {
     "Festival memory":  create_memory(n_neurons),
 }
 
-print(f"Neural network: {n_neurons} neurons\\n")
+print(f"Neural network: {n_neurons} neurons\
+")
 print("Stored memory patterns (1=active neuron, 0=silent):")
 for name, pattern in stories.items():
     active = sum(pattern)
@@ -127,7 +134,8 @@ for pattern in stories.values():
 np.fill_diagonal(W, 0)  # no self-connections
 W /= len(stories)  # normalize
 
-print(f"\\nWeight matrix: {n_neurons}x{n_neurons}, range [{W.min():.3f}, {W.max():.3f}]")
+print(f"\
+Weight matrix: {n_neurons}x{n_neurons}, range [{W.min():.3f}, {W.max():.3f}]")
 
 # Test retrieval: give a partial cue, can the network complete it?
 def retrieve(cue, W, steps=5):
@@ -142,7 +150,8 @@ def similarity(a, b):
     """Fraction of matching bits."""
     return np.mean(a == b)
 
-print("\\nMemory retrieval from partial cues:")
+print("\
+Memory retrieval from partial cues:")
 for name, pattern in stories.items():
     # Corrupt 40% of the pattern (partial cue)
     cue = pattern.copy()
@@ -160,7 +169,8 @@ for name, pattern in stories.items():
     print(f"    Accuracy: {sim:.0f}%")
 
 # Capacity limit: too many memories cause interference
-print("\\nCapacity test: what happens with too many stored memories?")
+print("\
+Capacity test: what happens with too many stored memories?")
 for n_memories in [2, 4, 8, 12]:
     W_test = np.zeros((n_neurons, n_neurons))
     test_patterns = [create_memory(n_neurons) for _ in range(n_memories)]
@@ -180,7 +190,8 @@ for n_memories in [2, 4, 8, 12]:
 
     print(f"  {n_memories:>2d} memories: avg retrieval accuracy = {np.mean(accuracies)*100:.0f}%")
 
-print(f"\\nKey insight: The network works well with a few memories but degrades")
+print(f"\
+Key insight: The network works well with a few memories but degrades")
 print(f"as more are added. This is why the grandmother focused on a small")
 print(f"set of core stories — quality over quantity prevents interference.")`,
       challenge: "Extend this model by adding a second variable and exploring how the interaction changes the results.",
@@ -197,7 +208,8 @@ print(f"set of core stories — quality over quantity prevents interference.")`,
       code: `import numpy as np
 
 # --- Spaced repetition theory — optimizing review intervals for retention ---
-print("=== Spaced Repetition: Optimal Review Scheduling ===\\n")
+print("=== Spaced Repetition: Optimal Review Scheduling ===\
+")
 
 # The SM-2 algorithm (used in Anki): after each review, the interval
 # grows by a multiplier that depends on how well you recalled.
@@ -235,14 +247,16 @@ print(f"{'Review':>7s} {'Day':>5s} {'Interval':>9s} {'EF':>5s}")
 for i, (day, interval, ef, q) in enumerate(perfect):
     print(f"{i+1:>7d} {day:>5.0f} {interval:>8d}d {ef:>5.2f}")
 
-print("\\n--- Struggling student (mix of scores) ---")
+print("\
+--- Struggling student (mix of scores) ---")
 struggling = sm2_schedule([3, 2, 4, 3, 5, 4, 5])
 print(f"{'Review':>7s} {'Day':>5s} {'Interval':>9s} {'EF':>5s} {'Score':>6s}")
 for i, (day, interval, ef, q) in enumerate(struggling):
     print(f"{i+1:>7d} {day:>5.0f} {interval:>8d}d {ef:>5.2f} {q:>6d}")
 
 # Compare: cramming vs spaced repetition
-print("\\n--- Cramming vs Spaced: 30-day simulation ---")
+print("\
+--- Cramming vs Spaced: 30-day simulation ---")
 def retention_over_time(days, reviews_at, strength_boost=5):
     """Simulate retention with reviews at given days."""
     strength = strength_boost
@@ -275,7 +289,8 @@ print("-" * 27)
 for d in checkpoints:
     print(f"{d:>5d} {cram_retention[d]*100:>9.0f}% {spaced_retention[d]*100:>9.0f}%")
 
-print(f"\\nAt day 30: cramming retains {cram_retention[29]*100:.0f}%, spaced retains {spaced_retention[29]*100:.0f}%")
+print(f"\
+At day 30: cramming retains {cram_retention[29]*100:.0f}%, spaced retains {spaced_retention[29]*100:.0f}%")
 print(f"Spaced repetition wins because each review happens just before")
 print(f"forgetting, which strengthens the memory trace more efficiently")
 print(f"than massing all reviews together.")`,
@@ -293,7 +308,8 @@ print(f"than massing all reviews together.")`,
       code: `import numpy as np
 
 # --- Memory interference — modeling how new learning disrupts old memories ---
-print("=== Memory Interference Model ===\\n")
+print("=== Memory Interference Model ===\
+")
 
 np.random.seed(42)
 
@@ -320,7 +336,8 @@ print(f"  Story C (different): {memory_C_different.astype(int).tolist()}")
 
 sim_AB = cosine_similarity(memory_A, memory_B_similar)
 sim_AC = cosine_similarity(memory_A, memory_C_different)
-print(f"\\nSimilarity A-B: {sim_AB:.3f} (high overlap)")
+print(f"\
+Similarity A-B: {sim_AB:.3f} (high overlap)")
 print(f"Similarity A-C: {sim_AC:.3f} (low overlap)")
 
 # Simulate retroactive interference
@@ -336,7 +353,8 @@ def retrieve_with_interference(target, interferer, interference_strength=0.5):
     accuracy = np.mean(retrieved_binary == target.astype(int))
     return accuracy, interference
 
-print("\\n--- Retroactive Interference ---")
+print("\
+--- Retroactive Interference ---")
 print("(Learning a new story right after an old one)")
 n_trials = 100
 for interferer_name, interferer in [("B (similar)", memory_B_similar), ("C (different)", memory_C_different)]:
@@ -349,7 +367,8 @@ for interferer_name, interferer in [("B (similar)", memory_B_similar), ("C (diff
     print(f"    Interference level: {interf:.3f}")
 
 # Proactive interference: how many old memories make new learning harder
-print("\\n--- Proactive Interference ---")
+print("\
+--- Proactive Interference ---")
 print("(Old memories making it harder to learn new ones)")
 for n_prior in [0, 2, 5, 10]:
     # More prior memories = more cumulative interference
@@ -360,12 +379,14 @@ for n_prior in [0, 2, 5, 10]:
     print(f"  {n_prior:>2d} prior memories: interference = {total_interference:.3f}, retention = {effective_retention*100:.0f}%")
 
 # Spacing effect on interference
-print("\\n--- How spacing reduces interference ---")
+print("\
+--- How spacing reduces interference ---")
 print("  Back-to-back study: interference at full strength")
 print("  1 hour gap: interference reduced ~40%")
 print("  1 day gap: interference reduced ~70%")
 print("  1 week gap: interference reduced ~90%")
-print("\\nKey insight: The grandmother never told two similar stories on the")
+print("\
+Key insight: The grandmother never told two similar stories on the")
 print("same day. By spacing similar content apart, she minimized interference")
 print("and gave each story time to consolidate independently.")`,
       challenge: "Extend this model by adding a second variable and exploring how the interaction changes the results.",
@@ -382,7 +403,8 @@ print("and gave each story time to consolidate independently.")`,
       code: `import numpy as np
 
 # --- Sleep and consolidation — simulating overnight memory strengthening ---
-print("=== Sleep & Memory Consolidation ===\\n")
+print("=== Sleep & Memory Consolidation ===\
+")
 
 np.random.seed(42)
 
@@ -431,7 +453,8 @@ def consolidate(memories, n_cycles=5, replay_noise=0.05):
 # Run consolidation
 post_sleep = consolidate(memories)
 
-print("\\nMemories after one night of sleep:")
+print("\
+Memories after one night of sleep:")
 print(f"{'Memory':<35s} {'Before':>7s} {'After':>7s} {'Change':>7s}")
 print("-" * 59)
 for m in post_sleep:
@@ -439,7 +462,8 @@ for m in post_sleep:
     print(f"{m['name']:<35s} {m['strength']:>7.2f} {m['post_sleep']:>7.2f} {sign}{m['change']:>6.2f}")
 
 # Analyze which factors matter most
-print("\\nWhat predicts memory strengthening during sleep?")
+print("\
+What predicts memory strengthening during sleep?")
 changes = np.array([m["change"] for m in post_sleep])
 emotions = np.array([m["emotional"] for m in post_sleep])
 rehearsals = np.array([m["rehearsals"] for m in post_sleep])
@@ -450,14 +474,16 @@ print(f"  Correlation with emotional intensity: {corr_emotion:+.3f}")
 print(f"  Correlation with prior rehearsals:    {corr_rehearsal:+.3f}")
 
 # Multi-night simulation
-print("\\nMulti-night consolidation (grandmother's story):")
+print("\
+Multi-night consolidation (grandmother's story):")
 story_strength = 0.6
 for night in range(7):
     replay_boost = 0.05 + 0.03 * 0.9  # high emotional tag
     story_strength = min(1.0, story_strength + replay_boost * 0.8)
     print(f"  Night {night+1}: strength = {story_strength:.3f}")
 
-print(f"\\nKey insight: Emotional memories (like grandmother's stories) get")
+print(f"\
+Key insight: Emotional memories (like grandmother's stories) get")
 print(f"preferential replay during sleep. After 7 nights, the story's memory")
 print(f"strength reaches {story_strength:.2f}, while low-emotion memories fade.")
 print(f"This is why we remember stories better than facts.")`,
@@ -475,7 +501,8 @@ print(f"This is why we remember stories better than facts.")`,
       code: `import numpy as np
 
 # --- Adaptive scheduling — learning your personal forgetting rate ---
-print("=== Adaptive Forgetting Rate Estimator ===\\n")
+print("=== Adaptive Forgetting Rate Estimator ===\
+")
 
 np.random.seed(42)
 
@@ -532,7 +559,8 @@ scheduler.add_item("A", "Elephant Story")
 # Student B: needs more practice
 scheduler.add_item("B", "Elephant Story")
 
-print("Simulating review sessions over 30 days...\\n")
+print("Simulating review sessions over 30 days...\
+")
 
 # Student A review history (mostly recalls)
 reviews_A = [(1, True), (3, True), (7, True), (14, True), (28, True)]
@@ -546,7 +574,8 @@ for day, recalled in reviews_A:
     item = scheduler.items["A"]
     print(f"{day:>5d} {'Yes' if recalled else 'No':>9s} {pred*100:>9.0f}% {item['decay_rate']:>11.4f} {item['interval']:>13d}d")
 
-print("\\n--- Student B (needs more practice) ---")
+print("\
+--- Student B (needs more practice) ---")
 print(f"{'Day':>5s} {'Recalled':>9s} {'Predicted':>10s} {'Decay rate':>11s} {'Next interval':>14s}")
 for day, recalled in reviews_B:
     pred = scheduler.record_review("B", day, recalled)
@@ -554,12 +583,14 @@ for day, recalled in reviews_B:
     print(f"{day:>5d} {'Yes' if recalled else 'No':>9s} {pred*100:>9.0f}% {item['decay_rate']:>11.4f} {item['interval']:>13d}d")
 
 # Compare final parameters
-print("\\nFinal learned parameters:")
+print("\
+Final learned parameters:")
 for sid in ["A", "B"]:
     item = scheduler.items[sid]
     print(f"  Student {sid}: decay_rate={item['decay_rate']:.4f}, strength={item['strength']:.2f}, next_review_in={item['interval']}d")
 
-print(f"\\n  Student A's interval grew to {scheduler.items['A']['interval']}d (learns fast)")
+print(f"\
+  Student A's interval grew to {scheduler.items['A']['interval']}d (learns fast)")
 print(f"  Student B's interval is {scheduler.items['B']['interval']}d (needs more frequent review)")
 
 # Predict retention at day 30
@@ -567,7 +598,8 @@ for sid in ["A", "B"]:
     ret = scheduler.predict_retention(sid, 30)
     print(f"  Student {sid} predicted retention at day 30: {ret*100:.0f}%")
 
-print(f"\\nKey insight: The algorithm adapts to each learner. It does not treat")
+print(f"\
+Key insight: The algorithm adapts to each learner. It does not treat")
 print(f"everyone the same. This is what makes modern systems like Anki more")
 print(f"effective than fixed study schedules — and why the grandmother adjusted")
 print(f"her storytelling frequency for each grandchild.")`,

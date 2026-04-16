@@ -72,7 +72,8 @@ for mat in linings:
     print(f"{mat['name']:<22} {mat['roughness']:>8.4f}m {f:>7.4f} {h_loss:>8.1f} m {gradient:>8.2f} m/km")
 
 # What gradient did the Romans actually use?
-print("\\n=== Historical Comparison ===")
+print("\
+=== Historical Comparison ===")
 aqueducts = [
     ("Aqua Appia (312 BC)", 16.4, 0.67),
     ("Aqua Marcia (144 BC)", 91.3, 2.94),
@@ -145,7 +146,8 @@ for d in valley_depths:
     print(f"  {d:>4} m depth → {p/1000:>6.1f} kPa ({p/101325:>5.1f} atm)")
 
 # Required wall thickness for each material
-print(f"\\n=== Required Pipe Wall Thickness (mm) ===")
+print(f"\
+=== Required Pipe Wall Thickness (mm) ===")
 print(f"{'Material':<18}" + "".join(f"{d:>7}m" for d in valley_depths))
 print("-" * 68)
 
@@ -159,7 +161,8 @@ for mat in materials:
     print(row)
 
 # Mass per metre comparison
-print(f"\\n=== Pipe Mass per Metre (kg/m) at 40 m depth ===")
+print(f"\
+=== Pipe Mass per Metre (kg/m) at 40 m depth ===")
 p_40 = hydrostatic_pressure(40)
 for mat in materials:
     allowable = mat["tensile_mpa"] * 1e6 / safety_factor
@@ -215,7 +218,8 @@ width = 6.4           # bridge width (m)
 g = 9.81
 
 print("=== Pont du Gard Arch Force Analysis ===")
-print(f"Stone density: {stone_density} kg/m³ | Width: {width} m\\n")
+print(f"Stone density: {stone_density} kg/m³ | Width: {width} m\
+")
 
 total_weight_above = 0
 
@@ -349,7 +353,8 @@ for aq in aqueducts:
 
     print(f"{aq['name']:<28} {v:>6.2f}m/s {t_res:>7.1f}hr {bacteria_final:>8.0f}/mL {quality:>8}")
 
-print("\\n* Bacteria per mL at delivery point")
+print("\
+* Bacteria per mL at delivery point")
 print("Modern WHO guideline: 0 E.coli per 100 mL (much stricter than Roman standards)")
 print("Roman 'acceptable': < 1000 per mL (based on taste and turbidity)")`,
       challenge: 'Add a settling basin (piscina) midway through the aqueduct. Assume the basin removes 70% of bacteria (they settle with sediment) but adds 2 hours of residence time. Does the basin improve or worsen final water quality? The answer depends on the bacterial doubling rate — a basin helps when doubling time is long, hurts when it is short.',
@@ -428,7 +433,8 @@ sections = [
 results = flow_audit(source, sections)
 
 print("=== Frontinus Flow Audit: Aqua Claudia ===")
-print(f"Source supply: {source:,} quinariae\\n")
+print(f"Source supply: {source:,} quinariae\
+")
 print(f"{'Section':<22} {'Flow In':>8} {'Legal':>7} {'Leaks':>7} {'Theft':>7} {'Loss%':>6}")
 print("-" * 59)
 
@@ -444,14 +450,17 @@ for r in results:
     total_theft += r["theft"]
 
 delivered = results[-1]["flow_out"]
-print(f"\\n{'TOTALS':<22} {'':>8} {total_legal:>6.0f} {total_leaks:>6.0f} {total_theft:>6.0f}")
-print(f"\\nDelivered to end: {delivered:,.0f} quinariae ({delivered/source*100:.1f}%)")
+print(f"\
+{'TOTALS':<22} {'':>8} {total_legal:>6.0f} {total_leaks:>6.0f} {total_theft:>6.0f}")
+print(f"\
+Delivered to end: {delivered:,.0f} quinariae ({delivered/source*100:.1f}%)")
 print(f"Total leaks: {total_leaks:,.0f} quinariae ({total_leaks/source*100:.1f}%)")
 print(f"Total theft: {total_theft:,.0f} quinariae ({total_theft/source*100:.1f}%)")
 print(f"System efficiency: {(total_legal + delivered)/source*100:.1f}%")
 
 # Priority investigation
-print("\\n=== Priority Sections for Investigation ===")
+print("\
+=== Priority Sections for Investigation ===")
 sorted_by_loss = sorted(results, key=lambda r: r["theft"], reverse=True)
 for r in sorted_by_loss[:3]:
     print(f"  {r['name']}: {r['theft']:.0f} quinariae theft detected — investigate!")`,

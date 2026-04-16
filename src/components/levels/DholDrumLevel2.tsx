@@ -444,7 +444,13 @@ ax.tick_params(colors='gray')
 # Complete signal chain diagram
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-steps = ['Hit pad\\n(physical)', 'Piezo\\n(voltage)', 'ADC\\n(digital)', 'MIDI\\n(message)', 'Synth\\n(audio)', 'Speaker\\n(sound)']
+steps = ['Hit pad\
+(physical)', 'Piezo\
+(voltage)', 'ADC\
+(digital)', 'MIDI\
+(message)', 'Synth\
+(audio)', 'Speaker\
+(sound)']
 step_colors = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7', '#ec4899']
 
 for i, (step, sc) in enumerate(zip(steps, step_colors)):
@@ -692,7 +698,10 @@ ax.set_ylim(-70, 5)
 # Absorption coefficients by material
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
-materials = ['Concrete', 'Glass', 'Wood\\npanel', 'Carpet', 'Acoustic\\nfoam', 'Audience\\n(people)']
+materials = ['Concrete', 'Glass', 'Wood\
+panel', 'Carpet', 'Acoustic\
+foam', 'Audience\
+(people)']
 alphas = [0.02, 0.05, 0.10, 0.40, 0.80, 0.50]
 bar_colors = plt.cm.RdYlGn(np.array(alphas))
 bars = ax.bar(materials, alphas, color=bar_colors)
@@ -732,11 +741,14 @@ ax.set_title('Room Impulse Response (Namghar)', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 ax.set_xlim(0, 500)
 
-ax.annotate('Direct\\nsound', xy=(0, 1), xytext=(20, 0.8), color='white', fontsize=8,
+ax.annotate('Direct\
+sound', xy=(0, 1), xytext=(20, 0.8), color='white', fontsize=8,
             arrowprops=dict(arrowstyle='->', color='white'))
-ax.annotate('Early\\nreflections', xy=(35, 0.4), xytext=(80, 0.6), color='white', fontsize=8,
+ax.annotate('Early\
+reflections', xy=(35, 0.4), xytext=(80, 0.6), color='white', fontsize=8,
             arrowprops=dict(arrowstyle='->', color='white'))
-ax.annotate('Late reverb\\n(diffuse)', xy=(200, 0.05), xytext=(250, 0.3), color='white', fontsize=8,
+ax.annotate('Late reverb\
+(diffuse)', xy=(200, 0.05), xytext=(250, 0.3), color='white', fontsize=8,
             arrowprops=dict(arrowstyle='->', color='white'))
 
 plt.tight_layout()

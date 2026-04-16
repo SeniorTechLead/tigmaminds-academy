@@ -211,7 +211,8 @@ ax2.plot(t, zoo2, color='#3b82f6', linewidth=1.5, label='Zooplankton')
 ax2.plot(t, small_fish2, color='#f59e0b', linewidth=1.5, label='Small fish')
 ax2.plot(t, large_fish2, color='#ef4444', linewidth=1.5, label='Large fish')
 ax2.axvline(100, color='#ef4444', linestyle='--', alpha=0.5)
-ax2.text(102, 80, 'Large fish\\nremoved', color='#ef4444', fontsize=9)
+ax2.text(102, 80, 'Large fish\
+removed', color='#ef4444', fontsize=9)
 ax2.set_xlabel('Time', color='white')
 ax2.set_ylabel('Population', color='white')
 ax2.set_title('Trophic Cascade: Large Fish Removed', color='white', fontsize=12)
@@ -401,8 +402,11 @@ ax1.set_title('Peat Accumulation Over 2000 Years', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
 
 # Mark historical periods
-periods = [(0, 'Roman era', 'white'), (500, 'Medieval\\nWarm Period', '#ef4444'),
-           (1200, 'Little\\nIce Age', '#3b82f6'), (1800, 'Industrial\\nera', '#f59e0b')]
+periods = [(0, 'Roman era', 'white'), (500, 'Medieval\
+Warm Period', '#ef4444'),
+           (1200, 'Little\
+Ice Age', '#3b82f6'), (1800, 'Industrial\
+era', '#f59e0b')]
 for yr, label, color in periods:
     ax1.axvline(yr, color=color, linestyle=':', alpha=0.3)
     ax1.text(yr + 20, thickness.max() * 0.9, label, color=color, fontsize=8)
@@ -417,7 +421,8 @@ ax2.set_title('Cumulative Carbon Sequestration', color='white', fontsize=12)
 ax2.tick_params(colors='gray')
 
 # Annotate current value
-ax2.annotate(f'{carbon_stored[-1]:.0f} tonnes C/ha\\nstored today', xy=(years[-1], carbon_stored[-1]),
+ax2.annotate(f'{carbon_stored[-1]:.0f} tonnes C/ha\
+stored today', xy=(years[-1], carbon_stored[-1]),
             xytext=(years[-1]-400, carbon_stored[-1]*0.7), color='#22c55e', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#22c55e'))
 

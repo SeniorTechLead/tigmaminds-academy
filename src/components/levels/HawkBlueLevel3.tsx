@@ -231,7 +231,8 @@ opt_V = V_range[opt_idx[1]]
 opt_phi = phi_range[opt_idx[0]]
 opt_climb = climb[opt_idx]
 ax1.plot(opt_V, opt_phi, '*', color='white', markersize=15)
-ax1.annotate(f'Optimum: V={opt_V:.0f}m/s, φ={opt_phi}°\\nClimb={opt_climb:.2f}m/s',
+ax1.annotate(f'Optimum: V={opt_V:.0f}m/s, φ={opt_phi}°\
+Climb={opt_climb:.2f}m/s',
              xy=(opt_V, opt_phi), xytext=(opt_V+3, opt_phi+5),
              color='white', fontsize=10, arrowprops=dict(arrowstyle='->', color='white'))
 
@@ -616,7 +617,8 @@ plt.savefig('/tmp/hawk_pareto.png', dpi=100, bbox_inches='tight', facecolor='#11
 plt.show()
 
 print(f"Pareto optimal strategies: {np.sum(is_pareto)} out of {n_strategies}")
-print(f"\\nExample Pareto strategies:")
+print(f"\
+Example Pareto strategies:")
 print(f"{'Distance':>10} {'Energy':>10} {'Speed':>8} {'Dwell':>8}")
 for i in np.where(is_pareto)[0][:5]:
     print(f"{distances[i]:>10.0f} {energies[i]:>10.1f} {glide_speeds[i]:>8.1f} {dwell_times[i]:>8.0f}")`,

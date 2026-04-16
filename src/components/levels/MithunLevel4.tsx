@@ -138,7 +138,8 @@ traits = list(pop.TRAITS.keys())
 h2_vals = [pop.TRAITS[t]['h2'] for t in traits]
 bars = ax.bar(range(len(traits)), h2_vals, color=trait_colors, edgecolor='none')
 ax.set_xticks(range(len(traits)))
-ax.set_xticklabels([t.replace('_', '\\n') for t in traits], color='white', fontsize=8)
+ax.set_xticklabels([t.replace('_', '\
+') for t in traits], color='white', fontsize=8)
 ax.set_ylabel('Heritability (h2)', color='white')
 ax.set_title('Heritability by trait', color='white', fontsize=11)
 for bar, h2 in zip(bars, h2_vals):
@@ -1214,7 +1215,8 @@ ebvs_sel = [dashboard.male_ebvs[s] for s in sire_ids]
 colors_sire = plt.cm.viridis(np.linspace(0.3, 0.9, len(sire_ids)))
 bars = ax.bar(range(len(sire_ids)), loads, color=colors_sire, edgecolor='none')
 ax.set_xticks(range(len(sire_ids)))
-ax.set_xticklabels([f'Bull {s}\\n(EBV:{ebvs_sel[i]:.1f})' for i, s in enumerate(sire_ids)],
+ax.set_xticklabels([f'Bull {s}\
+(EBV:{ebvs_sel[i]:.1f})' for i, s in enumerate(sire_ids)],
                     color='white', fontsize=6, rotation=45)
 ax.set_ylabel('Matings assigned', color='white')
 ax.set_title('RECOMMENDED SIRE USAGE', color='white', fontsize=12)

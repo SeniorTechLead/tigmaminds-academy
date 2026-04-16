@@ -184,8 +184,10 @@ for r0 in r0_values:
     planet_brightness[r0] = np.array(brightness)
 
 print("=== ATMOSPHERIC SCINTILLATION SIMULATION ===")
-print(f"\\nSimulated {n_frames} frames over {time_axis[-1]:.0f} seconds")
-print(f"\\n{'Conditions':<28} {'Fried r0':>9} {'Star scint.':>12} {'Planet scint.':>14} {'Ratio':>8}")
+print(f"\
+Simulated {n_frames} frames over {time_axis[-1]:.0f} seconds")
+print(f"\
+{'Conditions':<28} {'Fried r0':>9} {'Star scint.':>12} {'Planet scint.':>14} {'Ratio':>8}")
 print("-" * 74)
 for r0, label in zip(r0_values, labels):
     star_sci = np.std(star_brightness[r0]) / np.mean(star_brightness[r0])
@@ -193,9 +195,11 @@ for r0, label in zip(r0_values, labels):
     ratio = star_sci / planet_sci if planet_sci > 0 else float('inf')
     print(f"{label:<28} {r0*100:>7.0f} cm {star_sci:>11.3f} {planet_sci:>13.3f} {ratio:>7.1f}x")
 
-print(f"\\nScintillation index = std(brightness) / mean(brightness)")
+print(f"\
+Scintillation index = std(brightness) / mean(brightness)")
 print(f"Stars (point sources) twinkle {np.std(star_brightness[0.05])/np.mean(star_brightness[0.05]) / (np.std(planet_brightness[0.05])/np.mean(planet_brightness[0.05])):.1f}x more than planets in city conditions")
-print(f"\\nZiro Valley (r0=20cm) has {np.std(star_brightness[0.05])/np.mean(star_brightness[0.05]) / (np.std(star_brightness[0.20])/np.mean(star_brightness[0.20])):.1f}x less star scintillation than a city")
+print(f"\
+Ziro Valley (r0=20cm) has {np.std(star_brightness[0.05])/np.mean(star_brightness[0.05]) / (np.std(star_brightness[0.20])/np.mean(star_brightness[0.20])):.1f}x less star scintillation than a city")
 print(f"This is why stars appear steadier from mountain valleys — larger r0")
 print(f"means larger coherence cells, less wavefront distortion, less twinkling.")`,
       challenge: 'Add a simulation for a telescope with adaptive optics: at each timestep, subtract the mean phase from the screen (simulating a tip-tilt corrector). How much does this reduce the scintillation index? Real AO systems correct hundreds of modes.',
@@ -266,22 +270,26 @@ led_cool_total /= norm
 led_warm_total /= norm
 
 print("=== LIGHT POLLUTION: LAMP SPECTRUM vs SCATTERING ===")
-print(f"\\nRayleigh scattering (lambda^-4) favors short wavelengths:")
+print(f"\
+Rayleigh scattering (lambda^-4) favors short wavelengths:")
 print(f"  Blue (450nm): {rayleigh_scattering(np.array([450.0]))[0]:.2f}x relative to green")
 print(f"  Green (550nm): {rayleigh_scattering(np.array([550.0]))[0]:.2f}x (reference)")
 print(f"  Sodium (589nm): {rayleigh_scattering(np.array([589.0]))[0]:.2f}x")
 print(f"  Red (650nm): {rayleigh_scattering(np.array([650.0]))[0]:.2f}x")
 
-print(f"\\nTotal scattered light by lamp type (normalized to sodium = 1.00):")
+print(f"\
+Total scattered light by lamp type (normalized to sodium = 1.00):")
 print(f"  Sodium (LPS):   {sodium_total:.2f}  (narrow 589nm emission)")
 print(f"  Warm white LED: {led_warm_total:.2f}  (reduced blue, more amber)")
 print(f"  Cool white LED: {led_cool_total:.2f}  (strong blue peak at 450nm)")
-print(f"\\nCool LEDs scatter {led_cool_total/sodium_total:.1f}x more light than sodium lamps!")
+print(f"\
+Cool LEDs scatter {led_cool_total/sodium_total:.1f}x more light than sodium lamps!")
 print(f"Warm LEDs scatter {led_warm_total/sodium_total:.1f}x more than sodium.")
 
 # Sky brightness vs distance from light source
 distances_km = np.array([1, 5, 10, 20, 50, 100])
-print(f"\\nSky brightness falloff with distance (cool LED, 100k population):")
+print(f"\
+Sky brightness falloff with distance (cool LED, 100k population):")
 print(f"  {'Distance':>10} {'Radiance':>12} {'Sky mag':>10}")
 print(f"  {'-'*35}")
 base_radiance = 100  # nW/cm²/sr at source
@@ -289,7 +297,8 @@ for d in distances_km:
     rad = base_radiance / d**2.5
     sb = -2.5 * np.log10(rad + 0.17) + 26.33  # add natural background
     print(f"  {d:>8} km {rad:>10.3f} nW {sb:>8.1f}")
-print(f"\\nLight pollution reaches 50-100 km from a city of 100,000.")
+print(f"\
+Light pollution reaches 50-100 km from a city of 100,000.")
 print(f"Switching to warm LEDs or sodium reduces scatter, but shielding")
 print(f"(preventing upward light) is the most effective single intervention.")`,
       challenge: 'Add Mie scattering to the model with a humidity parameter (0 = dry, 1 = monsoon). Show how the relative advantage of sodium vs LED changes with humidity. In humid conditions, the wavelength advantage of sodium diminishes because Mie scattering is wavelength-independent.',
@@ -359,14 +368,17 @@ locations = {
 np.random.seed(42)
 
 print("=== BORTLE SCALE & SKY QUALITY MEASUREMENT ===")
-print(f"\\n{'Bortle':>6} {'Name':<32} {'SQM range':>14} {'Lim mag':>8} {'Stars visible':>14}")
+print(f"\
+{'Bortle':>6} {'Name':<32} {'SQM range':>14} {'Lim mag':>8} {'Stars visible':>14}")
 print("-" * 78)
 for cls in range(1, 10):
     d = bortle_data[cls]
     print(f"{cls:>6} {d['name']:<32} {d['sqm_min']:.2f}-{d['sqm_max']:.2f} {d['limiting_mag']:>8.1f} {d['stars_visible']:>14,}")
 
-print(f"\\n--- SQM Readings for NE India Locations ---")
-print(f"\\n{'Location':<35} {'SQM (mean)':>11} {'SQM (std)':>10} {'Bortle':>7} {'Stars':>8} {'Quality':<20}")
+print(f"\
+--- SQM Readings for NE India Locations ---")
+print(f"\
+{'Location':<35} {'SQM (mean)':>11} {'SQM (std)':>10} {'Bortle':>7} {'Stars':>8} {'Quality':<20}")
 print("-" * 95)
 
 for loc_name, (sqm_mean, sqm_std) in locations.items():
@@ -382,7 +394,8 @@ delhi_sqm = np.random.normal(16.5, 0.5, 30)
 ziro_stars = estimate_stars_visible(bortle_data[classify_bortle(np.mean(ziro_sqm))]['limiting_mag'])
 delhi_stars = estimate_stars_visible(bortle_data[classify_bortle(np.mean(delhi_sqm))]['limiting_mag'])
 
-print(f"\\nZiro Valley vs Delhi:")
+print(f"\
+Ziro Valley vs Delhi:")
 print(f"  Ziro: ~{ziro_stars:,} stars visible (Bortle {classify_bortle(np.mean(ziro_sqm))})")
 print(f"  Delhi: ~{delhi_stars:,} stars visible (Bortle {classify_bortle(np.mean(delhi_sqm))})")
 print(f"  Ziro shows {ziro_stars/max(1,delhi_stars):.0f}x more stars than Delhi!")`,
@@ -468,10 +481,13 @@ sky_levels = [
 star_fluxes = [1000, 5000, 10000, 50000]
 
 print("=== CCD PHOTOMETRY SIMULATION ===")
-print(f"\\nStar image: 100x100 pixels, FWHM=3.0 pixels")
+print(f"\
+Star image: 100x100 pixels, FWHM=3.0 pixels")
 print(f"Aperture radius=10px, sky annulus 15-25px")
-print(f"\\n--- SNR vs Sky Brightness ---")
-print(f"\\n{'Sky condition':<28} {'Sky bg':>7} {'Star=1k':>9} {'Star=5k':>9} {'Star=10k':>9} {'Star=50k':>9}")
+print(f"\
+--- SNR vs Sky Brightness ---")
+print(f"\
+{'Sky condition':<28} {'Sky bg':>7} {'Star=1k':>9} {'Star=5k':>9} {'Star=10k':>9} {'Star=50k':>9}")
 print("-" * 75)
 
 for sky_name, sky_bg in sky_levels:
@@ -483,14 +499,16 @@ for sky_name, sky_bg in sky_levels:
     print(f"{sky_name:<28} {sky_bg:>7} {snr_row[0]:>9.1f} {snr_row[1]:>9.1f} {snr_row[2]:>9.1f} {snr_row[3]:>9.1f}")
 
 # Show a detailed example
-print(f"\\n--- Detailed Example: 10,000-photon star ---")
+print(f"\
+--- Detailed Example: 10,000-photon star ---")
 for sky_name, sky_bg in sky_levels:
     img, _, _ = generate_star_image(star_flux=10000, sky_brightness=sky_bg)
     flux, sky_per_px, snr, n_pix = aperture_photometry(img, 50, 50)
     mag_err = 1.0857 / snr if snr > 0 else float('inf')
     print(f"  {sky_name:<28}: SNR={snr:>6.1f}, mag uncertainty=+/-{mag_err:.3f}")
 
-print(f"\\nKey insight: sky background is the dominant noise source for faint stars.")
+print(f"\
+Key insight: sky background is the dominant noise source for faint stars.")
 print(f"A dark site like Ziro (Bortle 2) gives 2-3x better SNR than a suburb,")
 print(f"enabling detection of stars that are invisible from light-polluted sites.")`,
       challenge: 'Implement differential photometry: add a second "comparison star" to the image and measure the brightness ratio between target and comparison. Show that atmospheric variations (simulate by multiplying the whole image by a random factor each frame) cancel out in the ratio.',
@@ -589,9 +607,12 @@ for name, temp, mag, color in famous_stars:
 
 # Region labels
 ax.text(25000, -7, 'SUPERGIANTS', color='#ff8888', fontsize=10, fontweight='bold', alpha=0.5)
-ax.text(3200, -2, 'RED\\nGIANTS', color='#ff6600', fontsize=9, fontweight='bold', alpha=0.5)
-ax.text(15000, 11, 'WHITE\\nDWARFS', color='#ccccff', fontsize=9, fontweight='bold', alpha=0.5)
-ax.text(6000, 6, 'MAIN\\nSEQUENCE', color='#ffff88', fontsize=9, fontweight='bold', alpha=0.3, rotation=-30)
+ax.text(3200, -2, 'RED\
+GIANTS', color='#ff6600', fontsize=9, fontweight='bold', alpha=0.5)
+ax.text(15000, 11, 'WHITE\
+DWARFS', color='#ccccff', fontsize=9, fontweight='bold', alpha=0.5)
+ax.text(6000, 6, 'MAIN\
+SEQUENCE', color='#ffff88', fontsize=9, fontweight='bold', alpha=0.3, rotation=-30)
 
 # Spectral type labels at top
 for stype, data in spectral_types.items():
@@ -614,9 +635,11 @@ plt.tight_layout()
 plt.show()
 
 print("=== HERTZSPRUNG-RUSSELL DIAGRAM DATA ===")
-print(f"\\nGenerated {len(ms_temps)} main sequence + {len(giant_temps)} red giants + {len(wd_temps)} white dwarfs")
+print(f"\
+Generated {len(ms_temps)} main sequence + {len(giant_temps)} red giants + {len(wd_temps)} white dwarfs")
 
-print(f"\\n--- Main Sequence by Spectral Type ---")
+print(f"\
+--- Main Sequence by Spectral Type ---")
 print(f"{'Type':>5} {'Temp range (K)':>16} {'Abs mag range':>14} {'Count':>6} {'Example':>12}")
 print("-" * 58)
 for stype, data in spectral_types.items():
@@ -634,7 +657,8 @@ for stype, data in spectral_types.items():
     else:
         print()
 
-print(f"\\n--- Famous Stars on the HR Diagram ---")
+print(f"\
+--- Famous Stars on the HR Diagram ---")
 print(f"{'Star':<15} {'Temp (K)':>9} {'Abs mag':>8} {'Category':<20}")
 print("-" * 55)
 for name, temp, mag, color in famous_stars:
@@ -648,12 +672,14 @@ for name, temp, mag, color in famous_stars:
         cat = "White dwarf"
     print(f"{name:<15} {temp:>9,} {mag:>8.2f} {cat:<20}")
 
-print(f"\\n--- HR Diagram Regions ---")
+print(f"\
+--- HR Diagram Regions ---")
 print(f"  Main sequence: {len(ms_temps)} stars (diagonal band, H-fusing)")
 print(f"  Red giants:    {len(giant_temps)} stars (cool but luminous, expanded envelopes)")
 print(f"  White dwarfs:  {len(wd_temps)} stars (hot but dim, Earth-sized remnants)")
 
-print(f"\\nRadius comparison at same luminosity (abs mag = -5.5):")
+print(f"\
+Radius comparison at same luminosity (abs mag = -5.5):")
 temp_hot = 30000
 temp_cool = 3500
 ratio = (temp_hot / temp_cool) ** 2

@@ -200,7 +200,8 @@ for pct in [0, 1, 2, 3, 5, 8, 10, 15, 20]:
 
 # Find the optimal starch percentage
 best_idx = np.argmax(strength)
-print(f"\\nOptimal starch content: {starch_pct[best_idx]:.1f}%")
+print(f"\
+Optimal starch content: {starch_pct[best_idx]:.1f}%")
 print(f"Peak strength: {strength[best_idx]:.1f} MPa")
 print(f"Strength without starch: {strength[0]:.1f} MPa")
 print(f"Improvement: {strength[best_idx]/strength[0]:.1f}x stronger!")`,
@@ -322,7 +323,8 @@ print("Expansion joints needed every ~50 m to absorb this movement.")
 print("Without them, thermal stress accumulates and cracks the wall.")
 
 # Stress calculation
-print("\\n=== Stress if wall CANNOT expand ===")
+print("\
+=== Stress if wall CANNOT expand ===")
 for name, alpha in materials.items():
     # Young's modulus (approximate, GPa)
     E = {"Granite": 50, "Limestone": 30, "Fired brick": 15,

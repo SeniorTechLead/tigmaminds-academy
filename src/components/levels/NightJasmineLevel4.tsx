@@ -652,8 +652,13 @@ n_rhythmic = 300
 # Create distinct phase groups (simulating biological gene modules)
 module_phases = [3, 8, 13, 17, 21]  # dawn, morning, afternoon, evening, night
 module_widths = [2, 2, 3, 1.5, 2.5]
-module_names = ['Dawn\\n(photosynthesis)', 'Morning\\n(carbon fix)', 'Afternoon\\n(growth)',
-                'Evening\\n(scent/defense)', 'Night\\n(repair)']
+module_names = ['Dawn\
+(photosynthesis)', 'Morning\
+(carbon fix)', 'Afternoon\
+(growth)',
+                'Evening\
+(scent/defense)', 'Night\
+(repair)']
 
 true_phases = np.zeros(n_rhythmic)
 true_modules = np.zeros(n_rhythmic, dtype=int)
@@ -1233,7 +1238,8 @@ true_rhythmic_total = sum(1 for l in qc_labels if l != 'Non-rhythmic')
 false_pos = sum(1 for i in rhythmic_idx if qc_labels[i] == 'Non-rhythmic')
 false_neg = true_rhythmic_total - true_rhythmic_detected
 
-metrics_names = ['Sensitivity', 'Specificity', 'PPV', 'Detection\\nrate']
+metrics_names = ['Sensitivity', 'Specificity', 'PPV', 'Detection\
+rate']
 sensitivity = true_rhythmic_detected / max(true_rhythmic_total, 1)
 n_true_nr = sum(1 for l in qc_labels if l == 'Non-rhythmic')
 true_neg = n_true_nr - false_pos

@@ -357,7 +357,8 @@ ax.fill_between(hours, jumps_24, color='#f59e0b', alpha=0.3)
 ax.plot(hours, jumps_24, color='#f59e0b', linewidth=2.5)
 peak_idx = np.argmax(jumps_24)
 ax.axvline(hours[peak_idx], color='white', linestyle='--', alpha=0.5)
-ax.annotate(f'Peak: {hours[peak_idx]:.0f}:00\\n{jumps_24[peak_idx]:.1f}/hr',
+ax.annotate(f'Peak: {hours[peak_idx]:.0f}:00\
+{jumps_24[peak_idx]:.1f}/hr',
             xy=(hours[peak_idx], jumps_24[peak_idx]),
             xytext=(hours[peak_idx]+3, jumps_24[peak_idx]),
             color='#f59e0b', fontsize=11, fontweight='bold',
@@ -503,11 +504,16 @@ axes[1,0].set_title('Feature Importance', color='white')
 
 # Coefficient table
 axes[1,1].axis('off')
-table_text = "Regression Coefficients\\n" + "=" * 30 + "\\n"
+table_text = "Regression Coefficients\
+" + "=" * 30 + "\
+"
 for nm, b in zip(names, beta):
-    table_text += f"  {nm:<14} {b:>9.4f}\\n"
-table_text += f"\\n  R squared     {R2:>9.4f}"
-table_text += f"\\n  RMSE          {RMSE:>9.2f}"
+    table_text += f"  {nm:<14} {b:>9.4f}\
+"
+table_text += f"\
+  R squared     {R2:>9.4f}"
+table_text += f"\
+  RMSE          {RMSE:>9.2f}"
 axes[1,1].text(0.1, 0.95, table_text, transform=axes[1,1].transAxes,
                color='#22c55e', fontsize=12, va='top',
                fontfamily='monospace',
@@ -521,7 +527,8 @@ plt.show()
 print("Coefficients:")
 for nm, b in zip(names, beta):
     print(f"  {nm:<14} beta = {b:>9.4f}")
-print(f"\\nR2 = {R2:.4f}  |  RMSE = {RMSE:.2f} jumps/hr")`,
+print(f"\
+R2 = {R2:.4f}  |  RMSE = {RMSE:.2f} jumps/hr")`,
       challenge: 'Split the data into 80% training and 20% testing. Fit on training data only and evaluate R squared on the test set. Is the test R squared close to the training R squared? If not, the model may be overfitting.',
       successHint: 'You have a fitted statistical model that turns environmental measurements into jump frequency predictions. The standardised coefficients confirm what the biology told us: dissolved oxygen (via 1/DO) is the dominant predictor. This is piece five of the capstone.',
     },
@@ -586,7 +593,8 @@ ax1t.plot(hours, temp_24, ':', color='#ef4444', linewidth=1.5,
           alpha=0.6, label='Temp')
 peak = np.argmax(forecast)
 ax1.axvline(hours[peak], color='white', linestyle='--', alpha=0.4)
-ax1.annotate(f'Peak: {hours[peak]:.0f}:00\\n{forecast[peak]:.1f}/hr',
+ax1.annotate(f'Peak: {hours[peak]:.0f}:00\
+{forecast[peak]:.1f}/hr',
              xy=(hours[peak], forecast[peak]),
              xytext=(hours[peak]+3, forecast[peak]+1),
              color='#f59e0b', fontsize=11, fontweight='bold',
@@ -680,18 +688,22 @@ plt.show()
 print("=" * 55)
 print("  FISH ACTIVITY PREDICTOR -- CAPSTONE COMPLETE")
 print("=" * 55)
-print(f"\\n24-Hour Forecast:")
+print(f"\
+24-Hour Forecast:")
 print(f"  Peak: {hours[peak]:.0f}:00 ({forecast[peak]:.1f} jumps/hr)")
 mn = np.argmin(forecast)
 print(f"  Min:  {hours[mn]:.0f}:00 ({forecast[mn]:.1f} jumps/hr)")
 print(f"  At peak: T={temp_24[peak]:.1f}C, DO={DO_24[peak]:.1f}mg/L")
-print(f"\\nSpecies with highest jump:")
+print(f"\
+Species with highest jump:")
 best = fish[np.argmax(heights)]
 print(f"  {best[0]} ({best[1]*100:.0f}cm): {max(heights):.2f}m")
-print(f"\\nKey finding: fish jump most when DO is low")
+print(f"\
+Key finding: fish jump most when DO is low")
 print(f"(predawn ~4-6AM) and temperature is moderate")
 print(f"(metabolically active but not heat-stressed).")
-print(f"\\nPipeline: data -> physics -> biology -> patterns -> model")`,
+print(f"\
+Pipeline: data -> physics -> biology -> patterns -> model")`,
       challenge: 'Add a fifth panel: a 2D heatmap showing predicted jump frequency as a function of temperature (x-axis) and DO (y-axis). Mark the "danger zone" where jumping exceeds 10/hr. Overlay actual Barak River monthly average conditions as dots on the heatmap to show which months fall in the danger zone.',
       successHint: 'You have built a complete ecological predictor from first principles. The pipeline — data generation, projectile physics, biological triggers, temporal patterns, regression fitting, and dashboard assembly — is exactly how professional ecological models are built. This answers the story\'s question "Why do fish jump?" with a quantitative, predictive, visual framework.',
     },

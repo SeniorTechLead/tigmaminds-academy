@@ -54,7 +54,8 @@ for name, count, mass in categories:
     total = count * o2
     total_o2_day += total
     print(f"{name:<10} {count:>8,} {o2:>10.1f} L {total:>12,.0f} L/day")
-print(f"\\nTotal O2 demand: {total_o2_day:,.0f} litres/day")
+print(f"\
+Total O2 demand: {total_o2_day:,.0f} litres/day")
 print(f"               = {total_o2_day/1000:,.0f} m³/day")
 
 # Ark air volume and ventilation
@@ -70,7 +71,8 @@ air_speed = 0.5  # m/s (conservative)
 air_exchange_m3_per_hour = vent_area * air_speed * 3600
 fresh_o2_per_day = air_exchange_m3_per_hour * 24 * 0.21
 
-print(f"\\n--- Ventilation Analysis ---")
+print(f"\
+--- Ventilation Analysis ---")
 print(f"Vent opening area: {vent_area:.0f} m²")
 print(f"Air exchange: {air_exchange_m3_per_hour:,.0f} m³/hour")
 print(f"Fresh O2 supply: {fresh_o2_per_day:,.0f} m³/day")
@@ -141,7 +143,8 @@ rain_mm_per_day = 50  # heavy rain
 daily_rain_litres = roof_area * rain_mm_per_day  # 1mm on 1m² = 1 litre
 total_rain = daily_rain_litres * rain_days
 
-print(f"\\n--- Rainwater Collection ---")
+print(f"\
+--- Rainwater Collection ---")
 print(f"Roof area: {roof_area:,.0f} m²")
 print(f"Rain collected in 40 days: {total_rain:,.0f} litres ({total_rain/1000:,.0f} m³)")
 print(f"Days of water supply from rain: {total_rain/daily_water:.0f} days")
@@ -149,7 +152,8 @@ print(f"Days of water supply from rain: {total_rain/daily_water:.0f} days")
 # Storage needed
 stored_needed = annual_water - total_rain
 stored_m3 = max(0, stored_needed / 1000)
-print(f"\\nStorage needed: {stored_m3:,.0f} m³")
+print(f"\
+Storage needed: {stored_m3:,.0f} m³")
 print(f"That is {stored_m3 / 41000 * 100:.0f}% of ark volume")
 
 # Timeline plot
@@ -170,10 +174,12 @@ plt.title("Ark Water Budget Over One Year")
 plt.legend(); plt.grid(alpha=0.3); plt.show()
 
 if min(stored) > 0:
-    print("\\n✓ Water lasts the full year")
+    print("\
+✓ Water lasts the full year")
 else:
     dry_day = np.argmax(stored <= 0)
-    print(f"\\n✗ Water runs out on day {dry_day}")`,
+    print(f"\
+✗ Water runs out on day {dry_day}")`,
       challenge: 'Add a 50% water recycling rate: each day, 50% of consumed water is recovered. How does this change the timeline? Does the ark now have surplus water capacity?',
       successHint: 'Water budgeting is the most critical logistic for any closed system. The ISS spends more engineering effort on water recycling than almost any other system. For the ark, rainwater collection was the lifeline.',
     },
@@ -228,7 +234,8 @@ for name, info in levels.items():
           f"{yearly_t:>10,.0f} t")
 
 total_food_t = sum(yearly_totals.values())
-print(f"\\nTotal food storage: {total_food_t:,.0f} tonnes")
+print(f"\
+Total food storage: {total_food_t:,.0f} tonnes")
 print(f"Volume at ~600 kg/m³ packing: {total_food_t*1000/600:,.0f} m³")
 
 # Energy pyramid visualization
@@ -297,7 +304,8 @@ for name, count, mass in categories:
     total_waste_day += total
     print(f"{name:<10} {count:>8,} {w:>12.3f} kg {total:>10,.0f} kg")
 
-print(f"\\nTotal daily waste: {total_waste_day:,.0f} kg ({total_waste_day/1000:.0f} tonnes)")
+print(f"\
+Total daily waste: {total_waste_day:,.0f} kg ({total_waste_day/1000:.0f} tonnes)")
 print(f"Annual waste: {total_waste_day * 365 / 1000:,.0f} tonnes")
 
 # Labour analysis: 8 people, 16 hours/day
@@ -305,7 +313,8 @@ workers = 8
 hours_per_day = 16
 total_pens = sum(count for _, count, _ in categories)
 seconds_per_pen = (workers * hours_per_day * 3600) / total_pens
-print(f"\\n--- Labour Analysis ---")
+print(f"\
+--- Labour Analysis ---")
 print(f"Workers: {workers} | Hours/day: {hours_per_day}")
 print(f"Time per pen: {seconds_per_pen:.1f} seconds")
 print(f"That's barely enough to shovel and move on!")
@@ -332,7 +341,8 @@ plt.legend(); plt.grid(alpha=0.3)
 plt.ylim(0, 400); plt.show()
 
 no_clean_toxic = 25 / ammonia_ppm_per_day
-print(f"\\nWithout cleaning: toxic in {no_clean_toxic:.1f} days")
+print(f"\
+Without cleaning: toxic in {no_clean_toxic:.1f} days")
 print(f"With daily cleaning: safe indefinitely (if 90% removed)")`,
       challenge: 'What if Noah composted the waste (reducing ammonia by 95%) and used it as fuel for heating? Calculate the energy content: dry manure produces ~15 MJ/kg. How much heating energy could the ark generate from its daily waste?',
       successHint: 'Waste management is the unglamorous backbone of any closed system. The ISS devotes enormous engineering to it. Ancient ships had bilge pumps and scuppers. The ark needed industrial-scale waste processing — and only eight workers to do it.',
@@ -412,7 +422,8 @@ for i, (t, h) in enumerate(zip(temps, heights)):
                  xytext=(t+2, h), fontsize=10, color='white')
 
 plt.tight_layout(); plt.show()
-print(f"\\nLower deck: {temps[0]:.0f}°C (tropical animals)")
+print(f"\
+Lower deck: {temps[0]:.0f}°C (tropical animals)")
 print(f"Upper deck: {temps[2]:.0f}°C (temperate/cold animals)")
 print(f"Temperature range: {temps[2]-temps[0]:.0f}°C difference between decks")`,
       challenge: 'What happens in a tropical climate where ambient temperature is 30°C instead of 15°C? Recalculate. At what point does the lower deck become dangerously hot (>40°C)? How much additional ventilation would be needed?',
@@ -505,7 +516,8 @@ plt.suptitle("Closed System Comparison: Ark vs ISS", fontsize=13)
 plt.tight_layout(); plt.show()
 
 # Key insight
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("The ISS supports 6 people with $150 billion of technology.")
 print("The ark needed to support 70,000+ organisms with wood and pitch.")
 print("Volume per occupant: ISS gives each astronaut 229 m³.")

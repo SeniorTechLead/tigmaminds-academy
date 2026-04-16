@@ -145,7 +145,8 @@ for key, r in results.items():
     print(f"  {r['name']:<25}: {r['value']:.4f} {r['unit']}  (95% CI: {r['ci_low']:.4f}-{r['ci_high']:.4f})")
 
 derived = pred.predict_derived(test_mass)
-print(f"\\n  Derived quantities:")
+print(f"\
+  Derived quantities:")
 print(f"  {'Specific BMR':<25}: {derived['specific_bmr']:.0f} mW/kg")
 print(f"  {'Starvation time':<25}: {derived['starvation_hours']:.1f} hours")
 print(f"  {'Daily food need':<25}: {derived['daily_food_pct']:.1f}% body mass")
@@ -313,7 +314,8 @@ plt.show()
 print(f"=== MINIMUM VIABLE BODY SIZE ===")
 print(f"  Overall minimum: {min_viable:.4f}g ({min_viable*1000:.1f}mg)")
 print(f"  This corresponds to ~{(min_viable/0.001)**(1/3) * 10:.1f}mm body length")
-print(f"\\n  Limiting constraints by size:")
+print(f"\
+  Limiting constraints by size:")
 for i, name in enumerate(cnames):
     mask = limiting == i
     if np.any(mask):
@@ -416,7 +418,8 @@ for idx, trait in enumerate(trait_info):
     ax_scatter.loglog(lims, lims, 'w--', linewidth=1, alpha=0.5)
     ax_scatter.set_xlabel('Predicted', color='white', fontsize=8)
     ax_scatter.set_ylabel('Observed', color='white', fontsize=8)
-    ax_scatter.set_title(f'{name}\\nR2={metrics["r2"]:.3f}, MAPE={metrics["mape"]:.1f}%',
+    ax_scatter.set_title(f'{name}\
+R2={metrics["r2"]:.3f}, MAPE={metrics["mape"]:.1f}%',
                           color=color, fontsize=9, fontweight='bold')
 
     # Residual plot
@@ -435,14 +438,16 @@ print("=== VALIDATION SUMMARY ===")
 for trait in trait_info:
     metrics = calc_metrics(pred_data[trait], real_data[trait])
     name = trait_info[trait][0]
-    print(f"\\n  {name}:")
+    print(f"\
+  {name}:")
     print(f"    R2 = {metrics['r2']:.3f}")
     print(f"    MAPE = {metrics['mape']:.1f}%")
     print(f"    Mean log residual = {metrics['log_residuals'].mean():.3f} (0 = unbiased)")
     print(f"    Std log residual = {metrics['log_residuals'].std():.3f}")
 
 # Check for size-dependent bias
-print(f"\\n  Size-dependent bias check:")
+print(f"\
+  Size-dependent bias check:")
 small = masses < 1
 large = masses > 100
 for trait in trait_info:
@@ -619,15 +624,23 @@ axes[1, 1].set_title('Conservation vulnerability by size', color='white', fontsi
 axes[1, 1].legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # 6: Final summary report
-report = "=== BODY SIZE PREDICTOR REPORT ===\\n"
+report = "=== BODY SIZE PREDICTOR REPORT ===\
+"
 for sp, mass in species.items():
     p = full_profile(mass)
-    report += f"\\n{sp}:\\n"
-    report += f"  BMR: {p['bmr_mW']:.3f} mW\\n"
-    report += f"  Heart: {p['heart_bpm']:.0f} bpm\\n"
-    report += f"  Lifespan: {p['lifespan_yr']:.1f} yr\\n"
-    report += f"  Starve in: {p['starv_hr']:.1f} hr\\n"
-    report += f"  Food: {p['food_pct']:.1f}%/day\\n"
+    report += f"\
+{sp}:\
+"
+    report += f"  BMR: {p['bmr_mW']:.3f} mW\
+"
+    report += f"  Heart: {p['heart_bpm']:.0f} bpm\
+"
+    report += f"  Lifespan: {p['lifespan_yr']:.1f} yr\
+"
+    report += f"  Starve in: {p['starv_hr']:.1f} hr\
+"
+    report += f"  Food: {p['food_pct']:.1f}%/day\
+"
 
 axes[1, 2].text(0.05, 0.95, report, transform=axes[1, 2].transAxes,
                  fontsize=7, color='#22c55e', family='monospace', verticalalignment='top')
@@ -637,7 +650,8 @@ plt.tight_layout()
 plt.show()
 
 print(report)
-print("\\nKey insight: the smallest frogs live on a knife edge —")
+print("\
+Key insight: the smallest frogs live on a knife edge —")
 print("any environmental change (humidity, temperature, prey) can push")
 print("them past physiological limits. Conservation must protect not")
 print("just the frogs, but the microhabitat conditions they depend on.")`,
@@ -772,13 +786,15 @@ plt.show()
 print("=== ENSEMBLE PREDICTION REPORT ===")
 for sp, mass in test_species.items():
     result = ep.predict_ensemble(mass, n_samples=5000)
-    print(f"\\n{sp} ({mass}g):")
+    print(f"\
+{sp} ({mass}g):")
     for trait in ep.PARAMS:
         t = result[trait]
         print(f"  {ep.NAMES[trait]:<20}: {t['median']:.3f} {ep.UNITS[trait]}  "
               f"(95% CI: {t['ci_2_5']:.3f}-{t['ci_97_5']:.3f}, CV={t['cv']:.1f}%)")
 
-print(f"\\nSmaller species have WIDER confidence intervals (higher CV)")
+print(f"\
+Smaller species have WIDER confidence intervals (higher CV)")
 print(f"because scaling laws are less well-calibrated at extreme sizes.")
 print(f"This uncertainty must be reported alongside any prediction.")`,
       challenge: 'Add a "measurement error" parameter: body mass itself is uncertain (e.g., +/- 10% for field measurements). Sample mass from a distribution and propagate this through all predictions. How much does mass uncertainty contribute to total prediction uncertainty?',
@@ -970,18 +986,32 @@ n_critical = sum(1 for s in sorted_species if s[1]['composite'] > 0.6)
 n_high = sum(1 for s in sorted_species if 0.4 < s[1]['composite'] <= 0.6)
 n_moderate = sum(1 for s in sorted_species if s[1]['composite'] <= 0.4)
 
-report = f"CONSERVATION ASSESSMENT\\n{'='*40}\\n"
-report += f"Species assessed: {len(species_db)}\\n"
-report += f"Critical: {n_critical} | High: {n_high} | Moderate: {n_moderate}\\n\\n"
-report += "PRIORITY ACTIONS:\\n"
-report += "1. Protect cloud forest humidity\\n"
-report += "   (critical for species <1g)\\n"
-report += "2. Maintain canopy cover\\n"
-report += "   (buffers temperature extremes)\\n"
-report += "3. Monitor insect populations\\n"
-report += "   (prey base for all species)\\n"
-report += "4. Establish humidity refugia\\n"
-report += "   at 1200-2000m elevation\\n"
+report = f"CONSERVATION ASSESSMENT\
+{'='*40}\
+"
+report += f"Species assessed: {len(species_db)}\
+"
+report += f"Critical: {n_critical} | High: {n_high} | Moderate: {n_moderate}\
+\
+"
+report += "PRIORITY ACTIONS:\
+"
+report += "1. Protect cloud forest humidity\
+"
+report += "   (critical for species <1g)\
+"
+report += "2. Maintain canopy cover\
+"
+report += "   (buffers temperature extremes)\
+"
+report += "3. Monitor insect populations\
+"
+report += "   (prey base for all species)\
+"
+report += "4. Establish humidity refugia\
+"
+report += "   at 1200-2000m elevation\
+"
 
 axes[1, 2].text(0.05, 0.95, report, transform=axes[1, 2].transAxes,
                  fontsize=8, color='#22c55e', family='monospace', verticalalignment='top')
@@ -996,7 +1026,8 @@ for sp, v in sorted_species:
     level = 'CRITICAL' if v['composite'] > 0.6 else 'HIGH' if v['composite'] > 0.4 else 'MODERATE'
     print(f"  [{level:>8}] {sp:<30} {mass:>8.2f}g  vuln={v['composite']:.2f}")
 
-print(f"\\nBody mass is the strongest predictor of vulnerability.")
+print(f"\
+Body mass is the strongest predictor of vulnerability.")
 print(f"Protecting microhabitat conditions (humidity, temperature)")
 print(f"is more important than protecting area for miniaturized species.")`,
       challenge: 'Extend the assessment to include an "adaptive capacity" metric: species with wider geographic ranges (from IUCN data) can shift their distribution in response to climate change. How does range size modify vulnerability?',

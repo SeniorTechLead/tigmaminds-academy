@@ -297,8 +297,10 @@ The code below creates a bar chart comparing brain region activity in a novice v
       code: `import numpy as np
 import matplotlib.pyplot as plt
 
-regions = ['Prefrontal\\nCortex', 'Amygdala', 'Hippocampus',
-           'Basal\\nGanglia', 'Insula']
+regions = ['Prefrontal\
+Cortex', 'Amygdala', 'Hippocampus',
+           'Basal\
+Ganglia', 'Insula']
 
 # Relative BOLD signal (based on published meditation studies)
 novice =      [0.5, 0.8, 0.4, 0.6, 0.4]

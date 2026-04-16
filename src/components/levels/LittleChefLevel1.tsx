@@ -89,7 +89,8 @@ ax2.plot(T_melt, pressure, color='#3b82f6', linewidth=2, label='Melting curve')
 cooking = [
     (100, 1, 'Normal boiling'),
     (121, 2, 'Pressure cooker'),
-    (70, 0.3, 'Vacuum cooking\\n(sous vide)'),
+    (70, 0.3, 'Vacuum cooking\
+(sous vide)'),
 ]
 for temp, p, name in cooking:
     ax2.plot(temp, p, 'o', color='#f59e0b', markersize=10)
@@ -106,7 +107,8 @@ ax2.tick_params(colors='gray')
 
 # Label regions
 ax2.text(50, 0.1, 'ICE', color='#60a5fa', fontsize=12, fontweight='bold', alpha=0.5)
-ax2.text(50, 3, 'LIQUID\\nWATER', color='#3b82f6', fontsize=12, fontweight='bold', alpha=0.5)
+ax2.text(50, 3, 'LIQUID\
+WATER', color='#3b82f6', fontsize=12, fontweight='bold', alpha=0.5)
 ax2.text(150, 0.3, 'STEAM', color='#ef4444', fontsize=12, fontweight='bold', alpha=0.5)
 
 plt.tight_layout()
@@ -306,7 +308,8 @@ ax1.set_title('pH of Common Foods', color='white', fontsize=13)
 ax1.axhline(7, color='white', linestyle='--', alpha=0.3)
 ax1.axhline(4.6, color='#ef4444', linestyle=':', alpha=0.5)
 ax1.text(2.5, 7.2, 'Neutral', color='white', fontsize=9, ha='center')
-ax1.text(2.5, 4.3, 'Safety threshold\\n(botulism)', color='#ef4444', fontsize=8, ha='center')
+ax1.text(2.5, 4.3, 'Safety threshold\
+(botulism)', color='#ef4444', fontsize=8, ha='center')
 ax1.text(2.5, 2, 'ACIDIC', color='#ef4444', fontsize=11, ha='center', alpha=0.5)
 ax1.text(2.5, 11, 'ALKALINE', color='#3b82f6', fontsize=11, ha='center', alpha=0.5)
 ax1.set_xticks([])
@@ -327,9 +330,12 @@ for i in range(len(pH_range)-1):
 
 # Mark food additions
 additions = [
-    (2.5, 'Add lemon\\njuice', '#fbbf24'),
-    (5.5, 'Natural\\ncabbage', '#a855f7'),
-    (8.5, 'Add baking\\nsoda', '#3b82f6'),
+    (2.5, 'Add lemon\
+juice', '#fbbf24'),
+    (5.5, 'Natural\
+cabbage', '#a855f7'),
+    (8.5, 'Add baking\
+soda', '#3b82f6'),
     (10, 'Add khar', '#22c55e'),
 ]
 for pH, label, color in additions:
@@ -407,7 +413,8 @@ ax = axes[0, 0]
 ax.set_facecolor('#111827')
 sizes = simulate_emulsion(1000, 1, 0.1)
 ax.hist(sizes, bins=50, color='#ef4444', alpha=0.7, edgecolor='none')
-ax.set_title(f'Gentle mixing, little emulsifier\\nMean: {np.mean(sizes):.0f}μm (UNSTABLE)', color='#ef4444', fontsize=10)
+ax.set_title(f'Gentle mixing, little emulsifier\
+Mean: {np.mean(sizes):.0f}μm (UNSTABLE)', color='#ef4444', fontsize=10)
 ax.set_xlabel('Droplet size (μm)', color='white', fontsize=8)
 ax.tick_params(colors='gray')
 
@@ -416,7 +423,8 @@ ax = axes[0, 1]
 ax.set_facecolor('#111827')
 sizes = simulate_emulsion(1000, 10, 0.1)
 ax.hist(sizes, bins=50, color='#f59e0b', alpha=0.7, edgecolor='none')
-ax.set_title(f'Vigorous mixing, little emulsifier\\nMean: {np.mean(sizes):.0f}μm (unstable)', color='#f59e0b', fontsize=10)
+ax.set_title(f'Vigorous mixing, little emulsifier\
+Mean: {np.mean(sizes):.0f}μm (unstable)', color='#f59e0b', fontsize=10)
 ax.set_xlabel('Droplet size (μm)', color='white', fontsize=8)
 ax.tick_params(colors='gray')
 
@@ -425,7 +433,8 @@ ax = axes[1, 0]
 ax.set_facecolor('#111827')
 sizes = simulate_emulsion(1000, 1, 2)
 ax.hist(sizes, bins=50, color='#3b82f6', alpha=0.7, edgecolor='none')
-ax.set_title(f'Gentle mixing + egg yolk\\nMean: {np.mean(sizes):.0f}μm (moderate)', color='#3b82f6', fontsize=10)
+ax.set_title(f'Gentle mixing + egg yolk\
+Mean: {np.mean(sizes):.0f}μm (moderate)', color='#3b82f6', fontsize=10)
 ax.set_xlabel('Droplet size (μm)', color='white', fontsize=8)
 ax.tick_params(colors='gray')
 
@@ -434,7 +443,8 @@ ax = axes[1, 1]
 ax.set_facecolor('#111827')
 sizes = simulate_emulsion(1000, 10, 2)
 ax.hist(sizes, bins=50, color='#22c55e', alpha=0.7, edgecolor='none')
-ax.set_title(f'Vigorous mixing + egg yolk\\nMean: {np.mean(sizes):.0f}μm (STABLE mayo!)', color='#22c55e', fontsize=10)
+ax.set_title(f'Vigorous mixing + egg yolk\
+Mean: {np.mean(sizes):.0f}μm (STABLE mayo!)', color='#22c55e', fontsize=10)
 ax.set_xlabel('Droplet size (μm)', color='white', fontsize=8)
 ax.tick_params(colors='gray')
 
@@ -502,10 +512,14 @@ ax1.fill_between(temp, rate_temp, alpha=0.15, color='#f59e0b')
 
 # Mark key temperatures
 markers = [
-    (4, 'Fridge\\n(dormant)', '#3b82f6'),
-    (22, 'Room temp\\n(slow rise)', '#22c55e'),
-    (32, 'Optimal\\n(fast rise)', '#f59e0b'),
-    (45, 'Death\\nzone', '#ef4444'),
+    (4, 'Fridge\
+(dormant)', '#3b82f6'),
+    (22, 'Room temp\
+(slow rise)', '#22c55e'),
+    (32, 'Optimal\
+(fast rise)', '#f59e0b'),
+    (45, 'Death\
+zone', '#ef4444'),
 ]
 for t_mark, label, color in markers:
     idx = np.argmin(np.abs(temp - t_mark))
@@ -664,9 +678,11 @@ for name, props in compounds.items():
     ax2.fill_between(temp, amount, alpha=0.1, color=color)
 
 ax2.axvline(154, color='white', linestyle=':', alpha=0.3)
-ax2.text(156, 0.95, 'Maillard\\nonset', color='white', fontsize=8)
+ax2.text(156, 0.95, 'Maillard\
+onset', color='white', fontsize=8)
 ax2.axvline(200, color='#ef4444', linestyle=':', alpha=0.3)
-ax2.text(202, 0.95, 'Burning\\nrisk', color='#ef4444', fontsize=8)
+ax2.text(202, 0.95, 'Burning\
+risk', color='#ef4444', fontsize=8)
 
 ax2.set_xlabel('Temperature (°C)', color='white')
 ax2.set_ylabel('Relative amount produced', color='white')

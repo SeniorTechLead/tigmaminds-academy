@@ -185,10 +185,14 @@ ax1.axhline(y=Ms, color='#60a5fa', linewidth=2, label=f'Ms = {Ms}°C')
 ax1.axhline(y=Mf, color='#60a5fa', linewidth=2, linestyle='--', label=f'Mf = {Mf}°C')
 
 # Fill regions
-ax1.text(5, 650, 'PEARLITE\\n(soft)', color='#f87171', fontsize=10, ha='center', fontweight='bold')
-ax1.text(10, 430, 'BAINITE\\n(hard, tough)', color='#f59e0b', fontsize=10, ha='center', fontweight='bold')
-ax1.text(0.3, 250, 'MARTENSITE\\n(very hard)', color='#60a5fa', fontsize=10, ha='center', fontweight='bold')
-ax1.text(0.1, 700, 'AUSTENITE\\n(unstable)', color='white', fontsize=10, ha='center', alpha=0.5)
+ax1.text(5, 650, 'PEARLITE\
+(soft)', color='#f87171', fontsize=10, ha='center', fontweight='bold')
+ax1.text(10, 430, 'BAINITE\
+(hard, tough)', color='#f59e0b', fontsize=10, ha='center', fontweight='bold')
+ax1.text(0.3, 250, 'MARTENSITE\
+(very hard)', color='#60a5fa', fontsize=10, ha='center', fontweight='bold')
+ax1.text(0.1, 700, 'AUSTENITE\
+(unstable)', color='white', fontsize=10, ha='center', alpha=0.5)
 
 # Cooling curves
 cooling_rates = [
@@ -210,14 +214,19 @@ ax1.legend(facecolor='#374151', edgecolor='#4b5563', labelcolor='white', fontsiz
 
 # Resulting hardness for each cooling rate
 ax2 = axes[1]
-methods = ['Furnace\\ncool', 'Air\\ncool', 'Oil\\nquench', 'Water\\nquench']
+methods = ['Furnace\
+cool', 'Air\
+cool', 'Oil\
+quench', 'Water\
+quench']
 hardness = [20, 35, 50, 63]
 phases = ['Coarse pearlite', 'Fine pearlite', 'Bainite', 'Martensite']
 bar_colors = ['#9ca3af', '#a78bfa', '#10b981', '#60a5fa']
 
 bars = ax2.bar(methods, hardness, color=bar_colors, edgecolor='white', linewidth=0.5, width=0.6)
 for bar, h, phase in zip(bars, hardness, phases):
-    ax2.text(bar.get_x() + bar.get_width()/2, h + 1, f'{h} HRC\\n{phase}',
+    ax2.text(bar.get_x() + bar.get_width()/2, h + 1, f'{h} HRC\
+{phase}',
              ha='center', color='white', fontsize=9)
 
 ax2.set_ylabel('Hardness (HRC)', color='white', fontsize=11)
@@ -346,8 +355,10 @@ axes[1].fill_betweenx(y, hardness, 30, alpha=0.2, color='#f59e0b')
 axes[1].set_xlabel('Hardness (HRC)', color='white', fontsize=10)
 axes[1].set_ylabel('Height: Edge → Spine (mm)', color='white', fontsize=10)
 axes[1].set_title('Differential Temper Profile', color='white', fontsize=12, fontweight='bold')
-axes[1].text(55, 5, 'Hard edge\\n(wear resistant)', color='#f87171', fontsize=9, ha='center')
-axes[1].text(42, 35, 'Tough spine\\n(impact resistant)', color='#10b981', fontsize=9, ha='center')
+axes[1].text(55, 5, 'Hard edge\
+(wear resistant)', color='#f87171', fontsize=9, ha='center')
+axes[1].text(42, 35, 'Tough spine\
+(impact resistant)', color='#10b981', fontsize=9, ha='center')
 for s in ['top','right']: axes[1].spines[s].set_visible(False)
 for s in ['bottom','left']: axes[1].spines[s].set_color('white')
 
@@ -437,7 +448,8 @@ conditions = [
 for name, gs, color in conditions:
     ys = sigma_0 + k_hp / np.sqrt(gs)
     axes[0,0].scatter([gs], [ys], s=100, color=color, edgecolors='white', zorder=5)
-    axes[0,0].annotate(f'{name}\\n{ys:.0f} MPa', (gs, ys), textcoords="offset points",
+    axes[0,0].annotate(f'{name}\
+{ys:.0f} MPa', (gs, ys), textcoords="offset points",
                        xytext=(10, 5), color=color, fontsize=8)
 
 # Simulate grain structures using random Voronoi points
@@ -477,7 +489,8 @@ def draw_grains(ax, n_grains, title, size=10):
     avg_area = size**2 / n_grains
     avg_diameter = np.sqrt(avg_area) * 1000 / size  # convert to μm scale
     strength = sigma_0 + k_hp / np.sqrt(avg_diameter)
-    ax.set_title(f'{title}\\n~{n_grains} grains, σ_y ≈ {strength:.0f} MPa',
+    ax.set_title(f'{title}\
+~{n_grains} grains, σ_y ≈ {strength:.0f} MPa',
                  color='white', fontsize=10, fontweight='bold')
     ax.set_xticks([]); ax.set_yticks([])
 
@@ -499,7 +512,8 @@ print("Grain structure summary:")
 for name, gs, color in conditions:
     ys = sigma_0 + k_hp / np.sqrt(gs)
     print(f"  {name:30s} | grain: {gs:>5.0f} μm | strength: {ys:>5.0f} MPa")
-print(f"\\nHand-forging refines grains from ~50 μm to ~5 μm")
+print(f"\
+Hand-forging refines grains from ~50 μm to ~5 μm")
 print(f"Strength increase: {(sigma_0 + k_hp/np.sqrt(5))/(sigma_0 + k_hp/np.sqrt(50)) * 100 - 100:.0f}% stronger")
 print(f"This is why hand-forged Naga dao outperforms cast or stamped blades!")`,
       challenge: 'Model "grain growth" during overheating: if the smith accidentally holds the blade at 1100°C for too long, grain size doubles every 15 minutes. How quickly does strength degrade? How many minutes until the blade is weakened by 30%?',
@@ -636,7 +650,8 @@ plt.show()
 # Best overall designs
 best_idx = np.argsort(-performance[pareto_mask])[:5]
 pareto_indices = np.where(pareto_mask)[0]
-print(f"\\nTop 5 Pareto-Optimal Designs (of {n_pareto} non-dominated):")
+print(f"\
+Top 5 Pareto-Optimal Designs (of {n_pareto} non-dominated):")
 print(f"  {'#':>3} | {'Carbon':>6} | {'Temper':>6} | {'Bevel':>5} | {'Hardness':>8} | {'Toughness':>9} | {'Score':>5}")
 print("-" * 60)
 for rank, bi in enumerate(best_idx, 1):

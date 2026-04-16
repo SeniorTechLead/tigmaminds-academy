@@ -52,7 +52,8 @@ STARS = [
 
 print("=== Celestial Navigation Simulator — Architecture ===")
 print("Classes: Star, Ship, Weather, Voyage")
-print(f"Star catalogue: {len(STARS)} navigation stars\\n")
+print(f"Star catalogue: {len(STARS)} navigation stars\
+")
 
 print(f"{'Star':<12} {'RA (h)':>7} {'Dec':>7} {'Alt at LST=0':>13} {'Visible?':>9}")
 print("-" * 50)
@@ -112,7 +113,8 @@ obs_lat, obs_lon = 62.0, -33.0  # mid-Atlantic
 jd = julian_day(1000, 7, 15, 0)
 
 print("=== Star Position Engine ===")
-print(f"July 15, 1000 CE, midnight | Observer: {obs_lat}°N, {abs(obs_lon)}°W\\n")
+print(f"July 15, 1000 CE, midnight | Observer: {obs_lat}°N, {abs(obs_lon)}°W\
+")
 print(f"{'Star':<12} {'Altitude':>9} {'Azimuth':>9} {'Visible':>8} {'Use':>20}")
 print("-" * 60)
 
@@ -123,9 +125,11 @@ for name, ra, dec in stars:
     print(f"{name:<12} {alt:>7.1f}° {az:>7.1f}° {vis:>6} {use:>18}")
 
 pol_alt, _ = star_altaz(2.53, 89.26, obs_lat, obs_lon, jd)
-print(f"\\nPolaris altitude: {pol_alt:.1f}° vs true latitude: {obs_lat}° (err: {abs(pol_alt-obs_lat):.2f}°)")
+print(f"\
+Polaris altitude: {pol_alt:.1f}° vs true latitude: {obs_lat}° (err: {abs(pol_alt-obs_lat):.2f}°)")
 
-print(f"\\n=== Vega Through the Night ===")
+print(f"\
+=== Vega Through the Night ===")
 for h in range(7):
     alt, az = star_altaz(18.62, 38.78, obs_lat, obs_lon, julian_day(1000,7,15,h))
     print(f"  {h:>2}:00  alt={alt:.1f}°  az={az:.1f}°")`,
@@ -164,7 +168,8 @@ uncertainty, proc_noise = 5.0, 3.0
 storms, fixes, log = 0, 0, []
 
 print("=== Full Voyage Simulation: Iceland to Greenland ===")
-print(f"Target: {target_lat}°N, {abs(target_lon)}°W | Heading: {heading}°\\n")
+print(f"Target: {target_lat}°N, {abs(target_lon)}°W | Heading: {heading}°\
+")
 
 for hour in range(days * 24):
     # Weather
@@ -214,7 +219,8 @@ for d, tla, tlo, ela, elo, err, unc in log:
     print(f"{d:>4} {tla:>8.2f}°N {abs(tlo):>8.2f}°W {ela:>8.2f}°N {abs(elo):>8.2f}°W {err:>5.1f}km {unc:>4.1f}km")
 
 td = np.sqrt(((true_lat-target_lat)*111)**2 + ((true_lon-target_lon)*111*np.cos(np.radians(true_lat)))**2)
-print(f"\\nFinal distance from target: {td:.0f} km")
+print(f"\
+Final distance from target: {td:.0f} km")
 print(f"Star fixes taken: {fixes} | Storm hours: {storms} | Final uncertainty: ±{uncertainty:.0f} km")`,
       challenge: 'Add longitude estimation using a speed log (wave counting). Track longitude uncertainty separately from latitude. After 7 days, how much worse is longitude uncertainty? This models the fundamental asymmetry in Viking navigation — latitude was easy, longitude was nearly impossible.',
       successHint: 'You built a multi-physics voyage simulator integrating oceanography, meteorology, celestial mechanics, and estimation theory. This is exactly the structure of modern ship routing software and autonomous vehicle planners.',
@@ -263,7 +269,8 @@ lost = [r for r in results if r["status"] == "lost"]
 print("=" * 60)
 print("    VOYAGE SIMULATION VALIDATION REPORT")
 print("=" * 60)
-print(f"Simulations: 1000 | Route: Iceland to Greenland\\n")
+print(f"Simulations: 1000 | Route: Iceland to Greenland\
+")
 
 arr_rate = len(arrived) / 1000
 days_a = np.array([r["days"] for r in arrived]) if arrived else np.array([0])
@@ -283,16 +290,19 @@ checks = [
 for name, m_val, h_val, ok in checks:
     print(f"{name:<28} {m_val:>12} {h_val:>12} {'OK' if ok else 'CHECK':>4}")
 
-print(f"\\n=== Crossing Time Percentiles ===")
+print(f"\
+=== Crossing Time Percentiles ===")
 for p in [10, 25, 50, 75, 90]:
     print(f"  {p}th: {np.percentile(days_a, p):.1f} days")
 
-print(f"\\n=== Landing Accuracy ===")
+print(f"\
+=== Landing Accuracy ===")
 for km in [50, 100, 200, 500]:
     print(f"  Within {km:>3} km: {np.sum(dist_a < km)/len(dist_a)*100:>5.1f}%")
 
 passed = sum(1 for *_, ok in checks if ok)
-print(f"\\nChecks passed: {passed}/{len(checks)}")
+print(f"\
+Checks passed: {passed}/{len(checks)}")
 print("Model is " + ("CONSISTENT" if passed >= 3 else "DISCREPANT") + " with historical data.")`,
       challenge: 'Identify which parameter to adjust (storm frequency, current strength, heading noise) and tune it until all metrics match. This calibration process is how every simulation model is refined.',
       successHint: 'Model validation is the difference between a toy and a tool. You compared your simulator against 1,000-year-old data and assessed fidelity — the same process used to certify flight simulators and climate models.',
@@ -386,7 +396,8 @@ skills = [
 print("SKILLS DEMONSTRATED:")
 for skill, detail in skills:
     print(f"  - {skill}: {detail}")
-print("\\nPython: numpy (arrays, FFT, random, linalg, statistics)")
+print("\
+Python: numpy (arrays, FFT, random, linalg, statistics)")
 print("Concepts: 15+ STEM topics integrated into one project")`,
       challenge: 'Add a one-sentence CV tagline ("Built a multi-physics simulator that reproduces 1,000-year-old Viking navigation data"), a "what I learned" section, and three follow-up project ideas. A strong portfolio tells a story of growth and ambition.',
       successHint: 'You completed a full engineering project: system design, implementation, validation, and documentation. You integrated 15+ STEM topics into a coherent simulator and validated it against historical data. This is the process professional engineers and scientists follow every day. The skills demonstrated — computational modeling, statistical validation, technical communication — are among the most in-demand in STEM careers.',

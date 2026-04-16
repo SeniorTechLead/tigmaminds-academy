@@ -107,30 +107,36 @@ class SolarKitchenDesigner:
         print("=" * 55)
         print("    SOLAR KITCHEN DESIGN REPORT")
         print("=" * 55)
-        print(f"\\n  REQUIREMENTS:")
+        print(f"\
+  REQUIREMENTS:")
         print(f"    Meals per day: {self.meals}")
         print(f"    Location: {self.latitude} N latitude")
         print(f"    Solar resource: {self.dni} kWh/m^2/day DNI")
 
-        print(f"\\n  DISH DESIGN:")
+        print(f"\
+  DISH DESIGN:")
         print(f"    Diameter: {d['dish_diameter_m']:.1f} m")
         print(f"    Area: {d['dish_area_m2']:.0f} m^2")
         print(f"    Peak power: {d['peak_power_kW']:.0f} kW solar")
 
-        print(f"\\n  BOILER:")
+        print(f"\
+  BOILER:")
         print(f"    Steam rate: {d['steam_rate_kg_hr']:.0f} kg/hr")
         print(f"    Pressure: {d['boiler_pressure_atm']} atm")
 
-        print(f"\\n  STORAGE:")
+        print(f"\
+  STORAGE:")
         print(f"    Tank: {d['tank_volume_litres']:.0f} litres")
         print(f"    Backup hours: {d['storage_hours']}")
 
-        print(f"\\n  PERFORMANCE:")
+        print(f"\
+  PERFORMANCE:")
         print(f"    Daily solar energy: {d['daily_energy_kWh']:.0f} kWh")
         print(f"    Meals from solar: {d['meals_achievable']:.0f}/day")
         print(f"    Solar fraction: {d['solar_fraction']:.0%}")
 
-        print(f"\\n  COST ESTIMATE:")
+        print(f"\
+  COST ESTIMATE:")
         print(f"    Dish: {d['dish_cost']:,.0f}")
         print(f"    Boiler: {d['boiler_cost']:,.0f}")
         print(f"    Storage: {d['storage_cost']:,.0f}")
@@ -149,7 +155,8 @@ configs = [
 ]
 
 for config in configs:
-    print(f"\\n>>> Designing: {config['name']}")
+    print(f"\
+>>> Designing: {config['name']}")
     designer = SolarKitchenDesigner(
         config["meals"], config["lat"], config["dni"]
     )
@@ -584,7 +591,8 @@ scenarios = [
 ]
 
 for name, day, cloud, wind_hours in scenarios:
-    print(f"\\n>>> Scenario: {name}")
+    print(f"\
+>>> Scenario: {name}")
     sim = SolarKitchenSimulator(dish_diameter=15, latitude=12, day_of_year=day)
     log = sim.simulate_day(cloud_factor=cloud, wind_stow_hours=wind_hours)
     sim.report(log)`,

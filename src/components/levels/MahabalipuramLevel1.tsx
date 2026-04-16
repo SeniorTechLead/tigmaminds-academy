@@ -138,7 +138,8 @@ for i, combo in enumerate(configs):
     total = sum(angles)
     print(f"{config_str:<16} {name_str:<30} {angle_str:<25} {total:.0f}")
 
-print(f"\\nTotal valid configurations found: {len(configs)}")
+print(f"\
+Total valid configurations found: {len(configs)}")
 print()
 
 # Classify by type
@@ -147,7 +148,8 @@ semi_regular = [c for c in configs if len(set(c)) > 1]
 print(f"Regular tilings (one polygon type): {len(regular)}")
 for c in regular:
     print(f"  {'.'.join(str(n) for n in c)}")
-print(f"\\nSemi-regular configurations: {len(semi_regular)}")
+print(f"\
+Semi-regular configurations: {len(semi_regular)}")
 print("(Not all of these produce valid tilings that extend infinitely)")`,
       challenge: 'For each valid vertex configuration, calculate the "openness ratio" — the fraction of area covered by the largest polygon type. Jali screens need high openness (light transmission). Which configurations have the highest ratio of large-polygon area?',
       successHint: 'You just enumerated the Archimedean tilings — a result that Archimedes himself studied around 200 BCE. The fact that there are only 11 possible semi-regular tilings is a deep result in geometry. The Mahabalipuram carvers explored many of these independently.',

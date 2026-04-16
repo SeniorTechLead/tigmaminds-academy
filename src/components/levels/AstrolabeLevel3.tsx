@@ -64,7 +64,8 @@ ax2.legend(fontsize=8); ax2.grid(True, alpha=0.2)
 plt.tight_layout()
 plt.show()
 
-print("\\n=== Summary ===")
+print("\
+=== Summary ===")
 for d in [15, 25, 40]:
     p = eye_resolution / (np.pi * d * 10 / 360)
     print(f"  {d}cm: {p:.2f}° precision = {p*111:.0f}km nav / {p*4:.1f}min time")`,
@@ -439,7 +440,8 @@ h = survey_single(distance, angle)
 print(f"Distance: {distance}m, Angle: {angle}°")
 print(f"Minaret height: {h:.1f} m")
 
-print("\\n=== Two-Position Survey ===")
+print("\
+=== Two-Position Survey ===")
 angle1 = 28  # from far position
 angle2 = 42  # from near position (closer)
 spacing = 20 # meters between positions
@@ -466,7 +468,8 @@ ax.set_title('Height Sensitivity to Angle Error', color='white')
 ax.legend(fontsize=8); ax.grid(True, alpha=0.2)
 plt.show()
 
-print(f"\\n±0.5° error in angle causes:")
+print(f"\
+±0.5° error in angle causes:")
 print(f"  Single-position: ±{abs(survey_single(50,38.5) - h):.1f} m error")
 print(f"  Two-position:    ±{abs(survey_double(20,28.5,42.5) - h2):.1f} m error")`,
       challenge: 'The two-position method is more sensitive to angle errors. Can you figure out why? (Hint: look at the denominator tan(α₂) - tan(α₁). When the angles are close, this is small, amplifying errors.)',

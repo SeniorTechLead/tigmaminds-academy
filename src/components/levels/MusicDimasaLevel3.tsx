@@ -19,7 +19,8 @@ export default function MusicDimasaLevel3() {
       code: `import numpy as np
 
 # --- Polyrhythm mathematics — modeling simultaneous rhythmic layers ---
-print("=== Polyrhythm Mathematics ===\\n")
+print("=== Polyrhythm Mathematics ===\
+")
 
 # A polyrhythm layers two or more rhythms with different beat counts
 # over the same time span. The simplest example: 3 against 2.
@@ -49,7 +50,8 @@ def lcm(a, b):
 
 all_beats = list(layers.values())
 cycle_length = reduce(lcm, all_beats)
-print(f"\\nCycle length (LCM of {all_beats}): {cycle_length} subdivisions")
+print(f"\
+Cycle length (LCM of {all_beats}): {cycle_length} subdivisions")
 print(f"All four layers realign every {cycle_length} smallest-note units.")
 
 # Compute coincidence points — where two or more layers hit simultaneously
@@ -68,16 +70,19 @@ for pos in range(subdivisions):
     if count >= 2:
         coincidences[pos] = count
 
-print(f"\\nCoincidence points (2+ layers hitting together): {len(coincidences)}")
+print(f"\
+Coincidence points (2+ layers hitting together): {len(coincidences)}")
 max_overlap = max(coincidences.values()) if coincidences else 0
 strongest = [p for p, c in coincidences.items() if c == max_overlap]
 print(f"Strongest accent ({max_overlap} layers together) at subdivisions: {strongest[:5]}{'...' if len(strongest) > 5 else ''}")
 
 # Rhythmic density — total events per measure
 total_events = sum(layers.values())
-print(f"\\nTotal rhythmic events per measure: {total_events}")
+print(f"\
+Total rhythmic events per measure: {total_events}")
 print(f"Average inter-onset interval: {duration / total_events * 1000:.1f} ms")
-print(f"\\nKey insight: Dimasa polyrhythms use odd groupings (3, 5, 7) that")
+print(f"\
+Key insight: Dimasa polyrhythms use odd groupings (3, 5, 7) that")
 print(f"rarely coincide, creating a shimmering texture unlike the regular")
 print(f"accents of Western 4/4 time.")`,
       challenge: "Extend this model by adding a second variable and exploring how the interaction changes the results.",
@@ -94,7 +99,8 @@ print(f"accents of Western 4/4 time.")`,
       code: `import numpy as np
 
 # --- Scale systems — comparing Dimasa scales to Western temperament ---
-print("=== Dimasa vs Western Scale Comparison ===\\n")
+print("=== Dimasa vs Western Scale Comparison ===\
+")
 
 # Western equal temperament: each semitone is 2^(1/12) apart
 # 12 equal steps from root to octave
@@ -117,12 +123,14 @@ dimasa_ratios = 2 ** (np.array(dimasa_cents) / 1200.0)
 dimasa_freqs = A4 * dimasa_ratios
 dimasa_labels = ["Sa", "Re", "Ga", "Pa", "Dha", "Sa'"]
 
-print("\\nDimasa pentatonic scale (approximate field measurements):")
+print("\
+Dimasa pentatonic scale (approximate field measurements):")
 for label, freq, cents_val in zip(dimasa_labels, dimasa_freqs, dimasa_cents):
     print(f"  {label:4s}: {freq:7.1f} Hz  ({cents_val:4d} cents from root)")
 
 # Compare: find nearest Western pitch for each Dimasa note
-print("\\nNearest Western match for each Dimasa note:")
+print("\
+Nearest Western match for each Dimasa note:")
 western_cents_arr = 1200 * np.log2(western_ratios)
 for label, dc in zip(dimasa_labels, dimasa_cents):
     diffs = np.abs(western_cents_arr - dc)
@@ -131,12 +139,14 @@ for label, dc in zip(dimasa_labels, dimasa_cents):
     print(f"  {label:4s} ({dc:4d} cents) -> {western_names[nearest_idx]:3s} ({western_cents_arr[nearest_idx]:.0f} cents), off by {deviation:+.0f} cents")
 
 # Musical intervals in Dimasa scale
-print("\\nIntervals between consecutive Dimasa notes:")
+print("\
+Intervals between consecutive Dimasa notes:")
 for i in range(len(dimasa_cents) - 1):
     interval = dimasa_cents[i + 1] - dimasa_cents[i]
     print(f"  {dimasa_labels[i]} -> {dimasa_labels[i+1]}: {interval} cents ({'~whole tone' if 180 < interval < 260 else '~minor 3rd' if 260 < interval < 350 else 'unique'})")
 
-print("\\nKey insight: Dimasa intervals of ~240 cents fall between a Western")
+print("\
+Key insight: Dimasa intervals of ~240 cents fall between a Western")
 print("whole tone (200 cents) and minor third (300 cents) — a 'neutral second'")
 print("that Western notation cannot represent without microtonal symbols.")`,
       challenge: "Extend this model by adding a second variable and exploring how the interaction changes the results.",
@@ -153,7 +163,8 @@ print("that Western notation cannot represent without microtonal symbols.")`,
       code: `import numpy as np
 
 # --- Rhythmic complexity metrics — quantifying groove and syncopation ---
-print("=== Rhythmic Complexity Metrics ===\\n")
+print("=== Rhythmic Complexity Metrics ===\
+")
 
 # Represent rhythms as binary patterns on a 16-step grid
 # 1 = hit, 0 = rest
@@ -201,7 +212,8 @@ for name, pat in patterns.items():
     print(f"{name:<25s} {h:4d} {d:8.2f} {s:12d} {e:14.2f}")
 
 # Explain the metrics
-print("\\nWhat the numbers tell us:")
+print("\
+What the numbers tell us:")
 print("- Syncopation: higher = more off-beat accents (the 'groove' factor)")
 print("- Evenness (std): lower = more regular spacing; higher = more uneven")
 print("- The Dimasa cross-rhythm has HIGH syncopation and HIGH unevenness,")
@@ -219,7 +231,8 @@ def rhythm_entropy(pattern):
     probs = counts / counts.sum()
     return -np.sum(probs * np.log2(probs))
 
-print("\\nInterval entropy (bits) — higher = more interval variety:")
+print("\
+Interval entropy (bits) — higher = more interval variety:")
 for name, pat in patterns.items():
     ent = rhythm_entropy(pat)
     print(f"  {name:<25s}: {ent:.3f} bits")`,
@@ -237,7 +250,8 @@ for name, pat in patterns.items():
       code: `import numpy as np
 
 # --- Ensemble synchronization — modeling timing in group performance ---
-print("=== Ensemble Synchronization Model ===\\n")
+print("=== Ensemble Synchronization Model ===\
+")
 
 np.random.seed(42)
 
@@ -252,12 +266,14 @@ musician_names = ["Drummer 1 (khram)", "Drummer 2 (jota)", "Flute", "Singer", "C
 jitter_std = [0.010, 0.015, 0.025, 0.030, 0.020]
 
 print(f"Target tempo: {60/target_interval:.0f} BPM (interval = {target_interval*1000:.0f} ms)")
-print(f"\\nMusician timing precision (std of jitter):")
+print(f"\
+Musician timing precision (std of jitter):")
 for name, j in zip(musician_names, jitter_std):
     print(f"  {name}: +/- {j*1000:.0f} ms")
 
 # Simulate without synchronization (independent clocks)
-print("\\n--- Without mutual listening (independent clocks) ---")
+print("\
+--- Without mutual listening (independent clocks) ---")
 independent_times = {}
 for name, j in zip(musician_names, jitter_std):
     beats = np.cumsum(target_interval + np.random.normal(0, j, n_beats))
@@ -274,7 +290,8 @@ print(f"Mean group asynchrony: {mean_async_indep:.1f} ms")
 
 # Simulate WITH mutual synchronization (phase correction)
 # Each musician adjusts toward the group mean on each beat
-print("\\n--- With mutual listening (phase correction, alpha=0.3) ---")
+print("\
+--- With mutual listening (phase correction, alpha=0.3) ---")
 alpha = 0.3  # correction strength
 synced_times = {name: [0.0] for name in musician_names}
 for beat_idx in range(1, n_beats + 1):
@@ -298,13 +315,15 @@ print(f"Mean group asynchrony: {mean_async_synced:.1f} ms")
 print(f"Improvement: {(1 - mean_async_synced/mean_async_indep)*100:.0f}% tighter")
 
 # Drift analysis
-print("\\n--- Tempo drift over 20 beats ---")
+print("\
+--- Tempo drift over 20 beats ---")
 for name in musician_names:
     intervals = np.diff(synced_times[name][1:])
     drift = (intervals[-1] - intervals[0]) / intervals[0] * 100
     print(f"  {name}: avg interval {np.mean(intervals)*1000:.1f} ms, drift {drift:+.1f}%")
 
-print("\\nKey insight: A correction factor (alpha) of 0.3 means each musician")
+print("\
+Key insight: A correction factor (alpha) of 0.3 means each musician")
 print("adjusts 30% toward the group average on every beat. Too low and they")
 print("drift apart; too high and the group sounds robotic. Dimasa ensembles")
 print("achieve alpha ~ 0.2-0.4 naturally through years of playing together.")`,
@@ -322,7 +341,8 @@ print("achieve alpha ~ 0.2-0.4 naturally through years of playing together.")`,
       code: `import numpy as np
 
 # --- Melodic contour analysis — extracting pitch patterns from vocal music ---
-print("=== Melodic Contour Analysis ===\\n")
+print("=== Melodic Contour Analysis ===\
+")
 
 np.random.seed(42)
 
@@ -367,14 +387,16 @@ for name, mel in [("Dimasa", melody_dimasa), ("Western", melody_western)]:
     mean_interval = np.mean(np.abs(intervals))
     max_interval = max(np.abs(intervals))
     pitch_range = max(mel) - min(mel)
-    print(f"\\n{name} melody statistics:")
+    print(f"\
+{name} melody statistics:")
     print(f"  Ups: {n_up}, Downs: {n_down}, Repeats: {n_repeat}")
     print(f"  Mean interval size: {mean_interval:.0f} cents")
     print(f"  Largest leap: {max_interval} cents")
     print(f"  Total range: {pitch_range} cents")
 
 # Interval distribution
-print("\\nInterval histogram (absolute cents -> count):")
+print("\
+Interval histogram (absolute cents -> count):")
 for name, mel in [("Dimasa", melody_dimasa), ("Western", melody_western)]:
     hist = interval_histogram(mel)
     print(f"  {name}: {hist}")
@@ -391,9 +413,11 @@ def contour_distance(c1, c2):
 cd = contour_code(melody_dimasa)
 cw = contour_code(melody_western)
 dist = contour_distance(cd, cw)
-print(f"\\nContour distance (Dimasa vs Western): {dist:.2f}")
+print(f"\
+Contour distance (Dimasa vs Western): {dist:.2f}")
 print(f"(0.0 = identical shape, 1.0 = completely different)")
-print(f"\\nKey insight: Dimasa melodies favor 240-cent steps (neutral seconds)")
+print(f"\
+Key insight: Dimasa melodies favor 240-cent steps (neutral seconds)")
 print(f"and arch-shaped contours with repeated notes at the peak, while")
 print(f"Western melodies use a wider variety of interval sizes (100-200 cents).")`,
       challenge: "Extend this model by adding a second variable and exploring how the interaction changes the results.",
@@ -410,7 +434,8 @@ print(f"Western melodies use a wider variety of interval sizes (100-200 cents)."
       code: `import numpy as np
 
 # --- Cultural classification — building a music tradition identifier ---
-print("=== Music Tradition Classifier ===\\n")
+print("=== Music Tradition Classifier ===\
+")
 
 np.random.seed(42)
 
@@ -453,8 +478,10 @@ for name, feats in traditions.items():
 unknown_sample = [230, 7, 5, 0.42, 0.80]
 unknown_norm = (np.array(unknown_sample) - feat_min) / feat_range
 
-print(f"\\nUnknown sample: {unknown_sample}")
-print(f"\\nDistances from unknown to each tradition:")
+print(f"\
+Unknown sample: {unknown_sample}")
+print(f"\
+Distances from unknown to each tradition:")
 distances = {}
 for name, norm_feats in normalized.items():
     dist = np.sqrt(np.sum((unknown_norm - norm_feats) ** 2))
@@ -462,10 +489,12 @@ for name, norm_feats in normalized.items():
     print(f"  {name:<18s}: {dist:.4f}")
 
 nearest = min(distances, key=distances.get)
-print(f"\\nClassification: {nearest} (nearest neighbor)")
+print(f"\
+Classification: {nearest} (nearest neighbor)")
 
 # Confusion-style analysis: classify each tradition against all others
-print("\\nLeave-one-out validation:")
+print("\
+Leave-one-out validation:")
 correct = 0
 for test_name, test_feats in normalized.items():
     best_dist = float('inf')
@@ -482,13 +511,15 @@ for test_name, test_feats in normalized.items():
     print(f"  {test_name:<18s} -> nearest other: {best_match:<18s} (dist {best_dist:.4f})")
 
 # Feature importance: which feature varies most across traditions?
-print("\\nFeature variance (higher = more discriminating):")
+print("\
+Feature variance (higher = more discriminating):")
 for i, fn in enumerate(feature_names):
     col = all_feats[:, i]
     norm_var = np.var((col - col.min()) / (col.max() - col.min() + 1e-9))
     print(f"  {fn:<22s}: {norm_var:.4f}")
 
-print("\\nKey insight: Syncopation and arch contour together are the strongest")
+print("\
+Key insight: Syncopation and arch contour together are the strongest")
 print("discriminators. Dimasa music uniquely combines HIGH syncopation with")
 print("HIGH arch contour — no other tradition in our dataset does this.")`,
       challenge: "Combine the models from all six lessons into a unified analysis pipeline. Run it on a new dataset and generate a comprehensive summary report.",

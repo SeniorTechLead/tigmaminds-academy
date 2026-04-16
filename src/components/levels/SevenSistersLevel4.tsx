@@ -62,7 +62,9 @@ ax.set_title('Species Accumulation',color='white'); ax.tick_params(colors='gray'
 ax=axes[1,2]; ax.set_facecolor('#111827')
 ax.axis('off')
 total=len(set(np.where(presence.sum(axis=0)>0)[0]))
-ax.text(0.1,0.5,f'Total species: {total}\\nSites: {n_sites}\\nMean richness: {richness.mean():.0f}',transform=ax.transAxes,fontsize=14,color='white')
+ax.text(0.1,0.5,f'Total species: {total}\
+Sites: {n_sites}\
+Mean richness: {richness.mean():.0f}',transform=ax.transAxes,fontsize=14,color='white')
 
 plt.tight_layout()
 plt.show()
@@ -207,7 +209,10 @@ ax.set_title('Accumulation',color='white'); ax.tick_params(colors='gray')
 
 ax=axes[1,2]; ax.set_facecolor('#111827')
 ax.axis('off')
-ax.text(0.1,0.5,f'Gamma: {gamma}\\nMean Alpha: {alpha_mean:.0f}\\nBeta: {beta_add:.0f}\\nBeta fraction: {beta_add/gamma:.0%}',transform=ax.transAxes,fontsize=12,color='white')
+ax.text(0.1,0.5,f'Gamma: {gamma}\
+Mean Alpha: {alpha_mean:.0f}\
+Beta: {beta_add:.0f}\
+Beta fraction: {beta_add/gamma:.0%}',transform=ax.transAxes,fontsize=12,color='white')
 
 plt.tight_layout()
 plt.show()
@@ -351,7 +356,9 @@ ax.set_title('Cost vs Richness',color='white'); ax.tick_params(colors='gray')
 
 ax=axes[1,2]; ax.set_facecolor('#111827')
 ax.axis('off')
-ax.text(0.1,0.5,f'Total species: {total}\\nSites for 90%: {next((i+1 for i,s in enumerate(cum_sp) if s>=total*0.9),len(cum_sp))}\\nCost for 90%: {cum_cost[next((i+1 for i,s in enumerate(cum_sp) if s>=total*0.9),len(cum_sp))  ]:.1f}',transform=ax.transAxes,fontsize=12,color='white')
+ax.text(0.1,0.5,f'Total species: {total}\
+Sites for 90%: {next((i+1 for i,s in enumerate(cum_sp) if s>=total*0.9),len(cum_sp))}\
+Cost for 90%: {cum_cost[next((i+1 for i,s in enumerate(cum_sp) if s>=total*0.9),len(cum_sp))  ]:.1f}',transform=ax.transAxes,fontsize=12,color='white')
 
 plt.tight_layout()
 plt.show()
@@ -425,7 +432,13 @@ ax.set_title('Shannon Distribution',color='white'); ax.tick_params(colors='gray'
 
 ax=axes[1,2]; ax.set_facecolor('#111827')
 ax.axis('off')
-rpt=f'BIODIVERSITY HOTSPOT REPORT\\n{"="*30}\\nGamma: {gamma}\\nMean Alpha: {S.mean():.0f}\\nBeta: {gamma-S.mean():.0f}\\nPriority sites: {sel}\\nSpecies covered: {cov}'
+rpt=f'BIODIVERSITY HOTSPOT REPORT\
+{"="*30}\
+Gamma: {gamma}\
+Mean Alpha: {S.mean():.0f}\
+Beta: {gamma-S.mean():.0f}\
+Priority sites: {sel}\
+Species covered: {cov}'
 ax.text(0.05,0.95,rpt,transform=ax.transAxes,fontsize=9,color='white',verticalalignment='top',fontfamily='monospace')
 
 plt.tight_layout()

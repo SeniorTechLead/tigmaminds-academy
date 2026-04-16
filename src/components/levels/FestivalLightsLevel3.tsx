@@ -308,16 +308,25 @@ ax.legend(fontsize=8)
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
 ax.axis('off')
-text = f"LED Circuit Design Summary ({V_supply}V supply)\\n"
-text += "=" * 42 + "\\n\\n"
-text += f"{'LED':<8} {'Vf':>5} {'R(Ω)':>6} {'I(mA)':>7} {'P_R(mW)':>8}\\n"
-text += "-" * 42 + "\\n"
+text = f"LED Circuit Design Summary ({V_supply}V supply)\
+"
+text += "=" * 42 + "\
+\
+"
+text += f"{'LED':<8} {'Vf':>5} {'R(Ω)':>6} {'I(mA)':>7} {'P_R(mW)':>8}\
+"
+text += "-" * 42 + "\
+"
 for name in names:
     result = led_resistor(V_supply, leds[name]['Vf'], I_max)
     text += f"{name:<8} {leds[name]['Vf']:>5.1f} {result['R_std']:>6.0f} "
-    text += f"{result['I_actual_mA']:>7.1f} {result['P_resistor_mW']:>8.1f}\\n"
-text += "\\nSeries advantage: less wasted power\\n"
-text += "Parallel advantage: fault tolerance\\n"
+    text += f"{result['I_actual_mA']:>7.1f} {result['P_resistor_mW']:>8.1f}\
+"
+text += "\
+Series advantage: less wasted power\
+"
+text += "Parallel advantage: fault tolerance\
+"
 text += "Best practice: series groups in parallel"
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=9, color='white',
         fontfamily='monospace', verticalalignment='top')
@@ -637,20 +646,36 @@ ax.legend(fontsize=8)
 ax = axes[1, 2]
 ax.set_facecolor('#111827')
 ax.axis('off')
-text = "Photometry Quick Reference\\n"
-text += "=" * 35 + "\\n\\n"
-text += "Quantity    Unit    Meaning\\n"
-text += "-" * 35 + "\\n"
-text += "Flux        lm      Total light output\\n"
-text += "Intensity   cd      Light per solid angle\\n"
-text += "Illuminance lux     Light per surface area\\n"
-text += "Luminance   cd/m²   Surface brightness\\n"
-text += "Efficacy    lm/W    Efficiency\\n\\n"
-text += "Typical illuminance levels:\\n"
-text += "  Direct sun: 100,000 lux\\n"
-text += "  Overcast:   10,000 lux\\n"
-text += "  Office:     500 lux\\n"
-text += "  Festival:   50-200 lux\\n"
+text = "Photometry Quick Reference\
+"
+text += "=" * 35 + "\
+\
+"
+text += "Quantity    Unit    Meaning\
+"
+text += "-" * 35 + "\
+"
+text += "Flux        lm      Total light output\
+"
+text += "Intensity   cd      Light per solid angle\
+"
+text += "Illuminance lux     Light per surface area\
+"
+text += "Luminance   cd/m²   Surface brightness\
+"
+text += "Efficacy    lm/W    Efficiency\
+\
+"
+text += "Typical illuminance levels:\
+"
+text += "  Direct sun: 100,000 lux\
+"
+text += "  Overcast:   10,000 lux\
+"
+text += "  Office:     500 lux\
+"
+text += "  Festival:   50-200 lux\
+"
 text += "  Moonlight:  0.1 lux"
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=9, color='white',
         fontfamily='monospace', verticalalignment='top')
@@ -1011,7 +1036,11 @@ fig.suptitle('Power Efficiency & Electrical Safety for Festival Lighting',
 ax = axes[0, 0]
 ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
-stages = ['Wall\\npower', 'After\\nAC/DC', 'After\\ndriver', 'Light\\noutput']
+stages = ['Wall\
+power', 'After\
+AC/DC', 'After\
+driver', 'Light\
+output']
 powers = [P_acdc_input, P_driver_input, P_led_total, P_light]
 losses = [P_heat_acdc, P_heat_driver, P_heat_led, 0]
 colors_stage = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6']
@@ -1086,20 +1115,38 @@ ax.legend(fontsize=8)
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.axis('off')
-text = "IP RATING GUIDE (for outdoor festivals)\\n"
-text += "=" * 40 + "\\n\\n"
-text += "IP X Y\\n"
-text += "   | |__ Water protection (Y)\\n"
-text += "   |____ Dust protection (X)\\n\\n"
-text += "Water (Y):  \\n"
-text += "  4: Splash proof\\n"
-text += "  5: Water jet proof \\n"
-text += "  6: Powerful water jet proof\\n"
-text += "  7: Temporary immersion\\n"
-text += "  8: Continuous submersion\\n\\n"
-text += "Festival requirement: IP65 minimum\\n"
-text += "(Dust-tight + water jet protection)\\n\\n"
-text += "GFCI/RCD: Trips in <30ms at 30mA\\n"
+text = "IP RATING GUIDE (for outdoor festivals)\
+"
+text += "=" * 40 + "\
+\
+"
+text += "IP X Y\
+"
+text += "   | |__ Water protection (Y)\
+"
+text += "   |____ Dust protection (X)\
+\
+"
+text += "Water (Y):  \
+"
+text += "  4: Splash proof\
+"
+text += "  5: Water jet proof \
+"
+text += "  6: Powerful water jet proof\
+"
+text += "  7: Temporary immersion\
+"
+text += "  8: Continuous submersion\
+\
+"
+text += "Festival requirement: IP65 minimum\
+"
+text += "(Dust-tight + water jet protection)\
+\
+"
+text += "GFCI/RCD: Trips in <30ms at 30mA\
+"
 text += "leakage — prevents electrocution"
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=9, color='white',
         fontfamily='monospace', verticalalignment='top')

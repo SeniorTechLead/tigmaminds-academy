@@ -47,7 +47,8 @@ N0 = 1000      # initial inoculum
 print("=== Bacterial Logistic Growth ===")
 print(f"Initial population: {N0:,.0f} cells")
 print(f"Growth rate: {r} per hour")
-print(f"Carrying capacity: {K:,.0f} cells\\n")
+print(f"Carrying capacity: {K:,.0f} cells\
+")
 
 time, pop = logistic_growth(N0, r, K, 30)
 
@@ -62,8 +63,10 @@ for h in [0, 2, 5, 8, 10, 12, 15, 20, 25, 30]:
         print(f"{h:>5.0f}h {N:>14,.0f} {rate:>14,.0f} {N/K*100:>7.1f}%")
 
 # Effect of antibiotic: reduce K
-print("\\n=== Antibiotic Effect on Carrying Capacity ===")
-print("Penicillin reduces effective K by killing dividing cells\\n")
+print("\
+=== Antibiotic Effect on Carrying Capacity ===")
+print("Penicillin reduces effective K by killing dividing cells\
+")
 
 for antibiotic_factor in [1.0, 0.5, 0.1, 0.01, 0.001]:
     K_eff = K * antibiotic_factor
@@ -72,7 +75,8 @@ for antibiotic_factor in [1.0, 0.5, 0.1, 0.01, 0.001]:
     print(f"K_effective = {K_eff:>12,.0f} ({antibiotic_factor:>5.1%} of normal) "
           f"-> Final pop: {final:>12,.0f}")
 
-print("\\nAt MIC, K_effective drops low enough that the immune system")
+print("\
+At MIC, K_effective drops low enough that the immune system")
 print("can clear the remaining bacteria. That's the therapeutic goal.")`,
       challenge: 'Add a "lag phase" to the model — real bacteria take 1-2 hours to activate their metabolic machinery before growing. Modify the simulation so growth rate is 0 for the first 1.5 hours, then switches to r = 0.8. How does this change the time to reach 50% of K?',
       successHint: 'The logistic equation appears everywhere: bacterial growth, tumour progression, technology adoption, social media virality, even fish populations in lakes. Mastering it gives you a universal tool for modelling any system with limited resources.',
@@ -136,7 +140,8 @@ time, conc, gut = pk_one_compartment(dose, bioavail, ka, ke, vd, 12)
 print("=== Amoxicillin Pharmacokinetic Profile ===")
 print(f"Dose: {dose} mg oral | Bioavailability: {bioavail:.0%}")
 print(f"Ka: {ka}/hr | Ke: {ke}/hr | Vd: {vd} L")
-print(f"Half-life: {0.693/ke:.1f} hours\\n")
+print(f"Half-life: {0.693/ke:.1f} hours\
+")
 
 print(f"{'Hour':>6} {'Plasma (mg/L)':>14} {'Gut (mg)':>10} {'Status':>20}")
 print("-" * 52)
@@ -157,7 +162,8 @@ tmax = time[peak_idx]
 # Time above MIC
 above_mic = np.sum(conc > mic) * 0.05
 
-print(f"\\nPeak concentration (Cmax): {cmax:.2f} mg/L at {tmax:.1f} hours")
+print(f"\
+Peak concentration (Cmax): {cmax:.2f} mg/L at {tmax:.1f} hours")
 print(f"Time above MIC ({mic} mg/L): {above_mic:.1f} hours")
 print(f"Target: >40% of dosing interval above MIC for efficacy")
 print(f"Achieved: {above_mic/8*100:.0f}% of 8-hour interval")`,
@@ -258,7 +264,8 @@ print("I = Intermediate (high-dose or alternative route may work)")
 print("R = Resistant (drug will NOT work at achievable concentrations)")
 
 # Distribution of MICs across isolates
-print("\\n=== MIC Distribution (50 S. aureus isolates) ===")
+print("\
+=== MIC Distribution (50 S. aureus isolates) ===")
 isolate_mics = np.random.lognormal(mean=np.log(0.5), sigma=1.2, size=50)
 isolate_mics = np.clip(isolate_mics, 0.0625, 256)
 bins = [0.0625 * 2**i for i in range(14)]
@@ -330,7 +337,8 @@ N_final = 10**8
 true_mu = 2.5e-9  # per cell per division
 
 print("=== Luria-Delbruck Fluctuation Test Simulation ===")
-print(f"Cultures: {n_cultures} | Final pop: {N_final:.0e} | True mu: {true_mu:.1e}\\n")
+print(f"Cultures: {n_cultures} | Final pop: {N_final:.0e} | True mu: {true_mu:.1e}\
+")
 
 results = luria_delbruck_simulation(n_cultures, N_final, true_mu)[0]
 results_arr = np.array(results)
@@ -353,14 +361,16 @@ if p0 > 0:
 else:
     mu_estimate = float('nan')
 
-print(f"\\n=== Mutation Rate Estimation ===")
+print(f"\
+=== Mutation Rate Estimation ===")
 print(f"Cultures with 0 mutants (P0): {np.sum(results_arr == 0)}/{n_cultures} = {p0:.3f}")
 print(f"Estimated mu (P0 method): {mu_estimate:.2e}")
 print(f"True mu:                  {true_mu:.2e}")
 print(f"Estimation error: {abs(mu_estimate - true_mu) / true_mu * 100:.0f}%")
 
 # Compare with Poisson (incorrect) model
-print(f"\\n=== Why Poisson is Wrong ===")
+print(f"\
+=== Why Poisson is Wrong ===")
 mean_mutants = np.mean(results_arr)
 var_mutants = np.var(results_arr)
 print(f"Mean mutant count: {mean_mutants:.1f}")
@@ -441,7 +451,8 @@ for g in [0, 10, 20, 30, 50, 75, 100, 150, 200]:
         print(f"{g:>5} {f:>7.3f} {int(f*N):>10} {int((1-f)*N):>12}")
 
 # Scenario 2: Antibiotic removed (resistance costly)
-print("\\n=== Scenario 2: Antibiotic Removed (s = -0.05) ===")
+print("\
+=== Scenario 2: Antibiotic Removed (s = -0.05) ===")
 p0_high = freqs[min(100, len(freqs)-1)]  # start from Scenario 1
 freqs2 = wright_fisher(N, p0_high, s=-0.05, generations=300)
 print(f"Starting frequency: {p0_high:.3f}")
@@ -451,7 +462,8 @@ for g in [0, 25, 50, 100, 150, 200, 300]:
         print(f"Gen {g:>4}: freq = {f:.3f}")
 
 # Multiple runs to show stochasticity
-print("\\n=== Stochastic Variation (10 runs, small pop N=500) ===")
+print("\
+=== Stochastic Variation (10 runs, small pop N=500) ===")
 outcomes = {"Fixed (R=1.0)": 0, "Lost (R=0.0)": 0, "Polymorphic": 0}
 for run in range(10):
     np.random.seed(run)
@@ -465,7 +477,8 @@ for run in range(10):
         outcomes["Polymorphic"] += 1
     print(f"  Run {run+1:>2}: final freq = {final:.3f}")
 
-print(f"\\nOutcomes: {outcomes}")
+print(f"\
+Outcomes: {outcomes}")
 print("Even with positive selection, drift can eliminate resistance in small pops.")`,
       challenge: 'Model "compensatory evolution": after resistance fixes, introduce a second mutation that eliminates the fitness cost (changes s from -0.05 to 0.0 in the drug-free phase). Run 100 simulations and compare how often resistance persists with vs without compensatory mutations. This explains why resistance is so hard to reverse.',
       successHint: 'Population genetics is the mathematical framework for understanding evolution — including the evolution of drug resistance. The Wright-Fisher model you just implemented is taught in every genetics graduate programme. It explains why resistance spreads under antibiotic pressure, why it persists when pressure is removed, and why small-population effects (hospital wards, clinics) can produce unpredictable outcomes.',

@@ -130,12 +130,21 @@ ax3.tick_params(colors='gray')
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
 # Simplified pathway diagram using bar chart of precursors
-precursors = ['Shikimic\\nacid', 'Mevalonate\\n(MVA)', 'MEP\\npathway', 'Amino\\nacids', 'Acetyl\\nCoA']
+precursors = ['Shikimic\
+acid', 'Mevalonate\
+(MVA)', 'MEP\
+pathway', 'Amino\
+acids', 'Acetyl\
+CoA']
 products = [35, 45, 25, 30, 20]  # approximate % of known compounds from each
 colors_p = ['#3b82f6', '#22c55e', '#14b8a6', '#ef4444', '#f59e0b']
 bars = ax4.bar(precursors, products, color=colors_p, alpha=0.8, edgecolor='white', linewidth=0.5)
 # Annotate product classes
-annotations = ['Phenolics\\nFlavonoids', 'Terpenoids\\nSteroids', 'Terpenoids\\n(plastidic)', 'Alkaloids', 'Fatty acids\\nPolyketides']
+annotations = ['Phenolics\
+Flavonoids', 'Terpenoids\
+Steroids', 'Terpenoids\
+(plastidic)', 'Alkaloids', 'Fatty acids\
+Polyketides']
 for bar, ann in zip(bars, annotations):
     ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
              ann, ha='center', va='bottom', color='white', fontsize=7, fontweight='bold')
@@ -149,11 +158,14 @@ plt.show()
 print("=" * 60)
 print("    PHYTOCHEMICAL LANDSCAPE ANALYSIS")
 print("=" * 60)
-print(f"\\nDatabase: {n_plants} plants from {len(plant_families)} families")
-print(f"\\nMost alkaloid-rich families:")
+print(f"\
+Database: {n_plants} plants from {len(plant_families)} families")
+print(f"\
+Most alkaloid-rich families:")
 for fam in sorted(plant_families, key=lambda f: -np.mean(plant_data['alkaloid_content'][plant_data['family']==f]))[:3]:
     print(f"  {fam}: {np.mean(plant_data['alkaloid_content'][plant_data['family']==fam]):.1f}")
-print(f"\\nMost bioactive families:")
+print(f"\
+Most bioactive families:")
 for fam in sorted(plant_families, key=lambda f: -np.mean(plant_data['bioactivity'][plant_data['family']==f]))[:3]:
     print(f"  {fam}: {np.mean(plant_data['bioactivity'][plant_data['family']==fam]):.2f}")`,
       challenge: 'Add a chemotaxonomy analysis: cluster plants by their phytochemical profiles and show how chemical similarity often (but not always) correlates with taxonomic relatedness.',
@@ -265,8 +277,10 @@ cbar3.ax.tick_params(colors='gray')
 ax3.axvline(500, color='#fbbf24', linestyle='--', linewidth=1.5)
 ax3.axhline(5, color='#fbbf24', linestyle='--', linewidth=1.5)
 ax3.fill_between([0, 500], -2, 5, alpha=0.1, color='#22c55e')
-ax3.text(250, 4, 'Lipinski\\nfavorable', color='#22c55e', fontsize=10, ha='center', fontweight='bold')
-ax3.text(650, 6.5, 'Lipinski\\nviolation', color='#ef4444', fontsize=10, ha='center', fontweight='bold')
+ax3.text(250, 4, 'Lipinski\
+favorable', color='#22c55e', fontsize=10, ha='center', fontweight='bold')
+ax3.text(650, 6.5, 'Lipinski\
+violation', color='#ef4444', fontsize=10, ha='center', fontweight='bold')
 ax3.set_xlabel('Molecular weight (Da)', color='white')
 ax3.set_ylabel('logP (lipophilicity)', color='white')
 ax3.set_title("Lipinski's Rule of Five", color='white', fontsize=12, fontweight='bold')
@@ -305,7 +319,8 @@ for name, ka, ke, _ in compounds:
     t_half = 0.693 / ke
     t_max = np.log(ka/ke) / (ka - ke)
     C_max = one_compartment(t_max, dose, ka, ke, Vd)
-    print(f"\\n{name}:")
+    print(f"\
+{name}:")
     print(f"  Half-life: {t_half:.1f} h")
     print(f"  Time to peak: {t_max:.1f} h")
     print(f"  Peak concentration: {C_max:.1f} mg/L")
@@ -333,9 +348,15 @@ np.random.seed(42)
 
 # Drug discovery pipeline simulation
 pipeline_stages = [
-    'Ethnobotanical\\nsurvey', 'Crude\\nextract', 'Bioassay\\nscreening',
-    'Active\\nfraction', 'Pure\\ncompound', 'Preclinical',
-    'Phase I', 'Phase II', 'Phase III', 'Approved\\ndrug'
+    'Ethnobotanical\
+survey', 'Crude\
+extract', 'Bioassay\
+screening',
+    'Active\
+fraction', 'Pure\
+compound', 'Preclinical',
+    'Phase I', 'Phase II', 'Phase III', 'Approved\
+drug'
 ]
 # Survival rates at each stage
 survival_rates = [1.0, 0.90, 0.75, 0.40, 0.25, 0.15, 0.08, 0.04, 0.02, 0.01]
@@ -385,7 +406,12 @@ ax2.tick_params(axis='x', colors='gray')
 # Plot 3: Ethnobotanical vs random screening
 ax3 = axes[1, 0]
 ax3.set_facecolor('#111827')
-categories = ['All plants\\nscreened', 'Show lab\\nactivity', 'Potent\\nhits', 'Drug-like\\n(Lipinski)', 'Lead\\ncompound']
+categories = ['All plants\
+screened', 'Show lab\
+activity', 'Potent\
+hits', 'Drug-like\
+(Lipinski)', 'Lead\
+compound']
 ethno_rates = [100, 75, 30, 20, 10]
 random_rates = [100, 5, 1, 0.5, 0.1]
 x = np.arange(len(categories))
@@ -425,11 +451,14 @@ plt.show()
 print("=" * 60)
 print("    DRUG DISCOVERY PIPELINE ANALYSIS")
 print("=" * 60)
-print(f"\\nStarting with {n_initial} ethnobotanical leads:")
+print(f"\
+Starting with {n_initial} ethnobotanical leads:")
 for stage, count, time, cost in zip(pipeline_stages, survivors, stage_times, cumulative_cost):
-    stage_clean = stage.replace('\\n', ' ')
+    stage_clean = stage.replace('\
+', ' ')
     print(f"  {stage_clean:<22} {count:>4} candidates  ({time:.0f} yr, \{cost:.0f}M)")
-print(f"\\nEthnobotanical advantage: {75/5:.0f}x higher hit rate than random screening")
+print(f"\
+Ethnobotanical advantage: {75/5:.0f}x higher hit rate than random screening")
 print(f"Total cost to bring one drug to market: ~\{cumulative_cost[-1]:.0f}M")
 print(f"Total timeline: ~{stage_times[-1]:.0f} years")`,
       challenge: 'Simulate a Monte Carlo drug discovery campaign: run 1000 simulations of the pipeline with stochastic survival at each stage. Report the probability distribution of final successful drugs and the expected return on investment.',
@@ -492,7 +521,8 @@ colors_c = ['#3b82f6' if v < 0 else '#ef4444' for v in values]
 bars = ax.barh(names, values, color=colors_c, alpha=0.8, edgecolor='white', linewidth=0.5)
 ax.axvline(0, color='white', linewidth=0.5)
 ax.axvline(total, color='#fbbf24', linewidth=2, linestyle='--')
-ax.text(total - 0.3, len(names), f'Total: {total:.1f} kcal/mol\\nKd = {dG_to_Kd(total)*1e6:.1f} μM',
+ax.text(total - 0.3, len(names), f'Total: {total:.1f} kcal/mol\
+Kd = {dG_to_Kd(total)*1e6:.1f} μM',
         color='#fbbf24', fontsize=10, fontweight='bold', va='bottom')
 for bar, val in zip(bars, values):
     pos = val - 0.3 if val < 0 else val + 0.1
@@ -546,7 +576,8 @@ cbar.set_label('log₁₀(Kd) — lower is tighter', color='white')
 cbar.ax.tick_params(colors='gray')
 # Mark typical drug zone
 ax3.contour(S, E, np.log10(Kd_landscape), levels=[-6], colors=['white'], linewidths=2)
-ax3.text(7, 3.5, 'Kd < 1 μM\\n(drug-like)', color='white', fontsize=10, fontweight='bold')
+ax3.text(7, 3.5, 'Kd < 1 μM\
+(drug-like)', color='white', fontsize=10, fontweight='bold')
 ax3.set_xlabel('Shape complementarity score', color='white')
 ax3.set_ylabel('Electrostatic score', color='white')
 ax3.set_title('Binding Affinity Landscape', color='white', fontsize=12, fontweight='bold')
@@ -584,15 +615,18 @@ plt.show()
 print("=" * 60)
 print("    MOLECULAR DOCKING ANALYSIS")
 print("=" * 60)
-print(f"\\nReference compound: ΔG = {total:.1f} kcal/mol, Kd = {dG_to_Kd(total)*1e6:.2f} μM")
-print(f"\\nSAR modifications:")
+print(f"\
+Reference compound: ΔG = {total:.1f} kcal/mol, Kd = {dG_to_Kd(total)*1e6:.2f} μM")
+print(f"\
+SAR modifications:")
 for name, delta in modifications[1:]:
     new_dG = base_dG + delta
     new_Kd = dG_to_Kd(new_dG) * 1e6
     fold_change = dG_to_Kd(base_dG) / dG_to_Kd(new_dG)
     direction = "improved" if delta < 0 else "worsened"
     print(f"  {name:<25}: {delta:+.1f} kcal/mol → Kd = {new_Kd:.2f} μM ({fold_change:.1f}x {direction})")
-print(f"\\nVirtual screening hit rates:")
+print(f"\
+Virtual screening hit rates:")
 print(f"  Random library: {hit_rate_random:.0%}")
 print(f"  Ethnobotanical: {hit_rate_ethno:.0%}")
 print(f"  Enrichment factor: {hit_rate_ethno/max(hit_rate_random,0.001):.1f}x")`,
@@ -698,8 +732,10 @@ ax3.set_ylabel('Herb B dose (μg/mL)', color='white')
 ax3.set_title('Isobologram: Drug Synergy Analysis', color='white', fontsize=12, fontweight='bold')
 ax3.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax3.tick_params(colors='gray')
-ax3.text(30, 35, 'SYNERGY\\n(below line)', color='#22c55e', fontsize=11, fontweight='bold')
-ax3.text(70, 45, 'ANTAGONISM\\n(above line)', color='#ef4444', fontsize=11, fontweight='bold')
+ax3.text(30, 35, 'SYNERGY\
+(below line)', color='#22c55e', fontsize=11, fontweight='bold')
+ax3.text(70, 45, 'ANTAGONISM\
+(above line)', color='#ef4444', fontsize=11, fontweight='bold')
 
 # Plot 4: Multi-component traditional remedy
 ax4 = axes[1, 1]
@@ -733,17 +769,20 @@ plt.show()
 print("=" * 60)
 print("    DOSE-RESPONSE & SYNERGY ANALYSIS")
 print("=" * 60)
-print(f"\\nTherapeutic indices:")
+print(f"\
+Therapeutic indices:")
 for name, ED50, TD50, _ in drugs:
     ti = TD50 / ED50
     safety = "SAFE" if ti > 5 else "CAUTION" if ti > 2 else "DANGEROUS"
     print(f"  {name:<25}: TI = {ti:.1f} ({safety})")
-print(f"\\nSynergy analysis (traditional combination):")
+print(f"\
+Synergy analysis (traditional combination):")
 print(f"  Individual herbs at EC50: {herb_A[250]:.0f}% + {herb_B[250]:.0f}% + {herb_C[250]:.0f}%")
 print(f"  Predicted additive: {additive[250]:.0f}%")
 print(f"  Actual combination: {synergistic[250]:.0f}%")
 print(f"  Synergy bonus: +{synergistic[250] - additive[250]:.0f}%")
-print(f"\\nThis explains why traditional herbalists combine multiple plants —")
+print(f"\
+This explains why traditional herbalists combine multiple plants —")
 print(f"the synergy between compounds produces effects greater than any single herb.")`,
       challenge: 'Implement the Chou-Talalay combination index (CI) method: for each combination ratio, calculate CI using the median-effect equation. Generate a CI-Fa (combination index vs fraction affected) plot showing how synergy varies with effect level.',
       successHint: 'You have quantified the pharmacology behind traditional medicine — dose-response curves explain why dosing matters, therapeutic indices explain safety margins, and synergy analysis explains why the witch doctor combines multiple plants.',
@@ -897,18 +936,22 @@ plt.show()
 print("=" * 60)
 print("    ETHNOBOTANICAL KNOWLEDGE GRAPH ANALYSIS")
 print("=" * 60)
-print(f"\\nGraph size: {len(plants)} plants, {len(compounds)} compounds, {len(diseases)} diseases")
+print(f"\
+Graph size: {len(plants)} plants, {len(compounds)} compounds, {len(diseases)} diseases")
 print(f"Plant-compound edges: {PC.sum()}")
 print(f"Compound-disease edges: {CD.sum()}")
-print(f"\\nMost connected plants (degree centrality):")
+print(f"\
+Most connected plants (degree centrality):")
 for i in np.argsort(plant_degree)[::-1][:5]:
     print(f"  {plants[i]:<15}: {plant_degree[i]} compounds → {plant_disease_count[i]} diseases")
-print(f"\\nMost similar plant pairs (Jaccard > 0.2):")
+print(f"\
+Most similar plant pairs (Jaccard > 0.2):")
 for i in range(n_plants):
     for j in range(i+1, n_plants):
         if similarity[i,j] > 0.2:
             print(f"  {plants[i]} ↔ {plants[j]}: {similarity[i,j]:.2f}")
-print(f"\\nThe knowledge graph preserves and connects the witch doctor's")
+print(f"\
+The knowledge graph preserves and connects the witch doctor's")
 print(f"empirical wisdom with modern chemical and medical data.")`,
       challenge: 'Implement a link prediction algorithm: use the graph structure to predict new compound-disease edges (novel therapeutic applications). Score each missing edge by the number of paths of length 2 connecting it and rank the top 10 predictions.',
       successHint: 'You have built a computational version of the witch doctor\'s knowledge — a graph that connects plants, compounds, and diseases, enabling systematic discovery of new therapeutic relationships.',

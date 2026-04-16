@@ -836,7 +836,8 @@ plt.show()
 print("Dawn chorus order (earliest to latest):")
 for i, sp in enumerate(species_sorted):
     print(f"  {i+1}. {sp['name']}: {onset_times[sp['name']]:.0f} min (eye: {sp['eye_mm']} mm, threshold: {sp['threshold_lux']} lux)")
-print(f"\\nCorrelation (eye size vs onset): r = {np.corrcoef(eyes, onsets)[0,1]:.3f}")`,
+print(f"\
+Correlation (eye size vs onset): r = {np.corrcoef(eyes, onsets)[0,1]:.3f}")`,
       challenge: 'Model seasonal variation: in June (long days), dawn starts at 4:30 AM; in March it starts at 6:30 AM. How does the absolute timing of each species shift? Does the RELATIVE order stay the same?',
       successHint: 'The dawn chorus demonstrates how a simple physical variable (light level) combined with an evolved trait (eye size) creates a highly structured, predictable ecological pattern. Understanding this helps predict how light pollution and climate change will disrupt bird communities.',
     },

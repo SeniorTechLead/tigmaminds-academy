@@ -49,7 +49,8 @@ print("=== Hess's Law: Gunpowder Enthalpy ===")
 print(f"Products:  {products_H:.1f} kJ")
 print(f"Reactants: {reactants_H:.1f} kJ")
 print(f"ΔH_rxn  = {dH_rxn:.1f} kJ (per 2 mol KNO₃)")
-print(f"{'Exothermic' if dH_rxn < 0 else 'Endothermic'} reaction\\n")
+print(f"{'Exothermic' if dH_rxn < 0 else 'Endothermic'} reaction\
+")
 
 # Energy per gram of mixture
 molar_mass_mix = 2*101.1 + 3*12.0 + 32.1  # g per formula unit
@@ -70,7 +71,8 @@ print("-" * 54)
 for name, e in propellants:
     print(f"{name:<30} {e:>10.0f} {e/energy_per_gram:>9.2f}×")
 
-print(f"\\nGunpowder releases ~{energy_per_gram:.0f} J/g")
+print(f"\
+Gunpowder releases ~{energy_per_gram:.0f} J/g")
 print("Modern explosives release 3-5× more energy per gram.")
 print("Gunpowder is a LOW explosive — it deflagrates (burns fast)")
 print("rather than detonates (supersonic shock wave).")`,
@@ -303,7 +305,8 @@ def tube_burn(r_out, r_in, length, burn_rate, dt=0.01):
 r0 = 5.0        # mm outer radius
 burn = 2.0       # mm/s linear burn rate
 
-print("=== Grain Geometry: Surface Area Over Time ===\\n")
+print("=== Grain Geometry: Surface Area Over Time ===\
+")
 
 # Sphere
 t_s, a_s, f_s = sphere_burn(r0, burn)
@@ -313,12 +316,14 @@ for i in range(0, len(t_s), max(1, len(t_s)//6)):
 
 # Tube (neutral)
 t_t, a_t, f_t = tube_burn(r0, 1.5, 20.0, burn)
-print("\\nTUBULAR GRAIN (neutral)")
+print("\
+TUBULAR GRAIN (neutral)")
 for i in range(0, len(t_t), max(1, len(t_t)//6)):
     print(f"  t={t_t[i]:>4.2f}s  area={a_t[i]:>6.1f} mm²  burned={f_t[i]*100:>5.1f}%")
 
 # Gas generation comparison
-print("\\n=== Peak Gas Generation Rate ===")
+print("\
+=== Peak Gas Generation Rate ===")
 print(f"Sphere peak: {a_s[0]:>8.1f} mm² (at ignition, then drops)")
 print(f"Tube   peak: {max(a_t):>8.1f} mm² (sustained throughout)")
 print(f"Tube/Sphere ratio: {max(a_t)/a_s[0]:.1f}×")
@@ -386,7 +391,8 @@ serp = simulate_burn("serpentine")
 corn = simulate_burn("corned")
 
 print("=== Serpentine vs Corned Powder Performance ===")
-print(f"(500 trials each)\\n")
+print(f"(500 trials each)\
+")
 
 for name, data in [("Serpentine", serp), ("Corned", corn)]:
     print(f"{name}:")

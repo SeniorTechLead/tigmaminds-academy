@@ -66,7 +66,8 @@ ax1.set_ylim(-0.05, 1.05)
 ax1.tick_params(colors='gray')
 
 fixed = np.sum((results_small[:, -1] == 0) | (results_small[:, -1] == 1))
-ax1.text(100, 0.9, f'{fixed}/10 alleles fixed\\nor lost', color='#ef4444', fontsize=10)
+ax1.text(100, 0.9, f'{fixed}/10 alleles fixed\
+or lost', color='#ef4444', fontsize=10)
 
 # Large population (N=500)
 ax2.set_facecolor('#111827')
@@ -81,7 +82,8 @@ ax2.set_ylim(-0.05, 1.05)
 ax2.tick_params(colors='gray')
 
 fixed2 = np.sum((results_large[:, -1] == 0) | (results_large[:, -1] == 1))
-ax2.text(100, 0.9, f'{fixed2}/10 alleles fixed\\nor lost', color='#22c55e', fontsize=10)
+ax2.text(100, 0.9, f'{fixed2}/10 alleles fixed\
+or lost', color='#22c55e', fontsize=10)
 
 plt.tight_layout()
 plt.show()

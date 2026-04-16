@@ -92,10 +92,7 @@ function saveLocal(progress: Record<string, LessonProgress>) {
 
 async function saveToSupabase(userId: string, slug: string, progress: LessonProgress) {
   const lesson = await getLessonBySlug(slug);
-  if (!lesson) {
-    console.error(`[Progress] Unknown lesson slug: ${slug}`);
-    return;
-  }
+  if (!lesson) return;
   try {
     const row: Record<string, unknown> = {
       user_id: userId,

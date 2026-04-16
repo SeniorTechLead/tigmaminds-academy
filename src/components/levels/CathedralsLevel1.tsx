@@ -151,7 +151,8 @@ for ax, label, H, angle in [
     # Vertical component
     ax.annotate("", xy=(0, V*scale*0.6), xytext=(0, 0),
                 arrowprops=dict(arrowstyle="->", lw=2, color="#22c55e"))
-    ax.set_title(f"{label}\\nH={H/1000:.0f} kN, angle={angle:.0f}°", fontsize=11)
+    ax.set_title(f"{label}\
+H={H/1000:.0f} kN, angle={angle:.0f}°", fontsize=11)
     ax.set_aspect("equal")
     ax.grid(alpha=0.3)
     ax.set_xlabel("Horizontal (kN)")
@@ -326,7 +327,8 @@ axes[0].set_title('Barrel Vault: Uniform Wall Load', fontsize=12)
 axes[0].set_xlabel('Position along wall (m)')
 axes[0].set_ylabel('Load (kN/m)')
 axes[0].set_ylim(0, max(barrel_load) * 3)
-axes[0].text(5, max(barrel_load) * 2, 'Entire wall\\nmust be solid',
+axes[0].text(5, max(barrel_load) * 2, 'Entire wall\
+must be solid',
              ha='center', fontsize=11, color='#ef4444')
 
 # Ribbed vault: point loads at columns
@@ -555,7 +557,8 @@ for h, name in cathedrals.items():
     total = ss + ts
     color = '#ef4444' if name == 'Beauvais' else '#7c3aed'
     ax.plot(h, total, 'o', ms=10, color=color, zorder=5)
-    ax.annotate(f'{name}\\n{h}m', (h, total),
+    ax.annotate(f'{name}\
+{h}m', (h, total),
                 textcoords="offset points", xytext=(10, 8),
                 fontsize=9, color=color)
 

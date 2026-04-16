@@ -36,10 +36,14 @@ import matplotlib.pyplot as plt
 # Simulated interaction energies (kJ/mol)
 # More negative = stronger attraction = more mixing
 pairs = {
-    "Water-Water\\n(polar-polar)": -20.0,
-    "Oil-Oil\\n(nonpolar-nonpolar)": -5.0,
-    "Water-Ethanol\\n(polar-polar)": -18.0,
-    "Oil-Water\\n(polar-nonpolar)": -0.5,
+    "Water-Water\
+(polar-polar)": -20.0,
+    "Oil-Oil\
+(nonpolar-nonpolar)": -5.0,
+    "Water-Ethanol\
+(polar-polar)": -18.0,
+    "Oil-Water\
+(polar-nonpolar)": -0.5,
 }
 
 names = list(pairs.keys())
@@ -177,7 +181,8 @@ plt.figure(figsize=(10, 5))
 plt.plot(V_base, pH_values, color='#a78bfa', linewidth=2.5)
 plt.axhline(y=7, color='gray', linewidth=1, linestyle='--', alpha=0.4)
 plt.axvline(x=50, color='#10b981', linewidth=1, linestyle='--', alpha=0.6)
-plt.annotate('Equivalence\\npoint', xy=(50, 7), xytext=(60, 4),
+plt.annotate('Equivalence\
+point', xy=(50, 7), xytext=(60, 4),
              fontsize=10, color='#10b981',
              arrowprops=dict(arrowstyle='->', color='#10b981'))
 plt.xlabel('Volume NaOH added (mL)', fontsize=11, color='lightgray')

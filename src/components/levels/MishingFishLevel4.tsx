@@ -961,7 +961,8 @@ plt.show()
 # Print top 5 solutions
 feasible = [r for r in results if not r['violated']]
 feasible.sort(key=lambda x: x['profit'], reverse=True)
-print("\\nTop 5 feasible solutions:")
+print("\
+Top 5 feasible solutions:")
 print(f"{'Rank':<6} {'Density':>8} {'Feed%':>8} {'Harvest':>8} {'Profit':>10} {'Weight':>8}")
 print("-" * 52)
 for i, r in enumerate(feasible[:5]):

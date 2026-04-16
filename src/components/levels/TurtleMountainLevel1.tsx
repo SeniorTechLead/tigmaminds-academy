@@ -49,7 +49,8 @@ for radius_km, name, color, desc in layers:
     ax1.fill(x, y, color=color, alpha=0.6)
     # Label
     r_label = (radius_km / 6371) * 0.85 if radius_km > 1000 else 0.05
-    ax1.text(r_label * 0.7, r_label * 0.3, f'{name}\\n{radius_km}km',
+    ax1.text(r_label * 0.7, r_label * 0.3, f'{name}\
+{radius_km}km',
              color='white', fontsize=7, ha='center', fontweight='bold')
 
 ax1.set_aspect('equal')
@@ -149,8 +150,10 @@ ax1.set_ylabel('Latitude (degrees)', color='white')
 ax1.set_title("India's Northward Journey", color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
-ax1.text(120, -45, 'Part of Gondwana\\n(near Antarctica)', color='gray', fontsize=9)
-ax1.text(30, 20, 'Colliding with Asia\\n(Himalayas rising)', color='gray', fontsize=9)
+ax1.text(120, -45, 'Part of Gondwana\
+(near Antarctica)', color='gray', fontsize=9)
+ax1.text(30, 20, 'Colliding with Asia\
+(Himalayas rising)', color='gray', fontsize=9)
 
 # Speed vs time
 ax2.set_facecolor('#111827')
@@ -244,7 +247,10 @@ ax2.set_facecolor('#111827')
 ref_mag = 5
 ref_energy = 10 ** (1.5 * ref_mag + 4.8)
 compare_mags = [5, 6, 7, 8, 8.6, 9.1]
-compare_names = ['Mw 5\\n(reference)', 'Mw 6', 'Mw 7', 'Mw 8', 'Mw 8.6\\n(1950 Assam)', 'Mw 9.1\\n(2004 tsunami)']
+compare_names = ['Mw 5\
+(reference)', 'Mw 6', 'Mw 7', 'Mw 8', 'Mw 8.6\
+(1950 Assam)', 'Mw 9.1\
+(2004 tsunami)']
 multiples = [10 ** (1.5 * (m - ref_mag)) for m in compare_mags]
 
 bars = ax2.bar(compare_names, multiples, color=['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#a855f7', '#ec4899'])
@@ -404,7 +410,8 @@ for lat, lon, mag, year, name in quakes:
     alpha = 0.7 if mag >= 7 else 0.4
     color = '#ef4444' if mag >= 8 else '#f59e0b' if mag >= 7 else '#22c55e'
     ax1.scatter(lon, lat, s=size, color=color, alpha=alpha, edgecolors='white', linewidth=0.5)
-    ax1.annotate(f'{name}\\n{year} (M{mag})', xy=(lon, lat), xytext=(lon + 0.3, lat + 0.3),
+    ax1.annotate(f'{name}\
+{year} (M{mag})', xy=(lon, lat), xytext=(lon + 0.3, lat + 0.3),
                  color='white', fontsize=7)
 
 # Approximate plate boundaries
@@ -433,7 +440,8 @@ for y, m, n in zip(years, mags, names):
 
 # Highlight seismic gap (post-1950)
 ax2.axvspan(1960, 2030, alpha=0.1, color='#ef4444')
-ax2.text(1995, 8.8, 'Seismic gap\\n(no Mw 8+ since 1950)', color='#ef4444', fontsize=9, ha='center')
+ax2.text(1995, 8.8, 'Seismic gap\
+(no Mw 8+ since 1950)', color='#ef4444', fontsize=9, ha='center')
 
 ax2.set_xlabel('Year', color='white')
 ax2.set_ylabel('Magnitude (Mw)', color='white')

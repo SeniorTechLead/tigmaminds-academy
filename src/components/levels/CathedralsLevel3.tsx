@@ -162,9 +162,11 @@ for i in range(arch.n_nodes):
     if i % 2 == 0 or i == arch.n_nodes - 1:
         print(f"{i:>5} {x:>7.2f} {y:>7.2f} {dx:>9.4f} {dy:>9.4f}")
 
-print(f"\\nMax vertical displacement: {np.min(displacements[1::2])*1000:.4f} mm")
+print(f"\
+Max vertical displacement: {np.min(displacements[1::2])*1000:.4f} mm")
 print(f"Max horizontal displacement: {np.max(np.abs(displacements[0::2]))*1000:.4f} mm")
-print(f"\\nElement stresses (MPa):")
+print(f"\
+Element stresses (MPa):")
 print(f"  Max compression: {np.min(stresses)/1e6:.2f} MPa")
 print(f"  Max tension: {np.max(stresses)/1e6:.2f} MPa")
 print(f"  Limestone strength: ~40 MPa compression")
@@ -246,7 +248,8 @@ towers = [
 ]
 
 print("=== Wind Loading on Gothic Cathedral Towers ===")
-print(f"Reference wind: 20 m/s at 10m height | Drag coeff: 1.3\\n")
+print(f"Reference wind: 20 m/s at 10m height | Drag coeff: 1.3\
+")
 
 print(f"{'Tower':<24} {'H(m)':>5} {'V_top':>7} {'Force':>8} "
       f"{'Moment':>10} {'Base σ':>10}")
@@ -259,7 +262,8 @@ for name, h, w, d in towers:
           f"{r['base_moment']:>8.0f}kN·m {r['base_stress_kpa']:>8.0f}kPa")
 
 # Wind speed sensitivity analysis
-print("\\n=== Beauvais Spire: Wind Speed Sensitivity ===")
+print("\
+=== Beauvais Spire: Wind Speed Sensitivity ===")
 for v_ref in [10, 15, 20, 25, 30, 40]:
     r = tower_wind_analysis(153, 8, 8, v_ref=v_ref)
     stone_limit = 2000  # kPa — tensile/bending limit for limestone
@@ -270,7 +274,8 @@ for v_ref in [10, 15, 20, 25, 30, 40]:
           f"({ratio:.0f}% of limit) [{status}]")
 
 # Wind profile visualization
-print("\\n=== Wind Speed Profile (height vs speed) ===")
+print("\
+=== Wind Speed Profile (height vs speed) ===")
 heights = [0, 10, 20, 30, 50, 75, 100, 125, 150]
 for z in heights:
     if z == 0:
@@ -400,7 +405,8 @@ windows = [
     ("Reims", 12, 6.0),
 ]
 
-print("=== Gothic Rose Window Geometry ===\\n")
+print("=== Gothic Rose Window Geometry ===\
+")
 
 for name, n, r in windows:
     rw = RoseWindow(n, r)
@@ -490,7 +496,8 @@ def note_name(freq):
     return f"{notes[note_idx]}{octave}"
 
 # Organ pipe calculation table
-print("=== Organ Pipe Frequency Calculator ===\\n")
+print("=== Organ Pipe Frequency Calculator ===\
+")
 
 # Standard organ pipe lengths
 lengths = [8.0, 4.0, 2.0, 1.0, 0.5, 0.25, 0.125]
@@ -504,7 +511,8 @@ for L in lengths:
           f"{f_stopped:>10.1f}Hz {note_name(f_stopped):>5}")
 
 # Harmonic series comparison
-print("\\n=== Harmonic Series: Open vs Stopped Pipe (L=1m) ===")
+print("\
+=== Harmonic Series: Open vs Stopped Pipe (L=1m) ===")
 f0_open, _ = pipe_frequency(1.0, "open")
 f0_stopped, _ = pipe_frequency(1.0, "stopped")
 
@@ -520,7 +528,8 @@ for i in range(8):
           f"{s:>12.1f}Hz {note_name(s):>5}")
 
 # Temperature sensitivity
-print("\\n=== Temperature Effect on Tuning ===")
+print("\
+=== Temperature Effect on Tuning ===")
 print("(An organ goes out of tune as the cathedral heats up!)")
 f_ref, _ = pipe_frequency(1.0, "open", 15)  # tuned at 15°C
 for temp in [5, 10, 15, 20, 25, 30]:
@@ -530,7 +539,8 @@ for temp in [5, 10, 15, 20, 25, 30]:
           f"deviation: {cents_off:>+5.1f} cents {'(in tune)' if abs(cents_off) < 5 else ''}")
 
 # Notre-Dame organ statistics
-print("\\n=== Notre-Dame Organ Statistics ===")
+print("\
+=== Notre-Dame Organ Statistics ===")
 stops = [
     ("32-foot (Bombarde)", 9.75, "open"),
     ("16-foot (Principal)", 4.88, "open"),
@@ -592,7 +602,8 @@ cathedrals = {
 }
 
 # Derived structural metrics
-print("=== Comparative Gothic Analysis ===\\n")
+print("=== Comparative Gothic Analysis ===\
+")
 print("--- Structural Metrics ---")
 print(f"{'Metric':<30} {'Notre-Dame':>12} {'Chartres':>12} {'Beauvais':>12}")
 print("-" * 68)
@@ -620,7 +631,8 @@ for metric_name in ["Height-to-thickness", "Span-to-height", "Buttress ratio",
     print(f"{metric_name:<30} " + "  ".join(f"{v:>10.2f}" for v in vals))
 
 # Multi-criteria scoring
-print("\\n--- Multi-Criteria Scoring (0-100, higher = better) ---")
+print("\
+--- Multi-Criteria Scoring (0-100, higher = better) ---")
 criteria = {
     "Structural safety": {"weight": 0.30, "metric": "Stability index", "higher_better": True},
     "Interior height": {"weight": 0.20, "metric": lambda c: c["vault_height_m"], "higher_better": True},
@@ -668,7 +680,8 @@ print(f"{'WEIGHTED TOTAL':<24} {'':>4} " +
       "  ".join(f"{totals[n]:>10.1f}" for n in cathedrals))
 
 winner = max(totals, key=totals.get)
-print(f"\\nHighest overall score: {winner}")
+print(f"\
+Highest overall score: {winner}")
 print("(But remember: Beauvais's choir collapsed. Models must be validated against reality.)")`,
       challenge: 'Change the weights to reflect different priorities: (1) a military commander who values structural safety above all else, (2) an artist who values light and beauty, (3) a bishop who wants the tallest vault to glorify God. How does the "winner" change with each stakeholder\'s priorities? This is why multi-criteria analysis is used in public policy — different stakeholders weight the same criteria differently.',
       successHint: 'Multi-criteria analysis is used everywhere complex decisions are made: infrastructure planning, environmental policy, product design, medical treatment selection. You learned to normalise diverse metrics to a common scale, assign weights, and compute composite scores — the foundation of systematic decision-making.',

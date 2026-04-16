@@ -67,7 +67,8 @@ for T in [500, 700, 900, 1000, 1100, 1200]:
     print(f"{T:<12} {D:<15.2e} {dist:<20.2f}")
 
 # Concentration profiles at wootz forging temperature
-print("\\n=== Carbon Profile at 1100°C (Wootz Crucible) ===")
+print("\
+=== Carbon Profile at 1100°C (Wootz Crucible) ===")
 print(f"{'Depth (mm)':<12}", end="")
 for t in [1, 6, 12, 24, 48]:
     print(f"{'  ' + str(t) + 'h':>8}", end="")
@@ -82,7 +83,8 @@ for d in depths:
         print(f"{c:>8.2f}", end="")
     print()
 
-print("\\nKey insight: at 1100°C, carbon penetrates ~5 mm in 24 hours.")
+print("\
+Key insight: at 1100°C, carbon penetrates ~5 mm in 24 hours.")
 print("Wootz ingots were typically 30-50 mm — requiring days of soaking.")`,
       challenge: 'Calculate how long it takes for the centre of a 40 mm diameter wootz ingot to reach 90% of the surface carbon concentration at 1100°C. (Hint: solve C(20mm, t) = 0.9 × C_surface by iterating over time.) This determines the minimum crucible hold time.',
       successHint: 'Fick\'s laws are the foundation of all solid-state diffusion science — used in semiconductor doping, case-hardening of gears, and carburizing of steel. The Arrhenius temperature dependence (exponential activation) appears in nearly every rate-dependent process in chemistry and materials science.',
@@ -136,7 +138,8 @@ def predict_microstructure(carbon_pct, cooling_rate_Cs):
 # Analyse wootz steel (1.5% C)
 carbon = 1.5
 print(f"=== TTT Analysis for {carbon}% Carbon Steel (Wootz) ===")
-print(f"Nose time estimate: {ttt_nose_time(carbon):.1f} seconds\\n")
+print(f"Nose time estimate: {ttt_nose_time(carbon):.1f} seconds\
+")
 
 cooling_rates = [0.1, 0.5, 1, 5, 10, 50, 100, 500]
 print(f"{'Cool Rate (°C/s)':<18} {'Microstructure':<28} {'HRC':>5} {'Toughness':>10}")
@@ -147,7 +150,8 @@ for rate in cooling_rates:
     print(f"{rate:<18.1f} {structure:<28} {hardness:>4} {toughness:>9.2f}")
 
 # Compare different carbon contents
-print("\\n=== Effect of Carbon Content on TTT Nose ===")
+print("\
+=== Effect of Carbon Content on TTT Nose ===")
 print(f"{'Carbon %':<10} {'Nose Time (s)':>14} {'Hardenability':>14}")
 print("-" * 40)
 for c in [0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.5, 2.0]:
@@ -156,7 +160,8 @@ for c in [0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.5, 2.0]:
     print(f"{c:<10.1f} {nose:>12.1f} {harden:>14}")
 
 # Wootz optimal cooling strategy
-print("\\n=== Optimal Cooling for Wootz Damask Pattern ===")
+print("\
+=== Optimal Cooling for Wootz Damask Pattern ===")
 target_rate = 0.5  # °C/s — slow air cool
 struct, hrc, tough = predict_microstructure(carbon, target_rate)
 print(f"Recommended cooling: {target_rate} °C/s (slow air cooling)")
@@ -225,7 +230,8 @@ for name, hv in phases:
 print("* Indent diagonal at 1 kgf load")
 
 # Simulate hardness traverse across wootz blade
-print("\\n=== Hardness Traverse Across Wootz Blade ===")
+print("\
+=== Hardness Traverse Across Wootz Blade ===")
 print("(Measuring every 0.1 mm across the cross-section)")
 
 np.random.seed(42)
@@ -253,7 +259,8 @@ for i in range(0, len(positions), 5):
     print(f"{positions[i]:<15.1f} {hv:>5.0f} {phase:>14}  {bar}")
 
 # Statistics
-print(f"\\nTraverse statistics:")
+print(f"\
+Traverse statistics:")
 print(f"  Mean hardness: {np.mean(hardness_profile):.0f} HV")
 print(f"  Max (carbide): {np.max(hardness_profile):.0f} HV")
 print(f"  Min (matrix):  {np.min(hardness_profile):.0f} HV")
@@ -330,10 +337,12 @@ for name, E, sy, uts, elong in steels:
     toughness = np.trapz(stress, strain)
     print(f"{name:<36} {E:>4} {sy:>5} {uts:>5} {elong:>4}% {toughness:>8.1f}")
 
-print("\\n* Toughness = area under curve (MPa = MJ/m³)")
+print("\
+* Toughness = area under curve (MPa = MJ/m³)")
 
 # Detailed wootz curve
-print("\\n=== Wootz Steel Stress-Strain Curve (detailed) ===")
+print("\
+=== Wootz Steel Stress-Strain Curve (detailed) ===")
 strain, stress = tensile_test(200, 800, 1050, 8)
 print(f"{'Strain (%)':>10} {'Stress (MPa)':>14} {'Region':<20}")
 print("-" * 46)
@@ -353,7 +362,8 @@ for target_pct, label in landmarks:
     idx = np.argmin(np.abs(strain * 100 - target_pct))
     print(f"{strain[idx]*100:>9.1f}% {stress[idx]:>12.0f} {label:<20}")
 
-print(f"\\nKey: Wootz combines high strength ({steels[2][3]} MPa UTS)")
+print(f"\
+Key: Wootz combines high strength ({steels[2][3]} MPa UTS)")
 print(f"with moderate ductility ({steels[2][4]}% elongation) — rare for high-carbon steel.")`,
       challenge: 'Calculate the "resilience" (area under the elastic region only) for each steel. Resilience = energy absorbed before permanent deformation. Which steel has the highest resilience? (Hint: resilience = σ_y² / (2E).) How does resilience differ from toughness, and why do both matter for a blade?',
       successHint: 'The tensile test is the most fundamental mechanical test in materials science. Every structural material — from aluminium aircraft skins to titanium hip implants — is characterised by its stress-strain curve. You now understand the full curve: elasticity, yielding, hardening, necking, and fracture.',
@@ -420,7 +430,8 @@ for C in np.arange(1.0, 2.05, 0.1):
                     best_alloy = results[-1]
 
 print(f"=== Wootz Alloy Design Optimisation ===")
-print(f"Evaluated {len(results):,} compositions\\n")
+print(f"Evaluated {len(results):,} compositions\
+")
 
 # Top 8 alloys
 sorted_r = sorted(results, key=lambda r: r[8], reverse=True)
@@ -430,7 +441,8 @@ for r in sorted_r[:8]:
     print(f"{r[0]:>4.1f} {r[1]:>5.3f} {r[2]:>4.1f} {r[3]:>4.1f} "
           f"{r[4]:>5.0f} {r[5]:>5.1f} {r[6]:>7.1f} {r[8]:>5.3f}")
 
-print(f"\\nOptimal composition:")
+print(f"\
+Optimal composition:")
 b = best_alloy
 print(f"  Carbon:    {b[0]:.1f}%")
 print(f"  Vanadium:  {b[1]:.3f}%")
@@ -441,7 +453,8 @@ print(f"  Toughness: {b[5]:.1f} J")
 print(f"  Pattern:   {b[6]:.1f} / 15")
 
 # Historical comparison
-print("\\n=== Historical vs Optimised ===")
+print("\
+=== Historical vs Optimised ===")
 hist_h, hist_t, hist_p, _ = evaluate_alloy(1.5, 0.03, 0.3, 0.2, 0.02)
 print(f"Historical wootz (1.5C, 0.03V, 0.3Mn, 0.2Si):")
 print(f"  Hardness: {hist_h:.0f} HV | Toughness: {hist_t:.1f} J | Pattern: {hist_p:.1f}")

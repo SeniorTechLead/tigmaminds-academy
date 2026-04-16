@@ -64,7 +64,8 @@ ships = [
     ("Columbus Santa Maria",      19,  6, 3.2, 0.55,   80,  40,  40, 70),
 ]
 
-print("=== Buoyancy Analysis: Zheng He vs Columbus ===\\n")
+print("=== Buoyancy Analysis: Zheng He vs Columbus ===\
+")
 
 for name, L, B, D, Cb, hull, cargo, crew, days in ships:
     r = ship_buoyancy(L, B, D, Cb, hull, cargo, crew, days)
@@ -74,10 +75,12 @@ for name, L, B, D, Cb, hull, cargo, crew, days in ships:
     print(f"  Total mass: {r['total_mass']:,.0f} t")
     print(f"  Draft: {r['draft']:.1f}m | Freeboard: {r['freeboard']:.1f}m [{status}]")
     print(f"  Hull: {r['hull_fraction']:.0f}% | Cargo: {r['cargo_fraction']:.0f}%")
-    print(f"  Displacement: {r['displacement']:,.0f} t\\n")
+    print(f"  Displacement: {r['displacement']:,.0f} t\
+")
 
 # Freeboard sensitivity — how much cargo before danger?
-print("=== Cargo Loading Limit (75m Treasure Ship) ===\\n")
+print("=== Cargo Loading Limit (75m Treasure Ship) ===\
+")
 print(f"{'Cargo (t)':>10} {'Draft (m)':>10} {'Freeboard':>10} {'Status':>10}")
 print("-" * 44)
 for cargo in range(0, 4001, 500):
@@ -85,7 +88,8 @@ for cargo in range(0, 4001, 500):
     status = "SAFE" if r['freeboard'] > 1.5 else "RISK" if r['freeboard'] > 0 else "SUNK"
     print(f"{cargo:>10,} {r['draft']:>10.2f} {r['freeboard']:>9.2f}m {status:>10}")
 
-print(f"\\nKey insight: the 75m ship can carry ~2500t of cargo safely.")
+print(f"\
+Key insight: the 75m ship can carry ~2500t of cargo safely.")
 print(f"The 137m chronicle ship would need impossibly thick timbers")
 print(f"to resist the structural forces — buoyancy alone is not enough.")`,
       challenge: 'Add a function to compute the maximum safe cargo for each ship size by binary-searching for the cargo mass that gives exactly 1.5 m freeboard. Then calculate each ship\'s cargo-to-hull-mass ratio — a higher ratio means a more efficient design.',
@@ -153,10 +157,12 @@ disp = 5000      # tonnes
 hole = 0.05      # m^2 (small breach)
 depth = 2.5      # m below waterline
 
-print("=== Flooding Simulation: Effect of Bulkheads ===\\n")
+print("=== Flooding Simulation: Effect of Bulkheads ===\
+")
 print(f"Ship: 75m treasure ship, {hull_vol} m^3 hull, {disp}t displacement")
 print(f"Breach: {hole} m^2 hole, {depth}m below waterline")
-print(f"Flow rate: {flooding_rate(hole, depth):.3f} m^3/s\\n")
+print(f"Flow rate: {flooding_rate(hole, depth):.3f} m^3/s\
+")
 
 configs = [
     ("No bulkheads (1 compartment)", 0),
@@ -180,16 +186,19 @@ for name, n_bulk in configs:
         print(f"  SINKS after {sink_time}s ({sink_time/60:.1f} min)")
     else:
         print(f"  SURVIVES — reserve buoyancy: {final_reserve:,.0f}t")
-    print(f"  Water ingress after 5 min: {min(300 * flooding_rate(hole, depth), comp_vol):.0f} m^3\\n")
+    print(f"  Water ingress after 5 min: {min(300 * flooding_rate(hole, depth), comp_vol):.0f} m^3\
+")
 
 # Multi-compartment flooding (worst case)
-print("=== How Many Compartments Can Flood? (13 bulkheads) ===\\n")
+print("=== How Many Compartments Can Flood? (13 bulkheads) ===\
+")
 rho = 1.025
 reserve = hull_vol * rho - disp
 comp_vol = hull_vol / 14
 
 print(f"Total reserve buoyancy: {reserve:,.0f} tonnes")
-print(f"Buoyancy lost per flooded compartment: {comp_vol * rho:,.0f} tonnes\\n")
+print(f"Buoyancy lost per flooded compartment: {comp_vol * rho:,.0f} tonnes\
+")
 
 for n_flooded in range(1, 8):
     lost = n_flooded * comp_vol * rho
@@ -198,7 +207,8 @@ for n_flooded in range(1, 8):
     print(f"  {n_flooded} compartment(s) flooded: "
           f"lost {lost:,.0f}t, remaining {remaining:,.0f}t — {status}")
 
-print(f"\\nThe 13-bulkhead treasure ship can survive flooding in")
+print(f"\
+The 13-bulkhead treasure ship can survive flooding in")
 print(f"up to {int(reserve / (comp_vol * rho))} compartments simultaneously.")`,
       challenge: 'Add a second breach in a different compartment after 60 seconds. Simulate both compartments flooding simultaneously. How does this change the survivability? Then calculate the minimum number of bulkheads needed to survive 2 simultaneous breaches.',
       successHint: 'You modeled damage control engineering — the same compartmentalization principle used in modern warships, submarines, and aircraft. The Titanic had 16 watertight compartments but sank because 6 flooded simultaneously (more than its design allowed). Chinese shipbuilders understood this tradeoff 600 years before the Titanic.',
@@ -270,7 +280,8 @@ def hull_bending(length_m, beam_m, draft_m, depth_m, block_coeff,
     }
 
 # Analyze ships from 20m to 140m
-print("=== Hogging & Sagging: The Structural Limit of Wood ===\\n")
+print("=== Hogging & Sagging: The Structural Limit of Wood ===\
+")
 
 # Material limits
 joint_strength = 8.0   # MPa — mortise-and-tenon joints
@@ -299,9 +310,12 @@ for name, L, B, T, D, Cb in ships:
           f"{ratio:>6.1f}x [{status}]")
 
 # Find the maximum safe length
-print(f"\\n=== Finding Maximum Safe Wooden Ship Length ===\\n")
+print(f"\
+=== Finding Maximum Safe Wooden Ship Length ===\
+")
 print(f"Joint strength limit: {joint_strength} MPa")
-print(f"Searching for maximum length...\\n")
+print(f"Searching for maximum length...\
+")
 
 for length in range(30, 150, 5):
     beam = length * 0.35  # typical L/B ratio
@@ -314,13 +328,16 @@ for length in range(30, 150, 5):
               f"({'SAFE' if r['stress_sag_MPa'] < joint_strength else 'EXCEEDS LIMIT'})"
               f"{marker}")
 
-print(f"\\n--- Wave Height Sensitivity (75m ship) ---\\n")
+print(f"\
+--- Wave Height Sensitivity (75m ship) ---\
+")
 for wh in [1, 2, 3, 4, 5, 6]:
     r = hull_bending(75, 28, 7, 9, 0.55, wave_height_m=wh)
     safe = "OK" if r['stress_sag_MPa'] < joint_strength else "DANGER"
     print(f"  Wave {wh}m: stress = {r['stress_sag_MPa']:.1f} MPa [{safe}]")
 
-print(f"\\nConclusion: wooden ships hit structural limits around 60-80m.")
+print(f"\
+Conclusion: wooden ships hit structural limits around 60-80m.")
 print(f"The Wyoming (100m with steel straps) confirms this — she flexed")
 print(f"badly and sank. Chronicle dimensions of 137m are structurally")
 print(f"implausible without modern materials.")`,
@@ -379,14 +396,16 @@ def magnetic_dip(lat):
     return np.degrees(np.arctan(2 * np.tan(mag_lat)))
 
 # Compare Chinese and European compass systems
-print("=== 48-Point Chinese vs 32-Point European Compass ===\\n")
+print("=== 48-Point Chinese vs 32-Point European Compass ===\
+")
 
 chinese_48 = build_compass(48)
 european_32 = build_compass(32)
 
 print(f"Chinese compass: {len(chinese_48)} points, {360/48:.1f}° each")
 print(f"European compass: {len(european_32)} points, {360/32:.2f}° each")
-print(f"Resolution advantage: {(360/32)/(360/48):.1f}x finer\\n")
+print(f"Resolution advantage: {(360/32)/(360/48):.1f}x finer\
+")
 
 # True bearing vs nearest compass point
 true_bearing = 67.0  # example bearing
@@ -398,7 +417,9 @@ print(f"  Chinese 48-pt nearest: {ch_nearest}° (error: {abs(true_bearing-ch_nea
 print(f"  European 32-pt nearest: {eu_nearest}° (error: {abs(true_bearing-eu_nearest):.2f}°)")
 
 # Magnetic declination along Zheng He's route
-print(f"\\n=== Magnetic Declination Along Zheng He's Route ===\\n")
+print(f"\
+=== Magnetic Declination Along Zheng He's Route ===\
+")
 
 waypoints = [
     ("Nanjing (start)",     32.1, 118.8),
@@ -421,7 +442,9 @@ for name, lat, lon in waypoints:
     print(f"{name:<22} {lat:>5.1f}° {lon:>6.1f}° {dec:>+6.1f}° {dip:>+6.1f}°")
 
 # Navigation error accumulation
-print(f"\\n=== Cross-Track Error Over Distance ===\\n")
+print(f"\
+=== Cross-Track Error Over Distance ===\
+")
 print(f"{'Distance':>10} {'48-pt max':>12} {'32-pt max':>12} {'Advantage':>10}")
 print("-" * 48)
 for dist in [100, 500, 1000, 2000, 5000]:
@@ -430,9 +453,11 @@ for dist in [100, 500, 1000, 2000, 5000]:
     print(f"{dist:>8} km {err_48:>9.1f} km {err_32:>9.1f} km "
           f"{err_32/err_48:>8.1f}x")
 
-print(f"\\nThe Chinese 48-point compass reduced cross-track error by ~1.5x")
+print(f"\
+The Chinese 48-point compass reduced cross-track error by ~1.5x")
 print(f"compared to the European system — critical for open-ocean voyaging.")
-print(f"\\nNanjing to Malindi: ~12,000 km across 10+ compass corrections.")
+print(f"\
+Nanjing to Malindi: ~12,000 km across 10+ compass corrections.")
 print(f"Zheng He's navigators corrected declination at each port,")
 print(f"keeping accumulated error within the detection range of")
 print(f"coastal landmarks and depth soundings.")`,
@@ -493,7 +518,8 @@ ships = {
     "Cont. ship (modern)":     ship_stats(400, 59, 16, 30, 0.70, 25, 0.15),
 }
 
-print("=== Ship Comparison Across History ===\\n")
+print("=== Ship Comparison Across History ===\
+")
 print(f"{'Ship':<30} {'L(m)':>5} {'Disp(t)':>9} {'Cargo(t)':>9} {'Crew':>5}")
 print("-" * 62)
 for name, s in ships.items():
@@ -501,7 +527,9 @@ for name, s in ships.items():
           f"{s['cargo_capacity']:>8,.0f} {s['crew']:>5}")
 
 # Fleet comparison
-print(f"\\n=== Fleet Comparison ===\\n")
+print(f"\
+=== Fleet Comparison ===\
+")
 
 fleets = [
     ("Zheng He 1st voyage (1405)", [
@@ -527,10 +555,12 @@ for fleet_name, composition, total_crew in fleets:
     print(f"  Ships: {total_ships}")
     print(f"  Crew: {total_crew:,}")
     print(f"  Total displacement: {total_disp:,.0f} tonnes")
-    print(f"  Total cargo capacity: {total_cargo:,.0f} tonnes\\n")
+    print(f"  Total cargo capacity: {total_cargo:,.0f} tonnes\
+")
 
 # Logistics calculation
-print(f"=== Fleet Logistics: Feeding 27,800 People ===\\n")
+print(f"=== Fleet Logistics: Feeding 27,800 People ===\
+")
 
 crew_total = 27800
 days = 90  # voyage duration
@@ -548,15 +578,19 @@ print(f"  TOTAL: {total_stores:,.0f} tonnes of consumables")
 
 supply_ship_cargo = ships["Zheng He supply ship"]["cargo_capacity"]
 ships_needed = int(np.ceil(total_stores / supply_ship_cargo))
-print(f"\\n  Supply ship cargo capacity: {supply_ship_cargo:,.0f} t each")
+print(f"\
+  Supply ship cargo capacity: {supply_ship_cargo:,.0f} t each")
 print(f"  Supply ships needed: {ships_needed}")
 print(f"  (Historical record: 255 support vessels — consistent)")
 
 # Scale law demonstration
-print(f"\\n=== The Cube Law of Ship Scaling ===\\n")
+print(f"\
+=== The Cube Law of Ship Scaling ===\
+")
 base_length = 19  # Santa Maria
 base_disp = ships["Columbus Santa Maria"]["displacement"]
-print(f"Base: Santa Maria at {base_length}m = {base_disp:.0f}t\\n")
+print(f"Base: Santa Maria at {base_length}m = {base_disp:.0f}t\
+")
 for factor in [1, 2, 3, 4, 5]:
     L = base_length * factor
     predicted = base_disp * factor**3
@@ -614,7 +648,8 @@ def network_value(n_ports, base_value_per_port=100):
     return base_value_per_port * n_ports * (n_ports - 1) / 2
 
 # Historical parameters
-print("=== Economics of the Treasure Fleet ===\\n")
+print("=== Economics of the Treasure Fleet ===\
+")
 
 ming_budget = 30_000_000  # silver taels, approximate annual revenue
 
@@ -631,10 +666,12 @@ for name, ships, crew, cargo, markup, days in scenarios:
     print(f"  Revenue: {r['revenue']:>12,.0f} taels")
     print(f"  Cost:    {r['cost']:>12,.0f} taels")
     print(f"  Profit:  {r['profit']:>12,.0f} taels")
-    print(f"  ROI: {r['roi']:.0f}% | Budget share: {r['budget_pct']:.1f}%\\n")
+    print(f"  ROI: {r['roi']:.0f}% | Budget share: {r['budget_pct']:.1f}%\
+")
 
 # Network growth model
-print("=== Counterfactual: Network Growth 1433-1500 ===\\n")
+print("=== Counterfactual: Network Growth 1433-1500 ===\
+")
 
 ports_1433 = 30
 new_ports_per_voyage = 3
@@ -652,7 +689,9 @@ for year in range(1433, 1510, 5):
     print(f"{year:>6} {voyages:>8} {ports:>6} {value:>13,.0f} {ratio:>7.1f}x")
 
 # Exploration range model
-print(f"\\n=== Exploration Reach by Decade ===\\n")
+print(f"\
+=== Exploration Reach by Decade ===\
+")
 
 speed_knots = 4.5
 sailing_days_per_voyage = 180
@@ -663,7 +702,8 @@ km_per_voyage = range_per_voyage * 1.852
 known_range_1433 = 12000  # km from Nanjing (reached E. Africa)
 
 print(f"Fleet range per voyage: {km_per_voyage:,.0f} km")
-print(f"Known range by 1433: {known_range_1433:,} km (East Africa)\\n")
+print(f"Known range by 1433: {known_range_1433:,} km (East Africa)\
+")
 
 milestones = [
     (12000, "East Africa (achieved 1433)"),
@@ -688,7 +728,9 @@ for _ in range(20):  # 20 more voyages
             print(f"{year:>6} {cumulative_range:>14,.0f} km   {name}")
 
 # Compare actual history
-print(f"\\n=== What Actually Happened (without China) ===\\n")
+print(f"\
+=== What Actually Happened (without China) ===\
+")
 
 events = [
     (1433, "Treasure fleet cancelled"),
@@ -703,7 +745,8 @@ for year, event in events:
     gap = year - 1433
     print(f"  {year} (+{gap:>2}y): {event}")
 
-print(f"\\nKey insight: Europe took 65 years to reach ports China")
+print(f"\
+Key insight: Europe took 65 years to reach ports China")
 print(f"already knew in 1433. The cancellation didn't stop global")
 print(f"trade — it just shifted who controlled it, with consequences")
 print(f"that shaped the modern world for the next 500 years.")`,

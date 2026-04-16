@@ -55,7 +55,8 @@ for rpm in [1, 2, 3, 4, 5]:
 # Compare: what about the handle end (behind the grip)?
 r_handle = grip_position
 v_handle = 3 * 2 * math.pi * r_handle
-print(f"\\nAt 3 rev/s:")
+print(f"\
+At 3 rev/s:")
 print(f"  Tip speed:    {3 * 2 * math.pi * r_tip:.1f} m/s")
 print(f"  Handle speed: {v_handle:.1f} m/s")
 print(f"  Tip is {r_tip/r_handle:.1f}x faster than handle end!")`,
@@ -101,7 +102,8 @@ print("=== Torque Analysis for Thang-Ta ===")
 print(f"Sword mass: {sword_mass} kg, length: {sword_length} m")
 print(f"Moment of inertia: {I:.4f} kg⋅m²")
 print(f"Desired acceleration: {alpha} rad/s²")
-print(f"Torque needed: {tau_needed:.2f} Nm\\n")
+print(f"Torque needed: {tau_needed:.2f} Nm\
+")
 
 # How much force at different grip positions?
 print(f"{'Grip from end':>14} {'Lever arm':>10} {'Force needed':>13}")
@@ -112,7 +114,8 @@ for grip in [0.10, 0.15, 0.20, 0.25, 0.30]:
     print(f"{grip:>11.2f} m {r:>9.2f} m {F:>10.1f} N ({F/g:.1f} kg)")
 
 # Effect of angle
-print(f"\\nForce at 0.15m grip, varying angle:")
+print(f"\
+Force at 0.15m grip, varying angle:")
 r = 0.15
 for angle_deg in [30, 45, 60, 75, 90]:
     angle_rad = math.radians(angle_deg)
@@ -151,7 +154,8 @@ segments = [
     ('Wrist → Sword tip', 0.65, 2.5),
 ]
 
-print("=== Thang-Ta Kinetic Chain Analysis ===\\n")
+print("=== Thang-Ta Kinetic Chain Analysis ===\
+")
 print(f"{'Segment':<22} {'Length':>7} {'Mult':>6} {'Speed':>8} {'Cum. Mult':>10}")
 print("-" * 58)
 
@@ -165,10 +169,12 @@ for name, length, mult in segments:
     total_length += length
     print(f"{name:<22} {length:>5.2f}m {mult:>5.1f}x {speed:>7.1f} m/s {cumulative_mult:>9.1f}x")
 
-print(f"\\nTotal chain length: {total_length:.2f} m")
+print(f"\
+Total chain length: {total_length:.2f} m")
 print(f"Final tip speed: {speed:.1f} m/s ({speed * 3.6:.0f} km/h)")
 print(f"Overall amplification: {cumulative_mult:.0f}x")
-print(f"\\nStarting from {0.5} m/s at the hip → {speed:.1f} m/s at the blade")
+print(f"\
+Starting from {0.5} m/s at the hip → {speed:.1f} m/s at the blade")
 print(f"That's like going from walking speed to highway speed!")`,
       challenge: 'What happens if the warrior removes one link (e.g., keeps the wrist locked)? Remove the wrist segment and recalculate. How much speed is lost?',
       successHint: 'The kinetic chain principle applies to all striking sports: tennis serves, golf swings, karate punches, and cricket bowling. The chain is what separates powerful athletes from weak ones — it is not about muscle size, it is about coordination.',
@@ -210,9 +216,11 @@ grips = {
 
 omega_initial = 3 * 2 * math.pi  # 3 rev/s starting speed
 
-print("=== Angular Momentum in Thang-Ta ===\\n")
+print("=== Angular Momentum in Thang-Ta ===\
+")
 print(f"Starting spin: 3 rev/s ({omega_initial:.1f} rad/s)")
-print(f"Sword: {sword_mass} kg, {sword_length} m\\n")
+print(f"Sword: {sword_mass} kg, {sword_length} m\
+")
 
 L_ref = None
 for name, pivot_dist in grips.items():
@@ -277,8 +285,10 @@ g = 9.8
 # Centre of mass of sword (assume uniform) is at L/2 from handle
 r_com = sword_length / 2  # 0.4m from grip
 
-print("=== Centripetal Force in Thang-Ta ===\\n")
-print(f"Sword: {sword_mass} kg, CoM at {r_com} m from grip\\n")
+print("=== Centripetal Force in Thang-Ta ===\
+")
+print(f"Sword: {sword_mass} kg, CoM at {r_com} m from grip\
+")
 
 print(f"{'Spin (rev/s)':>13} {'Omega':>8} {'Force (N)':>10} {'x Weight':>9}")
 print("-" * 44)
@@ -296,14 +306,16 @@ target_ratio = 10
 target_F = target_ratio * sword_mass * g
 target_omega = math.sqrt(target_F / (sword_mass * r_com))
 target_revs = target_omega / (2 * math.pi)
-print(f"\\nTo reach {target_ratio}x weight: need {target_revs:.1f} rev/s")
+print(f"\
+To reach {target_ratio}x weight: need {target_revs:.1f} rev/s")
 print(f"That requires gripping with {target_F:.0f} N of force")
 print(f"(About {target_F/g:.0f} kg grip strength — serious training needed!)")
 
 # What if the sword is released at 3 rev/s?
 omega = 3 * 2 * math.pi
 v_release = omega * r_com
-print(f"\\nIf released at 3 rev/s, sword flies at {v_release:.1f} m/s ({v_release*3.6:.0f} km/h)")
+print(f"\
+If released at 3 rev/s, sword flies at {v_release:.1f} m/s ({v_release*3.6:.0f} km/h)")
 print("Direction: tangent to the circle (sideways), NOT outward!")`,
       challenge: 'Compare a heavy training sword (2.0 kg) with the standard 1.2 kg sword. At 3 rev/s, how much more grip force does the heavy sword require? This is why warriors train with heavy swords.',
       successHint: 'Centripetal force is not a separate force — it is the NET inward force (grip, tension, gravity, etc.) that bends a straight path into a circle. Understanding this eliminates the "centrifugal force" misconception forever.',

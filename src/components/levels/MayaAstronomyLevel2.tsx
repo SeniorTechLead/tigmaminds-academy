@@ -125,7 +125,8 @@ print(f"{'Total eclipse possible' if ang_moon > ang_sun else 'Annular eclipse'}:
 
 # Umbra cone length
 umbra_length = D_moon * R_moon / (R_sun - R_moon)
-print(f"\\nUmbra cone length from Moon: {umbra_length:.0f} km")
+print(f"\
+Umbra cone length from Moon: {umbra_length:.0f} km")
 print(f"Earth surface is {D_moon:.0f} km from Moon")
 umbra_width_km = 2 * R_moon * (1 - D_moon / umbra_length)
 # More accurate: shadow width on Earth
@@ -142,7 +143,8 @@ eclipse_limit_deg = 18.5
 # How many days near the node?
 node_window_days = eclipse_limit_deg / 360 * draconic_month * 2
 
-print(f"\\n=== Node Geometry ===")
+print(f"\
+=== Node Geometry ===")
 print(f"Orbital tilt: {orbital_tilt_deg} degrees")
 print(f"Synodic month: {moon_synodic:.2f} days")
 print(f"Draconic month: {draconic_month:.2f} days")
@@ -152,7 +154,8 @@ print(f"Eclipse seasons per year: ~2 (nodes are 180 degrees apart)")
 # Saros cycle
 saros_days = 6585.32
 saros_months = saros_days / moon_synodic
-print(f"\\n=== Saros Cycle ===")
+print(f"\
+=== Saros Cycle ===")
 print(f"Saros period: {saros_days:.2f} days = {saros_days/365.25:.2f} years")
 print(f"  = {saros_months:.1f} synodic months")
 print(f"  = {saros_days/draconic_month:.1f} draconic months")
@@ -163,7 +166,8 @@ print(f"This 8-hour shift moves each eclipse ~120 degrees west")
 # Maya cycle comparison
 maya_cycle_days = 11960
 maya_months = maya_cycle_days / moon_synodic
-print(f"\\n=== Maya Eclipse Cycle (Dresden Codex) ===")
+print(f"\
+=== Maya Eclipse Cycle (Dresden Codex) ===")
 print(f"Maya cycle: {maya_cycle_days} days = {maya_cycle_days/365.25:.2f} years")
 print(f"  = {maya_months:.1f} synodic months (Maya used 405)")
 print(f"  = {maya_cycle_days/draconic_month:.1f} draconic months")
@@ -254,7 +258,8 @@ for n in [0, 5, 19, 20, 42, 360, 584, 2920, 7200, 144000, 1872000]:
     print(f"{n:<10} {str(pure):<18} {glyphs:<20} {str(cal):<18}")
 
 # Multiplication in base-20
-print("\\n=== Base-20 Multiplication Table (partial) ===")
+print("\
+=== Base-20 Multiplication Table (partial) ===")
 print(f"{'×':<4}", end="")
 for b in range(1, 11):
     print(f"{b:>6}", end="")
@@ -268,7 +273,8 @@ for a in [1, 5, 10, 15, 19]:
     print()
 
 # Key astronomical numbers in Maya notation
-print("\\n=== Astronomical Numbers in Maya Base-20 ===")
+print("\
+=== Astronomical Numbers in Maya Base-20 ===")
 astro = [
     ("Venus synodic (584d)", 584),
     ("5 Venus cycles (2920d)", 2920),
@@ -340,13 +346,15 @@ for s in steps:
 print(f"GCD = {g}")
 
 calendar_round = lcm(tzolkin, haab)
-print(f"\\nLCM({tzolkin}, {haab}) = {tzolkin} x {haab} / {g} = {calendar_round} days")
+print(f"\
+LCM({tzolkin}, {haab}) = {tzolkin} x {haab} / {g} = {calendar_round} days")
 print(f"  = {calendar_round / haab:.0f} Haab' years (solar)")
 print(f"  = {calendar_round / tzolkin:.0f} Tzolk'in cycles (sacred)")
 print(f"  = {calendar_round / 365.2422:.1f} tropical years")
 
 # Why 260 and 365?
-print("\\n=== Why 260? Factoring the Tzolk'in ===")
+print("\
+=== Why 260? Factoring the Tzolk'in ===")
 print(f"260 = 13 x 20")
 print(f"  13: number of levels in Maya heaven")
 print(f"  20: base of Maya number system (fingers + toes)")
@@ -354,7 +362,8 @@ print(f"  260 ~ human gestation period (266 days)")
 print(f"  260 ~ interval between zenith passages of Sun at 15 deg N")
 
 # LCM of astronomical cycles
-print("\\n=== LCM of Maya Astronomical Cycles ===")
+print("\
+=== LCM of Maya Astronomical Cycles ===")
 cycles = [
     ("Tzolk'in", 260),
     ("Haab'", 365),
@@ -375,7 +384,8 @@ for i in range(len(cycles)):
             print(f"{name_a:<20} {name_b:<20} {l:>10,} {l/365.25:>10.1f}")
 
 # Calendar Round date calculator
-print("\\n=== Calendar Round Position for Day Numbers ===")
+print("\
+=== Calendar Round Position for Day Numbers ===")
 tzolkin_names = ["Imix","Ik","Akbal","Kan","Chicchan","Cimi","Manik",
                  "Lamat","Muluc","Oc","Chuen","Eb","Ben","Ix","Men",
                  "Cib","Caban","Etznab","Cauac","Ahau"]
@@ -433,7 +443,8 @@ def simulate_observations(true_period, n_observations, obs_error_days=1.5):
 
 # Show how averaging improves accuracy
 print("=== Error Reduction by Averaging ===")
-print("(Observation error: ±1.5 days per cycle)\\n")
+print("(Observation error: ±1.5 days per cycle)\
+")
 
 for name, true_val in [("Venus", TRUE_VENUS_SYNODIC),
                         ("Mars", TRUE_MARS_SYNODIC),
@@ -455,7 +466,8 @@ for name, true_val in [("Venus", TRUE_VENUS_SYNODIC),
 
 # Long baseline method (Maya approach)
 print("=== Maya Long-Baseline Method ===")
-print("Instead of timing individual cycles, time the total span:\\n")
+print("Instead of timing individual cycles, time the total span:\
+")
 
 n_cycles_list = [1, 5, 10, 65, 100]
 for n_cycles in n_cycles_list:
@@ -472,7 +484,8 @@ print()
 print("Key insight: timing one LONG span and dividing is more accurate")
 print("than averaging many SHORT measurements, because the endpoint")
 print("error is fixed regardless of the span length.")
-print(f"\\n65 cycles (Dresden Codex): error < 0.03 days/cycle = 43 minutes")
+print(f"\
+65 cycles (Dresden Codex): error < 0.03 days/cycle = 43 minutes")
 print(f"This matches the documented Maya accuracy for Venus.")`,
       challenge: 'The Maya eclipse cycle spans 405 lunar months (11,960 days). If their endpoint timing error is ±0.5 days, what is their per-month error? Calculate the accuracy in hours. Compare this to the modern value of 29.53059 days — how close did the Maya get?',
       successHint: 'You\'ve discovered why ancient astronomers were so accurate despite primitive instruments: they traded time for precision. A 1-day error spread over 500 years of observation becomes negligible per cycle. The Central Limit Theorem and the long-baseline method are the statistical foundations of all precision measurement — from GPS satellites to gravitational wave detectors.',

@@ -61,14 +61,16 @@ for country, prod in countries.items():
     print()
 
 # Find comparative advantages
-print("\\n=== Comparative Advantages ===")
+print("\
+=== Comparative Advantages ===")
 for g in goods:
     costs = {c: opp_costs[c][g] for c in countries}
     best = min(costs, key=costs.get)
     print(f"{g:<10} -> {best:<16} (opp cost: {costs[best]:.2f})")
 
 # Gains from trade: autarky vs specialisation
-print("\\n=== Gains from Specialisation ===")
+print("\
+=== Gains from Specialisation ===")
 n_workers = 1000  # per country
 
 # Autarky: each country splits workers equally across goods
@@ -83,7 +85,8 @@ for g in goods:
     print(f"  Total {g:<8}: {autarky_total[g]:>8.0f} units")
 
 # Specialisation: each country focuses on comparative advantage
-print("\\nSpecialisation (each country trades):")
+print("\
+Specialisation (each country trades):")
 spec_total = {g: 0 for g in goods}
 assignments = {}
 for g in goods:
@@ -204,7 +207,8 @@ for i in np.argsort(-betweenness):
           f"{betweenness_norm[i]:>10.2f} {role:>16}")
 
 # What happens if Samarkand is removed?
-print("\\n=== Impact of Removing Samarkand ===")
+print("\
+=== Impact of Removing Samarkand ===")
 sam_idx = city_idx["Samarkand"]
 dist2 = np.full((n, n), INF)
 for i in range(n):
@@ -283,7 +287,8 @@ def seir_simulation(population, beta, sigma, gamma, days, initial_exposed=5):
 
 # Silk Road city outbreak
 print("=== SEIR Model: Plague in a Silk Road City ===")
-print("Population: 50,000 | Latent period: 4 days | Infectious: 7 days\\n")
+print("Population: 50,000 | Latent period: 4 days | Infectious: 7 days\
+")
 
 pop = 50000
 beta = 0.4      # transmission rate
@@ -296,7 +301,8 @@ S, E, I, R = seir_simulation(pop, beta, sigma, gamma, days)
 # R0 calculation
 R0 = beta / gamma
 print(f"R0 = beta/gamma = {beta}/{gamma:.3f} = {R0:.1f}")
-print(f"Expected to infect {R0:.1f} people per case -> epidemic will {'spread' if R0 > 1 else 'die out'}\\n")
+print(f"Expected to infect {R0:.1f} people per case -> epidemic will {'spread' if R0 > 1 else 'die out'}\
+")
 
 # Key milestones
 peak_day = np.argmax(I)
@@ -309,11 +315,13 @@ for d in [0, 10, 20, 30, 50, 75, 100, peak_day, 150, 199]:
     if d < days:
         print(f"{d:>6} {S[d]:>11,.0f} {E[d]:>9,.0f} {I[d]:>10,.0f} {R[d]:>9,.0f}")
 
-print(f"\\nPeak infectious: day {peak_day} with {peak_infected:,.0f} people")
+print(f"\
+Peak infectious: day {peak_day} with {peak_infected:,.0f} people")
 print(f"Total infected: {total_infected:,.0f} ({total_infected/pop*100:.1f}% of population)")
 
 # Compare latent periods
-print("\\n=== Impact of Latent Period on Outbreak ===")
+print("\
+=== Impact of Latent Period on Outbreak ===")
 for latent in [1, 3, 5, 10, 20]:
     sig = 1/latent
     S2, E2, I2, R2 = seir_simulation(pop, beta, sig, gamma, days)
@@ -399,7 +407,8 @@ segments = [
 
 total_dist = sum(s["distance"] for s in segments)
 print("=== Silk Road Caravan Optimisation ===")
-print(f"Total distance: {total_dist:,} km across {len(segments)} segments\\n")
+print(f"Total distance: {total_dist:,} km across {len(segments)} segments\
+")
 
 print(f"{'Goods (kg)':>11} {'Reserve':>8} {'Days':>7} {'Survives':>9} {'Profit':>10}")
 print("-" * 47)
@@ -426,14 +435,16 @@ for goods_kg in range(40, 160, 10):
                 best_profit = profit
                 best_config = (goods_kg, reserve, days, profit)
 
-print(f"\\n=== Optimal Configuration ===")
+print(f"\
+=== Optimal Configuration ===")
 print(f"Goods per camel: {best_config[0]} kg")
 print(f"Water reserve: {best_config[1]} days")
 print(f"Journey time: {best_config[2]:.0f} days")
 print(f"Profit: {best_config[3]:,.0f} gold coins")
 
 # Risk analysis: what if a segment takes longer?
-print("\\n=== Risk: Sandstorm Delays (Taklamakan) ===")
+print("\
+=== Risk: Sandstorm Delays (Taklamakan) ===")
 for delay in [0, 3, 7, 14]:
     modified = [dict(s) for s in segments]
     modified[1]["distance"] += delay * 25  # delay adds km equivalent
@@ -509,7 +520,8 @@ for m in markets:
           f"{m.price:>7.1f} g {'surplus' if surplus > 0 else 'deficit':>8}")
 
 # Simulate trade over 12 months
-print("\\n=== Price Dynamics Over 12 Months ===")
+print("\
+=== Price Dynamics Over 12 Months ===")
 transport_cost_per_leg = 8  # gold per unit between adjacent cities
 
 for month in range(1, 13):
@@ -534,7 +546,8 @@ for month in range(1, 13):
         print(f"Month {month:>2}: " + " -> ".join(prices))
 
 # Arbitrage opportunity analysis
-print("\\n=== Arbitrage Opportunities ===")
+print("\
+=== Arbitrage Opportunities ===")
 print(f"{'Route':<35} {'Buy':>6} {'Sell':>6} {'Cost':>6} {'Profit':>7}")
 print("-" * 62)
 for i in range(len(markets)):

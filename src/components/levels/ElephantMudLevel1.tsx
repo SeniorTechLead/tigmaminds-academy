@@ -242,7 +242,8 @@ ax.tick_params(colors='gray')
 # Annotate
 for dt, label in [(1, '1°C: bathtub splash'), (3, '3°C: serious mud bath')]:
     w = mass * specific_heat * dt / latent_heat
-    ax.annotate(f'{label}\\n({w:.0f} kg water)', xy=(dt, w), xytext=(dt+0.5, w+2),
+    ax.annotate(f'{label}\
+({w:.0f} kg water)', xy=(dt, w), xytext=(dt+0.5, w+2),
                 color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 plt.tight_layout()
@@ -384,7 +385,8 @@ ax.set_title('Elephant Skin Wrinkles Increase SA', color='white', fontsize=11)
 ax.tick_params(colors='gray')
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
-ax.annotate(f'Elephant wrinkles: ~1cm deep\\nSA increase: ~{(wrinkle_multiplier[33]-1)*100:.0f}%',
+ax.annotate(f'Elephant wrinkles: ~1cm deep\
+SA increase: ~{(wrinkle_multiplier[33]-1)*100:.0f}%',
             xy=(1, effective_sa[33]), xytext=(5, effective_sa[33]*1.05),
             color='#f59e0b', fontsize=10, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -436,12 +438,18 @@ fig.patch.set_facecolor('#1f2937')
 ax = axes[0, 0]
 ax.set_facecolor('#111827')
 strategies = {
-    'Sweating\\n(human)': {'power': 600, 'water_use': 1.0, 'color': '#3b82f6'},
-    'Panting\\n(dog)': {'power': 300, 'water_use': 0.5, 'color': '#f59e0b'},
-    'Mud bath\\n(elephant)': {'power': 800, 'water_use': 0.3, 'color': '#8b5cf6'},
-    'Water immersion\\n(hippo)': {'power': 2000, 'water_use': 0, 'color': '#22c55e'},
-    'Ear radiation\\n(elephant)': {'power': 200, 'water_use': 0, 'color': '#ef4444'},
-    'Shade seeking\\n(any)': {'power': 150, 'water_use': 0, 'color': '#6b7280'},
+    'Sweating\
+(human)': {'power': 600, 'water_use': 1.0, 'color': '#3b82f6'},
+    'Panting\
+(dog)': {'power': 300, 'water_use': 0.5, 'color': '#f59e0b'},
+    'Mud bath\
+(elephant)': {'power': 800, 'water_use': 0.3, 'color': '#8b5cf6'},
+    'Water immersion\
+(hippo)': {'power': 2000, 'water_use': 0, 'color': '#22c55e'},
+    'Ear radiation\
+(elephant)': {'power': 200, 'water_use': 0, 'color': '#ef4444'},
+    'Shade seeking\
+(any)': {'power': 150, 'water_use': 0, 'color': '#6b7280'},
 }
 
 names = list(strategies.keys())
@@ -464,7 +472,8 @@ for name, props in strategies.items():
         efficiency = props['power'] / props['water_use']
         ax.scatter(props['water_use'], props['power'], s=100, color=props['color'],
                    edgecolors='white', linewidth=1)
-        ax.annotate(name.replace('\\n', ' '), xy=(props['water_use'], props['power']),
+        ax.annotate(name.replace('\
+', ' '), xy=(props['water_use'], props['power']),
                     xytext=(5, 5), textcoords='offset points', color=props['color'], fontsize=8)
 
 ax.set_xlabel('Water use (liters/hour)', color='white')
@@ -522,7 +531,8 @@ energy_cost[env_range > tnz_high] = basal_rate + 8 * (env_range[env_range > tnz_
 ax.plot(env_range, energy_cost, color='#ef4444', linewidth=2)
 ax.fill_between(env_range, basal_rate, energy_cost, alpha=0.2, color='#ef4444')
 ax.axvspan(tnz_low, tnz_high, alpha=0.1, color='#22c55e')
-ax.text((tnz_low + tnz_high)/2, basal_rate * 0.9, 'Thermoneutral\\nZone', ha='center',
+ax.text((tnz_low + tnz_high)/2, basal_rate * 0.9, 'Thermoneutral\
+Zone', ha='center',
         color='#22c55e', fontsize=10)
 ax.set_xlabel('Environmental temperature (°C)', color='white')
 ax.set_ylabel('Energy expenditure (relative)', color='white')
@@ -534,7 +544,8 @@ plt.show()
 
 print("Cooling strategy comparison:")
 for name, props in strategies.items():
-    name_clean = name.replace('\\n', ' ')
+    name_clean = name.replace('\
+', ' ')
     water = f"{props['water_use']} L/hr" if props['water_use'] > 0 else "none"
     print(f"  {name_clean}: {props['power']}W cooling, water: {water}")
 print()
@@ -608,7 +619,8 @@ daily_strict = np.sum(strict_energy[:1440])
 daily_hetero = np.sum(hetero_energy[:1440])
 savings = (daily_strict - daily_hetero) / daily_strict * 100
 
-ax.bar(['Strict\\nhomeotherm', 'Heterotherm'], [daily_strict, daily_hetero],
+ax.bar(['Strict\
+homeotherm', 'Heterotherm'], [daily_strict, daily_hetero],
        color=['#3b82f6', '#22c55e'])
 ax.set_ylabel('Daily energy cost (relative)', color='white')
 ax.set_title(f'Energy Savings: {savings:.0f}% less with heterothermy', color='white', fontsize=11)
@@ -656,7 +668,8 @@ colors_la = [a['color'] for a in large_animals.values()]
 ax.scatter(masses, Tmax, s=[m/20 for m in masses], c=colors_la, edgecolors='white', linewidth=1)
 for name, m, t, c in zip(names, masses, Tmax, colors_la):
     strategy = large_animals[name]['strategy']
-    ax.annotate(f'{name}\\n({strategy})', xy=(m, t), xytext=(10, 5),
+    ax.annotate(f'{name}\
+({strategy})', xy=(m, t), xytext=(10, 5),
                 textcoords='offset points', color=c, fontsize=7)
 
 ax.set_xlabel('Body mass (kg)', color='white')
@@ -760,7 +773,8 @@ ax.tick_params(colors='gray')
 
 for dt, label in [(1.5, 'Paris +1.5°C'), (3, '+3°C'), (5, '+5°C (catastrophic)')]:
     e = baseline_energy + (8 * max(0, base_temp + dt - tnz_upper)**1.5)
-    ax.annotate(f'{label}\\n{e:.0f}% energy', xy=(dt, e), xytext=(dt+0.3, e+5),
+    ax.annotate(f'{label}\
+{e:.0f}% energy', xy=(dt, e), xytext=(dt+0.3, e+5),
                 color='#f59e0b', fontsize=8, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 # 3. Calf survival vs heat days

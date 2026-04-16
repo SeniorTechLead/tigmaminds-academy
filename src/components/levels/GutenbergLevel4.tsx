@@ -94,7 +94,8 @@ print("-" * 32)
 for c in cities.values():
     print(f"{c.name:<14} {c.population:>6,} {c.literacy:>4.0%} {len(c.connections):>4}")
 
-print("\\nDesign complete. Next: implement the simulation engine.")`,
+print("\
+Design complete. Next: implement the simulation engine.")`,
       challenge: 'Add a "university" boolean to each city. Universities increase local literacy rate by 5% per decade and increase the transmission beta by 1.5x (scholars spread ideas faster). How does the presence of universities affect the model design? Which cities should have universities based on historical records?',
       successHint: 'Good system design makes everything else easier. You defined City and Technology classes, a network of connected cities, and clear parameters. Real network simulation software (ns-3, SimPy, NetLogo) uses exactly this pattern: nodes with properties, edges with weights, and technology parameters that govern behaviour.',
     },
@@ -209,7 +210,8 @@ print_hist, print_cities = simulate_network(
     seed_city="Mainz", seed_copies=5, months=120)
 
 print("=== Network Spread: Scribal vs Printing ===")
-print(f"Total literate population: {total_literate:,}\\n")
+print(f"Total literate population: {total_literate:,}\
+")
 
 print(f"{'Month':>6} {'Scribal':>10} {'Printing':>10} {'Ratio':>8}")
 print("-" * 36)
@@ -220,7 +222,8 @@ for m in [1, 3, 6, 12, 24, 36, 48, 60, 84, 120]:
     print(f"{m:>5}mo {s:>9,} {p:>9,} {ratio:>7.1f}x")
 
 # Per-city breakdown at 5 years
-print(f"\\n=== Per-City Informed at Month 60 ===")
+print(f"\
+=== Per-City Informed at Month 60 ===")
 print(f"{'City':<14} {'Literate':>8} {'Scribal':>8} {'S%':>5} {'Print':>8} {'P%':>5}")
 print("-" * 51)
 for name in sorted(scribal_cities.keys()):
@@ -285,7 +288,8 @@ months = 120
 # Sweep beta to find the phase transition
 print("=== Phase Transition Analysis ===")
 print(f"Population: {population:,} | Forgetting rate: {gamma}")
-print(f"Critical beta = gamma / S0_fraction = {gamma / 0.999:.5f}\\n")
+print(f"Critical beta = gamma / S0_fraction = {gamma / 0.999:.5f}\
+")
 
 betas = np.linspace(0.0001, 0.015, 30)
 
@@ -306,7 +310,8 @@ for beta in betas:
               f"{total_reached:>13,.0f} {regime:>12}")
 
 # Compare scribal vs printing at the transition
-print("\\n=== Scribal vs Printing: Phase Transition ===")
+print("\
+=== Scribal vs Printing: Phase Transition ===")
 scenarios = [
     ("Scribal (pre-1450)",     0.0003, gamma),
     ("Early printing (1455)",   0.003,  gamma),
@@ -325,7 +330,8 @@ for name, beta, g in scenarios:
           f"Total reached={total:>6,.0f} ({pct:.0f}%)")
 
 # Sensitivity: what parameter matters most?
-print("\\n=== Sensitivity Analysis: What Drives the Transition? ===")
+print("\
+=== Sensitivity Analysis: What Drives the Transition? ===")
 base_beta = 0.005
 base_gamma = 0.005
 
@@ -388,11 +394,13 @@ gamma_range = np.linspace(0.0001, 0.02, 40)
 print("=== Phase Diagram: Information Spread ===")
 print(f"Population: {population:,} | Initial: {initial}")
 print(f"Beta range: {beta_range[0]:.4f} to {beta_range[-1]:.4f}")
-print(f"Gamma range: {gamma_range[0]:.4f} to {gamma_range[-1]:.4f}\\n")
+print(f"Gamma range: {gamma_range[0]:.4f} to {gamma_range[-1]:.4f}\
+")
 
 # ASCII phase diagram
 print("Phase diagram (beta = x, gamma = y):")
-print("  . = dies out (<5%)  o = persists (5-50%)  # = viral (>50%)\\n")
+print("  . = dies out (<5%)  o = persists (5-50%)  # = viral (>50%)\
+")
 
 # Sample at coarser resolution for ASCII display
 b_sample = np.linspace(0.0001, 0.02, 30)
@@ -419,7 +427,8 @@ print("           |                      o = persists (5-50%)")
 print("  lo gamma v                      . = dies out (<5%)")
 
 # Historical positions on the phase diagram
-print("\\n=== Historical Positions ===")
+print("\
+=== Historical Positions ===")
 historical = [
     ("Oral tradition (pre-writing)",  0.0001, 0.015),
     ("Scribal Rome (1st c.)",         0.0004, 0.008),
@@ -438,7 +447,8 @@ for name, b, g in historical:
     regime = "VIRAL" if frac > 0.5 else "PERSISTS" if frac > 0.05 else "DIES"
     print(f"{name:<36} {b:>6.4f} {g:>6.4f} {r0:>5.2f} {regime:>10}")
 
-print("\\nThe Gutenberg transition: R0 crossed from <1 to >1.")
+print("\
+The Gutenberg transition: R0 crossed from <1 to >1.")
 print("This is the phase transition that changed civilisation.")`,
       challenge: 'Add a third dimension: **network connectivity** (average number of trade routes per city). Create a 3D parameter sweep of beta x gamma x connectivity. At what connectivity does a scribal system (low beta) still achieve viral spread? This would tell us: could the Roman Empire have had an information revolution without printing, just through better roads?',
       successHint: 'You mapped the complete phase diagram of information spread — identifying exactly where each historical media technology sits relative to the critical threshold. This is how physicists map the phases of matter, how epidemiologists identify pandemic thresholds, and how network scientists predict viral cascades. The phase diagram is the most powerful analytical tool in complex systems science.',

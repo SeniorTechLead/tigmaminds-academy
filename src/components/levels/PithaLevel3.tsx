@@ -475,7 +475,8 @@ print("Starch Gelatinization Analysis:")
 for T in [60, 65, 70, 75, 80]:
     alpha_30 = avrami_gelatinization(np.array([30.0]), T)[0] * 100
     print(f"  {T}°C for 30 min: {alpha_30:.0f}% gelatinized")
-print(f"\\nOptimal gelatinization for pitha: ~{optimal:.0f}%")
+print(f"\
+Optimal gelatinization for pitha: ~{optimal:.0f}%")
 print("Below 60%: bacteria starve (crystalline starch is inaccessible)")
 print("Above 85%: batter becomes gummy (excess starch gel)")`,
       challenge: 'Model the effect of grinding fineness: finer rice flour has smaller particles, faster water penetration, and faster gelatinization. Create a particle-size-dependent model and find the optimal grind.',

@@ -365,7 +365,8 @@ for i, n in enumerate([1, 2, 3]):
     ax.plot([0, L*100], [-1.3, -1.3], color='#f59e0b', linewidth=1, alpha=0.3)
     ax.plot([0, L*100], [1.3, 1.3], color='#f59e0b', linewidth=1, alpha=0.3)
 
-    ax.set_title(f'Open-open: harmonic {n}\\nf = {freq:.0f} Hz', color='white', fontsize=10)
+    ax.set_title(f'Open-open: harmonic {n}\
+f = {freq:.0f} Hz', color='white', fontsize=10)
     ax.set_ylim(-1.5, 1.5)
     ax.set_xlabel('Position (cm)', color='white', fontsize=8)
     ax.tick_params(colors='gray')
@@ -392,7 +393,8 @@ for i, n in enumerate([1, 3, 5]):
     ax.plot([0, L*100], [-1.3, -1.3], color='#f59e0b', linewidth=1, alpha=0.3)
     ax.plot([0, L*100], [1.3, 1.3], color='#f59e0b', linewidth=1, alpha=0.3)
 
-    ax.set_title(f'Closed-open: harmonic {n}\\nf = {freq:.0f} Hz', color='white', fontsize=10)
+    ax.set_title(f'Closed-open: harmonic {n}\
+f = {freq:.0f} Hz', color='white', fontsize=10)
     ax.set_ylim(-1.5, 1.5)
     ax.set_xlabel('Position (cm)', color='white', fontsize=8)
     ax.tick_params(colors='gray')
@@ -585,7 +587,8 @@ for ax, (name, ratio, color) in zip(axes, intervals):
     consonance = 1 / (1 + roughness * 50)
     consonance_scores.append((name, consonance))
 
-    ax.set_ylabel(f'{name}\\n{base_freq}+{f2:.0f}Hz', color=color, fontsize=8,
+    ax.set_ylabel(f'{name}\
+{base_freq}+{f2:.0f}Hz', color=color, fontsize=8,
                    rotation=0, labelpad=90, va='center', ha='left')
     ax.set_ylim(-1.2, 1.2)
     ax.tick_params(colors='gray')

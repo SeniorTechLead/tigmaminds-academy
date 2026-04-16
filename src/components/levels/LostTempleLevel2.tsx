@@ -149,9 +149,11 @@ for group, color in group_colors.items():
 
 # Reference zones
 ax1.axvspan(-28, -22, alpha=0.08, color='#22c55e')
-ax1.text(-25, 16, 'C3 plants\\n(rice, wheat)', color='#22c55e', fontsize=8, ha='center')
+ax1.text(-25, 16, 'C3 plants\
+(rice, wheat)', color='#22c55e', fontsize=8, ha='center')
 ax1.axvspan(-16, -10, alpha=0.08, color='#f59e0b')
-ax1.text(-13, 16, 'C4 plants\\n(millet, maize)', color='#f59e0b', fontsize=8, ha='center')
+ax1.text(-13, 16, 'C4 plants\
+(millet, maize)', color='#f59e0b', fontsize=8, ha='center')
 
 ax1.axhspan(0, 5, alpha=0.05, color='white')
 ax1.text(-28, 3, 'Plants', color='gray', fontsize=8)
@@ -396,7 +398,8 @@ ax.imshow(slope, origin='lower', extent=[0, 100, 0, 100], cmap='magma', aspect='
 # Annotate discovered features
 rect = plt.Rectangle((30, 35), 25, 30, fill=False, edgecolor='#22c55e', linewidth=2, linestyle='--')
 ax.add_patch(rect)
-ax.text(42.5, 67, 'Temple foundation\\n(25×30m)', ha='center', color='#22c55e', fontsize=9)
+ax.text(42.5, 67, 'Temple foundation\
+(25×30m)', ha='center', color='#22c55e', fontsize=9)
 
 # Road
 road_x = np.array([10, 80])

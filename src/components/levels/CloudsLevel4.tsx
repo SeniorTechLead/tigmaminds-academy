@@ -568,7 +568,8 @@ ax.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Skill score bar chart
 ax = axes[1, 1]
-methods = ['Persistence\\n(baseline)', 'Climatology', 'Regression']
+methods = ['Persistence\
+(baseline)', 'Climatology', 'Regression']
 skills = [0] + [m['skill'] for m in temp_metrics[1:]]
 colors = ['#9ca3af', '#3b82f6', '#22c55e']
 bars = ax.bar(methods, skills, color=colors, alpha=0.8, edgecolor='white', linewidth=0.5)
@@ -1253,7 +1254,8 @@ ax5.set_title('5. Predictability Limit', color='white', fontsize=11)
 ax6 = fig.add_subplot(gs[1, 2])
 ax6.set_facecolor('#111827')
 ax6.tick_params(colors='gray')
-skills_names = ['Data\\nScience', 'Statistics', 'Physics', 'Coding', 'Viz', 'Domain']
+skills_names = ['Data\
+Science', 'Statistics', 'Physics', 'Coding', 'Viz', 'Domain']
 skills_scores = [85, 80, 90, 85, 88, 92]
 colors_skills = ['#ef4444', '#f59e0b', '#3b82f6', '#22c55e', '#a855f7', '#ec4899']
 bars = ax6.barh(skills_names, skills_scores, color=colors_skills, alpha=0.7)

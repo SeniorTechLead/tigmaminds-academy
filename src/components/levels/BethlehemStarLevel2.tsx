@@ -326,14 +326,16 @@ plt.annotate('NOW (2024)', (pole_x[now_idx], pole_y[now_idx]),
 # Mark 7 BCE
 bce_idx = np.argmin(np.abs(years - (-7)))
 plt.scatter(pole_x[bce_idx], pole_y[bce_idx], s=80, color='#fbbf24', zorder=10)
-plt.annotate('7 BCE\\n(Star of Bethlehem)', (pole_x[bce_idx], pole_y[bce_idx]),
+plt.annotate('7 BCE\
+(Star of Bethlehem)', (pole_x[bce_idx], pole_y[bce_idx]),
              textcoords="offset points", xytext=(10, -15), fontsize=9,
              color='#fbbf24')
 
 # Mark key epochs
 for name, px, py, yr, color in pole_stars:
     plt.scatter(px, py, s=60, color=color, zorder=8, marker='*')
-    plt.annotate(f'{name}\\n({yr})', (px, py), textcoords="offset points",
+    plt.annotate(f'{name}\
+({yr})', (px, py), textcoords="offset points",
                  xytext=(10, 5), fontsize=9, color=color)
 
 # Ecliptic pole at center
@@ -432,7 +434,8 @@ for yr, s in events:
     print(f"  Year {yr:.1f}: minimum separation {s:.2f}°")
 if len(events) > 1:
     gaps = [events[i+1][0] - events[i][0] for i in range(len(events)-1)]
-    print(f"\\nAverage interval: {np.mean(gaps):.1f} years")`,
+    print(f"\
+Average interval: {np.mean(gaps):.1f} years")`,
       challenge: 'Modify the predictor to also track Mars. Find times when Jupiter, Saturn, and Mars are all within 15° of each other. How rare are triple-planet groupings compared to two-planet conjunctions?',
       successHint: 'You have built a tool that replicates what ancient astronomers did with decades of patient observation. The conjunction predictor combines Kepler’s laws, coordinate geometry, and computational search — a genuine piece of computational astronomy.',
     },

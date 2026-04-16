@@ -67,7 +67,8 @@ for s in ships:
           f"{BM:>5.1f} {BG:>5.1f} {GM:>5.1f}  {stable} ({stiffness})")
 
 # What if the treasure ship were narrower?
-print("\\n=== Effect of Beam on Treasure Ship Stability ===")
+print("\
+=== Effect of Beam on Treasure Ship Stability ===")
 print(f"{'Beam (m)':<10} {'BM (m)':>8} {'GM (m)':>8} {'Roll period (s)':>16}")
 for beam in [30, 35, 40, 45, 50, 55]:
     I_wp = 120 * beam**3 / 12
@@ -157,12 +158,14 @@ for angle in range(30, 175, 5):
         if angle % 15 == 0 or angle == 30:
             print(f"{angle:>9}° {F/1000:>10.1f} {drv/1000:>10.1f} {hl/1000:>10.1f} {pct:>7.0f}%")
 
-print(f"\\nOptimal sailing angle: {best_angle}° (max drive: {best_drive/1000:.1f} kN)")
+print(f"\
+Optimal sailing angle: {best_angle}° (max drive: {best_drive/1000:.1f} kN)")
 
 # Speed estimate using drag balance
 # At steady speed: drive force = hull drag
 # Hull drag ≈ 0.5 × ρ_water × V² × wetted_area × Cf
-print("\\n=== Estimated Ship Speed vs Wind Angle ===")
+print("\
+=== Estimated Ship Speed vs Wind Angle ===")
 rho_water = 1025
 wetted_area = 120 * 50 * 0.7  # rough estimate
 Cf = 0.003  # friction coefficient for wooden hull
@@ -216,7 +219,8 @@ for w in woods:
           f"{w['shear_mpa']:>6.0f} {ratio:>5.0f}:1")
 
 # Moisture effect on strength
-print("\\n=== Moisture Content vs Strength (Teak) ===")
+print("\
+=== Moisture Content vs Strength (Teak) ===")
 teak_dry = 95  # MPa at 12% moisture
 print(f"{'Moisture %':>11} {'Strength (MPa)':>15} {'% of Dry':>9} {'Condition':>20}")
 print("-" * 57)
@@ -236,12 +240,14 @@ for mc in [5, 8, 12, 18, 24, 28, 35, 50]:
                  else "waterlogged")
     print(f"{mc:>9}% {strength:>13.1f} {pct:>8.0f}% {condition:>20}")
 
-print("\\nBelow 28% (fibre saturation): strength changes with moisture.")
+print("\
+Below 28% (fibre saturation): strength changes with moisture.")
 print("Above 28%: cell walls are saturated — no further strength loss.")
 print("Teak's natural oils keep moisture low even in marine environments.")
 
 # Plank sizing for treasure ship
-print("\\n=== Hull Plank Sizing (Treasure Ship) ===")
+print("\
+=== Hull Plank Sizing (Treasure Ship) ===")
 hull_load_kpa = 80  # hydrostatic pressure at 7.5m draft
 for w in woods:
     # Required thickness: t = sqrt(6 × P × span² / (strength × width))
@@ -326,7 +332,8 @@ for depth in np.arange(0.5, draft + 0.1, 0.5):
     print(f"{depth:<9.1f} {P:>13.1f} {sigma:>11.2f} {sf:>12.1f}{warning}")
 
 # Vary frame spacing at maximum depth (keel)
-print(f"\\n=== Frame Spacing Effect at Keel ({draft} m depth) ===")
+print(f"\
+=== Frame Spacing Effect at Keel ({draft} m depth) ===")
 print(f"{'Spacing (mm)':<13} {'Stress (MPa)':>13} {'Safety Factor':>14} {'Assessment':>12}")
 print("-" * 54)
 
@@ -337,7 +344,8 @@ for spacing in [400, 500, 550, 600, 700, 800, 1000]:
     print(f"{spacing:<12} {sigma:>11.2f} {sf:>12.1f}  {assessment}")
 
 # Plank thickness required for safety factor = 3 at keel
-print(f"\\n=== Required Plank Thickness (SF=3) at Keel ===")
+print(f"\
+=== Required Plank Thickness (SF=3) at Keel ===")
 for spacing in [400, 500, 600, 800]:
     P_keel = 1025 * 9.81 * draft / 1000  # kPa
     w = P_keel * plank_w
@@ -442,10 +450,12 @@ for i in range(len(waypoints) - 1):
     leg = f"{name1} -> {name2}"
     print(f"{leg:<35} {dist:>8.0f} nm {bearing:>6.0f}°")
 
-print(f"\\nTotal route distance: {total_distance:,.0f} nm ({total_distance * 1.852:,.0f} km)")
+print(f"\
+Total route distance: {total_distance:,.0f} nm ({total_distance * 1.852:,.0f} km)")
 
 # Dead reckoning error accumulation
-print("\\n=== Dead Reckoning Error Accumulation ===")
+print("\
+=== Dead Reckoning Error Accumulation ===")
 print("Starting from Malacca, heading to Calicut (bearing ~285°)")
 true_lat, true_lon = 11.25, 75.78  # Calicut
 dr_lat, dr_lon = 2.20, 102.25     # Malacca start

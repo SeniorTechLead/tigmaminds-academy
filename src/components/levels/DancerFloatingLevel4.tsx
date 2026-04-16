@@ -138,7 +138,8 @@ plt.show()
 print(f"Motion data generated: {len(frames)} frames at 30 fps ({t[-1]:.1f} s)")
 print(f"Segments modeled: {len(SEGMENTS)}")
 print(f"Total mass fraction check: {sum(s['mass_frac'] for s in SEGMENTS.values()):.3f} (should be ~1.0)")
-print(f"\\nKey data per frame: joint positions, spin rate, arm configuration")
+print(f"\
+Key data per frame: joint positions, spin rate, arm configuration")
 print(f"Ready for kinematic analysis in next lesson.")`,
       challenge: 'Extend the motion generator to produce a grand jete (split leap): the dancer runs, jumps with legs splitting forward/back, and lands. Define joint positions for each phase (approach, takeoff, flight, landing) with at least 60 frames.',
       successHint: 'A well-designed data model is the foundation of the entire analyzer. Every subsequent calculation — CoM, momentum, torques, energy — depends on having clean, consistent motion data with known segment properties.',
@@ -435,7 +436,8 @@ print(f"  Spin rate: {spin_revs[0]:.1f} to {spin_revs[-1]:.1f} rev/s")
 print(f"  Speed multiplier: {spin_revs[-1]/spin_revs[0]:.2f}x")
 print(f"  KE_rot: {KE_rot[0]:.1f} to {KE_rot[-1]:.1f} J")
 print(f"  Energy added by arm pull-in: {KE_rot[-1] - KE_rot[0]:.1f} J")
-print(f"\\nKey insight: Angular momentum is conserved, but kinetic energy")
+print(f"\
+Key insight: Angular momentum is conserved, but kinetic energy")
 print(f"INCREASES. The extra energy comes from muscular work pulling arms inward.")`,
       challenge: 'Add the boat\'s angular momentum to the analysis. If the boat has I_boat = 80 kg.m^2 and starts stationary, track the boat\'s counter-rotation. Plot dancer spin, boat spin, and total system angular momentum on the same graph.',
       successHint: 'The angular momentum tracker reveals a subtle truth: while L is conserved during a spin, kinetic energy is not. The dancer actively adds energy by pulling arms inward against centrifugal force. Conservation laws constrain the system but do not prevent energy input.',
@@ -614,7 +616,11 @@ ax.legend(fontsize=9)
 # Peak torque comparison across poses
 ax = axes[1, 2]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
-joints = ['Shoulder\\n(peak)', 'Shoulder\\n(mean)', 'Elbow\\n(peak)', 'Elbow\\n(mean)']
+joints = ['Shoulder\
+(peak)', 'Shoulder\
+(mean)', 'Elbow\
+(peak)', 'Elbow\
+(mean)']
 values = [np.max(np.abs(tau_shoulder)), np.mean(np.abs(tau_shoulder)),
           np.max(np.abs(tau_elbow)), np.mean(np.abs(tau_elbow))]
 colors = ['#ef4444', '#ef4444', '#f59e0b', '#f59e0b']
@@ -794,7 +800,8 @@ print(f"  Total metabolic cost: {E_metabolic[-1]:.1f} J")
 print(f"  Overall efficiency: {E_mechanical[-1]/E_metabolic[-1]*100:.1f}%")
 print(f"  Average metabolic power: {np.mean(P_metabolic):.0f} W")
 print(f"  Peak metabolic power: {np.max(P_metabolic):.0f} W")
-print(f"\\nFor a 3-minute routine at this intensity:")
+print(f"\
+For a 3-minute routine at this intensity:")
 print(f"  Estimated metabolic cost: {np.mean(P_metabolic)*180/1000:.1f} kJ")
 print(f"  Equivalent to: {np.mean(P_metabolic)*180/4184:.0f} food Calories")`,
       challenge: 'Compute the metabolic cost for three different dance styles: a slow, sustained adagio (low power, long duration), the explosive pirouette we analyzed, and a series of jumps (high peak power, intermittent). Compare total energy expenditure and determine which style is most metabolically demanding per unit time.',
@@ -991,19 +998,24 @@ print("DANCE MOVE PHYSICS ANALYZER — REPORT")
 print("=" * 60)
 print(f"Sequence: Preparation -> Pirouette -> Finish ({t[-1]:.1f}s)")
 print(f"Dancer: {body_mass} kg")
-print(f"\\nKinematics:")
+print(f"\
+Kinematics:")
 print(f"  Peak spin rate: {spin_rate.max():.1f} rev/s")
 print(f"  CoM height range: {com_height.min()*100:.1f} - {com_height.max()*100:.1f} cm")
-print(f"\\nDynamics:")
+print(f"\
+Dynamics:")
 print(f"  Peak GRF: {GRF_vertical.max():.0f} N ({GRF_vertical.max()/(body_mass*g):.1f}x body weight)")
 print(f"  Peak angular momentum: {Lz.max():.1f} kg.m^2/s")
-print(f"\\nEnergetics:")
+print(f"\
+Energetics:")
 print(f"  Total mechanical work: {E_mech_cum[-1]:.0f} J")
 print(f"  Estimated metabolic cost: {E_metab_cum[-1]:.0f} J")
 print(f"  Overall efficiency: {E_mech_cum[-1]/E_metab_cum[-1]*100:.0f}%")
 print(f"  Metabolic equivalent: {E_metab_cum[-1]/4184:.1f} food Calories")
-print(f"\\nAll validation checks passed: {all(validations.values())}")
-print(f"\\nDashboard saved to /tmp/dance_dashboard.png")`,
+print(f"\
+All validation checks passed: {all(validations.values())}")
+print(f"\
+Dashboard saved to /tmp/dance_dashboard.png")`,
       challenge: 'Add an injury risk panel to the dashboard: flag any frames where GRF exceeds 3x body weight (landing impact risk), where angular velocity exceeds 8 rev/s (dizziness risk), or where the estimated joint torque exceeds physiological limits. Color-code the timeline red/yellow/green based on risk level.',
       successHint: 'You have built a complete Dance Move Physics Analyzer from scratch — a pipeline that transforms raw motion data into a comprehensive biomechanical report. This is portfolio-quality work that demonstrates physics, programming, signal processing, and data visualization. The same pipeline architecture (data -> processing -> modeling -> visualization -> validation) appears in every engineering discipline.',
     },

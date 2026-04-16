@@ -93,8 +93,10 @@ plt.tight_layout()
 plt.show()
 
 print("Fibonacci sequence: ", fib[:15])
-print(f"\\nGolden ratio φ = (1 + √5) / 2 = {phi:.10f}")
-print(f"\\nRatio convergence:")
+print(f"\
+Golden ratio φ = (1 + √5) / 2 = {phi:.10f}")
+print(f"\
+Ratio convergence:")
 for i in range(8):
     print(f"  F({i+2})/F({i+1}) = {fib[i+1]}/{fib[i]} = {fib[i+1]/fib[i]:.6f}")`,
       challenge: 'Generate a Fibonacci sunflower: plot 500 points where each point is at angle n × 137.5° and radius √n. Why do Fibonacci spirals appear?',
@@ -200,8 +202,10 @@ for i in range(n_pts):
     theta = i * golden_angle
     ax.scatter(r * np.cos(theta) + 12, r * np.sin(theta),
                s=10, c='#22c55e', alpha=0.5)
-ax.text(-12, -12, 'Rational (60°)\\nSpokes form!', ha='center', color='#ef4444', fontsize=9)
-ax.text(12, -12, 'Golden (137.5°)\\nNo spokes!', ha='center', color='#22c55e', fontsize=9)
+ax.text(-12, -12, 'Rational (60°)\
+Spokes form!', ha='center', color='#ef4444', fontsize=9)
+ax.text(12, -12, 'Golden (137.5°)\
+No spokes!', ha='center', color='#22c55e', fontsize=9)
 ax.set_title('Rational vs Golden Angle Packing', color='white', fontsize=10)
 ax.set_aspect('equal')
 ax.tick_params(colors='gray')

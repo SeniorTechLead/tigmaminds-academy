@@ -65,7 +65,8 @@ ax1.tick_params(colors='gray')
 
 # 2. Light sensitivity comparison
 ax2.set_facecolor('#111827')
-species_sens = ['Human', 'Cat', 'Owl', 'Tarsier', 'Deep-sea\\nfish']
+species_sens = ['Human', 'Cat', 'Owl', 'Tarsier', 'Deep-sea\
+fish']
 sensitivity = [1, 6, 10, 20, 100]  # relative to human
 rod_pct = [95, 97, 99, 99.5, 100]  # % of photoreceptors that are rods
 colors_bar = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444', '#a855f7']
@@ -289,14 +290,19 @@ ax2.semilogx(light_levels, cone_response, color='#f59e0b', linewidth=2.5, label=
 ax2.axvspan(1e-6, 0.01, alpha=0.1, color='#3b82f6')
 ax2.axvspan(0.01, 10, alpha=0.1, color='#a855f7')
 ax2.axvspan(10, 1e4, alpha=0.1, color='#f59e0b')
-ax2.text(0.001, 85, 'Scotopic\\n(rods only)', color='#3b82f6', fontsize=9, ha='center')
-ax2.text(0.3, 85, 'Mesopic\\n(both)', color='#a855f7', fontsize=9, ha='center')
-ax2.text(100, 85, 'Photopic\\n(cones only)', color='#f59e0b', fontsize=9, ha='center')
+ax2.text(0.001, 85, 'Scotopic\
+(rods only)', color='#3b82f6', fontsize=9, ha='center')
+ax2.text(0.3, 85, 'Mesopic\
+(both)', color='#a855f7', fontsize=9, ha='center')
+ax2.text(100, 85, 'Photopic\
+(cones only)', color='#f59e0b', fontsize=9, ha='center')
 
 # Mark owl and human operating ranges
-ax2.annotate('Owl hunting\\nrange', xy=(0.0001, 60), color='#22c55e', fontsize=8, ha='center',
+ax2.annotate('Owl hunting\
+range', xy=(0.0001, 60), color='#22c55e', fontsize=8, ha='center',
              bbox=dict(boxstyle='round', facecolor='#22c55e', alpha=0.2))
-ax2.annotate('Human\\nreading', xy=(100, 50), color='#ef4444', fontsize=8, ha='center',
+ax2.annotate('Human\
+reading', xy=(100, 50), color='#ef4444', fontsize=8, ha='center',
              bbox=dict(boxstyle='round', facecolor='#ef4444', alpha=0.2))
 
 ax2.set_xlabel('Luminance (cd/m²)', color='white')
@@ -495,9 +501,19 @@ ax1.set_ylim(0, 75)
 
 # 2. Applications: owl-inspired noise reduction
 ax2.set_facecolor('#111827')
-applications = ['Wind turbine\\nblade', 'Aircraft\\nlanding gear', 'Computer\\nfan', 'Train\\npantograph', 'Drone\\npropeller']
+applications = ['Wind turbine\
+blade', 'Aircraft\
+landing gear', 'Computer\
+fan', 'Train\
+pantograph', 'Drone\
+propeller']
 noise_reduction = [6, 10, 8, 12, 5]  # dB reduction achieved
-bio_feature = ['Leading edge\\nserrations', 'Trailing edge\\nfringe', 'Velvety\\nsurface', 'Edge\\nserrations', 'Serrated\\ntips']
+bio_feature = ['Leading edge\
+serrations', 'Trailing edge\
+fringe', 'Velvety\
+surface', 'Edge\
+serrations', 'Serrated\
+tips']
 
 colors_app = ['#22c55e', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444']
 bars = ax2.barh(applications, noise_reduction, color=colors_app, alpha=0.8, edgecolor='white', linewidth=0.5)

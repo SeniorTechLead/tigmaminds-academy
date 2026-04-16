@@ -245,7 +245,8 @@ ax2.tick_params(colors='lightgray')
 plt.tight_layout()
 plt.show()
 
-print("\\nKey: larger volume = longer reverberation")
+print("\
+Key: larger volume = longer reverberation")
 print("Ideal for speech: RT60 = 1-2 seconds")
 print("The Hagia Sophia (10+ seconds) creates awe, not clarity")`,
       challenge: 'Modify the Grand Mosque by adding 2000 m² of acoustic panels (absorption coefficient 0.80). How does RT60 change? This is how modern mosque renovations balance acoustic tradition with speech intelligibility.',

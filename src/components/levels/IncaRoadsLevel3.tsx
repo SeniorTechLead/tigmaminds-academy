@@ -50,7 +50,8 @@ bridges = [
     {"name": "Gorge spanning",  "L": 60, "T": 12000,"mu": 18, "d": 0.22},
 ]
 
-print("=== Suspension Bridge Dynamic Analysis ===\\n")
+print("=== Suspension Bridge Dynamic Analysis ===\
+")
 print(f"{'Bridge':<20} {'f1 (Hz)':>8} {'f2':>6} {'f3':>6} {'Period (s)':>10}")
 print("-" * 52)
 
@@ -60,7 +61,8 @@ for b in bridges:
     print(f"{b['name']:<20} {freqs[0]:>7.3f} {freqs[1]:>5.3f} {freqs[2]:>5.3f} {period:>9.2f}")
 
 # Wind loading analysis
-print("\\n=== Wind Loading at Different Speeds ===")
+print("\
+=== Wind Loading at Different Speeds ===")
 print(f"{'Wind (m/s)':>12} {'Force (N)':>10} {'Force (kg equiv)':>17} {'Beaufort':>10}")
 beaufort = [(5,"Gentle"), (10,"Fresh"), (15,"Strong"), (20,"Gale"), (30,"Storm")]
 for v, desc in beaufort:
@@ -68,7 +70,8 @@ for v, desc in beaufort:
     print(f"{v:>10} {F:>9.0f} {F/9.81:>15.1f} {desc:>10}")
 
 # Resonance analysis
-print("\\n=== Vortex-Induced Vibration Risk ===")
+print("\
+=== Vortex-Induced Vibration Risk ===")
 print(f"{'Bridge':<20} {'f1 (Hz)':>8} {'v_crit (m/s)':>13} {'Risk Level':>12}")
 print("-" * 55)
 
@@ -79,7 +82,8 @@ for b in bridges:
     print(f"{b['name']:<20} {f1:>7.3f} {v_crit:>11.1f} {risk:>12}")
 
 # Damping simulation: amplitude decay over time
-print("\\n=== Damping: Oscillation Decay After Wind Gust ===")
+print("\
+=== Damping: Oscillation Decay After Wind Gust ===")
 zeta_dry = 0.02   # damping ratio (dry grass rope)
 zeta_fresh = 0.08  # damping ratio (fresh woven rope)
 f1 = natural_frequency(1, 28, 5000, 10)
@@ -92,7 +96,8 @@ for t in [0, 2, 5, 10, 20, 30, 60]:
     a_dry = A0 * np.exp(-zeta_dry * omega * t)
     print(f"{t:>6} {a_fresh:>12.4f} {a_dry:>11.4f}")
 
-print("\\nFresh rope damps 4x faster — a key reason for annual rebuilding.")`,
+print("\
+Fresh rope damps 4x faster — a key reason for annual rebuilding.")`,
       challenge: 'Soldiers are told to break step when crossing bridges — marching in unison at the bridge\'s natural frequency causes resonance. Calculate the "forbidden cadence" (steps per second) for each bridge. If the average walking pace is 2 steps/second, is any bridge at risk from normal foot traffic?',
       successHint: 'You analysed a dynamic system: natural frequencies, forced vibration, resonance, and damping. These concepts govern everything from musical instruments to earthquake engineering to electronic circuit design. The mathematics of vibration is universal.',
     },
@@ -189,7 +194,8 @@ print(f"Max altitude:   {terrain.max():.0f} m")
 print(f"Min altitude:   {terrain.min():.0f} m")
 
 # Run A* with different altitude penalties
-print("\\n=== Route Comparison: Altitude Penalty Sensitivity ===")
+print("\
+=== Route Comparison: Altitude Penalty Sensitivity ===")
 print(f"{'Penalty':>10} {'Path len':>10} {'Cost (km)':>10} {'Max alt':>10} {'Total climb':>12}")
 print("-" * 54)
 
@@ -202,7 +208,8 @@ for penalty in [0.0, 0.002, 0.005, 0.010, 0.020]:
         print(f"{penalty:>8.3f} {len(path):>8} {cost:>9.1f} {max_alt:>8.0f}m {total_climb:>10.0f}m")
 
 # Show best route profile
-print("\\n=== Altitude Profile of Optimal Route (penalty=0.005) ===")
+print("\
+=== Altitude Profile of Optimal Route (penalty=0.005) ===")
 path, cost = a_star(terrain, start, goal, 0.005)
 if path:
     step = max(1, len(path) // 12)
@@ -337,11 +344,13 @@ for name, tape in provinces:
     total_str = "".join(str(d) for d in running_total)
     print(f"{name:<16} {tape_str:>14} {total_str:>14} {steps:>6}")
 
-print(f"\\nTotal: {''.join(str(d) for d in running_total)} ({int(''.join(str(d) for d in running_total)):,})")
+print(f"\
+Total: {''.join(str(d) for d in running_total)} ({int(''.join(str(d) for d in running_total)):,})")
 print(f"Total computational steps: {total_steps}")
 
 # Tax calculation (multiply by rate)
-print("\\n=== Quipu Computation: Tax Calculation (x3 tribute) ===")
+print("\
+=== Quipu Computation: Tax Calculation (x3 tribute) ===")
 for name, tape in provinces:
     tax, steps = quipu_multiply(tape, 3)
     orig = "".join(str(d) for d in tape)
@@ -349,7 +358,8 @@ for name, tape in provinces:
     print(f"  {name:<14} {orig:>8} x3 = {tax_str:>8} ({steps} steps)")
 
 # Turing completeness argument
-print("\\n=== Computational Completeness Analysis ===")
+print("\
+=== Computational Completeness Analysis ===")
 operations = [
     ("Addition",       "Sum provinces", True),
     ("Multiplication", "Tax calculation", True),
@@ -366,7 +376,8 @@ for op, use, capable in operations:
     status = "YES" if capable is True else "NO" if capable is False else "DEBATED"
     print(f"{op:<22} {use:<30} {status:>15}")
 
-print("\\nVerdict: Quipus + quipucamayocs satisfy 5 of 7 criteria.")
+print("\
+Verdict: Quipus + quipucamayocs satisfy 5 of 7 criteria.")
 print("The system was likely Turing-complete in practice,")
 print("even if not provably so from surviving evidence.")`,
       challenge: 'Implement a simple conditional operation: "If a province\'s population exceeds 10,000, apply 20% tax; otherwise apply 10%." This requires comparison (is the number > threshold?) and branching (different operations based on the result). Is this operation within the capability of a quipu system?',
@@ -439,7 +450,8 @@ itinerary = [
     (42, 3400, "Cusco — 5 weeks (fully acclimatized)"),
 ]
 
-print("=== Acclimatization Timeline: Coast to Cusco ===\\n")
+print("=== Acclimatization Timeline: Coast to Cusco ===\
+")
 print(f"{'Day':>4} {'Alt (m)':>8} {'EPO':>8} {'RBC':>8} {'VO2max%':>8} {'Location':<30}")
 print("-" * 68)
 
@@ -450,7 +462,8 @@ for day, alt, location in itinerary:
     print(f"{day:>4} {alt:>6} {epo:>7.1f} {rbc:>7.2f} {vo2:>6.1f}% {location:<30}")
 
 # Compare gradual vs rapid ascent
-print("\\n=== Rapid vs Gradual Ascent to 4000m ===")
+print("\
+=== Rapid vs Gradual Ascent to 4000m ===")
 print(f"{'Day':>4} {'Gradual EPO':>12} {'Gradual RBC':>12} {'Rapid EPO':>10} {'Rapid RBC':>10}")
 print("-" * 50)
 
@@ -463,7 +476,8 @@ for day in [0, 1, 3, 5, 7, 10, 14, 21, 30]:
     r_rbc = rbc_response(max(0, day - 1), delay=9)      # delayed RBC response
     print(f"{day:>4} {g_epo:>10.1f} {g_rbc:>10.2f} {r_epo:>9.1f} {r_rbc:>9.2f}")
 
-print("\\nGradual ascent: EPO ramps smoothly, RBCs follow predictably.")
+print("\
+Gradual ascent: EPO ramps smoothly, RBCs follow predictably.")
 print("Rapid ascent: EPO spikes (stress response), RBC response delayed.")
 print("Risk of acute mountain sickness with rapid ascent: ~50% at 4000m.")`,
       challenge: 'Model the effect of coca leaf chewing (a traditional Andean practice) as a mild ventilatory stimulant that increases alveolar pO2 by 5-8 mmHg. How does this shift the acclimatization timeline? Does it reduce the acute mountain sickness window? (Hint: higher pO2 means less hypoxic stress, so EPO rises less dramatically but the body is less stressed.)',
@@ -579,7 +593,8 @@ print(f"Cities: {n_cities} | Roads: {len(edges)} | Avg degree: {avg_degree:.1f}"
 print(f"Theoretical percolation threshold: p_c ~ {1/avg_degree:.3f}")
 
 # Random attack simulation
-print("\\n--- Random Edge Removal ---")
+print("\
+--- Random Edge Removal ---")
 print(f"{'Fraction removed':>18} {'Largest component':>18} {'Connected?':>12}")
 print("-" * 50)
 
@@ -594,10 +609,12 @@ for frac in np.arange(0, 1.01, 0.1):
     print(f"{frac:>16.0%} {avg_size:>16.1%} {connected:>12}")
 
 if percolation_threshold:
-    print(f"\\nPercolation threshold (random): ~{percolation_threshold:.0%} edges removed")
+    print(f"\
+Percolation threshold (random): ~{percolation_threshold:.0%} edges removed")
 
 # Targeted attack
-print("\\n--- Targeted Node Removal (highest degree first) ---")
+print("\
+--- Targeted Node Removal (highest degree first) ---")
 print(f"{'Nodes removed':>15} {'Largest component':>18} {'Connected?':>12}")
 print("-" * 47)
 for n_rm in range(0, 12):
@@ -605,7 +622,8 @@ for n_rm in range(0, 12):
     connected = "YES" if size > 0.5 else "NO"
     print(f"{n_rm:>13} {size:>16.1%} {connected:>12}")
 
-print("\\nTargeted attack is far more effective than random failure.")
+print("\
+Targeted attack is far more effective than random failure.")
 print("Network hubs are critical vulnerabilities — protect them first.")`,
       challenge: 'Add a "redundancy upgrade" analysis: for each edge in the MST (the minimum spanning tree — the backbone), calculate how much adding one parallel edge (redundant road) improves the percolation threshold. Which single redundancy investment gives the best improvement? This is how network engineers prioritise infrastructure upgrades.',
       successHint: 'Percolation theory is one of the most powerful tools in network science. You applied it to a historical road network, but the same mathematics describes internet resilience, power grid failures, disease spread on social networks, and ecosystem fragmentation. The universal insight: highly connected networks are resilient to random failures but vulnerable to targeted attacks on hubs.',

@@ -158,7 +158,8 @@ ax3.set_title('Strength vs flexibility trade-off', color='white', fontsize=11)
 ax3.legend(fontsize=9)
 # Ideal basket fiber region
 ax3.axvspan(3, 10, alpha=0.1, color='#22c55e')
-ax3.text(6, 10, 'Ideal basket\\nfiber zone', color='#22c55e', fontsize=9, ha='center')
+ax3.text(6, 10, 'Ideal basket\
+fiber zone', color='#22c55e', fontsize=9, ha='center')
 
 plt.tight_layout()
 plt.show()
@@ -168,7 +169,8 @@ print(f"{'Fiber':<15} {'E (GPa)':>8} {'UTS (MPa)':>10} {'Fail strain':>12} {'Tou
 print("-" * 58)
 for name, props, t in zip(names, [fibers[n] for n in names], toughness):
     print(f"{name:<15} {props['youngs_modulus']:>8.1f} {props['uts']:>10} {props['failure_strain']*100:>10.1f}% {t:>10.2f}")
-print(f"\\nBest for baskets: {'Cane (rattan)'} — highest toughness + flexibility")`,
+print(f"\
+Best for baskets: {'Cane (rattan)'} — highest toughness + flexibility")`,
       challenge: 'Add moisture content as a variable: wet bamboo has ~30% lower Young modulus but ~50% higher failure strain. Generate stress-strain curves for dry and wet bamboo side by side. Which is better for basket weaving?',
       successHint: 'You can now characterize and compare natural fiber mechanical properties — the foundation of materials science for traditional crafts.',
     },
@@ -376,7 +378,8 @@ print(f"{'Weave':<15} {'Cover':>7} {'Crimp':>7} {'Float':>7} {'Interlock':>10}")
 print("-" * 50)
 for name, a in analyses.items():
     print(f"{name:<15} {a['cover_factor']:>7.2f} {a['crimp']:>7.3f} {a['max_float_warp']:>7} {a['interlocking']:>10.3f}")
-print(f"\\nBest for rigid baskets: Plain (highest crimp + interlocking)")
+print(f"\
+Best for rigid baskets: Plain (highest crimp + interlocking)")
 print(f"Best for decorative baskets: Twill/Herringbone (diagonal pattern + moderate stability)")`,
       challenge: 'Create a custom weave pattern: design a 3/1 twill (over-three-under-one) and analyze it. How do its float lengths and interlocking compare to the 2/2 twill? Which would you choose for a basket that needs to be waterproof?',
       successHint: 'You can now generate and analyze weave patterns mathematically — connecting traditional craft knowledge to structural engineering.',
@@ -742,7 +745,8 @@ print(f"Load distribution uniformity (lower CV = more uniform):")
 print(f"  Plain weave: CV = {plain_cv:.1f}%")
 print(f"  Twill weave: CV = {twill_cv:.1f}%")
 print(f"  Plain weave distributes load {twill_cv/plain_cv:.1f}x more uniformly")
-print(f"\\nProgressive failure:")
+print(f"\
+Progressive failure:")
 print(f"  Plain: {len(plain_failures)} fibers failed before collapse")
 print(f"  Twill: {len(twill_failures)} fibers failed before collapse")`,
       challenge: 'Add a handle attachment: concentrate 50% of the total force at two attachment points (fibers 5 and 15). How does this change the tension distribution? What is the stress concentration factor at the attachment compared to the average?',
@@ -891,16 +895,23 @@ ax2.legend(fontsize=7)
 # Best fiber per application
 ax3 = axes[1, 1]
 ax3.axis('off')
-result_text = "OPTIMAL FIBER SELECTION\\n" + "=" * 40 + "\\n\\n"
+result_text = "OPTIMAL FIBER SELECTION\
+" + "=" * 40 + "\
+\
+"
 for app, data in app_scores.items():
     sorted_fibers = sorted(data['scores'].items(), key=lambda x: x[1], reverse=True)
-    result_text += f"{app}:\\n"
+    result_text += f"{app}:\
+"
     for rank, (name, score) in enumerate(sorted_fibers[:3]):
         marker = '>>>' if rank == 0 else '   '
-        result_text += f"  {marker} {rank+1}. {name} (score: {score:.3f})\\n"
-    result_text += "\\n"
+        result_text += f"  {marker} {rank+1}. {name} (score: {score:.3f})\
+"
+    result_text += "\
+"
 
-result_text += f"\\nPareto-optimal fibers: {', '.join(pareto)}"
+result_text += f"\
+Pareto-optimal fibers: {', '.join(pareto)}"
 ax3.text(0.05, 0.95, result_text, transform=ax3.transAxes, color='#22c55e',
     fontsize=8.5, va='top', fontfamily='monospace',
     bbox=dict(boxstyle='round,pad=0.5', facecolor='#0d1117', edgecolor='#22c55e', alpha=0.8))
@@ -910,7 +921,8 @@ plt.show()
 
 print(f"Pareto-optimal fibers: {pareto}")
 for app, data in app_scores.items():
-    print(f"\\n{app}: best = {data['best']}")`,
+    print(f"\
+{app}: best = {data['best']}")`,
       challenge: 'Add a "hybrid basket" option: combine two fibers (e.g., bamboo warp + cane weft) by averaging their properties with user-specified mix ratios. Can a hybrid outperform any single fiber for the rice basket application?',
       successHint: 'You can now select optimal materials for basket designs using multi-objective optimization — the engineering approach to traditional craft knowledge.',
     },

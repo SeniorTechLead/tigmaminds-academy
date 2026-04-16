@@ -124,11 +124,13 @@ for table in ['smiths','steels','recipes','blades','performance']:
     count = c.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0]
     print(f"  {table}: {count} records")
 
-print("\\nMaster Smiths:")
+print("\
+Master Smiths:")
 for row in c.execute('SELECT name, village, years_experience, specialty FROM smiths ORDER BY years_experience DESC'):
     print(f"  {row[0]:12s} | {row[1]:12s} | {row[2]:>2} years | {row[3]}")
 
-print("\\nBest Performing Recipes:")
+print("\
+Best Performing Recipes:")
 rows = c.execute('''
     SELECT s.name, st.source, r.quench_medium, r.temper_temp_c,
            ROUND(AVG(CASE WHEN p.test_type='hardness_hrc' THEN p.score END), 1) as hardness,
@@ -273,7 +275,8 @@ for idx, (steel, color) in enumerate(zip(steel_types, colors)):
         ORDER BY res.overall DESC LIMIT 1
     ''', (steel,)).fetchone()
 
-    print(f"\\n  {steel.upper()} STEEL ({carbon*100:.0f}% C):")
+    print(f"\
+  {steel.upper()} STEEL ({carbon*100:.0f}% C):")
     print(f"    Best: forge {best[0]}°C → {best[1]} quench → temper {best[2]}°C for {best[3]}min")
     print(f"    Result: {best[4]:.0f} HRC, toughness {best[5]:.0f}, overall {best[6]:.3f}")
 
@@ -370,7 +373,8 @@ c.executemany('INSERT INTO blades_qc (batch_id, edge_hardness, spine_toughness, 
 conn.commit()
 
 # Grade distribution
-print("\\nGrade Distribution:")
+print("\
+Grade Distribution:")
 for grade in ['A', 'B', 'C', 'F']:
     count = c.execute('SELECT COUNT(*) FROM blades_qc WHERE grade=?', (grade,)).fetchone()[0]
     total = c.execute('SELECT COUNT(*) FROM blades_qc').fetchone()[0]
@@ -460,7 +464,8 @@ plt.tight_layout()
 plt.show()
 
 # Detect the problem
-print("\\nPROCESS ALERT:")
+print("\
+PROCESS ALERT:")
 ooc = [i+1 for i, m in enumerate(batch_means) if m < lcl]
 if ooc:
     print(f"  Batches below LCL: {ooc}")
@@ -557,12 +562,14 @@ print("║       NAGA METALLURGY KNOWLEDGE PLATFORM — DASHBOARD       ║")
 print("╚══════════════════════════════════════════════════════════════╝")
 
 # Steel library
-print("\\n[STEEL LIBRARY]")
+print("\
+[STEEL LIBRARY]")
 for row in c.execute('SELECT name, carbon, source, optimal_temper FROM steel_library ORDER BY carbon'):
     print(f"  {row[0]:18s} | {row[1]*100:.0f}% C | {row[2]:25s} | temper: {row[3]}°C")
 
 # Top designs
-print("\\n[TOP BLADE DESIGNS]")
+print("\
+[TOP BLADE DESIGNS]")
 rows = c.execute('''SELECT d.name, s.name as steel, d.bevel, d.score
                     FROM blade_designs d JOIN steel_library s ON d.steel_id = s.id
                     ORDER BY d.score DESC LIMIT 8''').fetchall()
@@ -571,7 +578,8 @@ for name, steel, bevel, score in rows:
     print(f"  {name:35s} | {bevel:.0f}° bevel | score: {score:.3f} {bar}")
 
 # Production summary
-print("\\n[PRODUCTION SUMMARY]")
+print("\
+[PRODUCTION SUMMARY]")
 for grade in ['A', 'B', 'C']:
     count = c.execute('SELECT COUNT(*) FROM production_log WHERE grade=?', (grade,)).fetchone()[0]
     print(f"  Grade {grade}: {count} blades")
@@ -651,7 +659,8 @@ plt.suptitle('Naga Metallurgy Knowledge Platform', color='white', fontsize=14, f
 plt.tight_layout()
 plt.show()
 
-print("\\n  Platform complete.")
+print("\
+  Platform complete.")
 print("  Traditional Naga metallurgy preserved in database,")
 print("  validated by materials science, extended by optimization.")
 print("  From forge fire to database — knowledge endures.")

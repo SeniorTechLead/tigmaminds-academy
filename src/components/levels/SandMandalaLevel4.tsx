@@ -84,7 +84,8 @@ for ax, (n, p, ind, name) in zip(axes, configs):
             alpha=0.4)
     ax.plot(pts[:, 0], pts[:, 1], 'w-', linewidth=1.5)
     ax.plot(pts[:, 0], pts[:, 1], 'wo', markersize=3)
-    ax.set_title(f'{name}\\narea={area:.2f}', fontsize=9)
+    ax.set_title(f'{name}\
+area={area:.2f}', fontsize=9)
     ax.set_xlim(-2, 2); ax.set_ylim(-2, 2)
     ax.set_aspect('equal'); ax.axis('off')
 
@@ -172,7 +173,8 @@ for ax, (gname, g) in zip(axes, groups.items()):
 
     ax.set_xlim(-5, 7); ax.set_ylim(-5, 7)
     ax.set_aspect('equal'); ax.axis('off')
-    ax.set_title(f'{gname}\\n{len(ops)} ops per cell',
+    ax.set_title(f'{gname}\
+{len(ops)} ops per cell',
                  fontsize=10)
 
 plt.suptitle('Stage 2: Wallpaper Group Tiling', fontsize=13)
@@ -417,7 +419,8 @@ for i in range(-3, 4):
 sq = np.array([[0,1,1,0,0], [0,0,1,1,0]]) - 0.5
 ax.plot(sq[0], sq[1], 'r-', linewidth=2)
 packing_sq = np.pi * r_atom**2 / 1.0
-ax.set_title(f'Square\\npacking={packing_sq:.1%}',
+ax.set_title(f'Square\
+packing={packing_sq:.1%}',
              fontsize=10)
 ax.set_xlim(-2.5, 2.5); ax.set_ylim(-2.5, 2.5)
 ax.set_aspect('equal'); ax.axis('off')
@@ -441,7 +444,8 @@ cell = np.array([
 ax.plot(cell[0], cell[1], 'r-', linewidth=2)
 area_hex = np.sqrt(3) / 2
 packing_hex = np.pi * r_atom**2 / area_hex
-ax.set_title(f'Hexagonal\\npacking={min(packing_hex, 0.907):.1%}',
+ax.set_title(f'Hexagonal\
+packing={min(packing_hex, 0.907):.1%}',
              fontsize=10)
 ax.set_xlim(-2.5, 2.5); ax.set_ylim(-2.5, 2.5)
 ax.set_aspect('equal'); ax.axis('off')
@@ -461,7 +465,8 @@ for i in range(-3, 4):
 sq = np.array([[0,1,1,0,0], [0,0,1,1,0]]) - 0.5
 ax.plot(sq[0], sq[1], 'r-', linewidth=2)
 packing_bcc = 2 * np.pi * r_atom**2 / 1.0
-ax.set_title(f'Centred Square\\npacking={packing_bcc:.1%}',
+ax.set_title(f'Centred Square\
+packing={packing_bcc:.1%}',
              fontsize=10)
 ax.set_xlim(-2.5, 2.5); ax.set_ylim(-2.5, 2.5)
 ax.set_aspect('equal'); ax.axis('off')

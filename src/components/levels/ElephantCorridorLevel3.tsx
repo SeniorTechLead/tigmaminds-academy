@@ -344,7 +344,8 @@ for p in range(n_patches):
     print(f"  {p:<6} {degree_centrality[p]:>10.2f} {betweenness_norm[p]:>14.2f} {closeness_norm[p]:>12.2f}{marker}")
 
 top_betweenness = int(np.argmax(betweenness_norm))
-print(f"\\nHighest betweenness: Patch {top_betweenness} — this is the critical bottleneck.")
+print(f"\
+Highest betweenness: Patch {top_betweenness} — this is the critical bottleneck.")
 print("Losing this patch would disconnect the most patch-pairs.")
 print("Conservation priority: protect patch {top_betweenness} and its corridors first.")`,
       challenge: 'Remove patch 4 (simulate habitat destruction) by zeroing its row and column in the adjacency matrix. How does the network fragment? Which patch-pairs lose connectivity? This shows the real cost of losing a high-betweenness node.',

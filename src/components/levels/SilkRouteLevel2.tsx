@@ -481,7 +481,8 @@ for idx, (values, label, color) in enumerate(data):
     # Mark the "slowbalization" period
     ax.axvspan(2008, 2023, alpha=0.05, color='#ef4444')
     if idx == 0:
-        ax.text(2015, max(values)*0.85, 'Slow-\\nbalization?', color='#ef4444', fontsize=8, ha='center')
+        ax.text(2015, max(values)*0.85, 'Slow-\
+balization?', color='#ef4444', fontsize=8, ha='center')
 
 plt.tight_layout()
 plt.show()
