@@ -57,7 +57,8 @@ for code, name, offset in foils:
     x_all = np.concatenate([xu, xl[::-1]])
     y_all = np.concatenate([yu, yl[::-1]]) + offset
     ax.fill(x_all, y_all, alpha=0.3); ax.plot(x_all, y_all, linewidth=1.5)
-    ax.text(-0.12, offset, f'NACA {code}\\n{name}', color='white', fontsize=7, va='center')
+    ax.text(-0.12, offset, f'NACA {code}\
+{name}', color='white', fontsize=7, va='center')
 ax.set_xlim(-0.15,1.1); ax.set_aspect('equal')
 ax.set_title('NACA Airfoil Gallery', color='white', fontsize=11)
 ax.set_xticks([]); ax.set_yticks([])
@@ -94,7 +95,8 @@ ax.set_ylabel('-Cp (pressure coefficient)', color='white')
 ax.set_title('Pressure Distribution (NACA 2412, α=5°)', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax.tick_params(colors='gray')
-ax.text(0.4, -1.5, 'Area between curves\\n= Lift per unit span', color='#22c55e', fontsize=9, ha='center')
+ax.text(0.4, -1.5, 'Area between curves\
+= Lift per unit span', color='#22c55e', fontsize=9, ha='center')
 
 # --- Effect of thickness on drag ---
 ax = axes[1, 1]; ax.set_facecolor('#111827')
@@ -113,7 +115,8 @@ ax.plot(thickness, merit, color='#22c55e', linewidth=2, linestyle='--', label='N
 
 opt_t = thickness[np.argmax(merit)]
 ax.axvline(opt_t, color='gray', linestyle=':', alpha=0.3)
-ax.text(opt_t+0.5, 0.5, f'Optimum\\n~{opt_t:.0f}%', color='gray', fontsize=9)
+ax.text(opt_t+0.5, 0.5, f'Optimum\
+~{opt_t:.0f}%', color='gray', fontsize=9)
 
 ax.set_xlabel('Thickness (% chord)', color='white')
 ax.set_ylabel('Value', color='white')
@@ -225,7 +228,8 @@ Cd_plate = np.minimum(Cd_plate_lam, Cd_plate_turb)
 ax.loglog(Re_range, Cd_plate, color='#22c55e', linewidth=2.5, label='Flat plate (friction)')
 
 # Drag crisis annotation
-ax.annotate('Drag crisis!\\nFlow transitions', xy=(3e5, 0.1), xytext=(3e6, 0.3),
+ax.annotate('Drag crisis!\
+Flow transitions', xy=(3e5, 0.1), xytext=(3e6, 0.3),
             color='#ef4444', fontsize=8, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
 ax.set_xlabel('Reynolds number', color='white')
@@ -403,8 +407,10 @@ for y0 in np.linspace(-0.3, 0.3, 15):
         y_s += 0.15*np.exp(-((x_s-0.3)/0.2)**2)  # deflect over airfoil
     ax.plot(x_s, y_s, color='#06b6d4', linewidth=0.4, alpha=0.5)
 
-ax.text(0.8, 0.25, 'Separated\\nflow', color='#ef4444', fontsize=9)
-ax.text(-0.2, 0.25, 'Attached\\nflow', color='#22c55e', fontsize=9)
+ax.text(0.8, 0.25, 'Separated\
+flow', color='#ef4444', fontsize=9)
+ax.text(-0.2, 0.25, 'Attached\
+flow', color='#22c55e', fontsize=9)
 ax.annotate('→ Wind', xy=(-0.3, -0.2), color='#06b6d4', fontsize=10)
 
 ax.set_xlim(-0.4, 1.6); ax.set_ylim(-0.5, 0.5)
@@ -646,7 +652,11 @@ ax.tick_params(colors='gray')
 ax = axes[1, 0]; ax.set_facecolor('#111827')
 # Draw quad from above
 positions = [(-1, 1), (1, 1), (1, -1), (-1, -1)]
-labels_r = ['Front-Left\\n(CCW)', 'Front-Right\\n(CW)', 'Rear-Right\\n(CCW)', 'Rear-Left\\n(CW)']
+labels_r = ['Front-Left\
+(CCW)', 'Front-Right\
+(CW)', 'Rear-Right\
+(CCW)', 'Rear-Left\
+(CW)']
 base_rpm = 5000
 
 # Different commands
@@ -835,7 +845,8 @@ ax.set_ylabel('Pressure coefficient Cp', color='white')
 ax.set_title('Cp Distribution: Theory vs Reality', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax.tick_params(colors='gray')
-ax.text(180, -2, 'Real: separation creates\\nconstant low-pressure wake', color='#ef4444', fontsize=8, ha='center')
+ax.text(180, -2, 'Real: separation creates\
+constant low-pressure wake', color='#ef4444', fontsize=8, ha='center')
 
 # --- CFD mesh visualization ---
 ax = axes[1, 0]; ax.set_facecolor('#111827')
@@ -866,7 +877,8 @@ ax.set_xticks([]); ax.set_yticks([])
 
 # --- CFD hierarchy ---
 ax = axes[1, 1]; ax.set_facecolor('#111827')
-methods = ['Panel\\nMethod', 'RANS', 'LES', 'DNS']
+methods = ['Panel\
+Method', 'RANS', 'LES', 'DNS']
 accuracy = [3, 6, 8, 10]
 cost = [1, 4, 7, 10]
 colors_m = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444']

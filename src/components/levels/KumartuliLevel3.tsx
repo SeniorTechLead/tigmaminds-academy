@@ -139,7 +139,8 @@ print(f"  Right roller: Ry = {reactions[2]/1000:.2f} kN")
 # Verify equilibrium
 total_ext_y = sum(fy for _, (fx, fy) in loads.items())
 total_react_y = reactions[1] + reactions[2]
-print(f"\\nEquilibrium check: loads = {total_ext_y/1000:.1f} kN, "
+print(f"\
+Equilibrium check: loads = {total_ext_y/1000:.1f} kN, "
       f"reactions = {total_react_y/1000:.1f} kN")`,
       challenge: 'Add a third load of 8 kN at the midspan bottom node (heavy idol). Which members see the largest force increase? Does any member switch from tension to compression? This analysis guides builders on where to add reinforcement.',
       successHint: 'The method of joints is one of the oldest and most elegant methods in structural analysis. Every bridge truss, roof truss, and tower crane has been designed using this exact approach. You just solved a real engineering problem from first principles.',
@@ -294,11 +295,13 @@ for i in range(len(members_r)):
     else:
         red_fail += 1
 
-print(f"\\nRedundant truss ({n_members_r} members):")
+print(f"\
+Redundant truss ({n_members_r} members):")
 print(f"  Survives single failure: {red_survive}/{n_members_r} cases")
 print(f"  Collapses on failure:    {red_fail}/{n_members_r} cases")
 
-print(f"\\nExtra members added: {n_members_r - n_members}")
+print(f"\
+Extra members added: {n_members_r - n_members}")
 print(f"Reliability improvement: {red_survive/n_members_r*100:.0f}% vs "
       f"{det_survive/n_members*100:.0f}% survival rate")`,
       challenge: 'Test double-member failure: remove 2 members at a time from the redundant truss. What fraction of 2-member combinations cause collapse? How many extra diagonals would you need for full double-failure survival?',

@@ -60,7 +60,8 @@ for i in range(0, len(y_pts), 2):
 
 # Reynolds number check
 Re = rho * v_max * H / mu
-print(f"\\nRe = {Re:.0f} ({'Laminar' if Re < 2000 else 'Turbulent'})")
+print(f"\
+Re = {Re:.0f} ({'Laminar' if Re < 2000 else 'Turbulent'})")
 
 # Case 2: Turbulent river flow (numerical approximation)
 print()
@@ -98,9 +99,11 @@ for y_check in [0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0]:
 Q_laminar = np.trapz(v_laminar, y_pts)
 Q_turb = np.trapz(v_turb, y_river)
 
-print(f"\\nLaminar flow rate (1cm channel): {Q_laminar*1000:.4f} mL/s per m width")
+print(f"\
+Laminar flow rate (1cm channel): {Q_laminar*1000:.4f} mL/s per m width")
 print(f"Turbulent flow rate (5m river):  {Q_turb:.2f} m2/s per m width")
-print(f"\\nThe Padma River (500m wide) carries: {Q_turb*500:.0f} m3/s")
+print(f"\
+The Padma River (500m wide) carries: {Q_turb*500:.0f} m3/s")
 print("That is enough to fill an Olympic swimming pool every second!")`,
       challenge: 'Change the river slope to 0.001 (steeper section, like rapids). How does the velocity profile change? Calculate the new shear velocity and surface speed. At what slope does the near-bottom velocity exceed a hilsa\'s swimming speed (0.8 m/s)?',
       successHint: 'You just solved the Navier-Stokes equations for two cases — laminar and turbulent channel flow. These are among the very few cases where analytical or semi-analytical solutions exist. For everything else (flow around fish, flow through fish passages, ocean currents), we use CFD — billions of numerical calculations on supercomputers.',
@@ -262,7 +265,8 @@ for v in [0.3, 0.5, 0.7, 0.9, 1.0, 1.2, 1.5, 2.0, 2.5]:
     print(f"{v:>12.1f} {E:>10.0f} {T_days:>10.1f}")
 
 opt_idx = np.argmin(energies)
-print(f"\\nOptimal speed (still water): {speeds[opt_idx]:.2f} m/s")
+print(f"\
+Optimal speed (still water): {speeds[opt_idx]:.2f} m/s")
 print(f"Minimum energy: {energies[opt_idx]:.0f} kJ")
 
 # Case 2: Various currents
@@ -300,7 +304,8 @@ print(f"Total:           {E_total:.0f} kJ")
 fat_energy = 37  # kJ/g
 fat_needed = E_total / fat_energy
 body_fat_pct = fat_needed / (mass * 1000) * 100
-print(f"\\nFat needed: {fat_needed:.0f} g ({body_fat_pct:.0f}% body weight)")
+print(f"\
+Fat needed: {fat_needed:.0f} g ({body_fat_pct:.0f}% body weight)")
 
 # Sensitivity: what if the fish picks wrong speed?
 print()
@@ -533,7 +538,8 @@ positions = [("Nose (5cm)", 5), ("Max width (10cm)", 10), ("Tail (30cm)", 25)]
 for name, x_idx in positions:
     if x_idx >= nx:
         continue
-    print(f"\\n{name}:")
+    print(f"\
+{name}:")
     print(f"{'y (cm)':>8} {'Speed':>8}")
     for j in range(0, ny, 2):
         v = speed[j, x_idx]

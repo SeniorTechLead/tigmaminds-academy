@@ -151,7 +151,8 @@ plt.show()
 
 for name, hl in half_lives.items():
     print(f"{name:8s}: half-life = {hl:.1f} months")
-print(f"\\nYellow fades {half_lives['Yellow']/half_lives['Blue']:.1f}x faster than Blue")
+print(f"\
+Yellow fades {half_lives['Yellow']/half_lives['Blue']:.1f}x faster than Blue")
 print("This is why old flags look blue — it's the last color standing!")`,
       challenge: 'If flags are strung in October (post-monsoon), they get 8 dry months before their first monsoon. If strung in April, they get only 2. Plot both scenarios — when is the best time to hang new flags?',
       successHint: 'You have created a multi-panel fading analysis with seasonal variation and visual simulation. The flag color progression panel is an intuitive way to communicate the science — showing exactly how the five sacred colors evolve over time.',
@@ -449,7 +450,8 @@ plt.show()
 print("=== Mechanical Summary ===")
 for s, t in zip(stages, toughness):
     print(f"{s['label']:15s}: {s['ts']:4d} MPa, {s['elong']:.1f}% elong, toughness {t:.1f} MJ/m³")
-print(f"\\nToughness drops {toughness[0]/toughness[-1]:.0f}x from new to 18-month fabric")
+print(f"\
+Toughness drops {toughness[0]/toughness[-1]:.0f}x from new to 18-month fabric")
 print("Brittle + weak = tears in moderate wind")`,
       challenge: 'Compare cotton (prayer flag) with polyester (synthetic flag) at the same UV exposure. Polyester loses strength slower (k = 0.04 vs 0.08 per month) but starts at similar strength. Plot both on the same axes.',
       successHint: 'You have created a complete tensile testing analysis with stress-strain curves, property degradation tracking, toughness computation, and wind tolerance assessment. This is exactly how textile engineers evaluate fabric durability for outdoor applications.',
@@ -593,7 +595,8 @@ if t50_natural:
 if t50_synthetic:
     ax.bar(x[:len(t50_synthetic)] + width/2, t50_synthetic, width, color='#3b82f6', alpha=0.8, label='Synthetic')
 ax.set_xticks(x[:max(len(name_natural), len(name_synthetic))])
-labels = [f'{n}\\n{s}' if i < len(name_synthetic) else n
+labels = [f'{n}\
+{s}' if i < len(name_synthetic) else n
           for i, (n, s) in enumerate(zip(name_natural + ['']*(5-len(name_natural)),
                                           name_synthetic + ['']*(5-len(name_synthetic))))]
 ax.set_xticklabels(name_natural, fontsize=7, rotation=30, ha='right', color='white')
@@ -630,13 +633,16 @@ plt.savefig('lightfastness.png', dpi=100, facecolor='#1f2937')
 plt.show()
 
 print("=== Lightfastness Summary ===")
-print("\\nNatural dyes:")
+print("\
+Natural dyes:")
 for name, months in zip(name_natural, t50_natural):
     print(f"  {name:20s}: {months:.1f} months to 50% fade")
-print("\\nSynthetic dyes:")
+print("\
+Synthetic dyes:")
 for name, months in zip(name_synthetic, t50_synthetic):
     print(f"  {name:20s}: {months:.1f} months to 50% fade")
-print(f"\\nSynthetic dyes last {np.mean(t50_synthetic)/np.mean(t50_natural):.1f}x longer on average")`,
+print(f"\
+Synthetic dyes last {np.mean(t50_synthetic)/np.mean(t50_natural):.1f}x longer on average")`,
       challenge: 'Calculate the environmental impact: if natural flags are replaced 3× more often, but synthetic dyes create chemical waste, which is more sustainable? Estimate the total waste per year for a monastery with 100 flags.',
       successHint: 'You have built a comprehensive dye lightfastness analysis using the Blue Wool Scale, outdoor lifetime prediction, and cost-effectiveness comparison. The data clearly shows the trade-off between tradition (natural dyes, faster fading) and durability (synthetic dyes, longer lasting).',
     },

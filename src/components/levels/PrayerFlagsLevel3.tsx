@@ -481,7 +481,8 @@ for prop, data, name in [(color, 'Color', 'Color'), (strength, 'Strength', 'Stre
     else:
         print(f"{name} still above 20% at month 24")
 
-print(f"\\nAt month 12: Color={color[int(12/24*len(t))]*100:.0f}%, Strength={strength[int(12/24*len(t))]*100:.0f}%")`,
+print(f"\
+At month 12: Color={color[int(12/24*len(t))]*100:.0f}%, Strength={strength[int(12/24*len(t))]*100:.0f}%")`,
       challenge: 'Add a "UV stabilizer" treatment: reduce UV sensitivity by 50%. How many extra months of life does this give? Is it more effective than reducing wind exposure?',
       successHint: 'You have built a coupled degradation model with three interacting state variables — the kind of model used in real materials science for predicting outdoor product lifetimes. The synergy visualization quantifies exactly how much worse coupled degradation is compared to isolated mechanisms.',
     },

@@ -25,7 +25,8 @@ export default function MapMakerLevel4() {
       code: `import numpy as np
 
 # --- Stage 1: Coordinate Data Ingestion & Validation ---
-print("=== Capstone Stage 1: Data Ingestion & Validation ===\\n")
+print("=== Capstone Stage 1: Data Ingestion & Validation ===\
+")
 
 np.random.seed(42)
 
@@ -59,7 +60,8 @@ def validate_entry(entry):
     return errors
 
 print(f"Validating {len(raw_data)} entries against NE India bounds...")
-print(f"Bounds: lat [{NE_INDIA_BOUNDS['lat_min']},{NE_INDIA_BOUNDS['lat_max']}], lon [{NE_INDIA_BOUNDS['lon_min']},{NE_INDIA_BOUNDS['lon_max']}]\\n")
+print(f"Bounds: lat [{NE_INDIA_BOUNDS['lat_min']},{NE_INDIA_BOUNDS['lat_max']}], lon [{NE_INDIA_BOUNDS['lon_min']},{NE_INDIA_BOUNDS['lon_max']}]\
+")
 
 valid_entries = []
 for entry in raw_data:
@@ -73,7 +75,8 @@ for entry in raw_data:
         print()
         valid_entries.append(entry)
 
-print(f"\\nResult: {len(valid_entries)}/{len(raw_data)} entries passed validation")
+print(f"\
+Result: {len(valid_entries)}/{len(raw_data)} entries passed validation")
 print(f"Rejected: {len(raw_data) - len(valid_entries)} entries")
 
 # Summary by feature type
@@ -81,11 +84,13 @@ types = {}
 for e in valid_entries:
     t = e["type"]
     types[t] = types.get(t, 0) + 1
-print(f"\\nValid features by type:")
+print(f"\
+Valid features by type:")
 for t, count in sorted(types.items()):
     print(f"  {t}: {count}")
 
-print("\\nQuality gate: All coordinates within NE India bounding box,")
+print("\
+Quality gate: All coordinates within NE India bounding box,")
 print("no missing names, no negative values. Ready for Stage 2.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -101,7 +106,8 @@ print("no missing names, no negative values. Ready for Stage 2.")`,
       code: `import numpy as np
 
 # --- Stage 2: Multi-projection renderer with distortion analysis ---
-print("=== Stage 2: Multi-Projection Distortion Analysis ===\\n")
+print("=== Stage 2: Multi-Projection Distortion Analysis ===\
+")
 
 R = 6371.0  # km
 
@@ -155,11 +161,13 @@ for lat in test_lats:
     print(f"{lat:>10d} | {true_area:>9.0f}km2 | {merc_area:>9.0f}km2 {merc_ratio:>7.3f}x | {lam_area:>9.0f}km2 {lam_ratio:>7.3f}x")
 
 # Projection recommendation
-print("\\nProjection recommendation for NE India (lat 22-29, lon 89-97):")
+print("\
+Projection recommendation for NE India (lat 22-29, lon 89-97):")
 print("  Mercator:        Good for navigation, bad for area comparison")
 print("  Lambert Conic:   Best for this latitude range (distortion < 1%)")
 print("  Equirectangular: Simple but distorts both shape and area")
-print("\\nFor a regional map of NE India, Lambert Conformal Conic centered")
+print("\
+For a regional map of NE India, Lambert Conformal Conic centered")
 print("at 26N/93E gives the least overall distortion.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -175,7 +183,8 @@ print("at 26N/93E gives the least overall distortion.")`,
       code: `import numpy as np
 
 # --- Stage 3: Feature overlay engine with spatial queries ---
-print("=== Stage 3: Feature Overlay & Spatial Queries ===\\n")
+print("=== Stage 3: Feature Overlay & Spatial Queries ===\
+")
 
 np.random.seed(42)
 
@@ -213,7 +222,8 @@ for park in parks:
         print(f"    (no cities within 0.5 degrees)")
 
 # QUERY 2: Point-in-polygon (simplified circular parks)
-print("\\nPoint-in-Park test (is each city inside a park boundary?):")
+print("\
+Point-in-Park test (is each city inside a park boundary?):")
 for city in cities:
     inside = []
     for park in parks:
@@ -224,7 +234,8 @@ for city in cities:
     print(f"  {city['name']}: {status}")
 
 # QUERY 3: Nearest neighbor
-print("\\nNearest city to each park:")
+print("\
+Nearest city to each park:")
 for park in parks:
     min_d = float('inf')
     nearest = ""
@@ -237,12 +248,14 @@ for park in parks:
 
 # Layer statistics
 total_features = len(cities) + len(parks)
-print(f"\\nOverlay summary:")
+print(f"\
+Overlay summary:")
 print(f"  Layers: 2 (cities: {len(cities)}, parks: {len(parks)})")
 print(f"  Total features: {total_features}")
 print(f"  Spatial extent: lat [{min(c['lat'] for c in cities):.2f}, {max(c['lat'] for c in cities):.2f}]")
 print(f"                  lon [{min(c['lon'] for c in cities):.2f}, {max(c['lon'] for c in cities):.2f}]")
-print(f"\\nQuality: All spatial queries executed without error.")`,
+print(f"\
+Quality: All spatial queries executed without error.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -257,7 +270,8 @@ print(f"\\nQuality: All spatial queries executed without error.")`,
       code: `import numpy as np
 
 # --- Stage 4: Thematic map generator with classification schemes ---
-print("=== Stage 4: Thematic Classification Engine ===\\n")
+print("=== Stage 4: Thematic Classification Engine ===\
+")
 
 np.random.seed(42)
 
@@ -315,7 +329,8 @@ for name in districts:
     elif d["pop_density"] < 200 and d["forest_pct"] > 50:
         print(f"  Green zone: {name} (low density, high forest)")
 
-print(f"\\nLegend generated for {len(variables)} variables across {len(districts)} districts.")
+print(f"\
+Legend generated for {len(variables)} variables across {len(districts)} districts.")
 print("Quality: Classification complete, ready for rendering.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -331,7 +346,8 @@ print("Quality: Classification complete, ready for rendering.")`,
       code: `import numpy as np
 
 # --- Stage 5: Route optimization and network analysis ---
-print("=== Stage 5: Route Optimization (Dijkstra) ===\\n")
+print("=== Stage 5: Route Optimization (Dijkstra) ===\
+")
 
 # Road network as a weighted graph (distances in km)
 graph = {
@@ -377,7 +393,8 @@ def dijkstra(graph, start, end):
     return distances[end], path
 
 # Find shortest paths from Guwahati to all cities
-print("\\nShortest paths from Guwahati (Dijkstra):")
+print("\
+Shortest paths from Guwahati (Dijkstra):")
 print(f"{'Destination':<14s} {'Distance':>9s} {'Route'}")
 print("-" * 60)
 for dest in sorted(graph.keys()):
@@ -388,7 +405,8 @@ for dest in sorted(graph.keys()):
     print(f"{dest:<14s} {dist:>8.0f}km  {route}")
 
 # Network analysis
-print("\\nNetwork statistics:")
+print("\
+Network statistics:")
 n_nodes = len(graph)
 n_edges = sum(len(v) for v in graph.values()) // 2
 print(f"  Nodes (cities): {n_nodes}")
@@ -404,12 +422,14 @@ for i in range(len(all_cities)):
         for city in path[1:-1]:  # exclude endpoints
             betweenness[city] += 1
 
-print("\\nBetweenness centrality (how often each city is on a shortest path):")
+print("\
+Betweenness centrality (how often each city is on a shortest path):")
 for city in sorted(betweenness, key=betweenness.get, reverse=True):
     print(f"  {city:<14s}: {betweenness[city]}")
 
 hub = max(betweenness, key=betweenness.get)
-print(f"\\nMost critical hub: {hub} (removing it would disrupt the most routes)")`,
+print(f"\
+Most critical hub: {hub} (removing it would disrupt the most routes)")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -430,12 +450,14 @@ print("  NE India Interactive Map Builder")
 print("=" * 60)
 
 # Compile pipeline results
-print("\\n1. DATA INGESTION (Stage 1)")
+print("\
+1. DATA INGESTION (Stage 1)")
 print("   Features loaded: 5 cities, 3 national parks, 1 river")
 print("   Validation: 5/8 raw entries passed (3 rejected)")
 print("   Coordinate system: WGS84 (EPSG:4326)")
 
-print("\\n2. PROJECTION ANALYSIS (Stage 2)")
+print("\
+2. PROJECTION ANALYSIS (Stage 2)")
 print("   Region: lat 22-29N, lon 89-97E (NE India)")
 print("   Recommended: Lambert Conformal Conic")
 print("     - Center: 26N, 93E")
@@ -443,18 +465,21 @@ print("     - Area distortion: < 1% across region")
 print("     - Alternative: UTM Zone 46N (for small-area work)")
 print("   NOT recommended: Mercator (1.24x area inflation at 26N)")
 
-print("\\n3. SPATIAL QUERIES (Stage 3)")
+print("\
+3. SPATIAL QUERIES (Stage 3)")
 print("   Buffer analysis: 2 cities within 0.5 deg of Kaziranga NP")
 print("   Nearest city to each park identified")
 print("   All point-in-polygon tests executed")
 
-print("\\n4. THEMATIC CLASSIFICATION (Stage 4)")
+print("\
+4. THEMATIC CLASSIFICATION (Stage 4)")
 print("   Variables mapped: population density, literacy, forest cover")
 print("   Method: quantile classification (4 classes)")
 print("   Key finding: strong negative correlation (-0.82)")
 print("   between population density and forest cover")
 
-print("\\n5. ROUTE ANALYSIS (Stage 5)")
+print("\
+5. ROUTE ANALYSIS (Stage 5)")
 routes = {
     "Guwahati -> Kaziranga": "215 km via Nagaon",
     "Guwahati -> Dibrugarh": "372 km via Jorhat",
@@ -464,7 +489,8 @@ for route, detail in routes.items():
     print(f"   {route}: {detail}")
 print("   Network hub: Kaziranga (highest betweenness centrality)")
 
-print("\\n6. MAP SPECIFICATIONS")
+print("\
+6. MAP SPECIFICATIONS")
 specs = {
     "Scale": "1:1,000,000 (regional overview)",
     "Projection": "Lambert Conformal Conic (26N/93E)",
@@ -476,13 +502,15 @@ specs = {
 for key, val in specs.items():
     print(f"   {key}: {val}")
 
-print("\\n7. QUALITY METRICS")
+print("\
+7. QUALITY METRICS")
 print("   Coordinate validation: 100% of kept features within bounds")
 print("   Projection distortion: < 1% area error")
 print("   Route optimization: Dijkstra verified on all O-D pairs")
 print("   Classification: cross-validated against natural breaks")
 
-print("\\n" + "=" * 60)
+print("\
+" + "=" * 60)
 print("  Report complete. All 6 pipeline stages passed.")
 print("  Map ready for rendering and publication.")
 print("=" * 60)`,

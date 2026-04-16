@@ -515,7 +515,8 @@ for i, (ux, uy) in enumerate(temple_utm):
 plt.tight_layout()
 plt.show()
 
-print(f"\\nTemple dimensions: {w:.1f}m x {h:.1f}m = {area:.0f} m²")
+print(f"\
+Temple dimensions: {w:.1f}m x {h:.1f}m = {area:.0f} m²")
 print(f"Coordinate system: UTM Zone 46N (WGS84)")
 print(f"Pixel size: 0.5m — each pixel coordinate shift = 0.5m on the ground")`,
       challenge: 'Add a rotation of 12 degrees to the affine transform (simulating a LiDAR flight path that was not aligned to north) and verify that the UTM coordinates still resolve correctly. What happens to the temple outline in UTM space when the DEM is rotated?',
@@ -678,7 +679,8 @@ print(f"Rectangularity scores (1.0 = perfect rectangle):")
 print(f"  Temple region: {rect_temple:.3f}")
 print(f"  Mesa region:   {rect_mesa:.3f}")
 print(f"  {'Temple is more rectangular' if rect_temple > rect_mesa else 'Mesa is more rectangular'}")
-print(f"\\nSemivariogram shows variance increase around 30-35m lag")
+print(f"\
+Semivariogram shows variance increase around 30-35m lag")
 print(f"This matches the temple width (~40m) — structure size detected statistically")`,
       challenge: 'Add a second rectangular structure (a smaller shrine, 10x10m) at a different location and see if both the LISA analysis and semivariogram detect two distinct spatial scales. Does the semivariogram show two breaks?',
       successHint: 'You can now use spatial statistics to formally distinguish man-made structures from natural terrain features — the critical step between "interesting shape" and "confirmed archaeological site."',
@@ -900,11 +902,13 @@ plt.show()
 
 print(f"Training: {len(y_train)} patches ({sum(y_train)} sites, {len(y_train)-sum(y_train)} non-sites)")
 print(f"Testing:  {len(y_test)} patches ({sum(y_test)} sites, {len(y_test)-sum(y_test)} non-sites)")
-print(f"\\nResults:")
+print(f"\
+Results:")
 print(f"  Precision: {precision:.3f} (of flagged locations, {precision:.0%} are real sites)")
 print(f"  Recall:    {recall:.3f} ({recall:.0%} of real sites were detected)")
 print(f"  F1 Score:  {f1:.3f}")
-print(f"\\nTop features: {feature_names[np.argmax(importance)]}, {feature_names[np.argsort(importance)[-2]]}")`,
+print(f"\
+Top features: {feature_names[np.argmax(importance)]}, {feature_names[np.argsort(importance)[-2]]}")`,
       challenge: 'Increase class imbalance: use 20 sites and 500 non-sites. Observe how F1 drops. Then implement cost-sensitive training by weighting site errors 10x higher than non-site errors in the gradient computation. Does this recover recall?',
       successHint: 'You can now train and evaluate a site detection classifier with appropriate metrics for rare-event detection — the foundation of automated archaeological survey.',
     },
@@ -1031,14 +1035,16 @@ print("Bayesian Evidence Fusion Results")
 print("=" * 50)
 print(f"Prior probability of site: 1%")
 print(f"Evidence layers: LiDAR edges, vegetation, soil moisture")
-print(f"\\nDetection (threshold=0.5):")
+print(f"\
+Detection (threshold=0.5):")
 print(f"  True positives:  {tp}")
 print(f"  False positives: {fp}")
 print(f"  Missed sites:    {fn}")
 print(f"  Precision: {precision:.3f}")
 print(f"  Recall:    {recall:.3f}")
 print(f"  F1 Score:  {f1:.3f}")
-print(f"\\nKey insight: false positives in ONE layer are filtered out by other layers.")
+print(f"\
+Key insight: false positives in ONE layer are filtered out by other layers.")
 print(f"  LiDAR false positive (natural feature at 85,20): no veg/moisture support -> filtered")
 print(f"  Vegetation false positive (wet area at 50,85): no LiDAR/moisture support -> filtered")
 print(f"  Only locations with convergent evidence survive fusion.")`,

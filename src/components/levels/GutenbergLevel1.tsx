@@ -55,12 +55,14 @@ for n in [1, 2, 5, 10, 20, 50, 100, 500, 1000, 10000]:
 
 # Find exact break-even point
 # scribing = printing → n × 1000 = 5000 + n × 2 → 998n = 5000 → n = 5.01
-print(f"\\nBreak-even point: {5000 / (1000 - 2):.0f} copies")
+print(f"\
+Break-even point: {5000 / (1000 - 2):.0f} copies")
 print(f"Above this, printing is cheaper per copy.")
 print(f"Below this, hire a scribe.")
 
 # Savings at historical production levels
-print(f"\\n=== Historical Context ===")
+print(f"\
+=== Historical Context ===")
 productions = [
     ("Gutenberg Bible (1455)", 180),
     ("Luther's 95 Theses (1517)", 1000),
@@ -150,7 +152,8 @@ internet = simulate_idea_spread(
 )
 
 print("=== Idea Spread: Scribal vs Print vs Internet ===")
-print(f"Population: {population:,} educated people\\n")
+print(f"Population: {population:,} educated people\
+")
 
 print(f"{'Step':>5} {'Scribal':>12} {'Print':>12} {'Internet':>12}")
 print("-" * 43)
@@ -170,13 +173,15 @@ def time_to_pct(history, target_pct, population):
             return i
     return len(history)
 
-print(f"\\n=== Time to Reach 50% Awareness ===")
+print(f"\
+=== Time to Reach 50% Awareness ===")
 print(f"Scribal:  {time_to_pct(scribal, 50, population)} steps")
 print(f"Print:    {time_to_pct(print_culture, 50, population)} steps")
 print(f"Internet: {time_to_pct(internet, 50, population)} steps")
 
 # Historical examples
-print(f"\\n=== Historical Spread Rates ===")
+print(f"\
+=== Historical Spread Rates ===")
 events = [
     ("Copernicus (1543)", "~100 years to reach all astronomers", "Print (slowly — controversial)"),
     ("Luther's Theses (1517)", "2 weeks across Germany", "Print (rapidly — populist)"),
@@ -261,11 +266,13 @@ for name, pb, sn, sb in alloys:
     mp, hard, dur = alloy_properties(pb, sn, sb)
     print(f"{name:<22} {pb:>3} {sn:>3} {sb:>3} {dv:>+5.2f} {mp:>6.0f} {hard:>4.0f} {dur:>9.2f}")
 
-print(f"\\nGutenberg's alloy minimises volume change (ΔV ≈ 0)")
+print(f"\
+Gutenberg's alloy minimises volume change (ΔV ≈ 0)")
 print(f"while keeping melting point low and hardness high.")
 
 # Optimization: find the alloy with minimum |ΔV| and acceptable properties
-print(f"\\n=== Optimizing the Type Metal ===")
+print(f"\
+=== Optimizing the Type Metal ===")
 print(f"Finding composition with |ΔV| closest to zero...")
 
 best_dv = 100
@@ -295,7 +302,8 @@ if best_alloy:
     print(f"  Melting point: {mp:.0f}°C")
     print(f"  Hardness: {hard:.0f}")
     print(f"  Durability: {dur:.2f}")
-    print(f"\\nCompare with Gutenberg's: 80% Pb, 5% Sn, 15% Sb")
+    print(f"\
+Compare with Gutenberg's: 80% Pb, 5% Sn, 15% Sb")
     print(f"  His alloy is remarkably close to the mathematical optimum!")`,
       challenge: 'The code uses a simplified linear model for alloy properties. Real alloys have non-linear interactions (eutectic points where melting drops dramatically). Research the actual eutectic point of the Pb-Sn-Sb system (~240°C at the right composition) and see how it changes the optimization.',
       successHint: 'You optimized an alloy composition — the same task materials scientists perform when designing new metals, ceramics, and polymers. The method (grid search over composition space, evaluate multiple properties, find the Pareto-optimal point) is used in every materials research lab in the world.',
@@ -370,7 +378,8 @@ for year in range(0, 200, 10):
     print(f"{year:>6} {s:>14,.0f} {p:>12,.0f} {p/population*100:>6.1f}%")
 
 # Tipping point
-print(f"\\n=== Tipping Point Analysis ===")
+print(f"\
+=== Tipping Point Analysis ===")
 for i, (p_prev, p_curr) in enumerate(zip(print_culture[:-1], print_culture[1:])):
     growth_rate = (p_curr - p_prev) / max(p_prev, 1)
     if growth_rate > 0.1 and i > 5:  # rapid growth phase
@@ -379,7 +388,8 @@ for i, (p_prev, p_curr) in enumerate(zip(print_culture[:-1], print_culture[1:]))
         break
 
 # Impact cascade
-print(f"\\n=== The Printing Cascade ===")
+print(f"\
+=== The Printing Cascade ===")
 cascade = [
     (0, "Gutenberg Bible (1455)", "180 copies of one book"),
     (7, "First printed almanac (1462)", "Mass-market practical information"),
@@ -398,7 +408,8 @@ for years_after, event, significance in cascade:
     print(f"{1455+years_after:>6} {event:<45} {significance}")
 
 # Metcalfe's law for printing
-print(f"\\n=== Metcalfe's Law Applied to Printing ===")
+print(f"\
+=== Metcalfe's Law Applied to Printing ===")
 print(f"Value of printing network ≈ n² (n = number of literate people)")
 for n in [1000, 10000, 100000, 1000000, 5000000]:
     value = n * n
@@ -474,7 +485,8 @@ for lh_pct in [100, 110, 120, 130, 140, 150, 160, 180, 200]:
     print(f"{lh_pct:>12}% {score:>6.0f} {bar}")
 
 # Line length analysis
-print(f"\\n=== Optimal Line Length ===")
+print(f"\
+=== Optimal Line Length ===")
 print(f"{'Chars/Line':>12} {'Score':>8} {'Example'}")
 print("-" * 60)
 examples = {20: "Narrow column", 40: "Newspaper column", 55: "Paperback book",
@@ -488,7 +500,8 @@ for chars in [20, 30, 40, 50, 55, 60, 65, 70, 80, 100, 120]:
     print(f"{chars:>10} {score:>6.0f} {bar:<20} {example}")
 
 # Complete typography audit
-print(f"\\n=== Typography Presets Comparison ===")
+print(f"\
+=== Typography Presets Comparison ===")
 presets = [
     ("Gutenberg Bible", 16, 1.25, 42, 0),
     ("Modern paperback", 10, 1.45, 60, 0),
@@ -506,7 +519,8 @@ for name, size, lh, cpl, ls in presets:
     print(f"{name:<22} {size:>3}pt {lh:>4.0%} {cpl:>4} {ls:>+3}% {score:>5.0f}")
 
 # Kerning pairs
-print(f"\\n=== Common Kerning Pairs ===")
+print(f"\
+=== Common Kerning Pairs ===")
 kerning_pairs = [
     ("AV", -80, "A's right diagonal and V's left diagonal create a gap"),
     ("To", -60, "T's top bar creates space above the o"),
@@ -523,7 +537,8 @@ for pair, kern, reason in kerning_pairs:
     arrow = "←" if kern < 0 else "→" if kern > 0 else "·"
     print(f"{pair:>6} {kern:>+10} {arrow}  {reason}")
 
-print(f"\\nTotal kerning pairs in a professional font: ~500-2,000")
+print(f"\
+Total kerning pairs in a professional font: ~500-2,000")
 print(f"Gutenberg set 290 different character molds to handle all")
 print(f"letter combinations, ligatures, and abbreviations.")`,
       challenge: 'Design a "dyslexia-friendly" typography preset: research suggests larger font size (14pt+), wider line spacing (160%+), shorter line length (40-50 chars), and wider letter spacing (+5%). Calculate its readability score. Is it higher or lower than "optimal"? (The readability model may not capture accessibility needs — a good reminder that models have limits.)',
@@ -613,7 +628,8 @@ for tech in technologies:
     print(f"{tech['name']:<20} {tech['year']:>6} {bits_str:>12} {cost_str:>12} {reach_str:>12}")
 
 # Rate of change
-print(f"\\n=== Acceleration of Change ===")
+print(f"\
+=== Acceleration of Change ===")
 for i in range(1, len(technologies)):
     prev = technologies[i-1]
     curr = technologies[i]
@@ -627,7 +643,8 @@ for i in range(1, len(technologies)):
               f"{cost_ratio:>10.0f}× cheaper)")
 
 # The Gutenberg moment repeated
-print(f"\\n=== Each Technology Created Its Own Revolution ===")
+print(f"\
+=== Each Technology Created Its Own Revolution ===")
 revolutions = [
     ("Gutenberg press (1455)", "Reformation, Scientific Revolution, mass literacy"),
     ("Telegraph (1837)", "Real-time news, financial markets, colonial administration"),

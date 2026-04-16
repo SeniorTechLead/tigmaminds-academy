@@ -371,7 +371,8 @@ print(f"Pattern: {rows}x{cols} = {len(bits)} bits")
 
 # Test at different error rates
 for error_rate in [0.01, 0.05, 0.10]:
-    print(f"\\n{'='*50}")
+    print(f"\
+{'='*50}")
     print(f"Channel error rate: {error_rate:.0%}")
 
     # Uncoded transmission
@@ -468,7 +469,8 @@ print("=== Coding Gain at Target BER ===")
 target_bers = [0.01, 0.001, 0.0001]
 
 for target in target_bers:
-    print(f"\\nTarget BER = {target}")
+    print(f"\
+Target BER = {target}")
     # Find channel p where each code achieves this BER
     for p_test in np.linspace(0.001, 0.4, 1000):
         if uncoded_ber(p_test) >= target:

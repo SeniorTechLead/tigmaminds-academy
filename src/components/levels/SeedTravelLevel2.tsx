@@ -112,7 +112,8 @@ islands = [('Small islet', 1, '#ef4444'), ('Majuli', 1250, '#3b82f6'), ('Borneo'
 for name, area, color in islands:
     s = C * area ** z
     ax1.plot(area, s, 'o', color=color, markersize=10)
-    ax1.annotate(f'{name}\\n({s:.0f} spp)', xy=(area, s), xytext=(5, 10),
+    ax1.annotate(f'{name}\
+({s:.0f} spp)', xy=(area, s), xytext=(5, 10),
                  textcoords='offset points', color=color, fontsize=9)
 ax1.set_xlabel('Island area (km2)', color='white')
 ax1.set_ylabel('Number of species', color='white')
@@ -283,7 +284,8 @@ costs = [0, 50, 20, 5]
 print("Control strategy comparison:")
 for s, f, c in zip(strategies, final_pct, costs):
     print(f"  {s}: {f}% remaining, cost {c}M")
-print("\\nEarly detection is 10x cheaper AND 10x more effective.")`,
+print("\
+Early detection is 10x cheaper AND 10x more effective.")`,
       challenge: 'Add a biocontrol agent (predator) arriving in year 10. Does it also become invasive? (Cane toads in Australia were introduced as biocontrol.)',
       successHint: 'Invasive species are dispersal amplified by human transport. Understanding invasion dynamics is essential for biosecurity and conservation.',
     },

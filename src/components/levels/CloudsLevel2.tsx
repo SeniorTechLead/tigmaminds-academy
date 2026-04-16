@@ -97,7 +97,8 @@ print("7-day weather summary:")
 print(f"  Temperature: min={temp.min():.1f}°C, max={temp.max():.1f}°C, mean={temp.mean():.1f}°C")
 print(f"  Pressure: min={pressure.min():.1f}, max={pressure.max():.1f}, trend={'falling' if pressure[-1] < pressure[0] else 'rising'}")
 print(f"  Humidity: mean={humidity.mean():.0f}%, peak={humidity.max():.0f}%")
-print(f"\\nPressure dropped {pressure[0]-pressure[-1]:.1f} hPa over 7 days → low pressure system approaching")
+print(f"\
+Pressure dropped {pressure[0]-pressure[-1]:.1f} hPa over 7 days → low pressure system approaching")
 print(f"Humidity increased from ~{humidity[:96].mean():.0f}% to ~{humidity[-96:].mean():.0f}% → moisture building → rain likely")`,
       challenge: 'Calculate the correlation between temperature and humidity (use np.corrcoef). Is it positive or negative? Why does that make physical sense?',
       successHint: 'Weather data analysis is the bridge between observation and prediction. Every weather forecast starts with thousands of stations logging these three variables — and algorithms finding patterns in the data that human eyes would miss.',
@@ -192,7 +193,8 @@ ax1.set_ylabel('Height (m)', color='white')
 ax1.tick_params(colors='gray')
 
 # Labels
-ax1.text(25, 1, 'HOT GROUND\\n(sun-heated clearing)', color='white', fontsize=9,
+ax1.text(25, 1, 'HOT GROUND\
+(sun-heated clearing)', color='white', fontsize=9,
          ha='center', fontweight='bold')
 ax1.text(5, 1, 'Shade', color='#94a3b8', fontsize=9, ha='center')
 ax1.text(45, 1, 'Shade', color='#94a3b8', fontsize=9, ha='center')
@@ -310,10 +312,14 @@ ax.text(high_x, high_y, 'H', color='#3b82f6', fontsize=30, fontweight='bold',
         ha='center', va='center')
 
 # Annotations
-ax.annotate('Low pressure\\nAir rises → clouds\\nCCW rotation (N. Hem.)',
+ax.annotate('Low pressure\
+Air rises → clouds\
+CCW rotation (N. Hem.)',
             xy=(low_x, low_y - 0.5), xytext=(low_x - 1.5, low_y - 2.5),
             color='#ef4444', fontsize=9, arrowprops=dict(arrowstyle='->', color='#ef4444'))
-ax.annotate('High pressure\\nAir sinks → clear skies\\nCW rotation (N. Hem.)',
+ax.annotate('High pressure\
+Air sinks → clear skies\
+CW rotation (N. Hem.)',
             xy=(high_x, high_y + 0.5), xytext=(high_x + 0.5, high_y + 2.5),
             color='#3b82f6', fontsize=9, arrowprops=dict(arrowstyle='->', color='#3b82f6'))
 
@@ -440,12 +446,14 @@ plt.show()
 hot_first = np.sum(first_decade > 35)
 hot_last = np.sum(last_decade > 35)
 print(f"Warming trend: {z[0]:.3f}°C per year = {z[0]*30:.1f}°C over 30 years")
-print(f"\\nExtreme heat days (>35°C):")
+print(f"\
+Extreme heat days (>35°C):")
 print(f"  First decade: {hot_first} days")
 print(f"  Last decade: {hot_last} days")
 if hot_first > 0:
     print(f"  Increase: {(hot_last/hot_first - 1)*100:.0f}%")
-print("\\nA small shift in the mean causes a LARGE change in extremes.")
+print("\
+A small shift in the mean causes a LARGE change in extremes.")
 print("This is why climate change is dangerous even at 'just' 1-2°C warming.")`,
       challenge: 'Change the warming trend from 0.03°C/year to 0.06°C/year (doubled). How many extreme heat days does the last decade get? This shows the non-linear relationship between average warming and extreme events.',
       successHint: 'The distinction between weather and climate is crucial for understanding climate change. A single cold week doesn\'t contradict warming — you need to look at decades of data. The boy\'s grandmother remembered 60 years of weather; the climate record she carried was more valuable than any single forecast.',
@@ -672,7 +680,8 @@ ax.plot(hours, pressure_sensor, color='#3b82f6', linewidth=0.8)
 ax.set_ylabel('Pressure (hPa)', color='white')
 ax.tick_params(colors='gray')
 # Mark pressure drops
-ax.annotate('Pressure falling\\n→ rain coming', xy=(55, pressure_sensor[660]),
+ax.annotate('Pressure falling\
+→ rain coming', xy=(55, pressure_sensor[660]),
             xytext=(45, pressure_sensor[660] + 3), color='#f59e0b', fontsize=8,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -702,20 +711,26 @@ plt.show()
 
 # Summary statistics
 print("=== 72-Hour Weather Station Report ===")
-print(f"\\nTemperature:")
+print(f"\
+Temperature:")
 print(f"  Min: {temp_sensor.min():.1f}°C  Max: {temp_sensor.max():.1f}°C  Mean: {temp_sensor.mean():.1f}°C")
 print(f"  Sensor accuracy: ±{np.std(temp_sensor - temp_true):.2f}°C")
-print(f"\\nHumidity:")
+print(f"\
+Humidity:")
 print(f"  Min: {humidity_sensor.min():.0f}%  Max: {humidity_sensor.max():.0f}%  Mean: {humidity_sensor.mean():.0f}%")
-print(f"\\nPressure:")
+print(f"\
+Pressure:")
 print(f"  Start: {pressure_sensor[0]:.1f} hPa  End: {pressure_sensor[-1]:.1f} hPa")
 print(f"  Trend: {'Falling' if pressure_sensor[-1] < pressure_sensor[0] else 'Rising'} ({pressure_sensor[0] - pressure_sensor[-1]:.1f} hPa drop)")
-print(f"\\nWind:")
+print(f"\
+Wind:")
 print(f"  Mean: {wind_speed.mean():.1f} km/h  Max gust: {wind_speed.max():.1f} km/h")
-print(f"\\nRainfall:")
+print(f"\
+Rainfall:")
 print(f"  Total: {rain.sum():.1f} mm")
 print(f"  Max intensity: {rain.max():.1f} mm/5min")
-print(f"\\n=== Arduino parts list ===")
+print(f"\
+=== Arduino parts list ===")
 print(f"  BME280 sensor (temp + humidity + pressure): ~$5")
 print(f"  Arduino Nano: ~$5")
 print(f"  Anemometer kit: ~$15")

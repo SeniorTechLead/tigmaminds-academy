@@ -193,7 +193,8 @@ for c in range(n_clinics):
     print(f"  Clinic {c+1} ({cx:.1f}, {cy:.1f}): {np.sum(mask)} villages, {village_pop[mask].sum():,} people, avg {village_dists[mask].mean():.1f}km")
 
 underserved = np.sum(village_dists > 5)
-print(f"\\n  Villages >5km from any clinic: {underserved} ({underserved/n_villages*100:.0f}%)")`,
+print(f"\
+  Villages >5km from any clinic: {underserved} ({underserved/n_villages*100:.0f}%)")`,
       challenge: 'Add a constraint: clinics must be near a road (within 0.5km of y=10). How does this change optimal locations? Real facility location always has constraints.',
       successHint: 'Spatial analysis transforms maps from pictures into decision-making tools. Every hospital location, school district, and evacuation route is the result of spatial analysis.',
     },

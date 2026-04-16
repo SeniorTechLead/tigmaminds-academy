@@ -61,7 +61,8 @@ for name, params in fish_types.items():
     ax1.plot(x, y + y_offset, color=params['color'], linewidth=1.5)
     ax1.plot(x, -y + y_offset, color=params['color'], linewidth=1.5)
     ratio = params['L'] / params['W']
-    ax1.text(params['L'] + 2, y_offset, f'{name}\\nL/W = {ratio:.1f}', color=params['color'],
+    ax1.text(params['L'] + 2, y_offset, f'{name}\
+L/W = {ratio:.1f}', color=params['color'],
             fontsize=8, va='center')
     y_offset -= 25
 
@@ -188,7 +189,10 @@ ax2.annotate(f'O₂ extracted: {100 - water_counter[-1]:.0f}%',
 
 # Extraction efficiency comparison
 ax3.set_facecolor('#111827')
-methods = ['Concurrent\\n(same direction)', 'Countercurrent\\n(opposite)', 'Human lungs\\n(tidal breathing)']
+methods = ['Concurrent\
+(same direction)', 'Countercurrent\
+(opposite)', 'Human lungs\
+(tidal breathing)']
 efficiencies = [50, 85, 25]
 colors_bar = ['#f59e0b', '#22c55e', '#a855f7']
 bars = ax3.bar(methods, efficiencies, color=colors_bar, edgecolor='none')
@@ -223,7 +227,8 @@ ax4.text(35, 1, 'Lethal', color='#ef4444', fontsize=9)
 # Barak River range
 ax4.axvline(20, color='#f59e0b', linestyle='--', linewidth=1, alpha=0.5)
 ax4.axvline(32, color='#f59e0b', linestyle='--', linewidth=1, alpha=0.5)
-ax4.text(26, 12, 'Barak River\\nrange', ha='center', color='#f59e0b', fontsize=9)
+ax4.text(26, 12, 'Barak River\
+range', ha='center', color='#f59e0b', fontsize=9)
 
 plt.tight_layout()
 plt.show()
@@ -272,15 +277,20 @@ fig.patch.set_facecolor('#1f2937')
 
 # Energy pyramid
 ax1.set_facecolor('#111827')
-levels = ['Producers\\n(algae, plants)', 'Primary consumers\\n(invertebrates)',
-          'Secondary consumers\\n(small fish)', 'Tertiary consumers\\n(mahseer, otters)']
+levels = ['Producers\
+(algae, plants)', 'Primary consumers\
+(invertebrates)',
+          'Secondary consumers\
+(small fish)', 'Tertiary consumers\
+(mahseer, otters)']
 energy = [10000, 1000, 100, 10]  # kJ
 colors_list = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444']
 
 for i, (level, e, color) in enumerate(zip(levels, energy, colors_list)):
     width = e / 100
     ax1.barh(i, width, height=0.6, color=color, edgecolor='none', left=-width/2)
-    ax1.text(width/2 + 5, i, f'{level}\\n{e:,} kJ', color=color, va='center', fontsize=9)
+    ax1.text(width/2 + 5, i, f'{level}\
+{e:,} kJ', color=color, va='center', fontsize=9)
 
 ax1.set_yticks([])
 ax1.set_xlabel('Relative energy (kJ)', color='white')
@@ -331,9 +341,12 @@ ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9
 ax3.tick_params(colors='gray')
 
 # Annotate zones
-ax3.text(20, 35, 'Headwaters\\n(cold, fast)', color='#60a5fa', fontsize=8, ha='center')
-ax3.text(100, 35, 'Middle reaches\\n(most diverse)', color='#60a5fa', fontsize=8, ha='center')
-ax3.text(180, 35, 'Lower river\\n(warm, slow)', color='#60a5fa', fontsize=8, ha='center')
+ax3.text(20, 35, 'Headwaters\
+(cold, fast)', color='#60a5fa', fontsize=8, ha='center')
+ax3.text(100, 35, 'Middle reaches\
+(most diverse)', color='#60a5fa', fontsize=8, ha='center')
+ax3.text(180, 35, 'Lower river\
+(warm, slow)', color='#60a5fa', fontsize=8, ha='center')
 
 # Nutrient cycle
 ax4.set_facecolor('#111827')
@@ -617,10 +630,14 @@ ax2.plot(river_x, river_y, color='#60a5fa', linewidth=3, alpha=0.3)
 
 # Key locations
 locations = [
-    (10, 'Spawning\\ngrounds', '#ef4444'),
-    (40, 'Nursery\\nareas', '#f59e0b'),
-    (70, 'Feeding\\ngrounds', '#22c55e'),
-    (90, 'River\\nmouth', '#3b82f6'),
+    (10, 'Spawning\
+grounds', '#ef4444'),
+    (40, 'Nursery\
+areas', '#f59e0b'),
+    (70, 'Feeding\
+grounds', '#22c55e'),
+    (90, 'River\
+mouth', '#3b82f6'),
 ]
 
 for km, label, color in locations:
@@ -703,7 +720,8 @@ ax4.fill_between(distance_km, fat_remaining / 1000, 0,
 
 max_dist = initial_fat / current_cost
 ax4.axvline(max_dist, color='#ef4444', linestyle=':', linewidth=1)
-ax4.annotate(f'Maximum range:\\n{max_dist:.0f} km', xy=(max_dist, 0),
+ax4.annotate(f'Maximum range:\
+{max_dist:.0f} km', xy=(max_dist, 0),
             xytext=(max_dist + 20, 5), color='#ef4444', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#ef4444'))
 

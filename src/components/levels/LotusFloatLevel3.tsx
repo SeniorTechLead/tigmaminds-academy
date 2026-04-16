@@ -96,7 +96,8 @@ surfaces = {
     'Teflon': 115,
     'Rough wax': 130,
     'Lotus leaf': 162,
-    'Artificial\\nsuperhydrophobic': 170,
+    'Artificial\
+superhydrophobic': 170,
 }
 names = list(surfaces.keys())
 angles = list(surfaces.values())
@@ -435,13 +436,20 @@ for name, d in designs.items():
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 applications = [
-    (1997, 'Lotus effect\\ndiscovered', '#22c55e'),
-    (2003, 'Lotusan\\npaint', '#3b82f6'),
-    (2005, 'Self-cleaning\\nglass', '#f59e0b'),
-    (2008, 'NanoTex\\ntextiles', '#a855f7'),
-    (2012, 'Anti-ice\\ncoatings', '#ef4444'),
-    (2018, 'Medical\\nimplants', '#06b6d4'),
-    (2023, 'Smart responsive\\nsurfaces', '#f59e0b'),
+    (1997, 'Lotus effect\
+discovered', '#22c55e'),
+    (2003, 'Lotusan\
+paint', '#3b82f6'),
+    (2005, 'Self-cleaning\
+glass', '#f59e0b'),
+    (2008, 'NanoTex\
+textiles', '#a855f7'),
+    (2012, 'Anti-ice\
+coatings', '#ef4444'),
+    (2018, 'Medical\
+implants', '#06b6d4'),
+    (2023, 'Smart responsive\
+surfaces', '#f59e0b'),
 ]
 
 for year, label, color in applications:
@@ -575,7 +583,9 @@ ax.tick_params(colors='gray')
 ax = axes[0, 1]
 ax.set_facecolor('#111827')
 fluxes = [flux_aerenchyma * 1e6, flux_water_only * 1e6]
-labels = ['With\\naerenchy.', 'Water\\nonly']
+labels = ['With\
+aerenchy.', 'Water\
+only']
 colors = ['#22c55e', '#ef4444']
 bars = ax.bar(labels, fluxes, color=colors, edgecolor='none', width=0.5)
 ax.set_ylabel('O2 flux (μmol/s)', color='white')
@@ -695,37 +705,43 @@ np.random.seed(42)
 
 # Aquatic plant traits comparison
 species = {
-    'Lotus\\n(Nelumbo)': {
+    'Lotus\
+(Nelumbo)': {
         'type': 'emergent',
         'aerenchyma': 0.40, 'leaf_thickness': 0.5, 'root_depth': 0.8,
         'growth_rate': 0.4, 'buoyancy': 0.9, 'photosynthesis': 0.8,
         'flood_tolerance': 0.7, 'drag_resistance': 0.5, 'color': '#22c55e'
     },
-    'Water lily\\n(Nymphaea)': {
+    'Water lily\
+(Nymphaea)': {
         'type': 'floating-leaf',
         'aerenchyma': 0.50, 'leaf_thickness': 0.3, 'root_depth': 0.5,
         'growth_rate': 0.5, 'buoyancy': 0.95, 'photosynthesis': 0.7,
         'flood_tolerance': 0.8, 'drag_resistance': 0.6, 'color': '#f59e0b'
     },
-    'Elodea\\n(submerged)': {
+    'Elodea\
+(submerged)': {
         'type': 'submerged',
         'aerenchyma': 0.20, 'leaf_thickness': 0.05, 'root_depth': 0.2,
         'growth_rate': 0.9, 'buoyancy': 0.3, 'photosynthesis': 0.5,
         'flood_tolerance': 1.0, 'drag_resistance': 0.9, 'color': '#3b82f6'
     },
-    'Water hyacinth\\n(Eichhornia)': {
+    'Water hyacinth\
+(Eichhornia)': {
         'type': 'free-floating',
         'aerenchyma': 0.60, 'leaf_thickness': 0.6, 'root_depth': 0.1,
         'growth_rate': 1.0, 'buoyancy': 1.0, 'photosynthesis': 0.9,
         'flood_tolerance': 0.9, 'drag_resistance': 0.3, 'color': '#a855f7'
     },
-    'Cattail\\n(Typha)': {
+    'Cattail\
+(Typha)': {
         'type': 'emergent',
         'aerenchyma': 0.35, 'leaf_thickness': 0.8, 'root_depth': 0.9,
         'growth_rate': 0.6, 'buoyancy': 0.4, 'photosynthesis': 0.85,
         'flood_tolerance': 0.6, 'drag_resistance': 0.4, 'color': '#ef4444'
     },
-    'Duckweed\\n(Lemna)': {
+    'Duckweed\
+(Lemna)': {
         'type': 'free-floating',
         'aerenchyma': 0.30, 'leaf_thickness': 0.02, 'root_depth': 0.05,
         'growth_rate': 0.95, 'buoyancy': 0.98, 'photosynthesis': 0.6,
@@ -752,7 +768,8 @@ for sp_name, data in species.items():
     ax.fill(angles, values, alpha=0.05, color=data['color'])
 
 ax.set_xticks(angles[:-1])
-ax.set_xticklabels([t.replace('_', '\\n') for t in traits], color='white', fontsize=7)
+ax.set_xticklabels([t.replace('_', '\
+') for t in traits], color='white', fontsize=7)
 ax.set_ylim(0, 1.1)
 ax.set_title('Trait comparison across aquatic plants', color='white', fontsize=11)
 ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=6, loc='upper right')
@@ -764,7 +781,8 @@ ax.set_facecolor('#111827')
 for sp_name, data in species.items():
     ax.scatter([data['buoyancy']], [data['leaf_thickness']], c=data['color'],
                s=100, zorder=5, edgecolors='white', linewidths=0.5)
-    ax.annotate(sp_name.split('\\n')[0], xy=(data['buoyancy'], data['leaf_thickness']),
+    ax.annotate(sp_name.split('\
+')[0], xy=(data['buoyancy'], data['leaf_thickness']),
                 xytext=(5, 5), textcoords='offset points', fontsize=8, color='white')
 ax.set_xlabel('Buoyancy', color='white')
 ax.set_ylabel('Leaf thickness (structural support)', color='white')
@@ -929,8 +947,10 @@ fig, axes = plt.subplots(2, 3, figsize=(16, 10))
 fig.patch.set_facecolor('#1f2937')
 
 surfaces_data = [
-    ('Ordered assembly\\n(high diffusion)', ordered),
-    ('Disordered\\n(low diffusion)', disordered),
+    ('Ordered assembly\
+(high diffusion)', ordered),
+    ('Disordered\
+(low diffusion)', disordered),
     ('Dense coverage', dense),
 ]
 
@@ -939,7 +959,8 @@ for i, (name, surf) in enumerate(surfaces_data):
     ax.set_facecolor('#111827')
     ax.imshow(surf, cmap='YlGn', interpolation='nearest')
     ca, metrics = estimate_contact_angle(surf)
-    ax.set_title(f'{name}\\nCA={ca:.0f}°, coverage={metrics["coverage"]:.0%}',
+    ax.set_title(f'{name}\
+CA={ca:.0f}°, coverage={metrics["coverage"]:.0%}',
                  color='white', fontsize=10)
     ax.tick_params(colors='gray')
 
@@ -948,7 +969,8 @@ ax = axes[1, 0]
 ax.set_facecolor('#111827')
 for (name, surf), color in zip(surfaces_data, ['#22c55e', '#ef4444', '#3b82f6']):
     heights = surf[surf > 0].flatten()
-    ax.hist(heights, bins=20, alpha=0.5, color=color, label=name.split('\\n')[0])
+    ax.hist(heights, bins=20, alpha=0.5, color=color, label=name.split('\
+')[0])
 ax.set_xlabel('Particle stack height', color='white')
 ax.set_ylabel('Count', color='white')
 ax.set_title('Height distribution', color='white', fontsize=11)

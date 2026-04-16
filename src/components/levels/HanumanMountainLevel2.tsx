@@ -64,7 +64,8 @@ for p in high_alt:
 
 # Query: plants with anti-cancer/anti-inflammatory use
 healing = [p for p in plants if "anti" in p["use"]]
-print(f"\\n{len(healing)} plants with 'anti-' properties:")
+print(f"\
+{len(healing)} plants with 'anti-' properties:")
 for p in healing:
     print(f"  {p['name']}: {p['use']} ({p['compound']})")`,
       challenge: 'Add 3 more plants to the database (research real Himalayan herbs). Then write a query that finds all plants whose altitude range overlaps with 3000-4000 m. Hint: overlap means plant_low < 4000 AND plant_high > 3000.',
@@ -178,7 +179,8 @@ for n1, v1 in norm.items():
         print(f"{d:12.2f}", end="")
     print()
 
-print("\\nSmall distance = similar plants.")
+print("\
+Small distance = similar plants.")
 print("Pine and Juniper are closest (both needle-leaved, high alt).")`,
       challenge: 'Find the two MOST similar plants programmatically (exclude self-comparisons). Print which pair has the smallest distance and explain why biologically.',
       successHint: 'You just did something profound — represented biological features as numbers and used geometry (Euclidean distance) to measure similarity. This is the foundation of computational taxonomy and machine learning.',
@@ -357,7 +359,8 @@ for name, feats in data.items():
         correct += 1
     print(f"  {name:15s} -> {pred:15s} [{match}]")
 
-print(f"\\nAccuracy: {correct}/{len(data)} = {correct/len(data)*100:.0f}%")
+print(f"\
+Accuracy: {correct}/{len(data)} = {correct/len(data)*100:.0f}%")
 print("3 questions max to identify any of 6 species.")
 print("A real app uses 100+ features and 10,000+ species.")`,
       challenge: 'Add 3 more species to the database and expand the decision tree to handle them. What is the minimum depth needed for 9 species? (Hint: 2^depth >= number of species.)',

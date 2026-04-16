@@ -202,7 +202,8 @@ plt.axhspan(4000, 1e8, alpha=0.05, color='red', label='Turbulent (Re > 4000)')
 v_return = 4.4  # m/s (gravity wave speed)
 Re_return = rho * v_return * L / mu
 plt.plot(v_return, Re_return, 'o', color='#ef4444', markersize=10, zorder=5)
-plt.annotate(f'Return flow\\nRe = {Re_return:.0e}', xy=(v_return, Re_return),
+plt.annotate(f'Return flow\
+Re = {Re_return:.0e}', xy=(v_return, Re_return),
              xytext=(3.0, Re_return/5), fontsize=10, color='#ef4444',
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 

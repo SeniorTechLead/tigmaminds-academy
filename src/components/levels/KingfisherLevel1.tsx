@@ -284,8 +284,10 @@ ax2.annotate('', xy=(400, 800), xytext=(200, 1000),
              arrowprops=dict(arrowstyle='->', color='white', lw=1.5))
 ax2.annotate('', xy=(200, 1000), xytext=(400, 800),
              arrowprops=dict(arrowstyle='->', color='#3b82f6', lw=2))
-ax2.text(150, 850, 'White\\nlight in', color='white', fontsize=8)
-ax2.text(350, 900, 'Blue\\nlight out', color='#3b82f6', fontsize=8)
+ax2.text(150, 850, 'White\
+light in', color='white', fontsize=8)
+ax2.text(350, 900, 'Blue\
+light out', color='#3b82f6', fontsize=8)
 
 ax2.set_title('Feather Nanostructure (cross-section)', color='white', fontsize=13)
 ax2.set_xlabel('nm', color='white')
@@ -453,7 +455,8 @@ examples = [
 
 for i, (year, name, source, color) in enumerate(examples):
     ax1.plot(year, i, 'o', color=color, markersize=12)
-    ax1.text(year + 2, i, f'{name}\\n({source})', va='center', color='white', fontsize=8)
+    ax1.text(year + 2, i, f'{name}\
+({source})', va='center', color='white', fontsize=8)
     ax1.axhline(i, color='#4b5563', alpha=0.1, linewidth=0.5)
 
 ax1.set_xlabel('Year', color='white')
@@ -464,8 +467,14 @@ ax1.set_xlim(1935, 2030)
 
 # 2. Performance improvements
 ax2.set_facecolor('#111827')
-applications = ['Shinkansen\\n(energy)', 'Shark suit\\n(drag)', 'Whale turbine\\n(efficiency)',
-                'Eastgate Bldg\\n(cooling)', 'Gecko tape\\n(adhesion)', 'Lotus coating\\n(cleaning)']
+applications = ['Shinkansen\
+(energy)', 'Shark suit\
+(drag)', 'Whale turbine\
+(efficiency)',
+                'Eastgate Bldg\
+(cooling)', 'Gecko tape\
+(adhesion)', 'Lotus coating\
+(cleaning)']
 improvements = [15, 8, 35, 90, 200, 95]  # percent improvement
 colors_app = ['#06b6d4', '#ef4444', '#ec4899', '#f59e0b', '#a855f7', '#3b82f6']
 

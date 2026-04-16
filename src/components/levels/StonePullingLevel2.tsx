@@ -95,7 +95,8 @@ ax.add_patch(arc)
 ax.text(1.2, 0.2, f'θ = {theta}°', color='white', fontsize=11)
 
 # Info box
-info = f'Stone: {mass:,} kg | θ = {theta}° | μ = {mu}\\nPull force needed: {F_pull/1000:.1f} kN ({int(F_pull/500)+1} people)'
+info = f'Stone: {mass:,} kg | θ = {theta}° | μ = {mu}\
+Pull force needed: {F_pull/1000:.1f} kN ({int(F_pull/500)+1} people)'
 ax.text(0.5, 3.5, info, color='white', fontsize=11,
         bbox=dict(boxstyle='round,pad=0.5', facecolor='#374151', edgecolor='#4b5563'))
 
@@ -245,12 +246,14 @@ print("=" * 55)
 sliding_mu = [0.65, 0.50, 0.35, 0.20]
 sliding_names = ['Rough stone', 'Packed earth', 'Wet earth', 'Wood planks']
 
-print("\\nSliding friction:")
+print("\
+Sliding friction:")
 for name, mu in zip(sliding_names, sliding_mu):
     F = mu * W
     print(f"  {name:15s} (μ={mu:.2f}): {F/1000:>6.1f} kN ({int(F/500)+1} people)")
 
-print("\\nRolling friction (log rollers):")
+print("\
+Rolling friction (log rollers):")
 Crr = 0.02  # rolling resistance coefficient for wood on earth
 radii = [0.05, 0.075, 0.10, 0.125, 0.15, 0.20, 0.25]
 for r in radii:
@@ -269,8 +272,15 @@ for ax in [ax1, ax2]:
     for s in ['bottom','left']: ax.spines[s].set_color('white')
 
 # Plot 1: Force comparison bar chart
-methods = ['Rough\\nstone', 'Packed\\nearth', 'Wet\\nearth', 'Wood\\nplanks',
-           'Rollers\\n10cm', 'Rollers\\n15cm', 'Rollers\\n20cm']
+methods = ['Rough\
+stone', 'Packed\
+earth', 'Wet\
+earth', 'Wood\
+planks',
+           'Rollers\
+10cm', 'Rollers\
+15cm', 'Rollers\
+20cm']
 forces = [0.65*W, 0.50*W, 0.35*W, 0.20*W,
           Crr*W/0.10, Crr*W/0.15, Crr*W/0.20]
 colors = ['#f87171','#f87171','#f59e0b','#f59e0b','#10b981','#10b981','#10b981']
@@ -308,7 +318,8 @@ plt.show()
 # Savings summary
 best_sliding = 0.35 * W  # wet earth
 best_rolling = Crr * W / 0.15
-print(f"\\nBest sliding (wet earth): {best_sliding/1000:.1f} kN")
+print(f"\
+Best sliding (wet earth): {best_sliding/1000:.1f} kN")
 print(f"Best rolling (15cm logs): {best_rolling/1000:.2f} kN")
 print(f"Rolling is {best_sliding/best_rolling:.0f}x easier than best sliding!")`,
       challenge: 'What if the rollers are not perfectly round (eccentricity)? Model the extra force needed if rollers have a 5% deviation from circular. How much does imperfect roundness cost?',
@@ -524,7 +535,8 @@ for ax in [ax1, ax2]:
     for s in ['top','right']: ax.spines[s].set_visible(False)
     for s in ['bottom','left']: ax.spines[s].set_color('white')
 
-names = [r[0].replace(', ', '\\n') for r in results]
+names = [r[0].replace(', ', '\
+') for r in results]
 useful = [W_useful/1000] * len(results)
 friction_losses = [r[2]/1000 for r in results]
 efficiencies = [r[3] for r in results]
@@ -556,7 +568,8 @@ plt.show()
 
 best = max(results, key=lambda r: r[3])
 worst = min(results[1:], key=lambda r: r[3])  # exclude vertical lift
-print(f"\\nBest method: {best[0]} ({best[3]:.1f}% efficient, {best[5]} people)")
+print(f"\
+Best method: {best[0]} ({best[3]:.1f}% efficient, {best[5]} people)")
 print(f"Worst practical method: {worst[0]} ({worst[3]:.1f}% efficient, {worst[5]} people)")
 print(f"Engineering improvement: {best[3]-worst[3]:.1f} percentage points of efficiency")`,
       challenge: 'Add a "cost" column: each method has setup costs (building ramp, cutting rollers, etc.). Calculate cost-effectiveness as (efficiency gain / setup cost). Which investment gives the best return?',

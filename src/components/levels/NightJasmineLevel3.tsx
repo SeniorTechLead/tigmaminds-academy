@@ -578,7 +578,11 @@ ax.tick_params(colors='gray')
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
 time_points = [12, 19, 22, 3]  # noon, early evening, late night, pre-dawn
-time_labels = ['12:00\\n(noon)', '19:00\\n(dusk)', '22:00\\n(night)', '03:00\\n(pre-dawn)']
+time_labels = ['12:00\
+(noon)', '19:00\
+(dusk)', '22:00\
+(night)', '03:00\
+(pre-dawn)']
 
 comp_names = list(compounds.keys())
 colors_comp = [compounds[c]['color'] for c in comp_names]
@@ -778,7 +782,11 @@ ax.tick_params(colors='gray')
 ax = axes[0, 1]
 ax.set_facecolor('#111827')
 syndromes = ['Moth', 'Butterfly', 'Bee', 'Bird', 'Bat', 'Wind']
-traits = ['Scent', 'Color\\nbrightness', 'Tube\\nlength', 'Nectar\\nvolume', 'Night\\nactivity']
+traits = ['Scent', 'Color\
+brightness', 'Tube\
+length', 'Nectar\
+volume', 'Night\
+activity']
 data = np.array([
     [1.0, 0.3, 0.8, 0.8, 1.0],  # Moth
     [0.3, 0.9, 0.5, 0.5, 0.0],  # Butterfly

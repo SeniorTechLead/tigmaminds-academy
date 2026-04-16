@@ -105,7 +105,8 @@ print("HAWK FLIGHT DATABASE — ANALYSIS")
 print("=" * 60)
 print(f"Total waypoints: {c.execute('SELECT COUNT(*) FROM waypoints').fetchone()[0]}")
 
-print("\\nFlight summary:")
+print("\
+Flight summary:")
 for row in c.execute('''
     SELECT behavior, COUNT(*) as points, ROUND(AVG(speed_ms),1) as avg_speed,
            ROUND(AVG(altitude_m),0) as avg_alt,
@@ -114,7 +115,8 @@ for row in c.execute('''
 '''):
     print(f"  {row[0]:<10}: {row[1]:>4} pts, speed={row[2]} m/s, alt={row[3]}m ({row[4]}-{row[5]}m)")
 
-print("\\nClimb rate analysis (thermal segments):")
+print("\
+Climb rate analysis (thermal segments):")
 for row in c.execute('''
     SELECT w1.timestamp_s,
            ROUND((w2.altitude_m - w1.altitude_m) / 10, 2) as climb_rate
@@ -125,7 +127,8 @@ for row in c.execute('''
 '''):
     print(f"  t={row[0]:.0f}s: climb = {row[1]} m/s")
 
-print("\\nTotal distance traveled:")
+print("\
+Total distance traveled:")
 row = c.execute('''
     SELECT ROUND(SUM(speed_ms * 10) / 1000, 1) as dist_km
     FROM waypoints
@@ -260,7 +263,8 @@ for row in c.execute('SELECT * FROM sorties ORDER BY total_distance_km DESC'):
 # Best strategy analysis
 best = c.execute('SELECT algorithm, total_distance_km FROM sorties ORDER BY total_distance_km DESC LIMIT 1').fetchone()
 worst = c.execute('SELECT algorithm, total_distance_km FROM sorties ORDER BY total_distance_km ASC LIMIT 1').fetchone()
-print(f"\\nBest: {best[0]} ({best[1]} km)")
+print(f"\
+Best: {best[0]} ({best[1]} km)")
 print(f"Worst: {worst[0]} ({worst[1]} km)")
 print(f"Hawk-inspired is {best[1]/worst[1]:.1f}x better than worst strategy")
 
@@ -375,7 +379,8 @@ print(f"Observations: {len(obs)} from {n_hawks} hawks")
 print(f"Grid points: {len(grid_x) * len(grid_y)}")
 
 # Compare estimated vs true at thermal locations
-print("\\nThermal detection accuracy:")
+print("\
+Thermal detection accuracy:")
 for tx, ty, tw, tr in [(2, 3, 3.5, 0.4), (5, 1, 2.8, 0.3), (8, 4, 4.0, 0.5)]:
     row = c.execute('SELECT estimated_w, confidence FROM wind_field WHERE x_km=? AND y_km=?', (tx, ty)).fetchone()
     if row:
@@ -384,7 +389,8 @@ for tx, ty, tw, tr in [(2, 3, 3.5, 0.4), (5, 1, 2.8, 0.3), (8, 4, 4.0, 0.5)]:
         print(f"  ({tx},{ty}): true_w={true_w:.1f}, est_w={row[0]:.1f}, error={error:.2f}, conf={row[1]:.3f}")
 
 # Average error
-print("\\nOverall reconstruction quality:")
+print("\
+Overall reconstruction quality:")
 total_error = 0
 count = 0
 for row in c.execute('SELECT x_km, y_km, estimated_w FROM wind_field'):
@@ -541,23 +547,27 @@ print("BIO-INSPIRED DRONE FLIGHT PLANNER")
 print("=" * 60)
 
 plan = c.execute('SELECT * FROM flight_plans').fetchone()
-print(f"\\nRoute: {plan[1]}")
+print(f"\
+Route: {plan[1]}")
 print(f"Planned waypoints: {plan[2]}")
 print(f"Distance: {plan[3]} km, Energy: {plan[4]}, Time: {plan[5]} min")
 print(f"Thermals planned: {plan[6]}")
 
-print(f"\\nSimulation results (10 trials):")
+print(f"\
+Simulation results (10 trials):")
 print(f"{'Trial':>6} {'Dist':>6} {'Energy':>8} {'Time':>6} {'Thermals':>9} {'Success':>8}")
 for row in c.execute('SELECT * FROM flight_results'):
     print(f"{row[0]:>6} {row[2]:>6.1f} {row[3]:>8.1f} {row[4]:>6.0f} {row[5]:>9} {'Yes' if row[6] else 'No':>8}")
 
 avg = c.execute('SELECT AVG(actual_energy), AVG(actual_time), AVG(success)*100 FROM flight_results').fetchone()
-print(f"\\nAverages: energy={avg[0]:.1f}, time={avg[1]:.0f}min, success={avg[2]:.0f}%")
+print(f"\
+Averages: energy={avg[0]:.1f}, time={avg[1]:.0f}min, success={avg[2]:.0f}%")
 
 # Direct flight comparison
 direct_dist = np.sqrt((goal[0]-start[0])**2 + (goal[1]-start[1])**2)
 direct_energy = direct_dist * 3.0  # no thermals
-print(f"\\nDirect flight (no soaring): dist={direct_dist:.1f}km, energy={direct_energy:.1f}")
+print(f"\
+Direct flight (no soaring): dist={direct_dist:.1f}km, energy={direct_energy:.1f}")
 print(f"Soaring saves {(1-avg[0]/direct_energy)*100:.0f}% energy")
 
 conn.close()`,

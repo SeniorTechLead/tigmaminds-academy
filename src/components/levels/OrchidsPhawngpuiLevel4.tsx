@@ -109,11 +109,13 @@ conn.commit()
 print("PHAWNGPUI ORCHID BIODIVERSITY DATABASE")
 print("=" * 65)
 
-print(f"\\nTotal: {c.execute('SELECT COUNT(*) FROM species').fetchone()[0]} species, "
+print(f"\
+Total: {c.execute('SELECT COUNT(*) FROM species').fetchone()[0]} species, "
       f"{c.execute('SELECT COUNT(*) FROM populations').fetchone()[0]} populations, "
       f"{c.execute('SELECT COUNT(*) FROM observations').fetchone()[0]} observations")
 
-print("\\nSpecies summary:")
+print("\
+Species summary:")
 print(f"{'Species':<30} {'Status':>6} {'Pops':>5} {'Total N':>8} {'Threats':>8}")
 print("-" * 60)
 for row in c.execute('''
@@ -126,7 +128,8 @@ for row in c.execute('''
 '''):
     print(f"{row[0]:<30} {row[1]:>6} {row[2]:>5} {row[3]:>8} {row[4]:>8}")
 
-print("\\nCritically endangered endemic species:")
+print("\
+Critically endangered endemic species:")
 for row in c.execute('''
     SELECT s.common_name, p.elevation_m, p.est_individuals, p.habitat
     FROM species s JOIN populations p ON s.id = p.species_id
@@ -134,7 +137,8 @@ for row in c.execute('''
 '''):
     print(f"  {row[0]}: {row[2]} individuals at {row[1]}m ({row[3]})")
 
-print("\\nTop threats across all populations:")
+print("\
+Top threats across all populations:")
 for row in c.execute('''
     SELECT threat_type, COUNT(*) as n, SUM(CASE WHEN severity IN ('high','critical') THEN 1 ELSE 0 END) as severe
     FROM threats GROUP BY threat_type ORDER BY n DESC
@@ -262,7 +266,8 @@ for row in c.execute('''
         budget_left -= cost
         used_species.add((name, action))
 
-print(f"\\n{'Species':<30} {'Action':<22} {'Cost':>10} {'Benefit':>8} {'Score':>6}")
+print(f"\
+{'Species':<30} {'Action':<22} {'Cost':>10} {'Benefit':>8} {'Score':>6}")
 print("-" * 80)
 total_benefit = 0
 for row in selected[:10]:
@@ -271,13 +276,15 @@ for row in selected[:10]:
     print(f"{name[:25]:<25} {tag:<5} {action:<22} {cost:>10,} {benefit:>8.2f} {score:>6.2f}")
     total_benefit += benefit
 
-print(f"\\nBudget used: {BUDGET - budget_left:,} / {BUDGET:,} INR")
+print(f"\
+Budget used: {BUDGET - budget_left:,} / {BUDGET:,} INR")
 print(f"Total expected benefit: {total_benefit:.2f}")
 print(f"Actions funded: {len(selected[:10])}")
 print(f"Species covered: {len(set(r[1] for r in selected[:10]))}")
 
 # Compare: what if we just protect the most endangered?
-print("\\nComparison: CR-only strategy vs optimized:")
+print("\
+Comparison: CR-only strategy vs optimized:")
 cr_cost = sum(r[4] for r in selected[:10] if r[6] == 'CR')
 cr_benefit = sum(r[5] for r in selected[:10] if r[6] == 'CR')
 print(f"  CR species: cost={cr_cost:,}, benefit={cr_benefit:.2f}")
@@ -398,7 +405,8 @@ for strategy_name, removal_order in strategies.items():
 conn.commit()
 
 # Print extinction cascade
-print("\\nExtinction cascade (most-connected first):")
+print("\
+Extinction cascade (most-connected first):")
 print(f"{'Removed':>8} {'Pollinator':<20} {'Orchids left':>12} {'% surviving':>12}")
 print("-" * 55)
 curve = results['Most-connected first']
@@ -410,7 +418,8 @@ for i, (n_rem, n_surv) in enumerate(curve):
     print(f"{n_rem:>8} {poll_name:<20} {n_surv:>12} {pct:>10.0f}% {bar}")
 
 # Keystone species
-print("\\nKeystone pollinators (whose removal causes most orchid loss):")
+print("\
+Keystone pollinators (whose removal causes most orchid loss):")
 for row in c.execute('''
     SELECT s1.pollinators_removed, s1.orchids_surviving,
            LAG(s1.orchids_surviving) OVER (ORDER BY s1.pollinators_removed) as prev
@@ -541,21 +550,24 @@ en_sp = c.execute("SELECT COUNT(*) FROM inventory WHERE status='EN'").fetchone()
 endemic_sp = c.execute("SELECT COUNT(*) FROM inventory WHERE endemic=1").fetchone()[0]
 total_cost = c.execute("SELECT SUM(cost_lakhs) FROM conservation_plan").fetchone()[0]
 
-print(f"\\nExecutive Summary:")
+print(f"\
+Executive Summary:")
 print(f"  Species: {total_sp} ({cr_sp} CR, {en_sp} EN, {endemic_sp} endemic)")
 print(f"  Total budget needed: {total_cost:.1f} lakhs INR")
 critical_count = c.execute("SELECT COUNT(*) FROM conservation_plan WHERE priority='CRITICAL'").fetchone()[0]
 print(f"  Critical actions: {critical_count}")
 
 # Priority actions
-print(f"\\nCRITICAL PRIORITY ACTIONS:")
+print(f"\
+CRITICAL PRIORITY ACTIONS:")
 print(f"{'Species':<30} {'Action':<25} {'Cost':>6} {'Timeline':<15}")
 print("-" * 80)
 for row in c.execute("SELECT species, action, cost_lakhs, timeline FROM conservation_plan WHERE priority='CRITICAL' ORDER BY cost_lakhs DESC"):
     print(f"{row[0]:<30} {row[1]:<25} {row[2]:>5.1f}L {row[3]:<15}")
 
 # Network vulnerability
-print(f"\\nNETWORK VULNERABILITY:")
+print(f"\
+NETWORK VULNERABILITY:")
 for row in c.execute('''
     SELECT n.species, i.status, n.degree, n.specialization, n.keystone_dependency, i.vulnerability
     FROM network_metrics n JOIN inventory i ON n.species = i.species
@@ -565,7 +577,8 @@ for row in c.execute('''
     print(f"  {row[0][:25]:<25} [{row[1]}] {row[2]} pollinators, spec={row[3]:.2f}, vuln={row[5]:.2f}{flag}")
 
 # Monitoring plan
-print(f"\\n5-YEAR MONITORING TARGETS:")
+print(f"\
+5-YEAR MONITORING TARGETS:")
 print(f"{'Species':<30} {'Metric':<18} {'Baseline':>9} {'Target':>9}")
 print("-" * 70)
 for row in c.execute("SELECT * FROM monitoring_targets WHERE metric='population_count' ORDER BY baseline"):
@@ -573,7 +586,8 @@ for row in c.execute("SELECT * FROM monitoring_targets WHERE metric='population_
     print(f"{row[0]:<30} {row[1]:<18} {row[2]:>9,} {row[3]:>9,} ({change:+.0f}%)")
 
 # Cost-effectiveness
-print(f"\\nCOST-EFFECTIVENESS RANKING:")
+print(f"\
+COST-EFFECTIVENESS RANKING:")
 for row in c.execute('''
     SELECT cp.species, SUM(cp.cost_lakhs), i.vulnerability, i.population,
            ROUND(i.vulnerability / SUM(cp.cost_lakhs), 2)
@@ -583,7 +597,8 @@ for row in c.execute('''
     print(f"  {row[0][:25]:<25}: {row[1]:.1f}L cost, {row[2]:.2f} vuln, ratio={row[4]}")
 
 conn.close()
-print(f"\\n{'='*70}")
+print(f"\
+{'='*70}")
 print("This plan protects Phawngpui's irreplaceable orchid heritage through")
 print("systematic, evidence-based conservation. Every rupee is allocated to")
 print("maximize biodiversity outcomes.")`,

@@ -138,10 +138,14 @@ fig.patch.set_facecolor('#1f2937')
 # Activity curves
 ax1.set_facecolor('#111827')
 curves = [
-    ('Nepenthesin\\n(pitcher plant)', nepenthesin, '#22c55e'),
-    ('Pepsin\\n(human stomach)', pepsin, '#ef4444'),
-    ('Trypsin\\n(human intestine)', trypsin, '#3b82f6'),
-    ('Amylase\\n(human saliva)', amylase, '#f59e0b'),
+    ('Nepenthesin\
+(pitcher plant)', nepenthesin, '#22c55e'),
+    ('Pepsin\
+(human stomach)', pepsin, '#ef4444'),
+    ('Trypsin\
+(human intestine)', trypsin, '#3b82f6'),
+    ('Amylase\
+(human saliva)', amylase, '#f59e0b'),
 ]
 for name, curve, color in curves:
     ax1.plot(pH, curve, linewidth=2, label=name, color=color)
@@ -254,7 +258,8 @@ ax1.fill_between(prey_per_month, total_benefit, total_cost_per_month,
 # Break-even point
 breakeven = total_cost_per_month / benefit_per_insect
 ax1.axvline(breakeven, color='#f59e0b', linestyle=':', linewidth=1.5)
-ax1.annotate(f'Break-even:\\n{breakeven:.1f} insects/month', xy=(breakeven, total_cost_per_month),
+ax1.annotate(f'Break-even:\
+{breakeven:.1f} insects/month', xy=(breakeven, total_cost_per_month),
              xytext=(breakeven+3, total_cost_per_month+50), color='#f59e0b', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -280,9 +285,11 @@ ax2.axhline(10, color='gray', linestyle=':', linewidth=0.5)
 ax2.text(40, 12, 'Typical capture rate (~10/month)', color='gray', fontsize=8)
 
 ax2.axvspan(5, 15, alpha=0.1, color='#22c55e')
-ax2.text(10, 80, 'Carnivory\\nviable', ha='center', color='#22c55e', fontsize=9)
+ax2.text(10, 80, 'Carnivory\
+viable', ha='center', color='#22c55e', fontsize=9)
 ax2.axvspan(30, 50, alpha=0.1, color='#ef4444')
-ax2.text(40, 80, 'Roots\\ncheaper', ha='center', color='#ef4444', fontsize=9)
+ax2.text(40, 80, 'Roots\
+cheaper', ha='center', color='#ef4444', fontsize=9)
 
 ax2.set_xlabel('Soil nitrogen (mg/kg)', color='white')
 ax2.set_ylabel('Insects needed to break even (per month)', color='white')
@@ -406,7 +413,8 @@ min_viable = 50  # minimum N pool for survival
 viable_rate = insect_capture_rates[np.argmin(np.abs(np.array(steady_states) - min_viable))]
 ax2.axhline(min_viable, color='#ef4444', linestyle='--', linewidth=1)
 ax2.axvline(viable_rate, color='#ef4444', linestyle='--', linewidth=1)
-ax2.annotate(f'Minimum viable\\n({viable_rate:.0f} insects/month)', xy=(viable_rate, min_viable),
+ax2.annotate(f'Minimum viable\
+({viable_rate:.0f} insects/month)', xy=(viable_rate, min_viable),
              xytext=(viable_rate+10, min_viable+50), color='#ef4444', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -514,10 +522,14 @@ ax1.plot(gens, history['structure'], color='#3b82f6', linewidth=2, label='Trap s
 
 # Mark evolutionary stages
 stages = [
-    (0, 'Ancestor:\\nnon-carnivorous', '#6b7280'),
-    (80, 'Proto-carnivore:\\nsticky glands', '#f59e0b'),
-    (200, 'Early carnivore:\\nenzymes appear', '#22c55e'),
-    (350, 'Full carnivore:\\nstructured trap', '#3b82f6'),
+    (0, 'Ancestor:\
+non-carnivorous', '#6b7280'),
+    (80, 'Proto-carnivore:\
+sticky glands', '#f59e0b'),
+    (200, 'Early carnivore:\
+enzymes appear', '#22c55e'),
+    (350, 'Full carnivore:\
+structured trap', '#3b82f6'),
 ]
 for gen, label, color in stages:
     ax1.axvline(gen, color=color, linestyle=':', linewidth=0.5)

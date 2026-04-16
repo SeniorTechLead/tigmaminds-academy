@@ -141,7 +141,8 @@ for i, (name, params) in enumerate(SPECIES.items()):
 plt.tight_layout()
 plt.show()
 
-print("\\nSpecies acoustic signatures:")
+print("\
+Species acoustic signatures:")
 for name, params in SPECIES.items():
     mod = []
     if params['fm'] > 0: mod.append(f"FM±{params['fm']}Hz")
@@ -550,16 +551,25 @@ ax.tick_params(colors='gray')
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.axis('off')
-report = f"FROG CALL CLASSIFIER REPORT\\n{'='*40}\\n"
-report += f"Best k: {best_k}\\nTest accuracy: {test_acc:.1%}\\n\\n"
-report += f"{'Species':<16} {'Prec':>6} {'Rec':>6} {'F1':>6}\\n{'-'*36}\\n"
+report = f"FROG CALL CLASSIFIER REPORT\
+{'='*40}\
+"
+report += f"Best k: {best_k}\
+Test accuracy: {test_acc:.1%}\
+\
+"
+report += f"{'Species':<16} {'Prec':>6} {'Rec':>6} {'F1':>6}\
+{'-'*36}\
+"
 for i in range(n_classes):
-    report += f"{sp_names[i][:15]:<16} {prec[i]:>6.2f} {rec[i]:>6.2f} {f1[i]:>6.2f}\\n"
+    report += f"{sp_names[i][:15]:<16} {prec[i]:>6.2f} {rec[i]:>6.2f} {f1[i]:>6.2f}\
+"
 # Find most confused pair
 np.fill_diagonal(conf, 0)
 if conf.max() > 0:
     ci,cj = np.unravel_index(conf.argmax(), conf.shape)
-    report += f"\\nMost confused: {sp_names[ci][:10]} <-> {sp_names[cj][:10]}"
+    report += f"\
+Most confused: {sp_names[ci][:10]} <-> {sp_names[cj][:10]}"
 ax.text(0.05, 0.95, report, transform=ax.transAxes, fontsize=9,
         verticalalignment='top', fontfamily='monospace', color='#22c55e')
 
@@ -782,17 +792,29 @@ ax.tick_params(colors='gray')
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.axis('off')
-report = "FIELD DEPLOYMENT ASSESSMENT\\n"
-report += "=" * 42 + "\\n\\n"
+report = "FIELD DEPLOYMENT ASSESSMENT\
+"
+report += "=" * 42 + "\
+\
+"
 for r in results:
-    report += f"{r['name']}:\\n"
-    report += f"  Accuracy (all):      {r['acc']:.1%}\\n"
-    report += f"  Accuracy (conf>60%): {r['acc_conf']:.1%}\\n"
-    report += f"  Coverage:            {r['coverage']:.1%}\\n"
-    report += f"  Mean confidence:     {r['mean_conf']:.2f}\\n\\n"
-report += "RECOMMENDATION:\\n"
-report += "Use confidence threshold 0.6\\n"
-report += "Flag low-confidence for expert review\\n"
+    report += f"{r['name']}:\
+"
+    report += f"  Accuracy (all):      {r['acc']:.1%}\
+"
+    report += f"  Accuracy (conf>60%): {r['acc_conf']:.1%}\
+"
+    report += f"  Coverage:            {r['coverage']:.1%}\
+"
+    report += f"  Mean confidence:     {r['mean_conf']:.2f}\
+\
+"
+report += "RECOMMENDATION:\
+"
+report += "Use confidence threshold 0.6\
+"
+report += "Flag low-confidence for expert review\
+"
 report += "Augment training with noisy data"
 ax.text(0.05, 0.95, report, transform=ax.transAxes, fontsize=8,
         verticalalignment='top', fontfamily='monospace', color='#22c55e')

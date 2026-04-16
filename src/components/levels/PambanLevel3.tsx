@@ -283,7 +283,8 @@ for m in sorted(members, key=lambda x: -x.consequence):
     print(f"{m.name:<21} {m.consequence:>9}    {m.degrad_rate:>9.3f}    "
           f"{interval_months:>11} months  \{annual_cost:>10,.0f}")
 
-print(f"\\nTotal annual maintenance budget: \{total_annual_cost:,.0f}")
+print(f"\
+Total annual maintenance budget: \{total_annual_cost:,.0f}")
 
 # Risk profile over time without inspection
 print()

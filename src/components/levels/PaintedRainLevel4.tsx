@@ -63,7 +63,9 @@ class DropletOptics:
 droplet = DropletOptics(radius_mm=1.0, temperature_c=20)
 
 print("=== Stage 1: Droplet Optics Foundation ===")
-print("\\nRefractive index model validated against known values:\\n")
+print("\
+Refractive index model validated against known values:\
+")
 
 known = {"Red (656nm)": (656, 1.3311), "Yellow (589nm)": (589, 1.3330),
          "Green (527nm)": (527, 1.3355), "Blue (486nm)": (486, 1.3371),
@@ -79,10 +81,13 @@ for name, (wl, n_known) in known.items():
     status = "OK" if error < 0.002 else "CHECK"
     print(f"{name:<16} {n_calc:<14.6f} {n_known:<14.4f} {error:.6f} {status}")
 
-print(f"\\nMax error: {max(errors):.6f} (acceptable < 0.002)")
+print(f"\
+Max error: {max(errors):.6f} (acceptable < 0.002)")
 print(f"Mean error: {np.mean(errors):.6f}")
 
-print("\\n--- Fresnel Reflectance at Different Angles ---\\n")
+print("\
+--- Fresnel Reflectance at Different Angles ---\
+")
 print(f"{'Angle':<10} {'Red (656nm)':<14} {'Blue (486nm)':<14}")
 print("-" * 38)
 for angle in [0, 20, 40, 60, 80]:
@@ -90,13 +95,16 @@ for angle in [0, 20, 40, 60, 80]:
     r_blue = droplet.fresnel_reflectance(486, angle)
     print(f"{angle:>4} deg    {r_red:<14.4f} {r_blue:<14.4f}")
 
-print("\\n--- Temperature Sensitivity ---\\n")
+print("\
+--- Temperature Sensitivity ---\
+")
 for temp in [5, 15, 20, 25, 35]:
     d = DropletOptics(temperature_c=temp)
     n = d.refractive_index(589)
     print(f"  {temp:>2} C -> n(589nm) = {n:.6f}")
 
-print("\\nStage 1 complete: DropletOptics class ready for ray tracing.")`,
+print("\
+Stage 1 complete: DropletOptics class ready for ray tracing.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -151,9 +159,12 @@ incidence_angles = np.linspace(0, 89, 500)
 colors = {"Red (700nm)": 1.3312, "Green (520nm)": 1.3355, "Blue (460nm)": 1.3380}
 
 print("=== Stage 2: Ray Tracing Through a Spherical Droplet ===")
-print("\\nTracing 500 rays at different incidence angles per color...\\n")
+print("\
+Tracing 500 rays at different incidence angles per color...\
+")
 
-print("--- Primary Rainbow (1 reflection) ---\\n")
+print("--- Primary Rainbow (1 reflection) ---\
+")
 print(f"{'Color':<16} {'Min Deviation':<16} {'Rainbow Angle':<16} {'Intensity'}")
 print("-" * 60)
 
@@ -173,7 +184,9 @@ for color_name, n in colors.items():
     peak_int = int_arr[min_idx]
     print(f"{color_name:<16} {min_dev:<16.2f} {rainbow_ang:<16.2f} {peak_int:.4f}")
 
-print("\\n--- Secondary Rainbow (2 reflections) ---\\n")
+print("\
+--- Secondary Rainbow (2 reflections) ---\
+")
 print(f"{'Color':<16} {'Min Deviation':<16} {'Rainbow Angle':<16} {'Intensity'}")
 print("-" * 60)
 
@@ -194,14 +207,17 @@ for color_name, n in colors.items():
     print(f"{color_name:<16} {min_dev:<16.2f} {rainbow_ang:<16.2f} {peak_int:.4f}")
 
 # Intensity comparison
-print("\\n--- Why is the secondary rainbow dimmer? ---\\n")
+print("\
+--- Why is the secondary rainbow dimmer? ---\
+")
 n_test = 1.3330
 _, i1 = trace_ray(n_test, 59.0, num_reflections=1)
 _, i2 = trace_ray(n_test, 72.0, num_reflections=2)
 print(f"Primary peak intensity:   {i1:.4f} ({i1*100:.1f}% of incident light)")
 print(f"Secondary peak intensity: {i2:.4f} ({i2*100:.1f}% of incident light)")
 print(f"Ratio: secondary is {i1/i2:.1f}x dimmer than primary")
-print("\\nEach extra reflection loses ~96% of light (Fresnel reflectance ~4%).")
+print("\
+Each extra reflection loses ~96% of light (Fresnel reflectance ~4%).")
 print("Stage 2 complete: ray tracer ready for dispersion calculations.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -251,7 +267,9 @@ def solar_intensity(wavelength_nm):
 wavelengths = np.arange(380, 705, 5)
 
 print("=== Stage 3: Full Spectrum Dispersion and Intensity ===")
-print("\\nComputing rainbow properties for {} wavelengths (380-700nm)...\\n".format(len(wavelengths)))
+print("\
+Computing rainbow properties for {} wavelengths (380-700nm)...\
+".format(len(wavelengths)))
 
 # Compute for each wavelength
 results = []
@@ -265,7 +283,8 @@ for wl in wavelengths:
 results = np.array(results)
 
 # Print sampled results
-print("--- Primary Rainbow Spectrum (sampled every 40nm) ---\\n")
+print("--- Primary Rainbow Spectrum (sampled every 40nm) ---\
+")
 print(f"{'Wavelength':<12} {'n':<10} {'Angle (deg)':<14} {'Fresnel I':<12} {'Solar I':<10} {'Combined'}")
 print("-" * 68)
 for row in results[::8]:
@@ -276,14 +295,18 @@ for row in results[::8]:
 # Summary statistics
 angles = results[:, 2]
 combined = results[:, 5]
-print(f"\\n--- Dispersion Summary ---")
-print(f"\\nAngular range: {angles.min():.3f} to {angles.max():.3f} degrees")
+print(f"\
+--- Dispersion Summary ---")
+print(f"\
+Angular range: {angles.min():.3f} to {angles.max():.3f} degrees")
 print(f"Total angular spread: {angles.max() - angles.min():.3f} degrees")
 print(f"Peak intensity wavelength: {results[np.argmax(combined), 0]:.0f} nm")
 print(f"Intensity range: {combined.min():.5f} to {combined.max():.5f}")
 
 # Where does each color band fall?
-print("\\n--- Color Band Positions in the Rainbow ---\\n")
+print("\
+--- Color Band Positions in the Rainbow ---\
+")
 bands = [("Violet", 380, 450), ("Blue", 450, 490), ("Cyan", 490, 520),
          ("Green", 520, 565), ("Yellow", 565, 590), ("Orange", 590, 625), ("Red", 625, 700)]
 for name, lo, hi in bands:
@@ -293,7 +316,8 @@ for name, lo, hi in bands:
         band_intensity = results[mask, 5]
         print(f"  {name:<8} {lo}-{hi}nm  angle: {band_angles.min():.2f}-{band_angles.max():.2f} deg  avg intensity: {band_intensity.mean():.5f}")
 
-print("\\nStage 3 complete: full spectrum dispersion model ready.")`,
+print("\
+Stage 3 complete: full spectrum dispersion model ready.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -345,11 +369,14 @@ def visible_arc_fraction(sun_altitude_deg, rainbow_angle_deg=42.0):
     return visible_fraction, arc_extent
 
 print("=== Stage 4: Observer Geometry and Rainbow Arc ===")
-print("\\nThe rainbow is a circle centered on the anti-solar point.")
-print("How much you see depends on the sun's altitude.\\n")
+print("\
+The rainbow is a circle centered on the anti-solar point.")
+print("How much you see depends on the sun's altitude.\
+")
 
 # Primary rainbow at ~42 degrees, secondary at ~51 degrees
-print("--- Visible Rainbow Arc vs Sun Altitude ---\\n")
+print("--- Visible Rainbow Arc vs Sun Altitude ---\
+")
 print(f"{'Sun Altitude':<14} {'Anti-solar':<12} {'Primary (42 deg)':<24} {'Secondary (51 deg)'}")
 print(f"{'':14} {'point':12} {'Visible   Arc Top':24} {'Visible   Arc Top'}")
 print("-" * 70)
@@ -367,22 +394,29 @@ for sun_alt in [0, 5, 10, 15, 20, 30, 42, 50]:
         s_str = "  INVISIBLE"
     print(f"{sun_alt:>5} deg      {-sun_alt:>5} deg     {p_str:<24} {s_str}")
 
-print("\\n--- Key Observations ---")
+print("\
+--- Key Observations ---")
 print("At sunset (sun = 0 deg): maximum rainbow, full semicircle, top at 42 deg")
 print("At sun = 42 deg: primary rainbow entirely below horizon (invisible)")
 print("At sun = 51 deg: secondary also gone")
 print("From an airplane: anti-solar point can be above you -> FULL CIRCLE rainbow!")
 
 # Angular size of rainbow in the sky
-print("\\n\\n--- Physical Size Estimate ---\\n")
-print("If a rain curtain is D km away, what is the rainbow's apparent size?\\n")
+print("\
+\
+--- Physical Size Estimate ---\
+")
+print("If a rain curtain is D km away, what is the rainbow's apparent size?\
+")
 for dist_km in [0.5, 1.0, 2.0, 5.0]:
     radius_m = dist_km * 1000 * np.tan(np.radians(42))
     print(f"  Distance: {dist_km} km -> rainbow radius: {radius_m:.0f} m ({radius_m/1000:.2f} km)")
 
-print("\\nThe rainbow has no fixed location -- it moves with you!")
+print("\
+The rainbow has no fixed location -- it moves with you!")
 print("Every observer sees their OWN rainbow from DIFFERENT droplets.")
-print("\\nStage 4 complete: observer geometry model ready.")`,
+print("\
+Stage 4 complete: observer geometry model ready.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -417,8 +451,11 @@ def rainbow_angle_for_k(n, k):
 # Droplet size affects rainbow appearance
 print("=== Stage 5: Atmospheric Conditions and Rare Rainbow Types ===")
 
-print("\\n--- Effect of Droplet Size ---\\n")
-print("Droplet size controls whether you see vivid colors or a white fog-bow.\\n")
+print("\
+--- Effect of Droplet Size ---\
+")
+print("Droplet size controls whether you see vivid colors or a white fog-bow.\
+")
 sizes = [
     (2.0, "Large drops", "Vivid primary + secondary, sharp colors"),
     (1.0, "Medium drops", "Good primary, faint secondary"),
@@ -436,8 +473,12 @@ for size, name, appearance in sizes:
     total_width = 1.8 + diffraction_deg  # 1.8 deg is geometric dispersion
     print(f"{size:<12.2f} {name:<16} {total_width:>6.2f} deg     {appearance}")
 
-print("\\n\\n--- Higher-Order Rainbows ---\\n")
-print("Beyond primary (k=1) and secondary (k=2), higher orders exist but are very rare.\\n")
+print("\
+\
+--- Higher-Order Rainbows ---\
+")
+print("Beyond primary (k=1) and secondary (k=2), higher orders exist but are very rare.\
+")
 n_yellow = cauchy_n(570)
 print(f"{'Order k':<10} {'Reflections':<14} {'Deviation':<14} {'Direction':<20} {'Visibility'}")
 print("-" * 72)
@@ -456,9 +497,13 @@ for k in range(1, 7):
         visibility = f"{rel_intensity:.4f}% of primary"
         print(f"  k={k:<6} {k:<14} {dev_mod:>8.1f} deg    {direction:<20} {visibility}")
 
-print("\\n\\n--- Supernumerary Arcs ---\\n")
+print("\
+\
+--- Supernumerary Arcs ---\
+")
 print("These faint pastel bands INSIDE the primary rainbow are caused by")
-print("wave interference -- rays taking slightly different paths through the drop.\\n")
+print("wave interference -- rays taking slightly different paths through the drop.\
+")
 # Simulate interference pattern
 n = cauchy_n(550)  # green light
 theta_rainbow = 42.0
@@ -475,7 +520,8 @@ for offset in offsets[::4]:
         label = " <- supernumerary arc"
     print(f"  {42.0 - offset:>5.1f} deg  I = {intensity:.3f}  {bar}{label}")
 
-print("\\nSupernumerary arcs are most visible with uniform small droplets (0.5-1mm).")
+print("\
+Supernumerary arcs are most visible with uniform small droplets (0.5-1mm).")
 print("Stage 5 complete: atmospheric effects model ready.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -534,7 +580,8 @@ sun_alt = 15.0
 temp = 22.0
 droplet_mm = 1.0
 
-print(f"\\nInput Conditions:")
+print(f"\
+Input Conditions:")
 print(f"  Sun altitude:   {sun_alt} degrees")
 print(f"  Temperature:    {temp} C")
 print(f"  Droplet size:   {droplet_mm} mm")
@@ -543,7 +590,9 @@ print(f"  Droplet size:   {droplet_mm} mm")
 wavelengths = np.arange(380, 705, 5)
 colors_map = {380:"Violet", 450:"Blue", 490:"Cyan", 520:"Green", 570:"Yellow", 600:"Orange", 640:"Red"}
 
-print(f"\\n--- Primary Rainbow Profile ---\\n")
+print(f"\
+--- Primary Rainbow Profile ---\
+")
 print(f"{'WL (nm)':<10} {'n':<10} {'Angle':<10} {'Intensity':<12} {'Solar':<10} {'Combined'}")
 print("-" * 58)
 all_data = []
@@ -562,7 +611,8 @@ for row in all_data[::8]:
 angles = [d[2] for d in all_data]
 combined = [d[5] for d in all_data]
 
-print(f"\\n--- Summary Statistics ---")
+print(f"\
+--- Summary Statistics ---")
 print(f"  Primary arc: {min(angles):.2f} to {max(angles):.2f} deg (width: {max(angles)-min(angles):.2f} deg)")
 print(f"  Peak intensity at {all_data[np.argmax(combined)][0]:.0f} nm")
 frac = visible_fraction(sun_alt, 42.0)
@@ -570,7 +620,8 @@ print(f"  Visible arc: {frac*100:.1f}% of full circle ({frac*360:.0f} deg)")
 print(f"  Rainbow top: {-sun_alt + 42:.1f} deg above horizon")
 
 # Secondary
-print(f"\\n--- Secondary Rainbow ---")
+print(f"\
+--- Secondary Rainbow ---")
 sec_data = []
 for wl in wavelengths:
     n = cauchy_n(wl, temp)
@@ -584,19 +635,22 @@ print(f"  Intensity: {np.mean(sec_inten)/np.mean([d[3] for d in all_data])*100:.
 # Alexander's dark band
 dark_lo = max(angles)
 dark_hi = min(sec_angles)
-print(f"\\n--- Alexander's Dark Band ---")
+print(f"\
+--- Alexander's Dark Band ---")
 print(f"  From {dark_lo:.2f} to {dark_hi:.2f} deg ({dark_hi - dark_lo:.2f} deg wide)")
 
 # Supernumerary prediction
 diff_width = np.degrees(0.5e-6 / (droplet_mm * 1e-3))
-print(f"\\n--- Supernumerary Arcs ---")
+print(f"\
+--- Supernumerary Arcs ---")
 print(f"  Diffraction broadening: {diff_width:.2f} deg")
 if droplet_mm < 1.5:
     print(f"  Prediction: VISIBLE (droplets small enough for clear interference)")
 else:
     print(f"  Prediction: WASHED OUT (large droplets blur the interference pattern)")
 
-print(f"\\n{'=' * 60}")
+print(f"\
+{'=' * 60}")
 print(f"  SIMULATION COMPLETE")
 print(f"  Rainbow visible: YES (sun below 42 deg)")
 print(f"  Best viewing: face away from sun, look at {42 - sun_alt:.0f} deg altitude")

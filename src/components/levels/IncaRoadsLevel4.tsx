@@ -255,14 +255,16 @@ cities = {
 
 n = rows * cols
 
-print("=== Dijkstra Multi-Objective Routing Engine ===\\n")
+print("=== Dijkstra Multi-Objective Routing Engine ===\
+")
 
 # Route from each city to Highland capital
 target_name = "Highland capital"
 tr, tc = cities[target_name]
 target_id = tr * cols + tc
 
-print(f"All routes to {target_name} (alt: {alt[tr,tc]:.0f}m)\\n")
+print(f"All routes to {target_name} (alt: {alt[tr,tc]:.0f}m)\
+")
 print(f"{'From':<20} {'Cost':>8} {'Dist (km)':>10} {'Climb (m)':>10} {'Rivers':>8} {'Steps':>6}")
 print("-" * 64)
 
@@ -289,7 +291,8 @@ for name, (r, c) in cities.items():
     print(f"{name:<20} {dist_arr[target_id]:>7.1f} {total_dist:>8.1f} {total_climb:>8.0f} {rivers:>6} {len(path):>6}")
 
 # Compare penalty settings
-print("\\n=== Sensitivity: How Altitude Penalty Changes Routes ===")
+print("\
+=== Sensitivity: How Altitude Penalty Changes Routes ===")
 source_id = 0  # Coastal port
 for penalty in [0.0, 0.002, 0.005, 0.010, 0.020, 0.050]:
     dist_arr, prev = dijkstra(adj, source_id, n, climb_pen=penalty)
@@ -393,7 +396,8 @@ crossings = [
     {"name": "Extreme span", "span": 80, "sag_ratio": 0.18, "cables": 8, "diam_cm": 30},
 ]
 
-print("=== Bridge Feasibility Analysis ===\\n")
+print("=== Bridge Feasibility Analysis ===\
+")
 print(f"{'Crossing':<22} {'Span':>6} {'Tension (kN)':>13} {'Strength':>10} {'Wind':>8} {'Days':>6} {'FEASIBLE':>10}")
 print("-" * 77)
 
@@ -409,7 +413,8 @@ for cx in crossings:
           f"{'OK' if strength_ok else 'FAIL':>8} {'OK' if wind_ok else 'FAIL':>8} {days:>5.0f} {status:>8}")
 
 # Detailed report for Q'eswachaka
-print("\\n=== Detailed Report: Q'eswachaka Bridge ===")
+print("\
+=== Detailed Report: Q'eswachaka Bridge ===")
 qb = BridgeFeasibility(28, 0.12, 6, 15)
 Th, Tm = qb.cable_tension()
 load, allow, sok = qb.strength_check()
@@ -526,7 +531,8 @@ def check_bridge(span_m):
     return fos >= 3.0, fos, T_max
 
 # 5. Run integrated analysis
-print("=== INTEGRATED ROAD NETWORK OPTIMISER ===\\n")
+print("=== INTEGRATED ROAD NETWORK OPTIMISER ===\
+")
 
 # Check all river crossings
 infeasible = set()
@@ -540,10 +546,12 @@ for edge in river_edges:
     u, v = edge
     print(f"  Edge ({u:>3}->{v:>3}) span={span:>4.0f}m  FoS={fos:>4.1f}  {status}")
 
-print(f"\\nTotal crossings: {len(river_edges)} | Infeasible: {len(infeasible)}")
+print(f"\
+Total crossings: {len(river_edges)} | Infeasible: {len(infeasible)}")
 
 # Route all city pairs with infeasible bridges blocked
-print("\\n=== Optimal Routes (infeasible bridges blocked) ===")
+print("\
+=== Optimal Routes (infeasible bridges blocked) ===")
 print(f"{'From':<12} {'To':<12} {'Cost':>8} {'Path len':>9}")
 print("-" * 43)
 
@@ -562,8 +570,10 @@ for src_name, src_id in city_ids.items():
         print(f"{src_name:<12} {dst_name:<12} {dist[dst_id]:>7.1f} {len(path):>7}")
 
 # 6. Critical link analysis
-print("\\n=== Critical Link Analysis ===")
-print("Removing each city and measuring connectivity loss:\\n")
+print("\
+=== Critical Link Analysis ===")
+print("Removing each city and measuring connectivity loss:\
+")
 
 for remove_name, remove_id in city_ids.items():
     # Route without this city
@@ -584,7 +594,8 @@ for remove_name, remove_id in city_ids.items():
     print(f"  Remove {remove_name:<12}: {reachable}/{total-1} cities still reachable "
           f"{'-- CRITICAL' if reachable < total-1 else '-- OK'}")
 
-print("\\nIntegrated optimiser complete: routing + bridges + vulnerability.")`,
+print("\
+Integrated optimiser complete: routing + bridges + vulnerability.")`,
       challenge: 'Add a "construction priority" output: rank the road segments by importance (how many shortest paths use that segment) and list the top 10 segments to build first. This is the real-world problem of infrastructure prioritization — which road should we build first to maximize connectivity per unit cost?',
       successHint: 'You integrated four subsystems into a complete engineering tool: terrain modelling, multi-objective routing, structural feasibility analysis, and network vulnerability assessment. This is systems engineering — the discipline of building complex systems from interacting components. The integration step is where engineering separates from coding.',
     },

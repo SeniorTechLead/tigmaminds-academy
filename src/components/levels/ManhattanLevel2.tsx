@@ -86,7 +86,8 @@ for name, Z, A in key_nuclei:
     print(f"{name:<12} {Z:>4} {A:>4} {be:>9.3f} {stability:>12}")
 
 # Energy released in U-235 fission
-print("\\n=== U-235 Fission Energy Calculation ===")
+print("\
+=== U-235 Fission Energy Calculation ===")
 be_u235 = be_values["U-235"] * 235
 # Typical fission: U-235 -> Ba-141 + Kr-92 + 2 neutrons
 be_ba = binding_energy_per_nucleon(56, 141) * 141
@@ -99,7 +100,8 @@ print(f"Energy released per fission: {energy_released:.1f} MeV")
 print(f"Actual measured value:        ~200 MeV")
 
 # Compare to chemical energy
-print("\\n=== Nuclear vs Chemical Energy ===")
+print("\
+=== Nuclear vs Chemical Energy ===")
 fission_ev = energy_released * 1e6  # convert MeV to eV
 chemical_ev = 4.0  # C + O2 -> CO2 releases ~4 eV
 ratio = fission_ev / chemical_ev
@@ -166,7 +168,8 @@ for m in materials:
           f"{lam_therm:>11.2f} {lam_fast:>10.1f}")
 
 # Fission probability vs slab thickness
-print("\\n=== Fission Probability vs Slab Thickness (U-235, thermal) ===")
+print("\
+=== Fission Probability vs Slab Thickness (U-235, thermal) ===")
 n_u235 = number_density(19.1, 235)
 print(f"{'Thickness (cm)':<16} {'P(fission)':>12} {'P(escape)':>12}")
 print("-" * 42)
@@ -175,7 +178,8 @@ for t in [0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0]:
     print(f"{t:>14.1f} {p:>10.4f} {1-p:>10.4f}")
 
 # Why U-238 is almost useless for fission
-print("\\n=== Why U-238 Cannot Sustain a Chain Reaction ===")
+print("\
+=== Why U-238 Cannot Sustain a Chain Reaction ===")
 n_u238 = number_density(19.1, 238)
 lam_fission_238 = mean_free_path(n_u238, 0.00002)
 lam_capture_238 = mean_free_path(n_u238, 2.7)
@@ -238,7 +242,8 @@ targets = [
     ("Supergrade",             0.95),
 ]
 
-print(f"\\n{'Target':<26} {'U-235 %':>8} {'Stages':>8} {'Cascade length*':>16}")
+print(f"\
+{'Target':<26} {'U-235 %':>8} {'Stages':>8} {'Cascade length*':>16}")
 print("-" * 60)
 for name, x_target in targets:
     n = stages_needed(x_feed, x_target, alpha)
@@ -246,10 +251,12 @@ for name, x_target in targets:
     cascade_m = n * 0.5
     print(f"{name:<26} {x_target*100:>6.1f}% {n:>7.0f} {cascade_m:>12.0f} m")
 
-print("\\n* Cascade length assumes 0.5 m per stage")
+print("\
+* Cascade length assumes 0.5 m per stage")
 
 # Cascade enrichment profile — tracking composition through stages
-print("\\n=== Enrichment Profile Through Cascade (to 90%) ===")
+print("\
+=== Enrichment Profile Through Cascade (to 90%) ===")
 n_stages = int(stages_needed(x_feed, 0.90, alpha))
 x = x_feed
 print(f"{'Stage':>8} {'U-235 %':>10} {'Enrichment':>12}")
@@ -262,7 +269,8 @@ for stage in range(n_stages + 1):
     x = alpha * x / (1 + (alpha - 1) * x)
 
 # Separative Work Units (SWU) — the industry measure of enrichment effort
-print("\\n=== Separative Work Units (SWU) ===")
+print("\
+=== Separative Work Units (SWU) ===")
 def value_function(x):
     """Standard SWU value function V(x) = (2x - 1) * ln(x/(1-x))"""
     return (2*x - 1) * np.log(x / (1 - x))
@@ -326,7 +334,8 @@ def snells_angle(theta_in, v1, v2):
 # Calculate lens interface profile
 # For a flat detonation front to become spherical,
 # the interface must be a specific curve
-print("\\n=== Lens Interface Profile ===")
+print("\
+=== Lens Interface Profile ===")
 R_sphere = 0.30  # target convergence radius (m)
 n_points = 20
 
@@ -367,13 +376,15 @@ if arrival_times:
     mean_t = np.mean(times)
     spread = np.max(times) - np.min(times)
     uniformity = (1 - spread / mean_t) * 100
-    print(f"\\nMean arrival time: {mean_t:.3f} μs")
+    print(f"\
+Mean arrival time: {mean_t:.3f} μs")
     print(f"Time spread: {spread:.3f} μs")
     print(f"Wavefront uniformity: {uniformity:.1f}%")
     print(f"Required for implosion: >95% uniformity")
 
 # Number of lenses needed for spherical coverage
-print("\\n=== Lens Array Design ===")
+print("\
+=== Lens Array Design ===")
 for n_lenses in [20, 32, 60, 92]:
     solid_angle = 4 * np.pi / n_lenses
     half_angle = np.arccos(1 - solid_angle / (2 * np.pi))
@@ -382,7 +393,8 @@ for n_lenses in [20, 32, 60, 92]:
     print(f"{n_lenses} lenses: diameter {lens_diameter*100:.1f} cm each, "
           f"coverage gap {max(gap_pct, 0):.1f}%")
 
-print("\\nFat Man used 32 explosive lenses arranged in a truncated icosahedron")
+print("\
+Fat Man used 32 explosive lenses arranged in a truncated icosahedron")
 print("(soccer ball geometry) — the same as a C60 buckyball molecule.")`,
       challenge: 'What happens if the velocity ratio changes by 1% (manufacturing defect in the explosive)? Recalculate the arrival time spread. This sensitivity analysis explains why explosive lens manufacturing required unprecedented quality control — any variation in explosive composition ruined the implosion symmetry.',
       successHint: 'You just applied Snell\'s law — the same optics principle that governs eyeglasses and telescopes — to shock wave physics. This crossover between optics and detonation physics is a beautiful example of how fundamental principles (Snell\'s law) apply across completely different physical systems.',
@@ -442,7 +454,8 @@ for rad, q in quality_factors.items():
     print(f"{rad:<18} {q:>10} {sv:>12.2f} Sv")
 
 # Dose vs distance (inverse square law)
-print("\\n=== Inverse Square Law — Dose vs Distance ===")
+print("\
+=== Inverse Square Law — Dose vs Distance ===")
 print("Source: 100 GBq Co-60 (1.25 MeV gamma), 1 hour exposure")
 source_gbq = 100
 energy = 1.25
@@ -455,7 +468,8 @@ for d in [0.1, 0.25, 0.5, 1.0, 2.0, 5.0, 10.0, 50.0]:
     print(f"{d:>12.1f} {dose_mSv:>16.2f} {dose_mSv:>12.2f} {annual:>14}")
 
 # Acute exposure effects
-print("\\n=== Acute Radiation Syndrome (whole-body dose) ===")
+print("\
+=== Acute Radiation Syndrome (whole-body dose) ===")
 dose_effects = [
     (0.25,  "No symptoms — below detection threshold"),
     (0.5,   "Mild blood count changes, no symptoms"),
@@ -471,7 +485,8 @@ for dose_sv, effect in dose_effects:
     print(f"  {dose_sv:>5.1f} Sv: {effect}")
 
 # Hiroshima dose estimates at various distances
-print("\\n=== Estimated Doses at Hiroshima (15 kT, air burst 580 m) ===")
+print("\
+=== Estimated Doses at Hiroshima (15 kT, air burst 580 m) ===")
 distances_km = [0.5, 1.0, 1.5, 2.0, 3.0, 5.0]
 for d_km in distances_km:
     # Simplified model: dose falls roughly as 1/r^2 with atmospheric absorption

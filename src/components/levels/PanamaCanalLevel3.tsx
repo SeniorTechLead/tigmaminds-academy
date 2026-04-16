@@ -103,7 +103,8 @@ times, h_history = shallow_water_lock(
     n_cells, lock_length, initial_depth, inflow_rate, total_time=300, dt=0.02)
 
 print("=== 1D Shallow Water Lock Filling Simulation ===")
-print(f"Lock: {lock_length}m, {n_cells} cells | Initial depth: {initial_depth}m\\n")
+print(f"Lock: {lock_length}m, {n_cells} cells | Initial depth: {initial_depth}m\
+")
 
 # Show water surface profile at selected times
 dx = lock_length / n_cells
@@ -117,7 +118,8 @@ for i in range(len(times)):
           f"{np.mean(h):>6.2f} {np.var(h):>7.4f}")
 
 # Wave analysis
-print("\\n=== Wave Analysis ===")
+print("\
+=== Wave Analysis ===")
 wave_speed = np.sqrt(9.81 * np.mean(h_history[-1]))
 print(f"Shallow water wave speed: {wave_speed:.1f} m/s")
 print(f"Lock traverse time: {lock_length / wave_speed:.1f} seconds")
@@ -126,7 +128,8 @@ print(f"Sloshing period: {2 * lock_length / wave_speed:.1f} seconds")
 # Non-uniformity metric
 final_h = h_history[-1]
 max_diff = np.max(final_h) - np.min(final_h)
-print(f"\\nFinal water surface variation: {max_diff*100:.1f} cm")
+print(f"\
+Final water surface variation: {max_diff*100:.1f} cm")
 print(f"(Target: <5 cm for safe ship operations)")`,
       challenge: 'Modify the culvert inflow to enter from BOTH ends of the lock simultaneously (distributed across first 5 and last 5 cells). How does this change the wave pattern and the final surface uniformity? The real Panama locks use distributed floor culverts for exactly this reason — to minimise sloshing.',
       successHint: 'You just ran a computational fluid dynamics simulation — the shallow water equations are the workhorse model for flood prediction, tsunami warning, and dam safety assessment. The finite volume method you used is the same approach (at much larger scale) used by FEMA flood models and the NOAA tsunami warning system.',
@@ -227,7 +230,8 @@ def simulate_canal_day(n_ships_atlantic, n_ships_pacific, lock_params):
 # Baseline parameters
 lock_params = {"fill_time": 8, "move_time": 22}  # 30 min total cycle
 
-print("=== Panama Canal Transit Scheduling Simulation ===\\n")
+print("=== Panama Canal Transit Scheduling Simulation ===\
+")
 
 # Test different demand levels
 demand_levels = [
@@ -253,7 +257,8 @@ for n_atl, n_pac, label in demand_levels:
           f"{avg_transit:>10.0f}min {utilisation:>6.0f}%")
 
 # Optimisation: what if we reduce fill time?
-print("\\n=== Impact of Faster Lock Filling ===")
+print("\
+=== Impact of Faster Lock Filling ===")
 for fill_t in [8, 6, 5, 4]:
     params = {"fill_time": fill_t, "move_time": 22}
     completed, _, transits = simulate_canal_day(25, 25, params)
@@ -350,7 +355,8 @@ np.random.seed(42)
 history = simulate_lake_year(params, n_years=5)
 
 print("=== Gatun Lake Water Balance Simulation ===")
-print(f"Lake area: {params['lake_area']} km² | Ships/day: {params['ships_per_day']}\\n")
+print(f"Lake area: {params['lake_area']} km² | Ships/day: {params['ships_per_day']}\
+")
 
 print(f"{'Year':>5} {'Month':>6} {'Level':>7} {'Rain':>8} {'River':>8} {'Evap':>8} {'Locks':>8} {'Net':>8}")
 print(f"{'':>5} {'':>6} {'(m)':>7} {'(Mm³)':>8} {'(Mm³)':>8} {'(Mm³)':>8} {'(Mm³)':>8} {'(Mm³)':>8}")
@@ -363,7 +369,8 @@ for h in history[::3]:  # every 3 months
 # Find critical periods
 min_level = min(h["level"] for h in history)
 min_entry = min(history, key=lambda h: h["level"])
-print(f"\\nLowest level: {min_level:.2f}m (Year {min_entry['year']}, Month {min_entry['month']})")
+print(f"\
+Lowest level: {min_level:.2f}m (Year {min_entry['year']}, Month {min_entry['month']})")
 print(f"Minimum operating level: 24.84m")
 print(f"Margin: {min_level - 24.84:.2f}m")
 
@@ -464,7 +471,8 @@ scenarios = [
 ]
 
 print("=== Climate Change Impact on Panama Canal ===")
-print(f"200 simulations x 20 years per scenario\\n")
+print(f"200 simulations x 20 years per scenario\
+")
 print(f"{'Scenario':<28} {'Full%':>6} {'Restrict%':>10} {'Critical%':>10} {'Ships Lost':>11}")
 print("-" * 67)
 
@@ -480,7 +488,8 @@ for name, rain_f, var_f in scenarios:
 # Revenue impact
 toll_per_ship = 400000  # USD average
 toll_str = f"{toll_per_ship:,}"
-print(f"\\n=== Revenue Impact (avg toll {toll_str}/ship) ===")
+print(f"\
+=== Revenue Impact (avg toll {toll_str}/ship) ===")
 for name, rain_f, var_f in scenarios:
     r = simulate_climate_scenario(name, rain_f, var_f)
     annual_lost = r["ships_lost"] / 200 / 20  # per simulation per year
@@ -564,7 +573,8 @@ def gate_analysis(gate_width, gate_height, upstream_depth, downstream_depth,
 gate_w = 19.5  # m
 gate_h = 20.0  # m
 
-print("=== Panama Canal Lock Gate Structural Analysis ===\\n")
+print("=== Panama Canal Lock Gate Structural Analysis ===\
+")
 
 # Different operating conditions
 conditions = [
@@ -585,7 +595,8 @@ for name, up, down in conditions:
           f"{r['total_moment']/1e6:>12.1f} {r['centre_of_pressure']:>7.2f}")
 
 # Force distribution profile
-print("\\n=== Force Distribution (Full Head Condition) ===")
+print("\
+=== Force Distribution (Full Head Condition) ===")
 r = gate_analysis(gate_w, gate_h, 15.24, 6.1, n_segments=10)
 print(f"{'Height (m)':>11} {'Force (kN)':>11} {'% of Total':>11}")
 print("-" * 35)
@@ -596,7 +607,8 @@ for i in range(len(r["depths"])):
     print(f"{r['depths'][i]:>10.1f} {r['forces'][i]/1000:>10.0f} {pct:>9.1f}%  {bar}")
 
 # Gate structural design check
-print("\\n=== Structural Design Check ===")
+print("\
+=== Structural Design Check ===")
 max_force = r["total_force"]
 gate_thickness = 2.1  # m
 gate_mass = 750000    # kg

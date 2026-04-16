@@ -231,11 +231,13 @@ for ri, (row, n_cols, color) in enumerate(zip(rows, cols_per_row, row_colors)):
 # Highlight one barrel
 highlight = plt.Circle((2.5, 2.5), 0.35, fill=False, edgecolor='#fbbf24', linewidth=3, linestyle='--')
 ax1.add_patch(highlight)
-ax1.annotate('C3 barrel\\n(examined below)', xy=(2.5, 2.5), xytext=(5.5, 4.5),
+ax1.annotate('C3 barrel\
+(examined below)', xy=(2.5, 2.5), xytext=(5.5, 4.5),
              color='#fbbf24', fontsize=10, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#fbbf24', linewidth=2))
 
-ax1.set_title('Mouse Barrel Cortex Map\\n(each circle = one barrel = one whisker)', color='white', fontsize=11)
+ax1.set_title('Mouse Barrel Cortex Map\
+(each circle = one barrel = one whisker)', color='white', fontsize=11)
 ax1.axis('off')
 
 # Right: Sparse coding in barrel C3
@@ -257,7 +259,8 @@ for trial in range(n_trials):
 im = ax2.imshow(activity, aspect='auto', cmap='YlOrRd', interpolation='nearest')
 ax2.set_xlabel('Neuron index (of ~4000 in real barrel)', color='white')
 ax2.set_ylabel('Touch trial', color='white')
-ax2.set_title('Sparse Coding in Barrel C3\\n(~10% neurons active per touch)', color='white', fontsize=11)
+ax2.set_title('Sparse Coding in Barrel C3\
+(~10% neurons active per touch)', color='white', fontsize=11)
 ax2.set_yticks(range(n_trials))
 ax2.set_yticklabels([f'Touch {i+1}' for i in range(n_trials)], color='white')
 ax2.tick_params(colors='gray')
@@ -312,8 +315,14 @@ fig.patch.set_facecolor('#1f2937')
 # Left: channel count comparison
 ax1.set_facecolor('#111827')
 systems = [
-    'Human hand\\n(natural)', 'Cat whisker\\narray', 'LUKE arm\\n(2024)',
-    'BrainGate\\ncortical', 'Vibrotactile\\nsubstitution', 'e-dermis\\n(JHU 2018)'
+    'Human hand\
+(natural)', 'Cat whisker\
+array', 'LUKE arm\
+(2024)',
+    'BrainGate\
+cortical', 'Vibrotactile\
+substitution', 'e-dermis\
+(JHU 2018)'
 ]
 channels = [17000, 4800, 20, 96, 6, 32]
 colors = ['#22c55e', '#f59e0b', '#3b82f6', '#a855f7', '#6b7280', '#ec4899']
@@ -331,8 +340,16 @@ for bar, val in zip(bars, channels):
 ax2.set_facecolor('#111827')
 years = [1998, 2004, 2012, 2015, 2018, 2020, 2023, 2025]
 channel_counts = [1, 4, 16, 32, 32, 64, 96, 128]
-milestones = ['First nerve\\nstimulation', 'Targeted\\nreinnervation', 'Utah array\\ncortical', 'DARPA\\nLUKE arm',
-              'e-dermis\\ntexture', '64-ch\\ncortical', 'BrainGate\\ntouch', 'Next-gen\\nprosthetics']
+milestones = ['First nerve\
+stimulation', 'Targeted\
+reinnervation', 'Utah array\
+cortical', 'DARPA\
+LUKE arm',
+              'e-dermis\
+texture', '64-ch\
+cortical', 'BrainGate\
+touch', 'Next-gen\
+prosthetics']
 
 ax2.plot(years, channel_counts, 'o-', color='#22c55e', linewidth=2, markersize=8)
 for y, c, m in zip(years, channel_counts, milestones):
@@ -341,7 +358,8 @@ for y, c, m in zip(years, channel_counts, milestones):
                  arrowprops=dict(arrowstyle='->', color='gray', linewidth=0.5))
 
 ax2.axhline(17000, color='#f59e0b', linestyle='--', alpha=0.5)
-ax2.text(2026, 17000, 'Natural hand\\n(17,000)', color='#f59e0b', fontsize=8, va='bottom')
+ax2.text(2026, 17000, 'Natural hand\
+(17,000)', color='#f59e0b', fontsize=8, va='bottom')
 ax2.set_xlabel('Year', color='white')
 ax2.set_ylabel('Sensory channels', color='white')
 ax2.set_yscale('log')
@@ -501,7 +519,8 @@ ax1.set_facecolor('#111827')
 im = ax1.imshow(signals_A[0], aspect='auto', cmap='RdBu_r', vmin=-2, vmax=2)
 ax1.set_xlabel('Time (ms)', color='white')
 ax1.set_ylabel('Electrode #', color='white')
-ax1.set_title('Neural signals\\n(imagined left hand)', color='white', fontsize=10)
+ax1.set_title('Neural signals\
+(imagined left hand)', color='white', fontsize=10)
 ax1.axvline(30, color='#22c55e', linestyle='--', alpha=0.5)
 ax1.axvline(70, color='#22c55e', linestyle='--', alpha=0.5)
 ax1.tick_params(colors='gray')
@@ -529,7 +548,8 @@ ax3.axhline(95, color='#f59e0b', linestyle='--', alpha=0.5, label='Clinical thre
 ax3.fill_between(sessions, 50, accuracy, alpha=0.1, color='#22c55e')
 ax3.set_xlabel('Training session', color='white')
 ax3.set_ylabel('Accuracy (%)', color='white')
-ax3.set_title('Decoder Accuracy\\nOver Training', color='white', fontsize=10)
+ax3.set_title('Decoder Accuracy\
+Over Training', color='white', fontsize=10)
 ax3.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 ax3.tick_params(colors='gray')
 ax3.set_ylim(40, 100)

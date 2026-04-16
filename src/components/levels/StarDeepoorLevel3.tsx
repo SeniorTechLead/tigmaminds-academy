@@ -777,13 +777,23 @@ from collections import Counter
 votes = Counter(neighbor_classes)
 prediction_m = votes.most_common(1)[0][0]
 
-text = f"MYSTERY METEORITE CLASSIFICATION\\n{'='*35}\\n\\n"
-text += f"Fe: {mystery['Fe']:.1f}%  Si: {mystery['Si']:.1f}%\\n"
-text += f"Mg: {mystery['Mg']:.1f}%  δ¹⁸O: {mystery['d18O']:.1f}‰\\n\\n"
-text += f"Nearest neighbors:\\n"
+text = f"MYSTERY METEORITE CLASSIFICATION\
+{'='*35}\
+\
+"
+text += f"Fe: {mystery['Fe']:.1f}%  Si: {mystery['Si']:.1f}%\
+"
+text += f"Mg: {mystery['Mg']:.1f}%  δ¹⁸O: {mystery['d18O']:.1f}‰\
+\
+"
+text += f"Nearest neighbors:\
+"
 for idx_m in nearest_m:
-    text += f"  {labels[idx_m]} (dist={dists_m[idx_m]:.2f})\\n"
-text += f"\\nCLASSIFICATION: {prediction_m}\\n"
+    text += f"  {labels[idx_m]} (dist={dists_m[idx_m]:.2f})\
+"
+text += f"\
+CLASSIFICATION: {prediction_m}\
+"
 text += f"Confidence: {votes[prediction_m]/5:.0%}"
 ax.text(0.05, 0.95, text, transform=ax.transAxes, fontsize=10, color='white',
         verticalalignment='top', fontfamily='monospace')
@@ -793,7 +803,8 @@ plt.show()
 
 print(f"Classification accuracy: {acc:.0%}")
 print(f"Mystery meteorite classified as: {prediction_m}")
-print(f"\\nKey: oxygen isotopes are the gold standard — they separate parent bodies")
+print(f"\
+Key: oxygen isotopes are the gold standard — they separate parent bodies")
 print("that major elements alone cannot distinguish.")`,
       challenge: 'Add trace element patterns (Ir, Ni, Co, Cr) and build a decision tree classifier. Compare its accuracy with k-NN and analyze which features are most discriminating.',
       successHint: 'Meteorite classification is applied geochemistry at its finest. Each meteorite is a message from a specific location in the early solar system. By reading the chemical fingerprints — especially oxygen isotopes — we can trace individual rocks back to their parent bodies across 4.6 billion years of history.',

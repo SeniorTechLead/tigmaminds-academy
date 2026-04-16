@@ -218,7 +218,8 @@ for i, level in enumerate(levels):
 
 # Labels on left
 for j, org in enumerate(organisms):
-    ax.text(-0.8, j, f'{org[1]}\\n({org[0]})', ha='right', va='center',
+    ax.text(-0.8, j, f'{org[1]}\
+({org[0]})', ha='right', va='center',
             color='#d1d5db', fontsize=8, fontstyle='italic')
 
 # Column headers
@@ -281,7 +282,8 @@ questions = {
     (0.75, 0.72): ('Has needles?', True),
     (0.12, 0.50): ('Leaves opposite?', True),
     (0.38, 0.50): ('Simple leaves?', True),
-    (0.62, 0.50): ('Needles in\\nbundles?', True),
+    (0.62, 0.50): ('Needles in\
+bundles?', True),
     (0.88, 0.50): ('Cactus-like?', True),
 }
 

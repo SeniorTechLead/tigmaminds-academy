@@ -60,7 +60,9 @@ ax1.tick_params(colors='gray')
 # Annotate the difference at 24 hours
 h_div_24 = 2 * cell_size / 1000
 h_elong_24 = n_cells * (initial_cell_length + (max_cell_length - initial_cell_length) * (1 - np.exp(-elongation_rate * 24))) / 1000
-ax1.annotate(f'After 24h:\\nDivision: {h_div_24:.1f} mm\\nElongation: {h_elong_24:.0f} mm',
+ax1.annotate(f'After 24h:\
+Division: {h_div_24:.1f} mm\
+Elongation: {h_elong_24:.0f} mm',
              xy=(24, h_elong_24), xytext=(35, h_elong_24*0.6),
              color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -137,7 +139,8 @@ ax1.plot(concentration, gibberellin_response, color='#22c55e', linewidth=2, labe
 # Mark optimal auxin concentration
 opt_auxin = 20  # peak of bell curve
 ax1.axvline(opt_auxin, color='#ef4444', linestyle=':', linewidth=0.5)
-ax1.annotate('Optimal auxin\\n(too much inhibits!)', xy=(opt_auxin, auxin_response[np.argmin(np.abs(concentration - opt_auxin))]),
+ax1.annotate('Optimal auxin\
+(too much inhibits!)', xy=(opt_auxin, auxin_response[np.argmin(np.abs(concentration - opt_auxin))]),
              xytext=(opt_auxin+15, 0.9), color='#ef4444', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -164,7 +167,8 @@ plt.colorbar(im, ax=ax2, label='Elongation rate')
 
 # Mark bamboo's operating point
 ax2.plot(15, 40, '*', color='#ef4444', markersize=15, markeredgecolor='white')
-ax2.text(17, 42, 'Bamboo\\n(high GA!)', color='white', fontsize=9, fontweight='bold')
+ax2.text(17, 42, 'Bamboo\
+(high GA!)', color='white', fontsize=9, fontweight='bold')
 
 # Mark normal plant
 ax2.plot(10, 10, 'o', color='white', markersize=8)
@@ -435,7 +439,12 @@ The bamboo "forest" is actually a bamboo "lawn" — but one that grows 30 metres
 import matplotlib.pyplot as plt
 
 # Grass vs tree vs bamboo comparison
-features = ['Stem\\nhollowness', 'Secondary\\ngrowth', 'Growth\\nspeed', 'Max\\nheight', 'Root\\ndepth', 'Lifespan']
+features = ['Stem\
+hollowness', 'Secondary\
+growth', 'Growth\
+speed', 'Max\
+height', 'Root\
+depth', 'Lifespan']
 
 grass = [10, 0, 7, 1, 2, 2]
 bamboo = [10, 0, 10, 8, 4, 6]
@@ -481,7 +490,8 @@ ax2.add_patch(circle_tree_outer)
 for r in [0.3, 0.6, 0.9, 1.2]:
     ring = plt.Circle((-2, 0), r, fill=False, color='#3b82f6', linewidth=0.5, alpha=0.5)
     ax2.add_patch(ring)
-ax2.text(-2, -2.2, 'Tree\\n(solid, rings)', ha='center', color='#3b82f6', fontsize=9)
+ax2.text(-2, -2.2, 'Tree\
+(solid, rings)', ha='center', color='#3b82f6', fontsize=9)
 
 # Bamboo: hollow with thick wall
 circle_bamboo_outer = plt.Circle((2, 0), 1.5, fill=False, color='#22c55e', linewidth=2)
@@ -491,7 +501,8 @@ wall = plt.Circle((2, 0), 1.5, fill=True, facecolor='#22c55e', alpha=0.2)
 ax2.add_patch(wall)
 ax2.add_patch(circle_bamboo_inner)
 ax2.add_patch(circle_bamboo_outer)
-ax2.text(2, -2.2, 'Bamboo\\n(hollow)', ha='center', color='#22c55e', fontsize=9)
+ax2.text(2, -2.2, 'Bamboo\
+(hollow)', ha='center', color='#22c55e', fontsize=9)
 
 ax2.set_xlim(-4.5, 4.5)
 ax2.set_ylim(-3, 3)
@@ -541,7 +552,8 @@ print("It achieved tree height without evolving tree anatomy.")`,
 import matplotlib.pyplot as plt
 
 # Material comparison
-materials = ['Bamboo', 'Wood\\n(pine)', 'Steel', 'Concrete', 'Aluminum']
+materials = ['Bamboo', 'Wood\
+(pine)', 'Steel', 'Concrete', 'Aluminum']
 
 # Properties (normalized 0-10 or actual values)
 tensile_strength = [185, 40, 250, 5, 310]  # MPa
@@ -590,7 +602,8 @@ ax.set_facecolor('#111827')
 for i, mat in enumerate(materials):
     ax.scatter(cost_per_tonne[i], renewability[i], s=200, color=colors[i],
                edgecolor='white', linewidth=1, zorder=5)
-    ax.annotate(mat.replace('\\n', ' '), xy=(cost_per_tonne[i], renewability[i]),
+    ax.annotate(mat.replace('\
+', ' '), xy=(cost_per_tonne[i], renewability[i]),
                 xytext=(cost_per_tonne[i]+50, renewability[i]+0.3),
                 color=colors[i], fontsize=8)
 ax.set_xlabel('Cost (USD/tonne)', color='white')
@@ -601,7 +614,9 @@ ax.tick_params(colors='gray')
 # Carbon sequestration comparison
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-land_types = ['Bamboo\\ngrove', 'Tree\\nplantation', 'Grassland', 'Cropland']
+land_types = ['Bamboo\
+grove', 'Tree\
+plantation', 'Grassland', 'Cropland']
 co2_sequestered = [12, 6, 2, 1]  # tonnes CO2/hectare/year
 seq_colors = ['#22c55e', '#3b82f6', '#f59e0b', '#6b7280']
 bars = ax.bar(range(len(land_types)), co2_sequestered, color=seq_colors, alpha=0.85)

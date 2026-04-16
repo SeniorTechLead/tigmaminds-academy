@@ -59,7 +59,8 @@ ax1.fill_between(T_hot - 273.15, carnot_efficiency * 100, alpha=0.1, color='#22c
 
 for name, (T, eff) in real_engines.items():
     ax1.plot(T - 273.15, eff * 100, 'o', markersize=8, zorder=5)
-    ax1.annotate(f'{name}\\n({eff*100:.0f}%)', xy=(T-273.15, eff*100),
+    ax1.annotate(f'{name}\
+({eff*100:.0f}%)', xy=(T-273.15, eff*100),
                 xytext=(10, -15), textcoords='offset points',
                 color='white', fontsize=7)
 
@@ -80,10 +81,12 @@ Q_cold = Q_hot - W
 
 # Draw boxes
 boxes = [
-    ('Hot reservoir\\n(fuel)', 0.1, 0.7, 0.2, 0.2, '#ef4444'),
+    ('Hot reservoir\
+(fuel)', 0.1, 0.7, 0.2, 0.2, '#ef4444'),
     ('Engine', 0.4, 0.5, 0.2, 0.2, '#f59e0b'),
     ('Useful work', 0.75, 0.7, 0.2, 0.15, '#22c55e'),
-    ('Cold reservoir\\n(environment)', 0.75, 0.2, 0.2, 0.15, '#3b82f6'),
+    ('Cold reservoir\
+(environment)', 0.75, 0.2, 0.2, 0.15, '#3b82f6'),
 ]
 
 for label, x, y, w, h, color in boxes:
@@ -100,7 +103,8 @@ ax2.annotate('', xy=(0.75, 0.3), xytext=(0.6, 0.5), arrowprops=arrow_props)
 ax2.text(0.35, 0.72, f'Q_hot = {Q_hot}', color='#ef4444', fontsize=10)
 ax2.text(0.68, 0.78, f'W = {W:.0f}', color='#22c55e', fontsize=10)
 ax2.text(0.68, 0.42, f'Q_cold = {Q_cold:.0f}', color='#3b82f6', fontsize=10)
-ax2.text(0.5, 0.35, f'η = {efficiency*100:.0f}%\\n(Carnot: {(1-298/850)*100:.0f}%)',
+ax2.text(0.5, 0.35, f'η = {efficiency*100:.0f}%\
+(Carnot: {(1-298/850)*100:.0f}%)',
         color='white', fontsize=11, ha='center',
         bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#f59e0b'))
 
@@ -665,7 +669,8 @@ for T_C, label, color in key_temps:
     T_K = T_C + 273.15
     P = sigma * T_K**4
     ax1.plot(T_C, P/1000, 'o', color=color, markersize=8, zorder=5)
-    ax1.annotate(f'{label}\\n{P/1000:.1f} kW/m²', xy=(T_C, P/1000),
+    ax1.annotate(f'{label}\
+{P/1000:.1f} kW/m²', xy=(T_C, P/1000),
                 xytext=(10, 10), textcoords='offset points',
                 color=color, fontsize=8)
 

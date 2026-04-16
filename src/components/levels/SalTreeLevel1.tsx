@@ -141,10 +141,14 @@ import matplotlib.pyplot as plt
 
 # Material properties
 components = {
-    'Cellulose\\n(fibers)': {'tensile': 750, 'compressive': 50, 'density': 1500, 'color': '#22c55e'},
-    'Lignin\\n(matrix)': {'tensile': 50, 'compressive': 200, 'density': 1300, 'color': '#f59e0b'},
-    'Wood composite\\n(Sal)': {'tensile': 120, 'compressive': 65, 'density': 880, 'color': '#8b4513'},
-    'Wood composite\\n(Pine)': {'tensile': 40, 'compressive': 35, 'density': 500, 'color': '#deb887'},
+    'Cellulose\
+(fibers)': {'tensile': 750, 'compressive': 50, 'density': 1500, 'color': '#22c55e'},
+    'Lignin\
+(matrix)': {'tensile': 50, 'compressive': 200, 'density': 1300, 'color': '#f59e0b'},
+    'Wood composite\
+(Sal)': {'tensile': 120, 'compressive': 65, 'density': 880, 'color': '#8b4513'},
+    'Wood composite\
+(Pine)': {'tensile': 40, 'compressive': 35, 'density': 500, 'color': '#deb887'},
     'Steel': {'tensile': 250, 'compressive': 250, 'density': 7800, 'color': '#6b7280'},
     'Concrete': {'tensile': 5, 'compressive': 40, 'density': 2400, 'color': '#94a3b8'},
 }
@@ -157,7 +161,8 @@ ax1.set_facecolor('#111827')
 for name, props in components.items():
     ax1.scatter(props['compressive'], props['tensile'], s=props['density']/5,
                 color=props['color'], edgecolor='white', linewidth=1, zorder=5, alpha=0.85)
-    ax1.annotate(name.replace('\\n', ' '), xy=(props['compressive'], props['tensile']),
+    ax1.annotate(name.replace('\
+', ' '), xy=(props['compressive'], props['tensile']),
                  xytext=(props['compressive']+5, props['tensile']+15),
                  color=props['color'], fontsize=7)
 
@@ -185,7 +190,8 @@ ax2.plot(cellulose_pct, compressive_composite, color='#f59e0b', linewidth=1, lin
 
 # Mark real wood compositions
 ax2.axvline(40, color='gray', linestyle=':', linewidth=0.5)
-ax2.text(42, 600, 'Typical wood\\n(~40% cellulose)', color='gray', fontsize=8)
+ax2.text(42, 600, 'Typical wood\
+(~40% cellulose)', color='gray', fontsize=8)
 
 ax2.set_xlabel('Cellulose content (%)', color='white')
 ax2.set_ylabel('Strength (MPa)', color='white')
@@ -299,7 +305,8 @@ for name, props in wood_types.items():
                         props['radial'] * np.sin(angles)**2)
     ax2.plot(angles, strength_at_angle, linewidth=2, label=name, color=props['color'])
 
-ax2.set_title('Strength vs Direction\\n(0° = along grain)', color='white', fontsize=11, pad=20)
+ax2.set_title('Strength vs Direction\
+(0° = along grain)', color='white', fontsize=11, pad=20)
 ax2.legend(loc='upper right', bbox_to_anchor=(1.4, 1.1), facecolor='#1f2937',
            edgecolor='gray', labelcolor='white', fontsize=7)
 ax2.tick_params(colors='gray')
@@ -386,10 +393,12 @@ ax1.set_title('Density vs Hardness: Hardwoods (circles) & Softwoods (squares)',
 ax1.tick_params(colors='gray')
 
 # Highlight exceptions
-ax1.annotate('Balsa: hardwood\\nbut softest!', xy=(160, 67),
+ax1.annotate('Balsa: hardwood\
+but softest!', xy=(160, 67),
              xytext=(250, 200), color='#f59e0b', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax1.annotate('Yew: softwood\\nbut very hard!', xy=(670, 1520),
+ax1.annotate('Yew: softwood\
+but very hard!', xy=(670, 1520),
              xytext=(500, 1600), color='#f59e0b', fontsize=8,
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -491,15 +500,19 @@ for name, props in woods.items():
 
 # Application zones
 ax1.axhspan(7, 10.5, xmin=0.55, alpha=0.08, color='#ef4444')
-ax1.text(820, 9.5, 'Structural\\n(sleepers, bridges)', color='#ef4444', fontsize=7, ha='center')
+ax1.text(820, 9.5, 'Structural\
+(sleepers, bridges)', color='#ef4444', fontsize=7, ha='center')
 ax1.axhspan(5, 8, xmin=0.2, xmax=0.6, alpha=0.08, color='#3b82f6')
-ax1.text(600, 6.5, 'Furniture\\n& boats', color='#3b82f6', fontsize=7, ha='center')
+ax1.text(600, 6.5, 'Furniture\
+& boats', color='#3b82f6', fontsize=7, ha='center')
 ax1.axhspan(0, 5, xmin=0, xmax=0.5, alpha=0.08, color='#22c55e')
-ax1.text(400, 2, 'Light construction\\n& framing', color='#22c55e', fontsize=7, ha='center')
+ax1.text(400, 2, 'Light construction\
+& framing', color='#22c55e', fontsize=7, ha='center')
 
 ax1.set_xlabel('Density (kg/m3)', color='white')
 ax1.set_ylabel('Durability (0-10)', color='white')
-ax1.set_title('Wood Selection: Density vs Durability\\n(bubble size = tensile strength)', color='white', fontsize=11)
+ax1.set_title('Wood Selection: Density vs Durability\
+(bubble size = tensile strength)', color='white', fontsize=11)
 ax1.tick_params(colors='gray')
 
 # Score each wood for each application
@@ -580,11 +593,16 @@ years = 200
 initial_trees = 1000
 
 scenarios = {
-    'No harvest\\n(natural forest)': 0.00,
-    'Sustainable\\n(1% per year)': 0.01,
-    'Moderate\\n(3% per year)': 0.03,
-    'Overharvest\\n(5% per year)': 0.05,
-    'Destructive\\n(10% per year)': 0.10,
+    'No harvest\
+(natural forest)': 0.00,
+    'Sustainable\
+(1% per year)': 0.01,
+    'Moderate\
+(3% per year)': 0.03,
+    'Overharvest\
+(5% per year)': 0.05,
+    'Destructive\
+(10% per year)': 0.10,
 }
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(11, 8))
@@ -615,7 +633,8 @@ for (name, harvest_rate), color in zip(scenarios.items(), colors):
 
         trees[y] = max(trees[y-1] + growth - harvest - mortality + noise, 0)
 
-    ax1.plot(range(years), trees, linewidth=2, label=name.replace('\\n', ' '), color=color)
+    ax1.plot(range(years), trees, linewidth=2, label=name.replace('\
+', ' '), color=color)
 
 ax1.axhline(initial_trees, color='gray', linestyle=':', linewidth=0.5)
 ax1.set_xlabel('Years', color='white')
@@ -642,7 +661,8 @@ for (name, harvest_rate), color in zip(scenarios.items(), colors):
         cumulative_harvest[y] = cumulative_harvest[y-1] + harvest
 
     ax2.plot(range(years), cumulative_harvest, linewidth=2,
-             label=name.replace('\\n', ' '), color=color)
+             label=name.replace('\
+', ' '), color=color)
 
 ax2.set_xlabel('Years', color='white')
 ax2.set_ylabel('Cumulative timber harvested (trees)', color='white')
@@ -663,7 +683,8 @@ for name, rate in scenarios.items():
         harvest = rate * trees_arr[y-1]
         trees_arr[y] = max(trees_arr[y-1] + growth - harvest - 0.01 * trees_arr[y-1], 0)
         total_harvest += harvest
-    clean_name = name.replace('\\n', ' ')
+    clean_name = name.replace('\
+', ' ')
     print(f"  {clean_name}: {total_harvest:.0f} trees total, {trees_arr[-1]:.0f} remaining")
 print()
 print("Counterintuitive result: MODERATE harvest yields MORE total timber")

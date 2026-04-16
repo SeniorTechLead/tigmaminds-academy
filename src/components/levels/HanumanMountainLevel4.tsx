@@ -59,7 +59,8 @@ for sp, data in species_data.items():
 
 # Classify a new sample
 test = np.array([5.1, 2.9, 1.76, 20, 5, 1])
-print(f"\\nTest sample: length={test[0]}, width={test[1]}, lobes={test[4]}")
+print(f"\
+Test sample: length={test[0]}, width={test[1]}, lobes={test[4]}")
 
 distances = {}
 for sp, centroid in centroids.items():
@@ -67,7 +68,8 @@ for sp, centroid in centroids.items():
     distances[sp] = d
 
 predicted = min(distances, key=distances.get)
-print(f"\\nPredicted species: {predicted}")
+print(f"\
+Predicted species: {predicted}")
 print("Distances:", {k: f"{v:.2f}" for k, v in distances.items()})`,
       challenge: 'Add Rhododendron (large broad leaves, ~12cm x 5cm, no lobes, smooth edges) and Juniper (tiny needles, ~1.5cm x 0.2cm). Run the classifier on a test sample [10, 4.5, 2.22, 30, 0, 0]. What does it predict?',
       successHint: 'You built a nearest-centroid classifier — the simplest form of machine learning for classification. Real plant ID apps use the same principle with thousands of features extracted from photos by convolutional neural networks.',
@@ -202,7 +204,8 @@ total = confusion.sum()
 correct = np.trace(confusion)
 accuracy = correct / total
 print(f"Overall accuracy: {accuracy:.1%}")
-print(f"\\nPer-species metrics:")
+print(f"\
+Per-species metrics:")
 for i, name in enumerate(species_names):
     tp = confusion[i, i]
     precision = tp / confusion[:, i].sum()
@@ -342,14 +345,16 @@ test_samples = [
     [2.1, 0.3, 0, 0, 3100],  # Should be Yew
 ]
 
-print("=== Plant ID Pipeline Results ===\\n")
+print("=== Plant ID Pipeline Results ===\
+")
 for sample in test_samples:
     pred = classify(sample, k=3)
     info = db[pred]
     print(f"Input: len={sample[0]}, width={sample[1]}, alt={sample[4]}m")
     print(f"  Species: {pred}")
     print(f"  Medicinal use: {info['use']}")
-    print(f"  Conservation: {info['status']}\\n")`,
+    print(f"  Conservation: {info['status']}\
+")`,
       challenge: 'Add a "confidence score" — the fraction of K neighbours that agree on the prediction. A confidence of 3/3 = 100% is strong; 2/3 = 67% suggests the plant is borderline between species. Test with a sample at [4.9, 1.5, 0, 1, 2000] — is the classifier confident?',
       successHint: 'You have built a complete plant identification system from scratch — database, preprocessing, classification, and output. This is the capstone of the Hanuman Mountain lesson: knowledge, structured as code, replaces brute force. Hanuman lifted a mountain; your algorithm searches it in milliseconds.',
     },
@@ -416,24 +421,29 @@ print("=" * 50)
 altitude = 4500
 leaf_data = [4500, 3.5, 0, 1]  # alt, width, compound, serrate
 
-print(f"\\n1. GEOLOGY: Altitude = {altitude} m")
+print(f"\
+1. GEOLOGY: Altitude = {altitude} m")
 print(f"   {geological_filter(altitude)}")
 
-print(f"\\n2. BOTANY: Leaf width=3.5cm, serrate edge")
+print(f"\
+2. BOTANY: Leaf width=3.5cm, serrate edge")
 species = identify_herb(leaf_data)
 print(f"   Identified: {species}")
 
-print(f"\\n3. PHARMACOLOGY: Assessing {species}")
+print(f"\
+3. PHARMACOLOGY: Assessing {species}")
 print(f"   {assess_potency(species)}")
 
-print(f"\\n4. RECOMMENDATION:")
+print(f"\
+4. RECOMMENDATION:")
 if species == "Sanjeevani":
     print("   MATCH FOUND. Proceed to extraction and testing.")
     print("   WARNING: Verify with DNA barcoding before use.")
 else:
     print(f"   Not Sanjeevani. Continue searching.")
 
-print("\\n" + "=" * 50)
+print("\
+" + "=" * 50)
 print("  Hanuman lifted a mountain.")
 print("  Science lifts the uncertainty.")
 print("=" * 50)`,

@@ -72,13 +72,15 @@ for aq in aqueducts:
     print(f"{aq['name']:<28} {aq['length_km']:>5.1f}km {slope:>8.5f} "
           f"{vel:>8.2f} m/s {flow_ld/1e6:>14.1f}")
 
-print(f"\\nTotal delivery: {total_flow/1e6:.0f} million litres/day")
+print(f"\
+Total delivery: {total_flow/1e6:.0f} million litres/day")
 print(f"Per capita (1M population): {total_flow/1e6:.0f} litres/person/day")
 print(f"Modern comparison: NYC delivers ~5,300 M litres/day for 8M people")
 print(f"              = ~660 litres/person/day")
 
 # How gradient affects flow
-print(f"\\n=== Effect of Gradient on Flow Velocity ===")
+print(f"\
+=== Effect of Gradient on Flow Velocity ===")
 print(f"Channel: 0.8m × 0.6m, stone-lined (n=0.013)")
 print(f"{'Gradient':>12} {'Velocity (m/s)':>15} {'Flow (L/s)':>12} {'Description':>16}")
 print("-" * 57)
@@ -89,7 +91,8 @@ for grad in [0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05]:
     print(f"{grad:>10.5f} {vel:>13.2f} {flow*1000:>10.0f} {desc:>16}")
 
 # Transit time
-print(f"\\n=== Water Transit Times ===")
+print(f"\
+=== Water Transit Times ===")
 for aq in aqueducts:
     slope = aq["drop_m"] / (aq["length_km"] * 1000)
     vel, _, _ = channel_flow(aq["width"], aq["depth"], slope)
@@ -155,7 +158,8 @@ for name, depth in locations:
     print(f"{name:<35} {depth:>8.1f} {p/1000:>14.1f} {atm:>10.2f}")
 
 # Siphon analysis
-print(f"\\n=== Inverted Siphon Analysis ===")
+print(f"\
+=== Inverted Siphon Analysis ===")
 siphons = [
     ("Shallow valley", 15, 200, 0.3),
     ("Medium valley", 30, 400, 0.3),
@@ -173,7 +177,8 @@ for name, depth, length, diameter in siphons:
     print(f"{name:<30} {depth:>4}m {length:>5}m {p/1000:>8.0f}kPa {vel:>8.2f}m/s {flow:>7.0f}")
 
 # Lead pipe stress
-print(f"\\n=== Lead Pipe Wall Thickness ===")
+print(f"\
+=== Lead Pipe Wall Thickness ===")
 print(f"Lead tensile strength: ~12 MPa")
 lead_strength = 12e6  # Pa
 
@@ -188,7 +193,8 @@ for depth in [15, 30, 50, 90]:
               f"weight = {pipe_weight:.0f} kg/m")
 
 # Fountain pressure
-print(f"\\n=== Public Fountain Performance ===")
+print(f"\
+=== Public Fountain Performance ===")
 print(f"Water tank 8m above fountain level:")
 tank_height = 8
 fountain_pipe_length = 50  # metres
@@ -289,7 +295,8 @@ print("=== Roman Water Distribution Network ===")
 network.analyze(head_pressure_kpa=80)
 
 # Theft detection
-print(f"\\n=== Frontinus's Water Audit ===")
+print(f"\
+=== Frontinus's Water Audit ===")
 official_supply = 800  # L/s
 actual_delivery = sum(n["demand"] for n in network.nodes.values())
 theft = official_supply - actual_delivery
@@ -300,7 +307,8 @@ print(f"Unaccounted water: {theft} L/s ({theft/official_supply*100:.0f}%)")
 print(f"Frontinus found 40% theft — {official_supply * 0.4:.0f} L/s stolen!")
 
 # Water equity analysis
-print(f"\\n=== Water Access Equity ===")
+print(f"\
+=== Water Access Equity ===")
 districts = [
     ("Palatine Hill (wealthy)", 80, 20000, "Private connections"),
     ("Forum (commercial)", 200, 50000, "100+ public fountains"),
@@ -315,7 +323,8 @@ for name, flow, pop, desc in districts:
     per_capita = flow * 86400 / pop
     print(f"{name:<28} {flow:>8} {pop:>10,} {per_capita:>12.0f}")
 
-print(f"\\nThe wealthy Palatine received {80*86400/20000:.0f} L/person/day")
+print(f"\
+The wealthy Palatine received {80*86400/20000:.0f} L/person/day")
 print(f"The poor Subura received {100*86400/80000:.0f} L/person/day")
 print(f"Water inequality existed even in ancient Rome.")`,
       challenge: 'Add a "leak detection" feature: if the total outflow from a junction doesn\'t match the inflow, there\'s a leak (or theft). Calculate the "water balance" at each junction and flag discrepancies greater than 5%. This is how modern water utilities detect leaks — the same principle Frontinus used in 97 CE.',
@@ -387,7 +396,8 @@ for km in [0, 5, 10, 20, 30, 50, 70, 91]:
               f"{errors[idx]*100:>10.1f}")
 
 max_error = np.max(np.abs(errors)) * 100
-print(f"\\nMaximum cumulative error: {max_error:.1f} cm")
+print(f"\
+Maximum cumulative error: {max_error:.1f} cm")
 print(f"This is {max_error/9000*100:.2f}% of the total 90m drop")
 
 # Check if gradient is always positive (water flows)
@@ -395,7 +405,8 @@ local_gradients = np.diff(surveyed) / 50  # gradient between measurements
 negative_sections = np.sum(local_gradients > 0)  # positive height change = water flows uphill
 total_sections = len(local_gradients)
 
-print(f"\\n=== Gradient Check ===")
+print(f"\
+=== Gradient Check ===")
 print(f"Sections where water flows uphill: {negative_sections} of {total_sections}")
 print(f"({negative_sections/total_sections*100:.1f}% — these would create pools)")
 
@@ -405,7 +416,8 @@ else:
     print(f"All sections slope downhill — the aqueduct works!")
 
 # Compare error sources
-print(f"\\n=== Error Sources in Roman Surveying ===")
+print(f"\
+=== Error Sources in Roman Surveying ===")
 sources = [
     ("Chorobates leveling", 2, "Water level reading precision"),
     ("Marker placement", 3, "Positioning the target stake"),
@@ -423,7 +435,8 @@ combined = np.sqrt(total_error_sq)
 print(f"  {'Combined (RSS)':<25} ±{combined:.1f}mm per measurement")
 
 # Modern comparison
-print(f"\\n=== Modern vs Roman Surveying ===")
+print(f"\
+=== Modern vs Roman Surveying ===")
 comparisons = [
     ("Roman chorobates", 5, "6m wooden bench with plumb lines and water groove"),
     ("Spirit level (1880)", 1, "Bubble level on a telescope"),
@@ -499,7 +512,8 @@ def semicircular_arch(span_m, stone_density=2400, arch_thickness_m=1.0):
 
 # Analyze the Pont du Gard's arches
 print("=== Pont du Gard — Arch Analysis ===")
-print("Three tiers of arches:\\n")
+print("Three tiers of arches:\
+")
 
 tiers = [
     ("Bottom tier", 24.5, 6),    # span 24.5m, 6 arches
@@ -531,12 +545,14 @@ print(f"Pier dimensions: {pier_width}m × {pier_depth}m × {pier_height}m")
 print(f"Pier weight: {pier_weight/1000:.0f} kN ({pier_weight/9810:.0f} tonnes)")
 print(f"Arch thrust (each side): {arch_result['thrust']/1000:.0f} kN")
 print(f"Net horizontal thrust: {net_thrust:.0f} kN (arches balance each other)")
-print(f"\\nThe piers work because adjacent arches push in OPPOSITE directions,")
+print(f"\
+The piers work because adjacent arches push in OPPOSITE directions,")
 print(f"cancelling each other's horizontal thrust. Only the end piers need")
 print(f"to resist unbalanced thrust — which is why they're built into the hillside.")
 
 # Load capacity
-print(f"\\n=== Load Capacity ===")
+print(f"\
+=== Load Capacity ===")
 limestone_compressive_strength = 40  # MPa = 40,000 kPa
 
 # Stress at the base of the bottom arch
@@ -549,11 +565,13 @@ print(f"Contact area: {contact_area:.2f} m²")
 print(f"Stress at base: {stress:.1f} MPa")
 print(f"Limestone strength: {limestone_compressive_strength} MPa")
 print(f"Safety factor: {safety_factor:.0f}× (the arch is {safety_factor:.0f} times stronger than needed)")
-print(f"\\nThis is why Roman arches last millennia — they operate at a")
+print(f"\
+This is why Roman arches last millennia — they operate at a")
 print(f"tiny fraction of their material's capacity.")
 
 # Effect of span on thrust
-print(f"\\n=== How Span Affects Thrust ===")
+print(f"\
+=== How Span Affects Thrust ===")
 print(f"{'Span (m)':>10} {'Thrust (kN)':>12} {'Base angle':>12} {'Weight (kN)':>12}")
 print("-" * 48)
 
@@ -561,7 +579,8 @@ for span in [3, 5, 10, 15, 20, 25, 30]:
     r = semicircular_arch(span)
     print(f"{span:>8} {r['thrust']/1000:>10.0f} {r['angle']:>10.0f}° {r['weight']/1000:>10.0f}")
 
-print(f"\\nDoubling the span more than doubles the thrust —")
+print(f"\
+Doubling the span more than doubles the thrust —")
 print(f"this is why very wide arches require very heavy piers.")`,
       challenge: 'The Romans also built pointed arches (in later periods). A pointed arch with the same span has less horizontal thrust than a semicircular one. Model a pointed arch where the height is 1.5× the radius (instead of equal to the radius). How does this change the thrust? This is the key innovation of Gothic cathedrals.',
       successHint: 'You analyzed the structural mechanics of Roman arches — the same analysis used for every bridge, tunnel, and arch structure today. The key insight: arches convert bending (which creates tension) into pure compression (which stone handles perfectly). This single idea made Roman architecture possible.',
@@ -626,7 +645,8 @@ def water_quality_model(flow_rate_ls, pipe_volume_L, temperature_C, days):
 
 # Compare flowing vs stagnant water
 print("=== Water Quality: Flowing vs Stagnant ===")
-print(f"Pipe volume: 1000 litres, Temperature: 20°C\\n")
+print(f"Pipe volume: 1000 litres, Temperature: 20°C\
+")
 
 scenarios = [
     ("Continuous flow (0.5 L/s)", 0.5),
@@ -645,7 +665,8 @@ for name, flow in scenarios:
           f"{counts[0]:>8.0f} {counts[2]:>8.0f} {counts[6]:>8.0f} bacteria/L")
 
 # The 80-metre rule
-print(f"\\n=== The 80-Metre Rule ===")
+print(f"\
+=== The 80-Metre Rule ===")
 print(f"No Roman citizen had to walk more than 80 metres to a fountain.")
 
 city_area_km2 = 14  # Rome's area within the walls
@@ -660,7 +681,8 @@ print(f"Actual fountains in Rome: >1,300")
 print(f"Overlap factor: {1300/fountains_needed:.1f}× (significant redundancy)")
 
 # Sewer flushing calculation
-print(f"\\n=== Sewer Flushing ===")
+print(f"\
+=== Sewer Flushing ===")
 fountain_overflow_pct = 30  # 30% of fountain water overflows to sewers
 total_fountain_flow = 1300 * 0.5  # L/s (average per fountain)
 sewer_flushing_flow = total_fountain_flow * fountain_overflow_pct / 100
@@ -676,7 +698,8 @@ print(f"Complete flush cycle: {flushing_time_hours:.0f} hours")
 print(f"The entire sewer system is flushed {24/flushing_time_hours:.1f}× per day!")
 
 # Water budget
-print(f"\\n=== Rome's Daily Water Budget ===")
+print(f"\
+=== Rome's Daily Water Budget ===")
 total_supply = 800000  # estimated L/s across all 11 aqueducts × time
 supply_per_day = 1000000000  # ~1 billion litres/day
 
@@ -689,7 +712,8 @@ categories = [
     ("Losses & theft", 5),
 ]
 
-print(f"Total supply: ~{supply_per_day/1e6:.0f} million litres/day\\n")
+print(f"Total supply: ~{supply_per_day/1e6:.0f} million litres/day\
+")
 print(f"{'Category':<30} {'Share':>6} {'Volume (ML/day)':>16}")
 print("-" * 54)
 for cat, pct in categories:

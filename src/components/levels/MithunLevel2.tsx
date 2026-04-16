@@ -504,7 +504,8 @@ ax2.axhline(50, color='#ef4444', linestyle='--', alpha=0.5, label='50% (critical
 
 # Mark mithun estimated bottleneck
 ax2.axvline(100, color='#f59e0b', linestyle=':', linewidth=2)
-ax2.text(110, 40, 'Estimated mithun\\nfounder size', color='#f59e0b', fontsize=10)
+ax2.text(110, 40, 'Estimated mithun\
+founder size', color='#f59e0b', fontsize=10)
 
 ax2.set_xlabel('Bottleneck population size', color='white')
 ax2.set_ylabel('Diversity retained (%)', color='white')
@@ -633,8 +634,10 @@ random_selected = np.random.choice(n_candidates, n_sel, replace=False)
 
 gains = {
     'Random': np.mean(cand_true_gv[random_selected]),
-    'Mass\\nselection': np.mean(cand_true_gv[mass_selected]),
-    'Genomic\\nselection': np.mean(cand_true_gv[genomic_selected]),
+    'Mass\
+selection': np.mean(cand_true_gv[mass_selected]),
+    'Genomic\
+selection': np.mean(cand_true_gv[genomic_selected]),
 }
 bar_colors = ['#ef4444', '#f59e0b', '#22c55e']
 bars = ax.bar(range(3), list(gains.values()), color=bar_colors, alpha=0.8)
@@ -728,7 +731,8 @@ ax1.set_ylim(0, 2000)
 
 # Global breed status
 ax2.set_facecolor('#111827')
-statuses = ['Not at risk', 'Vulnerable', 'Endangered', 'Critical', 'Extinct\\n(since 2000)']
+statuses = ['Not at risk', 'Vulnerable', 'Endangered', 'Critical', 'Extinct\
+(since 2000)']
 counts = [5720, 880, 740, 460, 1000]
 status_colors = ['#22c55e', '#f59e0b', '#ef4444', '#a855f7', '#6b7280']
 

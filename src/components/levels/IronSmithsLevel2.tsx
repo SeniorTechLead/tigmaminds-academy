@@ -56,16 +56,19 @@ solidus = np.where(c <= 0.77, 1538 - (1538-727) * c / 2.14,
 # Draw phase regions
 # Ferrite region
 ax.fill_between([0, 0.02, 0.02, 0], [0, 0, 727, 912], color='#34d399', alpha=0.3)
-ax.text(0.005, 400, 'α\\n(Ferrite)', color='#34d399', fontsize=11, fontweight='bold', ha='center')
+ax.text(0.005, 400, 'α\
+(Ferrite)', color='#34d399', fontsize=11, fontweight='bold', ha='center')
 
 # Austenite region
 ax.fill_between(c[c<=0.77], a3[c<=0.77], 1538, color='#60a5fa', alpha=0.2)
 ax.fill_between(c[c>=0.77], acm[c>=0.77], liquidus[c>=0.77], color='#60a5fa', alpha=0.2, where=~np.isnan(acm[c>=0.77]))
-ax.text(0.5, 1000, 'γ\\n(Austenite)', color='#60a5fa', fontsize=13, fontweight='bold', ha='center')
+ax.text(0.5, 1000, 'γ\
+(Austenite)', color='#60a5fa', fontsize=13, fontweight='bold', ha='center')
 
 # Pearlite/ferrite+cementite region
 ax.fill_between([0, 2.14, 2.14, 0], [0, 0, 727, 727], color='#fbbf24', alpha=0.15)
-ax.text(1.0, 350, 'Ferrite + Cementite\\n(Pearlite below 0.77%C)', color='#fbbf24', fontsize=10, ha='center')
+ax.text(1.0, 350, 'Ferrite + Cementite\
+(Pearlite below 0.77%C)', color='#fbbf24', fontsize=10, ha='center')
 
 # Phase boundary lines
 ax.plot(c[c<=0.77], a3[c<=0.77], color='#34d399', linewidth=2.5, label='A₃ line')
@@ -75,7 +78,8 @@ ax.plot(c, liquidus, color='white', linewidth=2, linestyle=':', label='Liquidus'
 
 # Eutectoid point
 ax.plot(0.77, 727, 'o', color='#f87171', markersize=12, zorder=5)
-ax.annotate('Eutectoid\\n(0.77%C, 727°C)', xy=(0.77, 727),
+ax.annotate('Eutectoid\
+(0.77%C, 727°C)', xy=(0.77, 727),
             xytext=(1.3, 800), color='white', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='white'))
 
@@ -173,7 +177,8 @@ for name, k, color in cooling_methods:
 
 # Phase transformation zone
 ax.axhspan(697, 757, alpha=0.15, color='#fbbf24')
-ax.annotate('Phase transformation zone\\n(austenite → pearlite/bainite)', xy=(100, 727),
+ax.annotate('Phase transformation zone\
+(austenite → pearlite/bainite)', xy=(100, 727),
             color='#fbbf24', fontsize=10, ha='center')
 
 # Martensite start temperature
@@ -246,10 +251,14 @@ ax1.plot(carbon, hv_tempered, color='#fbbf24', linewidth=2.5, label='Quenched + 
 
 # Application zones
 apps = [
-    (0.05, 0.25, 'Structural\\nsteel', '#34d399'),
-    (0.25, 0.55, 'Axles,\\ngears', '#60a5fa'),
-    (0.55, 0.85, 'Blades,\\nsprings', '#fbbf24'),
-    (0.85, 1.2, 'Tool\\nsteel', '#f87171'),
+    (0.05, 0.25, 'Structural\
+steel', '#34d399'),
+    (0.25, 0.55, 'Axles,\
+gears', '#60a5fa'),
+    (0.55, 0.85, 'Blades,\
+springs', '#fbbf24'),
+    (0.85, 1.2, 'Tool\
+steel', '#f87171'),
 ]
 for x1, x2, label, color in apps:
     ax1.axvspan(x1, x2, alpha=0.08, color=color)
@@ -271,7 +280,8 @@ plt.colorbar(scatter, ax=ax2, label='Carbon %')
 
 # Optimal zone
 ax2.axvspan(500, 700, alpha=0.15, color='#fbbf24')
-ax2.annotate('Optimal zone\\n(blade steel)', xy=(600, 40), color='#fbbf24',
+ax2.annotate('Optimal zone\
+(blade steel)', xy=(600, 40), color='#fbbf24',
              fontsize=11, ha='center', fontweight='bold')
 
 ax2.set_xlabel('Hardness (HV)', color='lightgray', fontsize=12)
@@ -485,7 +495,8 @@ for name, props in alloys.items():
     print()
 
 # Best alloy for each application
-print("\\nBest alloy by application:")
+print("\
+Best alloy by application:")
 print(f"  Kitchen knife:    Carbon Steel (hard, cheap, sharpenable)")
 print(f"  Surgical tool:    Stainless (corrosion-free, sterilizable)")
 print(f"  Cutting tool:     Tool Steel (extreme hardness)")

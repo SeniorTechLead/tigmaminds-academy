@@ -109,7 +109,10 @@ p_cal = per_serving['protein'] * 4
 c_cal = per_serving['carbs'] * 4
 f_cal = per_serving['fat'] * 9
 sizes = [p_cal, c_cal, f_cal]
-labels = [f'Protein\\n{p_cal:.0f} kcal', f'Carbs\\n{c_cal:.0f} kcal', f'Fat\\n{f_cal:.0f} kcal']
+labels = [f'Protein\
+{p_cal:.0f} kcal', f'Carbs\
+{c_cal:.0f} kcal', f'Fat\
+{f_cal:.0f} kcal']
 ax2.pie(sizes, labels=labels, colors=['#22c55e', '#3b82f6', '#f59e0b'],
         textprops={'color': 'white', 'fontsize': 9}, autopct='%1.0f%%')
 ax2.set_title('Caloric distribution', color='white', fontsize=11)
@@ -117,15 +120,26 @@ ax2.set_title('Caloric distribution', color='white', fontsize=11)
 # Database summary
 ax3 = axes[1, 1]
 ax3.axis('off')
-db_text = "NUTRIENT DATABASE\\n" + "=" * 40 + "\\n"
-db_text += f"Foods: {len(db.foods)}\\n"
-db_text += f"Nutrients tracked: {len(db.NUTRIENTS)}\\n\\n"
-db_text += "Sample recipe (per serving):\\n"
+db_text = "NUTRIENT DATABASE\
+" + "=" * 40 + "\
+"
+db_text += f"Foods: {len(db.foods)}\
+"
+db_text += f"Nutrients tracked: {len(db.NUTRIENTS)}\
+\
+"
+db_text += "Sample recipe (per serving):\
+"
 for food, grams in recipe.items():
-    db_text += f"  {food}: {grams/2:.0f}g\\n"
-db_text += f"\\nTotal: {per_serving['calories']:.0f} kcal\\n"
-db_text += f"Protein: {per_serving['protein']:.1f}g ({rdi['protein']:.0f}% RDI)\\n"
-db_text += f"Iron: {per_serving['iron']:.1f}mg ({rdi['iron']:.0f}% RDI)\\n"
+    db_text += f"  {food}: {grams/2:.0f}g\
+"
+db_text += f"\
+Total: {per_serving['calories']:.0f} kcal\
+"
+db_text += f"Protein: {per_serving['protein']:.1f}g ({rdi['protein']:.0f}% RDI)\
+"
+db_text += f"Iron: {per_serving['iron']:.1f}mg ({rdi['iron']:.0f}% RDI)\
+"
 db_text += f"Vit C: {per_serving['vitC']:.1f}mg ({rdi['vitC']:.0f}% RDI)"
 
 ax3.text(0.05, 0.95, db_text, transform=ax3.transAxes, color='#22c55e',
@@ -244,19 +258,26 @@ plt.colorbar(im, ax=ax2, shrink=0.8)
 # Top deficiencies
 ax3 = axes[1, 1]
 ax3.axis('off')
-def_text = "DEFICIENCY REPORT\\n" + "=" * 45 + "\\n\\n"
+def_text = "DEFICIENCY REPORT\
+" + "=" * 45 + "\
+\
+"
 for name in names:
     score = results[name]['score']
     defs = results[name]['deficiencies']
     grade = 'A' if score > 80 else 'B' if score > 60 else 'C' if score > 40 else 'D'
-    def_text += f"{name} (Score: {score:.0f}, Grade: {grade}):\\n"
+    def_text += f"{name} (Score: {score:.0f}, Grade: {grade}):\
+"
     if defs:
         for nutrient, pct in defs[:3]:
             severity = 'CRITICAL' if pct < 30 else 'LOW' if pct < 60 else 'MARGINAL'
-            def_text += f"  {severity}: {nutrient} at {pct:.0f}% RDI\\n"
+            def_text += f"  {severity}: {nutrient} at {pct:.0f}% RDI\
+"
     else:
-        def_text += "  No significant deficiencies\\n"
-    def_text += "\\n"
+        def_text += "  No significant deficiencies\
+"
+    def_text += "\
+"
 
 ax3.text(0.05, 0.95, def_text, transform=ax3.transAxes, color='#fbbf24',
     fontsize=8.5, va='top', fontfamily='monospace',
@@ -420,18 +441,29 @@ for label in ax2.get_yticklabels(): label.set_color('white'); label.set_fontsize
 # Changes summary
 ax3 = axes[1, 1]
 ax3.axis('off')
-change_text = "SUBSTITUTION REPORT\\n" + "=" * 45 + "\\n\\n"
-change_text += "Deficiencies found:\\n"
+change_text = "SUBSTITUTION REPORT\
+" + "=" * 45 + "\
+\
+"
+change_text += "Deficiencies found:\
+"
 for n, p in deficiencies:
-    change_text += f"  {n}: {p:.0f}% RDI\\n"
-change_text += "\\nChanges applied:\\n"
+    change_text += f"  {n}: {p:.0f}% RDI\
+"
+change_text += "\
+Changes applied:\
+"
 for c in changes:
-    change_text += f"  {c}\\n"
-change_text += f"\\nImprovement:\\n"
+    change_text += f"  {c}\
+"
+change_text += f"\
+Improvement:\
+"
 for n in RDI:
     delta = imp_rdi[n] - orig_rdi[n]
     if abs(delta) > 1:
-        change_text += f"  {n}: {orig_rdi[n]:.0f}% -> {imp_rdi[n]:.0f}% ({'+' if delta>0 else ''}{delta:.0f}%)\\n"
+        change_text += f"  {n}: {orig_rdi[n]:.0f}% -> {imp_rdi[n]:.0f}% ({'+' if delta>0 else ''}{delta:.0f}%)\
+"
 
 ax3.text(0.05, 0.95, change_text, transform=ax3.transAxes, color='#22c55e',
     fontsize=8.5, va='top', fontfamily='monospace',
@@ -570,12 +602,21 @@ ax2.legend(fontsize=9)
 # Top 5 plans
 ax3 = axes[1, 1]
 ax3.axis('off')
-plan_text = "TOP 5 MEAL PLANS\\n" + "=" * 50 + "\\n\\n"
+plan_text = "TOP 5 MEAL PLANS\
+" + "=" * 50 + "\
+\
+"
 for i, p in enumerate(all_plans[:5]):
-    plan_text += f"#{i+1} (score={p['score']:.3f}):\\n"
-    plan_text += f"  B: {p['b']}\\n  L: {p['l']}\\n  D: {p['d']}\\n"
+    plan_text += f"#{i+1} (score={p['score']:.3f}):\
+"
+    plan_text += f"  B: {p['b']}\
+  L: {p['l']}\
+  D: {p['d']}\
+"
     plan_text += f"  Cal: {p['total']['cal']:.0f}, Protein: {p['rdi']['protein']:.0f}%,"
-    plan_text += f" Iron: {p['rdi']['iron']:.0f}%, VitC: {p['rdi']['vitC']:.0f}%\\n\\n"
+    plan_text += f" Iron: {p['rdi']['iron']:.0f}%, VitC: {p['rdi']['vitC']:.0f}%\
+\
+"
 
 ax3.text(0.02, 0.98, plan_text, transform=ax3.transAxes, color='#22c55e',
     fontsize=8, va='top', fontfamily='monospace',
@@ -720,7 +761,8 @@ ax_t = fig.add_subplot(5, 2, (1, 2))
 ax_t.set_facecolor('#0d1117')
 ax_t.axis('off')
 title = """RECIPE NUTRITION ANALYZER — COMPLETE REPORT
-""" + "="*55 + """\\nRecipe:    Assamese Fish Curry with Rice and Greens
+""" + "="*55 + """\
+Recipe:    Assamese Fish Curry with Rice and Greens
 Servings:  2
 Method:    Simmered 25 min at ~95°C
 
@@ -742,7 +784,10 @@ ax_m = fig.add_subplot(5, 2, 3)
 ax_m.set_facecolor('#111827')
 ax_m.tick_params(colors='gray')
 sizes = [32*4, 55*4, 18*9]  # protein, carb, fat calories
-ax_m.pie(sizes, labels=['Protein\\n128 kcal', 'Carbs\\n220 kcal', 'Fat\\n162 kcal'],
+ax_m.pie(sizes, labels=['Protein\
+128 kcal', 'Carbs\
+220 kcal', 'Fat\
+162 kcal'],
     colors=['#22c55e', '#3b82f6', '#f59e0b'],
     textprops={'color': 'white', 'fontsize': 8}, autopct='%1.0f%%')
 ax_m.set_title('Caloric distribution', color='white', fontsize=10)

@@ -51,7 +51,8 @@ P_eq, Q_eq = equilibrium(500, 20, -100, 30)
 ax.plot(Qd, P_range, color='#3b82f6', linewidth=2.5, label='Demand')
 ax.plot(Qs, P_range, color='#ef4444', linewidth=2.5, label='Supply')
 ax.plot(Q_eq, P_eq, 'o', color='#fbbf24', markersize=12, zorder=5)
-ax.annotate(f'Equilibrium\\nP={P_eq:.0f} Rs, Q={Q_eq:.0f} kg',
+ax.annotate(f'Equilibrium\
+P={P_eq:.0f} Rs, Q={Q_eq:.0f} kg',
             (Q_eq, P_eq), textcoords='offset points', xytext=(60, 20),
             color='#fbbf24', fontsize=10, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#fbbf24'))
@@ -137,7 +138,8 @@ plt.show()
 print("=" * 60)
 print("    SUPPLY & DEMAND — TURA MARKET MODEL")
 print("=" * 60)
-print(f"\\nNormal equilibrium: P* = Rs {P_eq:.0f}, Q* = {Q_eq:.0f} kg")
+print(f"\
+Normal equilibrium: P* = Rs {P_eq:.0f}, Q* = {Q_eq:.0f} kg")
 print(f"After monsoon: P* = Rs {P_eq2:.0f}, Q* = {Q_eq2:.0f} kg")
 print(f"Price increase: Rs {P_eq2 - P_eq:.0f} ({(P_eq2-P_eq)/P_eq*100:.0f}%)")
 print(f"Quantity decrease: {Q_eq - Q_eq2:.0f} kg ({(Q_eq-Q_eq2)/Q_eq*100:.0f}%)")`,
@@ -190,7 +192,8 @@ for i in range(len(P)-1):
 # Mark unit elasticity
 idx_unit = np.argmin(np.abs(np.abs(ped) - 1))
 ax.plot(Q[idx_unit], P[idx_unit], 'o', color='#fbbf24', markersize=12, zorder=5)
-ax.annotate(f'|PED|=1\\nP={P[idx_unit]:.0f}, Q={Q[idx_unit]:.0f}',
+ax.annotate(f'|PED|=1\
+P={P[idx_unit]:.0f}, Q={Q[idx_unit]:.0f}',
             (Q[idx_unit], P[idx_unit]), textcoords='offset points', xytext=(50, 0),
             color='#fbbf24', fontsize=10, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#fbbf24'))
@@ -212,7 +215,9 @@ ax2.fill_between(P_range, 0, R, alpha=0.1, color='#3b82f6')
 ax2.plot(P_range[R_max_idx], R[R_max_idx], '*', color='#fbbf24', markersize=15, zorder=5)
 ax2.axvline(P_range[R_max_idx], color='#fbbf24', linestyle='--', linewidth=1)
 ax2.text(P_range[R_max_idx] + 0.5, R[R_max_idx] - 200,
-         f'Max revenue\\nP = Rs {P_range[R_max_idx]:.0f}\\nR = Rs {R[R_max_idx]:.0f}',
+         f'Max revenue\
+P = Rs {P_range[R_max_idx]:.0f}\
+R = Rs {R[R_max_idx]:.0f}',
          color='#fbbf24', fontsize=10)
 ax2.set_xlabel('Price (Rs)', color='white')
 ax2.set_ylabel('Revenue (Rs)', color='white')
@@ -271,7 +276,8 @@ plt.show()
 print("=" * 60)
 print("    PRICE ELASTICITY ANALYSIS — TURA MARKET")
 print("=" * 60)
-print(f"\\nElasticity at reference price P={P_test}:")
+print(f"\
+Elasticity at reference price P={P_test}:")
 for name, a_g, b_g, _ in goods:
     ped_val = elasticity(P_test, a_g, b_g)
     q_val = demand_linear(P_test, a_g, b_g)
@@ -280,7 +286,8 @@ for name, a_g, b_g, _ in goods:
         print(f"  {name:<25}: PED = {ped_val:.2f} ({elasticity_type})")
         rev = P_test * q_val
         print(f"    Revenue at P={P_test}: Rs {rev:.0f}")
-print(f"\\nRevenue-maximizing prices:")
+print(f"\
+Revenue-maximizing prices:")
 for name, a_g, b_g, _ in goods:
     P_opt = a_g / (2 * b_g)
     R_opt = P_opt * demand_linear(P_opt, a_g, b_g)
@@ -410,7 +417,11 @@ ax3.tick_params(colors='gray')
 # Plot 4: Total surplus comparison
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
-scenarios = ['Free\\nmarket', f'Price\\nceiling (Rs {P_ceiling})', f'Tax\\n(Rs {tax}/kg)', 'Monopoly\\n(est.)']
+scenarios = ['Free\
+market', f'Price\
+ceiling (Rs {P_ceiling})', f'Tax\
+(Rs {tax}/kg)', 'Monopoly\
+(est.)']
 cs_vals = [CS, 0.5*(P_max - P_ceiling)*Q_supplied, 0.5*(P_max - P_eq_tax)*Q_eq_tax, 0.5*(P_max-18)*200]
 ps_vals = [PS, 0.5*(P_ceiling - P_min)*Q_supplied, 0.5*(P_seller - P_min)*Q_eq_tax, 0.5*(18-P_min)*200]
 gov_rev = [0, 0, tax * Q_eq_tax, 0]
@@ -436,11 +447,14 @@ plt.show()
 print("=" * 60)
 print("    MARKET EQUILIBRIUM & WELFARE ANALYSIS")
 print("=" * 60)
-print(f"\\nFree market: CS = Rs {CS:.0f}, PS = Rs {PS:.0f}, Total = Rs {CS+PS:.0f}")
-print(f"\\nPrice ceiling (Rs {P_ceiling}):")
+print(f"\
+Free market: CS = Rs {CS:.0f}, PS = Rs {PS:.0f}, Total = Rs {CS+PS:.0f}")
+print(f"\
+Price ceiling (Rs {P_ceiling}):")
 print(f"  Shortage: {Q_demanded - Q_supplied:.0f} kg")
 print(f"  DWL: Rs {DWL_simple:.0f}")
-print(f"\\nTax (Rs {tax}/kg):")
+print(f"\
+Tax (Rs {tax}/kg):")
 print(f"  Buyer burden: Rs {buyer_burden:.1f}/kg ({buyer_burden/tax*100:.0f}% of tax)")
 print(f"  Seller burden: Rs {seller_burden:.1f}/kg ({seller_burden/tax*100:.0f}% of tax)")
 print(f"  Gov revenue: Rs {tax * Q_eq_tax:.0f}")`,
@@ -527,7 +541,8 @@ ax2.plot([22, 45], [22, 45], ':', color='gray', linewidth=0.5)
 diffs = np.abs(np.array(br1) - p2_range)
 ne_idx = np.argmin(diffs)
 ax2.plot(p2_range[ne_idx], br1[ne_idx], '*', color='#fbbf24', markersize=15, zorder=5)
-ax2.annotate(f'Nash Eq\\n({p2_range[ne_idx]:.0f}, {br1[ne_idx]:.0f})',
+ax2.annotate(f'Nash Eq\
+({p2_range[ne_idx]:.0f}, {br1[ne_idx]:.0f})',
             (p2_range[ne_idx], br1[ne_idx]), textcoords='offset points',
             xytext=(20, 20), color='#fbbf24', fontsize=10, fontweight='bold',
             arrowprops=dict(arrowstyle='->', color='#fbbf24'))
@@ -613,11 +628,14 @@ plt.show()
 print("=" * 60)
 print("    GAME THEORY — MARKET VENDOR STRATEGY")
 print("=" * 60)
-print(f"\\nNash equilibrium price: Rs {p2_range[ne_idx]:.0f}")
+print(f"\
+Nash equilibrium price: Rs {p2_range[ne_idx]:.0f}")
 print(f"Equilibrium profit: Rs {market_payoff(p2_range[ne_idx], p2_range[ne_idx]):.0f}")
-print(f"\\nCooperative profit (both at Rs 40): Rs {market_payoff(40, 40):.0f}")
+print(f"\
+Cooperative profit (both at Rs 40): Rs {market_payoff(40, 40):.0f}")
 print(f"Defection profit (Rs 28 vs Rs 40): Rs {market_payoff(28, 40):.0f}")
-print(f"\\nTournament rankings:")
+print(f"\
+Tournament rankings:")
 for rank, i in enumerate(sorted_idx):
     print(f"  #{rank+1}: {strategy_names[i]:<15} avg profit = Rs {avg_profits[i]:.0f}")`,
       challenge: 'Implement an evolutionary game theory simulation: start with equal populations of each strategy, and after each round, strategies with above-average profit grow while below-average ones shrink. Show which strategy eventually dominates the market.',
@@ -757,10 +775,12 @@ plt.show()
 print("=" * 60)
 print("    SEASONAL ECONOMICS — TURA MARKET")
 print("=" * 60)
-print(f"\\nPrice volatility analysis (5-year data):")
+print(f"\
+Price volatility analysis (5-year data):")
 for name, vol, cv, sr in vol_data:
     print(f"  {name:<15}: CV = {cv:.2f}, seasonal range = Rs {sr:.1f}/kg")
-print(f"\\nStorage opportunity analysis (ginger):")
+print(f"\
+Storage opportunity analysis (ginger):")
 harvest_price = np.mean(all_prices['Ginger'][months == 10])
 lean_price = np.mean(all_prices['Ginger'][months == 5])
 print(f"  Harvest price (Nov): Rs {harvest_price:.0f}/kg")
@@ -843,7 +863,8 @@ for a in range(n_aggregators):
     ax.text(0.48, agg_y[a], f'A{a+1}', color='white', fontsize=8, va='center')
 ax.scatter(*market_pos, s=200, c='#ef4444', zorder=5, marker='D',
           edgecolors='white', linewidths=1)
-ax.text(0.73, 0.5, 'TURA\\nMARKET', color='white', fontsize=9, va='center', fontweight='bold')
+ax.text(0.73, 0.5, 'TURA\
+MARKET', color='white', fontsize=9, va='center', fontweight='bold')
 ax.set_xlim(0, 0.9); ax.set_ylim(0, 1)
 ax.set_title('Supply Chain Network', color='white', fontsize=12, fontweight='bold')
 ax.axis('off')
@@ -864,13 +885,18 @@ ax2.set_title(f'Supply Concentration (HHI = {hhi:.0f})', color='white', fontsize
 ax2.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
 ax2.text(n_villages-3, max(sorted_shares)*90,
-         f'HHI < 1500: competitive\\nHHI > 2500: concentrated',
+         f'HHI < 1500: competitive\
+HHI > 2500: concentrated',
          color='gray', fontsize=8)
 
 # Plot 3: Price markup along supply chain
 ax3 = axes[1, 0]
 ax3.set_facecolor('#111827')
-chain_stages = ['Farm\\ngate', 'Village\\naggregator', 'Transport', 'Wholesale\\n(Tura)', 'Retail\\nvendor', 'Consumer']
+chain_stages = ['Farm\
+gate', 'Village\
+aggregator', 'Transport', 'Wholesale\
+(Tura)', 'Retail\
+vendor', 'Consumer']
 ginger_prices = [30, 34, 38, 44, 55, 55]
 rice_prices = [22, 24, 26, 29, 33, 33]
 orange_prices = [12, 15, 18, 23, 30, 30]
@@ -937,13 +963,16 @@ plt.show()
 print("=" * 60)
 print("    MARKET NETWORK ANALYSIS — TURA")
 print("=" * 60)
-print(f"\\nNetwork: {n_villages} villages → {n_aggregators} aggregators → 1 market")
+print(f"\
+Network: {n_villages} villages → {n_aggregators} aggregators → 1 market")
 print(f"Total weekly supply: {total_supply:.0f} kg")
 print(f"HHI: {hhi:.0f} ({'concentrated' if hhi > 2500 else 'moderate' if hhi > 1500 else 'competitive'})")
-print(f"\\nTop suppliers:")
+print(f"\
+Top suppliers:")
 for v in np.argsort(village_shares)[::-1][:5]:
     print(f"  Village {v+1}: {village_shares[v]*100:.1f}% of supply")
-print(f"\\nFarmer share of retail price:")
+print(f"\
+Farmer share of retail price:")
 for name, prices in [('Ginger', ginger_prices), ('Rice', rice_prices), ('Oranges', orange_prices)]:
     print(f"  {name}: {prices[0]/prices[-1]*100:.0f}% (Rs {prices[0]} of Rs {prices[-1]})")`,
       challenge: 'Model the effect of a new road connecting two previously isolated village clusters. Show how this changes supply patterns, reduces prices, and improves farmer incomes by shortening the supply chain.',
@@ -994,8 +1023,10 @@ ax.axhline(0, color='white', linewidth=0.3)
 ax.axvline(0, color='white', linewidth=0.3)
 ax.fill_between(x[x<0], v[x<0], v_rational[x<0], alpha=0.2, color='#ef4444', label='Loss aversion')
 ax.fill_between(x[x>0], v[x>0], v_rational[x>0], alpha=0.2, color='#22c55e')
-ax.annotate('Losses loom larger\\nthan gains', (-60, -5), color='#ef4444', fontsize=10, fontweight='bold')
-ax.annotate('Diminishing\\nsensitivity', (60, 3), color='#22c55e', fontsize=10)
+ax.annotate('Losses loom larger\
+than gains', (-60, -5), color='#ef4444', fontsize=10, fontweight='bold')
+ax.annotate('Diminishing\
+sensitivity', (60, 3), color='#22c55e', fontsize=10)
 ax.set_xlabel('Outcome (Rs)', color='white')
 ax.set_ylabel('Perceived value', color='white')
 ax.set_title('Prospect Theory Value Function', color='white', fontsize=12, fontweight='bold')
@@ -1046,8 +1077,10 @@ ax3.plot(p, w, color='#3b82f6', linewidth=2.5, label='Weighted probability')
 ax3.plot([0, 1], [0, 1], '--', color='gray', linewidth=1, label='Objective probability')
 ax3.fill_between(p, w, p, where=w > p, alpha=0.2, color='#ef4444', label='Overweighted')
 ax3.fill_between(p, w, p, where=w < p, alpha=0.2, color='#22c55e', label='Underweighted')
-ax3.annotate('Rare events\\noverestimated', (0.1, 0.25), color='#ef4444', fontsize=10)
-ax3.annotate('Common events\\nunderestimated', (0.7, 0.5), color='#22c55e', fontsize=10)
+ax3.annotate('Rare events\
+overestimated', (0.1, 0.25), color='#ef4444', fontsize=10)
+ax3.annotate('Common events\
+underestimated', (0.7, 0.5), color='#22c55e', fontsize=10)
 ax3.set_xlabel('Objective probability', color='white')
 ax3.set_ylabel('Decision weight', color='white')
 ax3.set_title('Probability Weighting Function', color='white', fontsize=12, fontweight='bold')
@@ -1071,7 +1104,8 @@ ax4_twin = ax4.twinx()
 ax4_twin.plot(offers, expected_payoff_proposer, 's-', color='#ef4444', linewidth=2, label='Expected payoff')
 ax4_twin.plot(offers, rational_payoff, ':', color='gray', linewidth=1, label='Rational prediction')
 ax4.axvline(20, color='#fbbf24', linestyle='--', linewidth=1)
-ax4.text(21, 30, 'Fairness\\nthreshold', color='#fbbf24', fontsize=9)
+ax4.text(21, 30, 'Fairness\
+threshold', color='#fbbf24', fontsize=9)
 ax4.set_xlabel('Offer (Rs out of 100)', color='white')
 ax4.set_ylabel('Acceptance rate (%)', color='#3b82f6')
 ax4_twin.set_ylabel('Proposer expected payoff (Rs)', color='#ef4444')
@@ -1086,12 +1120,14 @@ plt.show()
 print("=" * 60)
 print("    BEHAVIORAL ECONOMICS — MARKET BIASES")
 print("=" * 60)
-print(f"\\nAnchoring effect:")
+print(f"\
+Anchoring effect:")
 print(f"  Fair price: Rs {fair_price}")
 print(f"  High anchor ({high_anchor}) → avg final: Rs {np.mean(final_prices_high):.0f} (+{np.mean(final_prices_high)-fair_price:.0f} bias)")
 print(f"  Low anchor ({low_anchor}) → avg final: Rs {np.mean(final_prices_low):.0f} ({np.mean(final_prices_low)-fair_price:+.0f} bias)")
 print(f"  Anchoring gap: Rs {np.mean(final_prices_high) - np.mean(final_prices_low):.0f}")
-print(f"\\nLoss aversion (λ = 2.25):")
+print(f"\
+Loss aversion (λ = 2.25):")
 print(f"  Gaining Rs 50 feels like: {prospect_value(50):.1f}")
 print(f"  Losing Rs 50 feels like: {prospect_value(-50):.1f}")
 print(f"  Loss hurts {abs(prospect_value(-50))/prospect_value(50):.1f}x more than gain pleases")`,

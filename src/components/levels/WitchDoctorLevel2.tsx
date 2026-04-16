@@ -229,12 +229,14 @@ ax1.fill_between(line_a, line_b, ec50_b, alpha=0.1, color='#ef4444')
 
 # Synergistic combination (below line)
 ax1.plot(3, 5, 'o', color='#22c55e', markersize=12, label='Synergistic (CI=0.55)')
-ax1.annotate('3mg A + 5mg B\\n= 50% effect!', xy=(3, 5), xytext=(4.5, 8),
+ax1.annotate('3mg A + 5mg B\
+= 50% effect!', xy=(3, 5), xytext=(4.5, 8),
              color='#22c55e', fontsize=9, arrowprops=dict(arrowstyle='->', color='#22c55e'))
 
 # Antagonistic combination (above line)
 ax1.plot(7, 16, 'o', color='#ef4444', markersize=12, label='Antagonistic (CI=1.5)')
-ax1.annotate('7mg A + 16mg B\\n= only 50% effect', xy=(7, 16), xytext=(2, 18),
+ax1.annotate('7mg A + 16mg B\
+= only 50% effect', xy=(7, 16), xytext=(2, 18),
              color='#ef4444', fontsize=9, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
 ax1.set_xlabel(f'Drug A dose (mg) [EC50={ec50_a}]', color='white')
@@ -242,8 +244,10 @@ ax1.set_ylabel(f'Drug B dose (mg) [EC50={ec50_b}]', color='white')
 ax1.set_title('Isobologram: Visualizing Drug Interactions', color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9)
 ax1.tick_params(colors='gray')
-ax1.text(2, 2, 'SYNERGY\\nZONE', color='#22c55e', fontsize=12, alpha=0.5)
-ax1.text(6, 14, 'ANTAGONISM\\nZONE', color='#ef4444', fontsize=12, alpha=0.5)
+ax1.text(2, 2, 'SYNERGY\
+ZONE', color='#22c55e', fontsize=12, alpha=0.5)
+ax1.text(6, 14, 'ANTAGONISM\
+ZONE', color='#ef4444', fontsize=12, alpha=0.5)
 
 # Combination Index for various ratios
 ratios = np.linspace(0, 1, 50)  # fraction of dose that is Drug A
@@ -340,7 +344,11 @@ ax1.text(15, 10, 'Ineffective zone', color='gray', fontsize=9, alpha=0.7)
 
 # Population distribution of metabolizer types
 ax2.set_facecolor('#111827')
-labels = ['Ultra-rapid\\n(5%)', 'Rapid\\n(11%)', 'Normal\\n(77%)', 'Poor\\n(7%)']
+labels = ['Ultra-rapid\
+(5%)', 'Rapid\
+(11%)', 'Normal\
+(77%)', 'Poor\
+(7%)']
 sizes = [5, 11, 77, 7]
 bar_colors = ['#3b82f6', '#60a5fa', '#22c55e', '#ef4444']
 bars = ax2.bar(labels, sizes, color=bar_colors, width=0.6)

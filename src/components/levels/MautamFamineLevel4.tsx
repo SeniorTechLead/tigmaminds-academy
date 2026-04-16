@@ -119,9 +119,11 @@ conn.commit()
 print("MAUTAM ECOLOGICAL MONITORING DATABASE")
 print("=" * 60)
 
-print("\\nTotal observations:", c.execute('SELECT COUNT(*) FROM observations').fetchone()[0])
+print("\
+Total observations:", c.execute('SELECT COUNT(*) FROM observations').fetchone()[0])
 
-print("\\nRat populations by site (2007 peak vs 2006 baseline):")
+print("\
+Rat populations by site (2007 peak vs 2006 baseline):")
 for row in c.execute('''
     SELECT s.name, s.dist_to_bamboo_km,
         AVG(CASE WHEN o.year=2006 THEN o.count END) as baseline,
@@ -136,7 +138,8 @@ for row in c.execute('''
 '''):
     print(f"  {row[0]:<25} ({row[1]}km) baseline:{row[2]:>6.0f} peak:{row[3]:>6.0f} ratio:{row[4]}x")
 
-print("\\nCrop impact by distance to bamboo:")
+print("\
+Crop impact by distance to bamboo:")
 for row in c.execute('''
     SELECT s.dist_to_bamboo_km,
         AVG(CASE WHEN o.year=2006 THEN o.count END) as normal,
@@ -267,7 +270,8 @@ conn.commit()
 print("MAUTAM EARLY WARNING SYSTEM — REPORT")
 print("=" * 60)
 
-print("\\nAlert timeline:")
+print("\
+Alert timeline:")
 print(f"{'Date':<12} {'Level':<8} {'Triggers':<35} {'Action'}")
 print("-" * 90)
 for row in c.execute('''
@@ -276,12 +280,14 @@ for row in c.execute('''
 '''):
     print(f"{row[1]}-{row[0]:02d}     {row[2]:<8} {row[3]:<35} {row[4]}")
 
-print("\\nAlert counts by level:")
+print("\
+Alert counts by level:")
 for row in c.execute('SELECT level, COUNT(*) FROM alerts GROUP BY level ORDER BY COUNT(*) DESC'):
     bar = "█" * row[1]
     print(f"  {row[0]:<8}: {row[1]:>3} months  {bar}")
 
-print("\\nFirst RED alert:", c.execute("SELECT year||'-'||printf('%02d',month) FROM alerts WHERE level='RED' ORDER BY year,month LIMIT 1").fetchone()[0])
+print("\
+First RED alert:", c.execute("SELECT year||'-'||printf('%02d',month) FROM alerts WHERE level='RED' ORDER BY year,month LIMIT 1").fetchone()[0])
 print("Lead time before peak rats:", end=" ")
 peak = c.execute("SELECT year,month FROM indicators ORDER BY rat_trap_count DESC LIMIT 1").fetchone()
 first_red = c.execute("SELECT year,month FROM alerts WHERE level='RED' ORDER BY year,month LIMIT 1").fetchone()
@@ -411,7 +417,8 @@ print("MAUTAM RESOURCE ALLOCATION — GREEDY OPTIMIZER")
 print(f"Budget: {TOTAL_BUDGET:,} INR")
 print("=" * 70)
 
-print(f"\\n{'Site':<20} {'Intervention':<18} {'Units':>6} {'Saved(ha)':>10} {'Cost':>10}")
+print(f"\
+{'Site':<20} {'Intervention':<18} {'Units':>6} {'Saved(ha)':>10} {'Cost':>10}")
 print("-" * 70)
 for row in c.execute('''
     SELECT s.name, i.name, a.units, a.expected_crop_saved, a.cost
@@ -420,12 +427,14 @@ for row in c.execute('''
 '''):
     print(f"{row[0]:<20} {row[1]:<18} {row[2]:>6} {row[3]:>10.1f} {row[4]:>10,}")
 
-print(f"\\nBudget used: {TOTAL_BUDGET - budget_remaining:,} / {TOTAL_BUDGET:,} INR")
+print(f"\
+Budget used: {TOTAL_BUDGET - budget_remaining:,} / {TOTAL_BUDGET:,} INR")
 print(f"Total crop saved: {total_saved:.0f} hectare-equivalents")
 print(f"Cost per hectare saved: {(TOTAL_BUDGET - budget_remaining) / max(total_saved, 1):.0f} INR")
 
 # Summary by site
-print("\\nAllocation by site:")
+print("\
+Allocation by site:")
 for row in c.execute('''
     SELECT s.name, COUNT(*) as interventions, SUM(a.cost) as total_cost,
            SUM(a.expected_crop_saved) as total_saved
@@ -561,7 +570,8 @@ for scen in scenarios:
 conn.commit()
 
 # Compare scenarios
-print(f"\\n{'Scenario':<18} {'Crop%':>7} {'Famine':>8} {'Budget':>10} {'Loss':>10} {'Net Cost':>10}")
+print(f"\
+{'Scenario':<18} {'Crop%':>7} {'Famine':>8} {'Budget':>10} {'Loss':>10} {'Net Cost':>10}")
 print(f"{'':18} {'(median)':>7} {'(months)':>8} {'Spent':>10} {'Value':>10} {'(total)':>10}")
 print("-" * 70)
 
@@ -578,7 +588,8 @@ for row in c.execute('''
     print(f"{row[0]:<18} {row[1]:>7.1f} {row[2]:>8.1f} {row[3]:>10,.0f} {row[4]:>10,.0f} {row[5]:>10,.0f}")
 
 # Risk analysis: worst case
-print("\\nWorst-case analysis (10th percentile crop survival):")
+print("\
+Worst-case analysis (10th percentile crop survival):")
 for row in c.execute('''
     SELECT s.name, MIN(r.final_crop_pct), MAX(r.months_famine)
     FROM results r JOIN scenarios s ON r.scenario_id = s.id
@@ -592,7 +603,8 @@ best = c.execute('''
     FROM results r JOIN scenarios s ON r.scenario_id=s.id
     GROUP BY s.id ORDER BY 2 LIMIT 1
 ''').fetchone()
-print(f"\\nOptimal strategy: {best[0]} (total cost: {best[1]:,.0f} INR)")
+print(f"\
+Optimal strategy: {best[0]} (total cost: {best[1]:,.0f} INR)")
 
 conn.close()`,
       challenge: 'Add a "budget sensitivity" analysis: for the proactive scenario, vary the budget from 100k to 1M INR in 10 steps. Plot total cost (budget + crop loss) vs budget. Is there an optimal budget level? This is the "investment sweet spot" that policy-makers need.',

@@ -426,7 +426,9 @@ params[5] = best_peak; params[6] = best_hold
 sched = FiringSchedule(params)
 result = _quick_sim(m, sched.to_schedule())
 
-components = ['Fuel', 'Time', 'Porosity\\npenalty', 'Stress\\npenalty']
+components = ['Fuel', 'Time', 'Porosity\
+penalty', 'Stress\
+penalty']
 values = [result['total_fuel'], result['time'][-1] * 0.5,
           max(0, result['porosity'][-1] - 0.10) * 1000,
           max(0, np.max(result['stress']) - 60e6) / 1e6 * 200]
@@ -674,7 +676,8 @@ print("Optimization comparison:")
 print(f"  Random search: cost = {best_random_cost:.1f}")
 print(f"  Hill climbing:  cost = {best_hc_cost:.1f}")
 print(f"  Improvement: {(best_random_cost - best_hc_cost) / best_random_cost * 100:.1f}%")
-print(f"\\nBest schedule (hill climbing):")
+print(f"\
+Best schedule (hill climbing):")
 for name, val, (lo, hi) in zip(param_names, best_hc_params, bounds):
     print(f"  {name:>12s}: {val:8.1f}  (range: {lo}-{hi})")`,
       challenge: 'Implement simulated annealing: start with a "temperature" of 100 that decays by 0.99 each iteration. Accept worse solutions with probability exp(-delta_cost / temperature). Does it find better solutions than pure hill climbing?',
@@ -829,11 +832,13 @@ if len(pareto_points) > 0:
     # Annotate key points
     if len(pf) >= 3:
         # Lowest fuel
-        axes[1, 0].annotate(f'Cheapest\\n({pf[0,0]:.0f}kg, {pf[0,2]:.1f}%)',
+        axes[1, 0].annotate(f'Cheapest\
+({pf[0,0]:.0f}kg, {pf[0,2]:.1f}%)',
                             xy=(pf[0,0], pf[0,2]), color='#3b82f6', fontsize=8)
         # Best quality (lowest porosity)
         best_q = np.argmin(pf[:, 2])
-        axes[1, 0].annotate(f'Best quality\\n({pf[best_q,0]:.0f}kg, {pf[best_q,2]:.1f}%)',
+        axes[1, 0].annotate(f'Best quality\
+({pf[best_q,0]:.0f}kg, {pf[best_q,2]:.1f}%)',
                             xy=(pf[best_q,0], pf[best_q,2]), color='#22c55e', fontsize=8)
 
 # Parameter distributions along Pareto front
@@ -856,7 +861,8 @@ if len(pareto_params) > 0:
 plt.tight_layout()
 plt.show()
 
-print(f"\\nPareto analysis summary:")
+print(f"\
+Pareto analysis summary:")
 print(f"  Total solutions evaluated: {len(results)}")
 print(f"  Pareto optimal: {len(pareto_points)} ({len(pareto_points)/len(results)*100:.1f}%)")
 if len(pareto_points) > 0:
@@ -1048,7 +1054,8 @@ print(f"Robustness analysis:")
 print(f"  Nominal survival rate: {survival_pct:.1f}%")
 print(f"  Safety margin for 99% survival: {target_99:.2f}x slowdown")
 print(f"  Fuel cost at 99% survival: {costs_at_margins[np.argmin(np.abs(np.array(survival_rates)-99))]:.0f} kg")
-print(f"\\nMost sensitive parameter: {param_names[sorted_idx[-1]]}")
+print(f"\
+Most sensitive parameter: {param_names[sorted_idx[-1]]}")
 print(f"Least sensitive parameter: {param_names[sorted_idx[0]]}")`,
       challenge: 'Implement a robust optimizer that minimizes mean + 2×std of cost across 100 Monte Carlo samples. How does the robust optimum differ from the nominal optimum?',
       successHint: 'Sensitivity analysis is the bridge between theory and practice. A model that ignores uncertainty is a toy; a model that quantifies uncertainty is a tool. This capstone taught you to build tools.',
@@ -1206,7 +1213,8 @@ for clay, product in configs:
     params, cost = opt.optimize()
     analysis = opt.analyze(params)
     all_results[(clay, product)] = {'params': params, 'cost': cost, 'analysis': analysis, 'opt': opt}
-    print(f"\\n{clay} → {product}:")
+    print(f"\
+{clay} → {product}:")
     print(f"  Peak temp: {params[5]:.0f}°C, Hold: {params[6]:.1f}h")
     print(f"  Survival rate: {np.mean(analysis['survived'])*100:.1f}%")
     print(f"  Mean porosity: {np.mean(analysis['porosity']):.1f}%")
@@ -1322,16 +1330,19 @@ axes[1, 2].set_title('Optimization summary', color='white', fontsize=11)
 plt.tight_layout()
 plt.show()
 
-print("\\n" + "=" * 60)
+print("\
+" + "=" * 60)
 print("  OPTIMIZATION COMPLETE")
 print("=" * 60)
-print("\\nThe Kiln Temperature Optimizer combines:")
+print("\
+The Kiln Temperature Optimizer combines:")
 print("  1. Thermal physics (heat transfer, sintering)")
 print("  2. Optimization algorithms (hill climbing, random restarts)")
 print("  3. Multi-objective analysis (Pareto fronts)")
 print("  4. Uncertainty quantification (Monte Carlo)")
 print("  5. Decision support (dashboard visualization)")
-print("\\nThis is the same architecture used in industrial process control.")`,
+print("\
+This is the same architecture used in industrial process control.")`,
       challenge: 'Add a fourth configuration: "Porcelain (kaolin-rich)" making "Porcelain ware". This requires the highest firing temperature and lowest porosity. Does the optimizer find a viable schedule, or are the constraints too tight for the given clay properties?',
       successHint: 'You built a complete engineering design tool from first principles. The little potter shaped clay by hand; you shaped a kiln schedule by mathematics. Both require understanding the material — the difference is that your understanding scales to any clay, any kiln, any product.',
     },

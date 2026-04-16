@@ -148,7 +148,11 @@ ax2.legend(fontsize=8)
 ax3 = axes[1, 0]
 ax3.set_facecolor('#111827')
 ax3.tick_params(colors='gray')
-metrics = ['Max cargo\\n(kg)', 'GM\\n(m)', 'Draft\\n(cm)', 'R @ 2m/s\\n(N)']
+metrics = ['Max cargo\
+(kg)', 'GM\
+(m)', 'Draft\
+(cm)', 'R @ 2m/s\
+(N)']
 values = []
 for d in designs:
     max_cargo_d = rho * d.displaced_volume(d.D) - hull_mass
@@ -548,7 +552,11 @@ ax3.legend(fontsize=8)
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
 ax4.tick_params(colors='gray')
-constraints = ['Draft\\n< 0.40m', 'GM\\n> 0.30m', 'Freeboard\\n> 0.15m', 'L/B\\nin [2.5, 6]']
+constraints = ['Draft\
+< 0.40m', 'GM\
+> 0.30m', 'Freeboard\
+> 0.15m', 'L/B\
+in [2.5, 6]']
 # Evaluate best design
 z = np.linspace(0.001, D_opt, 200)
 y = (B_opt/2)*(z/D_opt)**(1/max(a_opt,0.5))
@@ -907,7 +915,8 @@ plt.show()
 print("Seasonal Performance Summary (boat speed through water = 3 m/s)")
 print("=" * 65)
 for dname, (L,B,D,a) in designs.items():
-    print(f"\\n{dname} (L={L}, B={B}, D={D}, alpha={a}):")
+    print(f"\
+{dname} (L={L}, B={B}, D={D}, alpha={a}):")
     for s in s_names:
         cond = seasons[s]
         r = resistance_in_conditions(L, B, D, a, boat_speed, cond['current'], cond['sediment'])

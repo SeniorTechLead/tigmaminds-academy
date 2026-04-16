@@ -284,7 +284,8 @@ le_vals = [results[n]['lum_eff'] for n in names_le]
 colors_le = [systems[n]['color'] for n in names_le]
 bars = ax.barh(names_le, le_vals, color=colors_le, alpha=0.8)
 ax.axvline(683, color='white', linewidth=1, linestyle='--', alpha=0.3)
-ax.text(683, -0.5, 'Max possible\\n(555 nm mono)', color='gray', fontsize=7)
+ax.text(683, -0.5, 'Max possible\
+(555 nm mono)', color='gray', fontsize=7)
 for bar, v in zip(bars, le_vals):
     ax.text(bar.get_width() + 5, bar.get_y() + bar.get_height()/2,
             f'{v:.0f} lm/W', color='white', fontsize=9, va='center')

@@ -296,7 +296,8 @@ for name, props in animals.items():
     dist = props['speed'] * props['endurance'] / 3600  # km
     ax2.scatter(props['speed'], props['endurance'], s=dist*50+50,
                 color=props['color'], alpha=0.7, edgecolors='white', linewidth=0.5)
-    ax2.annotate(f"{name}\\n({dist:.1f}km)", xy=(props['speed'], props['endurance']),
+    ax2.annotate(f"{name}\
+({dist:.1f}km)", xy=(props['speed'], props['endurance']),
                  xytext=(5, 5), textcoords='offset points', color=props['color'], fontsize=8)
 
 ax2.set_xlabel('Top speed (km/h)', color='white')
@@ -363,7 +364,8 @@ for name, props in animals.items():
     speed = props['length'] * props['freq']
     ax.scatter(props['length'], props['freq'], s=speed*30+50,
                color=props['color'], alpha=0.8, edgecolors='white', linewidth=1)
-    ax.annotate(f"{name}\\n{speed:.1f} m/s", xy=(props['length'], props['freq']),
+    ax.annotate(f"{name}\
+{speed:.1f} m/s", xy=(props['length'], props['freq']),
                 xytext=(10, 5), textcoords='offset points', color=props['color'], fontsize=9)
 
 # Add iso-speed lines

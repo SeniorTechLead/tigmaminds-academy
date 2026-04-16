@@ -49,7 +49,8 @@ R = 200.0
 print("=== Concave Mirror Ray Tracing ===")
 print(f"Radius of curvature: {R:.0f} mm")
 print(f"Paraxial focal length (f = R/2): {R/2:.0f} mm")
-print(f"\\n{'Ray height (mm)':<18} {'Axis crossing (mm)':>20} {'Deviation from f':>18}")
+print(f"\
+{'Ray height (mm)':<18} {'Axis crossing (mm)':>20} {'Deviation from f':>18}")
 print("-" * 58)
 
 for y in [5, 10, 20, 40, 60, 80, 95]:
@@ -57,17 +58,20 @@ for y in [5, 10, 20, 40, 60, 80, 95]:
     dev = x_cross - R/2
     print(f"{y:<18.0f} {x_cross:>18.2f} {dev:>16.2f}")
 
-print("\\nRays far from the axis cross CLOSER to the mirror — this")
+print("\
+Rays far from the axis cross CLOSER to the mirror — this")
 print("is SPHERICAL ABERRATION. Only paraxial (near-axis) rays")
 print("focus exactly at f = R/2.")
 
 # Refraction at curved surface
-print("\\n=== Refraction at a Curved Glass Surface ===")
+print("\
+=== Refraction at a Curved Glass Surface ===")
 n1, n2 = 1.0, 1.5  # air to glass
 R_lens = 100.0      # mm
 
 print(f"n1 = {n1} (air), n2 = {n2} (glass), R = {R_lens} mm")
-print(f"\\n{'Object dist (mm)':<20} {'Image dist (mm)':>18} {'Magnification':>15}")
+print(f"\
+{'Object dist (mm)':<20} {'Image dist (mm)':>18} {'Magnification':>15}")
 print("-" * 55)
 
 for s_obj in [500, 300, 200, 150, 120]:
@@ -121,7 +125,8 @@ def lensmaker(n, R1, R2):
 f = 50.0  # mm
 print("=== Thin Lens Image Formation ===")
 print(f"Focal length: {f:.0f} mm (converging lens)")
-print(f"\\n{'Object dist':>12} {'Image dist':>12} {'Magnif.':>10} {'Image type':<20}")
+print(f"\
+{'Object dist':>12} {'Image dist':>12} {'Magnif.':>10} {'Image type':<20}")
 print("-" * 56)
 
 for d_obj in [200, 150, 100, 75, 60, 50.1, 40, 30, 20]:
@@ -134,11 +139,13 @@ for d_obj in [200, 150, 100, 75, 60, 50.1, 40, 30, 20]:
         img_type = "virtual, upright"
     print(f"{d_obj:>10.1f} mm {d_img:>10.1f} mm {mag:>+9.2f} {img_type:<20}")
 
-print(f"\\nAt d_obj = f ({f:.0f} mm): rays emerge parallel — image at infinity")
+print(f"\
+At d_obj = f ({f:.0f} mm): rays emerge parallel — image at infinity")
 print(f"At d_obj < f: image is virtual (same side as object), upright, magnified")
 
 # Lensmaker equation — design a lens
-print("\\n=== Lens Design (Lensmaker Equation) ===")
+print("\
+=== Lens Design (Lensmaker Equation) ===")
 print(f"{'Glass type':<18} {'n':>5} {'R1 (mm)':>8} {'R2 (mm)':>8} {'f (mm)':>8}")
 print("-" * 49)
 
@@ -154,7 +161,8 @@ for name, n, R1, R2 in designs:
     f_calc = lensmaker(n, R1, R2)
     print(f"{name:<18} {n:>5.2f} {R1:>6.0f} {R2:>6.0f} {f_calc:>8.1f}")
 
-print("\\nHigher refractive index → shorter focal length → stronger lens")
+print("\
+Higher refractive index → shorter focal length → stronger lens")
 print("This is why diamond sparkles — its high n bends light sharply")`,
       challenge: 'A two-lens system: lens 1 (f₁ = 50 mm) forms an image that becomes the object for lens 2 (f₂ = 30 mm), separated by 120 mm. Calculate the final image position and total magnification. This is how microscopes and telescopes work — multiple lenses in sequence.',
       successHint: 'The thin lens equation is used every day by optometrists prescribing glasses, photographers choosing lenses, and engineers designing projectors. You now understand the core equation that governs all image-forming optics.',
@@ -211,10 +219,12 @@ for name, n1, n2 in interfaces:
     print(f"{name:<28} {n1:>5.2f} {n2:>5.2f} {theta_c:>7.1f}")
 
 # Trace light at various angles through glass-air interface
-print("\\n=== Light at Glass-Air Interface (n=1.5 → n=1.0) ===")
+print("\
+=== Light at Glass-Air Interface (n=1.5 → n=1.0) ===")
 n1, n2 = 1.50, 1.00
 theta_c = critical_angle(n1, n2)
-print(f"Critical angle: {theta_c:.1f}°\\n")
+print(f"Critical angle: {theta_c:.1f}°\
+")
 print(f"{'Incidence (°)':>14} {'Refracted (°)':>14} {'Outcome':<20}")
 print("-" * 50)
 
@@ -227,7 +237,8 @@ for theta_i in range(0, 90, 5):
     print(f"{theta_i:>12}° {'---' if theta_r is None else f'{theta_r:.1f}°':>13} {outcome}")
 
 # Optical fibre simulation
-print("\\n=== Optical Fibre: Light Bounces Over 1 km ===")
+print("\
+=== Optical Fibre: Light Bounces Over 1 km ===")
 fibre_n_core = 1.48
 fibre_n_clad = 1.46
 fibre_theta_c = critical_angle(fibre_n_core, fibre_n_clad)
@@ -286,7 +297,8 @@ wavelength = 550    # nm (green light)
 
 print("=== Single Slit Diffraction Pattern ===")
 print(f"Slit width: {slit_width_um} µm | Wavelength: {wavelength} nm")
-print(f"\\n{'Angle (°)':>10} {'Intensity':>10} {'Bar chart':<30}")
+print(f"\
+{'Angle (°)':>10} {'Intensity':>10} {'Bar chart':<30}")
 print("-" * 52)
 
 for theta in np.arange(-3.0, 3.1, 0.25):
@@ -295,7 +307,8 @@ for theta in np.arange(-3.0, 3.1, 0.25):
     print(f"{theta:>9.2f}° {I:>9.4f} {bar}")
 
 # Minima positions
-print(f"\\n=== Minima Positions ===")
+print(f"\
+=== Minima Positions ===")
 print(f"{'Order m':>8} {'Angle (°)':>10} {'Position on screen at 1m (mm)':>30}")
 print("-" * 50)
 a_nm = slit_width_um * 1000
@@ -308,7 +321,8 @@ for m in [1, 2, 3, 4, 5]:
     print(f"{m:>8} {theta_deg:>9.3f}° {pos_mm:>28.2f}")
 
 # Compare different slit widths
-print(f"\\n=== Central Band Width vs Slit Width ===")
+print(f"\
+=== Central Band Width vs Slit Width ===")
 print(f"{'Slit (µm)':>10} {'Central band (°)':>18} {'At 1m screen (mm)':>20}")
 print("-" * 50)
 for a in [10, 25, 50, 100, 200, 500]:
@@ -321,7 +335,8 @@ for a in [10, 25, 50, 100, 200, 500]:
     width_mm = 2 * 1000 * np.tan(np.radians(theta_1))
     print(f"{a:>10} {width_deg:>16.2f}° {width_mm:>18.1f}")
 
-print("\\nNarrower slit → wider diffraction pattern (inverse relationship)")`,
+print("\
+Narrower slit → wider diffraction pattern (inverse relationship)")`,
       challenge: 'Compare diffraction patterns for red (700 nm), green (550 nm), and blue (450 nm) light through the same slit. When white light hits a slit, each colour diffracts by a different amount — this is why diffraction gratings separate white light into a rainbow, just like a prism but by a completely different mechanism.',
       successHint: 'Diffraction is how we know light is a wave. It explains why microscopes have resolution limits (the Abbe diffraction limit), why radio antennas have beam widths, and why X-ray crystallography can reveal molecular structures. Every optical instrument is ultimately limited by diffraction.',
     },
@@ -377,7 +392,8 @@ wavelengths = [
 apex = 60  # degrees — standard prism
 
 print("=== Prism Dispersion Analysis ===")
-print(f"Apex angle: {apex}°\\n")
+print(f"Apex angle: {apex}°\
+")
 
 for glass_name, A, B in glasses:
     print(f"--- {glass_name} ---")
@@ -392,11 +408,13 @@ for glass_name, A, B in glasses:
         print(f"{lam:>8} nm {colour:<8} {n:>7.4f} {dev:>12.2f}°")
 
     spread = max(deviations) - min(deviations)
-    print(f"Angular spread (violet-red): {spread:.2f}°\\n")
+    print(f"Angular spread (violet-red): {spread:.2f}°\
+")
 
 # Compare dispersion power
 print("=== Abbe Number (Dispersion Power) ===")
-print("Lower Abbe number = higher dispersion\\n")
+print("Lower Abbe number = higher dispersion\
+")
 for glass_name, A, B in glasses:
     n_d = cauchy_n(587.6, A, B)  # yellow d-line
     n_F = cauchy_n(486.1, A, B)  # blue F-line
@@ -404,7 +422,8 @@ for glass_name, A, B in glasses:
     abbe = (n_d - 1) / (n_F - n_C)
     print(f"{glass_name:<24} Abbe number: {abbe:.1f}")
 
-print("\\nFlint glass has lower Abbe number = more dispersion")
+print("\
+Flint glass has lower Abbe number = more dispersion")
 print("Crown glass has higher Abbe number = less dispersion")
 print("Combining both corrects chromatic aberration (achromat)")`,
       challenge: 'An achromatic doublet combines a crown glass converging lens with a flint glass diverging lens to cancel chromatic aberration. If crown glass has Abbe number V₁ = 64 and flint glass V₂ = 25, and the desired combined focal length is 100 mm, calculate f₁ and f₂ using: f₁ = f × (1 - V₂/V₁) and f₂ = f × (1 - V₁/V₂). This is how every camera lens and telescope eyepiece is designed.',

@@ -302,7 +302,8 @@ function renderCounter() {
       '<button onclick="setCount(c => c + 1)">+</button>' +
       '<button class="secondary" onclick="setCount(0)">Reset</button>' +
     '</div>' +
-    '<div class="output">State: { count: ' + getCount() + ' }\\n' +
+    '<div class="output">State: { count: ' + getCount() + ' }\
+' +
     'React equivalent: const [count, setCount] = useState(0);</div>';
 }
 
@@ -372,7 +373,8 @@ function renderLibrary() {
     '<div style="margin-top:8px;font-size:12px;color:#64748b;">' +
       available + '/' + state.books.length + ' available' +
     '</div>' +
-    '<div class="output">' + (state.log.length ? state.log.join('\\n') : 'No actions yet — borrow a book!') + '</div>';
+    '<div class="output">' + (state.log.length ? state.log.join('\
+') : 'No actions yet — borrow a book!') + '</div>';
 }
 
 // ============================================
@@ -410,8 +412,10 @@ function renderTheme() {
       '<br/>Any component can subscribe — no prop drilling needed.' +
       '<br/>Current theme: <strong>' + theme + '</strong>' +
     '</div>' +
-    '<div class="output">Context value: "' + theme + '"\\n' +
-    'Any deeply nested component can call ThemeContext.get()\\n' +
+    '<div class="output">Context value: "' + theme + '"\
+' +
+    'Any deeply nested component can call ThemeContext.get()\
+' +
     'without receiving it as a prop through every parent.</div>';
 }
 
@@ -576,40 +580,55 @@ function runQuery(type) {
 
   switch (type) {
     case 'all_books':
-      sql = "SELECT books.title, authors.name AS author\\nFROM books\\nINNER JOIN authors ON books.author_id = authors.id";
+      sql = "SELECT books.title, authors.name AS author\
+FROM books\
+INNER JOIN authors ON books.author_id = authors.id";
       result = innerJoin(db.books, db.authors, 'author_id', 'id')
-        .map(function(r) { return '  ' + r.title + ' — by ' + r.name; }).join('\\n');
+        .map(function(r) { return '  ' + r.title + ' — by ' + r.name; }).join('\
+');
       break;
 
     case 'by_author':
-      sql = "SELECT title, year FROM books\\nWHERE author_id = 1  -- Nabajit Sharma";
+      sql = "SELECT title, year FROM books\
+WHERE author_id = 1  -- Nabajit Sharma";
       result = db.books.filter(b => b.author_id === 1)
-        .map(function(b) { return '  ' + b.title + ' (' + b.year + ')'; }).join('\\n');
+        .map(function(b) { return '  ' + b.title + ' (' + b.year + ')'; }).join('\
+');
       break;
 
     case 'with_genres':
-      sql = "SELECT books.title, genres.name AS genre\\nFROM books\\nJOIN book_genres ON books.id = book_genres.book_id\\nJOIN genres ON book_genres.genre_id = genres.id";
+      sql = "SELECT books.title, genres.name AS genre\
+FROM books\
+JOIN book_genres ON books.id = book_genres.book_id\
+JOIN genres ON book_genres.genre_id = genres.id";
       result = db.book_genres.map(bg => {
         const book = db.books.find(b => b.id === bg.book_id);
         const genre = db.genres.find(g => g.id === bg.genre_id);
         return '  ' + book.title + ' → ' + genre.name;
-      }).join('\\n');
+      }).join('\
+');
       break;
 
     case 'genre_count':
-      sql = "SELECT genres.name, COUNT(*) AS book_count\\nFROM book_genres\\nJOIN genres ON book_genres.genre_id = genres.id\\nGROUP BY genres.name";
+      sql = "SELECT genres.name, COUNT(*) AS book_count\
+FROM book_genres\
+JOIN genres ON book_genres.genre_id = genres.id\
+GROUP BY genres.name";
       const counts = {};
       db.book_genres.forEach(bg => {
         const g = db.genres.find(g => g.id === bg.genre_id).name;
         counts[g] = (counts[g] || 0) + 1;
       });
-      result = Object.entries(counts).map(function(e) { return '  ' + e[0] + ': ' + e[1] + ' book(s)'; }).join('\\n');
+      result = Object.entries(counts).map(function(e) { return '  ' + e[0] + ': ' + e[1] + ' book(s)'; }).join('\
+');
       break;
   }
 
   document.getElementById('query-output').innerHTML =
     '<div class="sql">' + sql + '</div>' +
-    '<div class="result"><strong>Result (' + result.split('\\n').length + ' rows):</strong>\\n' + result + '</div>';
+    '<div class="result"><strong>Result (' + result.split('\
+').length + ' rows):</strong>\
+' + result + '</div>';
 }
 </script>
 </body>
@@ -796,7 +815,8 @@ function callAPI(method, path, body) {
 
   document.getElementById('req-display').innerHTML =
     '<span class="method-label">' + method + '</span> <span class="url">' + path + '</span>' +
-    (body ? '\\nBody: ' + JSON.stringify(body) : '') +
+    (body ? '\
+Body: ' + JSON.stringify(body) : '') +
     '<span class="status ' + (isOk ? 'ok' : 'err') + '" id="status-display">' + response.status + ' ' + statusText + '</span>';
 
   document.getElementById('res-body').textContent = JSON.stringify(response.body, null, 2);
@@ -909,7 +929,8 @@ function createJWT(payload) {
 function log(msg) {
   const el = document.getElementById('security-log');
   const time = new Date().toLocaleTimeString();
-  el.textContent += '\\n[' + time + '] ' + msg;
+  el.textContent += '\
+[' + time + '] ' + msg;
   el.scrollTop = el.scrollHeight;
 }
 
@@ -1215,11 +1236,14 @@ async function startPipeline() {
 
   for (let i = 0; i < stages.length; i++) {
     renderStages(i, 'running');
-    logEl.textContent += '\\n--- ' + stages[i].name.toUpperCase() + ' ---\\n';
+    logEl.textContent += '\
+--- ' + stages[i].name.toUpperCase() + ' ---\
+';
 
     for (const line of buildLogs[i]) {
       await new Promise(r => setTimeout(r, 150));
-      logEl.textContent += line + '\\n';
+      logEl.textContent += line + '\
+';
       logEl.scrollTop = logEl.scrollHeight;
     }
 

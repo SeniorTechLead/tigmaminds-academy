@@ -805,14 +805,25 @@ if landfall_idx:
     elif lf_surge > 1: risk_level, risk_color = 'HIGH', '#f59e0b'
 
 report = (
-    f"RISK ASSESSMENT\\n"
-    f"{'='*35}\\n\\n"
-    f"Current: {known_lats[-1]:.1f}°N {known_lons[-1]:.1f}°E\\n"
-    f"Category: {curr_cat} ({known_winds[-1]} m/s)\\n"
-    f"Pressure: {known_pressures[-1]:.0f} hPa\\n\\n"
-    f"Landfall: {lf_text}\\n"
-    f"Surge: {surge_text}\\n\\n"
-    f"Risk: {risk_level}\\n"
+    f"RISK ASSESSMENT\
+"
+    f"{'='*35}\
+\
+"
+    f"Current: {known_lats[-1]:.1f}°N {known_lons[-1]:.1f}°E\
+"
+    f"Category: {curr_cat} ({known_winds[-1]} m/s)\
+"
+    f"Pressure: {known_pressures[-1]:.0f} hPa\
+\
+"
+    f"Landfall: {lf_text}\
+"
+    f"Surge: {surge_text}\
+\
+"
+    f"Risk: {risk_level}\
+"
 )
 
 ax.text(0.05, 0.95, report, transform=ax.transAxes, color='white',

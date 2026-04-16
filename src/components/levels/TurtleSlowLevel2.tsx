@@ -224,7 +224,9 @@ ax2.set_title('Phylogenetic Tree (DNA-based)', color='white', fontsize=13)
 ax2.axis('off')
 
 # Surprise annotation
-ax2.annotate('Surprise! Turtle is\\ncloser to Bird/Croc\\nthan to Lizard/Snake',
+ax2.annotate('Surprise! Turtle is\
+closer to Bird/Croc\
+than to Lizard/Snake',
              xy=(2, 8.5), xytext=(0.5, 6), color='#22c55e', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#22c55e'))
 
@@ -323,7 +325,8 @@ ax1.set_ylabel('Expected payoff', color='white')
 ax1.set_title('Hawk-Dove Game: Finding the ESS', color='white', fontsize=13)
 ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax1.tick_params(colors='gray')
-ax1.annotate('At ESS: both strategies\\nhave equal payoff',
+ax1.annotate('At ESS: both strategies\
+have equal payoff',
              xy=(ess_p, payoff_hawk(ess_p)), xytext=(0.65, 6),
              color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -439,7 +442,8 @@ for angle in [0, 30, 60, 90, 120, 150, 180]:
     ax2.annotate('', xy=(x, y), xytext=(x, y + 3),
                  arrowprops=dict(arrowstyle='->', color='#f59e0b', lw=1.5))
 
-ax2.annotate('Force distributed\\nacross dome surface', xy=(0, 8), color='#f59e0b', fontsize=10, ha='center')
+ax2.annotate('Force distributed\
+across dome surface', xy=(0, 8), color='#f59e0b', fontsize=10, ha='center')
 ax2.set_xlabel('Width (cm)', color='white')
 ax2.set_ylabel('Height (cm)', color='white')
 ax2.set_title('Dome Distributes Force', color='white', fontsize=13)
@@ -640,9 +644,11 @@ ax.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax.tick_params(colors='gray')
 
 # Annotate Pareto optimal region
-ax.annotate('OPTIMAL ZONE\\n(Pareto frontier)', xy=(2, 9), color='#f59e0b', fontsize=12,
+ax.annotate('OPTIMAL ZONE\
+(Pareto frontier)', xy=(2, 9), color='#f59e0b', fontsize=12,
             fontweight='bold', alpha=0.7)
-ax.annotate('SUB-OPTIMAL\\n(could improve)', xy=(6, 3), color='gray', fontsize=10, alpha=0.5)
+ax.annotate('SUB-OPTIMAL\
+(could improve)', xy=(6, 3), color='gray', fontsize=10, alpha=0.5)
 
 plt.tight_layout()
 plt.show()

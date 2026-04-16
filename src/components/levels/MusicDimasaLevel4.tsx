@@ -19,7 +19,8 @@ export default function MusicDimasaLevel4() {
       code: `import numpy as np
 
 # --- Stage 1: Audio Signal Ingestion & Onset Detection ---
-print("=== Capstone Stage 1: Audio Ingestion & Onset Detection ===\\n")
+print("=== Capstone Stage 1: Audio Ingestion & Onset Detection ===\
+")
 
 np.random.seed(42)
 
@@ -59,9 +60,11 @@ print(f"Signal: {len(signal)} samples at {sample_rate} Hz ({duration}s)")
 print(f"Frame size: {frame_size} samples ({frame_size/sample_rate*1000:.0f}ms)")
 print(f"Energy frames computed: {n_frames}")
 print(f"Detection threshold: {threshold}")
-print(f"\\nTrue onsets:     {onset_times}")
+print(f"\
+True onsets:     {onset_times}")
 print(f"Detected onsets: {[round(x, 3) for x in detected_onsets]}")
-print(f"\\nTrue count: {len(onset_times)}, Detected: {len(detected_onsets)}")
+print(f"\
+True count: {len(onset_times)}, Detected: {len(detected_onsets)}")
 
 # Quality check: how close are detections to truth?
 if detected_onsets:
@@ -71,7 +74,8 @@ if detected_onsets:
         errors.append(abs(closest - true_t) * 1000)
     print(f"Mean timing error: {np.mean(errors):.1f} ms")
     print(f"Max timing error:  {max(errors):.1f} ms")
-    print(f"\\nQuality: {'PASS' if np.mean(errors) < 30 else 'FAIL'} (threshold: 30ms)")`,
+    print(f"\
+Quality: {'PASS' if np.mean(errors) < 30 else 'FAIL'} (threshold: 30ms)")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -86,7 +90,8 @@ if detected_onsets:
       code: `import numpy as np
 
 # --- Stage 2: Beat and meter detection for non-Western time signatures ---
-print("=== Stage 2: Beat & Meter Detection ===\\n")
+print("=== Stage 2: Beat & Meter Detection ===\
+")
 
 np.random.seed(42)
 
@@ -105,22 +110,26 @@ print(f"Std IOI:  {np.std(iois)*1000:.0f} ms")
 # Simple approach: round to nearest 50ms grid
 grid_ms = 50
 quantized = [round(ioi * 1000 / grid_ms) * grid_ms for ioi in iois]
-print(f"\\nQuantized IOIs (to {grid_ms}ms grid): {quantized}")
+print(f"\
+Quantized IOIs (to {grid_ms}ms grid): {quantized}")
 
 # Count distinct durations
 unique_iois, counts = np.unique(quantized, return_counts=True)
-print(f"\\nDistinct beat durations:")
+print(f"\
+Distinct beat durations:")
 for u, c in zip(unique_iois, counts):
     print(f"  {u:.0f} ms appears {c} times")
 
 # Try to find the meter by grouping beats
 # Look for repeating IOI patterns
 pattern_str = "".join(["S" if q == 250 else "L" for q in quantized])
-print(f"\\nBeat pattern (S=short, L=long): {pattern_str}")
+print(f"\
+Beat pattern (S=short, L=long): {pattern_str}")
 
 # Check for common meter groupings
 measure_length_ms = sum(quantized[:4])  # try grouping 4 beats
-print(f"\\nAttempting meter detection:")
+print(f"\
+Attempting meter detection:")
 print(f"  4-beat group: {sum(quantized[:4])}ms = {sum(quantized[:4])/1000:.2f}s")
 if len(quantized) >= 3:
     three_group = sum(quantized[:3])
@@ -132,7 +141,8 @@ if len(iois) > 4:
     autocorr = np.correlate(ioi_arr - ioi_arr.mean(), ioi_arr - ioi_arr.mean(), mode='full')
     autocorr = autocorr[len(autocorr)//2:]
     autocorr /= autocorr[0] + 1e-9
-    print(f"\\nIOI autocorrelation (first 5 lags):")
+    print(f"\
+IOI autocorrelation (first 5 lags):")
     for lag in range(min(5, len(autocorr))):
         print(f"  Lag {lag}: {autocorr[lag]:.3f}")
     best_period = np.argmax(autocorr[1:]) + 1
@@ -140,7 +150,8 @@ if len(iois) > 4:
 
 # Determine likely meter
 total_subdivisions = sum([round(q / min(unique_iois)) for q in quantized[:4]])
-print(f"\\nSubdivisions in first group: {total_subdivisions}")
+print(f"\
+Subdivisions in first group: {total_subdivisions}")
 if total_subdivisions == 7:
     print("Detected meter: 7/8 (characteristic of Dimasa music)")
 elif total_subdivisions == 5:
@@ -148,7 +159,8 @@ elif total_subdivisions == 5:
 else:
     print(f"Detected meter: {total_subdivisions}/8 (non-standard)")
 
-print("\\nQuality: Non-Western meters detected successfully.")
+print("\
+Quality: Non-Western meters detected successfully.")
 print("Unlike 4/4 detectors, this approach makes no assumption about")
 print("equal beat spacing, so it can capture asymmetric meters like 7/8 = 2+2+3.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
@@ -165,7 +177,8 @@ print("equal beat spacing, so it can capture asymmetric meters like 7/8 = 2+2+3.
       code: `import numpy as np
 
 # --- Stage 3: Polyrhythm decomposition and layer separation ---
-print("=== Stage 3: Polyrhythm Decomposition ===\\n")
+print("=== Stage 3: Polyrhythm Decomposition ===\
+")
 
 np.random.seed(42)
 
@@ -208,13 +221,15 @@ for tmpl in templates.values():
         reconstruction[i] = min(1, reconstruction[i] + tmpl[i])
 
 residual = [max(0, c - r) for c, r in zip(combined, reconstruction)]
-print(f"\\nReconstruction:  {''.join(str(x) for x in reconstruction)}")
+print(f"\
+Reconstruction:  {''.join(str(x) for x in reconstruction)}")
 print(f"Original:        {''.join(str(x) for x in combined)}")
 print(f"Residual (unexplained hits): {''.join(str(x) for x in residual)}")
 print(f"Unexplained events: {sum(residual)}")
 
 # Layer interaction analysis
-print("\\nLayer coincidence matrix (how often two layers hit together):")
+print("\
+Layer coincidence matrix (how often two layers hit together):")
 layer_names = list(templates.keys())
 for i, n1 in enumerate(layer_names):
     for j, n2 in enumerate(layer_names):
@@ -222,7 +237,8 @@ for i, n1 in enumerate(layer_names):
             coincidences = sum(1 for a, b in zip(templates[n1], templates[n2]) if a == 1 and b == 1)
             print(f"  {n1} + {n2}: {coincidences} coincidences")
 
-print("\\nQuality: Decomposition explains {}/{} events in the combined pattern.".format(
+print("\
+Quality: Decomposition explains {}/{} events in the combined pattern.".format(
     sum(reconstruction), sum(combined)))`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -238,7 +254,8 @@ print("\\nQuality: Decomposition explains {}/{} events in the combined pattern."
       code: `import numpy as np
 
 # --- Stage 4: Cross-cultural rhythm comparison engine ---
-print("=== Stage 4: Cross-Cultural Rhythm Comparison ===\\n")
+print("=== Stage 4: Cross-Cultural Rhythm Comparison ===\
+")
 
 np.random.seed(42)
 
@@ -300,7 +317,8 @@ frange = fmax - fmin
 frange[frange == 0] = 1
 feat_norm = (feat_array - fmin) / frange
 
-print("\\nPairwise distance matrix:")
+print("\
+Pairwise distance matrix:")
 print(f"{'':>22s}", end="")
 for name in names:
     abbrev = name.split("(")[0].strip()[:8]
@@ -324,8 +342,10 @@ for i in range(n):
             min_dist = d
             pair = (names[i], names[j])
 
-print(f"\\nMost similar pair: {pair[0]} <-> {pair[1]} (distance {min_dist:.3f})")
-print("\\nThis suggests historical or structural connections between these")
+print(f"\
+Most similar pair: {pair[0]} <-> {pair[1]} (distance {min_dist:.3f})")
+print("\
+This suggests historical or structural connections between these")
 print("traditions that ethnomusicologists could investigate further.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -341,7 +361,8 @@ print("traditions that ethnomusicologists could investigate further.")`,
       code: `import numpy as np
 
 # --- Stage 5: Pattern generation and variation using learned rules ---
-print("=== Stage 5: Rhythm Pattern Generation ===\\n")
+print("=== Stage 5: Rhythm Pattern Generation ===\
+")
 
 np.random.seed(42)
 
@@ -361,12 +382,14 @@ p_1_given_1 = transitions["1->1"] / total_from_1 if total_from_1 > 0 else 0
 p_1_given_0 = transitions["0->1"] / total_from_0 if total_from_0 > 0 else 0
 
 print(f"Source pattern: {''.join(str(x) for x in source_pattern)}")
-print(f"\\nLearned transition probabilities:")
+print(f"\
+Learned transition probabilities:")
 print(f"  P(hit | previous=hit)  = {p_1_given_1:.2f}")
 print(f"  P(hit | previous=rest) = {p_1_given_0:.2f}")
 
 # Generate 5 variations using the Markov chain
-print("\\nGenerated variations:")
+print("\
+Generated variations:")
 source_density = sum(source_pattern) / len(source_pattern)
 print(f"{'Pattern':<20s} {'Density':>8s} {'Match%':>7s}")
 print("-" * 37)
@@ -386,7 +409,8 @@ for v in range(5):
     print(f"{''.join(str(x) for x in generated):<20s} {gen_density:>8.2f} {match_pct:>6.0%}")
 
 # Rule-based variation: shift pattern, add/remove hits
-print("\\nRule-based variations:")
+print("\
+Rule-based variations:")
 # Rotation (phase shift)
 for shift in [1, 2, 3]:
     rotated = source_pattern[shift:] + source_pattern[:shift]
@@ -402,7 +426,8 @@ for x in source_pattern[:8]:
     diminution.extend([x, x])
 print(f"  Diminution:  {''.join(str(x) for x in diminution)}")
 
-print("\\nEach variation preserves the 'feel' of the Dimasa source because")
+print("\
+Each variation preserves the 'feel' of the Dimasa source because")
 print("the Markov chain captures the pattern's tendency toward alternating")
 print("hits and rests, which is the core of its rhythmic character.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
@@ -432,7 +457,8 @@ np.random.seed(42)
 sample_rate = 8000
 onset_times = [0.0, 0.25, 0.45, 0.70, 1.0, 1.25, 1.45, 1.70]
 iois = np.diff(onset_times)
-print("\\n1. SIGNAL ANALYSIS")
+print("\
+1. SIGNAL ANALYSIS")
 print(f"   Detected onsets: {len(onset_times)}")
 print(f"   Mean IOI: {np.mean(iois)*1000:.0f} ms (tempo ~{60/np.mean(iois):.0f} BPM)")
 print(f"   IOI std: {np.std(iois)*1000:.0f} ms (timing variability)")
@@ -440,14 +466,16 @@ print(f"   IOI std: {np.std(iois)*1000:.0f} ms (timing variability)")
 # 2. Meter analysis
 quantized = [round(ioi * 1000 / 50) * 50 for ioi in iois]
 unique_q = set(quantized)
-print("\\n2. METER DETECTION")
+print("\
+2. METER DETECTION")
 print(f"   Quantized IOIs: {quantized}")
 print(f"   Distinct durations: {sorted(unique_q)} ms")
 print(f"   Detected meter: 7/8 (asymmetric, grouping 2+2+3)")
 print(f"   Confidence: HIGH (clear bimodal IOI distribution)")
 
 # 3. Layer decomposition
-print("\\n3. POLYRHYTHM DECOMPOSITION")
+print("\
+3. POLYRHYTHM DECOMPOSITION")
 layers = {
     "Khram (bass)": {"beats": 4, "density": 0.25, "role": "timekeeper"},
     "Jota (snare)": {"beats": 6, "density": 0.375, "role": "melodic rhythm"},
@@ -460,7 +488,8 @@ print(f"   Total ensemble events: {total_hits}/measure")
 print(f"   Layer independence: HIGH (few coincidence points)")
 
 # 4. Scale analysis
-print("\\n4. SCALE SYSTEM")
+print("\
+4. SCALE SYSTEM")
 dimasa_cents = [0, 240, 480, 720, 960]
 print(f"   Scale type: pentatonic (5 notes)")
 print(f"   Intervals: {[dimasa_cents[i+1]-dimasa_cents[i] for i in range(len(dimasa_cents)-1)]} cents")
@@ -468,7 +497,8 @@ print(f"   Nearest Western match: none (240-cent neutral seconds)")
 print(f"   Classification: equidistant pentatonic (unique to region)")
 
 # 5. Cross-cultural positioning
-print("\\n5. CROSS-CULTURAL COMPARISON")
+print("\
+5. CROSS-CULTURAL COMPARISON")
 comparisons = [
     ("vs Western pop",    "HIGH distance — no syncopation overlap"),
     ("vs West African",   "MODERATE distance — shared polyrhythmic complexity"),
@@ -479,7 +509,8 @@ for comp, result in comparisons:
     print(f"   {comp}: {result}")
 
 # 6. Summary statistics
-print("\\n6. KEY FINDINGS")
+print("\
+6. KEY FINDINGS")
 print("   - Dimasa music uses a 7/8 asymmetric meter uncommon in other traditions")
 print("   - The pentatonic scale with 240-cent intervals is a 'neutral second'")
 print("     system that falls between Western whole tones and minor thirds")
@@ -488,7 +519,8 @@ print("   - Nearest cultural analog: Japanese Gagaku (scale) + West African (rhy
 print("   - The tradition preserves mathematical structures that predate")
 print("     Western music theory by centuries")
 
-print("\\n" + "=" * 60)
+print("\
+" + "=" * 60)
 print("  Report complete. Pipeline processed all 6 stages successfully.")
 print("=" * 60)`,
       challenge: "Add an interactive mode where the user can adjust parameters and see results update in real time. This transforms the report from a static document into an exploration tool.",

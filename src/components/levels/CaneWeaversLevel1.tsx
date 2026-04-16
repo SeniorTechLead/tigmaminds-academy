@@ -205,12 +205,14 @@ for n in range(3, 13):
     marker = "YES" if can_tile else "no"
     print(f"{name:<14} | {n:>5} | {angle:>6.1f}° | {k:>8.2f}  | {marker}")
 
-print(f"\\nOnly {len(tessellating)} regular polygons can tessellate:")
+print(f"\
+Only {len(tessellating)} regular polygons can tessellate:")
 for name, n, k in tessellating:
     print(f"  {name}: {k} polygons meet at each vertex")
 
 # Semi-regular tessellations (vertex-transitive with 2+ polygon types)
-print("\\nSEMI-REGULAR TESSELLATIONS (2 polygon types):")
+print("\
+SEMI-REGULAR TESSELLATIONS (2 polygon types):")
 print("-" * 50)
 count = 0
 for n1 in range(3, 13):
@@ -396,7 +398,8 @@ for bits in product([0, 1], repeat=4):
         visual = ''.join('█' if b else '░' for b in bits)
         print(f"  #{count}: {visual} = {bits}")
 
-print(f"\\nTotal distinct 2×2 patterns: {count}")`,
+print(f"\
+Total distinct 2×2 patterns: {count}")`,
       challenge: 'Extend the counting to include reflections (horizontal, vertical, and both diagonals). How many distinct 3×3 patterns exist under the full symmetry group?',
       successHint: 'Counting distinct patterns under symmetry is a deep mathematical problem solved by group theory. The cane weavers of Tripura explore this vast pattern space through centuries of creative experimentation.',
     },

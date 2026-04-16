@@ -328,7 +328,8 @@ print(f"  Route: {' -> '.join(route_names)} -> {ports[exact_route[0]]}")
 print(f"  Total distance: {exact_dist:,.0f} km")
 
 gap = (nn_dist - exact_dist) / exact_dist * 100
-print(f"\\n  Heuristic gap: {gap:.1f}% longer than optimal")
+print(f"\
+  Heuristic gap: {gap:.1f}% longer than optimal")
 
 # Show all legs of optimal route
 print()

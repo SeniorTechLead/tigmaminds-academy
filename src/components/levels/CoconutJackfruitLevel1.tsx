@@ -201,7 +201,8 @@ ax1.text(1.5, 2.3, 't', ha='center', color='white', fontsize=14)
 ax1.text(-0.3, 1.5, 'T', ha='center', color='white', fontsize=14)
 ax1.text(-0.3, 0.5, 't', ha='center', color='white', fontsize=14)
 ax1.text(1, 2.6, 'Parent 2 alleles', ha='center', color='gray', fontsize=10)
-ax1.text(-0.6, 1, 'Parent 1\\nalleles', ha='center', color='gray', fontsize=10, rotation=90)
+ax1.text(-0.6, 1, 'Parent 1\
+alleles', ha='center', color='gray', fontsize=10, rotation=90)
 ax1.set_xlim(-0.8, 2.2)
 ax1.set_ylim(-0.2, 2.8)
 ax1.set_title('Punnett Square: Tt × Tt', color='white', fontsize=12)
@@ -317,8 +318,10 @@ ax2.set_title('Strategy: Many Small vs Few Large Seeds', color='white', fontsize
 ax2.tick_params(colors='gray')
 
 # Add strategy labels
-ax2.text(2, 1, 'Few large seeds\\n(high investment)', color='gray', fontsize=9, ha='center')
-ax2.text(100, 0.00001, 'Many small seeds\\n(low investment)', color='gray', fontsize=9, ha='center')
+ax2.text(2, 1, 'Few large seeds\
+(high investment)', color='gray', fontsize=9, ha='center')
+ax2.text(100, 0.00001, 'Many small seeds\
+(low investment)', color='gray', fontsize=9, ha='center')
 
 plt.tight_layout()
 plt.show()
@@ -417,7 +420,8 @@ ax1.legend(facecolor='#1f2937', labelcolor='white')
 ax1.tick_params(colors='gray')
 
 improvement = (all_means[-1] - all_means[0]) / all_means[0] * 100
-ax1.text(10, all_means[0] + 2, f'+{improvement:.0f}% improvement\\nin {n_generations} generations',
+ax1.text(10, all_means[0] + 2, f'+{improvement:.0f}% improvement\
+in {n_generations} generations',
         color='#22c55e', fontsize=10)
 
 # Population distributions (first, middle, last generations)
@@ -525,7 +529,10 @@ wild_type = np.random.normal(5, 1, n_plants)  # Brix (sugar content)
 crispr_edited = np.random.normal(12, 2, n_plants)  # Enhanced sweetness
 failed_edit = np.random.normal(5, 1.5, int(n_plants * 0.2))  # Edit didn't work
 
-categories = ['Wild type\\n(unedited)', 'CRISPR\\n(successful)', 'CRISPR\\n(failed edit)']
+categories = ['Wild type\
+(unedited)', 'CRISPR\
+(successful)', 'CRISPR\
+(failed edit)']
 data = [wild_type, crispr_edited, failed_edit]
 colors_box = ['#3b82f6', '#22c55e', '#ef4444']
 

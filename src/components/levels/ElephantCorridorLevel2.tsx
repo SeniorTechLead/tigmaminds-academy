@@ -550,7 +550,8 @@ axes[2].imshow(transition_masked, origin='lower', cmap='Oranges',
 # Arrow showing shift direction
 axes[2].annotate('', xy=(30, 45), xytext=(30, 30),
                  arrowprops=dict(arrowstyle='->', color='white', lw=3))
-axes[2].text(32, 37, 'Habitat\\nshift', color='white', fontsize=10)
+axes[2].text(32, 37, 'Habitat\
+shift', color='white', fontsize=10)
 
 axes[2].set_title(titles[2], color='white', fontsize=11)
 axes[2].set_xlabel('Easting (km)', color='white')

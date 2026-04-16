@@ -89,19 +89,22 @@ for k, v in ark.items():
     else:
         print(f"  {k}: {v}")
 
-print(f"\\n=== ANIMAL CATEGORIES ({len(animals)}) ===")
+print(f"\
+=== ANIMAL CATEGORIES ({len(animals)}) ===")
 total_sp = sum(a["species"] for a in animals)
 total_an = total_sp * 2
 print(f"Total species: {total_sp:,} | Total animals: {total_an:,}")
 
-print(f"\\n=== SUPPLY FUNCTIONS (test: 100 kg animal) ===")
+print(f"\
+=== SUPPLY FUNCTIONS (test: 100 kg animal) ===")
 test_mass = 100
 print(f"  Food:  {food_kg_day(test_mass):.2f} kg/day")
 print(f"  Water: {water_L_day(test_mass):.2f} L/day")
 print(f"  Waste: {waste_kg_day(test_mass):.2f} kg/day")
 print(f"  Heat:  {heat_watts(test_mass):.0f} W")
 print(f"  O2:    {o2_L_day(test_mass):.0f} L/day")
-print(f"\\n✓ Data model ready for calculations")`,
+print(f"\
+✓ Data model ready for calculations")`,
       challenge: 'Add a sixth category: "Aquatic-transitional" (species like crocodiles, turtles, seals) — 800 species, avg mass 30 kg, pen_m2 2.0, diet "fish", deck "Lower". How does this affect the total passenger count?',
       successHint: 'The data model is the foundation. With clean data structures, every subsequent calculation is a simple loop or function call. Messy data = messy code. Clean data = clean engineering.',
     },
@@ -137,7 +140,8 @@ animals = [
 ]
 
 # === SPACE ALLOCATION ===
-print("=== SPACE ALLOCATION ENGINE ===\\n")
+print("=== SPACE ALLOCATION ENGINE ===\
+")
 corridor_pct = 0.10
 crew_m2 = 50  # crew quarters
 available = ark["usable_area"] * (1 - corridor_pct) - crew_m2
@@ -145,7 +149,8 @@ available = ark["usable_area"] * (1 - corridor_pct) - crew_m2
 print(f"Total usable:  {ark['usable_area']:,.0f} m²")
 print(f"- Corridors:   {ark['usable_area'] * corridor_pct:,.0f} m²")
 print(f"- Crew:        {crew_m2:,.0f} m²")
-print(f"= Available:   {available:,.0f} m²\\n")
+print(f"= Available:   {available:,.0f} m²\
+")
 
 pen_total = 0
 supply_space = 0
@@ -159,12 +164,14 @@ for cat in animals:
           f"{'×' + str(cat['stack']):>10} {stacked:>10,.0f}")
 
 supply_space = available - pen_total
-print(f"\\nPen floor area:    {pen_total:,.0f} m²")
+print(f"\
+Pen floor area:    {pen_total:,.0f} m²")
 print(f"Supply area:       {supply_space:,.0f} m²")
 print(f"Utilisation:       {pen_total/available*100:.0f}%")
 
 status = "✓ FITS" if supply_space > 0 else "✗ OVERFLOW"
-print(f"\\nStatus: {status}")
+print(f"\
+Status: {status}")
 
 # Visualization
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
@@ -184,9 +191,11 @@ ax2.set_xlim(0, 135); ax2.set_ylim(0, 22.5)
 ax2.axhline(11.25, color='white', linewidth=0.5, linestyle='--')
 # Zones
 ax2.add_patch(plt.Rectangle((0, 0), 60, 22.5, color='#22c55e', alpha=0.3))
-ax2.text(30, 11, 'Tiny+Small\\n(stacked cages)', ha='center', fontsize=9, color='white')
+ax2.text(30, 11, 'Tiny+Small\
+(stacked cages)', ha='center', fontsize=9, color='white')
 ax2.add_patch(plt.Rectangle((60, 0), 40, 22.5, color='#f59e0b', alpha=0.3))
-ax2.text(80, 11, 'Medium\\nLarge', ha='center', fontsize=9, color='white')
+ax2.text(80, 11, 'Medium\
+Large', ha='center', fontsize=9, color='white')
 ax2.add_patch(plt.Rectangle((100, 0), 20, 22.5, color='#ef4444', alpha=0.3))
 ax2.text(110, 11, 'Mega', ha='center', fontsize=9, color='white')
 ax2.add_patch(plt.Rectangle((120, 0), 15, 22.5, color='#6b7280', alpha=0.3))
@@ -234,8 +243,10 @@ categories = [
 # Storage densities (kg/m³)
 storage_density = {"seeds": 700, "grain": 750, "hay/grain": 400, "hay": 150}
 
-print("=== SUPPLY CHAIN MANIFEST ===\\n")
-print(f"Voyage duration: {voyage_days} days\\n")
+print("=== SUPPLY CHAIN MANIFEST ===\
+")
+print(f"Voyage duration: {voyage_days} days\
+")
 print(f"{'Category':<10} {'Food/day':>10} {'Water/day':>10} "
       f"{'Food total':>12} {'Water total':>12}")
 print("=" * 60)
@@ -260,7 +271,8 @@ for cat in categories:
 rain_offset = 3037.5 * 0.05 * 40 / 1000  # tonnes
 net_water = total_water_t - rain_offset
 
-print(f"\\n{'TOTALS':<10} {'':>10} {'':>10} "
+print(f"\
+{'TOTALS':<10} {'':>10} {'':>10} "
       f"{total_food_t:>10,.0f} t {total_water_t:>10,.0f} t")
 print(f"Rainwater offset: {rain_offset:,.0f} t")
 print(f"Net water storage: {net_water:,.0f} t")
@@ -409,10 +421,12 @@ all_pass = True
 for name, check in checks.items():
     status = "PASS ✓" if check["pass"] else "FAIL ✗"
     if not check["pass"]: all_pass = False
-    print(f"\\n  [{status}] {name}")
+    print(f"\
+  [{status}] {name}")
     print(f"         {check['detail']}")
 
-print("\\n" + "=" * 60)
+print("\
+" + "=" * 60)
 verdict = "SEAWORTHY — CLEARED TO SAIL" if all_pass else "NOT CLEARED — FIX FAILURES"
 print(f"  VERDICT: {verdict}")
 print("=" * 60)
@@ -536,7 +550,8 @@ plt.tight_layout(); plt.show()
 # Find breakpoints
 for s in range(1000, 50000, 100):
     if calc_feasibility(s, 370, 0, 135) < 0:
-        print(f"\\nSpecies breakpoint: ~{s:,} (infeasible beyond this)")
+        print(f"\
+Species breakpoint: ~{s:,} (infeasible beyond this)")
         break
 print(f"At 1,500 families: margin = {calc_feasibility(1500, 370, 0, 135):.0f}%")
 print(f"At 35,000 species: margin = {calc_feasibility(35000, 370, 0, 135):.0f}%")
@@ -667,7 +682,8 @@ plt.suptitle("NOAH'S ARK — COMPLETE ENGINEERING REPORT", fontsize=15,
              fontweight='bold', color='gold', y=0.98)
 plt.show()
 
-print("\\n=== Report complete. ===")
+print("\
+=== Report complete. ===")
 print("This capstone combined: buoyancy, displacement, stability,")
 print("biodiversity, taxonomy, Kleiber's law, closed-system ecology,")
 print("sensitivity analysis, and data visualisation.")

@@ -344,7 +344,8 @@ ax2.fill_between(contrast, gap_relative * 100, alpha=0.15, color='#22c55e')
 # Mark specific materials
 materials = [
     (1.5/1.45, 'SiO₂/MgF₂', '#3b82f6'),
-    (2.0/1.45, 'Melanin/keratin\\n(kingfisher)', '#06b6d4'),
+    (2.0/1.45, 'Melanin/keratin\
+(kingfisher)', '#06b6d4'),
     (2.3/1.45, 'TiO₂/SiO₂', '#f59e0b'),
     (3.5/1.45, 'Si/SiO₂', '#ef4444'),
 ]
@@ -584,7 +585,10 @@ ax.tick_params(colors='gray')
 # 4. Fabrication methods comparison
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-methods = ['Self-assembly\\n(colloidal)', 'Lithography\\n(e-beam)', 'Holographic', 'Bio-templating', 'Inkjet\\nprinting']
+methods = ['Self-assembly\
+(colloidal)', 'Lithography\
+(e-beam)', 'Holographic', 'Bio-templating', 'Inkjet\
+printing']
 cost = [2, 10, 5, 3, 1]
 precision = [6, 10, 8, 5, 4]
 scalability = [8, 2, 5, 4, 9]
@@ -714,10 +718,12 @@ ax2.text(355, 390, 'Violet', color='#a855f7', fontsize=8)
 ax2.text(355, 740, 'Red', color='#ef4444', fontsize=8)
 
 # Mark specific opals
-ax2.annotate('Blue opal\\n(d≈180nm)', xy=(180, 2*180*n_eff*np.sin(np.radians(60))*0.8),
+ax2.annotate('Blue opal\
+(d≈180nm)', xy=(180, 2*180*n_eff*np.sin(np.radians(60))*0.8),
              xytext=(200, 600), color='#3b82f6', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#3b82f6'))
-ax2.annotate('Red opal\\n(d≈280nm)', xy=(280, 2*280*n_eff*np.sin(np.radians(60))*0.8),
+ax2.annotate('Red opal\
+(d≈280nm)', xy=(280, 2*280*n_eff*np.sin(np.radians(60))*0.8),
              xytext=(300, 700), color='#ef4444', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 

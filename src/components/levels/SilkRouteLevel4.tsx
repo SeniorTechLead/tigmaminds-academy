@@ -1181,15 +1181,26 @@ axes[1, 0].legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor=
 # 5. Recommendation
 best = analyses[0]
 axes[1, 1].axis('off')
-rec_text = f"RECOMMENDED ROUTE\\n"
-rec_text += f"{'='*40}\\n\\n"
-rec_text += f"Path: {' → '.join(optimizer.cities[p] for p in best['path'])}\\n\\n"
-rec_text += f"Expected profit: {best['mc_mean']:.0f} coins\\n"
-rec_text += f"Success rate: {best['success_rate']:.0f}%\\n"
-rec_text += f"Risk (std): {best['mc_std']:.0f} coins\\n"
-rec_text += f"Sharpe ratio: {best['sharpe']:.2f}\\n"
-rec_text += f"Travel days: {best['days']}\\n"
-rec_text += f"Return on capital: {best['mc_mean']/1000*100:.1f}%\\n"
+rec_text = f"RECOMMENDED ROUTE\
+"
+rec_text += f"{'='*40}\
+\
+"
+rec_text += f"Path: {' → '.join(optimizer.cities[p] for p in best['path'])}\
+\
+"
+rec_text += f"Expected profit: {best['mc_mean']:.0f} coins\
+"
+rec_text += f"Success rate: {best['success_rate']:.0f}%\
+"
+rec_text += f"Risk (std): {best['mc_std']:.0f} coins\
+"
+rec_text += f"Sharpe ratio: {best['sharpe']:.2f}\
+"
+rec_text += f"Travel days: {best['days']}\
+"
+rec_text += f"Return on capital: {best['mc_mean']/1000*100:.1f}%\
+"
 axes[1, 1].text(0.1, 0.9, rec_text, transform=axes[1, 1].transAxes,
                 color='#22c55e', fontsize=10, verticalalignment='top', fontfamily='monospace',
                 bbox=dict(boxstyle='round', facecolor='#111827', edgecolor='#22c55e', alpha=0.8))
@@ -1218,12 +1229,15 @@ axes[1, 2].set_title('10-year projection', color='white', fontsize=11)
 plt.tight_layout()
 plt.show()
 
-print("\\n" + "=" * 50)
+print("\
+" + "=" * 50)
 print("  TRADE ROUTE OPTIMIZER — SUMMARY")
 print("=" * 50)
-print(f"\\nStarting capital: {optimizer.capital} coins")
+print(f"\
+Starting capital: {optimizer.capital} coins")
 print(f"Risk tolerance: moderate")
-print(f"\\nTop route: {' → '.join(optimizer.cities[p] for p in best['path'])}")
+print(f"\
+Top route: {' → '.join(optimizer.cities[p] for p in best['path'])}")
 print(f"Expected return: {best['mc_mean']/1000*100:.1f}% per trip")
 print(f"Success rate: {best['success_rate']:.0f}%")
 print(f"10-year projection: {cumulative[-1]:.0f} coins from {optimizer.capital} initial")`,

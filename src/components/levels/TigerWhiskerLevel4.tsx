@@ -743,7 +743,12 @@ ax = axes[1, 2]
 ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 
-stages = ['Raw\\npiezo', 'Charge\\namp', 'Band-pass\\nfilter', 'Envelope\\ndetect', 'Feature\\nextract']
+stages = ['Raw\
+piezo', 'Charge\
+amp', 'Band-pass\
+filter', 'Envelope\
+detect', 'Feature\
+extract']
 snr_improvement = [1, 10, 25, 30, 50]  # Approximate SNR at each stage
 stage_colors = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7']
 
@@ -1002,7 +1007,8 @@ ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 
-models = ['k-NN (k=5)', 'Neural Net', 'Tiger whisker\\n(estimated)']
+models = ['k-NN (k=5)', 'Neural Net', 'Tiger whisker\
+(estimated)']
 accuracies = [knn_accs[2] * 100, test_accs[-1] * 100, 98]  # Tiger estimate
 model_colors = ['#a855f7', '#22c55e', '#f59e0b']
 
@@ -1552,7 +1558,8 @@ power_items = {
 
 colors_pie = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7']
 total_power = sum(power_items.values())
-ax.pie(power_items.values(), labels=[f'{k}\\n{v}mW' for k, v in power_items.items()],
+ax.pie(power_items.values(), labels=[f'{k}\
+{v}mW' for k, v in power_items.items()],
        colors=colors_pie, autopct='%1.0f%%',
        textprops={'color': 'white', 'fontsize': 7})
 ax.set_title(f'Power budget ({total_power}mW total)', color='white', fontsize=11)
@@ -1562,7 +1569,9 @@ ax = axes[1, 1]
 ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 
-modalities = ['Camera', 'LIDAR', 'Sonar', 'Whiskers\\n(ours)', 'Tiger\\nwhiskers']
+modalities = ['Camera', 'LIDAR', 'Sonar', 'Whiskers\
+(ours)', 'Tiger\
+whiskers']
 metrics_radar = {
     'Dust tolerance': [1, 2, 7, 9, 10],
     'Dark operation': [1, 8, 9, 10, 10],
@@ -1640,7 +1649,8 @@ for r in requirements:
         n_pass += 1
     print(f"  {r['name']:<25} target={r['target']}{r['unit']:>4} "
           f"achieved={r['achieved']}{r['unit']:>4} [{status}]")
-print(f"\\nOverall: {n_pass}/{len(requirements)} requirements met")
+print(f"\
+Overall: {n_pass}/{len(requirements)} requirements met")
 print()
 print("KEY FINDING: Heartbeat detection requires a dedicated low-frequency")
 print("whisker (f_n < 5 Hz) — the standard whiskers are too stiff.")

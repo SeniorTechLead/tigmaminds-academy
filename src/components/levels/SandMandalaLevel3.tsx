@@ -73,11 +73,13 @@ print(f"All {len(names)**2} products land in the group: "
       f"{'YES' if closed else 'NO'}")
 
 # Axiom 2: ASSOCIATIVITY (inherent for matrices)
-print("\\n=== Axiom 2: Associativity ===")
+print("\
+=== Axiom 2: Associativity ===")
 print("Matrix multiplication is always associative.")
 
 # Axiom 3: IDENTITY
-print("\\n=== Axiom 3: Identity ===")
+print("\
+=== Axiom 3: Identity ===")
 I = R(0)
 identity_works = all(
     np.allclose(I @ M, M) and np.allclose(M @ I, M)
@@ -85,13 +87,15 @@ identity_works = all(
 print(f"r0 is identity for all elements: {identity_works}")
 
 # Axiom 4: INVERSES
-print("\\n=== Axiom 4: Inverses ===")
+print("\
+=== Axiom 4: Inverses ===")
 for name, M in elements.items():
     inv = np.linalg.inv(M)
     inv_name = find_match(inv, matrices, names)
     print(f"  {name:5s} inverse = {inv_name}")
 
-print(f"\\nD_4 is a group with {len(names)} elements.")`,
+print(f"\
+D_4 is a group with {len(names)} elements.")`,
       challenge: 'Build the full 8x8 multiplication table and print it as a grid. Verify two additional properties: (1) every row and column of the table contains each element exactly once (a Latin square), and (2) the rotation subgroup {r0, r90, r180, r270} is itself a group (a subgroup).',
       successHint: 'You have verified that D_4 satisfies all four group axioms by exhaustive computation. Group theory is the mathematical backbone of symmetry — it classifies what types of symmetry are possible and how they relate to each other.',
     },
@@ -141,7 +145,8 @@ for i in range(-4, 5):
                     alpha=0.5)
 ax.set_xlim(-2, 4); ax.set_ylim(-2, 4)
 ax.set_aspect('equal'); ax.axis('off')
-ax.set_title('p4m\\n4-fold + mirrors', fontsize=10)
+ax.set_title('p4m\
+4-fold + mirrors', fontsize=10)
 
 # --- p6m: hexagonal lattice ---
 ax = axes[1]
@@ -157,7 +162,8 @@ for i in range(-4, 5):
         ax.plot(hx, hy, 'w-', linewidth=0.3)
 ax.set_xlim(-1.5, 4); ax.set_ylim(-1.5, 4)
 ax.set_aspect('equal'); ax.axis('off')
-ax.set_title('p6m\\n6-fold + mirrors', fontsize=10)
+ax.set_title('p6m\
+6-fold + mirrors', fontsize=10)
 
 # --- pg: glide reflection ---
 ax = axes[2]
@@ -179,7 +185,8 @@ for i in range(-4, 5):
             ax.fill(m[0], m[1], color='#f39c12', alpha=0.5)
 ax.set_xlim(-1, 4); ax.set_ylim(-1, 4)
 ax.set_aspect('equal'); ax.axis('off')
-ax.set_title('pg\\nglide reflection', fontsize=10)
+ax.set_title('pg\
+glide reflection', fontsize=10)
 
 plt.suptitle('3 of the 17 Wallpaper Groups', fontsize=13)
 plt.tight_layout()
@@ -336,7 +343,8 @@ xs = [p[0] for p in pts if p[0] is not None]
 ys = [p[1] for p in pts if p[1] is not None]
 axes[0].plot(xs, ys, color='#3498db', linewidth=0.5)
 axes[0].set_aspect('equal'); axes[0].axis('off')
-axes[0].set_title('Koch Curve\\nF->F+F--F+F', fontsize=9)
+axes[0].set_title('Koch Curve\
+F->F+F--F+F', fontsize=9)
 
 # Sierpinski
 s = apply_rules('A', {'A':'B-A-B', 'B':'A+B+A'}, 6)
@@ -345,7 +353,8 @@ xs = [p[0] for p in pts if p[0] is not None]
 ys = [p[1] for p in pts if p[1] is not None]
 axes[1].plot(xs, ys, color='#2ecc71', linewidth=0.3)
 axes[1].set_aspect('equal'); axes[1].axis('off')
-axes[1].set_title('Sierpinski Triangle\\nA->B-A-B',
+axes[1].set_title('Sierpinski Triangle\
+A->B-A-B',
                    fontsize=9)
 
 # Plant
@@ -362,7 +371,8 @@ for p in pts[1:]:
         px.append(p[0]); py.append(p[1])
 if px: ax.plot(px, py, color='#2ecc71', linewidth=0.4)
 ax.set_aspect('equal'); ax.axis('off')
-ax.set_title('Plant\\nX->F+[[X]-X]-F[-FX]+X', fontsize=9)
+ax.set_title('Plant\
+X->F+[[X]-X]-F[-FX]+X', fontsize=9)
 
 plt.suptitle('L-Systems: Grammars That Draw', fontsize=13)
 plt.tight_layout()
@@ -419,7 +429,8 @@ pts = np.array(points)
 ax1.scatter(pts[:, 0], pts[:, 1], s=0.1, c='#3498db',
             alpha=0.5)
 ax1.set_aspect('equal'); ax1.axis('off')
-ax1.set_title(f'Sierpinski Triangle\\n'
+ax1.set_title(f'Sierpinski Triangle\
+'
               f'D = log(3)/log(2) = {np.log(3)/np.log(2):.3f}',
               fontsize=10)
 
@@ -452,7 +463,8 @@ pts = np.array(points)
 ax2.scatter(pts[:, 0], pts[:, 1], s=0.1, c='#2ecc71',
             alpha=0.3)
 ax2.set_aspect('equal'); ax2.axis('off')
-ax2.set_title('Barnsley Fern\\n4 affine transforms',
+ax2.set_title('Barnsley Fern\
+4 affine transforms',
               fontsize=10)
 
 plt.suptitle('Iterated Function Systems', fontsize=13)
@@ -504,7 +516,8 @@ for k in range(1, 13):
     print(f"  k={k:2d}: 2*cos({angle:6.1f}) = {val:6.3f} "
           f"  -> {status}")
 
-print(f"\\nAllowed rotation orders: {allowed}")
+print(f"\
+Allowed rotation orders: {allowed}")
 print("No others are possible in periodic lattices.")
 
 # Visualise allowed vs forbidden
@@ -516,13 +529,15 @@ for ax, k in zip(axes, [2, 3, 4, 5, 6]):
     if k in allowed:
         ax.fill(x, y, color='#2ecc71', alpha=0.3)
         ax.plot(x, y, color='#2ecc71', linewidth=2)
-        ax.set_title(f'{k}-fold\\nALLOWED', fontsize=9,
+        ax.set_title(f'{k}-fold\
+ALLOWED', fontsize=9,
                      color='#2ecc71')
     else:
         ax.fill(x, y, color='#e74c3c', alpha=0.2)
         ax.plot(x, y, color='#e74c3c', linewidth=2,
                 linestyle='--')
-        ax.set_title(f'{k}-fold\\nFORBIDDEN', fontsize=9,
+        ax.set_title(f'{k}-fold\
+FORBIDDEN', fontsize=9,
                      color='#e74c3c')
 
     ax.set_xlim(-1.3, 1.3); ax.set_ylim(-1.3, 1.3)
@@ -532,7 +547,8 @@ plt.suptitle('Crystallographic Restriction', fontsize=13)
 plt.tight_layout()
 plt.show()
 
-print("\\n5-fold and 7-fold are forbidden in periodic tilings.")
+print("\
+5-fold and 7-fold are forbidden in periodic tilings.")
 print("This is why Penrose tilings (5-fold) must be APERIODIC.")`,
       challenge: 'Extend the proof to 3D. In three dimensions, the crystallographic restriction allows the same orders (1, 2, 3, 4, 6). The argument uses the trace of a 3D rotation matrix, which must be an integer for lattice compatibility. Show that trace(R) = 1 + 2*cos(theta) and find the allowed values.',
       successHint: 'The crystallographic restriction theorem is a striking example of mathematical inevitability: the simple requirement of translational periodicity eliminates most rotational symmetries. It explains why crystals, tiles, and mandalas use the same small set of symmetry orders.',

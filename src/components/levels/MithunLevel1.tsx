@@ -34,7 +34,13 @@ The mithun is fascinating because it sits between wild and domestic. It descends
 import matplotlib.pyplot as plt
 
 # Trait comparison: Wild Gaur vs Domestic Mithun
-traits = ['Body weight\\n(kg)', 'Brain size\\n(% of wild)', 'Aggression\\n(1-10)', 'Fear of\\nhumans (1-10)', 'Colour\\nvariety (1-10)', 'Milk yield\\n(relative)']
+traits = ['Body weight\
+(kg)', 'Brain size\
+(% of wild)', 'Aggression\
+(1-10)', 'Fear of\
+humans (1-10)', 'Colour\
+variety (1-10)', 'Milk yield\
+(relative)']
 gaur = [900, 100, 9, 10, 2, 1]
 mithun = [700, 85, 4, 3, 7, 3]
 
@@ -605,7 +611,15 @@ This model — free-ranging, culturally embedded, economically central — repre
 import matplotlib.pyplot as plt
 
 # Ecological comparison: Mithun (semi-wild) vs Industrial cattle
-categories = ['Carbon\\nfootprint', 'Water\\nuse', 'Land\\nuse', 'Biodiversity\\nimpact', 'Animal\\nwelfare', 'Genetic\\ndiversity', 'Disease\\nrisk', 'Cultural\\nvalue']
+categories = ['Carbon\
+footprint', 'Water\
+use', 'Land\
+use', 'Biodiversity\
+impact', 'Animal\
+welfare', 'Genetic\
+diversity', 'Disease\
+risk', 'Cultural\
+value']
 
 # Scores: lower is better for first 4, higher is better for last 4
 # Normalized 0-100 (higher = better overall sustainability)

@@ -65,7 +65,8 @@ markers = [(0, 'Surface'), (10, 'Recreational dive limit'),
 for d, label in markers:
     p = (P_atm + rho * g * d) / P_atm
     ax1.plot(p, d, 'o', color='#f59e0b', markersize=8)
-    ax1.annotate(f'{label}\\n({p:.1f} atm)', xy=(p, d), xytext=(p + 0.5, d + 3),
+    ax1.annotate(f'{label}\
+({p:.1f} atm)', xy=(p, d), xytext=(p + 0.5, d + 3),
                 color='#f59e0b', fontsize=8, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 # Force on a dam wall
@@ -84,7 +85,9 @@ ax2.tick_params(colors='gray')
 
 # Total force on 1m-wide strip
 total_force = 0.5 * rho * g * dam_depth**2  # N per metre width
-ax2.annotate(f'Total force per metre width:\\n{total_force/1000:.0f} kN/m\\n({total_force/1e6:.1f} MN/m)',
+ax2.annotate(f'Total force per metre width:\
+{total_force/1000:.0f} kN/m\
+({total_force/1e6:.1f} MN/m)',
             xy=(300, 35), color='#f59e0b', fontsize=10,
             bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#f59e0b'))
 
@@ -235,7 +238,9 @@ The **drag coefficient** (Cd) quantifies how streamlined a shape is:
 import matplotlib.pyplot as plt
 
 # Drag comparison for different shapes
-shapes = ['Flat plate', 'Cylinder', 'Sphere', 'Half-sphere\\n(bow)', 'Streamlined\\nhull', 'Teardrop']
+shapes = ['Flat plate', 'Cylinder', 'Sphere', 'Half-sphere\
+(bow)', 'Streamlined\
+hull', 'Teardrop']
 cd_values = [1.28, 1.20, 0.47, 0.42, 0.15, 0.04]
 colors_list = ['#ef4444', '#ef4444', '#f59e0b', '#f59e0b', '#22c55e', '#22c55e']
 
@@ -442,7 +447,8 @@ for name, params in methods.items():
     if np.any(mask):
         max_v = speeds[mask][-1]
         ax1.plot(max_v, available, 'o', color=params['color'], markersize=8)
-        ax1.annotate(f'{name}\\nmax {max_v:.1f} m/s', xy=(max_v, available),
+        ax1.annotate(f'{name}\
+max {max_v:.1f} m/s', xy=(max_v, available),
                     xytext=(max_v - 2, available + 3), color=params['color'], fontsize=8,
                     arrowprops=dict(arrowstyle='->', color=params['color']))
 
@@ -544,7 +550,8 @@ for d, label in [(3, 'Minor flood'), (6, 'Major flood'), (9, 'Catastrophic')]:
     f = 0.5 * rho * g * d**2 / 1000
     color = '#22c55e' if d <= 3 else ('#f59e0b' if d <= 6 else '#ef4444')
     ax1.plot(d, f, 'o', color=color, markersize=8)
-    ax1.annotate(f'{label}\\n{f:.0f} kN/m', xy=(d, f), xytext=(d + 0.5, f + 20),
+    ax1.annotate(f'{label}\
+{f:.0f} kN/m', xy=(d, f), xytext=(d + 0.5, f + 20),
                 color=color, fontsize=8, arrowprops=dict(arrowstyle='->', color=color))
 
 # 2. Hydrodynamic force vs current speed
@@ -605,7 +612,8 @@ ax4.set_xlabel('Pillar diameter (m)', color='white')
 ax4.set_ylabel('Scour depth (m)', color='white')
 ax4.set_title(f'Foundation Scour Depth (v={flow_speed} m/s)', color='white', fontsize=12)
 ax4.tick_params(colors='gray')
-ax4.annotate('Foundation must be\\ndeeper than this!', xy=(3, 2.0 * 3**0.65 * 3**0.43),
+ax4.annotate('Foundation must be\
+deeper than this!', xy=(3, 2.0 * 3**0.65 * 3**0.43),
             xytext=(1, 7), color='#f59e0b', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 

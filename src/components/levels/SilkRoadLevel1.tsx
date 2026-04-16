@@ -279,7 +279,8 @@ ax2.set_facecolor('#111827')
 im = ax2.imshow(rates, cmap='YlOrRd', aspect='auto')
 ax2.set_xticks(range(n))
 ax2.set_yticks(range(n))
-ax2.set_xticklabels([f'{names[i]}\\n({currencies[names[i]]["symbol"]})' for i in range(n)],
+ax2.set_xticklabels([f'{names[i]}\
+({currencies[names[i]]["symbol"]})' for i in range(n)],
                     color='white', fontsize=8)
 ax2.set_yticklabels(names, color='white', fontsize=8)
 ax2.set_title('Exchange Rate Matrix (how many column-currency per 1 row-currency)', color='white', fontsize=11)
@@ -549,7 +550,8 @@ ax3.tick_params(colors='gray')
 plt.setp(ax3.get_xticklabels(), color='white')
 for bar, t, s in zip(bars, total_times, total_speeds):
     ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 20,
-            f'{t} yrs\\n{s:.0f} km/yr', ha='center', color='white', fontsize=9)
+            f'{t} yrs\
+{s:.0f} km/yr', ha='center', color='white', fontsize=9)
 
 plt.tight_layout()
 plt.show()

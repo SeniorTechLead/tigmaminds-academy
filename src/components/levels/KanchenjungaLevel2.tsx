@@ -316,7 +316,8 @@ aar = accum_area / total_area
 print(f"Total glacier area: {total_area:.1f} km²")
 print(f"Accumulation zone: {accum_area:.1f} km² ({aar*100:.0f}%)")
 print(f"Current AAR: {aar:.2f} — {'Healthy' if aar >= 0.5 else 'Critical!'}")
-print(f"\\nIf ELA rises 200m to {ela+200}m:")
+print(f"\
+If ELA rises 200m to {ela+200}m:")
 new_accum = area[elevations >= ela+200].sum()
 print(f"  New AAR: {new_accum/total_area:.2f} — {'Healthy' if new_accum/total_area >= 0.5 else 'Critical!'}") `,
       challenge: 'Create a "what-if" scenario: if the lower 5 elevation bands (below 5300m) melt away entirely (area = 0), recalculate the AAR. Does losing the ablation zone actually improve the ratio?',

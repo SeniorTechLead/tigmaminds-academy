@@ -81,7 +81,8 @@ high_dose = Antibiotic("Amoxicillin-HD", 1000, 6, 1.5, 0.7, 20, 0.8, 3.0, 2.0, 2
 
 # System overview
 print("=== Antibiotic Resistance Simulator ===")
-print("Architecture designed. Key components:\\n")
+print("Architecture designed. Key components:\
+")
 
 print(f"PATHOGEN: {staph.name}")
 print(f"  Growth rate: {staph.growth_rate}/hr | K: {staph.K:.0e}")
@@ -90,18 +91,21 @@ print(f"  MIC (resistant): {staph.mic_r} mg/L")
 print(f"  Mutation rate: {staph.mutation_rate:.1e}")
 print(f"  Fitness cost of resistance: {staph.fitness_cost:.0%}")
 
-print(f"\\nANTIBIOTICS:")
+print(f"\
+ANTIBIOTICS:")
 for abx in [amoxicillin, high_dose]:
     half_life = 0.693 / abx.ke
     print(f"  {abx.name}: {abx.dose_mg}mg q{abx.interval_hr}h "
           f"(t½={half_life:.1f}hr, Vd={abx.vd}L)")
 
-print(f"\\nSIMULATION ENGINE:")
+print(f"\
+SIMULATION ENGINE:")
 print(f"  Time step: 0.1 hours")
 print(f"  PK model: one-compartment, first-order absorption/elimination")
 print(f"  PD model: Emax sigmoidal with Hill coefficient")
 print(f"  Resistance: mutation + selection + fitness cost")
-print(f"\\nNext step: Build the population simulation engine.")`,
+print(f"\
+Next step: Build the population simulation engine.")`,
       challenge: 'Add a second pathogen (E. coli with different PK/PD parameters) and a second antibiotic class (ciprofloxacin, a fluoroquinolone with concentration-dependent killing rather than time-dependent). How would the architecture change to accommodate multiple pathogen-drug combinations?',
       successHint: 'Good system design makes everything else easier. You defined three clean classes — Bacterium, Antibiotic, TreatmentProtocol — each with well-defined properties. This separation of concerns means you can swap pathogens, drugs, or protocols without rewriting the simulation engine. This is object-oriented design applied to computational biology.',
     },
@@ -228,7 +232,8 @@ time, conc, Ns, Nr = engine.simulate(duration_hr=168)  # 7 days
 
 print("=== Population Dynamics: 7-Day Treatment ===")
 print(f"Pathogen: {bact.name} | Drug: {abx_standard.name} {abx_standard.dose_mg}mg q{abx_standard.interval_hr}h")
-print(f"Initial: {engine.N0_s:.0e} susceptible, {engine.N0_r:.0e} resistant\\n")
+print(f"Initial: {engine.N0_s:.0e} susceptible, {engine.N0_r:.0e} resistant\
+")
 
 print(f"{'Day':>4} {'Conc (mg/L)':>12} {'Susceptible':>14} {'Resistant':>14} {'Total':>14} {'R Freq':>8}")
 print("-" * 68)
@@ -244,7 +249,8 @@ for day in range(8):
 # Final assessment
 total_final = Ns[-1] + Nr[-1]
 r_freq_final = Nr[-1] / total_final if total_final > 0 else 0
-print(f"\\nFinal bacterial load: {total_final:.2e}")
+print(f"\
+Final bacterial load: {total_final:.2e}")
 print(f"Resistant fraction: {r_freq_final:.4%}")
 if total_final < 1000:
     print("OUTCOME: Treatment SUCCESS — infection cleared")
@@ -388,7 +394,8 @@ strategies = {
 # Run all strategies
 print("=== Treatment Strategy Optimisation ===")
 print(f"Pathogen: S. aureus (MIC_s={bact_p['mic_s']}, MIC_r={bact_p['mic_r']})")
-print(f"Initial: {bact_p['N0_s']:.0e} susceptible + {bact_p['N0_r']:.0e} resistant\\n")
+print(f"Initial: {bact_p['N0_s']:.0e} susceptible + {bact_p['N0_r']:.0e} resistant\
+")
 
 results = []
 print(f"{'Strategy':<28} {'Final Total':>12} {'Final R%':>9} {'Total Dose':>11} {'Score':>7}")
@@ -410,7 +417,8 @@ for name, schedule in strategies.items():
 
 # Best strategy
 best = min(results, key=lambda x: x[4])
-print(f"\\nBEST STRATEGY: {best[0]}")
+print(f"\
+BEST STRATEGY: {best[0]}")
 print(f"  Final load: {best[1]:.2e} | Resistance: {best[2]:.2f}% | Score: {best[4]:.1f}")`,
       challenge: 'Add a "cycling" strategy: use Amoxicillin for 3 days, switch to a different antibiotic (different EC50, different resistance MIC) for 3 days, then back. Antibiotic cycling is proposed as a hospital-wide resistance management strategy. Does it outperform the best single-drug regimen?',
       successHint: 'Treatment optimisation is an active area of clinical research. The multi-objective framework you built — balancing efficacy against resistance — is exactly how clinical pharmacologists design dosing guidelines. The insight that front-loading can prevent resistance by killing mutants early is now standard practice for fluoroquinolones and is being studied for beta-lactams.',
@@ -491,7 +499,8 @@ observation_years = 20
 forecast_years = 10
 
 print("=== Antimicrobial Resistance Surveillance Report ===")
-print(f"Data period: {observation_years} years | Forecast: {forecast_years} years\\n")
+print(f"Data period: {observation_years} years | Forecast: {forecast_years} years\
+")
 
 print(f"{'Pathogen-Drug':<32} {'Start%':>7} {'Now%':>6} {'Trend':>7} "
       f"{'Yr to 50%':>9} {'Risk':>8}")
@@ -537,14 +546,16 @@ for name, init_r, model, use_trend in scenarios:
           f"{y50_str:>9} {risk:>8}")
 
 # Detailed view: S. aureus - Penicillin (the Fleming story)
-print("\\n=== Detailed: S. aureus Penicillin Resistance (Historical Model) ===")
+print("\
+=== Detailed: S. aureus Penicillin Resistance (Historical Model) ===")
 penicillin_data = generate_surveillance_data(30, 0.01, "logistic", 0.06)
 print(f"{'Year':>5} {'Resistance%':>12} {'Bar'}")
 for y in range(0, 30, 3):
     bar = "#" * int(penicillin_data[y] * 50)
     print(f"{1940+y:>5} {penicillin_data[y]*100:>10.1f}%  {bar}")
 
-print("\\nPattern matches historical data: <1% in 1940, ~80% by 1960s")
+print("\
+Pattern matches historical data: <1% in 1940, ~80% by 1960s")
 print("This trajectory is now repeating for carbapenems globally.")`,
       challenge: 'Add an "intervention analysis" module: simulate what happens to the K. pneumoniae carbapenem trajectory if antibiotic use is reduced by 30% starting in year 15. Can the resistance trend be reversed, or only slowed? This models the real policy question facing global health authorities today.',
       successHint: 'Resistance surveillance is the early warning system for one of the greatest threats to modern medicine. The tracker you built — trend fitting, forecasting, risk classification — is the same framework used by WHO, CDC, and ECDC to guide global antibiotic policy. The data says clearly: resistance is rising for nearly every drug-pathogen combination. The time to act is now.',

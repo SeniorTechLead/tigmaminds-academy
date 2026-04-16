@@ -57,7 +57,8 @@ for c in checkpoints:
     print(f"{c:>10.1f} {h:>15.0f} {t:>15.1f} {label:>16}")
 
 # Wootz steel sweet spot
-print(f"\\n=== Wootz Steel Sweet Spot (1.0-1.8% C) ===")
+print(f"\
+=== Wootz Steel Sweet Spot (1.0-1.8% C) ===")
 wootz_c = np.linspace(1.0, 1.8, 5)
 for c in wootz_c:
     h = 80 + 350 * c - 60 * c**2
@@ -69,7 +70,8 @@ for c in wootz_c:
 ht_product = hardness * toughness
 best_idx = np.argmax(ht_product)
 best_c = carbon_pct[best_idx]
-print(f"\\nOptimal carbon for hardness×toughness balance: {best_c:.2f}%")
+print(f"\
+Optimal carbon for hardness×toughness balance: {best_c:.2f}%")
 print(f"This falls squarely in the wootz steel range — the Indian")
 print(f"smiths found the optimum empirically 2,000 years ago.")`,
       challenge: 'Add a third property: **weldability** (decreases linearly from 100 at 0% C to near 0 at 0.5% C). Plot all three properties on the same chart. At what carbon percentage do you lose the ability to weld? This is why modern structural steel uses low carbon — bridges must be welded.',
@@ -103,7 +105,8 @@ a_fcc = 2 * np.sqrt(2) * r_Fe
 
 print("=== Iron Crystal Structures ===")
 print(f"Iron atomic radius: {r_Fe} nm")
-print(f"Carbon atomic radius: {r_C} nm\\n")
+print(f"Carbon atomic radius: {r_C} nm\
+")
 
 # BCC analysis
 print("--- BCC (Body-Centred Cubic) — Ferrite (α-iron) ---")
@@ -122,7 +125,8 @@ print(f"Carbon atom radius: {r_C:.4f} nm")
 print(f"Misfit in oct site: {((r_C - r_oct_bcc)/r_oct_bcc)*100:.1f}% (carbon is TOO BIG)")
 
 # FCC analysis
-print(f"\\n--- FCC (Face-Centred Cubic) — Austenite (γ-iron) ---")
+print(f"\
+--- FCC (Face-Centred Cubic) — Austenite (γ-iron) ---")
 print(f"Lattice parameter: {a_fcc:.4f} nm")
 atoms_per_fcc = 8 * (1/8) + 6 * (1/2)  # 8 corners + 6 faces
 print(f"Atoms per unit cell: {atoms_per_fcc:.0f}")
@@ -138,13 +142,16 @@ print(f"Carbon atom radius: {r_C:.4f} nm")
 print(f"Misfit in oct site: {((r_C - r_oct_fcc)/r_oct_fcc)*100:.1f}% (still too big, but LESS strain)")
 
 # Solubility comparison
-print(f"\\n=== Carbon Solubility Comparison ===")
+print(f"\
+=== Carbon Solubility Comparison ===")
 print(f"BCC (ferrite) max carbon: 0.022 wt% at 727°C")
 print(f"FCC (austenite) max carbon: 2.14 wt% at 1147°C")
 print(f"Ratio: {2.14/0.022:.0f}× more carbon in FCC")
-print(f"\\nWhy? Larger interstitial sites → less lattice strain")
+print(f"\
+Why? Larger interstitial sites → less lattice strain")
 print(f"→ lower energy penalty → more carbon dissolves.")
-print(f"\\nWootz crucible at 1200°C: iron is FCC, absorbs ~1.5% C")
+print(f"\
+Wootz crucible at 1200°C: iron is FCC, absorbs ~1.5% C")
 print(f"Slow cooling to room temp: iron reverts to BCC (max 0.022% C)")
 print(f"Excess carbon MUST go somewhere → forms Fe₃C (cementite) bands")
 print(f"These cementite bands = the famous Damascus pattern")`,
@@ -186,7 +193,8 @@ def Acm_line(c):
 T_eutectoid = 727  # °C
 C_eutectoid = 0.76  # wt%
 
-print("=== Iron-Carbon Phase Diagram Analysis ===\\n")
+print("=== Iron-Carbon Phase Diagram Analysis ===\
+")
 
 # Predict microstructure at room temperature (slow cooling)
 def predict_microstructure(carbon_pct):
@@ -214,7 +222,8 @@ for c in test_carbons:
     print(f"{c:>10.2f} {structure:<30} {p1:>10.1f} {p2:>10.1f}")
 
 # Wootz steel analysis
-print(f"\\n=== Wootz Steel (1.5% C) Cooling Path ===")
+print(f"\
+=== Wootz Steel (1.5% C) Cooling Path ===")
 wootz_c = 1.5
 T_start = 1200  # °C (crucible temperature)
 T_Acm = Acm_line(wootz_c)
@@ -227,12 +236,15 @@ print(f"Eutectoid temperature: {T_eutectoid}°C — remaining austenite → pear
 f_cem = (wootz_c - C_eutectoid) / (6.67 - C_eutectoid) * 100
 f_pearlite = 100 - f_cem
 
-print(f"\\nFinal microstructure (lever rule):")
+print(f"\
+Final microstructure (lever rule):")
 print(f"  Cementite (Fe₃C): {f_cem:.1f}%  — hard, brittle carbide bands")
 print(f"  Pearlite:          {f_pearlite:.1f}% — layered ferrite+cementite")
-print(f"\\nThe cementite network along grain boundaries creates")
+print(f"\
+The cementite network along grain boundaries creates")
 print(f"the visible banded pattern known as 'Damascus' or 'watered' steel.")
-print(f"\\nEstimated hardness: ~350-400 HV (Vickers)")
+print(f"\
+Estimated hardness: ~350-400 HV (Vickers)")
 print(f"This is hard enough to cut softer steels, yet tough enough")
 print(f"for a sword blade — the ideal wootz combination.")`,
       challenge: 'For a hypoeutectoid steel with 0.4% carbon, use the lever rule to calculate the exact percentages of ferrite and pearlite at room temperature. Then calculate for 0.76% (eutectoid — what percentage is pearlite?). Verify that at 0.76%, you get 100% pearlite — this is the eutectoid point where the phase diagram predicts a single transformation.',
@@ -300,7 +312,8 @@ for rate in test_rates:
     print(f"{rate:>12.2f} {phase:<30} {hv:>14.0f} {brittle:>8}")
 
 # Wootz crucible cooling
-print(f"\\n=== Wootz Crucible Cooling ===")
+print(f"\
+=== Wootz Crucible Cooling ===")
 crucible_time_hours = 48  # 2 days
 temp_drop = 1200 - 25     # °C
 wootz_rate = temp_drop / (crucible_time_hours * 3600)  # °C/s
@@ -313,7 +326,8 @@ print(f"Microstructure: {phase}")
 print(f"Hardness: {hv:.0f} HV")
 
 # Compare: modern water quench
-print(f"\\n=== Modern Water Quench ===")
+print(f"\
+=== Modern Water Quench ===")
 quench_rate = 1000  # °C/s
 phase_q, hv_q = microstructure(quench_rate)
 print(f"Cooling rate: {quench_rate} °C/s")
@@ -321,7 +335,8 @@ print(f"Microstructure: {phase_q}")
 print(f"Hardness: {hv_q:.0f} HV")
 print(f"BUT: at 1.5% C, martensite is so strained it CRACKS.")
 print(f"Internal stress exceeds fracture toughness.")
-print(f"\\nThe wootz smiths' slow cooling was not primitive —")
+print(f"\
+The wootz smiths' slow cooling was not primitive —")
 print(f"it was the ONLY way to get a usable blade at 1.5% carbon.")
 print(f"Modern metallurgy confirms their empirical wisdom.")`,
       challenge: 'Modern tool steel (e.g., a chisel at 0.8% C) IS quenched to martensite, then tempered at 200°C for 1 hour to reduce hardness from ~800 HV to ~600 HV. Model tempering: hardness drops as H = H_quenched × exp(-k × T_temper / 1000) where k ≈ 0.5. Print a table of tempering temperatures (100–500°C) and resulting hardness. At what temperature does the steel become too soft for a cutting tool (<400 HV)?',
@@ -366,7 +381,8 @@ for T in [800, 900, 1000, 1100, 1200, 1300]:
     print(f"{T:>10} {D:>14.2e} {x:>20.2f}")
 
 # Full crucible simulation
-print(f"\\n=== Wootz Crucible Simulation ===")
+print(f"\
+=== Wootz Crucible Simulation ===")
 T_crucible = 1200  # °C
 D_1200 = diffusivity(T_crucible)
 print(f"Temperature: {T_crucible}°C")
@@ -381,9 +397,11 @@ from math import erfc
 C_surface = 2.0  # wt% carbon at iron-charcoal interface
 iron_radius = 5e-3  # 5 mm radius of iron piece
 
-print(f"\\nCarbon profile after different times:")
+print(f"\
+Carbon profile after different times:")
 print(f"Surface carbon: {C_surface}% (set by charcoal contact)")
-print(f"Iron piece radius: {iron_radius*1000:.0f} mm\\n")
+print(f"Iron piece radius: {iron_radius*1000:.0f} mm\
+")
 
 times_hours = [1, 2, 4, 8, 12, 16]
 positions_mm = [0, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0]
@@ -409,11 +427,13 @@ depths = np.linspace(0, iron_radius, 50)
 carbons = [C_surface * erfc(d / (2 * np.sqrt(D_1200 * t_final))) for d in depths]
 avg_C = np.mean(carbons)
 
-print(f"\\nAfter 12 hours at {T_crucible}°C:")
+print(f"\
+After 12 hours at {T_crucible}°C:")
 print(f"  Average carbon content: {avg_C:.2f} wt%")
 print(f"  Centre carbon: {carbons[-1]:.2f} wt%")
 print(f"  Surface carbon: {carbons[0]:.2f} wt%")
-print(f"\\nThe gradient from surface to centre explains why wootz")
+print(f"\
+The gradient from surface to centre explains why wootz")
 print(f"ingots had slightly inhomogeneous carbon — which actually")
 print(f"HELPED form the banded cementite pattern during slow cooling.")`,
       challenge: 'Double the iron piece radius to 10 mm and recalculate. How much longer does it take to reach the same average carbon content? Remember: diffusion distance scales as √t, so doubling the distance requires 4× the time. Verify this numerically.',
@@ -471,7 +491,8 @@ materials = {
     },
 }
 
-print("=== Materials Property Comparison ===\\n")
+print("=== Materials Property Comparison ===\
+")
 print(f"{'Material':<22} {'σ (GPa)':>9} {'ρ (kg/m³)':>10} {'E (GPa)':>9} {'k (W/mK)':>10}")
 print("-" * 64)
 
@@ -481,7 +502,8 @@ for name, props in materials.items():
           f"{props['thermal_cond_W_mK']:>10}")
 
 # Specific strength (strength-to-weight ratio)
-print(f"\\n=== Specific Strength (σ/ρ) — strength per unit mass ===")
+print(f"\
+=== Specific Strength (σ/ρ) — strength per unit mass ===")
 print(f"{'Material':<22} {'σ/ρ (kN·m/kg)':>15}")
 print("-" * 40)
 for name, props in materials.items():
@@ -489,8 +511,10 @@ for name, props in materials.items():
     print(f"{name:<22} {specific:>15.1f}")
 
 # Trace element catalysis model
-print(f"\\n=== Trace Elements in Wootz Steel ===")
-print(f"These elements catalyse carbon nanotube formation:\\n")
+print(f"\
+=== Trace Elements in Wootz Steel ===")
+print(f"These elements catalyse carbon nanotube formation:\
+")
 
 trace_elements = {
     "Vanadium (V)": {"ppm": 400, "role": "Primary CNT catalyst, forms VC nucleation sites"},
@@ -505,11 +529,13 @@ for elem, data in trace_elements.items():
     print(f"  {elem:<20} {data['ppm']:>5} ppm  — {data['role']}")
     total_trace_ppm += data['ppm']
 
-print(f"\\n  Total trace elements: {total_trace_ppm} ppm = {total_trace_ppm/10000:.2f}%")
+print(f"\
+  Total trace elements: {total_trace_ppm} ppm = {total_trace_ppm/10000:.2f}%")
 print(f"  Less than 0.2% of the steel by weight — yet absolutely critical.")
 
 # CNT reinforcement estimate (rule of mixtures)
-print(f"\\n=== Composite Strength Estimate (Rule of Mixtures) ===")
+print(f"\
+=== Composite Strength Estimate (Rule of Mixtures) ===")
 cnt_volume_fractions = [0.0001, 0.001, 0.005, 0.01, 0.05]
 steel_strength = 0.80  # GPa (wootz matrix)
 cnt_strength = 60.0    # GPa
@@ -521,11 +547,13 @@ for vf in cnt_volume_fractions:
     improvement = (composite - steel_strength) / steel_strength * 100
     print(f"{vf*100:>10.3f} {composite:>18.3f} {improvement:>11.1f}%")
 
-print(f"\\nEven 0.01% CNTs by volume adds ~6% strength.")
+print(f"\
+Even 0.01% CNTs by volume adds ~6% strength.")
 print(f"More importantly, CNTs at crack tips RESIST crack propagation,")
 print(f"dramatically improving fracture toughness — the key to a blade")
 print(f"that is both hard AND resilient.")
-print(f"\\nThe Indian smiths unknowingly created a NANOCOMPOSITE —")
+print(f"\
+The Indian smiths unknowingly created a NANOCOMPOSITE —")
 print(f"a material that modern engineers are still learning to replicate.")`,
       challenge: 'The Halpin-Tsai equation gives a better estimate than rule-of-mixtures for short-fibre composites: E_composite = E_matrix × (1 + ξηVf)/(1 - ηVf) where η = (E_fibre/E_matrix - 1)/(E_fibre/E_matrix + ξ) and ξ ≈ 2 for randomly oriented short fibres. Calculate E_composite for wootz steel with 0.01% CNT volume fraction using E_matrix = 220 GPa and E_fibre = 1000 GPa. Compare with the rule-of-mixtures estimate.',
       successHint: 'You explored the nanostructures hidden inside ancient wootz steel — carbon nanotubes and cementite nanowires formed through trace-element catalysis during slow crucible cooling. This is one of the most remarkable convergences in the history of technology: a process developed 2,000 years ago in southern India inadvertently produced nanoscale structures that modern science only identified in the 21st century. The lesson is humbling — nature and human ingenuity can achieve at the bench what takes science centuries to explain at the blackboard.',

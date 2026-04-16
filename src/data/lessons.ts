@@ -6336,7 +6336,7 @@ plt.show()  # Watch the average climb!`,
       ],
       nextLessons: [
         { slug: 'seed-keeper-of-nagaland', reason: 'Applies the same selection principles to crops \u2014 seed keepers are plant breeders using the same logic' },
-        { slug: 'dancing-deer-loktak', reason: 'Explores another culturally important NE Indian animal and its conservation challenges' },
+        { slug: 'dancing-deer-of-loktak-lake', reason: 'Explores another culturally important NE Indian animal and its conservation challenges' },
         { slug: 'red-panda-mask', reason: 'Connects natural selection and evolution to camouflage \u2014 the wild version of what breeders do artificially' },
       ],
       relatedStories: [
@@ -19141,7 +19141,7 @@ print(f"That feeds a family for {days_fed:.0f} days")
         { slug: 'adaptation-and-evolution', reason: 'Ectothermy, pit organs, and constriction are all evolved adaptations — this reference covers natural selection in depth' },
       ],
       nextLessons: [
-        { slug: 'dancing-deer-loktak', reason: 'Another story of wildlife living alongside humans — the Sangai deer of Loktak Lake and wetland conservation' },
+        { slug: 'dancing-deer-of-loktak-lake', reason: 'Another story of wildlife living alongside humans — the Sangai deer of Loktak Lake and wetland conservation' },
         { slug: 'elephant-corridor', reason: 'From python coexistence to elephant corridors — how communities create safe passages for wildlife through human landscapes' },
         { slug: 'wild-orchids-trees', reason: 'From animal symbiosis to plant symbiosis — orchids living on trees without harming them, another form of peaceful coexistence' },
       ],

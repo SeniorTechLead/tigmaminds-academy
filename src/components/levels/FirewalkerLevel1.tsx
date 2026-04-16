@@ -196,7 +196,8 @@ for bar, k in zip(bars, conductivity):
 
 # Highlight charcoal/ash
 ax2.axvspan(0.01, 0.2, alpha=0.05, color='#22c55e')
-ax2.text(0.08, 7.5, 'Firewalking\\nzone', color='#22c55e', fontsize=9, ha='center')
+ax2.text(0.08, 7.5, 'Firewalking\
+zone', color='#22c55e', fontsize=9, ha='center')
 
 plt.tight_layout()
 plt.show()
@@ -501,13 +502,19 @@ ax1.axvspan(100, 120, alpha=0.05, color='#3b82f6')
 ax1.axvspan(120, 200, alpha=0.05, color='#ef4444')
 ax1.axvspan(200, 400, alpha=0.05, color='#22c55e')
 
-ax1.text(110, 65, 'Film\\nevaporation', color='#3b82f6', fontsize=9, ha='center')
-ax1.text(160, 40, 'Nucleate\\nboiling\\n(DANGER)', color='#ef4444', fontsize=9, ha='center')
-ax1.text(300, 45, 'Leidenfrost\\neffect\\n(vapor cushion)', color='#22c55e', fontsize=9, ha='center')
+ax1.text(110, 65, 'Film\
+evaporation', color='#3b82f6', fontsize=9, ha='center')
+ax1.text(160, 40, 'Nucleate\
+boiling\
+(DANGER)', color='#ef4444', fontsize=9, ha='center')
+ax1.text(300, 45, 'Leidenfrost\
+effect\
+(vapor cushion)', color='#22c55e', fontsize=9, ha='center')
 
 # Mark Leidenfrost point
 ax1.axvline(200, color='#f59e0b', linestyle='--', linewidth=1)
-ax1.text(205, 75, 'Leidenfrost\\npoint (200°C)', color='#f59e0b', fontsize=9)
+ax1.text(205, 75, 'Leidenfrost\
+point (200°C)', color='#f59e0b', fontsize=9)
 
 ax1.set_xlabel('Surface temperature (°C)', color='white')
 ax1.set_ylabel('Droplet lifetime (seconds)', color='white')
@@ -535,7 +542,8 @@ ax2.axvline(200, color='#f59e0b', linestyle='--', linewidth=1)
 # Peak heat transfer point
 peak_idx = np.argmax(heat_flux)
 ax2.plot(surface_temp[peak_idx], heat_flux[peak_idx], '*', color='#f59e0b', markersize=15)
-ax2.annotate(f'Maximum heat transfer\\n({surface_temp[peak_idx]:.0f}°C)',
+ax2.annotate(f'Maximum heat transfer\
+({surface_temp[peak_idx]:.0f}°C)',
             xy=(surface_temp[peak_idx], heat_flux[peak_idx]),
             xytext=(surface_temp[peak_idx]+50, heat_flux[peak_idx]-2),
             color='#f59e0b', fontsize=9, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -638,7 +646,8 @@ plt.setp(ax1.get_xticklabels(), rotation=20, ha='right', color='white', fontsize
 for bar, f, safe in zip(bars, fluxes, [f <= target_flux for f in fluxes]):
     symbol = 'SAFE' if safe else 'BURN'
     ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
-            f'{f} kW/m²\\n({symbol})', ha='center', color='white', fontsize=8)
+            f'{f} kW/m²\
+({symbol})', ha='center', color='white', fontsize=8)
 
 # Temperature evolution through a multi-layer protection system
 ax2.set_facecolor('#111827')

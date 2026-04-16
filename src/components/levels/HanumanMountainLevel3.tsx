@@ -63,7 +63,8 @@ drugs = {
 # Atomic masses
 mass = {"C": 12.01, "H": 1.008, "N": 14.01, "O": 16.00}
 
-print("=== Plant-Derived Drug Molecules ===\\n")
+print("=== Plant-Derived Drug Molecules ===\
+")
 for name, info in drugs.items():
     mw = sum(mass[a] * n for a, n in info["atoms"].items())
     total_atoms = sum(info["atoms"].values())
@@ -72,7 +73,8 @@ for name, info in drugs.items():
     print(f"  Total atoms: {total_atoms}")
     print(f"  Source: {info['source']}")
     print(f"  Target: {info['target']}")
-    print(f"  Use: {info['use']}\\n")`,
+    print(f"  Use: {info['use']}\
+")`,
       challenge: 'Add curcumin (C21H20O6, from turmeric, targets NF-kB pathway, anti-inflammatory) and reserpine (C33H40N2O9, from sarpagandha, targets vesicular monoamine transporter, blood pressure). Which has the highest molecular weight?',
       successHint: 'You can now calculate molecular properties from formulas. This is the first step of computational chemistry — turning molecular structure into quantitative data.',
     },
@@ -219,12 +221,14 @@ ax.text(100, 500, 'Surface', color='white', fontsize=10)
 
 # Mark Everest
 ax.plot([8849], [8849], 'r^', markersize=12)
-ax.text(8849, 9200, 'Everest\\n8,849 m', ha='center',
+ax.text(8849, 9200, 'Everest\
+8,849 m', ha='center',
         fontsize=9, color='cyan')
 ax.plot([8849], [-8849 * crust_density / (mantle_density - crust_density)],
         'rv', markersize=12)
 root_ev = 8849 * crust_density / (mantle_density - crust_density)
-ax.text(8849, -root_ev - 2000, f'Root\\n{root_ev:.0f} m',
+ax.text(8849, -root_ev - 2000, f'Root\
+{root_ev:.0f} m',
         ha='center', fontsize=9, color='orange')
 
 ax.set_xlabel('Mountain Height (m)')
@@ -291,7 +295,8 @@ plt.show()
 print(f"Control (no drug): ~{growth[0]:.0f} colonies")
 print(f"At MIC ({mic} ug/mL): ~{growth[5]:.0f} colonies")
 print(f"At 64 ug/mL: ~{growth[-1]:.0f} colonies")
-print(f"\\nMIC = lowest concentration with near-zero growth")`,
+print(f"\
+MIC = lowest concentration with near-zero growth")`,
       challenge: 'Add a second drug (extract from a different plant) with a higher MIC of 32 ug/mL. Plot both on the same graph. Which drug is more potent? Why?',
       successHint: 'You just simulated the key experiment in drug discovery. Every antibiotic, antiviral, and anti-cancer drug was validated through bioassays like this before reaching patients.',
     },

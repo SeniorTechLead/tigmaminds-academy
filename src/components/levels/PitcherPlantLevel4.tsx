@@ -114,7 +114,8 @@ print(f"  Total samples: {len(X)}")
 print(f"  Features: {len(feature_names)}")
 print(f"  Classes: {class_names}")
 print(f"  Samples per class: {[np.sum(y==c) for c in range(4)]}")
-print(f"\\nFeature statistics:")
+print(f"\
+Feature statistics:")
 for i, fname in enumerate(feature_names):
     print(f"  {fname:<16}: mean={X[:,i].mean():.2f}, std={X[:,i].std():.2f}, range=[{X[:,i].min():.1f}, {X[:,i].max():.1f}]")`,
       challenge: 'Compute the correlation matrix between all features. Which features are most correlated? Which are most independent? Independent features are more useful for classification.',
@@ -268,7 +269,8 @@ print("Feature ranking by discriminative power:")
 for rank, idx in enumerate(sorted_idx):
     source = "ENGINEERED" if idx >= 6 else "raw"
     print(f"  {rank+1}. {eng_names[idx]:<18} F={f_scores[idx]:>8.1f}  [{source}]")
-print(f"\\nTop features are the most useful for classification.")
+print(f"\
+Top features are the most useful for classification.")
 print(f"Engineered features often outrank raw ones because they capture shape, not just size.")`,
       challenge: 'Add two more engineered features of your own design. Does adding them improve the F-score ranking? Think about what distinguishes each trap type and create features that capture those differences.',
       successHint: 'Feature engineering is where domain knowledge meets machine learning. The best features are those that a botanist would use intuitively — you are just expressing that intuition mathematically.',
@@ -664,7 +666,8 @@ axes[0, 2].set_title('Feature importance', color='white', fontsize=10)
 
 # Decision rules (text)
 rules = best_tree.get_rules()
-rule_text = "\\n".join(rules[:12])  # show first 12 rules
+rule_text = "\
+".join(rules[:12])  # show first 12 rules
 axes[1, 0].text(0.02, 0.98, rule_text, transform=axes[1, 0].transAxes,
                  fontsize=6, color='#22c55e', family='monospace',
                  verticalalignment='top')
@@ -719,7 +722,8 @@ plt.show()
 print(f"Decision Tree Results (depth={best_depth}):")
 print(f"  Test accuracy: {dt_acc:.1%}")
 print(f"  k-NN accuracy: {knn_acc:.1%}")
-print(f"\\nTop decision rules:")
+print(f"\
+Top decision rules:")
 for rule in rules[:5]:
     print(f"  {rule}")`,
       challenge: 'Implement a simple Random Forest: train 10 decision trees, each on a random 80% subset of features and 80% subset of data. Average their predictions. Does the ensemble beat the single tree?',
@@ -897,10 +901,14 @@ metrics_text = f"""CLASSIFICATION REPORT
 {'Class':<12} {'Prec':>6} {'Recall':>6} {'F1':>6} {'Support':>8}
 {'-'*40}"""
 for c in range(4):
-    metrics_text += f"\\n{class_names[c]:<12} {precision[c]:>6.2f} {recall[c]:>6.2f} {f1[c]:>6.2f} {conf[c].sum():>8}"
-metrics_text += f"\\n{'-'*40}"
-metrics_text += f"\\n{'Macro avg':<12} {precision.mean():>6.2f} {recall.mean():>6.2f} {f1.mean():>6.2f} {conf.sum():>8}"
-metrics_text += f"\\n{'Accuracy':<12} {'':>6} {'':>6} {np.mean(all_preds==all_true):>6.2f} {len(all_true):>8}"
+    metrics_text += f"\
+{class_names[c]:<12} {precision[c]:>6.2f} {recall[c]:>6.2f} {f1[c]:>6.2f} {conf[c].sum():>8}"
+metrics_text += f"\
+{'-'*40}"
+metrics_text += f"\
+{'Macro avg':<12} {precision.mean():>6.2f} {recall.mean():>6.2f} {f1.mean():>6.2f} {conf.sum():>8}"
+metrics_text += f"\
+{'Accuracy':<12} {'':>6} {'':>6} {np.mean(all_preds==all_true):>6.2f} {len(all_true):>8}"
 
 axes[1, 2].text(0.05, 0.95, metrics_text, transform=axes[1, 2].transAxes,
                  fontsize=8, color='#22c55e', family='monospace', verticalalignment='top')
@@ -1099,13 +1107,19 @@ axes[1, 1].set_title('Classification metrics', color='white', fontsize=10)
 axes[1, 1].legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # 6: Prediction report
-report = "PREDICTION REPORT\\n" + "="*45
+report = "PREDICTION REPORT\
+" + "="*45
 for i, (s, pl, pp) in enumerate(zip(new_samples, pred_labels, pred_probs)):
-    report += f"\\n\\nSample {i+1}: [{', '.join(f'{v:.1f}' for v in s)}]"
-    report += f"\\n  Prediction: {class_names[pl]} ({pp[pl]*100:.0f}% confidence)"
+    report += f"\
+\
+Sample {i+1}: [{', '.join(f'{v:.1f}' for v in s)}]"
+    report += f"\
+  Prediction: {class_names[pl]} ({pp[pl]*100:.0f}% confidence)"
     runner_up = np.argsort(pp)[-2]
-    report += f"\\n  Runner-up: {class_names[runner_up]} ({pp[runner_up]*100:.0f}%)"
-    report += f"\\n  {'CONFIDENT' if pp[pl] > 0.7 else 'AMBIGUOUS - manual review needed'}"
+    report += f"\
+  Runner-up: {class_names[runner_up]} ({pp[runner_up]*100:.0f}%)"
+    report += f"\
+  {'CONFIDENT' if pp[pl] > 0.7 else 'AMBIGUOUS - manual review needed'}"
 
 axes[1, 2].text(0.05, 0.95, report, transform=axes[1, 2].transAxes,
                  fontsize=7, color='#22c55e', family='monospace', verticalalignment='top')
@@ -1115,10 +1129,12 @@ plt.tight_layout()
 plt.show()
 
 print(report)
-print(f"\\n{'='*45}")
+print(f"\
+{'='*45}")
 print(f"SYSTEM PERFORMANCE: {cv_acc:.1%} cross-validated accuracy")
 print(f"Macro F1: {f1_score.mean():.2f}")
-print(f"\\nThis classifier can identify carnivorous plant trap types")
+print(f"\
+This classifier can identify carnivorous plant trap types")
 print(f"from 6 morphological measurements with {cv_acc:.0%} accuracy.")`,
       challenge: 'Add a "reject option": if the maximum predicted probability is below 0.5, the classifier should say "uncertain" instead of making a forced prediction. How many of the test samples would be rejected?',
       successHint: 'You built a complete machine learning pipeline from scratch: data, features, models, evaluation, and explanation. This same workflow applies to any classification problem in biology, medicine, or engineering.',

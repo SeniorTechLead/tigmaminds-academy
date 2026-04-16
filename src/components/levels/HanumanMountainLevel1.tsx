@@ -262,9 +262,11 @@ def identify(node, depth=0):
         print(f"{indent}  If '{answer}':")
         identify(child, depth + 2)
 
-print("=== Himalayan Plant Dichotomous Key ===\\n")
+print("=== Himalayan Plant Dichotomous Key ===\
+")
 identify(key)
-print("\\nWith 2 questions, we distinguish 4 species.")
+print("\
+With 2 questions, we distinguish 4 species.")
 print("Add more branches to handle 8, 16, 32+ species.")`,
       challenge: 'Add a third level of questions. For example, under "Tulsi", add: "Stem square or round?" (square → Holy Basil, round → Sweet Basil). How many species can your expanded key handle?',
       successHint: 'A dichotomous key is both a botanical tool and a data structure — a binary tree. The same logic that identifies plants also powers search algorithms, decision trees in machine learning, and diagnostic flowcharts in medicine.',
@@ -314,7 +316,8 @@ ax.set_title('Extraction Curves: Different Compounds')
 ax.legend(fontsize=9)
 ax.grid(alpha=0.2)
 ax.axvline(x=30, color='gold', linestyle='--', alpha=0.7)
-ax.text(31, 50, 'Optimal\\ntime', color='gold', fontsize=9)
+ax.text(31, 50, 'Optimal\
+time', color='gold', fontsize=9)
 plt.show()
 
 print("Each compound dissolves at a different rate.")

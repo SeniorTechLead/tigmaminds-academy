@@ -203,17 +203,24 @@ ax.set_xlabel('Surface temperature (°C)', color='white')
 ax.set_ylabel('Heat flux (W/m²)', color='white')
 ax.set_title('Boiling curve: 4 regimes of heat transfer', color='white')
 # Annotate regimes
-ax.annotate('Natural\\nconvection', xy=(108, 2000), color='#22c55e', fontsize=9)
-ax.annotate('Nucleate\\nboiling\\n(max heat\\ntransfer)', xy=(120, heat_flux.max()*0.7),
+ax.annotate('Natural\
+convection', xy=(108, 2000), color='#22c55e', fontsize=9)
+ax.annotate('Nucleate\
+boiling\
+(max heat\
+transfer)', xy=(120, heat_flux.max()*0.7),
             color='#3b82f6', fontsize=9)
 ax.annotate('Transition', xy=(180, heat_flux.max()*0.4), color='#a855f7', fontsize=9)
-ax.annotate('LEIDENFROST\\n(film boiling)\\nLOW heat transfer!',
+ax.annotate('LEIDENFROST\
+(film boiling)\
+LOW heat transfer!',
             xy=(350, heat_flux.min()*2), color='#ef4444', fontsize=9, fontweight='bold')
 # Mark Leidenfrost point
 leidenfrost_idx = np.argmin(heat_flux[200:]) + 200
 ax.scatter([T_surface[leidenfrost_idx]], [heat_flux[leidenfrost_idx]],
            color='#ef4444', s=100, zorder=10)
-ax.annotate('Leidenfrost\\npoint', (T_surface[leidenfrost_idx], heat_flux[leidenfrost_idx]),
+ax.annotate('Leidenfrost\
+point', (T_surface[leidenfrost_idx], heat_flux[leidenfrost_idx]),
             textcoords="offset points", xytext=(20, 20), color='#ef4444',
             arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -260,7 +267,8 @@ ax.set_ylabel('Droplet lifetime (s)', color='white')
 ax.set_title('Water droplet lifetime (1 mL on surface)', color='white')
 ax.set_ylim(0, min(max(lifetimes), 60))
 ax.axvline(220, color='#ef4444', linewidth=1.5, linestyle='--', alpha=0.7)
-ax.text(230, max(lifetimes)*0.8, 'Leidenfrost point\\n(droplet "dances")',
+ax.text(230, max(lifetimes)*0.8, 'Leidenfrost point\
+(droplet "dances")',
         color='#ef4444', fontsize=9)
 
 # Panel 4: Application to firewalking — heat transfer with and without Leidenfrost
@@ -403,7 +411,8 @@ ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
 ax.plot(T_range, warm_response, color='#f59e0b', linewidth=2.5, label='Warm receptors')
 ax.plot(T_range, pain_response, color='#ef4444', linewidth=2.5, label='Pain nociceptors')
 ax.axvline(43, color='white', linewidth=1, linestyle='--', alpha=0.5)
-ax.text(43.5, max(pain_response)*0.9, 'Pain threshold\\n(43°C)', color='white', fontsize=9)
+ax.text(43.5, max(pain_response)*0.9, 'Pain threshold\
+(43°C)', color='white', fontsize=9)
 ax.set_xlabel('Temperature (°C)', color='white')
 ax.set_ylabel('Nerve firing rate (arbitrary)', color='white')
 ax.set_title('Thermoreceptor response curves', color='white')
@@ -441,7 +450,8 @@ ax.fill_between(T_plot, np.clip(t_3rd, 0.01, 1e4), 1e4,
 
 # Mark firewalking conditions
 ax.scatter([T_interface], [contact_time], color='white', s=150, zorder=10, marker='*')
-ax.annotate(f'Firewalking\\nT={T_interface:.0f}°C, t={contact_time}s',
+ax.annotate(f'Firewalking\
+T={T_interface:.0f}°C, t={contact_time}s',
             (T_interface, contact_time), textcoords="offset points",
             xytext=(15, 15), color='white', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='white'))
@@ -612,7 +622,8 @@ ax.axvline(contact_time, color='white', linewidth=1, linestyle='--', alpha=0.5)
 ax.set_xlabel('Time (s)', color='white')
 ax.set_ylabel('Total heat absorbed (J/m²)', color='white')
 ax.set_title('Cumulative heat absorption', color='white')
-ax.text(contact_time + 0.05, heat_absorbed.max() * 0.9, 'Foot lifts →\\nheat redistributes',
+ax.text(contact_time + 0.05, heat_absorbed.max() * 0.9, 'Foot lifts →\
+heat redistributes',
         color='white', fontsize=9)
 
 plt.tight_layout()

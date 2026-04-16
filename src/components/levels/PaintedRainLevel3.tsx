@@ -32,8 +32,10 @@ color_names = ["Violet", "Blue-violet", "Blue", "Green", "Yellow-green", "Yellow
 scattering = (700 / wavelengths_nm) ** 4
 
 print("=== Rayleigh Scattering Across the Visible Spectrum ===")
-print("\\nScattering intensity ~ 1 / wavelength^4")
-print("(Normalized so Red at 700nm = 1.0)\\n")
+print("\
+Scattering intensity ~ 1 / wavelength^4")
+print("(Normalized so Red at 700nm = 1.0)\
+")
 print(f"{'Color':<14} {'Wavelength (nm)':<17} {'Relative Scattering':<20}")
 print("-" * 51)
 for name, wl, s in zip(color_names, wavelengths_nm, scattering):
@@ -52,9 +54,13 @@ path_lengths[sun_angles_deg == 5] = 11.5
 tau_blue = 0.15   # optical depth for blue
 tau_red = 0.03    # optical depth for red
 
-print("\\n\\n=== Sky Color vs Sun Angle ===")
-print("\\nAs the sun lowers, light travels through more atmosphere.")
-print("Blue scatters away, leaving reds and oranges.\\n")
+print("\
+\
+=== Sky Color vs Sun Angle ===")
+print("\
+As the sun lowers, light travels through more atmosphere.")
+print("Blue scatters away, leaving reds and oranges.\
+")
 print(f"{'Sun Angle':<12} {'Path Length':<14} {'Blue Remaining':<16} {'Red Remaining':<16} {'Dominant Color'}")
 print("-" * 72)
 for angle, path in zip(sun_angles_deg, path_lengths):
@@ -71,7 +77,8 @@ for angle, path in zip(sun_angles_deg, path_lengths):
         color = "Deep red"
     print(f"{angle:>5} deg     {path:<14.1f} {blue_remaining:<16.1f} {red_remaining:<16.1f} {color}")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Violet scatters {:.1f}x more than red, yet the sky looks blue, not violet.".format(scattering[0]))
 print("Why? Our eyes are far more sensitive to blue than violet, and sunlight")
 print("contains less violet to begin with. The sky is a combined result of")
@@ -106,8 +113,10 @@ wavelengths_um = wavelengths_nm / 1000.0
 n_values = A + B / wavelengths_um**2
 
 print("=== Snell's Law and Dispersion in a Raindrop ===")
-print("\\nCauchy equation: n(lambda) = {:.4f} + {:.5f} / lambda^2".format(A, B))
-print("\\n{:<10} {:<16} {:<18}".format("Color", "Wavelength (nm)", "Refractive Index"))
+print("\
+Cauchy equation: n(lambda) = {:.4f} + {:.5f} / lambda^2".format(A, B))
+print("\
+{:<10} {:<16} {:<18}".format("Color", "Wavelength (nm)", "Refractive Index"))
 print("-" * 44)
 for name, wl, n in zip(color_names, wavelengths_nm, n_values):
     print(f"{name:<10} {wl:<16} {n:<18.6f}")
@@ -115,12 +124,16 @@ for name, wl, n in zip(color_names, wavelengths_nm, n_values):
 # Apply Snell's law: sin(theta_i) = n * sin(theta_r)
 # Light enters a raindrop at various incidence angles
 # The rainbow angle comes from the minimum deviation angle
-print("\\n\\n=== Refraction at a Water Droplet Surface ===")
-print("Snell's law: sin(theta_incident) = n * sin(theta_refracted)\\n")
+print("\
+\
+=== Refraction at a Water Droplet Surface ===")
+print("Snell's law: sin(theta_incident) = n * sin(theta_refracted)\
+")
 
 incidence_deg = 60.0
 theta_i = np.radians(incidence_deg)
-print(f"Incidence angle: {incidence_deg} degrees\\n")
+print(f"Incidence angle: {incidence_deg} degrees\
+")
 print(f"{'Color':<10} {'n':<10} {'Refracted Angle':<18} {'Bending':<12}")
 print("-" * 50)
 for name, n in zip(color_names, n_values):
@@ -130,11 +143,13 @@ for name, n in zip(color_names, n_values):
 
 # Dispersion: difference in refraction between violet and red
 spread = np.degrees(np.arcsin(np.sin(theta_i) / n_values[0])) - np.degrees(np.arcsin(np.sin(theta_i) / n_values[-1]))
-print(f"\\nAngular spread (violet to red): {abs(spread):.3f} degrees")
+print(f"\
+Angular spread (violet to red): {abs(spread):.3f} degrees")
 print("This tiny spread, amplified by two refractions and one reflection")
 print("inside the droplet, creates the full rainbow arc we see in the sky.")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Dispersion is small: n_violet - n_red = {:.6f}".format(n_values[0] - n_values[-1]))
 print("Yet this tiny difference produces the entire color separation in a rainbow.")
 print("The raindrop acts as both a prism (splitting colors) and a mirror (reflecting light back).")`,
@@ -176,7 +191,8 @@ magenta = (255, 0, 255)
 yellow = (255, 255, 0)
 
 print("=== Additive Color Mixing (Light) ===")
-print("Primaries: Red, Green, Blue\\n")
+print("Primaries: Red, Green, Blue\
+")
 pairs_add = [("Red + Green", red, green), ("Red + Blue", red, blue), ("Green + Blue", green, blue), ("Red + Green + Blue", red, green)]
 for name, c1, c2 in pairs_add:
     result = additive_mix(c1, c2)
@@ -184,8 +200,10 @@ for name, c1, c2 in pairs_add:
 rgb_white = additive_mix(additive_mix(red, green), blue)
 print(f"  {'Red + Green + Blue':<22} = RGB{rgb_white}  (White!)")
 
-print("\\n=== Subtractive Color Mixing (Pigments) ===")
-print("Primaries: Cyan, Magenta, Yellow\\n")
+print("\
+=== Subtractive Color Mixing (Pigments) ===")
+print("Primaries: Cyan, Magenta, Yellow\
+")
 pairs_sub = [("Cyan + Magenta", cyan, magenta), ("Cyan + Yellow", cyan, yellow), ("Magenta + Yellow", magenta, yellow)]
 for name, c1, c2 in pairs_sub:
     result = subtractive_mix(c1, c2)
@@ -194,9 +212,13 @@ cmy_black = subtractive_mix(subtractive_mix(cyan, magenta), yellow)
 print(f"  {'Cyan + Mag + Yellow':<22} = RGB{cmy_black}  (Black!)")
 
 # CIE xy chromaticity from wavelength (approximate)
-print("\\n\\n=== CIE Chromaticity Coordinates (Simplified) ===")
-print("\\nThe CIE color space maps every visible color to (x, y) coordinates.")
-print("All real colors fall inside the horseshoe-shaped gamut boundary.\\n")
+print("\
+\
+=== CIE Chromaticity Coordinates (Simplified) ===")
+print("\
+The CIE color space maps every visible color to (x, y) coordinates.")
+print("All real colors fall inside the horseshoe-shaped gamut boundary.\
+")
 
 # Approximate dominant wavelength to CIE xy
 cie_data = [
@@ -214,9 +236,11 @@ for name, wl, x, y in cie_data:
     print(f"{name:<10} {wl:<12} {x:<10.3f} {y:<10.3f}")
 
 # White point
-print(f"\\n{'D65 White':<10} {'---':<12} {'0.313':<10} {'0.329':<10}")
+print(f"\
+{'D65 White':<10} {'---':<12} {'0.313':<10} {'0.329':<10}")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Additive mixing ADDS light (screens, rainbows) -> more light = white.")
 print("Subtractive mixing REMOVES light (paint, ink) -> more pigment = black.")
 print("A rainbow uses additive mixing: overlapping colors create white bands.")`,
@@ -264,8 +288,10 @@ concentration = 0.01  # mol/L
 path_length = 1.0     # cm
 
 print("=== Beer-Lambert Law: Light Absorption by Pigments ===")
-print("\\nFormula: Absorbance = epsilon * concentration * path_length")
-print(f"Concentration: {concentration} mol/L, Path length: {path_length} cm\\n")
+print("\
+Formula: Absorbance = epsilon * concentration * path_length")
+print(f"Concentration: {concentration} mol/L, Path length: {path_length} cm\
+")
 
 for pigment_name, epsilons in pigments.items():
     print(f"--- {pigment_name} ---")
@@ -278,18 +304,22 @@ for pigment_name, epsilons in pigments.items():
         print(f"  {band:<8} eps={eps:<5.2f}  T={pct:>5.1f}%  {bar:<20} {status}")
         if pct > 50:
             reflected_colors.append(band)
-    print(f"  => We see: {', '.join(reflected_colors) if reflected_colors else 'Very dark'}\\n")
+    print(f"  => We see: {', '.join(reflected_colors) if reflected_colors else 'Very dark'}\
+")
 
 # Mixing two pigments (subtractive): multiply transmittances
-print("\\n=== Mixing Pigments (Subtractive) ===")
+print("\
+=== Mixing Pigments (Subtractive) ===")
 print("When you mix paints, each absorbs independently.")
-print("Combined transmittance = T1 * T2 (multiply at each wavelength)\\n")
+print("Combined transmittance = T1 * T2 (multiply at each wavelength)\
+")
 
 p1_name, p2_name = "Ultramarine Blue", "Cadmium Yellow"
 p1_eps = pigments[p1_name]
 p2_eps = pigments[p2_name]
 
-print(f"Mixing {p1_name} + {p2_name}:\\n")
+print(f"Mixing {p1_name} + {p2_name}:\
+")
 print(f"{'Band':<10} {'T(blue)':<10} {'T(yellow)':<12} {'T(mixed)':<12} {'Result'}")
 print("-" * 52)
 mixed_reflects = []
@@ -302,8 +332,10 @@ for band, e1, e2 in zip(wavelength_bands, p1_eps, p2_eps):
         mixed_reflects.append(band)
     print(f"{band:<10} {t1*100:>6.1f}%   {t2*100:>7.1f}%     {t_mix*100:>7.1f}%    {status}")
 
-print(f"\\n=> Mixed color appears: {', '.join(mixed_reflects) if mixed_reflects else 'Very dark'}")
-print("\\n--- Key Insight ---")
+print(f"\
+=> Mixed color appears: {', '.join(mixed_reflects) if mixed_reflects else 'Very dark'}")
+print("\
+--- Key Insight ---")
 print("Blue pigment absorbs yellow/orange/red; yellow pigment absorbs violet/blue.")
 print("Mixed together, only GREEN light passes through both -- that is why")
 print("mixing blue and yellow paint gives green, even though blue + yellow LIGHT = white!")`,
@@ -350,7 +382,9 @@ wavelengths = [700, 600, 570, 520, 460, 380]
 n_values = [1.3312, 1.3330, 1.3340, 1.3355, 1.3380, 1.3435]
 
 print("=== Primary Rainbow (1 internal reflection) ===")
-print("\\nLight path: Refract IN -> Reflect -> Refract OUT\\n")
+print("\
+Light path: Refract IN -> Reflect -> Refract OUT\
+")
 print(f"{'Color':<10} {'n':<10} {'Incidence':<12} {'Refraction':<12} {'Rainbow Angle'}")
 print("-" * 56)
 primary_angles = []
@@ -359,12 +393,17 @@ for color, wl, n in zip(colors, wavelengths, n_values):
     primary_angles.append(ra)
     print(f"{color:<10} {n:<10.4f} {ti:<12.2f} {tr:<12.2f} {ra:<.2f} deg")
 
-print(f"\\nPrimary rainbow spans: {min(primary_angles):.2f} to {max(primary_angles):.2f} degrees")
+print(f"\
+Primary rainbow spans: {min(primary_angles):.2f} to {max(primary_angles):.2f} degrees")
 print(f"Angular width: {max(primary_angles) - min(primary_angles):.2f} degrees")
 print("Red is on the OUTSIDE (larger angle), violet on the INSIDE.")
 
-print("\\n\\n=== Secondary Rainbow (2 internal reflections) ===")
-print("\\nLight path: Refract IN -> Reflect -> Reflect -> Refract OUT\\n")
+print("\
+\
+=== Secondary Rainbow (2 internal reflections) ===")
+print("\
+Light path: Refract IN -> Reflect -> Reflect -> Refract OUT\
+")
 print(f"{'Color':<10} {'n':<10} {'Rainbow Angle'}")
 print("-" * 32)
 secondary_angles = []
@@ -373,11 +412,13 @@ for color, n in zip(colors, n_values):
     secondary_angles.append(ra)
     print(f"{color:<10} {n:<10.4f} {ra:.2f} deg")
 
-print(f"\\nSecondary rainbow spans: {min(secondary_angles):.2f} to {max(secondary_angles):.2f} degrees")
+print(f"\
+Secondary rainbow spans: {min(secondary_angles):.2f} to {max(secondary_angles):.2f} degrees")
 print(f"Angular width: {max(secondary_angles) - min(secondary_angles):.2f} degrees")
 print("Colors are REVERSED: red inside, violet outside.")
 
-print("\\n=== Alexander's Dark Band ===")
+print("\
+=== Alexander's Dark Band ===")
 dark_band = min(secondary_angles) - max(primary_angles)
 print(f"Gap between primary ({max(primary_angles):.2f} deg) and secondary ({min(secondary_angles):.2f} deg):")
 print(f"Dark band width: {dark_band:.2f} degrees")
@@ -417,7 +458,9 @@ color_labels = {380: "Violet", 450: "Blue", 500: "Cyan", 530: "Green",
                 570: "Yellow", 600: "Orange", 660: "Red"}
 
 print("=== Human Cone Cell Response ===")
-print("\\nThree cone types: S (blue, peak 420nm), M (green, peak 530nm), L (red, peak 560nm)\\n")
+print("\
+Three cone types: S (blue, peak 420nm), M (green, peak 530nm), L (red, peak 560nm)\
+")
 print(f"{'Wavelength':<12} {'S (blue)':<10} {'M (green)':<10} {'L (red)':<10} {'Perceived Color'}")
 print("-" * 58)
 
@@ -436,14 +479,18 @@ for wl in range(380, 720, 20):
     print(f"{wl:>4} nm      {s:>5.3f} {s_bar:<4}  {m:>5.3f} {m_bar:<4}  {l:>5.3f} {l_bar:<4} {closest_label}")
 
 # Color matching experiment
-print("\\n\\n=== Color Matching: Why Yellow = Red + Green ===")
-print("\\nPure yellow light (570nm) activates cones like this:")
+print("\
+\
+=== Color Matching: Why Yellow = Red + Green ===")
+print("\
+Pure yellow light (570nm) activates cones like this:")
 s_y = cone_response(570, S_peak, S_width)
 m_y = cone_response(570, M_peak, M_width)
 l_y = cone_response(570, L_peak, L_width)
 print(f"  S = {s_y:.4f},  M = {m_y:.4f},  L = {l_y:.4f}")
 
-print("\\nMixing red (640nm) + green (530nm) light activates cones like this:")
+print("\
+Mixing red (640nm) + green (530nm) light activates cones like this:")
 s_mix = cone_response(640, S_peak, S_width) + cone_response(530, S_peak, S_width)
 m_mix = cone_response(640, M_peak, M_width) + cone_response(530, M_peak, M_width)
 l_mix = cone_response(640, L_peak, L_width) + cone_response(530, L_peak, L_width)
@@ -454,15 +501,20 @@ m_mix *= scale
 l_mix *= scale
 print(f"  S = {s_mix:.4f},  M = {m_mix:.4f},  L = {l_mix:.4f}")
 
-print(f"\\nM/L ratio for pure yellow: {m_y/l_y:.3f}")
+print(f"\
+M/L ratio for pure yellow: {m_y/l_y:.3f}")
 print(f"M/L ratio for red+green:   {m_mix/l_mix:.3f}")
 print("These are close enough that the brain perceives the SAME color!")
 
 # Color blindness
-print("\\n\\n=== Color Vision Deficiency ===")
-print("\\nProtanopia (no L cones): cannot distinguish red from green")
+print("\
+\
+=== Color Vision Deficiency ===")
+print("\
+Protanopia (no L cones): cannot distinguish red from green")
 print("Deuteranopia (no M cones): also confuses red and green")
-print("Tritanopia (no S cones): confuses blue and yellow\\n")
+print("Tritanopia (no S cones): confuses blue and yellow\
+")
 test_pairs = [("Red (640nm)", 640), ("Green (530nm)", 530)]
 for deficiency, missing in [("Protanopia (no L)", "L"), ("Deuteranopia (no M)", "M")]:
     print(f"{deficiency}:")

@@ -186,10 +186,12 @@ ax2.axhline(0, color='gray', linestyle='-', alpha=0.3)
 ax2.axvline(0, color='gray', linestyle='-', alpha=0.3)
 
 # Annotate the asymmetry
-ax2.annotate('Gaining ₹500\\nfeels this good', xy=(500, 500**0.88),
+ax2.annotate('Gaining ₹500\
+feels this good', xy=(500, 500**0.88),
              xytext=(600, 300), color='#22c55e', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#22c55e'))
-ax2.annotate('Losing ₹500\\nfeels THIS bad', xy=(-500, -2.25*500**0.88),
+ax2.annotate('Losing ₹500\
+feels THIS bad', xy=(-500, -2.25*500**0.88),
              xytext=(-400, -600), color='#ef4444', fontsize=9,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -291,7 +293,8 @@ ax2.set_title('Winner Take All: Small Head Start → Dominance', color='white', 
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
 
-ax2.annotate('20-user head start\\nbecomes total dominance', xy=(30, platform_a[30]),
+ax2.annotate('20-user head start\
+becomes total dominance', xy=(30, platform_a[30]),
              xytext=(15, platform_a[30]*0.8), color='#f59e0b', fontsize=10,
              arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -500,7 +503,8 @@ ax2.set_title('Optimal Bidding Strategy by Auction Type', color='white', fontsiz
 ax2.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax2.tick_params(colors='gray')
 
-ax2.annotate('In Vickrey: bid honestly\\n(dominant strategy)', xy=(600, 600),
+ax2.annotate('In Vickrey: bid honestly\
+(dominant strategy)', xy=(600, 600),
              xytext=(200, 800), color='#3b82f6', fontsize=10,
              arrowprops=dict(arrowstyle='->', color='#3b82f6'))
 
@@ -510,7 +514,8 @@ plt.show()
 print("Revenue Equivalence Theorem verified:")
 for label, revenue in zip(labels, data):
     print(f"  {label}: mean=₹{np.mean(revenue):.1f}, std=₹{np.std(revenue):.1f}")
-print(f"\\nAll four auction types yield ≈₹{np.mean(means):.0f} on average!")
+print(f"\
+All four auction types yield ≈₹{np.mean(means):.0f} on average!")
 print(f"With {n_bidders} bidders and valuations uniform on [0, 1000]:")
 print(f"  Expected revenue = 1000 * (n-1)/(n+1) = {1000*(n_bidders-1)/(n_bidders+1):.0f}")`,
       challenge: 'Add a "reserve price" of ₹300 (no sale if highest bid < 300). How does this affect revenue? Does Revenue Equivalence still hold? (Hint: it changes — reserve prices break the theorem.)',
@@ -561,10 +566,12 @@ ax1.axvline(threshold, color='#f59e0b', linestyle=':', label=f'Poverty threshold
 
 # Mark equilibria
 ax1.plot(15, 15, 'o', color='#ef4444', markersize=12, zorder=5)
-ax1.annotate('Poverty trap\\n(stable)', xy=(15, 15), xytext=(25, 50), color='#ef4444', fontsize=10,
+ax1.annotate('Poverty trap\
+(stable)', xy=(15, 15), xytext=(25, 50), color='#ef4444', fontsize=10,
              arrowprops=dict(arrowstyle='->', color='#ef4444'))
 ax1.plot(170, 170, 'o', color='#22c55e', markersize=12, zorder=5)
-ax1.annotate('Prosperity\\n(stable)', xy=(170, 170), xytext=(120, 150), color='#22c55e', fontsize=10,
+ax1.annotate('Prosperity\
+(stable)', xy=(170, 170), xytext=(120, 150), color='#22c55e', fontsize=10,
              arrowprops=dict(arrowstyle='->', color='#22c55e'))
 
 ax1.set_xlabel('Current annual income (₹ thousands)', color='white')

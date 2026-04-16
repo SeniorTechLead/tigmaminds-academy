@@ -201,7 +201,8 @@ conditions = [
     ("Summer day, still air", 20, 0.5, 15),
 ]
 
-print("=== Heat Loss by Mode — Red Panda at 38°C ===\\n")
+print("=== Heat Loss by Mode — Red Panda at 38°C ===\
+")
 
 for desc, t_air, wind, t_sky in conditions:
     t_air_k = t_air + 273.15
@@ -279,7 +280,8 @@ mass = 5.0  # kg
 
 # Basal Metabolic Rate (Kleiber's Law)
 bmr = 70 * mass**0.75
-print(f"=== Red Panda Energy Budget ({mass} kg) ===\\n")
+print(f"=== Red Panda Energy Budget ({mass} kg) ===\
+")
 print(f"Basal Metabolic Rate (BMR): {bmr:.0f} kcal/day")
 
 # Additional costs
@@ -290,7 +292,8 @@ activity = bmr * 0.6           # climbing, foraging
 winter_total = bmr + thermoreg_winter + activity
 summer_total = bmr + thermoreg_summer + activity
 
-print(f"\\nWinter total: {winter_total:.0f} kcal/day")
+print(f"\
+Winter total: {winter_total:.0f} kcal/day")
 print(f"  BMR: {bmr:.0f} + Heating: {thermoreg_winter:.0f} + Activity: {activity:.0f}")
 print(f"Summer total: {summer_total:.0f} kcal/day")
 print(f"  BMR: {bmr:.0f} + Cooling: {thermoreg_summer:.0f} + Activity: {activity:.0f}")
@@ -306,22 +309,26 @@ for season, total_cal in [("Winter", winter_total), ("Summer", summer_total)]:
     eating_hours = eating_minutes / 60
     pct_day = eating_hours / 24 * 100
 
-    print(f"\\n{season}:")
+    print(f"\
+{season}:")
     print(f"  Bamboo needed: {bamboo_kg:.1f} kg ({bamboo_kg/mass*100:.0f}% of body weight)")
     print(f"  Eating time: {eating_hours:.1f} hours ({pct_day:.0f}% of the day)")
 
-print(f"\\nThe red panda is essentially an eating machine!")
+print(f"\
+The red panda is essentially an eating machine!")
 print(f"It spends more time eating than sleeping.")
 
 # Kleiber's Law comparison
-print(f"\\n=== Kleiber's Law: BMR Across Species ===")
+print(f"\
+=== Kleiber's Law: BMR Across Species ===")
 for name, m in [("Mouse", 0.02), ("Rat", 0.3), ("Red panda", 5),
                 ("Dog", 20), ("Human", 70), ("Elephant", 5000)]:
     b = 70 * m**0.75
     per_kg = b / m
     print(f"  {name:15s} {m:7.1f} kg  BMR: {b:8.0f} kcal/day  ({per_kg:.0f} kcal/kg/day)")
 
-print(f"\\nSmaller animals burn MORE calories per kg!")`,
+print(f"\
+Smaller animals burn MORE calories per kg!")`,
       challenge: 'If habitat fragmentation forces the red panda to walk 2 km more per day between bamboo patches (costing ~50 extra kcal), how much more bamboo must it eat? How many extra minutes of foraging?',
       successHint: 'You have built a complete energy budget using Kleiber\'s Law. The numbers reveal why the red panda is so vulnerable to habitat loss: it already operates at the edge of its energy budget. Any additional cost — colder winters, longer travel, less bamboo — can tip the balance toward starvation.',
     },
@@ -370,7 +377,8 @@ body_temp = 38  # °C
 
 surface_area = 0.3  # m²
 
-print("=== Red Panda Fur Insulation Analysis ===\\n")
+print("=== Red Panda Fur Insulation Analysis ===\
+")
 
 conditions = [
     ("Dry fur, -10°C", k_fur_dry, -10),

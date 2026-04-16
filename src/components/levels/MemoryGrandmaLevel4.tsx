@@ -19,7 +19,8 @@ export default function MemoryGrandmaLevel4() {
       code: `import numpy as np
 
 # --- Stage 1: Forgetting Curve Data Ingestion ---
-print("=== Capstone Stage 1: Review Data Ingestion ===\\n")
+print("=== Capstone Stage 1: Review Data Ingestion ===\
+")
 
 np.random.seed(42)
 
@@ -58,11 +59,13 @@ print(f"Valid events: {valid}, Invalid: {invalid}")
 # Summary statistics
 items_reviewed = set(r["item"] for r in reviews)
 recalls = sum(1 for r in reviews if r["recalled"])
-print(f"\\nItems with data: {len(items_reviewed)}/{n_items}")
+print(f"\
+Items with data: {len(items_reviewed)}/{n_items}")
 print(f"Overall recall rate: {recalls}/{len(reviews)} ({recalls/len(reviews)*100:.0f}%)")
 
 # Per-item summary
-print(f"\\nPer-item review summary:")
+print(f"\
+Per-item review summary:")
 print(f"{'Item':<10s} {'Reviews':>8s} {'Recalled':>9s} {'Rate':>6s}")
 print("-" * 35)
 for item in item_names[:5]:
@@ -72,7 +75,8 @@ for item in item_names[:5]:
     print(f"{item:<10s} {len(item_reviews):>8d} {item_recalls:>9d} {rate:>5.0f}%")
 print("  ... (showing first 5)")
 
-print("\\nQuality gate: All events validated. Ready for Stage 2.")`,
+print("\
+Quality gate: All events validated. Ready for Stage 2.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -87,7 +91,8 @@ print("\\nQuality gate: All events validated. Ready for Stage 2.")`,
       code: `import numpy as np
 
 # --- Stage 2: Individual forgetting rate estimation from review data ---
-print("=== Stage 2: Forgetting Rate Estimation ===\\n")
+print("=== Stage 2: Forgetting Rate Estimation ===\
+")
 
 np.random.seed(42)
 
@@ -126,7 +131,8 @@ def estimate_decay_rate(reviews):
             best_rate = rate
     return best_rate, best_ll
 
-print("Estimating individual forgetting rates (maximum likelihood):\\n")
+print("Estimating individual forgetting rates (maximum likelihood):\
+")
 print(f"{'Item':<10s} {'Reviews':>8s} {'Recall%':>8s} {'Decay rate':>11s} {'Half-life':>10s} {'Log-lik':>8s}")
 print("-" * 57)
 
@@ -140,7 +146,8 @@ for item, reviews in items_data.items():
     print(f"{item:<10s} {n_reviews:>8d} {n_recalled/n_reviews*100:>7.0f}% {rate:>11.3f} {half_life:>9.1f}d {ll:>8.2f}")
 
 # Rank items by difficulty (higher decay = harder to remember)
-print("\\nItems ranked by difficulty (highest decay = hardest):")
+print("\
+Items ranked by difficulty (highest decay = hardest):")
 for item in sorted(decay_rates, key=decay_rates.get, reverse=True):
     r = decay_rates[item]
     difficulty = "HARD" if r > 0.3 else "MEDIUM" if r > 0.15 else "EASY"
@@ -149,10 +156,12 @@ for item in sorted(decay_rates, key=decay_rates.get, reverse=True):
 # Aggregate student-level forgetting rate
 avg_rate = np.mean(list(decay_rates.values()))
 std_rate = np.std(list(decay_rates.values()))
-print(f"\\nStudent-level summary:")
+print(f"\
+Student-level summary:")
 print(f"  Average decay rate: {avg_rate:.3f} +/- {std_rate:.3f}")
 print(f"  Average half-life:  {np.log(2)/avg_rate:.1f} days")
-print(f"\\nQuality: Estimated rates for all {len(items_data)} items. Ready for Stage 3.")`,
+print(f"\
+Quality: Estimated rates for all {len(items_data)} items. Ready for Stage 3.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -167,7 +176,8 @@ print(f"\\nQuality: Estimated rates for all {len(items_data)} items. Ready for S
       code: `import numpy as np
 
 # --- Stage 3: Optimal interval calculator with confidence bounds ---
-print("=== Stage 3: Optimal Review Intervals ===\\n")
+print("=== Stage 3: Optimal Review Intervals ===\
+")
 
 np.random.seed(42)
 
@@ -188,7 +198,8 @@ items = {
     "Card_5": 0.07,
 }
 
-print("Optimal review intervals for 85% retention target:\\n")
+print("Optimal review intervals for 85% retention target:\
+")
 print(f"{'Item':<10s} {'Decay':>6s} {'Interval':>9s} {'Retention at interval':>22s}")
 print("-" * 50)
 for item, rate in items.items():
@@ -197,7 +208,8 @@ for item, rate in items.items():
     print(f"{item:<10s} {rate:>6.3f} {interval:>8.1f}d {actual_retention*100:>21.1f}%")
 
 # Confidence bounds using bootstrap
-print("\\nConfidence bounds (uncertainty in decay rate estimate):")
+print("\
+Confidence bounds (uncertainty in decay rate estimate):")
 print(f"{'Item':<10s} {'Point est':>10s} {'95% CI low':>11s} {'95% CI high':>12s}")
 print("-" * 45)
 for item, rate in items.items():
@@ -211,7 +223,8 @@ for item, rate in items.items():
     print(f"{item:<10s} {point:>9.1f}d {ci_low:>10.1f}d {ci_high:>11.1f}d")
 
 # Compare different retention targets
-print("\\nHow target retention affects review frequency:")
+print("\
+How target retention affects review frequency:")
 print(f"{'Target':>7s} {'Card_1 (easy)':>14s} {'Card_4 (hard)':>14s}")
 print("-" * 37)
 for target in [0.70, 0.80, 0.85, 0.90, 0.95]:
@@ -219,7 +232,8 @@ for target in [0.70, 0.80, 0.85, 0.90, 0.95]:
     int_hard = optimal_interval(items["Card_4"], target)
     print(f"{target*100:>6.0f}% {int_easy:>13.1f}d {int_hard:>13.1f}d")
 
-print("\\nDiminishing returns: going from 85% to 95% target doubles the")
+print("\
+Diminishing returns: going from 85% to 95% target doubles the")
 print("review frequency. Most SRS systems use 85-90% as the sweet spot")
 print("between retention and study time efficiency.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
@@ -236,7 +250,8 @@ print("between retention and study time efficiency.")`,
       code: `import numpy as np
 
 # --- Stage 4: Multi-item scheduler with interference modeling ---
-print("=== Stage 4: Multi-Item Scheduler ===\\n")
+print("=== Stage 4: Multi-Item Scheduler ===\
+")
 
 np.random.seed(42)
 
@@ -263,7 +278,8 @@ max_per_day = 3
 schedule = {d: [] for d in range(1, 15)}
 
 print(f"Items to schedule: {len(items)}")
-print(f"Max reviews per day: {max_per_day}\\n")
+print(f"Max reviews per day: {max_per_day}\
+")
 
 for day in range(1, 15):
     # Find items due for review
@@ -309,11 +325,13 @@ for day in range(1, 15):
     else:
         print(f"{day:>4d} {'(rest day)':<40s}")
 
-print(f"\\nTotal reviews scheduled: {total_reviews}")
+print(f"\
+Total reviews scheduled: {total_reviews}")
 print(f"Average per day: {total_reviews/14:.1f}")
 
 # Check for interference violations
-print("\\nInterference check:")
+print("\
+Interference check:")
 violations = 0
 for day, sched in schedule.items():
     for i in range(len(sched)):
@@ -322,7 +340,8 @@ for day, sched in schedule.items():
                 violations += 1
                 print(f"  Day {day}: {sched[i]} + {sched[j]} (same topic!)")
 print(f"  Violations: {violations}")
-print(f"\\nThe scheduler avoids reviewing similar items on the same day,")
+print(f"\
+The scheduler avoids reviewing similar items on the same day,")
 print(f"reducing interference and improving retention for both items.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -338,7 +357,8 @@ print(f"reducing interference and improving retention for both items.")`,
       code: `import numpy as np
 
 # --- Stage 5: Performance prediction and learning curve ---
-print("=== Stage 5: Learning Curve Prediction ===\\n")
+print("=== Stage 5: Learning Curve Prediction ===\
+")
 
 np.random.seed(42)
 
@@ -360,7 +380,8 @@ students = {
     "Diya (struggling)":{"rate": 0.10, "reviews_done": 4},
 }
 
-print("Current performance and projections:\\n")
+print("Current performance and projections:\
+")
 print(f"{'Student':<20s} {'Done':>5s} {'Current':>8s} {'After 10':>9s} {'After 20':>9s} {'After 50':>9s}")
 print("-" * 53)
 for name, info in students.items():
@@ -371,7 +392,8 @@ for name, info in students.items():
     print(f"{name:<20s} {info['reviews_done']:>5d} {current*100:>7.0f}% {after_10*100:>8.0f}% {after_20*100:>8.0f}% {after_50*100:>8.0f}%")
 
 # Predict when each student will reach 90% mastery
-print("\\nReviews needed to reach 90% mastery:")
+print("\
+Reviews needed to reach 90% mastery:")
 target = 0.90
 for name, info in students.items():
     # Solve: ceiling - (ceiling-floor) * n^(-rate) >= target
@@ -385,7 +407,8 @@ for name, info in students.items():
         print(f"  {name:<20s}: cannot reach {target*100:.0f}% (ceiling too low)")
 
 # Efficiency analysis
-print("\\nStudy efficiency (performance gain per review):")
+print("\
+Study efficiency (performance gain per review):")
 for name, info in students.items():
     current = power_law_learning(info["reviews_done"], info["rate"])
     next_review = power_law_learning(info["reviews_done"] + 1, info["rate"])
@@ -393,13 +416,15 @@ for name, info in students.items():
     print(f"  {name:<20s}: +{marginal_gain:.2f}% per review (diminishing returns)")
 
 # Time to plateau
-print("\\nDiminishing returns analysis:")
+print("\
+Diminishing returns analysis:")
 print("  The power law means early reviews give the biggest gains.")
 print("  Review 1->2: large jump. Review 50->51: barely noticeable.")
 print("  Efficient systems stop reviewing items once they plateau")
 print("  and redirect effort to struggling items instead.")
 
-print("\\nQuality: Predictions generated for all students.")`,
+print("\
+Quality: Predictions generated for all students.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -421,13 +446,15 @@ print("=" * 60)
 
 np.random.seed(42)
 
-print("\\n1. DATA SUMMARY (Stage 1)")
+print("\
+1. DATA SUMMARY (Stage 1)")
 print("   Total review events: 47")
 print("   Items tracked: 10 flashcards")
 print("   Study period: 30 days")
 print("   Overall recall rate: 68%")
 
-print("\\n2. FORGETTING RATE ANALYSIS (Stage 2)")
+print("\
+2. FORGETTING RATE ANALYSIS (Stage 2)")
 items_analysis = {
     "Card_1": {"decay": 0.10, "difficulty": "EASY",   "half_life": 6.9},
     "Card_2": {"decay": 0.25, "difficulty": "MEDIUM", "half_life": 2.8},
@@ -439,26 +466,30 @@ print(f"   {'Item':<10s} {'Decay':>6s} {'Half-life':>10s} {'Difficulty'}")
 for item, info in items_analysis.items():
     print(f"   {item:<10s} {info['decay']:>6.2f} {info['half_life']:>9.1f}d  {info['difficulty']}")
 
-print("\\n3. OPTIMAL INTERVALS (Stage 3)")
+print("\
+3. OPTIMAL INTERVALS (Stage 3)")
 print("   Target retention: 85%")
 print("   Easy items: review every 5-10 days")
 print("   Medium items: review every 2-4 days")
 print("   Hard items: review daily until decay rate improves")
 print("   95% CI width: +/- 30% of point estimate")
 
-print("\\n4. SCHEDULING (Stage 4)")
+print("\
+4. SCHEDULING (Stage 4)")
 print("   14-day schedule generated")
 print("   Total reviews: 22")
 print("   Interference violations: 0 (no same-topic collisions)")
 print("   Rest days: 3 (prevents burnout)")
 
-print("\\n5. LEARNING CURVE PREDICTION (Stage 5)")
+print("\
+5. LEARNING CURVE PREDICTION (Stage 5)")
 print("   Current mastery: 72%")
 print("   Projected mastery after 20 more reviews: 88%")
 print("   Reviews to reach 90% mastery: ~15 more")
 print("   Marginal gain per review: 1.2% (diminishing)")
 
-print("\\n6. RECOMMENDATIONS")
+print("\
+6. RECOMMENDATIONS")
 recommendations = [
     "Focus 60% of study time on Card_4 (hardest, fastest decay)",
     "Card_3 and Card_5 can go 10+ days between reviews",
@@ -470,7 +501,8 @@ for i, rec in enumerate(recommendations, 1):
     print(f"   {i}. {rec}")
 
 # Efficiency metrics
-print("\\n7. SYSTEM EFFICIENCY")
+print("\
+7. SYSTEM EFFICIENCY")
 study_time_spaced = 22 * 2  # 2 min per review
 study_time_cramming = 10 * 5 * 3  # 10 items, 5 min each, 3 cram sessions
 retention_spaced = 88
@@ -481,7 +513,8 @@ print(f"   Efficiency ratio: {retention_spaced/study_time_spaced:.1f}% per minut
 print(f"                  vs {retention_cramming/study_time_cramming:.1f}% per minute (cramming)")
 print(f"   Spaced repetition is {(retention_spaced/study_time_spaced)/(retention_cramming/study_time_cramming):.1f}x more efficient")
 
-print("\\n" + "=" * 60)
+print("\
+" + "=" * 60)
 print("  Report complete. All 6 pipeline stages passed.")
 print("  Like the grandmother who knew exactly when to retell each story,")
 print("  this system personalizes the timing to each learner and each item.")

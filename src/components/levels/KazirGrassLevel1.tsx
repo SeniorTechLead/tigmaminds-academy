@@ -35,7 +35,12 @@ Grasslands cover ~40% of Earth's land surface (excluding Antarctica). They store
 import matplotlib.pyplot as plt
 
 # Grassland biome comparison
-biomes = ['Kaziranga\\n(floodplain)', 'Serengeti\\n(savanna)', 'Great Plains\\n(temperate)', 'Cerrado\\n(tropical)', 'Steppe\\n(central Asia)']
+biomes = ['Kaziranga\
+(floodplain)', 'Serengeti\
+(savanna)', 'Great Plains\
+(temperate)', 'Cerrado\
+(tropical)', 'Steppe\
+(central Asia)']
 
 rainfall = [2000, 800, 500, 1500, 350]       # mm/year
 grass_height = [6.0, 1.5, 1.0, 2.0, 0.5]    # max metres
@@ -94,7 +99,9 @@ ax.tick_params(colors='gray', labelsize=7)
 ax = axes[1, 2]
 ax = fig.add_subplot(2, 3, 6, polar=True)
 ax.set_facecolor('#111827')
-categories = ['Rainfall', 'Grass\\nheight', 'Fire', 'Grazers', 'Soil\\ncarbon']
+categories = ['Rainfall', 'Grass\
+height', 'Fire', 'Grazers', 'Soil\
+carbon']
 values = [rainfall[0]/20, grass_height[0]/6*10, fire_freq[0]*10, grazer_biomass[0]/10, soil_carbon[0]/10]
 values += values[:1]
 angles = np.linspace(0, 2*np.pi, 5, endpoint=False).tolist()
@@ -221,7 +228,10 @@ ax.tick_params(colors='gray')
 # Biomass allocation: above vs below ground
 ax = axes[1, 1]
 ax.set_facecolor('#111827')
-plants = ['Kaziranga\\ngrass', 'Oak\\ntree', 'Corn\\n(crop)', 'Bamboo']
+plants = ['Kaziranga\
+grass', 'Oak\
+tree', 'Corn\
+(crop)', 'Bamboo']
 above = [30, 70, 80, 60]
 below = [70, 30, 20, 40]
 
@@ -473,7 +483,12 @@ ax.tick_params(colors='gray')
 # 3. Kaziranga grazers and their grass preferences
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
-grazers = ['Indian\\nRhino', 'Asian\\nElephant', 'Wild\\nBuffalo', 'Swamp\\nDeer', 'Hog\\nDeer']
+grazers = ['Indian\
+Rhino', 'Asian\
+Elephant', 'Wild\
+Buffalo', 'Swamp\
+Deer', 'Hog\
+Deer']
 daily_intake = [60, 150, 30, 10, 5]   # kg grass per day
 preferred_height = [50, 200, 80, 30, 20]  # cm
 
@@ -608,7 +623,8 @@ ax.set_xlabel('Year', color='white')
 ax.set_ylabel('Indian Rhino Population', color='white')
 ax.set_title('Kaziranga Rhino Population Recovery', color='#f59e0b', fontsize=13)
 ax.tick_params(colors='gray')
-ax.annotate('Conservation\\nsuccess story', xy=(2015, 2400),
+ax.annotate('Conservation\
+success story', xy=(2015, 2400),
             color='white', fontsize=10, fontweight='bold')
 
 # 4. Food web
@@ -755,7 +771,8 @@ for ax, (title, quality, color) in zip(axes[1], habitat_maps):
     cmap = plt.cm.colors.LinearSegmentedColormap.from_list('c', ['#111827', color])
     ax.imshow(quality, cmap=cmap, vmin=0, vmax=1)
     good_pct = np.mean(quality > 0.5) * 100
-    ax.set_title(f'{title}\\n({good_pct:.0f}% suitable)', color=color, fontsize=10)
+    ax.set_title(f'{title}\
+({good_pct:.0f}% suitable)', color=color, fontsize=10)
     ax.tick_params(colors='gray')
 
 plt.tight_layout()

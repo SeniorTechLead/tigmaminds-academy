@@ -250,9 +250,11 @@ plt.show()
 
 # Summary
 triples = [e for e in events if e['type'] == 'Triple']
-print(f"\\nTotal conjunctions found: {len(events)}")
+print(f"\
+Total conjunctions found: {len(events)}")
 print(f"Triple conjunctions: {len(triples)}")
-print(f"\\nTriple conjunctions (rare!):")
+print(f"\
+Triple conjunctions (rare!):")
 for e in triples:
     yr = e['year']
     era = 'BCE' if yr < 0 else 'CE'
@@ -388,7 +390,8 @@ for s in segments:
     print(f"  {s['from']} → {s['to']:<18s} {s['distance_km']:8.1f}  {s['days']:7.1f}  {s['polaris_end']:6.1f}°")
 print("-" * 60)
 print(f"  {'TOTAL':<28s} {total_dist:8.1f}  {total_days:7.1f}")
-print(f"\\nEstimated journey: {total_days:.0f} days ({total_days/7:.1f} weeks)")`,
+print(f"\
+Estimated journey: {total_days:.0f} days ({total_days/7:.1f} weeks)")`,
       challenge: 'Add a "night visibility" calculation: for each waypoint, compute how many hours Jupiter-Saturn is above the horizon during the night. The Magi would time their journey to arrive when the conjunction was best visible.',
       successHint: 'You have combined celestial navigation, geography, and route planning into a single tool. This is computational geography — the same principles used in modern GPS routing, but using the sky as the reference frame.',
     },
@@ -421,11 +424,16 @@ class HypothesisEvaluator:
     """Evaluate Star of Bethlehem hypotheses against scientific criteria."""
 
     def __init__(self):
-        self.criteria = ['Timing\\n(matches Herod)',
-                        'Visibility\\n(from Persia)',
-                        'Brightness\\n(remarkable)',
-                        'Duration\\n(months)',
-                        'Significance\\n(to Magi)']
+        self.criteria = ['Timing\
+(matches Herod)',
+                        'Visibility\
+(from Persia)',
+                        'Brightness\
+(remarkable)',
+                        'Duration\
+(months)',
+                        'Significance\
+(to Magi)']
         self.hypotheses = {}
 
     def add_hypothesis(self, name, scores, year, description):
@@ -482,7 +490,8 @@ class HypothesisEvaluator:
         ax3 = fig.add_subplot(212)
         for i, (name, h) in enumerate(self.hypotheses.items()):
             ax3.scatter(h['year'], i, s=100, color=colors[i], zorder=5)
-            ax3.annotate(f"{name}\\n({h['year']} BCE)",
+            ax3.annotate(f"{name}\
+({h['year']} BCE)",
                         (h['year'], i), textcoords="offset points",
                         xytext=(10, 0), fontsize=9, color=colors[i])
         ax3.axvspan(4, 8, alpha=0.1, color='#fbbf24', label="Herod's reign overlap")
@@ -500,11 +509,13 @@ class HypothesisEvaluator:
 ev = HypothesisEvaluator()
 
 # Scores: [Timing, Visibility, Brightness, Duration, Significance]
-ev.add_hypothesis('Jupiter-Saturn\\nTriple Conjunction',
+ev.add_hypothesis('Jupiter-Saturn\
+Triple Conjunction',
     [9, 9, 7, 10, 10], 7,
     'Three conjunctions over 8 months in Pisces; matched Babylonian astrological significance')
 
-ev.add_hypothesis('Jupiter-Venus\\nConjunction',
+ev.add_hypothesis('Jupiter-Venus\
+Conjunction',
     [6, 9, 9, 3, 7], 2,
     'Extremely bright but brief; timing conflicts with Herod death in 4 BCE')
 
@@ -516,19 +527,22 @@ ev.add_hypothesis("Halley's Comet",
     [3, 9, 8, 4, 4], 12,
     'Too early (12 BCE); comets were bad omens in ancient world, not good signs')
 
-ev.add_hypothesis('Jupiter-Moon\\nOccultation',
+ev.add_hypothesis('Jupiter-Moon\
+Occultation',
     [7, 7, 6, 1, 6], 6,
     'Brief event; Jupiter hidden by Moon then reemerging; culturally significant')
 
 ev.comparison_chart()
 
 # Print detailed report
-print("\\n" + "="*60)
+print("\
+" + "="*60)
 print("STAR OF BETHLEHEM: HYPOTHESIS EVALUATION REPORT")
 print("="*60)
 sorted_hyp = sorted(ev.hypotheses.items(), key=lambda x: x[1]['total'], reverse=True)
 for rank, (name, h) in enumerate(sorted_hyp, 1):
-    print(f"\\n#{rank}: {name.replace(chr(10), ' ')} (Score: {h['total']}/50)")
+    print(f"\
+#{rank}: {name.replace(chr(10), ' ')} (Score: {h['total']}/50)")
     print(f"    Year: {h['year']} BCE")
     print(f"    {h['description']}")
     for criterion, score in zip(ev.criteria, h['scores']):

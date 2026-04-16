@@ -87,8 +87,10 @@ axes[0].legend(facecolor='#374151', edgecolor='#4b5563', labelcolor='white', fon
 
 # Mark regions on first material
 axes[0].annotate('Elastic', xy=(2, 0.3), color='white', fontsize=9)
-axes[0].annotate('Plateau\\n(energy absorption)', xy=(30, 0.4), color='white', fontsize=9)
-axes[0].annotate('Densification\\n(danger!)', xy=(75, 2.5), color='white', fontsize=9)
+axes[0].annotate('Plateau\
+(energy absorption)', xy=(30, 0.4), color='white', fontsize=9)
+axes[0].annotate('Densification\
+(danger!)', xy=(75, 2.5), color='white', fontsize=9)
 
 axes[1].set_xlabel('Compression (%)', color='white', fontsize=11)
 axes[1].set_ylabel('Cumulative Energy (MJ/m³)', color='white', fontsize=11)
@@ -197,7 +199,8 @@ plt.suptitle('Material Toughness Comparison: Biological vs Synthetic', color='wh
 plt.tight_layout()
 plt.show()
 
-print("\\nRanking by Specific Toughness (energy per kg):")
+print("\
+Ranking by Specific Toughness (energy per kg):")
 for i, r in enumerate(results, 1):
     marker = " ***" if 'Hornbill' in r[0] else ""
     print(f"  {i}. {r[0]:25s} | {r[4]:>6.1f} kJ/kg | {r[5]:>5.0f} kg/m³ | {r[6]}{marker}")`,

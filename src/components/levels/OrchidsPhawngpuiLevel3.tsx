@@ -477,8 +477,12 @@ ax1.contour(X, Y, Z, levels=10, colors='white', linewidths=0.5, alpha=0.3)
 plt.colorbar(cf, ax=ax1, label='Fitness')
 
 # Mark peaks and species
-peaks = [(3, 2, 'Dendrobium\\n(bee)'), (7, 8, 'Aerides\\n(moth)'),
-         (2, 6, 'Bulbophyllum\\n(fly)'), (6, 4, 'Coelogyne\\n(beetle)')]
+peaks = [(3, 2, 'Dendrobium\
+(bee)'), (7, 8, 'Aerides\
+(moth)'),
+         (2, 6, 'Bulbophyllum\
+(fly)'), (6, 4, 'Coelogyne\
+(beetle)')]
 for px, py, name in peaks:
     ax1.plot(px, py, '*', color='white', markersize=15)
     ax1.annotate(name, xy=(px, py), xytext=(px+0.5, py+0.5),
@@ -532,7 +536,8 @@ print("Fitness peaks (orchid species):")
 for px, py, name in peaks:
     f = fitness_landscape(np.array([[px]]), np.array([[py]]))[0,0]
     print(f"  {name.replace(chr(10), ' ')}: scent={px}, spur={py}, fitness={f:.2f}")
-print(f"\\nEvolutionary trajectory: ({traj_x[0]:.1f},{traj_y[0]:.1f}) → ({traj_x[-1]:.1f},{traj_y[-1]:.1f})")`,
+print(f"\
+Evolutionary trajectory: ({traj_x[0]:.1f},{traj_y[0]:.1f}) → ({traj_x[-1]:.1f},{traj_y[-1]:.1f})")`,
       challenge: 'Shift the fitness landscape (simulate climate change moving the moth peak from (7,8) to (5,6)). Does the orchid population track the moving peak? At what speed of peak movement does the population fail to keep up and go extinct?',
       successHint: 'You built an adaptive landscape — one of the most important conceptual tools in evolutionary biology. The landscape visualization explains why orchid diversity exists (multiple peaks), why species are stable (sitting on peaks), and why speciation occurs (populations crossing valleys to new peaks). The orchids of Phawngpui each represent a peak in trait space, shaped by millions of years of evolutionary hill-climbing.',
     },

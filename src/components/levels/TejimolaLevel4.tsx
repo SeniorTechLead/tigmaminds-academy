@@ -648,7 +648,8 @@ ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 # Find where P crosses 95%
 for nv, p in zip(vessel_counts, probs_meet):
     if p >= 0.95:
-        ax.annotate(f'Need ~{nv} vessels\\nfor 95% confidence',
+        ax.annotate(f'Need ~{nv} vessels\
+for 95% confidence',
                     xy=(nv, p*100), xytext=(nv+50, p*100-10),
                     color='#22c55e', fontsize=9, fontweight='bold',
                     arrowprops=dict(arrowstyle='->', color='#22c55e'))
@@ -885,7 +886,8 @@ phases = [
 ]
 for i, (label, start, end, color) in enumerate(phases):
     ax.barh(i, end - start, left=start, height=0.6, color=color, edgecolor='none')
-    ax.text((start + end) / 2, i, f'{label}\\n({end-start}wk)', ha='center', va='center',
+    ax.text((start + end) / 2, i, f'{label}\
+({end-start}wk)', ha='center', va='center',
             color='white', fontsize=7, fontweight='bold')
 # QC checkpoints
 qc_weeks = [2, 2 + SP['callus_wk'], 2 + SP['callus_wk'] + SP['shoot_wk'],

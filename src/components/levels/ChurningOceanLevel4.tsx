@@ -78,19 +78,22 @@ print(f"  Filtrate: {[c[0] for c in liquid_mix]}")
 
 # Stage 2: Centrifuge — separate by density
 heavy, light = centrifuge(liquid_mix, 1.05)
-print(f"\\nStage 2 — Centrifuge (threshold: 1.05 g/cm³)")
+print(f"\
+Stage 2 — Centrifuge (threshold: 1.05 g/cm³)")
 print(f"  Heavy: {[c[0] for c in heavy]}")
 print(f"  Light: {[c[0] for c in light]}")
 
 # Stage 3: Distill light fraction
 ethanol_frac, remainder = distill(light, 70, 85)
 water_frac, oils = distill(remainder, 95, 105)
-print(f"\\nStage 3 — Distillation")
+print(f"\
+Stage 3 — Distillation")
 print(f"  78°C fraction: {[c[0] for c in ethanol_frac]}")
 print(f"  100°C fraction: {[c[0] for c in water_frac]}")
 print(f"  Remaining: {[c[0] for c in oils]}")
 
-print("\\nPipeline complete! Each stage uses a different property.")`,
+print("\
+Pipeline complete! Each stage uses a different property.")`,
       challenge: 'Add a polarity-based separation step after distillation to separate oil from any remaining polar compounds. Then add a function that calculates purity percentage for each fraction. What is the minimum number of stages needed to separate all 7 components?',
       successHint: 'You have designed a complete separation pipeline — the same kind of process flowchart that chemical engineers use in industry. The key insight: no single technique separates everything; you need a pipeline that exploits multiple physical properties in sequence.',
     },
@@ -396,12 +399,14 @@ for name, actual, pred, err in zip(names, y, y_pred, errors):
     print(f"{name:<14} {actual:>8.2f} {pred:>10.2f} {err:>8.3f}")
 
 rmse = np.sqrt(np.mean(errors**2))
-print(f"\\nRMSE: {rmse:.3f} g/cm³")
+print(f"\
+RMSE: {rmse:.3f} g/cm³")
 
 # Predict unknown
 unknown = np.array([74, 1, 4, 0, 1])  # Butanol
 pred_unknown = unknown @ w
-print(f"\\nPrediction for butanol (MW=74, 1 OH, chain=4): {pred_unknown:.2f} g/cm³")
+print(f"\
+Prediction for butanol (MW=74, 1 OH, chain=4): {pred_unknown:.2f} g/cm³")
 print(f"Actual butanol density: 0.81 g/cm³")`,
       challenge: 'Add more training data (look up densities for acetic acid, diethyl ether, dichloromethane). Does the model improve with more data? Try using X**2 features (polynomial regression) to capture nonlinear relationships.',
       successHint: 'You have built a quantitative structure-property relationship (QSPR) model — a fundamental tool in computational chemistry and drug discovery. Pharmaceutical companies use similar models (with thousands of features and millions of compounds) to predict drug properties before synthesizing them.',
@@ -480,15 +485,18 @@ def distill_fraction(mix, amts, t_low, t_high):
 print("Step 1: Measure density")
 measure_density(mystery, amounts)
 
-print("\\nStep 2: Test pH")
+print("\
+Step 2: Test pH")
 test_ph(mystery, amounts)
 
-print("\\nStep 3: Filter (10 um pore)")
+print("\
+Step 3: Filter (10 um pore)")
 residue, filtrate = filter_mix(mystery, amounts, 10.0)
 print(f"  Residue (solids): {[r[0] for r in residue]}")
 print(f"  Filtrate (liquids): {[f[0] for f in filtrate]}")
 
-print("\\nStep 4: Distill filtrate")
+print("\
+Step 4: Distill filtrate")
 if filtrate:
     f_names = [f[0] for f in filtrate]
     f_amts = [f[1] for f in filtrate]
@@ -499,7 +507,8 @@ if filtrate:
     print(f"  90-120°C fraction: {[x[0] for x in mid_bp]}")
     print(f"  Remaining: {[x[0] for x in high_bp]}")
 
-print("\\n=== MYSTERY REVEALED ===")
+print("\
+=== MYSTERY REVEALED ===")
 for comp, amt in zip(mystery, amounts):
     props = CHEMICALS[comp]
     print(f"  {comp}: {amt:.1f}g (d={props['density']}, bp={props['bp']}°C, pH={props['ph']})") `,

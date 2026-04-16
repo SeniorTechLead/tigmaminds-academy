@@ -231,7 +231,8 @@ compounds = [
     ("β-Carotene (11 conj. bonds)", 11),
 ]
 
-print("=== HOMO-LUMO Gap & UV/Vis Absorption ===\\n")
+print("=== HOMO-LUMO Gap & UV/Vis Absorption ===\
+")
 print(f"{'Compound':<35} {'Conj.':>6} {'λ_abs(nm)':>10} {'ΔE(eV)':>10} {'Region'}")
 print("-" * 75)
 
@@ -310,7 +311,8 @@ plt.tight_layout()
 plt.savefig('homo_lumo.png', dpi=100, facecolor='#1f2937')
 plt.show()
 
-print("\\nKey insight: cardamom's monoterpenes absorb UV-B → photodegradation")
+print("\
+Key insight: cardamom's monoterpenes absorb UV-B → photodegradation")
 print("This is why dark storage preserves quality!")`,
       challenge: 'If you could add a UV-absorbing compound to cardamom packaging that absorbs everything below 350 nm, which terpenes would be fully protected? Which would still degrade?',
       successHint: 'You have applied quantum mechanics (particle-in-a-box) to predict molecular absorption — bridging the gap between atomic physics and practical food science. The relationship between conjugation and color is one of the most beautiful results in chemistry.',
@@ -463,7 +465,8 @@ plt.show()
 
 print(f"Fitted parameters: Vmax = {Vmax_fit:.1f} nmol/min/mg, Km = {Km_fit:.1f} μM")
 print(f"True parameters:   Vmax = {Vmax_true:.1f} nmol/min/mg, Km = {Km_true:.1f} μM")
-print(f"\\nPeak production: midday when light and temperature align")`,
+print(f"\
+Peak production: midday when light and temperature align")`,
       challenge: 'Add an "inhibitor" (a compound that competes with the substrate). Competitive inhibition changes Km but not Vmax. Model a 3× increase in apparent Km and plot the inhibited vs. uninhibited curves.',
       successHint: 'You have modeled Michaelis-Menten enzyme kinetics, performed Lineweaver-Burk analysis, and explored temperature and light effects. This is the foundation of biochemistry and is used in drug design, metabolic engineering, and agricultural optimization.',
     },
@@ -571,12 +574,14 @@ for name, data in terpenes.items():
     idx = np.argmin(np.abs(total_P - 760))
     dist_temp = temps[idx]
     ax.scatter([dist_temp], [760], color=data['color'], s=100, zorder=5, edgecolors='white')
-    ax.annotate(f'{name[:8]}\\n{dist_temp:.1f}°C', (dist_temp, 770),
+    ax.annotate(f'{name[:8]}\
+{dist_temp:.1f}°C', (dist_temp, 770),
                color=data['color'], fontsize=8, ha='center')
 
 # Pure water boiling
 ax.scatter([100], [760], color='cyan', s=100, zorder=5, edgecolors='white', marker='s')
-ax.annotate('Pure water\\n100.0°C', (100, 770), color='cyan', fontsize=8, ha='center')
+ax.annotate('Pure water\
+100.0°C', (100, 770), color='cyan', fontsize=8, ha='center')
 
 ax.axhline(y=760, color='white', linestyle='--', alpha=0.5)
 ax.set_xlim(95, 101)

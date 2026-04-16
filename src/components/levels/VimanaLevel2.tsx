@@ -62,7 +62,8 @@ Cp_diff = np.interp(x_upper, x_lower, Cp_lower) - Cp_upper
 C_L_estimate = np.trapz(Cp_diff, x_upper)
 
 print(f"Estimated C_L from pressure distribution: {C_L_estimate:.2f}")
-print(f"\\nKey observations:")
+print(f"\
+Key observations:")
 print(f"  Peak suction on upper surface: C_p = {min(Cp_upper):.1f} (at {x_upper[np.argmin(Cp_upper)]:.3f}c)")
 print(f"  The leading edge has the strongest pressure gradient")
 print(f"  About {abs(min(Cp_upper))/(abs(min(Cp_upper))+max(Cp_lower))*100:.0f}% of lift comes from upper surface suction")`,
@@ -142,7 +143,8 @@ plt.show()
 print(f"Stall angle: {alpha_stall}°")
 print(f"Maximum C_L: {C_L_max}")
 print(f"Best L/D ratio: {max(ld):.1f} at α = {best_alpha:.0f}°")
-print(f"\\nCruise is typically at the best L/D angle ({best_alpha:.0f}°)")
+print(f"\
+Cruise is typically at the best L/D angle ({best_alpha:.0f}°)")
 print(f"Takeoff uses higher α for maximum lift (closer to stall)")`,
       challenge: 'Add leading-edge slats (shift stall angle to 20° and increase C_L_max to 2.2). This is what real aircraft do for takeoff and landing. Plot both clean and slatted wing on the same chart.',
       successHint: 'Stall is the most dangerous aerodynamic phenomenon pilots face. Understanding the C_L vs. α curve is essential for every pilot and aircraft designer. The margin between maximum lift and stall is often just a few degrees.',
@@ -334,7 +336,8 @@ for name, fuel, dry, ve in stages:
     remaining = mf
     print(f"  {name}: m0={m0/1000:.0f}t, mf={mf/1000:.0f}t, Δv={dv/1000:.2f} km/s")
 
-print(f"\\nTotal Δv: {total_dv/1000:.2f} km/s")
+print(f"\
+Total Δv: {total_dv/1000:.2f} km/s")
 print(f"Payload to LEO: {payload/1000:.0f} tonnes")
 print(f"Total launch mass: {(sum(s[1]+s[2] for s in stages)+payload)/1000:.0f} tonnes")`,
       challenge: 'Add a 4th stage with mass_ratio 3 and v_e = 4500 (hydrogen engine). How much additional Δv does it provide? Is it enough to reach escape velocity?',
@@ -383,7 +386,8 @@ ax1.grid(alpha=0.3)
 for alt, name, color in [(400, 'ISS', 'green'), (20200, 'GPS', 'orange'), (35786, 'GEO', 'red')]:
     v = np.sqrt(G * M_earth / (R_earth + alt * 1000))
     ax1.plot(alt, v / 1000, 'o', color=color, markersize=8)
-    ax1.annotate(f'{name}\\n{v/1000:.1f} km/s', xy=(alt, v/1000),
+    ax1.annotate(f'{name}\
+{v/1000:.1f} km/s', xy=(alt, v/1000),
                  xytext=(alt + 2000, v/1000 + 0.3), fontsize=9, color=color)
 
 ax2.plot(altitudes / 1000, T_orbit / 3600, linewidth=2.5, color='orange')
@@ -484,7 +488,8 @@ plt.show()
 print("=== Hohmann Transfer: LEO → GEO ===")
 print(f"LEO velocity:  {v1/1000:.3f} km/s at {(r1-R)/1000:.0f} km")
 print(f"GEO velocity:  {v2/1000:.3f} km/s at {(r2-R)/1000:.0f} km")
-print(f"\\nBurn 1 (Δv): +{dv1/1000:.3f} km/s (enter transfer)")
+print(f"\
+Burn 1 (Δv): +{dv1/1000:.3f} km/s (enter transfer)")
 print(f"Burn 2 (Δv): +{dv2/1000:.3f} km/s (circularise)")
 print(f"Total Δv:     {(dv1+dv2)/1000:.3f} km/s")
 print(f"Transfer time: {T_transfer/3600:.1f} hours")`,

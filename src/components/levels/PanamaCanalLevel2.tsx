@@ -64,7 +64,8 @@ times, heads, flows = simulate_lock_filling(
 
 print("=== Non-Steady Lock Filling Simulation ===")
 print(f"Lock: {lock_length}m x {lock_width}m | Head: {head_lift}m")
-print(f"Culverts: {n_culverts} x {culvert_diam}m diameter\\n")
+print(f"Culverts: {n_culverts} x {culvert_diam}m diameter\
+")
 
 print(f"{'Time (s)':>9} {'Head (m)':>9} {'Flow (m³/s)':>12} {'% Filled':>10}")
 print("-" * 42)
@@ -75,12 +76,14 @@ for i in range(0, len(times), max(1, len(times) // 12)):
     print(f"{times[i]:>8.1f} {heads[i]:>8.2f} {flows[i]:>10.0f} {pct:>9.1f}%")
 
 fill_time = times[-1]
-print(f"\\nTotal fill time: {fill_time:.0f} seconds ({fill_time/60:.1f} minutes)")
+print(f"\
+Total fill time: {fill_time:.0f} seconds ({fill_time/60:.1f} minutes)")
 print(f"Volume moved: {total_volume:,.0f} m³ ({total_volume/1000:.0f} megalitres)")
 
 # Compare: first half vs second half fill time
 half_idx = np.argmin(np.abs(heads - head_lift / 2))
-print(f"\\nTime to fill first 50%: {times[half_idx]:.0f}s")
+print(f"\
+Time to fill first 50%: {times[half_idx]:.0f}s")
 print(f"Time to fill last 50%: {fill_time - times[half_idx]:.0f}s")
 print("The last half takes longer — the sqrt(h) slowdown in action.")`,
       challenge: 'The new Neopanamax locks (2016) are 427 m long, 55 m wide, with a 9.0 m lift but use water-saving basins that recycle 60% of lock water. Modify the simulation to model this: only 40% of the head is filled from the lake, the rest from side basins at lower pressure. How does this change the fill profile?',
@@ -160,7 +163,8 @@ sections = [
 results = bernoulli_flow(head, sections)
 
 print("=== Bernoulli Analysis: Gatun Lock Culvert System ===")
-print(f"Driving head: {head} m\\n")
+print(f"Driving head: {head} m\
+")
 print(f"{'Section':<18} {'Diam':>5} {'Vel':>7} {'Static P':>10} {'Dyn P':>8} {'Cavit?':>7}")
 print(f"{'':18} {'(m)':>5} {'(m/s)':>7} {'(kPa)':>10} {'(kPa)':>8}")
 print("-" * 57)
@@ -170,13 +174,15 @@ for r in results:
     print(f"{r['name']:<18} {r['diameter']:>4.1f} {r['velocity']:>6.1f} "
           f"{r['static_P']/1000:>9.1f} {r['dynamic_P']/1000:>7.1f} {cav:>7}")
 
-print(f"\\nTotal flow rate: {results[0]['flow_rate']:,.0f} m³/s per culvert line")
+print(f"\
+Total flow rate: {results[0]['flow_rate']:,.0f} m³/s per culvert line")
 print(f"Exit velocity: {results[-1]['velocity']:.1f} m/s", end="")
 print(f" ({'SAFE' if results[-1]['velocity'] < 3 else 'TOO HIGH'} — limit is 2.5 m/s)")
 
 # Energy budget
 total_friction = sum(r["friction_loss"] for r in results)
-print(f"\\nEnergy budget:")
+print(f"\
+Energy budget:")
 print(f"  Available head energy: {head * 1000 * 9.81 / 1000:.1f} kJ/m³")
 print(f"  Lost to friction: {total_friction / 1000:.1f} kJ/m³")
 print(f"  Hydraulic efficiency: {(1 - total_friction / (head * 1000 * 9.81)) * 100:.0f}%")`,
@@ -262,7 +268,8 @@ params = {
 
 # Scenario 1: No mosquito control (French era)
 print("=== Malaria Outbreak Simulation ===")
-print(f"Workers: {N_workers:,} | Initial mosquitoes: {N_mosquitoes:,}\\n")
+print(f"Workers: {N_workers:,} | Initial mosquitoes: {N_mosquitoes:,}\
+")
 
 history = simulate_vector_sir(N_workers, N_mosquitoes, 180, params)
 
@@ -273,18 +280,21 @@ for h in history[::30]:
     print(f"{h['day']:>5} {h['S']:>11.0f} {h['I']:>9.0f} {h['R']:>9.0f} {h['M_adult']:>10.0f}")
 
 peak = max(history, key=lambda h: h["I"])
-print(f"\\nPeak infection: Day {peak['day']}, {peak['I']:.0f} workers sick simultaneously")
+print(f"\
+Peak infection: Day {peak['day']}, {peak['I']:.0f} workers sick simultaneously")
 
 # Scenario 2: Gorgas mosquito control
 params_gorgas = {**params, "larva_mortality": 0.7, "egg_rate": 3}
 history2 = simulate_vector_sir(N_workers, N_mosquitoes, 180, params_gorgas)
 
-print("\\n--- With Gorgas Mosquito Control (American Era) ---")
+print("\
+--- With Gorgas Mosquito Control (American Era) ---")
 for h in history2[::30]:
     print(f"{h['day']:>5} {h['S']:>11.0f} {h['I']:>9.0f} {h['R']:>9.0f} {h['M_adult']:>10.0f}")
 
 peak2 = max(history2, key=lambda h: h["I"])
-print(f"\\nPeak infection: Day {peak2['day']}, {peak2['I']:.0f} workers sick")
+print(f"\
+Peak infection: Day {peak2['day']}, {peak2['I']:.0f} workers sick")
 print(f"Reduction: {(1 - peak2['I']/peak['I'])*100:.0f}% fewer cases at peak")`,
       challenge: 'Add a "screening" intervention: after day 30, infected workers are detected and isolated (removed from the susceptible-infected cycle) at a rate of 50% per day. How does combining screening with mosquito control compare to mosquito control alone? This models modern integrated disease management.',
       successHint: 'You just built an epidemiological model — the same framework used to predict COVID-19 spread, design vaccination campaigns, and allocate medical resources. The SIR model with vector dynamics is specifically how malaria, dengue, and Zika are modelled by the WHO and CDC.',
@@ -335,7 +345,8 @@ water_depth = 12.8     # m below water surface
 water_level = 26.0     # m (Gatun Lake level)
 
 print("=== Culebra Cut Excavation Optimisation ===")
-print(f"Channel width: {channel_width}m | Water depth: {water_depth}m\\n")
+print(f"Channel width: {channel_width}m | Water depth: {water_depth}m\
+")
 
 total_volume = 0
 print(f"{'Segment':<24} {'Length':>7} {'Slope':>6} {'Cut Depth':>10} {'Volume':>12} {'Top Width':>10}")
@@ -348,11 +359,14 @@ for seg in segments:
     print(f"{seg['name']:<24} {seg['length']:>5}m {seg['max_slope']:>4}° "
           f"{cut_depth:>8.1f}m {vol/1e6:>10.1f}M m³ {top_w:>8.1f}m")
 
-print(f"\\nTotal excavation: {total_volume/1e6:,.1f} million m³")
+print(f"\
+Total excavation: {total_volume/1e6:,.1f} million m³")
 
 # Optimise: find minimum volume slope angles that avoid landslides
-print("\\n=== Slope Optimisation ===")
-print("Testing slope angles to minimise volume while maintaining stability:\\n")
+print("\
+=== Slope Optimisation ===")
+print("Testing slope angles to minimise volume while maintaining stability:\
+")
 
 for seg in segments:
     cut_depth = seg["terrain_elev"] - water_level + water_depth
@@ -434,7 +448,8 @@ def ship_forces_in_lock(ship_length, ship_beam, ship_draft, ship_mass,
     }
 
 # Panamax ship in original lock
-print("=== Ship Forces During Lock Filling ===\\n")
+print("=== Ship Forces During Lock Filling ===\
+")
 
 ships = [
     ("Panamax vessel",    250, 32.2, 12.0, 65000e3, 33.5),
@@ -446,7 +461,8 @@ asymmetries = [0.05, 0.10, 0.20, 0.30, 0.50]  # metres
 for ship_name, length, beam, draft, mass, lock_w in ships:
     print(f"--- {ship_name} in {lock_w}m lock ---")
     print(f"Ship: {length}m x {beam}m, draft {draft}m")
-    print(f"Lock clearance: {(lock_w - beam)/2:.2f}m each side\\n")
+    print(f"Lock clearance: {(lock_w - beam)/2:.2f}m each side\
+")
 
     print(f"{'Asymm (m)':>10} {'F_static':>10} {'F_dynamic':>10} {'F_total':>10} "
           f"{'Per line':>10} {'Safety':>7}")

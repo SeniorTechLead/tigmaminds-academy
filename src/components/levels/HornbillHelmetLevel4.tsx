@@ -113,7 +113,8 @@ for table in ['materials', 'specimens', 'impact_tests', 'standards']:
     count = c.execute(f'SELECT COUNT(*) FROM {table}').fetchone()[0]
     print(f"Table '{table}': {count} records")
 
-print("\\nMaterial Summary:")
+print("\
+Material Summary:")
 rows = c.execute('''
     SELECT m.name, m.bio_inspired, COUNT(t.test_id),
            ROUND(AVG(t.peak_force_n), 0),
@@ -356,7 +357,8 @@ print("║         IMPACT MATERIAL CERTIFICATION REPORT            ║")
 print("╚══════════════════════════════════════════════════════════╝")
 
 for mat_id, mat_name, bio in mats:
-    print(f"\\n{'='*55}")
+    print(f"\
+{'='*55}")
     print(f"  Material: {mat_name} {'(bio-inspired)' if bio else '(conventional)'}")
     print(f"{'='*55}")
 
@@ -407,7 +409,8 @@ for mat_id, mat_name, bio in mats:
 conn.commit()
 
 # Summary matrix
-print(f"\\n{'='*55}")
+print(f"\
+{'='*55}")
 print("CERTIFICATION MATRIX")
 print(f"{'='*55}")
 print(f"{'Material':>20} | {'EN 1078':>10} | {'ECE 22.06':>10} | {'CPSC':>10}")
@@ -538,12 +541,14 @@ total_sold = c.execute('SELECT COUNT(*) FROM sales').fetchone()[0]
 total_incidents = c.execute('SELECT COUNT(*) FROM incidents').fetchone()[0]
 revenue = c.execute('SELECT SUM(price) FROM sales').fetchone()[0]
 
-print(f"\\n[PRODUCTION] {total_helmets} helmets manufactured")
+print(f"\
+[PRODUCTION] {total_helmets} helmets manufactured")
 print(f"[SALES]      {total_sold} sold | Revenue: Rs {revenue:,.0f}")
 print(f"[INCIDENTS]  {total_incidents} reported")
 
 # Safety performance
-print(f"\\n[SAFETY ANALYSIS]")
+print(f"\
+[SAFETY ANALYSIS]")
 rows = c.execute('''SELECT i.type, COUNT(*), ROUND(AVG(i.speed_kmh),1),
                     SUM(CASE WHEN i.outcome='no injury' THEN 1 ELSE 0 END) * 100.0 / COUNT(*)
                     FROM incidents i GROUP BY i.type ORDER BY COUNT(*) DESC''').fetchall()
@@ -553,7 +558,8 @@ for typ, count, avg_spd, safe_pct in rows:
     print(f"  {typ:>20} | {count:>5} | {avg_spd:>7.1f}kph | {safe_pct:>9.1f}%")
 
 # Traceability example
-print(f"\\n[TRACEABILITY EXAMPLE]")
+print(f"\
+[TRACEABILITY EXAMPLE]")
 incident = c.execute('''SELECT i.inc_id, i.helmet_id, i.date, i.type, i.speed_kmh, i.outcome, i.helmet_condition
                         FROM incidents i WHERE i.outcome != 'no injury' LIMIT 1''').fetchone()
 if incident:
@@ -575,7 +581,8 @@ if incident:
             print(f"  → Full traceability: incident → helmet → batch → material → supplier")
 
 # Environmental footprint
-print(f"\\n[ENVIRONMENTAL FOOTPRINT]")
+print(f"\
+[ENVIRONMENTAL FOOTPRINT]")
 avg_recovery = c.execute('SELECT ROUND(AVG(material_recovered_pct),1) FROM recycling').fetchone()[0]
 by_method = c.execute('SELECT method, COUNT(*), ROUND(AVG(material_recovered_pct),1) FROM recycling GROUP BY method').fetchall()
 for method, count, recovery in by_method:
@@ -583,7 +590,8 @@ for method, count, recovery in by_method:
 print(f"  Average material recovery: {avg_recovery}%")
 
 conn.close()
-print("\\n  Lifecycle database complete. Full traceability from material to recycling.")`,
+print("\
+  Lifecycle database complete. Full traceability from material to recycling.")`,
       challenge: 'Calculate the total carbon footprint of the helmet lifecycle: material production + manufacturing + distribution + end-of-life. Which phase has the highest environmental impact?',
       successHint: 'You have built a complete product lifecycle management system. This is the same infrastructure used by companies like Trek, Bell, and Shoei to manage helmet safety, quality, and sustainability.',
     },
@@ -705,14 +713,16 @@ print("║    BIOMIMETIC IMPACT PROTECTION — RESEARCH DASHBOARD       ║")
 print("╚══════════════════════════════════════════════════════════════╝")
 
 # Bio-inspiration mapping
-print("\\n[BIOLOGICAL INSPIRATIONS]")
+print("\
+[BIOLOGICAL INSPIRATIONS]")
 for row in c.execute('''SELECT b.species, b.structure, s.name, s.toughness
                         FROM bio_specimens b LEFT JOIN synthetic_materials s ON b.id = s.inspired_by
                         WHERE s.id IS NOT NULL''').fetchall():
     print(f"  {row[0]:>15} ({row[1][:25]}) → {row[2]} (toughness: {row[3]})")
 
 # Design leaderboard
-print("\\n[DESIGN LEADERBOARD — EN 1078 Certified]")
+print("\
+[DESIGN LEADERBOARD — EN 1078 Certified]")
 rows = c.execute('''SELECT d.name, s.name as material, d.gradient, d.thickness_mm, d.mass_g, d.peak_force_n
                     FROM design_candidates d JOIN synthetic_materials s ON d.mat_id = s.id
                     WHERE d.pass_en1078 = 1
@@ -784,14 +794,16 @@ total_designs = c.execute('SELECT COUNT(*) FROM design_candidates').fetchone()[0
 passing = c.execute('SELECT COUNT(*) FROM design_candidates WHERE pass_en1078=1').fetchone()[0]
 best = c.execute('SELECT name, peak_force_n, mass_g FROM design_candidates WHERE pass_en1078=1 ORDER BY peak_force_n LIMIT 1').fetchone()
 
-print(f"\\nPLATFORM SUMMARY:")
+print(f"\
+PLATFORM SUMMARY:")
 print(f"  Biological specimens studied: {len(bio)}")
 print(f"  Synthetic materials developed: {len(synth)}")
 print(f"  Design candidates evaluated: {total_designs}")
 print(f"  EN 1078 certified designs: {passing}")
 if best:
     print(f"  Best design: {best[0]} ({best[1]:.0f}N, {best[2]:.0f}g)")
-print(f"\\n  From hornbill to helmet — biomimetic engineering complete.")
+print(f"\
+  From hornbill to helmet — biomimetic engineering complete.")
 
 conn.close()`,
       challenge: 'Add a cost optimization module: find the design that minimizes cost while still passing EN 1078. Is the cheapest passing design bio-inspired or conventional?',

@@ -367,7 +367,8 @@ plt.tight_layout()
 plt.show()
 
 print("=== Keystone Species & Extinction Cascades ===")
-print(f"\\n--- Individual removal impact ---")
+print(f"\
+--- Individual removal impact ---")
 print(f"{'Pollinator':<16} {'Degree':>6} {'Plants lost if removed':>22}")
 print("-" * 48)
 sorted_impact = sorted(removal_impact.items(), key=lambda x: -x[1])
@@ -376,7 +377,8 @@ for name, lost in sorted_impact:
     marker = " ** KEYSTONE" if lost > 0 else ""
     print(f"{name:<16} {pollinator_degree[b_idx]:>6} {lost:>22}{marker}")
 
-print(f"\\n--- Extinction cascades by removal order ---")
+print(f"\
+--- Extinction cascades by removal order ---")
 print(f"{'Removed':>8} {'Most-connected':>15} {'Least-connected':>16}")
 print(f"{'':>8} {'plants left':>15} {'plants left':>16}")
 print("-" * 42)
@@ -393,12 +395,14 @@ for trial in random_final_plants:
     rob = sum(1 for p in trial if p >= half_plants) / (len(trial))
     random_robustness.append(rob)
 
-print(f"\\n--- Network Robustness ---")
+print(f"\
+--- Network Robustness ---")
 print(f"Fraction of pollinators removed before 50% plant loss:")
 print(f"  Most-connected first (worst case): {robustness_most:.2f}")
 print(f"  Random order (average case):       {np.mean(random_robustness):.2f} +/- {np.std(random_robustness):.2f}")
 print(f"  Least-connected first (best case): {robustness_least:.2f}")
-print(f"\\nThe gap between worst and best case ({robustness_least - robustness_most:.2f})")
+print(f"\
+The gap between worst and best case ({robustness_least - robustness_most:.2f})")
 print(f"shows how much the network depends on its hub species.")`,
       challenge: 'Run 100 random removal orders and compute the distribution of robustness values. What is the probability that random species loss causes >50% plant extinction before >50% of pollinators are lost?',
       successHint: 'Keystone identification is used by IUCN and national conservation agencies to prioritize pollinator protection. The cascade simulation you built is the same analysis that informed the EU ban on neonicotinoid pesticides.',
@@ -573,13 +577,15 @@ plt.tight_layout()
 plt.show()
 
 print("=== Colony Collapse Disorder Modeling ===")
-print(f"\\n{'Scenario':<35} {'Peak Pop':>9} {'End Pop':>9} {'Peak Honey':>11} {'End Honey':>10} {'Survived?':>10}")
+print(f"\
+{'Scenario':<35} {'Peak Pop':>9} {'End Pop':>9} {'Peak Honey':>11} {'End Honey':>10} {'Survived?':>10}")
 print("-" * 90)
 for r in results:
     status = "YES" if r['survived'] else "COLLAPSED"
     print(f"{r['label']:<35} {r['peak_pop']:>9.0f} {r['end_pop']:>9.0f} {r['peak_honey']:>10.1f}kg {r['end_honey']:>9.1f}kg {status:>10}")
 
-print(f"\\n--- CCD Stressor Effects ---")
+print(f"\
+--- CCD Stressor Effects ---")
 healthy = results[0]
 for r in results[1:]:
     pop_drop = (1 - r['peak_pop'] / healthy['peak_pop']) * 100
@@ -587,7 +593,8 @@ for r in results[1:]:
     print(f"{r['label']:<35}: peak pop -{pop_drop:.0f}%, end honey -{min(100, honey_drop):.0f}%")
 
 # Economic impact estimate
-print(f"\\n--- Economic Impact ---")
+print(f"\
+--- Economic Impact ---")
 print(f"Global pollination value: $235-577 billion/year")
 colony_loss_rates = [0, 10, 20, 30, 50]
 for loss in colony_loss_rates:
@@ -596,7 +603,8 @@ for loss in colony_loss_rates:
     print(f"  {loss}% colony loss -> {low:.0f}-{high:.0f} billion USD/year at risk")
 
 severe = results[-1]
-print(f"\\nSevere CCD reduces end-of-year population by {(1 - severe['end_pop']/healthy['end_pop'])*100:.0f}%")
+print(f"\
+Severe CCD reduces end-of-year population by {(1 - severe['end_pop']/healthy['end_pop'])*100:.0f}%")
 print(f"and honey stores by {(1 - severe['end_honey']/max(0.01, healthy['end_honey']))*100:.0f}%")
 if not severe['survived']:
     print(f"The colony COLLAPSES under full CCD stress.")`,
@@ -736,7 +744,8 @@ print("=== Network Resilience & Rewiring Analysis ===")
 print(f"Network: {n_pollinators} pollinators x {n_plants} plants")
 print(f"Removal order: most-connected first (worst case)")
 
-print(f"\\n--- Cascade severity by rewiring probability ---")
+print(f"\
+--- Cascade severity by rewiring probability ---")
 print(f"{'Rewiring Prob':>13} {'Plants surviving':>16} {'Plants lost':>12} {'Total rewired':>14}")
 print("-" * 58)
 
@@ -760,13 +769,15 @@ no_rewire = scenario_results[0.0]
 full_rewire = scenario_results[1.0]
 improvement = full_rewire - no_rewire
 
-print(f"\\n--- Rewiring effectiveness ---")
+print(f"\
+--- Rewiring effectiveness ---")
 print(f"Without rewiring: {no_rewire:.1f} plants survive")
 print(f"Maximum rewiring:  {full_rewire:.1f} plants survive")
 print(f"Improvement: +{improvement:.1f} plants saved ({improvement/n_plants*100:.0f}% of total)")
 
 # Identify which pollinators enable the most rewiring
-print(f"\\n--- Pollinator rewiring potential ---")
+print(f"\
+--- Pollinator rewiring potential ---")
 print(f"{'Pollinator':<16} {'Degree':>6} {'Generalism':>11} {'Can adopt?':>10}")
 print("-" * 46)
 for b in np.argsort(-pollinator_degree):
@@ -774,7 +785,8 @@ for b in np.argsort(-pollinator_degree):
     can_adopt = "HIGH" if gen > 0.4 else "MEDIUM" if gen > 0.2 else "LOW"
     print(f"{pollinator_names[b]:<16} {pollinator_degree[b]:>6} {gen:>11.2f} {can_adopt:>10}")
 
-print(f"\\nManagement insight: protecting generalist pollinators")
+print(f"\
+Management insight: protecting generalist pollinators")
 print(f"provides both direct pollination AND rewiring insurance.")`,
       challenge: 'Test a targeted wildflower strip that specifically adds plants for the most vulnerable pollinator (lowest degree). Compare to an untargeted strip. Is targeted planting more efficient?',
       successHint: 'Your Pollination Network Analyzer is complete. From network construction through keystone identification, CCD modeling, and resilience engineering — this tool could help agricultural extension officers design pollinator-friendly farming landscapes. The honey hunter\'s lesson, formalized in mathematics.',
@@ -961,7 +973,10 @@ ax.set_title(f'HEALTH SCORE: {health_score:.0f}/100', color='white', fontsize=12
 ax = axes[1, 1]
 vuln_counts = [int(np.sum(plant_degree == 1)), int(np.sum((plant_degree >= 2) & (plant_degree <= 3))),
                int(np.sum(plant_degree >= 4))]
-vuln_labels = ['Critical\\n(1 pollinator)', 'At risk\\n(2-3)', 'Resilient\\n(4+)']
+vuln_labels = ['Critical\
+(1 pollinator)', 'At risk\
+(2-3)', 'Resilient\
+(4+)']
 vuln_colors = ['#ef4444', '#f59e0b', '#22c55e']
 ax.bar(vuln_labels, vuln_counts, color=vuln_colors, edgecolor='none', width=0.5)
 for i, v in enumerate(vuln_counts):
@@ -981,7 +996,8 @@ print(f"  Robustness:   {score_robustness:>5.1f}/25")
 print(f"  Redundancy:   {score_redundancy:>5.1f}/25")
 
 vulnerable = int(np.sum(plant_degree == 1))
-print(f"\\nVulnerable plants: {vulnerable}/{n_plants}")
+print(f"\
+Vulnerable plants: {vulnerable}/{n_plants}")
 print(f"Robustness range: {robustness_most:.2f} (worst) to {robustness_least:.2f} (best)")
 
 recommendations = []
@@ -995,7 +1011,8 @@ if vulnerable > n_plants * 0.3:
     recommendations.append(f"URGENT: {vulnerable} plants at critical risk")
 if not recommendations:
     recommendations.append("Network is healthy. Maintain current habitat diversity.")
-print("\\nRecommendations:")
+print("\
+Recommendations:")
 for i, rec in enumerate(recommendations):
     print(f"  {i+1}. {rec}")`,
       challenge: 'Run the dashboard on a degraded network (remove 30% of interactions randomly to simulate habitat loss). Compare the health scores. How many wildflower strips would you need to add to restore the original health score?',
@@ -1147,36 +1164,42 @@ plt.show()
 print("FORAGING DASHBOARD — Summary")
 print("=" * 45)
 
-print(f"\\n--- Landscape ---")
+print(f"\
+--- Landscape ---")
 print(f"Hive at ({hive_x:.0f}, {hive_y:.0f}), {n_patches} flower patches")
 for i in range(n_patches):
     print(f"  Patch {i+1}: ({patch_x[i]:.0f}, {patch_y[i]:.0f})  nectar={patch_nectar[i]:.1f}")
 
-print(f"\\n--- Nectar Collection ({n_runs} runs, {n_steps} steps each) ---")
+print(f"\
+--- Nectar Collection ({n_runs} runs, {n_steps} steps each) ---")
 print(f"Random foraging:  {np.mean(random_totals):.0f} +/- {np.std(random_totals):.0f} units")
 print(f"Guided foraging:  {np.mean(guided_totals):.0f} +/- {np.std(guided_totals):.0f} units")
 guided_advantage = np.mean(guided_totals) / np.mean(random_totals)
 print(f"Guided advantage: {guided_advantage:.1%} more nectar")
 
-print(f"\\n--- Path Distance (energy cost) ---")
+print(f"\
+--- Path Distance (energy cost) ---")
 print(f"Random total distance:  {np.mean(random_dists):.0f} +/- {np.std(random_dists):.0f} units")
 print(f"Guided total distance:  {np.mean(guided_dists):.0f} +/- {np.std(guided_dists):.0f} units")
 dist_ratio = np.mean(guided_dists) / np.mean(random_dists)
 print(f"Guided travels: {dist_ratio:.1%} of random distance")
 
-print(f"\\n--- Efficiency (nectar per unit distance) ---")
+print(f"\
+--- Efficiency (nectar per unit distance) ---")
 random_eff = np.mean(random_totals) / np.mean(random_dists)
 guided_eff = np.mean(guided_totals) / np.mean(guided_dists)
 print(f"Random efficiency:  {random_eff:.4f} nectar/distance")
 print(f"Guided efficiency:  {guided_eff:.4f} nectar/distance")
 print(f"Efficiency gain:    {guided_eff / random_eff:.1%}")
 
-print(f"\\n--- Single-run path analysis ---")
+print(f"\
+--- Single-run path analysis ---")
 print(f"Random: visited {len(set(zip(r_px, r_py)))} unique locations, final nectar: {r_nectar[-1]:.0f}")
 print(f"Guided: visited {len(set(zip(g_px, g_py)))} unique locations, final nectar: {g_nectar[-1]:.0f}")
 
 # Nectar over time comparison
-print(f"\\n--- Cumulative nectar over time (every 10 steps) ---")
+print(f"\
+--- Cumulative nectar over time (every 10 steps) ---")
 print(f"{'Step':>6} {'Random':>10} {'Guided':>10} {'Guided lead':>12}")
 print("-" * 40)
 for s in range(0, n_steps, 10):
@@ -1184,7 +1207,8 @@ for s in range(0, n_steps, 10):
     print(f"{s:>6} {r_nectar[s]:>10.0f} {g_nectar[s]:>10.0f} {lead:>+12.0f}")
 print(f"{n_steps-1:>6} {r_nectar[-1]:>10.0f} {g_nectar[-1]:>10.0f} {g_nectar[-1]-r_nectar[-1]:>+12.0f}")
 
-print(f"\\nConclusion: Waggle dance communication gives {guided_advantage:.0%} more")
+print(f"\
+Conclusion: Waggle dance communication gives {guided_advantage:.0%} more")
 print(f"nectar at {guided_eff/random_eff:.0%} better energy efficiency.")
 print(f"The colony is smarter than any individual bee.")`,
       challenge: 'Add a fifth panel that shows a heatmap of patch visit frequency across all runs. Which patches are over-visited by guided bees and which are neglected? Propose a multi-target waggle dance strategy that balances exploitation of rich patches with exploration of undervisited ones.',

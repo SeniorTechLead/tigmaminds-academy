@@ -62,7 +62,8 @@ print("The Naga tradition uses techniques to reduce this requirement!")
 
 # A 5000 kg stone
 big_stone = 5000 * g
-print(f"\\nA 5,000 kg ceremonial stone weighs {big_stone:,.0f} N")
+print(f"\
+A 5,000 kg ceremonial stone weighs {big_stone:,.0f} N")
 print(f"That's {big_stone/9.81:.0f} kg-force — like lifting {big_stone/700:.0f} people!")`,
       challenge: 'What if the stone is wet (friction coefficient drops to 0.3)? How many fewer people are needed? This is why Naga stone-pullers sometimes wet the path.',
       successHint: 'You now understand the fundamental relationship between mass, gravity, and weight. Every engineering solution in stone-pulling is about reducing the force needed relative to this weight.',
@@ -253,7 +254,8 @@ print("=" * 60)
 
 # Method 1: Straight vertical lift
 W_gravity = mass * g * height
-print(f"\\nWork against gravity (any path): {W_gravity:,.0f} J = {W_gravity/1000:.1f} kJ")
+print(f"\
+Work against gravity (any path): {W_gravity:,.0f} J = {W_gravity/1000:.1f} kJ")
 
 # Different methods with friction
 methods = [
@@ -264,7 +266,8 @@ methods = [
     ("Gentle ramp (8°, greased)", 8, 0.06, 0.06),
 ]
 
-print(f"\\n{'Method':>35} | {'Distance':>8} | {'W_grav':>8} | {'W_fric':>8} | {'W_total':>8} | {'Efficiency':>10}")
+print(f"\
+{'Method':>35} | {'Distance':>8} | {'W_grav':>8} | {'W_fric':>8} | {'W_total':>8} | {'Efficiency':>10}")
 print("-" * 95)
 
 for name, angle, mu_static, mu_kinetic in methods:
@@ -332,7 +335,8 @@ print(f"Load to lift: {stone_edge_weight:,.0f} N (one quarter of stone)")
 print("=" * 60)
 
 # Class 1 lever: pry bar under stone edge
-print("\\nCLASS 1 LEVER — Pry bar under stone edge")
+print("\
+CLASS 1 LEVER — Pry bar under stone edge")
 print(f"{'Bar length':>12} | {'Effort arm':>10} | {'Load arm':>9} | {'MA':>5} | {'Force needed':>13} | {'People':>6}")
 print("-" * 60)
 

@@ -61,11 +61,14 @@ def bedload_transport(tau_star, D_mm):
     return q_b
 
 print("=== Sediment Transport: Shields Parameter Analysis ===")
-print("\\nShields parameter tells us if the river can move sediment.")
-print(f"Critical value (tau*_c) = {tau_star_critical} -- below this, particles stay put.\\n")
+print("\
+Shields parameter tells us if the river can move sediment.")
+print(f"Critical value (tau*_c) = {tau_star_critical} -- below this, particles stay put.\
+")
 
 # Test different flow conditions
-print("--- Flow Conditions vs Sediment Motion ---\\n")
+print("--- Flow Conditions vs Sediment Motion ---\
+")
 print(f"{'Velocity':<12} {'Depth':<10} {'Grain Size':<12} {'Shields tau*':<14} {'Motion?':<12} {'Transport Rate'}")
 print("-" * 76)
 
@@ -87,7 +90,10 @@ for vel, depth, grain in test_cases:
     print(f"{vel:<12.1f} {depth:<10.1f} {grain:<12.1f} {tau_star:<14.4f} {moves:<12} {q_str}  {bar}")
 
 # Grain size classes
-print("\\n\\n--- Sediment Size Classification ---\\n")
+print("\
+\
+--- Sediment Size Classification ---\
+")
 sizes = [
     ("Clay", 0.002, "< 0.004 mm"),
     ("Silt", 0.03, "0.004 - 0.063 mm"),
@@ -108,7 +114,8 @@ for name, d, rng in sizes:
     v_needed = np.sqrt(slope_needed) * 1.0**(2.0/3.0) / 0.03
     print(f"{name:<14} {d:<16.3f} {rng:<20} {v_needed:>.2f}")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Braided rivers form when there is abundant sediment and enough power to")
 print("move it. The Shields parameter determines the threshold -- a small increase")
 print("in flow velocity can suddenly mobilize material that was previously stable.")`,
@@ -148,7 +155,9 @@ def width_depth_ratio(width_m, depth_m):
 
 # Simulate satellite measurements of a braided river reach (e.g., Brahmaputra)
 print("=== Channel Morphology: Braided River Geometry ===")
-print("\\nSimulated satellite data for a 50 km braided river reach\\n")
+print("\
+Simulated satellite data for a 50 km braided river reach\
+")
 
 # Generate realistic cross-section data
 num_sections = 20
@@ -169,8 +178,10 @@ for i in range(num_sections):
 
 # Compute summary metrics
 bi = braiding_index(channels_per_section)
-print(f"\\n--- Summary Metrics ---")
-print(f"\\n  Braiding Index (avg channels): {bi:.1f}")
+print(f"\
+--- Summary Metrics ---")
+print(f"\
+  Braiding Index (avg channels): {bi:.1f}")
 print(f"  Min channels: {channels_per_section.min()}, Max: {channels_per_section.max()}")
 
 # Sinuosity of the main channel
@@ -189,7 +200,9 @@ print(f"  Average width-to-depth ratio: {avg_wd:.0f}")
 print(f"    -> {'Braided' if avg_wd > 40 else 'Single-thread'} pattern (threshold ~40)")
 
 # River type classification
-print("\\n--- River Pattern Classification ---\\n")
+print("\
+--- River Pattern Classification ---\
+")
 print(f"{'Metric':<30} {'Value':<15} {'Braided?'}")
 print("-" * 55)
 checks = [
@@ -203,9 +216,11 @@ for label, val, passes in checks:
     print(f"  {label:<30} {val:<15} {status}")
 
 all_pass = all(c[2] for c in checks)
-print(f"\\n  Classification: {'BRAIDED RIVER' if all_pass else 'NOT CLEARLY BRAIDED'}")
+print(f"\
+  Classification: {'BRAIDED RIVER' if all_pass else 'NOT CLEARLY BRAIDED'}")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Braided rivers have high width-to-depth ratios and low sinuosity.")
 print("The Brahmaputra in Assam is one of the world's largest braided rivers,")
 print("with a braiding index of 3-8 and total width up to 10 km during floods.")`,
@@ -249,7 +264,9 @@ def bank_erosion_rate(velocity, bank_material="sand"):
 
 # Simulate 50 years of bank position for a braided river channel
 print("=== Erosion and Deposition: Bank Migration Simulation ===")
-print("\\nSimulating 50 years of bank movement for a braided river channel.\\n")
+print("\
+Simulating 50 years of bank movement for a braided river channel.\
+")
 
 years = 50
 bank_position = np.zeros(years + 1)  # meters from starting point
@@ -293,15 +310,20 @@ for yr in range(years):
 print(f"{'...'}")
 print(f"{years:<8} {annual_peak_velocities[-1]:<14.2f} {'---':<14} {'---':<16} {bank_position[-1]:<14.1f}")
 
-print(f"\\n--- 50-Year Summary ---")
-print(f"\\n  Total erosion:    {total_eroded:>8.1f} m")
+print(f"\
+--- 50-Year Summary ---")
+print(f"\
+  Total erosion:    {total_eroded:>8.1f} m")
 print(f"  Total deposition: {total_deposited:>8.1f} m")
 print(f"  Net bank retreat: {bank_position[-1]:>8.1f} m")
 print(f"  Average rate:     {bank_position[-1]/years:>8.1f} m/year")
 print(f"  Max retreat in a year: {np.max(np.diff(bank_position)):>6.1f} m")
 
 # Compare bank materials
-print("\\n\\n--- Bank Material Comparison (at V = 2.5 m/s) ---\\n")
+print("\
+\
+--- Bank Material Comparison (at V = 2.5 m/s) ---\
+")
 print(f"{'Material':<12} {'Erosion Rate':<16} {'Years to Lose 100m'}")
 print("-" * 48)
 for mat in ["clay", "silt", "sand", "gravel"]:
@@ -310,7 +332,8 @@ for mat in ["clay", "silt", "sand", "gravel"]:
     yrs_str = f"{yrs_100m:.0f}" if yrs_100m < 10000 else "10000+"
     print(f"{mat:<12} {rate:<16.3f} {yrs_str}")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Sandy banks erode fastest -- this is why braided rivers in Assam's")
 print("alluvial plains shift so dramatically. A single flood can move a")
 print("bank by tens of meters, destroying farmland in hours.")`,
@@ -345,7 +368,9 @@ def manning_velocity(depth, width, slope, manning_n=0.03):
 
 # Simulate a braided river cross-section with multiple channels
 print("=== Flow Routing Through Braided Channels ===")
-print("\\nManning's equation: V = (1/n) * R^(2/3) * S^(1/2)\\n")
+print("\
+Manning's equation: V = (1/n) * R^(2/3) * S^(1/2)\
+")
 
 # Define channels at a single cross-section
 slope = 0.0004  # typical for large alluvial rivers
@@ -360,7 +385,8 @@ channels = [
 ]
 
 print(f"River slope: {slope}")
-print(f"\\n{'Channel':<20} {'Width (m)':<12} {'Depth (m)':<12} {'n':<8} {'V (m/s)':<10} {'Q (m3/s)':<12} {'% of Total'}")
+print(f"\
+{'Channel':<20} {'Width (m)':<12} {'Depth (m)':<12} {'n':<8} {'V (m/s)':<10} {'Q (m3/s)':<12} {'% of Total'}")
 print("-" * 86)
 
 total_Q = 0
@@ -375,14 +401,19 @@ for name, w, d, n, V, Q in results:
     bar = "#" * int(pct / 2)
     print(f"{name:<20} {w:<12} {d:<12.1f} {n:<8.3f} {V:<10.2f} {Q:<12.0f} {pct:>5.1f}%  {bar}")
 
-print(f"\\n  Total discharge: {total_Q:.0f} m3/s")
+print(f"\
+  Total discharge: {total_Q:.0f} m3/s")
 main_pct = results[0][5] / total_Q * 100
 print(f"  Main channel carries: {main_pct:.1f}% of total flow")
 print(f"  Floodplains carry: {(results[4][5] + results[5][5])/total_Q*100:.1f}%")
 
 # How flow redistributes at different water levels
-print("\\n\\n--- Flow Distribution at Different Flood Stages ---\\n")
-print("As water rises, flow shifts from channels to floodplains.\\n")
+print("\
+\
+--- Flow Distribution at Different Flood Stages ---\
+")
+print("As water rises, flow shifts from channels to floodplains.\
+")
 print(f"{'Stage':<16} {'Depth Factor':<14} {'Total Q (m3/s)':<16} {'Main Ch %':<12} {'Floodplain %'}")
 print("-" * 62)
 
@@ -404,7 +435,8 @@ for stage_name, depth_factor in [("Low flow", 0.3), ("Normal", 1.0), ("High flow
     flood_pct = flood_q / stage_total * 100 if stage_total > 0 else 0
     print(f"{stage_name:<16} {depth_factor:<14.1f} {stage_total:<16.0f} {main_pct:<12.1f} {flood_pct:.1f}%")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("During floods, floodplains can carry 30-50% of total discharge.")
 print("This is why braided rivers are so wide -- the active channel belt")
 print("expands dramatically during monsoon, then contracts to a few threads")
@@ -471,7 +503,9 @@ num_patches = 10
 years = 40
 
 print("=== Riparian Ecology: Vegetation vs Flood Disturbance ===")
-print(f"\\nSimulating {num_patches} patches across a floodplain for {years} years.\\n")
+print(f"\
+Simulating {num_patches} patches across a floodplain for {years} years.\
+")
 
 # Distance from main channel determines flood exposure
 patches = [VegetationPatch() for _ in range(num_patches)]
@@ -505,11 +539,14 @@ for yr in range(years):
         flood_label = f"  FLOOD ({flood_strength:.1f})" if is_flood else ""
         print(flood_label)
 
-print(f"\\nLegend: . = bare, g = grass, S = shrub, T = young tree, F = mature forest")
+print(f"\
+Legend: . = bare, g = grass, S = shrub, T = young tree, F = mature forest")
 print(f"Numbers in parentheses = biomass (kg/m2)")
 
 # Final state analysis
-print(f"\\n--- Final State After {years} Years ---\\n")
+print(f"\
+--- Final State After {years} Years ---\
+")
 print(f"{'Patch':<8} {'Distance':<12} {'Stage':<16} {'Age':<8} {'Biomass (kg/m2)'}")
 print("-" * 52)
 for i, patch in enumerate(patches):
@@ -519,10 +556,12 @@ for i, patch in enumerate(patches):
 # Summary
 near = [p for i, p in enumerate(patches) if distances[i] < 200]
 far = [p for i, p in enumerate(patches) if distances[i] >= 200]
-print(f"\\n  Near channel (<200m): avg biomass = {np.mean([p.biomass for p in near]):.1f} kg/m2")
+print(f"\
+  Near channel (<200m): avg biomass = {np.mean([p.biomass for p in near]):.1f} kg/m2")
 print(f"  Far from channel (>200m): avg biomass = {np.mean([p.biomass for p in far]):.1f} kg/m2")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Braided rivers maintain high biodiversity through disturbance.")
 print("Near the channel: constant resetting creates habitat for pioneer species.")
 print("Far from channel: mature forest develops. This gradient of disturbance")
@@ -595,8 +634,10 @@ class ChannelModel:
 
 # Scenario: river after a dam reduces sediment supply
 print("=== Predictive Modeling: Channel Evolution After Dam Construction ===")
-print("\\nA dam traps sediment upstream. The river downstream now has excess")
-print("transport capacity and will erode its bed and banks.\\n")
+print("\
+A dam traps sediment upstream. The river downstream now has excess")
+print("transport capacity and will erode its bed and banks.\
+")
 
 # Initial conditions (pre-dam equilibrium)
 model = ChannelModel(width=500, depth=3.5, slope=0.0004, discharge=5000, sediment_load=200)
@@ -612,7 +653,9 @@ print(f"  Balance: {'Near equilibrium' if abs(model.Qs - cap0) < 50 else 'Out of
 
 # Dam built: sediment drops to 30% of original
 model.Qs = 60  # dam traps 70% of sediment
-print(f"\\nPost-dam sediment supply: {model.Qs:.0f} kg/s (dam traps 70%)\\n")
+print(f"\
+Post-dam sediment supply: {model.Qs:.0f} kg/s (dam traps 70%)\
+")
 
 # Simulate 30 years
 years_sim = 30
@@ -629,17 +672,21 @@ for yr in range(years_sim):
 # Summary
 h0 = {"W": 500, "D": 3.5, "S": 0.0004}
 hf = model.history[-1]
-print(f"\\n--- {years_sim}-Year Change Summary ---")
-print(f"\\n  Width:  {h0['W']:.0f} -> {hf['W']:.0f} m  ({hf['W']-h0['W']:+.0f} m, {(hf['W']-h0['W'])/h0['W']*100:+.1f}%)")
+print(f"\
+--- {years_sim}-Year Change Summary ---")
+print(f"\
+  Width:  {h0['W']:.0f} -> {hf['W']:.0f} m  ({hf['W']-h0['W']:+.0f} m, {(hf['W']-h0['W'])/h0['W']*100:+.1f}%)")
 print(f"  Depth:  {h0['D']:.1f} -> {hf['D']:.2f} m  ({hf['D']-h0['D']:+.2f} m, {(hf['D']-h0['D'])/h0['D']*100:+.1f}%)")
 print(f"  Slope:  {h0['S']:.6f} -> {hf['S']:.7f}")
 
-print(f"\\n--- What This Means ---")
+print(f"\
+--- What This Means ---")
 print(f"  The river narrows by {h0['W']-hf['W']:.0f} m as it cuts down into its bed.")
 print(f"  Depth increases by {hf['D']-h0['D']:.2f} m -- the 'hungry water' effect.")
 print(f"  Braiding may decrease as the channel incises into a single thread.")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Lane's Balance (Q*S ~ Qs*D50) governs river form. When you change one")
 print("variable (like trapping sediment behind a dam), the river adjusts ALL")
 print("the others until a new equilibrium is reached. This can take decades")

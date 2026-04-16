@@ -36,8 +36,14 @@ fig.patch.set_facecolor('#1f2937')
 
 # Major seed banks by holdings
 ax1.set_facecolor('#111827')
-banks = ['Svalbard\\n(Norway)', 'IRRI\\n(Philippines)', 'NBPGR\\n(India)',
-         'Millennium\\n(UK)', 'USDA\\n(USA)', 'VIR\\n(Russia)']
+banks = ['Svalbard\
+(Norway)', 'IRRI\
+(Philippines)', 'NBPGR\
+(India)',
+         'Millennium\
+(UK)', 'USDA\
+(USA)', 'VIR\
+(Russia)']
 holdings = [1300000, 132000, 450000, 97000, 600000, 320000]
 colors = ['#3b82f6', '#22c55e', '#f59e0b', '#a855f7', '#ef4444', '#ec4899']
 
@@ -59,9 +65,11 @@ ax2.fill_between(years, varieties_pct, alpha=0.15, color='#ef4444')
 ax2.axhline(100, color='#4b5563', linestyle=':', alpha=0.3)
 
 # Annotate key events
-ax2.annotate('Green Revolution\\nbegins', xy=(1960, 50), xytext=(1940, 70),
+ax2.annotate('Green Revolution\
+begins', xy=(1960, 50), xytext=(1940, 70),
              color='#f59e0b', fontsize=8, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
-ax2.annotate('94% of varieties\\nlost by 2020', xy=(2020, 6), xytext=(1990, 30),
+ax2.annotate('94% of varieties\
+lost by 2020', xy=(2020, 6), xytext=(1990, 30),
              color='#ef4444', fontsize=8, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
 ax2.set_xlabel('Year', color='white')
@@ -222,7 +230,9 @@ ax1.legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=9
 ax1.tick_params(colors='gray')
 
 # Arrow showing breeding potential
-ax1.annotate('Breeding target:\\nhigh yield +\\ndrought tolerant',
+ax1.annotate('Breeding target:\
+high yield +\
+drought tolerant',
              xy=(8, 8), fontsize=9, color='#a855f7', ha='center',
              bbox=dict(boxstyle='round', facecolor='#a855f7', alpha=0.2))
 ax1.annotate('', xy=(8, 8), xytext=(6, 5.5),
@@ -230,7 +240,10 @@ ax1.annotate('', xy=(8, 8), xytext=(6, 5.5),
 
 # Genetic diversity comparison
 ax2.set_facecolor('#111827')
-categories = ['Wild\\nrelatives', 'Traditional\\nvarieties', 'Modern\\ncultivars']
+categories = ['Wild\
+relatives', 'Traditional\
+varieties', 'Modern\
+cultivars']
 diversity_metrics = {
     'Allele count': [450, 280, 85],
     'Disease resistance genes': [35, 20, 5],
@@ -318,7 +331,9 @@ ax1.set_ylim(0, 105)
 
 # Svalbard vault contents by region
 ax2.set_facecolor('#111827')
-regions = ['Asia-\\nPacific', 'Africa', 'Americas', 'Europe', 'Near\\nEast']
+regions = ['Asia-\
+Pacific', 'Africa', 'Americas', 'Europe', 'Near\
+East']
 samples = [380000, 220000, 280000, 310000, 110000]
 colors_reg = ['#22c55e', '#f59e0b', '#3b82f6', '#a855f7', '#ef4444']
 
@@ -378,7 +393,12 @@ fig.patch.set_facecolor('#1f2937')
 
 # Compare storage methods
 ax1.set_facecolor('#111827')
-methods = ['Open air', 'Clay pot\\n(sealed)', 'Bamboo +\\nash', 'Above\\ncooking fire', 'Refrigerator\\n(5°C)', 'Svalbard\\n(-18°C)']
+methods = ['Open air', 'Clay pot\
+(sealed)', 'Bamboo +\
+ash', 'Above\
+cooking fire', 'Refrigerator\
+(5°C)', 'Svalbard\
+(-18°C)']
 # Estimated viability after 5 years (%)
 viability_5yr = [15, 65, 70, 55, 85, 98]
 # Temperature (°C)
@@ -391,7 +411,8 @@ bars = ax1.bar(methods, viability_5yr, color=colors_bar, alpha=0.8, edgecolor='w
 
 for bar, v, t, m in zip(bars, viability_5yr, temps, moisture):
     ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-             f'{v}%\\n({t}°C, {m}%)', ha='center', color='white', fontsize=7)
+             f'{v}%\
+({t}°C, {m}%)', ha='center', color='white', fontsize=7)
 
 ax1.set_ylabel('Seed viability after 5 years (%)', color='white')
 ax1.set_title('Storage Method Comparison', color='white', fontsize=13)
@@ -437,7 +458,9 @@ for i in range(n_villages):
 # Network statistics
 total_unique = len(set().union(*village_varieties))
 avg_per_village = np.mean([len(v) for v in village_varieties])
-ax2.text(0, 0, f'Network:\\n{total_unique} varieties\\n(avg {avg_per_village:.0f}/village)',
+ax2.text(0, 0, f'Network:\
+{total_unique} varieties\
+(avg {avg_per_village:.0f}/village)',
          ha='center', va='center', color='#f59e0b', fontsize=9, fontweight='bold')
 
 ax2.set_title('Village Seed Exchange Network', color='white', fontsize=13)

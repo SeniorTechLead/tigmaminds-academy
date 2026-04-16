@@ -82,7 +82,8 @@ for step in range(int(days / dt)):
         sir_peaks = {"day": step * dt, "infected": I2}
 
 print("=== SEIR vs SIR Model Comparison ===")
-print(f"Population: {N:,} | R0 = {R0_value} | Incubation: {1/sigma:.0f} days\\n")
+print(f"Population: {N:,} | R0 = {R0_value} | Incubation: {1/sigma:.0f} days\
+")
 
 print(f"{'Model':<8} {'Peak Day':>10} {'Peak Infected':>15} {'Delay':>8}")
 print("-" * 43)
@@ -90,13 +91,15 @@ print(f"{'SIR':<8} {sir_peaks['day']:>8.0f} {sir_peaks['infected']:>13,.0f} {'�
 print(f"{'SEIR':<8} {seir_peaks['day']:>8.0f} {seir_peaks['infected']:>13,.0f} "
       f"{seir_peaks['day'] - sir_peaks['day']:>+6.0f}d")
 
-print("\\n=== SEIR Epidemic Timeline ===")
+print("\
+=== SEIR Epidemic Timeline ===")
 print(f"{'Day':>6} {'Susceptible':>12} {'Exposed':>10} {'Infected':>10} {'Removed':>10}")
 print("-" * 50)
 for day, s, e, i, r in seir_data:
     print(f"{day:>5.0f} {s:>11,.0f} {e:>9,.0f} {i:>9,.0f} {r:>9,.0f}")
 
-print(f"\\nThe SEIR peak is delayed by ~{seir_peaks['day'] - sir_peaks['day']:.0f} days vs SIR.")
+print(f"\
+The SEIR peak is delayed by ~{seir_peaks['day'] - sir_peaks['day']:.0f} days vs SIR.")
 print("The incubation period FLATTENS and DELAYS the peak — crucial for planning.")`,
       challenge: 'Compare bubonic plague (sigma = 1/4, incubation 4 days) and pneumonic plague (sigma = 1/2, incubation 2 days). Which peaks sooner? Which peaks higher? The pneumonic form has a shorter incubation — meaning the exposed compartment empties faster — so its curve looks more like the SIR model.',
       successHint: 'The SEIR model is the standard in modern epidemiology. COVID-19 projections in 2020 used SEIR models (with an incubation period of ~5 days) to predict hospital capacity needs. The incubation period is the parameter that determines whether contact tracing can outrun the epidemic.',
@@ -207,7 +210,8 @@ hub_id = list(hubs)[0]
 _, total_hub = simulate_network_epidemic(contacts, N, patient_zero=hub_id)
 
 print("=== Network Epidemic Simulation ===")
-print(f"Population: {N:,} | Avg contacts: 12 | Hubs: 5 (80 contacts each)\\n")
+print(f"Population: {N:,} | Avg contacts: 12 | Hubs: 5 (80 contacts each)\
+")
 
 print(f"{'Scenario':<35} {'Total Infected':>15} {'% of Pop':>10}")
 print("-" * 62)
@@ -218,9 +222,11 @@ print(f"{'No intervention (hub start)':<35} {total_hub:>13,} {total_hub/N*100:>8
 
 reduction_2d = (1 - total_trace_2d / total_no_trace) * 100
 reduction_1d = (1 - total_trace_1d / total_no_trace) * 100
-print(f"\\nContact tracing (2-day) reduced infections by {reduction_2d:.0f}%")
+print(f"\
+Contact tracing (2-day) reduced infections by {reduction_2d:.0f}%")
 print(f"Contact tracing (1-day) reduced infections by {reduction_1d:.0f}%")
-print(f"\\nStarting at a hub vs random: {total_hub - total_no_trace:+,} additional infections")
+print(f"\
+Starting at a hub vs random: {total_hub - total_no_trace:+,} additional infections")
 print("Superspreaders amplify epidemics — identifying and isolating hubs saves the most lives.")`,
       challenge: 'Add a "quarantine delay" parameter to model medieval limitations: in 1348, there was no phone or internet to trace contacts quickly. Set trace_speed to 7 days (a week to identify contacts). How much less effective is medieval contact tracing compared to modern 1-day tracing? This is why quarantine in 1348 meant locking down entire districts, not tracing individuals.',
       successHint: 'Contact network models are how public health agencies plan epidemic responses today. During COVID-19, contact tracing apps (like the UK NHS app) tried to automate the process you just simulated — identifying contacts of infected people and quarantining them before they became infectious.',
@@ -322,10 +328,12 @@ for day, _, ri, _, hi in records:
     if ri > max_rat_i: max_rat_i = ri; rat_peak_day = day
     if hi > max_human_i: max_human_i = hi; human_peak_day = day
 
-print(f"\\nRat epidemic peaks at day {rat_peak_day:.0f}")
+print(f"\
+Rat epidemic peaks at day {rat_peak_day:.0f}")
 print(f"Human epidemic peaks at day {human_peak_day:.0f}")
 print(f"Delay: {human_peak_day - rat_peak_day:.0f} days — rats die first, then humans")
-print("\\nThis delay is the signature of vector-borne transmission.")
+print("\
+This delay is the signature of vector-borne transmission.")
 print("Medieval observers: 'First the rats died, then the people.'")`,
       challenge: 'Add a flea-control intervention at day 30 (reduce flea population by 80%, simulating insecticide or removing rat nests). How much does this reduce human infections? Compare against doing nothing. This models modern plague control strategy: kill the fleas before they jump to humans.',
       successHint: 'Vector-borne disease models are essential for malaria (mosquito vector), Lyme disease (tick vector), and dengue (mosquito vector). The key insight: you don\'t have to cure the disease — you can break the transmission cycle by targeting the vector. DDT nearly eliminated malaria in the 1950s by killing mosquitoes, not by treating patients.',
@@ -394,10 +402,12 @@ for name, r0 in diseases:
     v = h / 0.85  # assuming 85% vaccine efficacy
     print(f"{name:<24} {r0:>4.1f} {h*100:>8.1f}% {min(v*100, 100):>14.1f}%")
 
-print("\\n* Vaccine needed assumes 85% vaccine efficacy")
+print("\
+* Vaccine needed assumes 85% vaccine efficacy")
 
 # Impact of vaccination coverage on plague epidemic
-print("\\n=== Plague Epidemic Size vs Vaccination Coverage ===")
+print("\
+=== Plague Epidemic Size vs Vaccination Coverage ===")
 R0_plague = 4.0
 print(f"{'Coverage':>10} {'Infected':>12} {'Reduction':>12}")
 print("-" * 36)
@@ -409,7 +419,8 @@ for coverage in [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9]:
     status = " ← THRESHOLD" if abs(coverage - herd_immunity_threshold(R0_plague)) < 0.03 else ""
     print(f"{coverage*100:>8.0f}% {size*100:>10.1f}% {reduction:>10.1f}%{status}")
 
-print(f"\\nAt 75% coverage, plague transmission stops entirely.")
+print(f"\
+At 75% coverage, plague transmission stops entirely.")
 print(f"At 50%, epidemic size drops by ~80% — partial coverage still saves lives.")`,
       challenge: 'Model a scenario where vaccine efficacy wanes over time (drops from 90% to 50% over 5 years). How does this affect the effective herd immunity threshold? This is the real-world challenge with COVID-19 boosters — waning immunity means the threshold is a moving target.',
       successHint: 'Herd immunity is one of the most important concepts in public health. Understanding the threshold equation (H = 1 - 1/R0) and how vaccination coverage maps to epidemic prevention is essential knowledge for evaluating public health policy — whether for plague, measles, or the next pandemic.',
@@ -452,7 +463,8 @@ total_pre = sum(g["pop"] for g in age_groups)
 np.random.seed(42)
 
 print("=== Black Death Age-Structured Mortality Model ===")
-print(f"Pre-plague population: {total_pre:,}\\n")
+print(f"Pre-plague population: {total_pre:,}\
+")
 
 print(f"{'Age Group':<10} {'Pre-Plague':>10} {'Mortality':>10} {'Deaths':>8} {'Survivors':>10} {'% Lost':>8}")
 print("-" * 58)
@@ -471,10 +483,12 @@ for g in age_groups:
 
 total_post = sum(g["pop"] for g in post_plague)
 
-print(f"\\n{'TOTAL':<10} {total_pre:>9,} {'':>10} {total_dead:>7,} {total_post:>9,} {total_dead/total_pre*100:>6.1f}%")
+print(f"\
+{'TOTAL':<10} {total_pre:>9,} {'':>10} {total_dead:>7,} {total_post:>9,} {total_dead/total_pre*100:>6.1f}%")
 
 # Age structure shift
-print("\\n=== Population Structure Shift ===")
+print("\
+=== Population Structure Shift ===")
 print(f"{'Age Group':<10} {'Pre-Plague %':>13} {'Post-Plague %':>14} {'Change':>8}")
 print("-" * 47)
 for i, g in enumerate(age_groups):
@@ -488,12 +502,14 @@ working_age_pre = sum(g["pop"] for g in age_groups if g["label"] in ("15-24", "2
 working_age_post = sum(g["pop"] for g in post_plague if g["label"] in ("15-24", "25-34", "35-44"))
 labour_loss = (1 - working_age_post / working_age_pre) * 100
 
-print(f"\\n=== Economic Impact ===")
+print(f"\
+=== Economic Impact ===")
 print(f"Working-age population (15-44):")
 print(f"  Before: {working_age_pre:>6,}")
 print(f"  After:  {working_age_post:>6,}")
 print(f"  Loss:   {labour_loss:.1f}%")
-print(f"\\nLabour shortage of {labour_loss:.0f}% means wages must rise.")
+print(f"\
+Labour shortage of {labour_loss:.0f}% means wages must rise.")
 print(f"This drove the collapse of feudalism in Western Europe.")`,
       challenge: 'Add a "nutrition" modifier: the bottom 30% of the population (poorest) have 1.3× mortality, the top 10% (best-nourished) have 0.7× mortality. How does this change the class structure after the plague? The Black Death disproportionately killed the poor — but by creating labour shortages, it dramatically improved wages and conditions for the survivors.',
       successHint: 'Age-structured demographic models are used to plan healthcare systems, pension funding, and economic policy. The same framework you just applied to the Black Death is used to model the impact of COVID-19 on different age groups — and to prioritise vaccine distribution to the most vulnerable.',

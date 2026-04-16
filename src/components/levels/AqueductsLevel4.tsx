@@ -125,7 +125,8 @@ class Fountain:
 
 
 # Build the Aqua Claudia system
-print("=== Aqueduct Flow Simulator — System Architecture ===\\n")
+print("=== Aqueduct Flow Simulator — System Architecture ===\
+")
 
 channels = [
     Channel("Mountain source channel", 30000, 1.2, 0.7, 3.5/1000, 0.013),
@@ -150,15 +151,18 @@ print("CHANNELS:")
 for c in channels:
     print(c.summary())
 
-print("\\nSIPHONS:")
+print("\
+SIPHONS:")
 for s in siphons:
     print(s.summary())
 
-print("\\nFOUNTAINS:")
+print("\
+FOUNTAINS:")
 total_demand = sum(f.demand for f in fountains)
 for f in fountains:
     print(f.summary())
-print(f"\\nTotal demand: {total_demand*1000:.0f} L/s")
+print(f"\
+Total demand: {total_demand*1000:.0f} L/s")
 print(f"Source capacity: {channels[0].flow_rate()*1000:.0f} L/s")
 surplus = channels[0].flow_rate() - total_demand
 print(f"Surplus: {surplus*1000:.0f} L/s ({'ADEQUATE' if surplus > 0 else 'DEFICIT'})")`,
@@ -264,12 +268,14 @@ class FlowEngine:
 
         # Subtract city elevation to get delivery head
         delivery_head = head - self.city_elev
-        self.log.append(f"\\nDelivery point: elevation {self.city_elev:.0f} m")
+        self.log.append(f"\
+Delivery point: elevation {self.city_elev:.0f} m")
         self.log.append(f"Available delivery head: {delivery_head:.1f} m")
 
         # Distribute to fountains
         remaining_flow = flow
-        self.log.append(f"\\nFountain Distribution (available flow: {flow*1000:.0f} L/s):")
+        self.log.append(f"\
+Fountain Distribution (available flow: {flow*1000:.0f} L/s):")
         served = 0
         unserved = 0
         for f in self.fountains:
@@ -286,7 +292,8 @@ class FlowEngine:
                 f"need={f['min_head']}m  [{status}]"
             )
 
-        self.log.append(f"\\nSummary: {served} served, {unserved} unserved")
+        self.log.append(f"\
+Summary: {served} served, {unserved} unserved")
         self.log.append(f"Remaining flow: {remaining_flow*1000:.0f} L/s "
                        f"({'surplus' if remaining_flow > 0 else 'DEFICIT'})")
         return flow, delivery_head, served, unserved
@@ -306,7 +313,8 @@ engine.add_fountain("Suburra district",   30, 2.0)
 engine.add_fountain("Palatine palace",    40, 4.0)
 engine.add_fountain("Street lacus (×20)", 10, 1.0)
 
-print("=== Aqueduct Flow Engine Simulation ===\\n")
+print("=== Aqueduct Flow Engine Simulation ===\
+")
 flow, head, served, unserved = engine.simulate()
 for line in engine.log:
     print(line)`,
@@ -397,7 +405,8 @@ for w in widths:
                     best_design = (w, d, sd, cost, flow, head)
 
 print("=== Aqueduct Network Optimisation ===")
-print(f"Searched {len(all_designs):,} designs | {feasible_count} feasible\\n")
+print(f"Searched {len(all_designs):,} designs | {feasible_count} feasible\
+")
 
 # Top 5 cheapest feasible designs
 feasible = sorted([d for d in all_designs if d[6]], key=lambda d: d[3])
@@ -409,7 +418,8 @@ for d in feasible[:5]:
     print(f"{d[0]:>5.1f}m {d[1]:>5.1f}m {d[2]:>5.2f}m {d[3]:>9.0f} {d[4]*1000:>7.0f} {d[5]:>5.1f}m")
 
 if best_design:
-    print(f"\\n=== Optimal Design ===")
+    print(f"\
+=== Optimal Design ===")
     print(f"  Channel width:    {best_design[0]:.1f} m")
     print(f"  Channel depth:    {best_design[1]:.1f} m")
     print(f"  Siphon diameter:  {best_design[2]:.2f} m")
@@ -421,14 +431,16 @@ if best_design:
 
 # Sensitivity: how does cost change near the optimum?
 if best_design:
-    print(f"\\n=== Sensitivity Analysis ===")
+    print(f"\
+=== Sensitivity Analysis ===")
     w0, d0, s0 = best_design[0], best_design[1], best_design[2]
     for param, values, label in [
         ("width",  np.arange(w0-0.2, w0+0.3, 0.1), "Channel width"),
         ("depth",  np.arange(d0-0.2, d0+0.3, 0.1), "Channel depth"),
         ("siphon", np.arange(s0-0.05, s0+0.1, 0.05), "Siphon Ø"),
     ]:
-        print(f"\\n  {label}:")
+        print(f"\
+  {label}:")
         for val in values:
             if val < 0.1: continue
             args = {"width": w0, "depth": d0, "siphon": s0}
@@ -502,7 +514,8 @@ class NetworkAuditor:
         measured_source = self.measure(true_flow)
 
         print(f"Source flow (measured): {measured_source:.0f} L/s")
-        print(f"(True source flow: {true_flow:.0f} L/s)\\n")
+        print(f"(True source flow: {true_flow:.0f} L/s)\
+")
 
         remaining_true = true_flow
 
@@ -556,7 +569,8 @@ auditor.add_section("Caelian district",    5, legal_draw=80, expected_loss_pct=4
 auditor.add_section("Palatine delivery",   3, legal_draw=60, expected_loss_pct=2, actual_theft=15)
 auditor.add_section("Forum distribution",  2, legal_draw=100, expected_loss_pct=2, actual_theft=10)
 
-print("=== Frontinus Network Audit ===\\n")
+print("=== Frontinus Network Audit ===\
+")
 results = auditor.run_audit()
 
 print(f"{'Section':<22} {'In':>6} {'Out':>6} {'Expected':>9} {'Discrep':>8} {'Z':>5} {'Flag':>16}")
@@ -570,7 +584,8 @@ for r in results:
 # Summary
 total_theft_detected = sum(r["discrepancy"] for r in results if r["z_score"] > 1.5)
 total_actual_theft = sum(r["actual_theft"] for r in results)
-print(f"\\nTotal suspicious losses: {total_theft_detected:.0f} L/s")
+print(f"\
+Total suspicious losses: {total_theft_detected:.0f} L/s")
 print(f"Actual total theft: {total_actual_theft:.0f} L/s")
 print(f"Detection accuracy: {min(total_theft_detected/total_actual_theft*100, 100):.0f}%")`,
       challenge: 'Run the audit 100 times with different random measurement errors. What fraction of the time does the Caelian district theft (40 L/s) get flagged? What about the Porta Maggiore theft (5 L/s)? This is the concept of statistical power — the probability of detecting a real problem given measurement noise. Large thefts are easy to detect; small ones hide in the noise.',
@@ -716,7 +731,8 @@ print("PORTFOLIO SKILLS SUMMARY:")
 for skill, detail in skills:
     print(f"  {skill}: {detail}")
 
-print("\\nThis project demonstrates the ability to model, optimise,")
+print("\
+This project demonstrates the ability to model, optimise,")
 print("and audit a complex physical system — the same skill set used")
 print("by civil engineers, water utility operators, and infrastructure")
 print("planners worldwide.")`,

@@ -61,14 +61,18 @@ print("=" * 50)
 print("FREE BODY DIAGRAM SOLUTION")
 print("=" * 50)
 print(f"Beam length: {L} m")
-print(f"\\nApplied loads:")
+print(f"\
+Applied loads:")
 for x, p in loads:
     print(f"  {abs(p)/1000:.1f} kN downward at x = {x:.1f} m")
-print(f"\\nTotal applied load: {abs(total_load)/1000:.1f} kN")
-print(f"\\nReactions:")
+print(f"\
+Total applied load: {abs(total_load)/1000:.1f} kN")
+print(f"\
+Reactions:")
 print(f"  Pin (x=0):    Ax = {Ax/1000:.2f} kN, Ay = {Ay/1000:.2f} kN (upward)")
 print(f"  Roller (x={L}): By = {By/1000:.2f} kN (upward)")
-print(f"\\nCheck ΣFy = {(Ay + By + total_load)/1000:.6f} kN (should be 0)")
+print(f"\
+Check ΣFy = {(Ay + By + total_load)/1000:.6f} kN (should be 0)")
 print(f"Check ΣM_A = {(By * L + moment_about_A)/1000:.6f} kN·m (should be 0)")
 
 # Draw the FBD
@@ -92,7 +96,8 @@ ax.add_patch(pin)
 ax.plot([0-pin_size*1.2, 0+pin_size*1.2],
         [beam_y-pin_size*1.5, beam_y-pin_size*1.5],
         color='#64748b', linewidth=3)
-ax.text(0, beam_y - pin_size*1.5 - 0.4, 'Pin\\nSupport A',
+ax.text(0, beam_y - pin_size*1.5 - 0.4, 'Pin\
+Support A',
         ha='center', color='#94a3b8', fontsize=8)
 
 # Draw roller support at x=L
@@ -103,7 +108,8 @@ ax.add_patch(circle)
 ax.plot([L-pin_size*1.2, L+pin_size*1.2],
         [beam_y - pin_size - 2*roller_r, beam_y - pin_size - 2*roller_r],
         color='#64748b', linewidth=3)
-ax.text(L, beam_y - pin_size*1.5 - 0.7, 'Roller\\nSupport B',
+ax.text(L, beam_y - pin_size*1.5 - 0.7, 'Roller\
+Support B',
         ha='center', color='#94a3b8', fontsize=8)
 
 # Draw applied loads (red, downward)
@@ -464,8 +470,10 @@ for bar, f in zip(bars, member_forces):
 plt.tight_layout()
 plt.show()
 
-print(f"\\nReactions: Ax = {reactions[0]/1000:.2f} kN, Ay = {reactions[1]/1000:.2f} kN, By = {reactions[2]/1000:.2f} kN")
-print(f"\\nMember analysis:")
+print(f"\
+Reactions: Ax = {reactions[0]/1000:.2f} kN, Ay = {reactions[1]/1000:.2f} kN, By = {reactions[2]/1000:.2f} kN")
+print(f"\
+Member analysis:")
 for m_idx, (i, j) in enumerate(members):
     f = member_forces[m_idx]
     state = "TENSION" if f > 0 else "COMPRESSION" if f < 0 else "ZERO-FORCE"
@@ -616,7 +624,8 @@ fos_marks = {'Aircraft (1.5)': 1.5, 'Bridge (2.5)': 2.5, 'Nuclear (4.0)': 4.0}
 for label, fos_val in fos_marks.items():
     pf_val = p_failure(fos_val)
     ax3.plot(fos_val, pf_val, 'o', color='#f59e0b', markersize=8, zorder=5)
-    ax3.annotate(f'{label}\\nPf={pf_val:.1e}', xy=(fos_val, pf_val),
+    ax3.annotate(f'{label}\
+Pf={pf_val:.1e}', xy=(fos_val, pf_val),
                 xytext=(fos_val + 0.2, pf_val * 5),
                 color='#f59e0b', fontsize=8,
                 arrowprops=dict(arrowstyle='->', color='#f59e0b'))
@@ -664,10 +673,12 @@ plt.tight_layout()
 plt.show()
 
 print("Engineering truth: safety costs money, but failure costs more.")
-print(f"\\nOptimal safety factor (this scenario): {fos_design[optimal_idx]:.1f}")
+print(f"\
+Optimal safety factor (this scenario): {fos_design[optimal_idx]:.1f}")
 print(f"Probability of failure at FoS=2.5: {p_failure(2.5):.2e}")
 print(f"Probability of failure at FoS=1.5: {p_failure(1.5):.2e}")
-print(f"\\nThat's a {p_failure(1.5)/p_failure(2.5):.0f}x higher chance of failure")
+print(f"\
+That's a {p_failure(1.5)/p_failure(2.5):.0f}x higher chance of failure")
 print("— which is why bridges use FoS=2.5, not 1.5.")`,
       challenge: 'Change the material variability (cov_strength) from 0.10 to 0.20 — representing a less controlled manufacturing process. How does this shift the optimal safety factor? What does this tell you about quality control?',
       successHint: 'Safety factors are where engineering meets economics, ethics, and statistics. The "right" safety factor balances cost against risk, and that balance depends on consequences: a footbridge over a garden stream needs less FoS than a highway bridge over a populated area.',
@@ -786,8 +797,10 @@ ax.axhline(400, color='#ef4444', linewidth=1, linestyle=':', alpha=0.5)
 ax.text(10, 410, 'Ultimate (400 MPa)', color='#ef4444', fontsize=8)
 # Mark regions
 ax.annotate('Elastic', xy=(0.05, 125), color='#22c55e', fontsize=9, fontweight='bold')
-ax.annotate('Yield\\nplateau', xy=(0.5, 220), color='#f59e0b', fontsize=8)
-ax.annotate('Strain\\nhardening', xy=(5, 350), color='#a855f7', fontsize=8)
+ax.annotate('Yield\
+plateau', xy=(0.5, 220), color='#f59e0b', fontsize=8)
+ax.annotate('Strain\
+hardening', xy=(5, 350), color='#a855f7', fontsize=8)
 ax.annotate('Necking', xy=(17, 300), color='#ef4444', fontsize=8)
 ax.set_xlabel('Strain (%)', color='white')
 ax.set_ylabel('Stress (MPa)', color='white')
@@ -800,7 +813,8 @@ ax.set_facecolor('#111827')
 ax.plot(strain_concrete * 100, concrete_stress, color='#94a3b8', linewidth=2.5)
 ax.axhline(40, color='#ef4444', linewidth=1, linestyle=':', alpha=0.5)
 ax.text(0.15, 42, "f'c = 40 MPa", color='#ef4444', fontsize=8)
-ax.annotate('Brittle failure!\\n(no warning)', xy=(0.3, 20),
+ax.annotate('Brittle failure!\
+(no warning)', xy=(0.3, 20),
             color='#ef4444', fontsize=9, fontweight='bold')
 ax.set_xlabel('Strain (%)', color='white')
 ax.set_ylabel('Stress (MPa)', color='white')
@@ -811,7 +825,8 @@ ax.tick_params(colors='gray')
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
 ax.plot(strain_wood * 100, wood_stress, color='#f59e0b', linewidth=2.5)
-ax.annotate('Fiber breakage\\n(semi-brittle)', xy=(1.2, 30),
+ax.annotate('Fiber breakage\
+(semi-brittle)', xy=(1.2, 30),
             color='#ef4444', fontsize=9)
 ax.set_xlabel('Strain (%)', color='white')
 ax.set_ylabel('Stress (MPa)', color='white')
@@ -825,8 +840,10 @@ ax.plot(strain_root * 100, root_young, color='#86efac', linewidth=2.5,
         label='Young root (5 years)')
 ax.plot(strain_root * 100, root_mature, color='#166534', linewidth=2.5,
         label='Mature root (50+ years)')
-ax.annotate('Flexible\\n(easy to guide)', xy=(5, 8), color='#86efac', fontsize=9)
-ax.annotate('Stiff\\n(rigid bridge)', xy=(2, 18), color='#166534', fontsize=9)
+ax.annotate('Flexible\
+(easy to guide)', xy=(5, 8), color='#86efac', fontsize=9)
+ax.annotate('Stiff\
+(rigid bridge)', xy=(2, 18), color='#166534', fontsize=9)
 ax.set_xlabel('Strain (%)', color='white')
 ax.set_ylabel('Stress (MPa)', color='white')
 ax.set_title('Ficus elastica Root (Estimated)', color='white', fontsize=11)
@@ -955,19 +972,22 @@ design_names = list(designs.keys())
 
 # Three different stakeholder weight profiles
 weight_profiles = {
-    'Speed-focused\\n(Emergency)': {
+    'Speed-focused\
+(Emergency)': {
         'span_capacity': 0.1, 'load_capacity': 0.15, 'construction_speed': 0.25,
         'initial_cost': 0.15, 'maintenance_cost': 0.05, 'lifespan': 0.05,
         'sustainability': 0.05, 'self_repair': 0.05, 'aesthetics': 0.05,
         'local_materials': 0.10,
     },
-    'Cost-focused\\n(Budget)': {
+    'Cost-focused\
+(Budget)': {
         'span_capacity': 0.05, 'load_capacity': 0.10, 'construction_speed': 0.10,
         'initial_cost': 0.20, 'maintenance_cost': 0.20, 'lifespan': 0.15,
         'sustainability': 0.05, 'self_repair': 0.05, 'aesthetics': 0.02,
         'local_materials': 0.08,
     },
-    'Sustainability\\n(Long-term)': {
+    'Sustainability\
+(Long-term)': {
         'span_capacity': 0.05, 'load_capacity': 0.05, 'construction_speed': 0.02,
         'initial_cost': 0.05, 'maintenance_cost': 0.10, 'lifespan': 0.20,
         'sustainability': 0.20, 'self_repair': 0.15, 'aesthetics': 0.08,
@@ -994,7 +1014,8 @@ ax.set_facecolor('#111827')
 score_matrix = np.array([[designs[d][c] for c in criteria] for d in design_names])
 im = ax.imshow(score_matrix, cmap='RdYlGn', aspect='auto', vmin=0, vmax=10)
 ax.set_xticks(range(len(criteria)))
-ax.set_xticklabels([c.replace('_', '\\n') for c in criteria], color='white',
+ax.set_xticklabels([c.replace('_', '\
+') for c in criteria], color='white',
                     fontsize=7, rotation=45, ha='right')
 ax.set_yticks(range(len(design_names)))
 ax.set_yticklabels(design_names, color='white', fontsize=9)
@@ -1095,7 +1116,8 @@ for i, name in enumerate(design_names):
 pareto_x = [15, 50, 80]
 pareto_y = [10, 500, 80]
 ax4.plot([15, 50], [10, 500], '--', color='gray', alpha=0.5)
-ax4.text(30, 250, 'Pareto\\nfrontier', color='gray', fontsize=9, rotation=70)
+ax4.text(30, 250, 'Pareto\
+frontier', color='gray', fontsize=9, rotation=70)
 
 ax4.set_xlabel('Initial Cost (relative)', color='white')
 ax4.set_ylabel('Lifespan (years)', color='white')
@@ -1112,12 +1134,14 @@ for profile_name, weights in weight_profiles.items():
     for d_name in design_names:
         scores[d_name] = sum(designs[d_name][c] * weights[c] for c in criteria)
     winner = max(scores, key=scores.get)
-    print(f"\\n{profile_name.replace(chr(10), ' ')}:")
+    print(f"\
+{profile_name.replace(chr(10), ' ')}:")
     for d_name in sorted(scores, key=scores.get, reverse=True):
         marker = " <-- WINNER" if d_name == winner else ""
         print(f"  {d_name:<25} {scores[d_name]:.2f}{marker}")
 
-print("\\n" + "=" * 60)
+print("\
+" + "=" * 60)
 print("The living root bridge wins on sustainability and long-term cost.")
 print("Steel wins on speed and load capacity.")
 print("There is no universally 'best' bridge — only the best bridge")

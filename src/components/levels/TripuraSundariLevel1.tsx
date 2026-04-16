@@ -68,7 +68,8 @@ for layer in layers:
     pressure += layer['thickness_m'] * layer['density_kg_m3'] * g
     print(f"  At {depth:>7.1f}m: {pressure/1e6:>8.2f} MPa ({pressure/1e6/101.325*1000:.0f} atm)")
 
-print(f"\\nThe Disang Formation at ~1800m depth experiences {pressure/1e6:.0f} MPa")
+print(f"\
+The Disang Formation at ~1800m depth experiences {pressure/1e6:.0f} MPa")
 print("That is enough to compress and harden the sediment into solid rock.")`,
       challenge: 'If the average sedimentation rate was 0.1 mm/year, how long did it take to deposit the entire 1833m column? Does this match the oldest layer age?',
       successHint: 'Every layer of rock tells a story — of ancient rivers, seas, and mountains. The geological column beneath Tripura is a 50-million-year diary written in stone.',
@@ -127,7 +128,8 @@ for i, e in enumerate(events):
 # Total distance
 total_lat = events[-1]['lat'] - events[0]['lat']
 total_km = total_lat * 111
-print(f"\\nTotal northward movement: {total_lat:.1f}° = {total_km:.0f} km")
+print(f"\
+Total northward movement: {total_lat:.1f}° = {total_km:.0f} km")
 print(f"Time taken: {events[0]['age_mya']} million years")
 print(f"Average speed: {total_km * 1e5 / (events[0]['age_mya'] * 1e6):.1f} cm/year")
 print()
@@ -140,7 +142,8 @@ for years in distances:
     dist = speed_now * years / 100  # metres
     print(f"  In {years:>5,} years: {dist:>8.1f} metres")
 
-print("\\nThe Himalayas grow ~5mm/year (erosion offsets some of the uplift)")`,
+print("\
+The Himalayas grow ~5mm/year (erosion offsets some of the uplift)")`,
       challenge: 'India\'s speed changed from ~15 cm/year (before collision) to ~5 cm/year (after). Calculate the kinetic energy change. Where did the lost energy go?',
       successHint: 'Plate tectonics explains everything about Tripura\'s landscape — the hills, the earthquakes, the rock types. The temple stands on evidence of a continent-scale collision.',
     },
@@ -271,7 +274,8 @@ for rock, rate in erosion_rates.items():
     print(f"{rock:<18} | {rate:>12.3f} | {m_per_myr:>10.0f} | {km_per_10myr:>8.1f}")
 
 # Landscape evolution
-print("\\nTRIPURA SUNDARI HILL EVOLUTION")
+print("\
+TRIPURA SUNDARI HILL EVOLUTION")
 print("-" * 50)
 uplift_rate = 0.3  # mm/year (tectonic uplift)
 erosion_rate = 0.1  # mm/year (sandstone)
@@ -301,7 +305,8 @@ for age, event in time_steps:
     height = max(0, height)
     print(f"{age:>10} | {height:>11.0f} | {event}")
 
-print(f"\\nCurrent temple hill height: ~50m above surroundings")
+print(f"\
+Current temple hill height: ~50m above surroundings")
 print(f"Net uplift rate: {net_rate:.2f} mm/yr ({net_rate * 1e6 / 1000:.0f} m/Myr)")
 print("The hill exists because uplift exceeds erosion for hard sandstone.")`,
       challenge: 'Climate change may increase Tripura\'s rainfall by 15%. How does this change the erosion rate and the net height change? Will the temple hill grow or shrink?',
@@ -363,7 +368,8 @@ for m in range(2, 10):
     print(f"    M{m:.0f}    | {E:>14.2e} | {tnt_str:>12} | {comparisons.get(m, '')}")
 
 # Intensity decay with distance
-print("\\nSHAKING INTENSITY vs DISTANCE (M6.5 earthquake)")
+print("\
+SHAKING INTENSITY vs DISTANCE (M6.5 earthquake)")
 print("-" * 50)
 M = 6.5
 for dist_km in [5, 10, 20, 50, 100, 200, 500]:
@@ -373,7 +379,8 @@ for dist_km in [5, 10, 20, 50, 100, 200, 500]:
     print(f"  {dist_km:>5} km: Intensity ≈ {intensity:.1f} ({level})")
 
 # Historical earthquakes near Tripura
-print("\\nHISTORICAL EARTHQUAKES NEAR TRIPURA")
+print("\
+HISTORICAL EARTHQUAKES NEAR TRIPURA")
 print("-" * 55)
 quakes = [
     (1869, 7.5, "Cachar", 80),

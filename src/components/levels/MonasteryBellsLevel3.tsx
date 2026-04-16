@@ -65,7 +65,8 @@ for idx, (m, n, title) in enumerate(modes):
     c = ax.contourf(X, Y, displacement, levels=20, cmap='RdBu_r')
     ax.contour(X, Y, displacement, levels=[0], colors='white', linewidths=1.5)
     ax.set_aspect('equal')
-    ax.set_title(f'{title}\\nf = {freq_ratios[idx]:.2f} × f₁', fontsize=10, color='white')
+    ax.set_title(f'{title}\
+f = {freq_ratios[idx]:.2f} × f₁', fontsize=10, color='white')
     ax.set_xlim(-1.2, 1.2)
     ax.set_ylim(-1.2, 1.2)
     ax.tick_params(labelsize=7)
@@ -250,9 +251,11 @@ ax2.plot(-outer, heights, color='#b45309', linewidth=2)
 ax2.plot(-inner, heights, color='#b45309', linewidth=2)
 
 # Labels
-ax2.annotate('Soundbow\\n(thickest)', xy=(0.45, 0.1), fontsize=9, color='lightgray',
+ax2.annotate('Soundbow\
+(thickest)', xy=(0.45, 0.1), fontsize=9, color='lightgray',
             arrowprops=dict(arrowstyle='->', color='lightgray'), xytext=(0.6, 0.15))
-ax2.annotate('Waist\\n(thinnest)', xy=(0.35, 0.5), fontsize=9, color='lightgray',
+ax2.annotate('Waist\
+(thinnest)', xy=(0.35, 0.5), fontsize=9, color='lightgray',
             arrowprops=dict(arrowstyle='->', color='lightgray'), xytext=(0.6, 0.5))
 ax2.annotate('Crown', xy=(0.15, 0.95), fontsize=9, color='lightgray',
             arrowprops=dict(arrowstyle='->', color='lightgray'), xytext=(0.5, 0.9))
@@ -337,7 +340,8 @@ for ax, signal, title, color in [
         ax.axvline(n * fundamental, color='white', linewidth=0.3, alpha=0.3)
 
 # Highlight missing 200 Hz
-axes[1, 1].annotate('No energy at 200 Hz!\\nBut brain still perceives it',
+axes[1, 1].annotate('No energy at 200 Hz!\
+But brain still perceives it',
                     xy=(200, 0), xytext=(400, 0.5),
                     fontsize=9, color='#ef4444',
                     arrowprops=dict(arrowstyle='->', color='#ef4444'))
@@ -413,7 +417,9 @@ axes[0, 1].set_title('Strike Impulse Spectrum (all frequencies)', fontsize=11)
 axes[0, 1].set_xlim(0, 2000)
 axes[0, 1].set_ylim(0, 1.5)
 axes[0, 1].grid(alpha=0.3)
-axes[0, 1].text(1000, 0.5, 'A perfect impulse\\ncontains ALL frequencies\\nequally', fontsize=10,
+axes[0, 1].text(1000, 0.5, 'A perfect impulse\
+contains ALL frequencies\
+equally', fontsize=10,
                ha='center', color='#3b82f6', style='italic')
 
 # Output = Input × H(f)
@@ -543,7 +549,8 @@ axes[1, 1].plot(sample_rates / 1000, max_freq / 1000, color='#a855f7', linewidth
 axes[1, 1].axhline(20, color='#f59e0b', linewidth=1.5, linestyle='--')
 axes[1, 1].text(35, 21, 'Human hearing limit (20 kHz)', fontsize=9, color='#f59e0b')
 axes[1, 1].scatter([44.1], [22.05], color='white', edgecolor='#10b981', s=80, zorder=5, linewidth=2)
-axes[1, 1].annotate('CD quality\\n44.1 kHz → 22.05 kHz max', xy=(44.1, 22.05),
+axes[1, 1].annotate('CD quality\
+44.1 kHz → 22.05 kHz max', xy=(44.1, 22.05),
                    xytext=(30, 25), fontsize=9, color='lightgray',
                    arrowprops=dict(arrowstyle='->', color='lightgray'))
 axes[1, 1].set_xlabel('Sample rate (kHz)', fontsize=10)

@@ -82,7 +82,9 @@ ax.semilogy(x * 1000, I_profile, color='#3b82f6', linewidth=2)
 ax.set_xlabel('Distance from base (mm)', color='white')
 ax.set_ylabel('I (m^4)', color='white')
 ax.set_title('Stiffness (I) along whisker', color='white', fontsize=11)
-ax.text(50, I_profile[100], f'I_base = {I_profile[0]:.2e} m^4\\nI_tip = {I_profile[-1]:.2e} m^4\\nRatio: {I_profile[0]/I_profile[-1]:.0f}x',
+ax.text(50, I_profile[100], f'I_base = {I_profile[0]:.2e} m^4\
+I_tip = {I_profile[-1]:.2e} m^4\
+Ratio: {I_profile[0]/I_profile[-1]:.0f}x',
         color='white', fontsize=8, bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor='#3b82f6'))
 
 # Plot 3: Deflection profile under tip load
@@ -544,8 +546,13 @@ ax = axes[1, 2]
 ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 
-stages = ['Whisker\\ndeflection', 'Channel\\nopening', 'Receptor\\npotential',
-          'Action\\npotentials', 'Brain\\npercept']
+stages = ['Whisker\
+deflection', 'Channel\
+opening', 'Receptor\
+potential',
+          'Action\
+potentials', 'Brain\
+percept']
 stage_x = np.arange(len(stages))
 
 # Signal "amplitude" at each stage (normalized)
@@ -1275,7 +1282,11 @@ ax.set_facecolor('#111827')
 ax.tick_params(colors='gray')
 
 # Performance summary
-categories = ['Detection\\nthreshold', 'Texture\\nresolution', 'Response\\ntime', 'Power\\nconsumption']
+categories = ['Detection\
+threshold', 'Texture\
+resolution', 'Response\
+time', 'Power\
+consumption']
 bio_perf = [9.5, 9, 8, 10]
 robot_perf = [6, 7, 9, 5]
 improvement = [r/b * 100 for r, b in zip(robot_perf, bio_perf)]

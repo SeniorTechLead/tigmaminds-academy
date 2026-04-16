@@ -156,7 +156,8 @@ for i, w in enumerate(words[:8]):
           f"L/S={ratio:.4f}  {display}")
 
 PHI = (1 + np.sqrt(5)) / 2
-print(f"\\nThe L/S ratio converges to phi = {PHI:.6f}")
+print(f"\
+The L/S ratio converges to phi = {PHI:.6f}")
 
 # Ammann bar spacing analysis
 print()
@@ -191,7 +192,8 @@ print(f"  {line}")
 # Check for forbidden substrings (SS never appears in Fibonacci word)
 has_SS = "SS" in word
 has_LLL = "LLL" in word
-print(f"\\nContains 'SS': {has_SS} (forbidden in Fibonacci word)")
+print(f"\
+Contains 'SS': {has_SS} (forbidden in Fibonacci word)")
 print(f"Contains 'LLL': {has_LLL} (forbidden in Fibonacci word)")
 print()
 
@@ -491,13 +493,15 @@ for d in points:
     print(f"  Position {d['position']}: {d['actual_sides']}-gon "
           f"(expected 6-gon, angle deficit: {d['angle_deficit']:.1f} deg)")
 
-print(f"\\nLine defects found: {len(lines)}")
+print(f"\
+Line defects found: {len(lines)}")
 if lines:
     rows = set(d["position"][0] for d in lines)
     print(f"  Affected rows: {sorted(rows)}")
     print(f"  Total displaced cells: {len(lines)}")
 
-print(f"\\nGrain boundaries found: {len(boundaries)}")
+print(f"\
+Grain boundaries found: {len(boundaries)}")
 if boundaries:
     cols = set(d["position"][1] for d in boundaries)
     print(f"  Boundary columns: {sorted(cols)}")

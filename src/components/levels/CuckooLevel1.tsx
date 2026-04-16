@@ -127,7 +127,8 @@ for ax, (values, label, color, unit) in zip(axes, data):
     ax.set_facecolor('#111827')
     ax.plot(hours, values, color=color, linewidth=2)
     ax.fill_between(hours, values, alpha=0.15, color=color)
-    ax.set_ylabel(f'{label}\\n({unit})', color='white', fontsize=9)
+    ax.set_ylabel(f'{label}\
+({unit})', color='white', fontsize=9)
     ax.tick_params(colors='gray')
     # Shade night hours
     for day in range(3):
@@ -303,9 +304,12 @@ ax.axvspan(21, 24, alpha=0.1, color='white')
 ax.axvspan(0, 7, alpha=0.1, color='white')
 
 # Mark key events
-ax.annotate('DLMO (normal)\\n~9pm', xy=(21, 10), color='#8b5cf6', fontsize=9)
-ax.annotate('DLMO (screen)\\n~11pm', xy=(23, 8), color='#ef4444', fontsize=9)
-ax.annotate('School starts\\n8am', xy=(8, 50), color='#f59e0b', fontsize=10,
+ax.annotate('DLMO (normal)\
+~9pm', xy=(21, 10), color='#8b5cf6', fontsize=9)
+ax.annotate('DLMO (screen)\
+~11pm', xy=(23, 8), color='#ef4444', fontsize=9)
+ax.annotate('School starts\
+8am', xy=(8, 50), color='#f59e0b', fontsize=10,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 ax.axvline(8, color='#f59e0b', linestyle=':', alpha=0.5)
 
@@ -394,7 +398,8 @@ axes[1].plot(days, day_length_change * 60, color='#3b82f6', linewidth=2)
 axes[1].axhline(0, color='gray', linewidth=0.5)
 axes[1].fill_between(days, day_length_change * 60, 0, where=day_length_change > 0, alpha=0.2, color='#22c55e', label='Lengthening (spring trigger)')
 axes[1].fill_between(days, day_length_change * 60, 0, where=day_length_change < 0, alpha=0.2, color='#ef4444', label='Shortening (autumn trigger)')
-axes[1].set_ylabel('Rate of change\\n(min/day)', color='white')
+axes[1].set_ylabel('Rate of change\
+(min/day)', color='white')
 axes[1].legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 axes[1].tick_params(colors='gray')
 
@@ -404,8 +409,10 @@ axes[2].fill_between(days, spring_readiness, alpha=0.5, color='#22c55e', label='
 axes[2].fill_between(days, autumn_readiness, alpha=0.5, color='#ef4444', label='Autumn departure readiness')
 axes[2].axvspan(75, 105, alpha=0.2, color='#22c55e')
 axes[2].axvspan(243, 273, alpha=0.2, color='#ef4444')
-axes[2].text(90, 80, 'Arrives\\nMar-Apr', ha='center', color='#22c55e', fontsize=10, fontweight='bold')
-axes[2].text(258, 80, 'Departs\\nSep-Oct', ha='center', color='#ef4444', fontsize=10, fontweight='bold')
+axes[2].text(90, 80, 'Arrives\
+Mar-Apr', ha='center', color='#22c55e', fontsize=10, fontweight='bold')
+axes[2].text(258, 80, 'Departs\
+Sep-Oct', ha='center', color='#ef4444', fontsize=10, fontweight='bold')
 axes[2].set_ylabel('Readiness (%)', color='white')
 axes[2].legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 axes[2].tick_params(colors='gray')
@@ -507,7 +514,8 @@ ax2.set_title('Subjective Well-Being During Recovery', color='white', fontsize=1
 # Mark worst day
 worst_day = hours[np.argmin(wellbeing_over_time)]
 worst_score = min(wellbeing_over_time)
-ax2.annotate(f'Worst: Day {worst_day:.1f}\\n({worst_score:.0f}%)', xy=(worst_day, worst_score),
+ax2.annotate(f'Worst: Day {worst_day:.1f}\
+({worst_score:.0f}%)', xy=(worst_day, worst_score),
              xytext=(worst_day + 2, worst_score + 20), color='#ef4444',
              arrowprops=dict(arrowstyle='->', color='#ef4444'), fontsize=10)
 

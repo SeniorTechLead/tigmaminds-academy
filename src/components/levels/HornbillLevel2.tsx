@@ -250,7 +250,10 @@ ax2.set_aspect('equal')
 
 # Time budget pie chart
 ax3.set_facecolor('#111827')
-activities = ['At nest', 'Foraging\\n(fig tree 1)', 'Foraging\\n(fig tree 2)', 'Foraging\\n(fig tree 3)', 'In transit']
+activities = ['At nest', 'Foraging\
+(fig tree 1)', 'Foraging\
+(fig tree 2)', 'Foraging\
+(fig tree 3)', 'In transit']
 time_pct = [35, 18, 18, 17, 12]
 colors_pie = ['#ef4444', '#22c55e', '#f59e0b', '#a855f7', '#6b7280']
 wedges, texts, autotexts = ax3.pie(time_pct, labels=activities, autopct='%1.0f%%',
@@ -335,8 +338,10 @@ fig.patch.set_facecolor('#1f2937')
 
 # Breeding pipeline for one year
 ax1.set_facecolor('#111827')
-stages = ['Pairs that\\nattempt breeding', 'Eggs laid', 'Eggs hatched', 'Chicks fledged',
-          'Juveniles survive\\n1st year']
+stages = ['Pairs that\
+attempt breeding', 'Eggs laid', 'Eggs hatched', 'Chicks fledged',
+          'Juveniles survive\
+1st year']
 counts = [50, 75, 55, 45, 25]
 colors_list = ['#3b82f6', '#a855f7', '#f59e0b', '#22c55e', '#22c55e']
 attrition = [0, 0, 75-55, 55-45, 45-25]
@@ -409,7 +414,11 @@ ax4.set_facecolor('#111827')
 base_params = {'fledge': 0.75, 'juv': 0.50, 'adult': 0.88, 'clutch': 1.5}
 
 # Change each parameter by ±20% and measure population growth rate
-param_names = ['Fledging\\nrate', 'Juvenile\\nsurvival', 'Adult\\nsurvival', 'Clutch\\nsize']
+param_names = ['Fledging\
+rate', 'Juvenile\
+survival', 'Adult\
+survival', 'Clutch\
+size']
 sensitivities = []
 
 for key in ['fledge', 'juv', 'adult', 'clutch']:
@@ -431,7 +440,8 @@ for key in ['fledge', 'juv', 'adult', 'clutch']:
 
 colors_sens = ['#3b82f6', '#f59e0b', '#ef4444', '#22c55e']
 bars = ax4.bar(param_names, sensitivities, color=colors_sens, edgecolor='none')
-ax4.set_ylabel('Change in growth rate\\nfrom ±20% change', color='white')
+ax4.set_ylabel('Change in growth rate\
+from ±20% change', color='white')
 ax4.set_title('Sensitivity Analysis: What Matters Most?', color='white', fontsize=12)
 ax4.tick_params(colors='gray')
 
@@ -588,7 +598,8 @@ for i in range(n_trees):
 
 # Clear-cut area
 ax4.fill([60, 100, 100, 60], [0, 0, 40, 40], color='#92400e', alpha=0.3)
-ax4.text(80, 20, 'Cleared\\narea', ha='center', color='#ef4444', fontsize=11, fontweight='bold')
+ax4.text(80, 20, 'Cleared\
+area', ha='center', color='#ef4444', fontsize=11, fontweight='bold')
 
 ax4.set_xlim(0, 100)
 ax4.set_ylim(0, 100)
@@ -687,7 +698,11 @@ true_occ = true_presence.mean()
 obs_occ = observed.mean()
 corrected_occ = obs_occ / p_detect.mean()
 
-bars = ax2.bar(['True\\noccupancy', 'Observed\\n(1 visit)', 'Observed\\n(3 visits)', 'Corrected\\nestimate'],
+bars = ax2.bar(['True\
+occupancy', 'Observed\
+(1 visit)', 'Observed\
+(3 visits)', 'Corrected\
+estimate'],
               [true_occ, detections[:, 0].mean(), obs_occ, min(corrected_occ, 1.0)],
               color=['#3b82f6', '#ef4444', '#f59e0b', '#22c55e'], edgecolor='none')
 ax2.set_ylabel('Occupancy rate', color='white')
@@ -699,7 +714,8 @@ for bar in bars:
 
 # Feature importance (what predicts hornbill presence?)
 ax3.set_facecolor('#111827')
-features = ['Canopy cover', 'Tree age', 'Fragment size', 'Distance\\nto road']
+features = ['Canopy cover', 'Tree age', 'Fragment size', 'Distance\
+to road']
 # Simple correlation with true presence
 importances = [
     np.corrcoef(canopy_cover, true_presence)[0, 1],
@@ -863,7 +879,11 @@ for dt in time_windows[detections]:
 
 true_negatives = len(energy) - true_positives - false_positives - false_negatives
 
-labels = ['True\\npositives', 'False\\npositives', 'False\\nnegatives', 'True\\nnegatives']
+labels = ['True\
+positives', 'False\
+positives', 'False\
+negatives', 'True\
+negatives']
 values = [true_positives, false_positives, false_negatives, max(true_negatives, 0)]
 colors_cm = ['#22c55e', '#ef4444', '#f59e0b', '#3b82f6']
 

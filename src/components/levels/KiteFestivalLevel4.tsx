@@ -399,11 +399,13 @@ img = _get_plot_as_base64()
 print(f'<img src="data:image/png;base64,{img}" />')
 
 # Summary statistics
-print("\\n=== Performance Summary (5-minute gusty wind) ===")
+print("\
+=== Performance Summary (5-minute gusty wind) ===")
 for kite in [diamond, delta, box]:
     L, D, T, sa, stall = solve_kite_forces(kite, v_h, v_v)
     flying = sa < 85
-    print(f"\\n{kite.name}:")
+    print(f"\
+{kite.name}:")
     print(f"  Time flying: {flying.sum()/len(flying)*100:.0f}%")
     print(f"  Stall events: {stall.sum()}")
     print(f"  Mean string angle: {sa[flying].mean():.1f}°" if flying.any() else "  Never flew")
@@ -531,13 +533,15 @@ plt.tight_layout()
 img=_get_plot_as_base64()
 print(f'<img src="data:image/png;base64,{img}" />')
 
-print("\\n=== Winner at Each Wind Condition ===")
+print("\
+=== Winner at Each Wind Condition ===")
 for vs in [3,5,7,10,12]:
     idx=int((vs-2)/0.5)
     best=max(['Diamond','Delta','Box'],
              key=lambda n: results[n]['fly'][idx]-results[n]['stall'][idx])
     print(f"Wind {vs} m/s ({vs*3.6:.0f} km/h): {best}")
-print("\\nBiren's diamond wins in gusty conditions (5-10 m/s)")
+print("\
+Biren's diamond wins in gusty conditions (5-10 m/s)")
 print("Ronit's delta wins in steady light wind (3-5 m/s)")
 print("Javed's box wins in strong wind (10+ m/s)")
 `,
@@ -615,7 +619,8 @@ mean_wind=5.0  # m/s (Beaufort 3, typical January afternoon)
 
 fig=plt.figure(figsize=(14,10))
 fig.patch.set_facecolor('#1f2937')
-fig.suptitle('KITE PERFORMANCE DASHBOARD\\nGuwahati January Festival | Wind: 18 km/h gusty',
+fig.suptitle('KITE PERFORMANCE DASHBOARD\
+Guwahati January Festival | Wind: 18 km/h gusty',
              color='white',fontsize=14,fontweight='bold')
 
 # Create grid layout
@@ -705,17 +710,21 @@ plt.tight_layout()
 img=_get_plot_as_base64()
 print(f'<img src="data:image/png;base64,{img}" />')
 
-print("\\n" + "="*50)
+print("\
+" + "="*50)
 print("  KITE FESTIVAL RESULTS")
 print("="*50)
 winner=kites[np.argmax(scores)]
-print(f"\\n  WINNER: {winner.name}")
-print(f"\\n  The diamond kite wins in gusty conditions because:")
+print(f"\
+  WINNER: {winner.name}")
+print(f"\
+  The diamond kite wins in gusty conditions because:")
 print(f"  - High flexibility ({diamond.flex}) absorbs gust energy")
 print(f"  - Light weight ({diamond.mass} kg) needs less lift to fly")
 print(f"  - High stall angle ({diamond.stall_angle}°) resists stall")
 print(f"  - Low tension means the string never snaps")
-print(f"\\n  Biren understood this intuitively. You now")
+print(f"\
+  Biren understood this intuitively. You now")
 print(f"  understand it mathematically.")
 `,
     },
@@ -845,10 +854,12 @@ plt.tight_layout()
 img = _get_plot_as_base64()
 print(f'<img src="data:image/png;base64,{img}" />')
 
-print("\\n" + "="*50)
+print("\
+" + "="*50)
 print("  DESIGN CHALLENGE RESULTS")
 print("="*50)
-print(f"\\nYour kite: {my_kite.name}")
+print(f"\
+Your kite: {my_kite.name}")
 print(f"  Area: {my_kite.area} m² | Mass: {my_kite.mass} kg")
 print(f"  Stall: {my_kite.stall_angle}° | Flex: {my_kite.flex}")
 print()
@@ -859,9 +870,11 @@ for cond_name, mean_v, gf in conditions:
     winner = kites[np.argmax(overall)]
     print(f"{cond_name}: Winner = {winner.name}")
 
-print("\\n  Modify 'my_kite' parameters above and re-run")
+print("\
+  Modify 'my_kite' parameters above and re-run")
 print("  to test your own designs!")
-print("\\n  Remember Biren's lesson: the best kite is not")
+print("\
+  Remember Biren's lesson: the best kite is not")
 print("  the most expensive — it is the one built by someone")
 print("  who bothered to understand the wind.")
 `,

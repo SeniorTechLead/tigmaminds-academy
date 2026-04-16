@@ -180,7 +180,10 @@ Orchids are the masters of insect pollination. Some have evolved pollen packages
 import matplotlib.pyplot as plt
 
 # Pollination strategy comparison
-strategies = ['Wind', 'Generalist\\ninsect', 'Specialist\\ninsect', 'Bird', 'Bat', 'Orchid\\n(pollinia)']
+strategies = ['Wind', 'Generalist\
+insect', 'Specialist\
+insect', 'Bird', 'Bat', 'Orchid\
+(pollinia)']
 
 # Metrics (0-10 scale)
 pollen_produced = [10, 5, 3, 4, 4, 1]
@@ -334,7 +337,9 @@ Northeast India is a **hotspot** for orchid diversity: over 850 species recorded
 import matplotlib.pyplot as plt
 
 # Orchid species counts by region (approximate)
-regions = ['Colombia', 'Ecuador', 'Brazil', 'Borneo', 'NE India\\n(Arunachal)', 'Papua\\nNew Guinea',
+regions = ['Colombia', 'Ecuador', 'Brazil', 'Borneo', 'NE India\
+(Arunachal)', 'Papua\
+New Guinea',
            'China', 'Madagascar', 'Thailand', 'Peru']
 species = [4270, 4032, 2500, 3000, 850, 3000, 1500, 1000, 1300, 2600]
 
@@ -363,9 +368,14 @@ for bar, count in zip(bars, species_sorted):
 
 # Pie chart: orchid families as fraction of all plants
 ax2.set_facecolor('#111827')
-plant_families = ['Orchidaceae\\n(28,000)', 'Asteraceae\\n(daisies, 24,000)',
-                  'Fabaceae\\n(legumes, 20,000)', 'Poaceae\\n(grasses, 12,000)',
-                  'Other families\\n(~270,000)']
+plant_families = ['Orchidaceae\
+(28,000)', 'Asteraceae\
+(daisies, 24,000)',
+                  'Fabaceae\
+(legumes, 20,000)', 'Poaceae\
+(grasses, 12,000)',
+                  'Other families\
+(~270,000)']
 plant_counts = [28000, 24000, 20000, 12000, 270000]
 pie_colors = ['#a855f7', '#f59e0b', '#22c55e', '#3b82f6', '#6b7280']
 
@@ -439,7 +449,8 @@ for pct, color, label in [(50, '#f59e0b', '50% habitat lost'), (80, '#ef4444', '
     remaining = 100 - pct
     sp = c * (remaining / 100) ** z
     ax1.plot(remaining, sp, 'o', color=color, markersize=8)
-    ax1.annotate(f'{label}\\n{sp:.0f}% species left', xy=(remaining, sp),
+    ax1.annotate(f'{label}\
+{sp:.0f}% species left', xy=(remaining, sp),
                  xytext=(remaining + 5, sp + 3), color=color, fontsize=8,
                  arrowprops=dict(arrowstyle='->', color=color))
 

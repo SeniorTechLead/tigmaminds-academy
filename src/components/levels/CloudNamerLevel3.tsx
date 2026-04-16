@@ -127,7 +127,9 @@ ax3.set_ylabel('Lapse rate (°C/km)', color='white')
 ax3.set_title('Saturated vs Dry Adiabatic Lapse Rate', color='white', fontsize=11)
 ax3.legend(fontsize=9, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax3.tick_params(colors='gray')
-ax3.annotate('Warm air: more moisture\\n→ more latent heat\\n→ lower SALR',
+ax3.annotate('Warm air: more moisture\
+→ more latent heat\
+→ lower SALR',
             xy=(30, salr_values[np.argmin(np.abs(temp_range - 30))]),
             xytext=(10, 4), color='#fbbf24', fontsize=9,
             arrowprops=dict(arrowstyle='->', color='#fbbf24'))
@@ -163,11 +165,13 @@ print(f"  DALR = g/cp = {g}/{cp} × 1000 = {DALR:.1f}°C/km")
 print(f"  SALR at 0°C:  {saturated_lapse_rate(0):.1f}°C/km")
 print(f"  SALR at 20°C: {saturated_lapse_rate(20):.1f}°C/km")
 print(f"  SALR at 35°C: {saturated_lapse_rate(35):.1f}°C/km")
-print(f"\\nFor today's conditions (T={T_surface}°C, RH={RH}%):")
+print(f"\
+For today's conditions (T={T_surface}°C, RH={RH}%):")
 print(f"  Dew point: {Td:.1f}°C")
 print(f"  Cloud base (LCL): {LCL:.0f}m ({LCL/1000:.1f}km)")
 print(f"  Cloud base temperature: {T_surface - DALR * LCL/1000:.1f}°C")
-print(f"\\nStability:")
+print(f"\
+Stability:")
 print(f"  If ELR < SALR → Absolutely stable (no convection)")
 print(f"  If SALR < ELR < DALR → Conditionally unstable")
 print(f"  If ELR > DALR → Absolutely unstable (strong convection)")`,
@@ -286,7 +290,8 @@ ax3.loglog(r_range, v_term, color='#3b82f6', linewidth=2.5)
 ax3.axvline(10, color='gray', linewidth=0.5, linestyle=':')
 ax3.axvline(100, color='gray', linewidth=0.5, linestyle=':')
 ax3.axvline(1000, color='gray', linewidth=0.5, linestyle=':')
-ax3.text(5, 0.001, 'Cloud\\ndroplet', color='#22c55e', fontsize=9, ha='center')
+ax3.text(5, 0.001, 'Cloud\
+droplet', color='#22c55e', fontsize=9, ha='center')
 ax3.text(50, 0.001, 'Drizzle', color='#f59e0b', fontsize=9, ha='center')
 ax3.text(500, 0.001, 'Rain', color='#ef4444', fontsize=9, ha='center')
 ax3.set_xlabel('Drop radius (μm)', color='white')
@@ -325,7 +330,8 @@ print("Cloud Microphysics Summary:")
 print(f"  CCN activation: larger nuclei activate at lower supersaturation")
 print(f"  Diffusion growth: slow, max ~20μm radius in ~1 hour")
 print(f"  Rain formation requires collision-coalescence or Bergeron process")
-print(f"\\nClean vs Polluted clouds (Twomey effect):")
+print(f"\
+Clean vs Polluted clouds (Twomey effect):")
 print(f"  Clean: ~100 drops/cm³, mean radius ~15μm → rains easily")
 print(f"  Polluted: ~500 drops/cm³, mean radius ~6μm → suppressed rain")
 print(f"  Same water content, different microphysics, different climate effect")`,
@@ -838,7 +844,10 @@ ax3.set_ylim(0, 7)
 # Plot 4: Global CRF budget
 ax4 = axes[1, 1]
 ax4.set_facecolor('#111827')
-components = ['SW cooling\\n(albedo)', 'LW warming\\n(greenhouse)', 'Net cloud\\neffect']
+components = ['SW cooling\
+(albedo)', 'LW warming\
+(greenhouse)', 'Net cloud\
+effect']
 values = [-50, 30, -20]
 colors_budget = ['#3b82f6', '#ef4444', '#a855f7']
 bars = ax4.bar(components, values, color=colors_budget, alpha=0.8, edgecolor='white', linewidth=1)
@@ -847,7 +856,8 @@ for bar, val in zip(bars, values):
     ax4.text(bar.get_x() + bar.get_width()/2, val + (2 if val > 0 else -3),
             f'{val:+.0f} W/m²', ha='center', color='white', fontsize=12, fontweight='bold')
 ax4.axhline(-3.7, color='#fbbf24', linewidth=1.5, linestyle='--')
-ax4.text(2.3, -5, '2×CO₂ forcing\\n(+3.7 W/m²)', color='#fbbf24', fontsize=9)
+ax4.text(2.3, -5, '2×CO₂ forcing\
+(+3.7 W/m²)', color='#fbbf24', fontsize=9)
 ax4.set_ylabel('Radiative forcing (W/m²)', color='white')
 ax4.set_title('Global Cloud Radiative Forcing Budget', color='white', fontsize=11)
 ax4.tick_params(colors='gray')
@@ -860,12 +870,15 @@ print("Cloud Radiative Forcing Summary:")
 print(f"  Global SW cooling:  -50 W/m²")
 print(f"  Global LW warming:  +30 W/m²")
 print(f"  Net cloud effect:   -20 W/m² (net cooling)")
-print(f"\\nA 10% change in net CRF = ±2 W/m² — comparable to 2×CO₂ forcing")
-print(f"\\nEquilibrium Climate Sensitivity (ECS) for 2×CO₂:")
+print(f"\
+A 10% change in net CRF = ±2 W/m² — comparable to 2×CO₂ forcing")
+print(f"\
+Equilibrium Climate Sensitivity (ECS) for 2×CO₂:")
 for lc in [-0.5, 0.0, 0.5, 1.0]:
     ecs = delta_F / (lambda_0 - lc)
     print(f"  Cloud feedback = {lc:+.1f} W/m²/K → ECS = {ecs:.1f}°C")
-print(f"\\nCloud feedback is THE largest uncertainty in climate projections.")
+print(f"\
+Cloud feedback is THE largest uncertainty in climate projections.")
 print(f"The cloud namer's science has planetary consequences.")`,
       challenge: 'Model the marine stratocumulus cloud deck specifically: how does warming affect the boundary layer inversion that maintains it? Simulate a scenario where low cloud cover decreases by 5% per degree of warming and compute the resulting amplification of climate sensitivity.',
       successHint: 'Cloud-climate feedbacks represent the frontier of atmospheric science. The simple observation that clouds both cool and warm Earth, depending on type, leads to the most consequential uncertainty in climate prediction. Every cloud the cloud namer identifies is a data point in this planetary-scale calculation.',

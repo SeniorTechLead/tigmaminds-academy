@@ -62,7 +62,8 @@ marks = [(0, 'Sea level'), (1.5, 'Shillong'), (8.85, 'Everest'), (12, 'Troposphe
 for a, label in marks:
     p = P0 * np.exp(-a / H)
     ax1.plot(p, a, 'o', color='#f59e0b', markersize=6)
-    ax1.annotate(f'{label}\\n{p:.0f} hPa', xy=(p, a), xytext=(p + 80, a + 3),
+    ax1.annotate(f'{label}\
+{p:.0f} hPa', xy=(p, a), xytext=(p + 80, a + 3),
                  color='#f59e0b', fontsize=8, arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
 # Temperature plot
@@ -141,9 +142,12 @@ ax.plot(T_moist, alt, color='#3b82f6', linewidth=2, label=f'Moist adiabatic ({mo
 ax.plot(T_env, alt, color='#f59e0b', linewidth=2, linestyle='--', label=f'Typical environment ({env_lapse}°C/km)')
 
 # Mark key locations
-locations = [(0, T_surface, 'Brahmaputra Valley\\n(~55 m)'),
-             (1.5, T_surface - env_lapse * 1.5, 'Shillong\\n(~1,500 m)'),
-             (3, T_surface - env_lapse * 3, 'High peaks\\n(~3,000 m)')]
+locations = [(0, T_surface, 'Brahmaputra Valley\
+(~55 m)'),
+             (1.5, T_surface - env_lapse * 1.5, 'Shillong\
+(~1,500 m)'),
+             (3, T_surface - env_lapse * 3, 'High peaks\
+(~3,000 m)')]
 for a, t, label in locations:
     ax.plot(t, a, 'o', color='#22c55e', markersize=8)
     ax.annotate(label, xy=(t, a), xytext=(t + 3, a + 0.2),
@@ -225,7 +229,8 @@ fig.patch.set_facecolor('#1f2937')
 axes[0].set_facecolor('#111827')
 axes[0].fill_between(days, evaporation, alpha=0.3, color='#f59e0b')
 axes[0].plot(days, evaporation, color='#f59e0b', linewidth=1.5)
-axes[0].set_ylabel('Evaporation\\n(mm/day)', color='white')
+axes[0].set_ylabel('Evaporation\
+(mm/day)', color='white')
 axes[0].set_title('The Water Cycle Over One Year', color='white', fontsize=13)
 axes[0].tick_params(colors='gray')
 
@@ -234,14 +239,16 @@ axes[1].set_facecolor('#111827')
 axes[1].fill_between(days, moisture, alpha=0.3, color='#3b82f6')
 axes[1].plot(days, moisture, color='#3b82f6', linewidth=1.5, label='Moisture')
 axes[1].plot(days, max_vapor, color='#ef4444', linewidth=1, linestyle='--', label='Max capacity')
-axes[1].set_ylabel('Atmospheric\\nmoisture (mm)', color='white')
+axes[1].set_ylabel('Atmospheric\
+moisture (mm)', color='white')
 axes[1].legend(facecolor='#1f2937', edgecolor='gray', labelcolor='white', fontsize=8)
 axes[1].tick_params(colors='gray')
 
 # Precipitation
 axes[2].set_facecolor('#111827')
 axes[2].bar(days, precipitation, color='#22c55e', alpha=0.8, width=1)
-axes[2].set_ylabel('Precipitation\\n(mm/day)', color='white')
+axes[2].set_ylabel('Precipitation\
+(mm/day)', color='white')
 axes[2].set_xlabel('Day of year', color='white')
 axes[2].tick_params(colors='gray')
 
@@ -259,7 +266,8 @@ total_precip = np.sum(precipitation)
 print(f"Total evaporation: {total_evap:.0f} mm/year")
 print(f"Total precipitation: {total_precip:.0f} mm/year")
 print(f"Peak precipitation month: summer (when evaporation is highest)")
-print(f"\\nFor comparison, Cherrapunji gets ~11,777 mm/year!")`,
+print(f"\
+For comparison, Cherrapunji gets ~11,777 mm/year!")`,
       challenge: 'Increase evaporation by 50% (multiply by 1.5) to simulate what happens when ocean temperatures rise. How does total precipitation change? This is one effect of climate change.',
       successHint: 'The water cycle is Earth\'s most important circulation system. Every drop of rain, every river, every glass of water you drink is part of this cycle. Understanding it is the first step to understanding why some places are wet and others are dry.',
     },

@@ -119,7 +119,8 @@ quantum_yield = 0.41
 E_photon = 2.22   # eV (at 560 nm)
 E_light = quantum_yield * E_photon
 E_heat = E_chemical - E_light
-labels = ['Chemical energy\\n(input)', 'Light output', 'Heat (waste)']
+labels = ['Chemical energy\
+(input)', 'Light output', 'Heat (waste)']
 values = [E_chemical, E_light, E_heat]
 colors_e = ['#3b82f6', '#22c55e', '#ef4444']
 bars = ax.bar(labels, values, color=colors_e, alpha=0.8)
@@ -247,7 +248,8 @@ efficacies = {
     'Fluorescent': 70,
     'White LED': 120,
     'Firefly': 90,  # estimated luminous efficacy
-    'Theoretical max\\n(555 nm mono)': 683,
+    'Theoretical max\
+(555 nm mono)': 683,
 }
 names_e = list(efficacies.keys())
 values_e = list(efficacies.values())
@@ -421,7 +423,8 @@ print("Flash pattern analysis:")
 for name, props in species.items():
     freq = 1.0 / props['period']
     print(f"  {name}: period={props['period']}s, freq={freq:.3f} Hz, flash={props['flash_dur']}s")
-print(f"\\nSynchronization (K={coupling_strength}):")
+print(f"\
+Synchronization (K={coupling_strength}):")
 print(f"  Final order parameter: r = {order_param[-1]:.3f}")
 print(f"  Time to sync (r > 0.8): ~{t_k[np.argmax(order_param > 0.8)]:.1f}s")`,
       challenge: 'Implement the "firefly femme fatale" effect: predatory Photuris females mimic the flash patterns of Photinus species to lure males. Add a predator that dynamically switches between mimicking two different species patterns, and track which "prey" fireflies are attracted (their oscillators shift toward the predator\'s frequency).',
@@ -482,10 +485,13 @@ daily_metabolism = 0.5  # J/day (rough estimate)
 
 # Activity energy costs (estimated, relative)
 activities = {
-    'Resting metabolism\\n(24 hours)': daily_metabolism,
+    'Resting metabolism\
+(24 hours)': daily_metabolism,
     'Flight (1 hour)': daily_metabolism * 0.3,
-    'Bioluminescence\\n(2-hour display)': E_total_biolum,
-    'Light energy\\n(visible output)': E_light_total,
+    'Bioluminescence\
+(2-hour display)': E_total_biolum,
+    'Light energy\
+(visible output)': E_light_total,
 }
 
 # Flash energy time series
@@ -502,7 +508,11 @@ fig.suptitle('ATP Energy Budget: Metabolic Cost of Bioluminescence',
 # Panel 1: Energy flow diagram (Sankey-style)
 ax = axes[0, 0]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
-stages = ['ATP\\nactivation', 'ATP\\nsynthesis', 'Light\\noutput', 'Heat\\nwaste']
+stages = ['ATP\
+activation', 'ATP\
+synthesis', 'Light\
+output', 'Heat\
+waste']
 values = [E_activation * 1e9, E_synthesis * 1e9, E_light_total * 1e9,
           (E_total_biolum - E_light_total) * 1e9]
 colors_s = ['#3b82f6', '#a855f7', '#22c55e', '#ef4444']
@@ -544,11 +554,16 @@ ax.set_xscale('log')
 ax = axes[1, 1]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
 cascade = {
-    'Chemical energy\\n(ATP + luciferin)': 100,
-    'Excited state\\n(oxyluciferin*)': 65,
-    'Photons emitted\\n(quantum yield)': 41,
-    'Visible light\\n(in useful direction)': 20,
-    'Detected by\\nfemale firefly': 0.01,
+    'Chemical energy\
+(ATP + luciferin)': 100,
+    'Excited state\
+(oxyluciferin*)': 65,
+    'Photons emitted\
+(quantum yield)': 41,
+    'Visible light\
+(in useful direction)': 20,
+    'Detected by\
+female firefly': 0.01,
 }
 stages_c = list(cascade.keys())
 values_c = list(cascade.values())
@@ -729,7 +744,8 @@ print("-" * 80)
 for name, props in organisms.items():
     print(f"{name:<25} {props['peak_nm']:>8} {props['quantum_yield']:>5.0%} "
           f"{props['habitat']:<15} {props['function']}")
-print(f"\\nConvergent evolution: bioluminescence evolved independently 40+ times")
+print(f"\
+Convergent evolution: bioluminescence evolved independently 40+ times")
 print(f"Highest QY: Firefly (41%) | Lowest: Fungi (3%)")`,
       challenge: 'Add seawater absorption to the model: calculate the effective visibility range for each marine organism by convolving their emission spectrum with the seawater transmission curve (strong absorption below 400 nm and above 600 nm, minimum absorption at 470 nm). Show why blue bioluminescence dominates in the ocean.',
       successHint: 'The comparative study reveals that evolution has independently discovered bioluminescence over 40 times, each time tuning the emission wavelength to the ecological niche. Blue for the ocean, green for forests, yellow for open-air mating signals. The physics constrains what is possible; ecology determines what is optimal.',
@@ -833,14 +849,22 @@ ax.legend(fontsize=8)
 ax = axes[1, 0]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
 milestones = [
-    (1947, 'Luciferin structure\\ndetermined'),
-    (1962, 'GFP discovered\\n(Shimomura)'),
-    (1992, 'GFP gene cloned\\n(Prasher/Chalfie)'),
-    (1994, 'GFP expression\\nin C. elegans'),
-    (2004, 'ATP hygiene assays\\ncommercialized'),
-    (2008, 'Nobel Prize\\n(Shimomura/Chalfie/Tsien)'),
-    (2012, 'Bio-LED nanostructure\\n(KAIST)'),
-    (2020, 'Glowing plants\\n(MIT, Planta)'),
+    (1947, 'Luciferin structure\
+determined'),
+    (1962, 'GFP discovered\
+(Shimomura)'),
+    (1992, 'GFP gene cloned\
+(Prasher/Chalfie)'),
+    (1994, 'GFP expression\
+in C. elegans'),
+    (2004, 'ATP hygiene assays\
+commercialized'),
+    (2008, 'Nobel Prize\
+(Shimomura/Chalfie/Tsien)'),
+    (2012, 'Bio-LED nanostructure\
+(KAIST)'),
+    (2020, 'Glowing plants\
+(MIT, Planta)'),
 ]
 years = [m[0] for m in milestones]
 labels = [m[1] for m in milestones]

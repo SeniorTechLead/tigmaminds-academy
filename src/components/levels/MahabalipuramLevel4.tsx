@@ -380,7 +380,8 @@ for tile in tiles:
         total_distance += np.sqrt((x2-x1)**2 + (y2-y1)**2)
 
 cut_time_min = total_distance / 200
-print(f"\\n=== Cutting Estimate ===")
+print(f"\
+=== Cutting Estimate ===")
 print(f"Total cut distance: {total_distance:.0f} mm")
 print(f"Estimated cutting time: {cut_time_min:.1f} min")
 print(f"Plus rapid moves and plunges: ~{cut_time_min * 1.5:.1f} min total")`,
@@ -614,15 +615,18 @@ class JaliDesignSystem:
         print("     JALI SCREEN DESIGN REPORT")
         print("=" * 58)
 
-        print("\\nSPECIFICATION:")
+        print("\
+SPECIFICATION:")
         for k, v in self.spec.items():
             print(f"  {k}: {v}")
 
         if "error" in self.design:
-            print(f"\\nERROR: {self.design['error']}")
+            print(f"\
+ERROR: {self.design['error']}")
             return
 
-        print("\\nOPTIMISED DESIGN:")
+        print("\
+OPTIMISED DESIGN:")
         print(f"  Bar width: {self.design['bar_width_mm']} mm")
         print(f"  Total bars: {self.design['bars']}")
         print(f"  Panel mass: {self.design['mass_kg']:.1f} kg")
@@ -631,14 +635,16 @@ class JaliDesignSystem:
 
         mfg = self.manufacturing_estimate()
         if mfg:
-            print("\\nMANUFACTURING:")
+            print("\
+MANUFACTURING:")
             print(f"  Cutting time: {mfg['cutting_time_min']:.0f} min")
             print(f"  Total time (with setup): {mfg['total_time_hours']:.1f} hours")
             print(f"  Material cost: {mfg['material_cost']:.0f}")
             print(f"  Machining cost: {mfg['machining_cost']:.0f}")
             print(f"  TOTAL COST: {mfg['total_cost']:.0f}")
 
-        print("\\nQUALITY CHECKS:")
+        print("\
+QUALITY CHECKS:")
         checks = [
             ("Structural safety", self.design["safety_factor"] >= 3),
             ("Openness > 40%", self.design["openness"] > 0.4),
@@ -653,7 +659,8 @@ class JaliDesignSystem:
             print(f"  [{status}] {name}")
 
         verdict = "APPROVED" if all_pass else "REVIEW REQUIRED"
-        print(f"\\n  VERDICT: {verdict}")
+        print(f"\
+  VERDICT: {verdict}")
         print("=" * 58)
 
 # Design three screens

@@ -58,7 +58,8 @@ ax1.text(-0.8, 0, 'Origin', fontsize=8, color='gray')
 
 # Draw solvent front
 ax1.axhline(solvent_front, color='#3b82f6', linestyle='--', linewidth=1)
-ax1.text(-0.8, solvent_front, 'Solvent\\nfront', fontsize=8, color='#3b82f6')
+ax1.text(-0.8, solvent_front, 'Solvent\
+front', fontsize=8, color='#3b82f6')
 
 # Draw pigment spots
 for p in pigments:
@@ -66,7 +67,8 @@ for p in pigments:
     # Gaussian blob for each pigment spot
     spot = plt.Circle((1, y), 0.3, color=p['color'], alpha=0.7)
     ax1.add_patch(spot)
-    ax1.text(1.8, y, f"{p['name']}\\nRf = {p['Rf']}", fontsize=7,
+    ax1.text(1.8, y, f"{p['name']}\
+Rf = {p['Rf']}", fontsize=7,
              va='center', color='#333')
 
 ax1.set_title('Chromatography Paper', color='#333', fontsize=12)
@@ -179,7 +181,9 @@ ax2.tick_params(colors='gray')
 unknown_conc = 0.05
 unknown_abs = epsilon * unknown_conc * path_length
 ax2.plot(unknown_conc * 1000, unknown_abs, 'o', color='#ef4444', markersize=10)
-ax2.annotate(f'Unknown sample\\nA = {unknown_abs:.0f}\\nc = {unknown_conc*1000:.0f} mmol/L',
+ax2.annotate(f'Unknown sample\
+A = {unknown_abs:.0f}\
+c = {unknown_conc*1000:.0f} mmol/L',
              xy=(unknown_conc*1000, unknown_abs), xytext=(unknown_conc*1000+20, unknown_abs-200),
              color='#ef4444', fontsize=9, arrowprops=dict(arrowstyle='->', color='#ef4444'))
 
@@ -263,9 +267,11 @@ ax2.tick_params(colors='gray')
 
 # Mark shade and sun zones
 ax2.axvspan(0.05, 0.25, alpha=0.1, color='#3b82f6')
-ax2.text(0.15, 25, 'SHADE\\n(grow tall!)', ha='center', color='#3b82f6', fontsize=9)
+ax2.text(0.15, 25, 'SHADE\
+(grow tall!)', ha='center', color='#3b82f6', fontsize=9)
 ax2.axvspan(0.35, 0.55, alpha=0.1, color='#f59e0b')
-ax2.text(0.45, 25, 'SUN\\n(grow wide)', ha='center', color='#f59e0b', fontsize=9)
+ax2.text(0.45, 25, 'SUN\
+(grow wide)', ha='center', color='#f59e0b', fontsize=9)
 
 plt.tight_layout()
 plt.show()
@@ -321,8 +327,11 @@ def simulate_pathway(pal, chs, f3h, dfr, ans, ufgt):
     return [substrate, cinnamic, naringenin, dihydroflavonol,
             leucoanthocyanidin, anthocyanidin, anthocyanin]
 
-steps = ['Phenylalanine', 'Cinnamic\\nacid', 'Naringenin', 'Dihydro-\\nflavonol',
-         'Leuco-\\nanthocyanidin', 'Anthocyanidin', 'Anthocyanin']
+steps = ['Phenylalanine', 'Cinnamic\
+acid', 'Naringenin', 'Dihydro-\
+flavonol',
+         'Leuco-\
+anthocyanidin', 'Anthocyanidin', 'Anthocyanin']
 enzymes = ['PAL', 'CHS', 'F3H', 'DFR', 'ANS', 'UFGT']
 
 # Three genotypes
@@ -349,7 +358,8 @@ for ax, (name, params), color in zip(axes, genotypes.items(), gcolors):
     for i, enz in enumerate(enzymes):
         activity = params[i]
         enz_color = '#22c55e' if activity > 0.5 else '#ef4444'
-        ax.annotate(f'{enz}\\n({activity:.0%})', xy=(i+0.5, max(levels)*0.95),
+        ax.annotate(f'{enz}\
+({activity:.0%})', xy=(i+0.5, max(levels)*0.95),
                     fontsize=6, color=enz_color, ha='center')
 
 axes[0].set_ylabel('Metabolite level', color='white')

@@ -57,7 +57,8 @@ for idx, (fruit_name, layers) in enumerate(fruits.items()):
     for layer_name, data in layers.items():
         circle = plt.Circle((0, 0), r, color=data['color'], alpha=0.7)
         ax.add_patch(circle)
-        ax.annotate(f"{layer_name}\\n{data['thickness']}mm",
+        ax.annotate(f"{layer_name}\
+{data['thickness']}mm",
                      xy=(r * 0.5, r * 0.5), fontsize=7, color='black',
                      ha='center', fontweight='bold',
                      bbox=dict(boxstyle='round,pad=0.2', facecolor='white', alpha=0.8))
@@ -404,7 +405,8 @@ import matplotlib.pyplot as plt
 
 # Nutritional data per 100g (USDA values)
 fruits_data = {
-    'Coconut\\n(meat)': {'fat': 33.5, 'carb': 15.2, 'protein': 3.3, 'fiber': 9.0, 'water': 47},
+    'Coconut\
+(meat)': {'fat': 33.5, 'carb': 15.2, 'protein': 3.3, 'fiber': 9.0, 'water': 47},
     'Jackfruit': {'fat': 0.6, 'carb': 23.2, 'protein': 1.7, 'fiber': 1.5, 'water': 73},
     'Mango': {'fat': 0.4, 'carb': 15.0, 'protein': 0.8, 'fiber': 1.6, 'water': 83},
     'Banana': {'fat': 0.3, 'carb': 22.8, 'protein': 1.1, 'fiber': 2.6, 'water': 75},
@@ -572,7 +574,8 @@ for name, data in layers.items():
 ax.plot(light_vals, heights, 'o-', color='#fbbf24', linewidth=2, markersize=8)
 for i, (name, data) in enumerate(layers.items()):
     ax.axhspan(data['height'] - 1, data['height'] + 1, alpha=0.15, color=data['color'])
-    ax.text(light_vals[i] + 2, heights[i], f'{name}\\n({light_vals[i]:.0f}%→{light_vals[i+1]:.0f}%)',
+    ax.text(light_vals[i] + 2, heights[i], f'{name}\
+({light_vals[i]:.0f}%→{light_vals[i+1]:.0f}%)',
             fontsize=8, color='white', va='center')
 ax.set_xlabel('Light intensity (% of full sun)', color='white')
 ax.set_ylabel('Height (m)', color='white')
@@ -595,7 +598,10 @@ for n, v in zip(capture_names, capture_vals):
 # Monoculture vs agroforestry
 ax = axes[1, 0]
 ax.set_facecolor('#111827')
-systems = ['Coconut\\nmono', 'Jackfruit\\nmono', 'Agroforestry\\n(4-layer)']
+systems = ['Coconut\
+mono', 'Jackfruit\
+mono', 'Agroforestry\
+(4-layer)']
 captured = [mono_coconut, mono_jackfruit, total_agroforestry]
 sys_colors = ['#22c55e', '#65a30d', '#a855f7']
 bars = ax.bar(systems, captured, color=sys_colors, edgecolor='none')

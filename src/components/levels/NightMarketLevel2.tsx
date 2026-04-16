@@ -100,7 +100,8 @@ ax2.plot(p_range, revenue_log / 1000, color='#f59e0b', linewidth=2, linestyle='-
 opt_price_linear = est_a / (2 * est_b)
 opt_revenue_linear = opt_price_linear * (est_a - est_b * opt_price_linear)
 ax2.plot(opt_price_linear, opt_revenue_linear / 1000, '*', color='#ef4444', markersize=15, zorder=5)
-ax2.annotate(f'Max revenue\\n₹{opt_price_linear:.0f}/kg', xy=(opt_price_linear, opt_revenue_linear/1000),
+ax2.annotate(f'Max revenue\
+₹{opt_price_linear:.0f}/kg', xy=(opt_price_linear, opt_revenue_linear/1000),
              xytext=(opt_price_linear + 40, opt_revenue_linear/1000 - 10),
              color='#ef4444', fontsize=10, fontweight='bold',
              arrowprops=dict(arrowstyle='->', color='#ef4444'))

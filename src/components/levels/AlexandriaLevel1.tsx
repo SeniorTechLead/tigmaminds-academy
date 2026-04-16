@@ -174,7 +174,8 @@ for category, authors in library.items():
     total_authors += len(authors)
     print(f"{category}: {len(authors)} authors, {cat_scrolls} scrolls")
 
-print(f"\\nTotal: {total_authors} authors, {total_scrolls} scrolls")
+print(f"\
+Total: {total_authors} authors, {total_scrolls} scrolls")
 print(f"(The real Library had ~400,000-700,000 scrolls)")
 
 # Search function
@@ -186,7 +187,8 @@ def search_author(name):
                    f"{info['scrolls']} scrolls: {', '.join(info['works'])}")
     return f"'{name}' not found in the catalogue."
 
-print(f"\\n{search_author('Euclid')}")
+print(f"\
+{search_author('Euclid')}")
 print(f"{search_author('Homer')}")
 print(f"{search_author('Confucius')}")`,
       challenge: 'Add a "Science" category with entries for Aristarchus (proposed heliocentric model), Hero of Alexandria (built a steam engine), and Ctesibius (invented the water clock). How many total scrolls does the expanded library have?',
@@ -249,7 +251,8 @@ print(f"Average connections per work: {avg_deg:.1f}")
 print(f"Most connected: {top} ({degrees[top]} connections)")
 
 # Simulate destruction events
-print("\\n=== Simulating Destruction Events ===")
+print("\
+=== Simulating Destruction Events ===")
 
 def remove_nodes(network, nodes_to_remove):
     """Remove nodes and all their connections."""
@@ -327,7 +330,8 @@ total_before = sum(categories_before.values())
 entropy_before = shannon_entropy(list(categories_before.values()))
 
 print("=== Library of Alexandria — Information Entropy Analysis ===")
-print(f"\\nBefore destruction:")
+print(f"\
+Before destruction:")
 print(f"  Total scrolls: {total_before:,}")
 print(f"  Categories: {len(categories_before)}")
 print(f"  Shannon entropy: {entropy_before:.3f} bits")
@@ -345,7 +349,8 @@ destruction_events = [
 ]
 
 current = dict(categories_before)
-print(f"\\n{'Event':<30} {'Scrolls':>8} {'Lost':>8} {'Entropy':>8} {'% Lost':>8}")
+print(f"\
+{'Event':<30} {'Scrolls':>8} {'Lost':>8} {'Entropy':>8} {'% Lost':>8}")
 print("-" * 64)
 print(f"{'Original Library':<30} {total_before:>8,} {'':>8} {entropy_before:>7.3f} {'0%':>8}")
 
@@ -364,7 +369,8 @@ for event_name, losses in destruction_events:
 surviving = {k: v for k, v in current.items() if v > 0}
 total_surviving = sum(surviving.values())
 entropy_final = shannon_entropy(list(surviving.values()))
-print(f"\\nSurviving scrolls: {total_surviving:,} ({total_surviving/total_before*100:.1f}%)")
+print(f"\
+Surviving scrolls: {total_surviving:,} ({total_surviving/total_before*100:.1f}%)")
 print(f"Surviving categories: {len(surviving)} of {len(categories_before)}")
 print(f"Final entropy: {entropy_final:.3f} bits (was {entropy_before:.3f})")
 print(f"Information diversity lost: {(1 - entropy_final/entropy_before)*100:.0f}%")`,
@@ -438,7 +444,8 @@ for year, pages in link_history:
         print(f"{year:>6} {pages:>18,} {pct:>12.1f}%")
 
 # Bit rot for 100 TB without maintenance
-print("\\n=== Bit Rot Simulation (No Maintenance) ===")
+print("\
+=== Bit Rot Simulation (No Maintenance) ===")
 print("Starting data: 100 TB on hard drives")
 bit_history = simulate_bit_rot(100, 20)
 
@@ -449,7 +456,8 @@ for year, tb in bit_history:
         print(f"{year:>6} {tb:>12.1f} {tb/100*100:>12.1f}%")
 
 # Comparison with ancient preservation
-print("\\n=== Preservation Comparison ===")
+print("\
+=== Preservation Comparison ===")
 media = [
     ("Sumerian clay tablet", 5000, "Still readable"),
     ("Egyptian papyrus (dry)", 3000, "Readable with care"),
@@ -467,7 +475,8 @@ print("-" * 64)
 for name, years, status in media:
     print(f"{name:<28} {years:>10} yrs  {status:>20}")
 
-print("\\nThe paradox: the OLDEST storage media are the most durable.")
+print("\
+The paradox: the OLDEST storage media are the most durable.")
 print("Digital is fast and dense, but fragile. Analog is slow, but lasts.")`,
       challenge: 'Add a "with maintenance" simulation: every 3 years, all surviving data is copied to new drives (resetting the age clock). Compare the data loss over 20 years with and without maintenance. This is what the Internet Archive does — active preservation through continuous copying.',
       successHint: 'You modeled the decay of digital information — a real and urgent problem. The Internet Archive, national libraries, and university repositories fight this decay every day. The lesson of Alexandria applies directly: knowledge must be ACTIVELY maintained, or it will be lost — whether it\'s stored on papyrus or petabytes.',
@@ -545,7 +554,8 @@ queries = [
     "quantum",  # won't find anything
 ]
 
-print("\\n=== Search Results ===")
+print("\
+=== Search Results ===")
 for q in queries:
     results = search(q, inverted_index, documents)
     if results:
@@ -555,7 +565,8 @@ for q in queries:
         print(f'Query: "{q}" → No results')
 
 # Show index stats
-print("\\n=== Most Common Terms ===")
+print("\
+=== Most Common Terms ===")
 sorted_terms = sorted(inverted_index.items(), key=lambda x: len(x[1]), reverse=True)
 for term, docs in sorted_terms[:5]:
     print(f'  "{term}" appears in {len(docs)} document(s)')`,

@@ -491,7 +491,8 @@ for name, c in costs_total.items():
     l = len(paths[name]) * 50
     print(f"  {name}: cost={c:.0f}, distance={l:.0f} km")
 pct_increase = 100 * (costs_total['RCP 8.5 (+4.5°C)'] / costs_total['Current climate'] - 1)
-print(f"\\n  Under RCP 8.5, migration costs increase by {pct_increase:.0f}%")
+print(f"\
+  Under RCP 8.5, migration costs increase by {pct_increase:.0f}%")
 print(f"  This means birds need {pct_increase:.0f}% more fat reserves")
 print(f"  or face {pct_increase:.0f}% higher mortality during migration.")`,
       challenge: 'Add a "stopover quality" analysis: identify cells along each route where the bird would need to stop and refuel (every 500 km). Compare food availability at these stopover sites across scenarios. Which stopovers are most vulnerable to climate change?',

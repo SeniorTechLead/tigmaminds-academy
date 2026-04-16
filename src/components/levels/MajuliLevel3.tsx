@@ -122,7 +122,11 @@ ax.text(50, 0.005, 'STABLE', color='#ef4444', fontsize=12, alpha=0.5)
 
 # Plot 4: Sediment budget
 ax = axes[1, 1]
-categories = ['Suspended\\nload', 'Bed load', 'Bank\\nerosion', 'Flood\\ndeposition', 'Net island\\nloss']
+categories = ['Suspended\
+load', 'Bed load', 'Bank\
+erosion', 'Flood\
+deposition', 'Net island\
+loss']
 values = [400, 335, 150, -120, -30]  # million tonnes/year
 colors_budget = ['#3b82f6', '#f59e0b', '#ef4444', '#22c55e', '#a855f7']
 bars = ax.bar(categories, values, color=colors_budget, edgecolor='none', width=0.6)
@@ -399,7 +403,8 @@ for x, y in zip(mid_years, erosion_rates):
     ax.text(x, y + 0.3, f'{y:.1f}', ha='center', color='white', fontsize=8)
 
 # Annotate key events
-ax.annotate('1950 earthquake\\nsediment pulse', xy=(1955, erosion_rates[0]),
+ax.annotate('1950 earthquake\
+sediment pulse', xy=(1955, erosion_rates[0]),
             xytext=(1965, erosion_rates[0]+3), color='#f59e0b', fontsize=8,
             arrowprops=dict(arrowstyle='->', color='#f59e0b'))
 
@@ -747,7 +752,8 @@ for Q_flood, label in [(55000, '2-yr'), (72000, '100-yr'), (84000, '100-yr 2050'
     if Q_flood > Q_threshold:
         E = a_power * (Q_flood - Q_threshold)**b_power / 1e6
         ax.plot(Q_flood/1000, E, 'o', markersize=8, color='#f59e0b', zorder=5)
-        ax.annotate(f'{label}\\n{E:.1f} km\²/yr', xy=(Q_flood/1000, E),
+        ax.annotate(f'{label}\
+{E:.1f} km\²/yr', xy=(Q_flood/1000, E),
                     xytext=(Q_flood/1000 + 5, E + 0.2), color='white', fontsize=8,
                     arrowprops=dict(arrowstyle='->', color='white', lw=1))
 
@@ -789,10 +795,14 @@ ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 ax = axes[1, 1]
 strategies = {
     'No protection': {'cost_per_km': 0, 'erosion_reduction': 0, 'lifespan': 0},
-    'Porcupine\\nstructures': {'cost_per_km': 50000, 'erosion_reduction': 40, 'lifespan': 5},
-    'Geotextile\\nbags': {'cost_per_km': 200000, 'erosion_reduction': 60, 'lifespan': 10},
-    'Concrete\\nrevetment': {'cost_per_km': 1000000, 'erosion_reduction': 85, 'lifespan': 25},
-    'Vegetation +\\nporcupine': {'cost_per_km': 80000, 'erosion_reduction': 55, 'lifespan': 15},
+    'Porcupine\
+structures': {'cost_per_km': 50000, 'erosion_reduction': 40, 'lifespan': 5},
+    'Geotextile\
+bags': {'cost_per_km': 200000, 'erosion_reduction': 60, 'lifespan': 10},
+    'Concrete\
+revetment': {'cost_per_km': 1000000, 'erosion_reduction': 85, 'lifespan': 25},
+    'Vegetation +\
+porcupine': {'cost_per_km': 80000, 'erosion_reduction': 55, 'lifespan': 15},
 }
 
 names = list(strategies.keys())

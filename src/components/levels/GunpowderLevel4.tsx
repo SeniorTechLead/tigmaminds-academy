@@ -98,7 +98,8 @@ propellants = {
 }
 
 print("=== Propellant Chemistry Simulator ===")
-print("System architecture: 3 classes defined\\n")
+print("System architecture: 3 classes defined\
+")
 
 print(f"{'Propellant':<20} {'Energy (MJ/kg)':>14} {'v_e (m/s)':>10} {'Flame T':>8}")
 print("-" * 54)
@@ -106,7 +107,8 @@ for key, p in propellants.items():
     print(f"{p.name:<20} {p.energy/1e6:>12.1f} {p.exhaust_velocity():>8.0f} {p.flame_temp:>6} K")
 
 # Quick integration test
-print("\\n=== Component Integration Test ===")
+print("\
+=== Component Integration Test ===")
 ch = Chamber(500, 300)  # 500 cm³ chamber, 300 MPa max
 pr = Projectile(2.0, 80)  # 2 kg projectile, 80mm bore
 bp = propellants["black_powder"]
@@ -116,7 +118,8 @@ print(f"Chamber pressure after 100g charge: {ch.pressure()/1e6:.1f} MPa")
 print(f"Projectile bore area: {pr.bore_area*1e6:.0f} mm²")
 print(f"Force on projectile: {ch.pressure() * pr.bore_area:.0f} N")
 print(f"Acceleration: {ch.pressure() * pr.bore_area / pr.mass:.0f} m/s²")
-print("\\nAll three classes working. Ready for simulation engine.")`,
+print("\
+All three classes working. Ready for simulation engine.")`,
       challenge: 'Add a method to Propellant called `burn_mass(surface_area_mm2, dt_seconds)` that returns the mass of propellant consumed in time dt based on burn rate and density. Use: mass = burn_rate × surface_area × density × dt (convert units carefully). This connects the propellant to the time-stepping simulation.',
       successHint: 'You designed a clean three-class architecture where each component handles its own physics. This separation makes the code testable (test each class independently), reusable (swap propellants without changing the barrel code), and extensible (add new features to one class without breaking others). This is professional software engineering.',
     },
@@ -225,7 +228,8 @@ engine = CombustionEngine(
 times, pressures, velocities, positions, muzzle_v = engine.run()
 
 print("=== Combustion Simulation: Ming Bronze Cannon ===")
-print(f"Charge: 200g corned powder | Bore: 80mm | Barrel: 1.5m\\n")
+print(f"Charge: 200g corned powder | Bore: 80mm | Barrel: 1.5m\
+")
 
 print(f"{'Time (ms)':>10} {'Pressure (MPa)':>15} {'Velocity (m/s)':>15} {'Position (mm)':>14}")
 print("-" * 56)
@@ -242,7 +246,8 @@ for i in indices[:10]:
     print(f"{times[i]:>8.2f} {pressures[i]:>13.1f} {velocities[i]:>13.0f} "
           f"{positions[i]:>12.0f}{marker}")
 
-print(f"\\nPeak pressure: {pressures[peak_idx]:.1f} MPa at {times[peak_idx]:.2f} ms")
+print(f"\
+Peak pressure: {pressures[peak_idx]:.1f} MPa at {times[peak_idx]:.2f} ms")
 print(f"Muzzle velocity: {muzzle_v:.0f} m/s")
 print(f"Muzzle energy: {0.5 * 2.0 * muzzle_v**2:.0f} J")
 print(f"Efficiency: {0.5 * 2.0 * muzzle_v**2 / (0.2 * 2.7e6) * 100:.1f}%")`,
@@ -332,7 +337,8 @@ projectiles = [
 
 angles = [30, 45, 60]
 
-print("=== Ballistics Calculator ===\\n")
+print("=== Ballistics Calculator ===\
+")
 print(f"{'Projectile':<22} {'Angle':>6} {'Range (m)':>10} {'Impact v':>10} "
       f"{'Impact E (kJ)':>14} {'BC':>6}")
 print("-" * 70)
@@ -418,7 +424,8 @@ weapons = [
     Weapon("Hwacha launcher",  "15th c.", 500,  100, 1000,  200, 5, 0.6, 0.1),
 ]
 
-print("=== Chinese Gunpowder Weapons Comparison ===\\n")
+print("=== Chinese Gunpowder Weapons Comparison ===\
+")
 print(f"{'Weapon':<22} {'Era':>8} {'Range':>7} {'RoF':>5} {'Energy':>8} "
       f"{'Weight':>7} {'Rel':>5} {'Acc':>5}")
 print("-" * 69)
@@ -427,7 +434,8 @@ for w in weapons:
           f"{w.energy:>7} J {w.weight:>5}kg {w.reliability:>4.0%} {w.accuracy:>4.0%}")
 
 # Multi-criteria scoring
-print("\\n=== Performance Indices ===")
+print("\
+=== Performance Indices ===")
 print(f"{'Weapon':<22} {'Firepower':>10} {'Mobility':>10} {'Cost-Eff':>10}")
 print("-" * 54)
 for w in weapons:
@@ -446,9 +454,11 @@ missions = {
                                   "mobility": 0.05, "cost": 0.1, "reliability": 0.2},
 }
 
-print("\\n=== Mission-Specific Ranking ===")
+print("\
+=== Mission-Specific Ranking ===")
 for mission, weights in missions.items():
-    print(f"\\n{mission}:")
+    print(f"\
+{mission}:")
     scores = []
     for w in weapons:
         # Normalise each attribute to 0-1 range

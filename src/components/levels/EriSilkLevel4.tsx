@@ -444,10 +444,14 @@ prob_best = np.mean(mc_ranks == 1, axis=0)
 # === SCENARIO ANALYSIS ===
 scenarios = {
     'Baseline': {},
-    'Renewable grid\\n(polyester -60% CO2)': {'Polyester': {'co2_mult': 0.4}},
-    'Water recycling\\n(cotton -40% water)': {'Conv. cotton': {'water_mult': 0.6}, 'Org. cotton': {'water_mult': 0.6}},
-    'Circular economy\\n(2x lifespan all)': {n: {'co2_mult': 0.5, 'water_mult': 0.5} for n in fiber_names},
-    'Ban microplastic\\n(polyester filtered)': {'Polyester': {'micro_mult': 0.1}},
+    'Renewable grid\
+(polyester -60% CO2)': {'Polyester': {'co2_mult': 0.4}},
+    'Water recycling\
+(cotton -40% water)': {'Conv. cotton': {'water_mult': 0.6}, 'Org. cotton': {'water_mult': 0.6}},
+    'Circular economy\
+(2x lifespan all)': {n: {'co2_mult': 0.5, 'water_mult': 0.5} for n in fiber_names},
+    'Ban microplastic\
+(polyester filtered)': {'Polyester': {'micro_mult': 0.1}},
 }
 
 scenario_winners = {}
@@ -563,7 +567,8 @@ for name, corrs in correlations.items():
     for metric, corr in corrs:
         color = colors_f[fiber_names.index(name)]
         ax.bar(x_pos, corr, 0.4, color=color, edgecolor='none')
-        ax.text(x_pos, corr + 0.02, f'{name[:4]}\\n{metric}', ha='center',
+        ax.text(x_pos, corr + 0.02, f'{name[:4]}\
+{metric}', ha='center',
                 color='white', fontsize=7)
         x_pos += 1
 ax.set_ylabel('|Correlation| with composite score', color='white')
@@ -709,10 +714,14 @@ best_idx = np.argmin(scores)
 # === POLICY ANALYSIS ===
 policies = {
     'Baseline': {},
-    'Carbon tax\\n($50/t CO2)': {'co2_tax': 50},
-    'Microplastic\\nfilter mandate': {'micro_reduce': 0.95},
-    'Min durability\\n(5yr minimum)': {'min_life': 5},
-    'EPR fee\\n(end-of-life)': {'epr_fee': True},
+    'Carbon tax\
+($50/t CO2)': {'co2_tax': 50},
+    'Microplastic\
+filter mandate': {'micro_reduce': 0.95},
+    'Min durability\
+(5yr minimum)': {'min_life': 5},
+    'EPR fee\
+(end-of-life)': {'epr_fee': True},
 }
 
 policy_rankings = {}

@@ -88,7 +88,8 @@ for start, end in routes:
         if routes.index((start, end)) < 5:
             total_stepping += dist
 
-print(f"\\nStepping-stone total (Bergen->Vinland via stops): {total_stepping:.0f} km")
+print(f"\
+Stepping-stone total (Bergen->Vinland via stops): {total_stepping:.0f} km")
 direct, _ = haversine(*places["Bergen"], *places["L'Anse Meadows"])
 print(f"Direct great circle (Bergen->Vinland):             {direct:.0f} km")
 print(f"Overhead from island-hopping: {(total_stepping/direct - 1)*100:.1f}%")`,
@@ -180,7 +181,8 @@ for year in key_years:
     print(f"{yr_label:<12} {ra:>10.2f}h {dec:>11.2f}° {nearest:>18}")
 
 # Viking era analysis
-print("\\n=== Viking Era Pole Star Analysis (800-1100 CE) ===")
+print("\
+=== Viking Era Pole Star Analysis (800-1100 CE) ===")
 for year in [800, 900, 1000, 1100]:
     ra, dec = precess_pole(year)
     # Angular distance to Polaris
@@ -267,7 +269,8 @@ def simulate_voyage(start_lat, start_lon, heading_deg, ship_speed_kmh,
     return track
 
 # Simulate key Viking routes
-print("=== Viking Voyage Simulations (with ocean currents) ===\\n")
+print("=== Viking Voyage Simulations (with ocean currents) ===\
+")
 
 voyages = [
     ("Iceland to Greenland", 64.1, -21.9, 260, 9.0, 5),
@@ -333,7 +336,8 @@ delta_n = n_o - n_e
 print("=== Calcite Birefringence Model ===")
 print(f"Ordinary index:      {n_o}")
 print(f"Extraordinary index: {n_e}")
-print(f"Birefringence Δn:    {delta_n:.3f}\\n")
+print(f"Birefringence Δn:    {delta_n:.3f}\
+")
 
 # Ray splitting at different incidence angles
 print("=== Double Refraction vs Incidence Angle ===")
@@ -348,8 +352,10 @@ for theta_i in range(0, 85, 5):
         print(f"{theta_i:>8}° {theta_o:>9.2f}° {theta_e:>10.2f}° {sep:>10.2f}°")
 
 # Sunstone navigation model
-print("\\n=== Sunstone Navigation Accuracy ===")
-print("Finding the sun through overcast using polarized skylight\\n")
+print("\
+=== Sunstone Navigation Accuracy ===")
+print("Finding the sun through overcast using polarized skylight\
+")
 
 def skylight_polarization(sun_angle_deg, sky_point_angle_deg):
     """
@@ -380,7 +386,8 @@ for angle in [0, 20, 40, 45, 50, 60, 80, 90, 120, 135, 160]:
         best_angle = angle
     print(f"{angle:>9}° {pol:>12.3f} {ratio:>15.2f}")
 
-print(f"\\nMax polarization at {best_angle}° from sun")
+print(f"\
+Max polarization at {best_angle}° from sun")
 print(f"Sun is 90° from max polarization point: estimated at {(best_angle - 90) % 360}° or {(best_angle + 90) % 360}°")
 print(f"Accuracy: within ~{abs(best_angle - 90 - sun_true):.0f}° of true position")`,
       challenge: 'The sunstone technique works best when the sky is partly polarized (thin overcast). Thick clouds destroy polarization. Model how cloud thickness affects detection accuracy by adding a "depolarization factor" (0 = clear sky, 1 = fully depolarized). At what cloud thickness does the sunstone become useless?',
@@ -478,7 +485,8 @@ estimates, uncertainties, gains = kalman_1d(
 
 # Report at daily intervals
 print("=== Kalman Filter: Viking Position Estimation ===")
-print(f"Ship speed: {speed_kmh} km/h | Star fixes available ~30% of daylight hours\\n")
+print(f"Ship speed: {speed_kmh} km/h | Star fixes available ~30% of daylight hours\
+")
 print(f"{'Day':>4} {'True pos':>10} {'Estimated':>10} {'Error':>8} {'Uncertainty':>12} {'Fixes today':>12}")
 print("-" * 58)
 
@@ -493,7 +501,8 @@ for day in range(days):
 
 # Summary
 errors = np.abs(np.array(estimates) - true_positions)
-print(f"\\nMean position error: {np.mean(errors):.1f} km")
+print(f"\
+Mean position error: {np.mean(errors):.1f} km")
 print(f"Max position error:  {np.max(errors):.1f} km")
 print(f"Dead reckoning only would give: ~{3.0 * np.sqrt(hours):.0f} km uncertainty")
 print(f"Kalman filter reduces this to: ~{uncertainties[-1]:.0f} km")`,

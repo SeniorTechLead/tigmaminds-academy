@@ -120,7 +120,11 @@ pacinian = pac_onset + pac_offset
 fig, axes = plt.subplots(4, 1, figsize=(10, 8), sharex=True)
 fig.patch.set_facecolor('#1f2937')
 
-labels = ['Stimulus\\n(pressure)', 'Merkel cell\\n(slow adapt)', 'Meissner\\n(rapid adapt)', 'Pacinian\\n(very rapid)']
+labels = ['Stimulus\
+(pressure)', 'Merkel cell\
+(slow adapt)', 'Meissner\
+(rapid adapt)', 'Pacinian\
+(very rapid)']
 data = [stimulus, merkel, meissner, pacinian]
 colors = ['#9ca3af', '#22c55e', '#3b82f6', '#f59e0b']
 
@@ -309,7 +313,8 @@ for ax, title, gap in zip(axes, scenarios, gap_widths):
     decision = 'GO' if gap > body_width + 4 else ('SQUEEZE' if gap >= body_width else 'STOP')
     dec_color = '#22c55e' if decision == 'GO' else ('#f59e0b' if decision == 'SQUEEZE' else '#ef4444')
     ax.text(0, -3, f'Decision: {decision}', ha='center', color=dec_color, fontsize=11, fontweight='bold')
-    ax.set_title(f'{title}\\nGap: {gap}cm', color='white', fontsize=10)
+    ax.set_title(f'{title}\
+Gap: {gap}cm', color='white', fontsize=10)
     ax.axis('off')
 
 plt.suptitle('Whisker Gap Detection (body width = 20cm)', color='white', fontsize=13, y=1.02)
@@ -365,7 +370,8 @@ ax1.set_facecolor('#111827')
 colors = plt.cm.YlOrRd(np.array(brain_area) / max(brain_area))
 bars = ax1.barh(body_parts, brain_area, color=colors, height=0.7)
 ax1.set_xlabel('Relative brain area in somatosensory cortex', color='white')
-ax1.set_title('Somatosensory Homunculus\\n(Brain space per body part)', color='white', fontsize=12)
+ax1.set_title('Somatosensory Homunculus\
+(Brain space per body part)', color='white', fontsize=12)
 ax1.tick_params(colors='gray')
 ax1.invert_yaxis()
 for bar, val in zip(bars, brain_area):
@@ -429,7 +435,13 @@ The goal: recreate the richness of biological touch (pressure, texture, temperat
 import matplotlib.pyplot as plt
 
 # Comparison: biological touch vs haptic tech
-categories = ['Spatial\\nresolution', 'Temporal\\nresolution', 'Force\\nrange', 'Texture\\ndetection', 'Temperature\\nsensing', 'Multi-point\\ntouch']
+categories = ['Spatial\
+resolution', 'Temporal\
+resolution', 'Force\
+range', 'Texture\
+detection', 'Temperature\
+sensing', 'Multi-point\
+touch']
 
 # Scores out of 10
 bio_touch = [9, 9, 8, 9, 8, 10]  # human fingertip

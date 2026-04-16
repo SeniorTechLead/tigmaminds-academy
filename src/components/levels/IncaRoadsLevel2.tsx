@@ -69,7 +69,8 @@ for b in bridges:
     print(f"{b['name']:<24} {b['span_m']:>4.0f}m {sag:>4.1f}m {a_est:>7.1f}m {rope_len:>7.1f}m {tension_kn:>9.1f}")
 
 # Compare catenary vs parabola
-print("\\n=== Catenary vs Parabola Comparison (28m span) ===")
+print("\
+=== Catenary vs Parabola Comparison (28m span) ===")
 span = 28
 sag = 3.36
 a_cat = span**2 / (8 * sag)
@@ -171,12 +172,14 @@ print(f"{'From':<18} {'To':<18} {'Distance (km)':>14}")
 print("-" * 52)
 for u, v, w in mst_edges:
     print(f"{cities[u]:<18} {cities[v]:<18} {w:>12}")
-print(f"\\nTotal MST distance: {mst_cost:,} km")
+print(f"\
+Total MST distance: {mst_cost:,} km")
 print(f"Edges used: {len(mst_edges)} (connecting {n} cities)")
 
 # Compare to full network
 total_all = sum(e[2] for e in edges)
-print(f"\\nFull network: {total_all:,} km ({len(edges)} edges)")
+print(f"\
+Full network: {total_all:,} km ({len(edges)} edges)")
 print(f"MST saves: {total_all - mst_cost:,} km ({(1 - mst_cost/total_all)*100:.0f}% reduction)")
 
 # Prim's algorithm for comparison
@@ -209,7 +212,8 @@ def prim(n_nodes, edge_list):
     return mst, total
 
 prim_edges, prim_cost = prim(n, edges)
-print(f"\\nPrim's MST cost: {prim_cost:,} km (same as Kruskal: {prim_cost == mst_cost})")`,
+print(f"\
+Prim's MST cost: {prim_cost:,} km (same as Kruskal: {prim_cost == mst_cost})")`,
       challenge: 'The MST is the cheapest connected network, but it has no redundancy — if one road is destroyed (landslide, flood), the network splits. Add the cheapest non-MST edge to create a single cycle. This gives the "minimum 2-edge-connected subgraph" — a network that survives one failure.',
       successHint: 'MST algorithms are used everywhere: network design (telecommunications, power grids), clustering in machine learning, image segmentation in computer vision, and circuit design. You implemented both major algorithms and compared them — a fundamental skill in graph algorithms.',
     },
@@ -283,7 +287,8 @@ for p in provinces:
     print(f"{p['name']:<16} {p['llamas']:>8} [{knot_str:>14}] {decoded:>8}")
 
 # Base-20 addition: sum all provincial llamas
-print("\\n=== Base-20 Addition: Total Empire Llamas ===")
+print("\
+=== Base-20 Addition: Total Empire Llamas ===")
 running_total = to_base(0, 20)
 for p in provinces:
     province_b20 = to_base(p["llamas"], 20)
@@ -293,7 +298,8 @@ for p in provinces:
     print(f"  + {p['name']:<14} [{knot_str}] = {total_dec:,} llamas")
 
 # Multiplication via repeated addition (how quipu operators computed)
-print("\\n=== Base-20 Multiplication (tax calculation) ===")
+print("\
+=== Base-20 Multiplication (tax calculation) ===")
 tax_rate_pct = 15  # 15% tribute
 for p in provinces:
     tax = p["maize_bushels"] * tax_rate_pct // 100
@@ -302,7 +308,8 @@ for p in provinces:
     print(f"  {p['name']:<14} Maize: {p['maize_bushels']:>6} -> Tax ({tax_rate_pct}%): {tax:>5} [{knot_str}]")
 
 empire_total = sum(p["llamas"] for p in provinces)
-print(f"\\nEmpire total llamas: {empire_total:,}")
+print(f"\
+Empire total llamas: {empire_total:,}")
 print(f"Base-20 encoding: [{'-'.join(str(d) for d in to_base(empire_total, 20))}]")`,
       challenge: 'The Inca used a base-10 recording system on quipus but a base-20 administrative grouping. Implement a "dual base" converter that shows the same number in base-10 (quipu knots) and base-20 (administrative groups of pachaka/waranga). Which base is more efficient for encoding large numbers? (Fewer digits = fewer knot clusters.)',
       successHint: 'You implemented positional arithmetic from scratch — the same system underpinning every computer (which uses base-2). Understanding base conversion is fundamental to computer science, and the quipu is one of the most ingenious non-written data storage systems ever invented.',
@@ -365,7 +372,8 @@ for name, alt in waypoints:
     print(f"{name:<34} {alt:>6} {pO2:>5.1f} {sat:>6.1f}% {delivery:>10.2f}x")
 
 # Compare adapted vs unadapted populations
-print("\\n=== Adapted (Andean) vs Unadapted Physiology ===")
+print("\
+=== Adapted (Andean) vs Unadapted Physiology ===")
 print(f"{'Altitude':>8} {'Unadapted Sat%':>15} {'Adapted Sat%':>13} {'Adapted advantage':>18}")
 print("-" * 56)
 
@@ -447,7 +455,8 @@ def greedy_facility_placement(positions, n_facilities):
 
 # Find optimal qollqa placements for different budgets
 print("=== Qollqa (Storehouse) Placement Optimisation ===")
-print(f"Road length: {max(km_positions)} km | {len(road_points)} demand points\\n")
+print(f"Road length: {max(km_positions)} km | {len(road_points)} demand points\
+")
 
 for n_qollqa in [2, 4, 6, 8]:
     facilities = greedy_facility_placement(km_positions, n_qollqa)

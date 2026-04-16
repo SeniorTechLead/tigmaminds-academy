@@ -67,7 +67,9 @@ class HydrologyModel:
 model = HydrologyModel(mean_annual_Q=5000, monsoon_peak_ratio=8, base_flow=800)
 
 print("=== Stage 1: Hydrological Input Module ===")
-print("\\nGenerating discharge time series for a monsoon-fed braided river.\\n")
+print("\
+Generating discharge time series for a monsoon-fed braided river.\
+")
 
 # Show multi-year statistics
 print(f"{'Year':<8} {'Mean Q':<12} {'Peak Q':<12} {'Min Q':<12} {'Volume (km3)':<14} {'Flood Days'}")
@@ -80,7 +82,9 @@ for yr in range(10):
     print(f"{yr+1:<8} {stats['mean']:<12.0f} {stats['peak']:<12.0f} {stats['min']:<12.0f} {stats['total_volume_km3']:<14.1f} {stats['days_above_flood']}")
 
 # Monthly breakdown for year 1
-print("\\n--- Monthly Discharge Profile (Year 1) ---\\n")
+print("\
+--- Monthly Discharge Profile (Year 1) ---\
+")
 Q_yr1 = model.daily_discharge(0)
 months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -96,7 +100,9 @@ for m, dm in zip(months, days_in_month):
     day += dm
 
 # Validate: check for realistic properties
-print("\\n--- Quality Checks ---\\n")
+print("\
+--- Quality Checks ---\
+")
 Q_test = model.daily_discharge(0)
 checks = [
     ("Peak/Base ratio > 5", np.max(Q_test) / np.min(Q_test) > 5, f"{np.max(Q_test)/np.min(Q_test):.1f}"),
@@ -108,7 +114,8 @@ for label, passed, detail in checks:
     status = "PASS" if passed else "FAIL"
     print(f"  [{status}] {label}: {detail}")
 
-print("\\nStage 1 complete: hydrology module ready to drive channel model.")`,
+print("\
+Stage 1 complete: hydrology module ready to drive channel model.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -191,11 +198,14 @@ budget.add_sink("Floodplain deposition", 200, efficiency=0.7)
 budget.add_sink("Bar deposition", 100, efficiency=0.5)
 
 print("=== Stage 2: Sediment Budget Calculator ===")
-print("\\nTracking sediment through a 50 km braided river reach.\\n")
+print("\
+Tracking sediment through a 50 km braided river reach.\
+")
 
 # Single year detailed view
 result = budget.compute_budget()
-print("--- Annual Sediment Budget (Year 1) ---\\n")
+print("--- Annual Sediment Budget (Year 1) ---\
+")
 print("INPUTS:")
 for name, load in result["inputs"].items():
     bar = "#" * int(load / 30)
@@ -203,15 +213,20 @@ for name, load in result["inputs"].items():
     print(f"  {name:<30} {load:>8.0f} kt  ({pct:>5.1f}%)  {bar}")
 print(f"  {'TOTAL INPUT':<30} {result['total_input']:>8.0f} kt")
 
-print("\\nOUTPUTS:")
+print("\
+OUTPUTS:")
 for name, trap in result["outputs"].items():
     print(f"  {name:<30} {trap:>8.0f} kt")
 
-print(f"\\n  In-reach storage change:     {result['storage_change']:>+8.0f} kt", end="")
+print(f"\
+  In-reach storage change:     {result['storage_change']:>+8.0f} kt", end="")
 print(f"  ({'aggradation' if result['storage_change'] > 0 else 'degradation'})")
 
 # Multi-year simulation
-print("\\n\\n--- 20-Year Sediment Budget Trends ---\\n")
+print("\
+\
+--- 20-Year Sediment Budget Trends ---\
+")
 print(f"{'Year':<8} {'Total In (kt)':<16} {'Floodplain':<14} {'Downstream':<14} {'Storage':<12} {'Balance'}")
 print("-" * 70)
 cumulative_storage = 0
@@ -225,14 +240,16 @@ for yr in range(20):
     ds_exp = r["outputs"].get("Downstream export", 0)
     print(f"{yr+1:<8} {r['total_input']:<16.0f} {fp_dep:<14.0f} {ds_exp:<14.0f} {r['storage_change']:<+12.0f} {balance}")
 
-print(f"\\n  Cumulative storage change over 20 years: {cumulative_storage:+.0f} kt")
+print(f"\
+  Cumulative storage change over 20 years: {cumulative_storage:+.0f} kt")
 print(f"  Average annual change: {cumulative_storage/20:+.0f} kt/year")
 if cumulative_storage > 0:
     print(f"  The reach is net AGGRADING (building up) -> channels may become more braided")
 else:
     print(f"  The reach is net DEGRADING (cutting down) -> channels may simplify")
 
-print("\\nStage 2 complete: sediment budget module ready.")`,
+print("\
+Stage 2 complete: sediment budget module ready.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -274,9 +291,11 @@ mean_rate = 15  # meters/year average lateral migration
 rate_std = 8
 
 print("=== Stage 3: Monte Carlo Channel Migration Simulator ===")
-print(f"\\nRunning {num_simulations} simulations of {years}-year channel migration.")
+print(f"\
+Running {num_simulations} simulations of {years}-year channel migration.")
 print(f"Mean migration rate: {mean_rate} m/yr, Std: {rate_std} m/yr")
-print(f"Flood probability: 20%/yr, Flood amplification: 3x\\n")
+print(f"Flood probability: 20%/yr, Flood amplification: 3x\
+")
 
 # Run all simulations
 all_results = np.zeros((num_simulations, years + 1))
@@ -288,7 +307,8 @@ final_positions = all_results[:, -1]
 max_excursions = np.max(np.abs(all_results), axis=1)
 
 # Statistics at key time points
-print("--- Channel Position Statistics Over Time ---\\n")
+print("--- Channel Position Statistics Over Time ---\
+")
 print(f"{'Year':<8} {'Median (m)':<14} {'Mean (m)':<14} {'Std (m)':<12} {'5th %ile':<12} {'95th %ile'}")
 print("-" * 62)
 for yr in [1, 5, 10, 15, 20, 25, 30]:
@@ -296,7 +316,10 @@ for yr in [1, 5, 10, 15, 20, 25, 30]:
     print(f"{yr:<8} {np.median(positions):<14.0f} {np.mean(positions):<14.0f} {np.std(positions):<12.0f} {np.percentile(positions, 5):<12.0f} {np.percentile(positions, 95):.0f}")
 
 # Risk assessment: probability of exceeding certain distances
-print("\\n\\n--- Risk Assessment: Probability of Migration Beyond Threshold ---\\n")
+print("\
+\
+--- Risk Assessment: Probability of Migration Beyond Threshold ---\
+")
 print(f"{'Distance (m)':<16} {'P(exceed) at 10yr':<20} {'P(exceed) at 20yr':<20} {'P(exceed) at 30yr'}")
 print("-" * 72)
 for threshold in [50, 100, 200, 300, 500]:
@@ -306,7 +329,9 @@ for threshold in [50, 100, 200, 300, 500]:
     print(f"{threshold:<16} {p10:<20.1f} {p20:<20.1f} {p30:.1f}%")
 
 # Distribution of final positions
-print("\\n--- Distribution of Final Position (Year 30) ---\\n")
+print("\
+--- Distribution of Final Position (Year 30) ---\
+")
 bins = np.linspace(-600, 600, 13)
 counts, _ = np.histogram(final_positions, bins=bins)
 max_count = max(counts)
@@ -315,11 +340,13 @@ for i in range(len(counts)):
     bar = "#" * int(counts[i] / max(max_count, 1) * 30)
     print(f"  {lo:>+6.0f} to {hi:>+6.0f} m: {counts[i]:>3} sims  {bar}")
 
-print(f"\\n  Positive = rightward migration, Negative = leftward")
+print(f"\
+  Positive = rightward migration, Negative = leftward")
 print(f"  Mean final position: {np.mean(final_positions):+.0f} m (slight rightward bias)")
 print(f"  Max excursion seen:  {np.max(np.abs(final_positions)):.0f} m")
 
-print("\\n--- Key Insight ---")
+print("\
+--- Key Insight ---")
 print("Monte Carlo reveals that a single prediction is meaningless for braided")
 print("rivers. The 95% confidence interval spans hundreds of meters. This is")
 print("why setback distances for buildings must use worst-case scenarios, not")
@@ -352,10 +379,13 @@ ranks = np.arange(1, n_years + 1)
 return_periods = (n_years + 1) / ranks  # Weibull formula
 
 print("=== Stage 4: Flood Return Period Analysis ===")
-print(f"\\nAnalyzing {n_years} years of annual maximum flood discharge.\\n")
+print(f"\
+Analyzing {n_years} years of annual maximum flood discharge.\
+")
 
 # Show the frequency analysis
-print("--- Top 15 Flood Events (ranked by magnitude) ---\\n")
+print("--- Top 15 Flood Events (ranked by magnitude) ---\
+")
 print(f"{'Rank':<8} {'Discharge (m3/s)':<20} {'Return Period (yr)':<20} {'Probability/yr'}")
 print("-" * 62)
 for i in range(15):
@@ -369,14 +399,17 @@ std_Q = np.std(annual_max_Q)
 beta = std_Q * np.sqrt(6) / np.pi
 mu = mean_Q - 0.5772 * beta  # Euler-Mascheroni constant
 
-print(f"\\n--- Gumbel Distribution Fit ---")
+print(f"\
+--- Gumbel Distribution Fit ---")
 print(f"  Mean annual max: {mean_Q:,.0f} m3/s")
 print(f"  Std deviation:   {std_Q:,.0f} m3/s")
 print(f"  Gumbel mu:       {mu:,.0f}")
 print(f"  Gumbel beta:     {beta:,.0f}")
 
 # Predict flood magnitudes for design return periods
-print("\\n--- Design Flood Estimates ---\\n")
+print("\
+--- Design Flood Estimates ---\
+")
 print(f"{'Return Period':<16} {'Discharge (m3/s)':<20} {'Annual Prob':<14} {'Use Case'}")
 print("-" * 68)
 design_periods = [2, 5, 10, 25, 50, 100, 200, 500]
@@ -390,7 +423,10 @@ for T in design_periods:
     print(f"{T:>5} years      {Q_T:<20,.0f} {prob:<14.4f} {use}")
 
 # Flood impact assessment
-print("\\n\\n--- Flood Impact at Different Stages ---\\n")
+print("\
+\
+--- Flood Impact at Different Stages ---\
+")
 print(f"{'Discharge':<16} {'Return Period':<16} {'Water Level':<14} {'Impact'}")
 print("-" * 66)
 
@@ -416,7 +452,9 @@ for Q_val, impact in impacts:
     print(f"{Q_val:>10,}      {T_est:>8.0f} yr       {level_str:<14} {impact}")
 
 # Risk over planning horizon
-print("\\n--- Probability of Exceeding Design Flood Over Planning Horizon ---\\n")
+print("\
+--- Probability of Exceeding Design Flood Over Planning Horizon ---\
+")
 print(f"{'Return Period':<16} {'P in 10yr':<12} {'P in 25yr':<12} {'P in 50yr':<12} {'P in 100yr'}")
 print("-" * 56)
 for T in [10, 25, 50, 100, 500]:
@@ -429,7 +467,8 @@ for T in [10, 25, 50, 100, 500]:
             print(f"     {p_exceed*100:>6.1f}%", end="")
     print()
 
-print("\\nA 100-year flood has a 26% chance of occurring in any 30-year mortgage!")
+print("\
+A 100-year flood has a 26% chance of occurring in any 30-year mortgage!")
 print("Stage 4 complete: flood frequency model ready.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
@@ -510,7 +549,9 @@ indicators = {
 }
 
 print("=== Stage 5: Ecosystem Health Scorecard ===")
-print("\\nAssessing river health from morphology and water quality metrics.\\n")
+print("\
+Assessing river health from morphology and water quality metrics.\
+")
 print(f"{'Indicator':<26} {'Value':<12} {'Optimal Range':<16} {'Score':<8} {'Grade':<12} {'Reason'}")
 print("-" * 100)
 
@@ -523,7 +564,8 @@ for name, data in indicators.items():
     print(f"{name:<26} {val_str:<12} {opt_str:<16} {score:>5.0f}   {grade:<12} {data['why']}")
 
 overall = np.mean(scores)
-print(f"\\n{'OVERALL SCORE':<26} {'':12} {'':16} {overall:>5.0f}")
+print(f"\
+{'OVERALL SCORE':<26} {'':12} {'':16} {overall:>5.0f}")
 
 # Grade
 if overall >= 80:
@@ -538,10 +580,14 @@ elif overall >= 40:
 else:
     grade = "CRITICAL"
     emoji = "Urgent restoration needed"
-print(f"\\n  Overall Grade: {grade} -- {emoji}")
+print(f"\
+  Overall Grade: {grade} -- {emoji}")
 
 # Compare scenarios
-print("\\n\\n--- Scenario Comparison ---\\n")
+print("\
+\
+--- Scenario Comparison ---\
+")
 scenarios = {
     "Natural braided river": {"BI": 5.0, "FP": 0.85, "SB": 1.0, "RV": 0.5, "DO": 7.5, "FV": 6.0},
     "After dam construction":{"BI": 2.0, "FP": 0.3,  "SB": 0.5, "RV": 0.8, "DO": 6.0, "FV": 2.0},
@@ -563,7 +609,8 @@ for scenario, values in scenarios.items():
     avg = np.mean(sc_scores)
     print(f"{scenario:<26} {vals_str} {avg:>5.0f}")
 
-print("\\nStage 5 complete: ecosystem health scoring ready.")`,
+print("\
+Stage 5 complete: ecosystem health scoring ready.")`,
       challenge: "Add a validation step that compares this stage output against an independent data source.",
       successHint: "This stage is complete and ready to feed into the next pipeline stage.",
     },
@@ -589,7 +636,8 @@ print("   Simulated Brahmaputra-type River System")
 print("=" * 65)
 
 # --- Section 1: Hydrology ---
-print("\\n1. HYDROLOGICAL SUMMARY")
+print("\
+1. HYDROLOGICAL SUMMARY")
 print("-" * 40)
 annual_peaks = np.random.lognormal(np.log(25000), 0.4, 30)
 print(f"  Record length:      30 years")
@@ -598,7 +646,8 @@ print(f"  Max recorded:       {np.max(annual_peaks):,.0f} m3/s")
 print(f"  100-yr design flood: {np.percentile(annual_peaks, 99):,.0f} m3/s (est)")
 
 # --- Section 2: Sediment ---
-print("\\n2. SEDIMENT BUDGET")
+print("\
+2. SEDIMENT BUDGET")
 print("-" * 40)
 sed_in = 1200 + np.random.normal(0, 100)
 sed_out = 1050 + np.random.normal(0, 80)
@@ -609,7 +658,8 @@ print(f"  Net storage change: {storage:+,.0f} kt/yr")
 print(f"  Status:             {'Aggrading' if storage > 50 else 'Degrading' if storage < -50 else 'Near equilibrium'}")
 
 # --- Section 3: Channel morphology ---
-print("\\n3. CHANNEL MORPHOLOGY")
+print("\
+3. CHANNEL MORPHOLOGY")
 print("-" * 40)
 bi = 4.2 + np.random.normal(0, 0.5)
 sinuosity = 1.12 + np.random.normal(0, 0.03)
@@ -622,7 +672,8 @@ print(f"  Avg migration rate: {migration:.0f} m/yr")
 print(f"  Channel type:       {'Braided' if bi > 2 and wd_ratio > 40 else 'Transitional'}")
 
 # --- Section 4: Ecosystem ---
-print("\\n4. ECOSYSTEM HEALTH")
+print("\
+4. ECOSYSTEM HEALTH")
 print("-" * 40)
 metrics = {"Braiding Index": (bi, 80), "Connectivity": (0.65, 75),
            "Vegetation": (0.45, 85), "Water Quality": (6.5, 70)}
@@ -636,7 +687,8 @@ overall_eco = np.mean(scores)
 print(f"  Overall health:     {overall_eco:.0f}/100")
 
 # --- Section 5: Risk assessment ---
-print("\\n5. RISK ASSESSMENT (30-year horizon)")
+print("\
+5. RISK ASSESSMENT (30-year horizon)")
 print("-" * 40)
 # Monte Carlo migration
 migrations = np.cumsum(np.random.normal(migration, 10, (500, 30)), axis=1)
@@ -650,7 +702,8 @@ for thresh, use in [(100, "Farmland"), (250, "Roads"), (500, "Buildings"), (1000
     print(f"  {thresh:>4}m ({use:<12})  {p:>6.1f}%              {risk}")
 
 # --- Section 6: Recommendations ---
-print("\\n6. MANAGEMENT RECOMMENDATIONS")
+print("\
+6. MANAGEMENT RECOMMENDATIONS")
 print("-" * 40)
 recommendations = []
 
@@ -670,7 +723,8 @@ for i, rec in enumerate(recommendations, 1):
     print(f"  {i}. {rec}")
 
 # --- Summary ---
-print(f"\\n{'=' * 65}")
+print(f"\
+{'=' * 65}")
 print(f"  ASSESSMENT COMPLETE")
 print(f"  River type: Braided (BI={bi:.1f})")
 print(f"  Health score: {overall_eco:.0f}/100")

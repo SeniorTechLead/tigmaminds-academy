@@ -187,7 +187,8 @@ for name, d_arr in cases:
 
 # Check against limit
 limit_mm = L * 1000 / 360
-print(f"\\nDeflection limit (L/360): {limit_mm:.1f} mm")
+print(f"\
+Deflection limit (L/360): {limit_mm:.1f} mm")
 total_max = np.max(d_total) * 1000
 print(f"Total deflection: {total_max:.1f} mm")
 print(f"Status: {'OK' if total_max <= limit_mm else 'EXCEEDS LIMIT'}")

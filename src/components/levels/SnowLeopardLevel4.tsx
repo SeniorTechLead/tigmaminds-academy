@@ -353,9 +353,11 @@ h = np.linspace(0, 8586, 500)
 
 # --- Altitude markers ---
 markers = [
-    (3000, 'Snow leopard\\nlower range', '#22c55e'),
+    (3000, 'Snow leopard\
+lower range', '#22c55e'),
     (5150, 'Base camp', '#3b82f6'),
-    (5500, 'Snow leopard\\nupper range', '#22c55e'),
+    (5500, 'Snow leopard\
+upper range', '#22c55e'),
     (6800, 'Camp 2', '#f59e0b'),
     (8000, 'Death zone', '#ef4444'),
     (8586, 'Summit', '#a855f7'),
@@ -405,7 +407,8 @@ plt.show()
 print("Annotated Altitude Zones")
 print("=" * 55)
 for alt, label, _ in markers:
-    lbl = label.replace('\\n', ' ')
+    lbl = label.replace('\
+', ' ')
     print(f"  {alt:>5} m  {lbl:<22} "
           f"O2={o2_pp(alt)/133.322:>5.0f} mmHg  "
           f"Boil={boil_pt(alt):.0f} C")`,
@@ -518,7 +521,8 @@ for n, a, m, p, e in zip(names, alts, measured,
           f"{p:>9.0f} Pa {e:>+6.1f}%")
 
 rmse = np.sqrt(np.mean((predicted - measured)**2))
-print(f"\\nRMSE: {rmse:.0f} Pa ({rmse/P0*100:.2f}% of P0)")
+print(f"\
+RMSE: {rmse:.0f} Pa ({rmse/P0*100:.2f}% of P0)")
 print(f"Max error: {max(abs(errors)):.1f}%")`,
       challenge: 'Implement a lapse-rate corrected model that uses T(h) = 288.15 - 0.0065*h instead of constant temperature. The pressure integral becomes P = P0 * (1 - 0.0065*h/288.15)^(g*M/(R*0.0065)). Compare the errors of both models. Which stations show the biggest improvement?',
       successHint: 'You now know exactly how accurate your model is: within 2-4% for most stations, with systematic over-prediction due to the isothermal assumption. A validated model is a trustworthy model.',
@@ -601,7 +605,8 @@ po2_val = o2_pp(user_alt)
 bp = boil_pt(user_alt)
 o2_pct = (po2_val / o2_pp(0)) * 100
 
-print("\\n" + "=" * 55)
+print("\
+" + "=" * 55)
 print("  ALTITUDE EFFECTS CALCULATOR — REPORT")
 print("=" * 55)
 print(f"  Input altitude:    {user_alt:,} m")
@@ -626,7 +631,8 @@ refs = [('Sea level', 0), ('Tawang', 3048),
         ('Snow leopard (high)', 5500),
         ('Base camp', 5150), ('Death zone', 8000),
         ('Summit', 8586)]
-print(f"\\n{'Location':<22} {'Alt':>6} {'O2%':>6} {'Boil':>6}")
+print(f"\
+{'Location':<22} {'Alt':>6} {'O2%':>6} {'Boil':>6}")
 print("-" * 44)
 for name, alt in sorted(refs, key=lambda x: x[1]):
     pct = (o2_pp(alt) / o2_pp(0)) * 100
@@ -637,7 +643,8 @@ for name, alt in sorted(refs, key=lambda x: x[1]):
 o2_drop = o2_pp(0)/133.322 - o2_pp(user_alt)/133.322
 bp_drop = boil_pt(0) - boil_pt(user_alt)
 accl_days = max(0, (user_alt - 3000) / 300) if user_alt > 3000 else 0
-print(f"\\n--- Altitude cost (sea level -> {user_alt} m) ---")
+print(f"\
+--- Altitude cost (sea level -> {user_alt} m) ---")
 print(f"  O2 drop:          {o2_drop:.1f} mmHg")
 print(f"  Boiling pt drop:  {bp_drop:.1f} C")
 print(f"  Est. acclimatize: {accl_days:.0f} days")`,

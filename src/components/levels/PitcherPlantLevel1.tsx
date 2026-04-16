@@ -26,7 +26,9 @@ There are about 800 known carnivorous plant species worldwide. They've evolved i
 import matplotlib.pyplot as plt
 
 # Nutrient levels in different soil types (mg/kg)
-soil_types = ['Garden soil', 'Forest soil', 'Bog soil\\n(pitcher plant)', 'Rocky outcrop\\n(Meghalaya)', 'Sand dune']
+soil_types = ['Garden soil', 'Forest soil', 'Bog soil\
+(pitcher plant)', 'Rocky outcrop\
+(Meghalaya)', 'Sand dune']
 nitrogen = [200, 150, 15, 10, 5]
 phosphorus = [50, 35, 3, 2, 1]
 potassium = [180, 120, 40, 25, 10]
@@ -51,12 +53,17 @@ ax1.tick_params(colors='gray')
 
 # Highlight pitcher plant habitat
 ax1.axvspan(1.5, 3.5, alpha=0.1, color='#ef4444')
-ax1.text(2.5, max(nitrogen) * 0.85, 'Carnivorous plant\\nhabitats', ha='center',
+ax1.text(2.5, max(nitrogen) * 0.85, 'Carnivorous plant\
+habitats', ha='center',
          color='#ef4444', fontsize=9, fontweight='bold')
 
 # Nutrient budget: soil vs insects
 ax2.set_facecolor('#111827')
-sources = ['Soil N\\n(bog)', 'Insect N\\n(per prey)', 'Soil P\\n(bog)', 'Insect P\\n(per prey)']
+sources = ['Soil N\
+(bog)', 'Insect N\
+(per prey)', 'Soil P\
+(bog)', 'Insect P\
+(per prey)']
 soil_vals = [15, 0, 3, 0]
 insect_vals = [0, 8, 0, 1.5]
 colors_bar = ['#22c55e', '#ef4444', '#3b82f6', '#f59e0b']
@@ -117,11 +124,16 @@ ax1.set_aspect('equal')
 
 # Draw pitcher shape (simplified as zones)
 zones = [
-    (10, 12, '#22c55e', 'Lid (operculum)', 'Keeps rain out,\\nattracts from above'),
-    (9, 10, '#ef4444', 'Peristome (rim)', 'Slippery when wet,\\ninsects slide in'),
-    (6, 9, '#f59e0b', 'Waxy zone', 'Loose wax crystals,\\nno grip for insect feet'),
-    (2, 6, '#a855f7', 'Glandular zone', 'Digestive glands,\\nenzyme secretion'),
-    (0, 2, '#3b82f6', 'Digestive pool', 'pH 2-3, protease,\\nlipase, esterase'),
+    (10, 12, '#22c55e', 'Lid (operculum)', 'Keeps rain out,\
+attracts from above'),
+    (9, 10, '#ef4444', 'Peristome (rim)', 'Slippery when wet,\
+insects slide in'),
+    (6, 9, '#f59e0b', 'Waxy zone', 'Loose wax crystals,\
+no grip for insect feet'),
+    (2, 6, '#a855f7', 'Glandular zone', 'Digestive glands,\
+enzyme secretion'),
+    (0, 2, '#3b82f6', 'Digestive pool', 'pH 2-3, protease,\
+lipase, esterase'),
 ]
 
 for y_low, y_high, color, name, func in zones:
@@ -131,7 +143,8 @@ for y_low, y_high, color, name, func in zones:
     rect = plt.Rectangle((-width_low, y_low), width_low * 2, y_high - y_low,
                           facecolor=color, alpha=0.3, edgecolor=color, linewidth=1.5)
     ax1.add_patch(rect)
-    ax1.text(2.2, (y_low + y_high) / 2, f'{name}\\n{func}',
+    ax1.text(2.2, (y_low + y_high) / 2, f'{name}\
+{func}',
              fontsize=7, color=color, va='center')
 
 ax1.set_title('Pitcher Plant Anatomy', color='white', fontsize=13)
@@ -140,7 +153,12 @@ ax1.set_yticks([])
 
 # Right: capture efficiency by zone
 ax2.set_facecolor('#111827')
-zone_names = ['Attraction\\n(nectar)', 'Landing\\n(peristome)', 'Slipping\\n(wax zone)', 'Retention\\n(fluid)', 'Digestion\\n(enzymes)']
+zone_names = ['Attraction\
+(nectar)', 'Landing\
+(peristome)', 'Slipping\
+(wax zone)', 'Retention\
+(fluid)', 'Digestion\
+(enzymes)']
 # Percentage of insects that pass through each stage
 # Funnel model: many attracted, fewer captured
 insects_at_stage = [100, 60, 45, 40, 38]
@@ -158,8 +176,11 @@ for i, count in enumerate(insects_at_stage):
     ax2.text(count + 1, i, f'{count}', va='center', color='white', fontsize=10)
 
 # Loss annotations
-losses = [('40 escape\\nbefore landing', 70), ('15 grip and\\nclimb out', 52),
-          ('5 fly out', 42), ('2 not fully\\ndigested', 39)]
+losses = [('40 escape\
+before landing', 70), ('15 grip and\
+climb out', 52),
+          ('5 fly out', 42), ('2 not fully\
+digested', 39)]
 for (label, x_pos), i in zip(losses, range(len(losses))):
     ax2.annotate(label, xy=(insects_at_stage[i+1], i+0.5),
                  xytext=(x_pos + 15, i + 0.5), color='gray', fontsize=7,
@@ -227,7 +248,8 @@ ax1.plot(ph, pepsin, color='#ef4444', linewidth=2, label='Pepsin (human stomach)
 ax1.plot(ph, trypsin, color='#3b82f6', linewidth=2, label='Trypsin (human intestine)')
 
 ax1.axvspan(2, 3, alpha=0.1, color='#22c55e')
-ax1.text(2.5, 1.05, 'Pitcher\\nfluid', ha='center', color='#22c55e', fontsize=8)
+ax1.text(2.5, 1.05, 'Pitcher\
+fluid', ha='center', color='#22c55e', fontsize=8)
 
 ax1.set_xlabel('pH', color='white')
 ax1.set_ylabel('Relative activity', color='white')
@@ -316,7 +338,8 @@ for (name, rain), color in zip(rainfall_scenarios.items(), colors):
 
 # Carnivory threshold
 ax1.axhline(15, color='#a855f7', linestyle='--', linewidth=1)
-ax1.text(35, 17, 'Carnivory becomes\\nviable below this', color='#a855f7', fontsize=8)
+ax1.text(35, 17, 'Carnivory becomes\
+viable below this', color='#a855f7', fontsize=8)
 
 ax1.set_xlabel('Years', color='white')
 ax1.set_ylabel('Soil nutrient level (% of original)', color='white')
@@ -326,7 +349,10 @@ ax1.tick_params(colors='gray')
 
 # Nutrient budget comparison
 ax2.set_facecolor('#111827')
-habitats = ['Garden\\n(800mm rain)', 'Rainforest\\n(2000mm)', 'Meghalaya\\nbog (11000mm)']
+habitats = ['Garden\
+(800mm rain)', 'Rainforest\
+(2000mm)', 'Meghalaya\
+bog (11000mm)']
 soil_n = [95, 40, 8]
 insect_n = [0, 0, 45]
 recycled_n = [5, 55, 2]
@@ -377,7 +403,12 @@ Each trap evolved independently — convergent evolution solving the same proble
 import matplotlib.pyplot as plt
 
 # Trap type comparison
-traps = ['Pitfall\\n(pitcher)', 'Flypaper\\n(sundew)', 'Snap\\n(Venus)', 'Suction\\n(bladderwort)', 'Lobster-pot\\n(Genlisea)']
+traps = ['Pitfall\
+(pitcher)', 'Flypaper\
+(sundew)', 'Snap\
+(Venus)', 'Suction\
+(bladderwort)', 'Lobster-pot\
+(Genlisea)']
 
 # Metrics
 capture_speed_ms = [np.nan, 60000, 100, 0.5, np.nan]  # ms (NaN = passive)
@@ -413,7 +444,8 @@ ax.set_facecolor('#111827')
 for i, trap in enumerate(traps):
     ax.scatter(energy_cost[i], capture_rate[i], s=200, color=trap_colors[i],
                edgecolor='white', linewidth=1, zorder=5)
-    ax.annotate(trap.replace('\\n', ' '), xy=(energy_cost[i], capture_rate[i]),
+    ax.annotate(trap.replace('\
+', ' '), xy=(energy_cost[i], capture_rate[i]),
                 xytext=(energy_cost[i]+0.3, capture_rate[i]+0.3),
                 color=trap_colors[i], fontsize=7)
 ax.set_xlabel('Energy cost (relative)', color='white')
@@ -445,7 +477,8 @@ for i, trap in enumerate(traps):
               capture_rate[i], 10 - energy_cost[i]]
     values += values[:1]
     ax.plot(angles, values, 'o-', color=trap_colors[i], linewidth=1.5,
-            label=trap.replace('\\n', ' '), markersize=3)
+            label=trap.replace('\
+', ' '), markersize=3)
     ax.fill(angles, values, alpha=0.05, color=trap_colors[i])
 
 ax.set_xticks(angles[:-1])
@@ -493,11 +526,16 @@ import matplotlib.pyplot as plt
 # Extreme adaptations: environmental stress vs adaptation cost vs fitness benefit
 adaptations = [
     ('Normal plant', 1, 1, 8, '#22c55e'),
-    ('Epiphyte\\n(orchid)', 4, 3, 7, '#3b82f6'),
-    ('CAM plant\\n(cactus)', 5, 4, 6, '#f59e0b'),
-    ('Carnivore\\n(pitcher)', 7, 6, 6, '#ef4444'),
-    ('Parasite\\n(dodder)', 8, 7, 5, '#a855f7'),
-    ('Myco-\\nheterotroph', 9, 8, 3, '#6b7280'),
+    ('Epiphyte\
+(orchid)', 4, 3, 7, '#3b82f6'),
+    ('CAM plant\
+(cactus)', 5, 4, 6, '#f59e0b'),
+    ('Carnivore\
+(pitcher)', 7, 6, 6, '#ef4444'),
+    ('Parasite\
+(dodder)', 8, 7, 5, '#a855f7'),
+    ('Myco-\
+heterotroph', 9, 8, 3, '#6b7280'),
 ]
 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 6))
@@ -529,7 +567,8 @@ ax1.text(5, 1, 'Bubble size = fitness in native habitat', color='gray', fontsize
 
 # Trade-off chart
 ax2.set_facecolor('#111827')
-names = [a[0].replace('\\n', ' ') for a in adaptations]
+names = [a[0].replace('\
+', ' ') for a in adaptations]
 fitness_vals = [a[3] for a in adaptations]
 cost_vals = [a[2] for a in adaptations]
 colors_list = [a[4] for a in adaptations]

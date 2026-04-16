@@ -804,10 +804,14 @@ ax1.tick_params(colors='gray')
 ax1.set_title('Predicted Sky', color='white', fontsize=11, fontweight='bold')
 
 # Add condition labels
-info_text = (f"Humidity: {base_humidity}%\\n"
-             f"PM2.5: {base_pm25} ug/m3\\n"
-             f"Alt: {base_altitude}m\\n"
-             f"Sun: {base_angle} deg\\n"
+info_text = (f"Humidity: {base_humidity}%\
+"
+             f"PM2.5: {base_pm25} ug/m3\
+"
+             f"Alt: {base_altitude}m\
+"
+             f"Sun: {base_angle} deg\
+"
              f"Cloud: {base_cloud*100:.0f}%")
 ax1.text(0.5, 0.02, info_text, transform=ax1.transAxes, color='white',
          fontsize=8, ha='center', va='bottom',

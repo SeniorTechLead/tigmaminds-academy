@@ -197,12 +197,18 @@ import matplotlib.pyplot as plt
 
 # Famous structures
 structures = [
-    ("Great Pyramid\\n(2560 BCE)", 146, 230, "Stone"),
-    ("Babel (est.)\\n(~600 BCE)", 91, 91, "Mud brick"),
-    ("Eiffel Tower\\n(1889)", 330, 125, "Iron"),
-    ("Empire State\\n(1931)", 443, 129, "Steel"),
-    ("Burj Khalifa\\n(2010)", 828, 73, "Steel+Conc"),
-    ("Jeddah Tower\\n(planned)", 1000, 80, "Steel+Conc"),
+    ("Great Pyramid\
+(2560 BCE)", 146, 230, "Stone"),
+    ("Babel (est.)\
+(~600 BCE)", 91, 91, "Mud brick"),
+    ("Eiffel Tower\
+(1889)", 330, 125, "Iron"),
+    ("Empire State\
+(1931)", 443, 129, "Steel"),
+    ("Burj Khalifa\
+(2010)", 828, 73, "Steel+Conc"),
+    ("Jeddah Tower\
+(planned)", 1000, 80, "Steel+Conc"),
 ]
 
 names = [s[0] for s in structures]

@@ -141,7 +141,8 @@ ax.legend(fontsize=8)
 # Panel 3: Test case summary
 ax = axes[1, 0]
 ax.set_facecolor('#111827'); ax.tick_params(colors='gray')
-test_labels = [f"{tc.material}\\n{tc.T_material}°C, {tc.contact_time}s" for tc in test_cases]
+test_labels = [f"{tc.material}\
+{tc.T_material}°C, {tc.contact_time}s" for tc in test_cases]
 test_T_int = []
 for tc in test_cases:
     e_m, e_s = tc.compute_effusivities()
@@ -556,7 +557,8 @@ print("Arrhenius burn prediction results:")
 print(f"  Firewalking (charcoal, 0.4s):")
 for d_mm, omega in omega_at_depths.items():
     print(f"    {d_mm} mm depth: Ω = {omega[-1]:.2e} ({'BURN' if omega[-1] >= 1 else 'safe'})")
-print(f"\\nMaterial comparison (0.5s contact):")
+print(f"\
+Material comparison (0.5s contact):")
 for mat, omega in zip(mat_names, mat_omega):
     severity = 'NONE' if omega < 0.3 else '1st' if omega < 1 else '2nd' if omega < 3 else '3rd'
     print(f"  {mat}: Ω = {omega:.2e} -> {severity} degree")`,
@@ -1238,13 +1240,15 @@ print("=" * 65)
 print("THERMAL SAFETY CALCULATOR — COMPLETE REPORT")
 print("=" * 65)
 for r in results_all:
-    print(f"\\n{r['scenario_name']}:")
+    print(f"\
+{r['scenario_name']}:")
     print(f"  {r['material']} at {r['T_material']}°C, {r['contact_time']}s contact")
     print(f"  Interface: {r['T_interface']:.1f}°C | Peak skin: {r['peak_skin_temp']:.1f}°C")
     print(f"  Damage: Ω = {r['omega']:.4f} | Severity: {r['severity']}")
     print(f"  Verdict: {r['verdict']} (margin = {r['safety_margin']:.3f})")
 
-print(f"\\n{'='*65}")
+print(f"\
+{'='*65}")
 print(f"Calculator ready for deployment.")
 print(f"Materials: {len(calc.MATERIALS)} | Validated against Henriques-Moritz data")
 print(f"Skills demonstrated: thermal physics, numerical methods, burn physiology,")

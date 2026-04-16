@@ -105,7 +105,11 @@ ax.set_ylim(0)
 
 # Plot 4: Wing loading comparison
 ax = axes[1, 1]
-animals = ['Flying\\nsquirrel', 'Sugar\\nglider', 'Colugo', 'Flying\\nfish', 'Hang\\nglider', 'Albatross']
+animals = ['Flying\
+squirrel', 'Sugar\
+glider', 'Colugo', 'Flying\
+fish', 'Hang\
+glider', 'Albatross']
 wing_loading = [25, 20, 15, 80, 30, 140]  # N/m^2 approximate
 colors = ['#22c55e', '#3b82f6', '#a855f7', '#f59e0b', '#6b7280', '#ef4444']
 bars = ax.bar(animals, wing_loading, color=colors, edgecolor='none', width=0.6)
@@ -238,11 +242,18 @@ ax.invert_yaxis()
 # Plot 4: Summary table as text
 ax = axes[1, 1]
 ax.axis('off')
-table_text = "Glider Performance Summary\\n" + "=" * 40 + "\\n\\n"
+table_text = "Glider Performance Summary\
+" + "=" * 40 + "\
+\
+"
 for name, best_v, best_ld in best_ld_data:
-    table_text += f"{name}:\\n"
-    table_text += f"  Best L/D = {best_ld:.1f} at {best_v:.1f} m/s\\n"
-    table_text += f"  Range from 20m = {20 * best_ld:.0f} m\\n\\n"
+    table_text += f"{name}:\
+"
+    table_text += f"  Best L/D = {best_ld:.1f} at {best_v:.1f} m/s\
+"
+    table_text += f"  Range from 20m = {20 * best_ld:.0f} m\
+\
+"
 ax.text(0.05, 0.95, table_text, transform=ax.transAxes, fontsize=10,
         verticalalignment='top', color='white', fontfamily='monospace')
 
@@ -563,7 +574,12 @@ ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')
 
 # Plot 3: Final phenotype comparison (radar-style as bar chart)
 ax = axes[2]
-traits = ['Membrane\\narea', 'Body\\nmass', 'L/D\\nratio', 'Nocturnal\\nadapt.', 'Tail\\nlength']
+traits = ['Membrane\
+area', 'Body\
+mass', 'L/D\
+ratio', 'Nocturnal\
+adapt.', 'Tail\
+length']
 # Normalized trait values (0-1) for converged gliders
 squirrel_traits = [0.7, 0.3, 0.5, 0.9, 0.8]
 sugar_glider_traits = [0.65, 0.25, 0.5, 0.85, 0.75]
