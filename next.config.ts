@@ -15,6 +15,20 @@ const nextConfig: NextConfig = {
       { source: '/reference/:slug', destination: '/library/:slug', permanent: true },
     ];
   },
+  async headers() {
+    return [
+      {
+        // All page routes — never cache HTML at the CDN edge.
+        // Static assets (_next/static) are content-hashed and cached separately by Vercel.
+        source: '/((?!_next/static|_next/image|content/|favicon).*)',
+        headers: [
+          { key: 'Cache-Control', value: 'no-store, max-age=0, s-maxage=0' },
+          { key: 'CDN-Cache-Control', value: 'no-store' },
+          { key: 'Surrogate-Control', value: 'no-store' },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
