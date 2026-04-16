@@ -60,7 +60,7 @@ export default function StdDevStepsDiagram() {
             className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
               step === s.key
                 ? 'bg-blue-600 text-white'
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'
             }`}
           >
             {s.label}
@@ -75,7 +75,7 @@ export default function StdDevStepsDiagram() {
         role="img"
         aria-label="Standard deviation step-by-step computation"
       >
-        <rect width={W} height={H} rx="8" className="fill-slate-900" />
+        <rect width={W} height={H} rx="8" className="fill-white dark:fill-slate-900" />
 
         {/* Number line */}
         <line x1={sx(nlMin)} y1={nlY} x2={sx(nlMax)} y2={nlY} stroke="#475569" strokeWidth="1.5" />

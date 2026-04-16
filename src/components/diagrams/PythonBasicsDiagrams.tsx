@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 const BOX = 'rounded-lg border-2 px-3 py-2 text-center font-mono text-sm transition-all duration-500';
-const DARK_BG = 'bg-gray-900';
+const DARK_BG = 'bg-white dark:bg-gray-900';
 const LABEL = 'text-[10px] font-bold uppercase tracking-wider';
 
 /* ════════════════════════════════════════════
@@ -42,15 +42,15 @@ export function PrintDiagram() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Python Terminal</span>
-        <button onClick={reset} className="text-[10px] text-gray-500 hover:text-white">Replay</button>
+        <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>Python Terminal</span>
+        <button onClick={reset} className="text-[10px] text-gray-500 hover:text-gray-900 dark:hover:text-white">Replay</button>
       </div>
       <div className="font-mono text-sm space-y-1 min-h-[120px]">
         {outputs.map((out, i) => (
           <div key={i}>
             <span className="text-gray-500">{'>>> '}</span>
             <span className="text-emerald-400">{lines[i].code}</span>
-            <div className="text-white pl-4">{out}</div>
+            <div className="text-gray-900 dark:text-white pl-4">{out}</div>
           </div>
         ))}
         {step < lines.length && (
@@ -118,11 +118,11 @@ export function VariableDiagram() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Memory — Labeled Boxes</span>
+        <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>Memory — Labeled Boxes</span>
         <div className="flex gap-1">
           {steps.map((_, i) => (
             <button key={i} onClick={() => setStep(i)}
-              className={`w-6 h-6 rounded text-xs font-bold ${i === step ? 'bg-emerald-600 text-white' : 'bg-gray-800 text-gray-500 hover:text-white'}`}>
+              className={`w-6 h-6 rounded text-xs font-bold ${i === step ? 'bg-emerald-600 text-white' : 'bg-gray-200 dark:bg-gray-800 text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>
               {i + 1}
             </button>
           ))}
@@ -130,7 +130,7 @@ export function VariableDiagram() {
       </div>
 
       {/* Current line of code */}
-      <div className="bg-gray-800 rounded-lg px-3 py-1.5 mb-3 text-center">
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-1.5 mb-3 text-center">
         <code className="text-sm text-emerald-400 font-mono">{steps[step].code}</code>
       </div>
 
@@ -141,7 +141,7 @@ export function VariableDiagram() {
             className={`${BOX} ${v.color} min-w-[90px] transition-all duration-500 ${
               (step < 3 && i === newest) || (step === 3 && v.name === 'age') ? 'scale-105 ring-1 ring-white/30' : ''
             }`}>
-            <div className="text-[10px] text-gray-400 mb-0.5">{v.name}</div>
+            <div className="text-[10px] text-gray-500 dark:text-gray-400 mb-0.5">{v.name}</div>
             <div className="text-lg font-bold mb-0.5">{v.value}</div>
             <div className={`text-[9px] font-mono ${v.color.includes('blue') ? 'text-blue-500' : v.color.includes('emerald') ? 'text-emerald-500' : v.color.includes('purple') ? 'text-purple-500' : 'text-amber-500'}`}>
               {v.type}
@@ -150,7 +150,7 @@ export function VariableDiagram() {
         ))}
       </div>
 
-      <p className="text-xs text-gray-400 text-center mt-3">{steps[step].caption}</p>
+      <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-3">{steps[step].caption}</p>
     </div>
   );
 }
@@ -169,7 +169,7 @@ export function ListDiagram() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>animals = ["elephant", "tiger", "rhino"]</span>
+        <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>animals = ["elephant", "tiger", "rhino"]</span>
         <button onClick={() => { setShowAppend(!showAppend); setHighlight(null); }}
           className="text-[10px] text-gray-500 hover:text-emerald-400">{showAppend ? 'Reset' : '.append("deer")'}</button>
       </div>
@@ -180,7 +180,7 @@ export function ListDiagram() {
             className={`${BOX} min-w-[80px] cursor-pointer ${
               highlight === i ? 'border-amber-400 bg-amber-900/30 text-amber-300 scale-110' :
               i === allItems.length - 1 && showAppend ? 'border-emerald-400 bg-emerald-900/30 text-emerald-300' :
-              'border-gray-600 bg-gray-800 text-white'
+              'border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white'
             }`}>
             <div className="text-[9px] text-gray-500">[{i}]</div>
             <div className="text-sm font-bold">"{val}"</div>
@@ -188,7 +188,7 @@ export function ListDiagram() {
         ))}
       </div>
 
-      <p className="text-xs text-gray-400 text-center mt-3">
+      <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-3">
         {highlight !== null
           ? `animals[${highlight}] → "${allItems[highlight]}" ${highlight === 0 ? '— index starts at 0, not 1!' : ''}`
           : showAppend ? `.append("deer") added a 4th item — len(animals) is now ${allItems.length}` : 'Click any box to see its index'}
@@ -224,9 +224,9 @@ export function LoopDiagram() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>for animal in animals:</span>
+        <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>for animal in animals:</span>
         <button onClick={run} disabled={running}
-          className={`text-[10px] px-2 py-1 rounded ${running ? 'text-gray-600' : 'text-emerald-400 hover:bg-emerald-900/30'}`}>
+          className={`text-[10px] px-2 py-1 rounded ${running ? 'text-gray-400 dark:text-gray-600' : 'text-emerald-400 hover:bg-emerald-900/30'}`}>
           {running ? 'Running...' : '▶ Run loop'}
         </button>
       </div>
@@ -237,7 +237,7 @@ export function LoopDiagram() {
           <div key={a} className={`${BOX} min-w-[80px] transition-all duration-300 ${
             i === current ? 'border-amber-400 bg-amber-900/40 text-amber-300 scale-110 shadow-lg shadow-amber-900/50' :
             i < current ? 'border-emerald-600 bg-emerald-900/20 text-emerald-400' :
-            'border-gray-700 bg-gray-800 text-gray-500'
+            'border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-gray-500'
           }`}>
             <div className="text-[9px] text-gray-500">[{i}]</div>
             <div className="text-sm font-bold">"{a}"</div>
@@ -246,18 +246,18 @@ export function LoopDiagram() {
       </div>
 
       {/* Terminal output */}
-      <div className="bg-gray-800 rounded-lg p-2 font-mono text-xs min-h-[60px]">
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-2 font-mono text-xs min-h-[60px]">
         <div className="text-gray-500 mb-1">output:</div>
         {outputs.map((o, i) => (
-          <div key={i} className="text-white transition-all duration-300">{o}</div>
+          <div key={i} className="text-gray-900 dark:text-white transition-all duration-300">{o}</div>
         ))}
         {current === -1 && !running && outputs.length === 0 && (
-          <div className="text-gray-600 italic">Press Run to step through the loop</div>
+          <div className="text-gray-400 dark:text-gray-600 italic">Press Run to step through the loop</div>
         )}
       </div>
 
       {current >= 0 && (
-        <p className="text-xs text-gray-400 text-center mt-2">
+        <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
           iteration {current + 1}: <span className="text-amber-300 font-mono">animal = "{animals[current]}"</span> → <span className="text-emerald-300 font-mono">print("{animals[current]}")</span>
         </p>
       )}
@@ -287,18 +287,18 @@ export function ConditionalDiagram() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>if / elif / else</span>
+        <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>if / elif / else</span>
         <div className="flex items-center gap-2">
           <span className="text-xs text-gray-500">temperature =</span>
           <input type="range" min={0} max={50} value={temp} onChange={e => setTemp(+e.target.value)}
             className="w-24 accent-emerald-500" />
-          <span className="text-sm font-mono text-white w-8">{temp}°</span>
+          <span className="text-sm font-mono text-gray-900 dark:text-white w-8">{temp}°</span>
         </div>
       </div>
 
       <div className="space-y-2">
         {branches.map((b, i) => (
-          <div key={i} className={`${BOX} text-left transition-all duration-300 ${b.active ? b.color + ' scale-[1.02]' : 'border-gray-700 bg-gray-800/50 text-gray-600'}`}>
+          <div key={i} className={`${BOX} text-left transition-all duration-300 ${b.active ? b.color + ' scale-[1.02]' : 'border-gray-300 dark:border-gray-700 bg-gray-100/50 dark:bg-gray-800/50 text-gray-400 dark:text-gray-600'}`}>
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono">
                 <span className="text-purple-400">{b.keyword}</span>{b.cond ? ` ${b.cond}:` : ':'}
@@ -349,8 +349,8 @@ export function FunctionDiagram() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>Function Call</span>
-        <span className="text-[10px] text-gray-600 font-mono">def greet(name):</span>
+        <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>Function Call</span>
+        <span className="text-[10px] text-gray-400 dark:text-gray-600 font-mono">def greet(name):</span>
       </div>
 
       <div className="flex items-center justify-center gap-3">
@@ -360,28 +360,28 @@ export function FunctionDiagram() {
           <div className={`${BOX} min-w-[80px] transition-all duration-300 ${
             phase === 'calling' ? 'border-blue-400 bg-blue-900/40 text-blue-300 scale-105' : 'border-blue-500 bg-blue-900/30 text-blue-300'
           }`}>
-            <div className="text-[10px] text-gray-400">name</div>
+            <div className="text-[10px] text-gray-500 dark:text-gray-400">name</div>
             <div className="font-bold">"{names[nameIdx]}"</div>
           </div>
         </div>
 
-        <div className={`text-xl transition-colors duration-300 ${phase === 'calling' ? 'text-blue-400' : 'text-gray-600'}`}>→</div>
+        <div className={`text-xl transition-colors duration-300 ${phase === 'calling' ? 'text-blue-400' : 'text-gray-400 dark:text-gray-600'}`}>→</div>
 
         {/* Function box */}
         <div className={`${BOX} min-w-[140px] transition-all duration-300 ${
           phase === 'inside' ? 'border-emerald-400 bg-emerald-900/40 text-emerald-300 scale-105' : 'border-emerald-500 bg-emerald-900/30 text-emerald-300'
         }`}>
-          <div className="text-[10px] text-gray-400 mb-1">greet()</div>
+          <div className="text-[10px] text-gray-500 dark:text-gray-400 mb-1">greet()</div>
           <div className="text-[9px] text-gray-500 font-mono">print("Hello, " + name + "!")</div>
         </div>
 
-        <div className={`text-xl transition-colors duration-300 ${phase === 'output' ? 'text-amber-400' : 'text-gray-600'}`}>→</div>
+        <div className={`text-xl transition-colors duration-300 ${phase === 'output' ? 'text-amber-400' : 'text-gray-400 dark:text-gray-600'}`}>→</div>
 
         {/* Output */}
         <div className="text-center">
           <div className="text-[10px] text-gray-500 mb-1">output</div>
           <div className={`${BOX} min-w-[100px] transition-all duration-300 ${
-            phase === 'output' ? 'border-amber-400 bg-amber-900/40 text-amber-300 scale-105' : 'border-gray-700 bg-gray-800 text-gray-500'
+            phase === 'output' ? 'border-amber-400 bg-amber-900/40 text-amber-300 scale-105' : 'border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-gray-500'
           }`}>
             <div className="text-sm font-bold">{outputText || '...'}</div>
           </div>
@@ -390,7 +390,7 @@ export function FunctionDiagram() {
 
       <div className="mt-3 text-center">
         <button onClick={call} disabled={phase !== 'idle'}
-          className={`text-xs px-4 py-1.5 rounded font-mono ${phase === 'idle' ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-gray-800 text-gray-500'}`}>
+          className={`text-xs px-4 py-1.5 rounded font-mono ${phase === 'idle' ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-gray-200 dark:bg-gray-800 text-gray-500'}`}>
           {phase === 'idle' ? `greet("${names[nameIdx]}")` : phase === 'calling' ? 'Passing argument...' : phase === 'inside' ? 'Running body...' : 'Printed!'}
         </button>
       </div>
@@ -432,12 +432,12 @@ export function NumpyDiagram() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={`${LABEL} text-gray-500`}>{mode === 'loop' ? 'Loop (one at a time)' : 'Numpy (all at once)'}</span>
+        <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>{mode === 'loop' ? 'Loop (one at a time)' : 'Numpy (all at once)'}</span>
         <div className="flex gap-2">
           <button onClick={switchMode} className="text-[10px] text-blue-400 hover:text-blue-300">
             Switch to {mode === 'loop' ? 'numpy' : 'loop'}
           </button>
-          <button onClick={() => setStep(0)} className="text-[10px] text-gray-500 hover:text-white">Reset</button>
+          <button onClick={() => setStep(0)} className="text-[10px] text-gray-500 hover:text-gray-900 dark:hover:text-white">Reset</button>
         </div>
       </div>
 
@@ -447,7 +447,7 @@ export function NumpyDiagram() {
           <div key={i} className={`${BOX} w-12 transition-all duration-300 ${
             i < processed
               ? 'border-emerald-500 bg-emerald-900/30 text-emerald-300'
-              : 'border-gray-700 bg-gray-800 text-gray-500'
+              : 'border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-gray-500'
           }`}>
             {val}
           </div>
@@ -462,7 +462,7 @@ export function NumpyDiagram() {
           <div key={i} className={`${BOX} w-12 transition-all duration-300 ${
             i < processed
               ? 'border-amber-500 bg-amber-900/30 text-amber-300'
-              : 'border-gray-700 bg-gray-800 text-gray-600'
+              : 'border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600'
           }`}>
             {i < processed ? val - 10 : '?'}
           </div>
@@ -471,7 +471,7 @@ export function NumpyDiagram() {
 
       <div className="mt-3 text-center">
         <button onClick={advance} disabled={processed >= data.length}
-          className={`text-xs px-3 py-1 rounded ${processed >= data.length ? 'text-gray-600 bg-gray-800' : 'text-white bg-emerald-600 hover:bg-emerald-700'}`}>
+          className={`text-xs px-3 py-1 rounded ${processed >= data.length ? 'text-gray-400 dark:text-gray-600 bg-gray-200 dark:bg-gray-800' : 'text-white bg-emerald-600 hover:bg-emerald-700'}`}>
           {processed >= data.length ? (mode === 'loop' ? `Done (${data.length} steps)` : 'Done (1 step!)') : mode === 'loop' ? `Process [${step}]` : 'Process ALL'}
         </button>
       </div>
@@ -517,16 +517,16 @@ export function PlotDiagram() {
   return (
     <div className={`${DARK_BG} rounded-xl p-4 max-w-sm mx-auto my-4`}>
       <div className="flex items-center justify-between mb-2">
-        <span className={`${LABEL} text-gray-500`}>plt.plot(x, y)</span>
-        <button onClick={reset} className="text-[10px] text-gray-500 hover:text-white">Replay</button>
+        <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>plt.plot(x, y)</span>
+        <button onClick={reset} className="text-[10px] text-gray-500 hover:text-gray-900 dark:hover:text-white">Replay</button>
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
-        <rect width={W} height={H} rx="4" fill="#111827" />
+        <rect width={W} height={H} rx="4" className="fill-white dark:fill-gray-900" />
 
         {/* Title */}
         {showLabels && (
-          <text x={W / 2} y={16} textAnchor="middle" fill="#e5e7eb" fontSize="10" fontFamily="system-ui" fontWeight="bold">
+          <text x={W / 2} y={16} textAnchor="middle" className="fill-gray-700 dark:fill-gray-300" fontSize="10" fontFamily="system-ui" fontWeight="bold">
             Annual Honey Production
           </text>
         )}
@@ -534,7 +534,7 @@ export function PlotDiagram() {
         {/* Grid lines */}
         {[0, 10, 20, 30].map(y => (
           <g key={y}>
-            <line x1={PAD} y1={scaleY(y)} x2={W - PAD} y2={scaleY(y)} stroke="#1f2937" strokeWidth="1" />
+            <line x1={PAD} y1={scaleY(y)} x2={W - PAD} y2={scaleY(y)} className="stroke-gray-200 dark:stroke-gray-800" strokeWidth="1" />
             <text x={PAD - 4} y={scaleY(y) + 3} textAnchor="end" fill="#4b5563" fontSize="8" fontFamily="system-ui">{y}</text>
           </g>
         ))}
@@ -569,7 +569,7 @@ export function PlotDiagram() {
         ))}
       </svg>
 
-      <p className="text-xs text-gray-500 text-center mt-1">
+      <p className="text-xs text-gray-500 dark:text-gray-500 text-center mt-1">
         {!showLabels ? 'Plotting points...' : 'plt.xlabel(), plt.ylabel(), plt.title() — always label your plots'}
       </p>
     </div>

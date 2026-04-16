@@ -51,7 +51,7 @@ export default function PWMBrightnessDiagram() {
   }
 
   return (
-    <div className="w-full bg-gray-900 rounded-xl p-6 text-white font-mono select-none">
+    <div className="w-full bg-white dark:bg-gray-900 rounded-xl p-6 text-gray-900 dark:text-white font-mono select-none">
       <h3 className="text-center text-lg font-bold text-amber-400 mb-4">
         Analog Output with PWM
       </h3>
@@ -78,13 +78,13 @@ export default function PWMBrightnessDiagram() {
             </div>
           </div>
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             Brightness: <span className="text-amber-400 font-bold">{dutyCycle}%</span>
           </p>
 
           {/* Slider */}
           <div className="w-full max-w-xs">
-            <label className="text-xs text-gray-400 block mb-1 text-center">
+            <label className="text-xs text-gray-500 dark:text-gray-400 block mb-1 text-center">
               PWM Value: <span className="text-amber-400 font-bold">{pwmValue}</span> / 255
             </label>
             <input
@@ -95,7 +95,7 @@ export default function PWMBrightnessDiagram() {
               onChange={e => { setBreathing(false); setPwmValue(Number(e.target.value)); }}
               className="w-full accent-amber-400 cursor-pointer"
             />
-            <div className="flex justify-between text-[10px] text-gray-500">
+            <div className="flex justify-between text-[10px] text-gray-500 dark:text-gray-500">
               <span>0 (off)</span>
               <span>127 (half)</span>
               <span>255 (full)</span>
@@ -110,8 +110,8 @@ export default function PWMBrightnessDiagram() {
                 onClick={() => { setBreathing(false); setPwmValue(v); }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                   pwmValue === v && !breathing
-                    ? 'bg-amber-600 ring-2 ring-amber-400'
-                    : 'bg-gray-700 hover:bg-gray-600'
+                    ? 'bg-amber-600 ring-2 ring-amber-400 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300'
                 }`}
               >
                 {v}
@@ -133,8 +133,8 @@ export default function PWMBrightnessDiagram() {
 
         {/* Right: PWM waveform */}
         <div className="flex flex-col items-center">
-          <p className="text-xs text-gray-400 mb-2 text-center">PWM Waveform — what the pin actually does:</p>
-          <div className="bg-gray-950 rounded-lg p-4 border border-gray-700 w-full">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 text-center">PWM Waveform — what the pin actually does:</p>
+          <div className="bg-gray-50 dark:bg-gray-950 rounded-lg p-4 border border-gray-300 dark:border-gray-700 w-full">
             <svg viewBox={`-10 -10 ${waveWidth + 20} ${waveHeight + 30}`} className="w-full h-auto">
               {/* Grid lines */}
               <line x1="0" y1="5" x2={waveWidth} y2="5" stroke="#374151" strokeWidth="0.5" strokeDasharray="4 4" />
@@ -163,16 +163,16 @@ export default function PWMBrightnessDiagram() {
           </div>
 
           {/* Visual explanation */}
-          <div className="mt-3 bg-gray-800 rounded-lg p-3 w-full">
+          <div className="mt-3 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 w-full">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-4 h-4 bg-amber-400 rounded-sm" />
-              <span className="text-xs text-gray-300">= pin is HIGH (5V)</span>
+              <span className="text-xs text-gray-600 dark:text-gray-300">= pin is HIGH (5V)</span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-4 h-4 bg-gray-700 rounded-sm border border-gray-600" />
-              <span className="text-xs text-gray-300">= pin is LOW (0V)</span>
+              <div className="w-4 h-4 bg-gray-200 dark:bg-gray-700 rounded-sm border border-gray-300 dark:border-gray-600" />
+              <span className="text-xs text-gray-600 dark:text-gray-300">= pin is LOW (0V)</span>
             </div>
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
               At {dutyCycle}%, the pin is ON for {dutyCycle}% of each cycle and OFF for {100 - dutyCycle}%.
               {pwmValue < 128 ? ' Low brightness — mostly OFF.' : pwmValue > 200 ? ' High brightness — mostly ON.' : ' Medium brightness — about half and half.'}
             </p>
@@ -181,7 +181,7 @@ export default function PWMBrightnessDiagram() {
       </div>
 
       {/* Live code */}
-      <div className="bg-gray-950 rounded-lg p-4 border border-gray-700 text-sm">
+      <div className="bg-gray-50 dark:bg-gray-950 rounded-lg p-4 border border-gray-300 dark:border-gray-700 text-sm">
         <p className="text-gray-500 mb-2">// Arduino Code:</p>
         <pre className="text-green-300 whitespace-pre-wrap leading-relaxed">
 {breathing ? `// Breathing effect — smooth fade in and out
@@ -199,7 +199,7 @@ analogWrite(9, ${pwmValue});  // brightness = ${pwmValue}/255 = ${dutyCycle}%`}
         </pre>
       </div>
 
-      <div className="mt-4 bg-gray-800 rounded-lg p-3 text-sm text-gray-300 leading-relaxed">
+      <div className="mt-4 bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
         <p className="text-amber-400 font-bold mb-1">Key idea:</p>
         <p><code className="text-green-400">analogWrite</code> does not output a real voltage between 0V and 5V. Instead it switches the pin on and off <span className="text-amber-400">very fast</span> (about 490 times per second). Writing <code className="text-green-400">analogWrite(9, {pwmValue})</code> means the pin is ON {dutyCycle}% of the time. Your eye sees this rapid blinking as a dimmer light. This technique is called <span className="text-amber-400 font-bold">PWM</span> — Pulse Width Modulation.</p>
       </div>
