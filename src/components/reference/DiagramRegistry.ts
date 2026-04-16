@@ -931,6 +931,15 @@ const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = 
   BulkheadDiagram: () => import('../diagrams/BulkheadDiagram'),
   DoseResponseDiagram: () => import('../diagrams/DoseResponseDiagram'),
   GasExpansionDiagram: () => import('../diagrams/GasExpansionDiagram'),
+  // Human Health & Nutrition diagrams
+  MacronutrientPlateDiagram: () => import('../diagrams/MacronutrientPlateDiagram'),
+  EnergyBalanceDiagram: () => import('../diagrams/EnergyBalanceDiagram'),
+  GlycaemicIndexDiagram: () => import('../diagrams/GlycaemicIndexDiagram'),
+  ProteinComplementDiagram: () => import('../diagrams/ProteinComplementDiagram'),
+  MetabolicPathwayDiagram: () => import('../diagrams/MetabolicPathwayDiagram'),
+  ImmuneResponseDiagram: () => import('../diagrams/ImmuneResponseDiagram'),
+  SleepCycleDiagram: () => import('../diagrams/SleepCycleDiagram'),
+  BMRCalculatorDiagram: () => import('../diagrams/BMRCalculatorDiagram'),
 };
 
 const cache: Record<string, ComponentType<any>> = {};
