@@ -102,7 +102,41 @@ Power budget: 6 LEDs at ~15 mA each = 90 mA total, well within the Arduino's 200
       checkQuestion: 'Why do we need current-limiting resistors between the Arduino pins and the LEDs?',
       checkAnswer: 'An LED has very low forward resistance once its threshold voltage is reached (~2V). Without a resistor, current spikes to hundreds of milliamps, destroying the LED and possibly the Arduino pin (rated 40 mA max). A 220-ohm resistor limits current to (5V - 2V) / 220 = ~13.6 mA — bright enough to see, safe for hardware.',
       codeIntro: 'Set up 6 LEDs on PWM pins and verify they all work with a startup sweep.',
-      code: `// Firefly Capstone - System Setup\\n// 6 LEDs on PWM pins in ring topology\\n\\nvoid setup() {\\n  pinMode(2, OUTPUT);\\n  pinMode(3, OUTPUT);\\n  pinMode(4, OUTPUT);\\n  pinMode(5, OUTPUT);\\n  pinMode(6, OUTPUT);\\n  pinMode(7, OUTPUT);\\n  Serial.println("=== Firefly Ring: 6 LEDs ===");\\n  Serial.println("Self-test: sweeping all LEDs...");\\n}\\n\\nvoid loop() {\\n  int pins[] = {2, 3, 4, 5, 6, 7};\\n\\n  for (int i = 0; i < 6; i++) {\\n    analogWrite(pins[i], 255);\\n    delay(150);\\n    analogWrite(pins[i], 0);\\n  }\\n\\n  for (int i = 0; i < 6; i++) {\\n    analogWrite(pins[i], 180);\\n  }\\n  delay(500);\\n\\n  for (int i = 0; i < 6; i++) {\\n    analogWrite(pins[i], 0);\\n  }\\n  delay(300);\\n\\n  Serial.println("Ring test complete");\\n}`,
+      code: `// Firefly Capstone - System Setup\
+// 6 LEDs on PWM pins in ring topology\
+\
+void setup() {\
+  pinMode(2, OUTPUT);\
+  pinMode(3, OUTPUT);\
+  pinMode(4, OUTPUT);\
+  pinMode(5, OUTPUT);\
+  pinMode(6, OUTPUT);\
+  pinMode(7, OUTPUT);\
+  Serial.println("=== Firefly Ring: 6 LEDs ===");\
+  Serial.println("Self-test: sweeping all LEDs...");\
+}\
+\
+void loop() {\
+  int pins[] = {2, 3, 4, 5, 6, 7};\
+\
+  for (int i = 0; i < 6; i++) {\
+    analogWrite(pins[i], 255);\
+    delay(150);\
+    analogWrite(pins[i], 0);\
+  }\
+\
+  for (int i = 0; i < 6; i++) {\
+    analogWrite(pins[i], 180);\
+  }\
+  delay(500);\
+\
+  for (int i = 0; i < 6; i++) {\
+    analogWrite(pins[i], 0);\
+  }\
+  delay(300);\
+\
+  Serial.println("Ring test complete");\
+}`,
       ledCount: 6,
       challenge: 'Reverse the sweep direction — light LEDs from 7 down to 2. Then try lighting opposite pairs (2+5, 3+6, 4+7) simultaneously.',
       successHint: 'All 6 LEDs responding independently confirms your ring is wired correctly. Next you add the Kuramoto synchronization algorithm.',
@@ -125,7 +159,51 @@ The key insight: **no central clock** coordinates them. Synchronization *emerges
       checkQuestion: 'If coupling strength K = 0, what happens to the firefly phases over time?',
       checkAnswer: 'Each firefly oscillates at its own natural frequency, drifting apart forever. The LEDs blink at slightly different rates with no coordination. Increasing K gradually pulls them together — above a critical threshold, they lock into perfect synchronization.',
       codeIntro: 'Implement the Kuramoto coupling algorithm. Watch the 6 LEDs start random and gradually synchronize.',
-      code: `// Firefly Kuramoto Synchronization\\n// 6 LEDs, ring coupling, gradual sync\\n\\nint pins[] = {2, 3, 4, 5, 6, 7};\\nint phase[] = {0, 100, 200, 50, 170, 30};\\nint freq[] = {15, 14, 16, 15, 13, 16};\\nint coupling = 3;\\n\\nvoid setup() {\\n  for (int i = 0; i < 6; i++) {\\n    pinMode(pins[i], OUTPUT);\\n  }\\n  Serial.println("Kuramoto sync starting...");\\n  Serial.println("Watch LEDs converge!");\\n}\\n\\nvoid loop() {\\n  for (int i = 0; i < 6; i++) {\\n    int left = (i + 5) % 6;\\n    int right = (i + 1) % 6;\\n    int diff_left = phase[left] - phase[i];\\n    int diff_right = phase[right] - phase[i];\\n    phase[i] += freq[i] + (coupling * diff_left) / 100 + (coupling * diff_right) / 100;\\n    if (phase[i] > 628) phase[i] -= 628;\\n    if (phase[i] < 0) phase[i] += 628;\\n  }\\n\\n  for (int i = 0; i < 6; i++) {\\n    int brightness;\\n    if (phase[i] < 157) {\\n      brightness = 255 - (phase[i] * 255 / 157);\\n    } else if (phase[i] < 471) {\\n      brightness = (phase[i] - 157) * 255 / 314;\\n      brightness = 255 - brightness;\\n    } else {\\n      brightness = (phase[i] - 471) * 255 / 157;\\n    }\\n    if (brightness < 0) brightness = 0;\\n    if (brightness > 255) brightness = 255;\\n    analogWrite(pins[i], brightness);\\n  }\\n\\n  delay(50);\\n  Serial.println("Phase sync in progress...");\\n}`,
+      code: `// Firefly Kuramoto Synchronization\
+// 6 LEDs, ring coupling, gradual sync\
+\
+int pins[] = {2, 3, 4, 5, 6, 7};\
+int phase[] = {0, 100, 200, 50, 170, 30};\
+int freq[] = {15, 14, 16, 15, 13, 16};\
+int coupling = 3;\
+\
+void setup() {\
+  for (int i = 0; i < 6; i++) {\
+    pinMode(pins[i], OUTPUT);\
+  }\
+  Serial.println("Kuramoto sync starting...");\
+  Serial.println("Watch LEDs converge!");\
+}\
+\
+void loop() {\
+  for (int i = 0; i < 6; i++) {\
+    int left = (i + 5) % 6;\
+    int right = (i + 1) % 6;\
+    int diff_left = phase[left] - phase[i];\
+    int diff_right = phase[right] - phase[i];\
+    phase[i] += freq[i] + (coupling * diff_left) / 100 + (coupling * diff_right) / 100;\
+    if (phase[i] > 628) phase[i] -= 628;\
+    if (phase[i] < 0) phase[i] += 628;\
+  }\
+\
+  for (int i = 0; i < 6; i++) {\
+    int brightness;\
+    if (phase[i] < 157) {\
+      brightness = 255 - (phase[i] * 255 / 157);\
+    } else if (phase[i] < 471) {\
+      brightness = (phase[i] - 157) * 255 / 314;\
+      brightness = 255 - brightness;\
+    } else {\
+      brightness = (phase[i] - 471) * 255 / 157;\
+    }\
+    if (brightness < 0) brightness = 0;\
+    if (brightness > 255) brightness = 255;\
+    analogWrite(pins[i], brightness);\
+  }\
+\
+  delay(50);\
+  Serial.println("Phase sync in progress...");\
+}`,
       ledCount: 6,
       challenge: 'Change coupling from 3 to 0 — the LEDs drift independently. Then try coupling = 10 for fast synchronization. Find the minimum coupling that still achieves sync.',
       successHint: 'You implemented the Kuramoto model in embedded C. This same algorithm models heart cells synchronizing, neurons firing in brain waves, and power grid generators staying in phase.',
@@ -142,7 +220,51 @@ For a firefly breathing pattern, we combine gamma correction with an **envelope 
       checkQuestion: 'With gamma = 2.2, what PWM value produces 50% perceived brightness?',
       checkAnswer: 'Solving: (x/255)^2.2 = 0.5, so x = 255 * 0.5^(1/2.2) = 255 * 0.73 = ~186. You need PWM 186 for 50% perceived brightness — not 128 as you might expect.',
       codeIntro: 'Apply gamma-corrected breathing to all 6 LEDs with staggered phases for an organic swarm effect.',
-      code: `// Gamma-Corrected Firefly Breathing\\n// 6 LEDs with smooth, perceptually-correct fading\\n\\nint pins[] = {2, 3, 4, 5, 6, 7};\\nint step = 0;\\n\\nint gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,\\n                  120, 161, 208, 255};\\n\\nint gammaCorrect(int raw) {\\n  int idx = raw / 23;\\n  if (idx > 11) idx = 11;\\n  return gammaLUT[idx];\\n}\\n\\nvoid setup() {\\n  for (int i = 0; i < 6; i++) {\\n    pinMode(pins[i], OUTPUT);\\n  }\\n  Serial.println("Gamma-corrected breathing");\\n}\\n\\nvoid loop() {\\n  for (int i = 0; i < 6; i++) {\\n    int offset = i * 40;\\n    int raw = step + offset;\\n    raw = raw % 240;\\n\\n    int brightness;\\n    if (raw < 120) {\\n      brightness = (raw * 255) / 120;\\n    } else {\\n      brightness = ((240 - raw) * 255) / 120;\\n    }\\n\\n    int corrected = gammaCorrect(brightness);\\n    analogWrite(pins[i], corrected);\\n  }\\n\\n  step += 2;\\n  if (step > 240) step = 0;\\n  delay(40);\\n\\n  Serial.println("Breathing...");\\n}`,
+      code: `// Gamma-Corrected Firefly Breathing\
+// 6 LEDs with smooth, perceptually-correct fading\
+\
+int pins[] = {2, 3, 4, 5, 6, 7};\
+int step = 0;\
+\
+int gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,\
+                  120, 161, 208, 255};\
+\
+int gammaCorrect(int raw) {\
+  int idx = raw / 23;\
+  if (idx > 11) idx = 11;\
+  return gammaLUT[idx];\
+}\
+\
+void setup() {\
+  for (int i = 0; i < 6; i++) {\
+    pinMode(pins[i], OUTPUT);\
+  }\
+  Serial.println("Gamma-corrected breathing");\
+}\
+\
+void loop() {\
+  for (int i = 0; i < 6; i++) {\
+    int offset = i * 40;\
+    int raw = step + offset;\
+    raw = raw % 240;\
+\
+    int brightness;\
+    if (raw < 120) {\
+      brightness = (raw * 255) / 120;\
+    } else {\
+      brightness = ((240 - raw) * 255) / 120;\
+    }\
+\
+    int corrected = gammaCorrect(brightness);\
+    analogWrite(pins[i], corrected);\
+  }\
+\
+  step += 2;\
+  if (step > 240) step = 0;\
+  delay(40);\
+\
+  Serial.println("Breathing...");\
+}`,
       ledCount: 6,
       challenge: 'Compare with and without gamma correction: comment out the gammaCorrect call and use raw brightness instead. Notice how the uncorrected version spends too long looking "almost full brightness" and jumps harshly at the dim end.',
       successHint: 'Gamma correction is used everywhere — monitors, LED strips, game engines, photography. You now understand why raw PWM values look wrong and how to fix them.',
@@ -163,7 +285,57 @@ Outputting comma-separated values (CSV format) lets you paste the data into a sp
       checkQuestion: 'Why include a timestamp (millis) in every serial log line instead of just printing values?',
       checkAnswer: 'Without timestamps, you cannot calculate rates, detect timing bugs, or correlate events. If your loop slows down, timestamps reveal the problem. They also let you reconstruct the exact timeline when analyzing logged data after the fact.',
       codeIntro: 'Add structured CSV logging and a sync order parameter to the firefly ring.',
-      code: `// Serial Logging with Sync Measurement\\n// 6 LEDs + CSV output + order parameter\\n\\nint pins[] = {2, 3, 4, 5, 6, 7};\\nint phase[] = {0, 105, 210, 52, 314, 420};\\nint freq[] = {15, 14, 16, 15, 13, 16};\\nint coupling = 4;\\nint loopCount = 0;\\n\\nvoid setup() {\\n  for (int i = 0; i < 6; i++) {\\n    pinMode(pins[i], OUTPUT);\\n  }\\n  Serial.println("ms,p0,p1,p2,p3,p4,p5,b0,b1,b2,b3,b4,b5");\\n}\\n\\nvoid loop() {\\n  for (int i = 0; i < 6; i++) {\\n    int left = (i + 5) % 6;\\n    int right = (i + 1) % 6;\\n    int diff_l = phase[left] - phase[i];\\n    int diff_r = phase[right] - phase[i];\\n    phase[i] += freq[i] + (coupling * diff_l) / 100 + (coupling * diff_r) / 100;\\n    if (phase[i] > 628) phase[i] -= 628;\\n    if (phase[i] < 0) phase[i] += 628;\\n  }\\n\\n  int bright[6];\\n  for (int i = 0; i < 6; i++) {\\n    bright[i] = (phase[i] < 314) ? (255 - phase[i] * 255 / 314) : ((phase[i] - 314) * 255 / 314);\\n    if (bright[i] < 0) bright[i] = 0;\\n    if (bright[i] > 255) bright[i] = 255;\\n    analogWrite(pins[i], bright[i]);\\n  }\\n\\n  if (loopCount % 5 == 0) {\\n    Serial.print(loopCount * 50);\\n    for (int i = 0; i < 6; i++) {\\n      Serial.print(",");\\n      Serial.print(phase[i]);\\n    }\\n    for (int i = 0; i < 6; i++) {\\n      Serial.print(",");\\n      Serial.print(bright[i]);\\n    }\\n    Serial.println();\\n  }\\n\\n  loopCount++;\\n  delay(50);\\n}`,
+      code: `// Serial Logging with Sync Measurement\
+// 6 LEDs + CSV output + order parameter\
+\
+int pins[] = {2, 3, 4, 5, 6, 7};\
+int phase[] = {0, 105, 210, 52, 314, 420};\
+int freq[] = {15, 14, 16, 15, 13, 16};\
+int coupling = 4;\
+int loopCount = 0;\
+\
+void setup() {\
+  for (int i = 0; i < 6; i++) {\
+    pinMode(pins[i], OUTPUT);\
+  }\
+  Serial.println("ms,p0,p1,p2,p3,p4,p5,b0,b1,b2,b3,b4,b5");\
+}\
+\
+void loop() {\
+  for (int i = 0; i < 6; i++) {\
+    int left = (i + 5) % 6;\
+    int right = (i + 1) % 6;\
+    int diff_l = phase[left] - phase[i];\
+    int diff_r = phase[right] - phase[i];\
+    phase[i] += freq[i] + (coupling * diff_l) / 100 + (coupling * diff_r) / 100;\
+    if (phase[i] > 628) phase[i] -= 628;\
+    if (phase[i] < 0) phase[i] += 628;\
+  }\
+\
+  int bright[6];\
+  for (int i = 0; i < 6; i++) {\
+    bright[i] = (phase[i] < 314) ? (255 - phase[i] * 255 / 314) : ((phase[i] - 314) * 255 / 314);\
+    if (bright[i] < 0) bright[i] = 0;\
+    if (bright[i] > 255) bright[i] = 255;\
+    analogWrite(pins[i], bright[i]);\
+  }\
+\
+  if (loopCount % 5 == 0) {\
+    Serial.print(loopCount * 50);\
+    for (int i = 0; i < 6; i++) {\
+      Serial.print(",");\
+      Serial.print(phase[i]);\
+    }\
+    for (int i = 0; i < 6; i++) {\
+      Serial.print(",");\
+      Serial.print(bright[i]);\
+    }\
+    Serial.println();\
+  }\
+\
+  loopCount++;\
+  delay(50);\
+}`,
       ledCount: 6,
       challenge: 'Copy the serial output and paste it into a spreadsheet. Plot the 6 brightness columns over time. You should see the curves converge as coupling pulls phases together.',
       successHint: 'Structured serial logging is how professional embedded developers debug. The CSV header + data pattern works with any analysis tool from Excel to Python matplotlib.',
@@ -184,7 +356,89 @@ This is the same architecture used in professional LED art installations, stage 
       checkQuestion: 'If you wanted to scale this to 100 LEDs, what hardware changes would you need?',
       checkAnswer: 'The Arduino Uno only has 6 PWM pins. For 100 LEDs, you would use WS2812B (NeoPixel) addressable LED strips — one data wire controls all 100 LEDs individually. Or use shift registers (74HC595) for on/off control, or PCA9685 PWM driver boards for 16 channels each.',
       codeIntro: 'The final capstone: full Kuramoto-coupled ring with breathing, gamma, and logging.',
-      code: `// === FIREFLY CAPSTONE: Full Synchronized Ring ===\\n// 6 LEDs | Kuramoto coupling | gamma | serial log\\n\\nint pins[] = {2, 3, 4, 5, 6, 7};\\nint phase[] = {0, 95, 210, 48, 340, 520};\\nint freq[] = {15, 14, 16, 15, 13, 16};\\nint coupling = 4;\\nint tick = 0;\\n\\nint gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,\\n                  120, 161, 208, 255};\\n\\nint gammaCorrect(int raw) {\\n  int idx = raw / 23;\\n  if (idx > 11) idx = 11;\\n  if (idx < 0) idx = 0;\\n  return gammaLUT[idx];\\n}\\n\\nvoid setup() {\\n  for (int i = 0; i < 6; i++) {\\n    pinMode(pins[i], OUTPUT);\\n  }\\n  Serial.println("=== Firefly Capstone ===");\\n  for (int i = 0; i < 6; i++) {\\n    analogWrite(pins[i], 200);\\n    delay(100);\\n    analogWrite(pins[i], 0);\\n  }\\n  Serial.println("Self-test OK");\\n  Serial.println("ms,b0,b1,b2,b3,b4,b5");\\n}\\n\\nvoid loop() {\\n  for (int i = 0; i < 6; i++) {\\n    int left = (i + 5) % 6;\\n    int right = (i + 1) % 6;\\n    int dl = phase[left] - phase[i];\\n    int dr = phase[right] - phase[i];\\n    phase[i] += freq[i] + (coupling * dl) / 100 + (coupling * dr) / 100;\\n    if (phase[i] > 628) phase[i] -= 628;\\n    if (phase[i] < 0) phase[i] += 628;\\n  }\\n\\n  Serial.print(tick * 50);\\n  for (int i = 0; i < 6; i++) {\\n    int raw;\\n    if (phase[i] < 314) {\\n      raw = 255 - (phase[i] * 255 / 314);\\n    } else {\\n      raw = ((phase[i] - 314) * 255 / 314);\\n    }\\n    if (raw < 0) raw = 0;\\n    if (raw > 255) raw = 255;\\n    int corrected = gammaCorrect(raw);\\n    analogWrite(pins[i], corrected);\\n    Serial.print(",");\\n    Serial.print(corrected);\\n  }\\n  Serial.println();\\n\\n  // Tone sweep: frequency rises as phases converge\\n  // Crude order parameter: smaller phase spread = higher sync\\n  int maxP = 0;\\n  int minP = 628;\\n  for (int i = 0; i < 6; i++) {\\n    if (phase[i] > maxP) maxP = phase[i];\\n    if (phase[i] < minP) minP = phase[i];\\n  }\\n  int spread = maxP - minP;\\n  int syncTone = 200 + (628 - spread) * 1200 / 628;\\n  if (syncTone > 1400) syncTone = 1400;\\n  tone(8, syncTone);\\n  // When nearly synced (spread < 60), play ascending confirmation\\n  if (spread < 60 && tick % 20 == 0) {\\n    tone(8, 800); delay(50);\\n    tone(8, 1000); delay(50);\\n    tone(8, 1200); delay(50);\\n  }\\n\\n  tick++;\\n  delay(50);\\n}`,
+      code: `// === FIREFLY CAPSTONE: Full Synchronized Ring ===\
+// 6 LEDs | Kuramoto coupling | gamma | serial log\
+\
+int pins[] = {2, 3, 4, 5, 6, 7};\
+int phase[] = {0, 95, 210, 48, 340, 520};\
+int freq[] = {15, 14, 16, 15, 13, 16};\
+int coupling = 4;\
+int tick = 0;\
+\
+int gammaLUT[] = {0, 1, 4, 10, 20, 36, 58, 86,\
+                  120, 161, 208, 255};\
+\
+int gammaCorrect(int raw) {\
+  int idx = raw / 23;\
+  if (idx > 11) idx = 11;\
+  if (idx < 0) idx = 0;\
+  return gammaLUT[idx];\
+}\
+\
+void setup() {\
+  for (int i = 0; i < 6; i++) {\
+    pinMode(pins[i], OUTPUT);\
+  }\
+  Serial.println("=== Firefly Capstone ===");\
+  for (int i = 0; i < 6; i++) {\
+    analogWrite(pins[i], 200);\
+    delay(100);\
+    analogWrite(pins[i], 0);\
+  }\
+  Serial.println("Self-test OK");\
+  Serial.println("ms,b0,b1,b2,b3,b4,b5");\
+}\
+\
+void loop() {\
+  for (int i = 0; i < 6; i++) {\
+    int left = (i + 5) % 6;\
+    int right = (i + 1) % 6;\
+    int dl = phase[left] - phase[i];\
+    int dr = phase[right] - phase[i];\
+    phase[i] += freq[i] + (coupling * dl) / 100 + (coupling * dr) / 100;\
+    if (phase[i] > 628) phase[i] -= 628;\
+    if (phase[i] < 0) phase[i] += 628;\
+  }\
+\
+  Serial.print(tick * 50);\
+  for (int i = 0; i < 6; i++) {\
+    int raw;\
+    if (phase[i] < 314) {\
+      raw = 255 - (phase[i] * 255 / 314);\
+    } else {\
+      raw = ((phase[i] - 314) * 255 / 314);\
+    }\
+    if (raw < 0) raw = 0;\
+    if (raw > 255) raw = 255;\
+    int corrected = gammaCorrect(raw);\
+    analogWrite(pins[i], corrected);\
+    Serial.print(",");\
+    Serial.print(corrected);\
+  }\
+  Serial.println();\
+\
+  // Tone sweep: frequency rises as phases converge\
+  // Crude order parameter: smaller phase spread = higher sync\
+  int maxP = 0;\
+  int minP = 628;\
+  for (int i = 0; i < 6; i++) {\
+    if (phase[i] > maxP) maxP = phase[i];\
+    if (phase[i] < minP) minP = phase[i];\
+  }\
+  int spread = maxP - minP;\
+  int syncTone = 200 + (628 - spread) * 1200 / 628;\
+  if (syncTone > 1400) syncTone = 1400;\
+  tone(8, syncTone);\
+  // When nearly synced (spread < 60), play ascending confirmation\
+  if (spread < 60 && tick % 20 == 0) {\
+    tone(8, 800); delay(50);\
+    tone(8, 1000); delay(50);\
+    tone(8, 1200); delay(50);\
+  }\
+\
+  tick++;\
+  delay(50);\
+}`,
       ledCount: 6,
       challenge: 'This is a complete embedded project. On real hardware, you would mount 6 green LEDs inside a frosted jar, add an LDR to activate only in darkness, and power from a USB battery pack. Your own Majuli firefly festival on a shelf.',
       successHint: 'You\'ve written the code for a complete capstone: circuit design, Kuramoto synchronization, gamma-corrected PWM, serial data logging, and a self-test routine. This is embedded systems engineering.',

@@ -16,7 +16,134 @@ export default function RicePlantedLevel3() {
       checkQuestion: 'Why does rice grow better in flooded paddies than in dry upland fields, even though flooding creates an anaerobic soil that is hostile to most plant roots?',
       checkAnswer: 'Three reasons: (1) Rice has aerenchyma tissue that delivers O2 from leaves to roots, so it can breathe in anaerobic soil. (2) Flooding suppresses most weeds, which lack aerenchyma and cannot compete. (3) Anaerobic decomposition releases ammonium (NH4+), which is the preferred nitrogen form for rice. In dry soil, nitrogen is mostly nitrate (NO3-), which leaches easily with rain. The flooded paddy retains nitrogen better. Rice evolved in wetlands and is pre-adapted to flooding; the paddy just replicates its natural habitat.',
       codeIntro: 'Model the biogeochemical layers of a flooded rice paddy and simulate oxygen, nitrogen, and methane profiles.',
-      code: `import numpy as np\\nimport matplotlib.pyplot as plt\\n\\nnp.random.seed(42)\\n\\n# Paddy soil depth profile model\\ndepth_cm = np.linspace(0, 30, 300)  # 0 = surface, 30 = deep soil\\n\\n# Oxygen profile: exponential decay from surface\\ndef oxygen_profile(depth, surface_O2=8.0, decay_rate=2.0):\\n    return surface_O2 * np.exp(-decay_rate * depth)\\n\\n# Ammonium profile: produced in anaerobic zone, consumed at surface\\ndef ammonium_profile(depth, peak_depth=10, peak_conc=5.0):\\n    return peak_conc * np.exp(-((depth - peak_depth)**2) / 50)\\n\\n# Methane: produced in deep anaerobic zone\\ndef methane_profile(depth, onset_depth=5, max_conc=3.0):\\n    return max_conc / (1 + np.exp(-0.5 * (depth - onset_depth)))\\n\\n# Redox potential\\ndef redox_profile(depth, surface_Eh=400, deep_Eh=-200):\\n    return surface_Eh + (deep_Eh - surface_Eh) / (1 + np.exp(-0.3 * (depth - 3)))\\n\\nO2 = oxygen_profile(depth_cm)\\nNH4 = ammonium_profile(depth_cm)\\nCH4 = methane_profile(depth_cm)\\nEh = redox_profile(depth_cm)\\n\\nfig, axes = plt.subplots(2, 3, figsize=(15, 9))\\nfig.patch.set_facecolor('#1f2937')\\nfig.suptitle('Rice Paddy Ecosystem: Biogeochemical Depth Profiles', color='white', fontsize=14, fontweight='bold', y=0.98)\\n\\nfor ax in axes.flat:\\n    ax.set_facecolor('#111827')\\n    ax.tick_params(colors='gray')\\n\\n# Plot 1: O2 profile\\nax = axes[0, 0]\\nax.plot(O2, depth_cm, color='#3b82f6', linewidth=2.5)\\nax.fill_betweenx(depth_cm, 0, O2, color='#3b82f6', alpha=0.1)\\nax.set_xlabel('O₂ (mg/L)', color='white')\\nax.set_ylabel('Depth (cm)', color='white')\\nax.set_title('Oxygen Profile', color='white', fontsize=11)\\nax.invert_yaxis()\\nax.axhline(2, color='#f59e0b', linewidth=1, linestyle='--', label='Aerobic/Anaerobic boundary')\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 2: NH4+ profile\\nax = axes[0, 1]\\nax.plot(NH4, depth_cm, color='#22c55e', linewidth=2.5)\\nax.fill_betweenx(depth_cm, 0, NH4, color='#22c55e', alpha=0.1)\\nax.set_xlabel('NH₄⁺ (mg/L)', color='white')\\nax.set_ylabel('Depth (cm)', color='white')\\nax.set_title('Ammonium Profile', color='white', fontsize=11)\\nax.invert_yaxis()\\n\\n# Plot 3: CH4 profile\\nax = axes[0, 2]\\nax.plot(CH4, depth_cm, color='#ef4444', linewidth=2.5)\\nax.fill_betweenx(depth_cm, 0, CH4, color='#ef4444', alpha=0.1)\\nax.set_xlabel('CH₄ (mg/L)', color='white')\\nax.set_ylabel('Depth (cm)', color='white')\\nax.set_title('Methane Profile', color='white', fontsize=11)\\nax.invert_yaxis()\\n\\n# Plot 4: Redox potential\\nax = axes[1, 0]\\nax.plot(Eh, depth_cm, color='#a855f7', linewidth=2.5)\\nax.fill_betweenx(depth_cm, -300, Eh, where=Eh<0, color='#ef4444', alpha=0.1, label='Reducing')\\nax.fill_betweenx(depth_cm, Eh, 500, where=Eh>0, color='#3b82f6', alpha=0.1, label='Oxidizing')\\nax.set_xlabel('Redox potential Eh (mV)', color='white')\\nax.set_ylabel('Depth (cm)', color='white')\\nax.set_title('Redox Profile', color='white', fontsize=11)\\nax.invert_yaxis()\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 5: Combined overview\\nax = axes[1, 1]\\nax.plot(O2 / 8, depth_cm, color='#3b82f6', linewidth=2, label='O₂ (norm)')\\nax.plot(NH4 / 5, depth_cm, color='#22c55e', linewidth=2, label='NH₄⁺ (norm)')\\nax.plot(CH4 / 3, depth_cm, color='#ef4444', linewidth=2, label='CH₄ (norm)')\\nax.set_xlabel('Normalized concentration', color='white')\\nax.set_ylabel('Depth (cm)', color='white')\\nax.set_title('Combined Chemical Profiles', color='white', fontsize=11)\\nax.invert_yaxis()\\nax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n# Zone labels\\nax.axhspan(0, 2, alpha=0.1, color='#3b82f6')\\nax.axhspan(2, 30, alpha=0.05, color='#ef4444')\\nax.text(0.8, 1, 'Aerobic', color='#3b82f6', fontsize=8)\\nax.text(0.8, 15, 'Anaerobic', color='#ef4444', fontsize=8)\\n\\n# Plot 6: Nutrient cycling diagram\\nax = axes[1, 2]\\nax.axis('off')\\ncycles = [\\n    ('N₂ (atmosphere)', 0.5, 0.9, '#22c55e'),\\n    ('NH₄⁺ (soil)', 0.2, 0.6, '#22c55e'),\\n    ('NO₃⁻ (surface)', 0.8, 0.6, '#3b82f6'),\\n    ('CH₄ (deep soil)', 0.2, 0.2, '#ef4444'),\\n    ('CO₂ (surface)', 0.8, 0.2, '#f59e0b'),\\n    ('Rice plant\\n(uptake)', 0.5, 0.5, '#a855f7'),\\n]\\nfor label, x, y, color in cycles:\\n    ax.text(x, y, label, transform=ax.transAxes, ha='center', va='center',\\n            color=color, fontsize=9, fontweight='bold',\\n            bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor=color, alpha=0.8))\\nax.set_title('Paddy Nutrient Cycling', color='white', fontsize=11)\\n\\nplt.tight_layout()\\nplt.show()\\n\\nprint("Rice Paddy Biogeochemistry")\\nprint("=" * 50)\\nprint()\\nprint("Depth zones:")\\nprint("  0-2 cm: Aerobic (O₂ > 2 mg/L, Eh > +200 mV)")\\nprint("  2-30 cm: Anaerobic (O₂ < 0.1 mg/L, Eh < -100 mV)")\\nprint()\\nprint("Key processes:")\\nprint("  Surface: nitrification (NH₄⁺ → NO₃⁻), CH₄ oxidation")\\nprint("  Deep: methanogenesis (organic C → CH₄), NH₄⁺ production")\\nprint("  Rhizosphere: O₂ leak from aerenchyma creates micro-aerobic zones")\\nprint()\\nprint("Rice adaptation: aerenchyma delivers O₂ to roots in anaerobic soil")\\nprint("This is why rice thrives where other crops drown.")`,
+      code: `import numpy as np\
+import matplotlib.pyplot as plt\
+\
+np.random.seed(42)\
+\
+# Paddy soil depth profile model\
+depth_cm = np.linspace(0, 30, 300)  # 0 = surface, 30 = deep soil\
+\
+# Oxygen profile: exponential decay from surface\
+def oxygen_profile(depth, surface_O2=8.0, decay_rate=2.0):\
+    return surface_O2 * np.exp(-decay_rate * depth)\
+\
+# Ammonium profile: produced in anaerobic zone, consumed at surface\
+def ammonium_profile(depth, peak_depth=10, peak_conc=5.0):\
+    return peak_conc * np.exp(-((depth - peak_depth)**2) / 50)\
+\
+# Methane: produced in deep anaerobic zone\
+def methane_profile(depth, onset_depth=5, max_conc=3.0):\
+    return max_conc / (1 + np.exp(-0.5 * (depth - onset_depth)))\
+\
+# Redox potential\
+def redox_profile(depth, surface_Eh=400, deep_Eh=-200):\
+    return surface_Eh + (deep_Eh - surface_Eh) / (1 + np.exp(-0.3 * (depth - 3)))\
+\
+O2 = oxygen_profile(depth_cm)\
+NH4 = ammonium_profile(depth_cm)\
+CH4 = methane_profile(depth_cm)\
+Eh = redox_profile(depth_cm)\
+\
+fig, axes = plt.subplots(2, 3, figsize=(15, 9))\
+fig.patch.set_facecolor('#1f2937')\
+fig.suptitle('Rice Paddy Ecosystem: Biogeochemical Depth Profiles', color='white', fontsize=14, fontweight='bold', y=0.98)\
+\
+for ax in axes.flat:\
+    ax.set_facecolor('#111827')\
+    ax.tick_params(colors='gray')\
+\
+# Plot 1: O2 profile\
+ax = axes[0, 0]\
+ax.plot(O2, depth_cm, color='#3b82f6', linewidth=2.5)\
+ax.fill_betweenx(depth_cm, 0, O2, color='#3b82f6', alpha=0.1)\
+ax.set_xlabel('O₂ (mg/L)', color='white')\
+ax.set_ylabel('Depth (cm)', color='white')\
+ax.set_title('Oxygen Profile', color='white', fontsize=11)\
+ax.invert_yaxis()\
+ax.axhline(2, color='#f59e0b', linewidth=1, linestyle='--', label='Aerobic/Anaerobic boundary')\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 2: NH4+ profile\
+ax = axes[0, 1]\
+ax.plot(NH4, depth_cm, color='#22c55e', linewidth=2.5)\
+ax.fill_betweenx(depth_cm, 0, NH4, color='#22c55e', alpha=0.1)\
+ax.set_xlabel('NH₄⁺ (mg/L)', color='white')\
+ax.set_ylabel('Depth (cm)', color='white')\
+ax.set_title('Ammonium Profile', color='white', fontsize=11)\
+ax.invert_yaxis()\
+\
+# Plot 3: CH4 profile\
+ax = axes[0, 2]\
+ax.plot(CH4, depth_cm, color='#ef4444', linewidth=2.5)\
+ax.fill_betweenx(depth_cm, 0, CH4, color='#ef4444', alpha=0.1)\
+ax.set_xlabel('CH₄ (mg/L)', color='white')\
+ax.set_ylabel('Depth (cm)', color='white')\
+ax.set_title('Methane Profile', color='white', fontsize=11)\
+ax.invert_yaxis()\
+\
+# Plot 4: Redox potential\
+ax = axes[1, 0]\
+ax.plot(Eh, depth_cm, color='#a855f7', linewidth=2.5)\
+ax.fill_betweenx(depth_cm, -300, Eh, where=Eh<0, color='#ef4444', alpha=0.1, label='Reducing')\
+ax.fill_betweenx(depth_cm, Eh, 500, where=Eh>0, color='#3b82f6', alpha=0.1, label='Oxidizing')\
+ax.set_xlabel('Redox potential Eh (mV)', color='white')\
+ax.set_ylabel('Depth (cm)', color='white')\
+ax.set_title('Redox Profile', color='white', fontsize=11)\
+ax.invert_yaxis()\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 5: Combined overview\
+ax = axes[1, 1]\
+ax.plot(O2 / 8, depth_cm, color='#3b82f6', linewidth=2, label='O₂ (norm)')\
+ax.plot(NH4 / 5, depth_cm, color='#22c55e', linewidth=2, label='NH₄⁺ (norm)')\
+ax.plot(CH4 / 3, depth_cm, color='#ef4444', linewidth=2, label='CH₄ (norm)')\
+ax.set_xlabel('Normalized concentration', color='white')\
+ax.set_ylabel('Depth (cm)', color='white')\
+ax.set_title('Combined Chemical Profiles', color='white', fontsize=11)\
+ax.invert_yaxis()\
+ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+# Zone labels\
+ax.axhspan(0, 2, alpha=0.1, color='#3b82f6')\
+ax.axhspan(2, 30, alpha=0.05, color='#ef4444')\
+ax.text(0.8, 1, 'Aerobic', color='#3b82f6', fontsize=8)\
+ax.text(0.8, 15, 'Anaerobic', color='#ef4444', fontsize=8)\
+\
+# Plot 6: Nutrient cycling diagram\
+ax = axes[1, 2]\
+ax.axis('off')\
+cycles = [\
+    ('N₂ (atmosphere)', 0.5, 0.9, '#22c55e'),\
+    ('NH₄⁺ (soil)', 0.2, 0.6, '#22c55e'),\
+    ('NO₃⁻ (surface)', 0.8, 0.6, '#3b82f6'),\
+    ('CH₄ (deep soil)', 0.2, 0.2, '#ef4444'),\
+    ('CO₂ (surface)', 0.8, 0.2, '#f59e0b'),\
+    ('Rice plant\
+(uptake)', 0.5, 0.5, '#a855f7'),\
+]\
+for label, x, y, color in cycles:\
+    ax.text(x, y, label, transform=ax.transAxes, ha='center', va='center',\
+            color=color, fontsize=9, fontweight='bold',\
+            bbox=dict(boxstyle='round', facecolor='#1f2937', edgecolor=color, alpha=0.8))\
+ax.set_title('Paddy Nutrient Cycling', color='white', fontsize=11)\
+\
+plt.tight_layout()\
+plt.show()\
+\
+print("Rice Paddy Biogeochemistry")\
+print("=" * 50)\
+print()\
+print("Depth zones:")\
+print("  0-2 cm: Aerobic (O₂ > 2 mg/L, Eh > +200 mV)")\
+print("  2-30 cm: Anaerobic (O₂ < 0.1 mg/L, Eh < -100 mV)")\
+print()\
+print("Key processes:")\
+print("  Surface: nitrification (NH₄⁺ → NO₃⁻), CH₄ oxidation")\
+print("  Deep: methanogenesis (organic C → CH₄), NH₄⁺ production")\
+print("  Rhizosphere: O₂ leak from aerenchyma creates micro-aerobic zones")\
+print()\
+print("Rice adaptation: aerenchyma delivers O₂ to roots in anaerobic soil")\
+print("This is why rice thrives where other crops drown.")`,
       challenge: 'Add the iron cycle to the model: Fe³⁺ is reduced to Fe²⁺ in anaerobic conditions, making iron available for plant uptake but potentially toxic at high concentrations. Model the Fe²⁺ profile and calculate the depth at which iron toxicity occurs (>300 mg/L Fe²⁺).',
       successHint: 'The paddy ecosystem is a masterclass in biogeochemistry. A few centimeters of water transform a field into a stratified system with distinct chemical zones, each supporting different microbial communities and nutrient transformations. Understanding this system is essential for optimizing rice production while minimizing environmental impact.',
     },
@@ -28,7 +155,178 @@ export default function RicePlantedLevel3() {
       checkQuestion: 'A farmer applies 120 kg N/ha of urea to a flooded rice paddy. If NUE is 35%, how much nitrogen does the rice actually absorb, and where does the rest go?',
       checkAnswer: 'The rice absorbs 120 × 0.35 = 42 kg N/ha. The remaining 78 kg N/ha is lost: denitrification ~30 kg (as N₂ and N₂O — a potent greenhouse gas), ammonia volatilization ~18 kg (urea hydrolyzes to NH₃ which evaporates at high pH), leaching to groundwater ~12 kg (as NO₃⁻), and runoff ~8 kg. This 65% loss is both economically wasteful and environmentally damaging. Solutions: deep placement of urea (reduces volatilization), use of nitrification inhibitors (reduces denitrification), split application (match N supply to plant demand).',
       codeIntro: 'Model the complete nitrogen cycle in a flooded rice paddy including all transformation pathways and loss mechanisms.',
-      code: `import numpy as np\\nimport matplotlib.pyplot as plt\\n\\nnp.random.seed(42)\\n\\n# Nitrogen cycle model for flooded rice paddy\\ndef paddy_nitrogen_model(days=120, N_applied_kg_ha=120, n_splits=1):\\n    """Simulate nitrogen transformations over a rice growing season."""\\n    dt = 1  # daily timestep\\n    n_steps = days\\n    \\n    # State variables (kg N/ha)\\n    NH4_soil = np.zeros(n_steps)\\n    NO3_soil = np.zeros(n_steps)\\n    N_plant = np.zeros(n_steps)\\n    N_lost_denit = np.zeros(n_steps)\\n    N_lost_vol = np.zeros(n_steps)\\n    N_lost_leach = np.zeros(n_steps)\\n    N_fixed = np.zeros(n_steps)\\n    \\n    # Initial conditions\\n    NH4_soil[0] = 10  # background soil N\\n    \\n    # Apply fertilizer\\n    fert_days = np.linspace(10, 80, n_splits).astype(int) if n_splits > 1 else [10]\\n    fert_per_split = N_applied_kg_ha / n_splits\\n    \\n    # Rate constants\\n    k_nitrification = 0.08    # day⁻¹ (NH4 → NO3)\\n    k_denitrification = 0.12  # day⁻¹ (NO3 → N2)\\n    k_volatilization = 0.03   # day⁻¹ (NH4 → NH3 gas)\\n    k_leaching = 0.02         # day⁻¹ (NO3 → groundwater)\\n    k_fixation = 0.5          # kg N/ha/day (BNF)\\n    k_mineralization = 0.3    # kg N/ha/day\\n    \\n    for t in range(1, n_steps):\\n        # Add fertilizer\\n        fert_input = fert_per_split if t in fert_days else 0\\n        \\n        # Plant uptake rate (sigmoid growth curve)\\n        growth_phase = 1 / (1 + np.exp(-0.05 * (t - 60)))  # peaks mid-season\\n        uptake_rate = 1.5 * growth_phase  # kg N/ha/day max\\n        \\n        # Transformations\\n        nitrification = k_nitrification * NH4_soil[t-1]\\n        denitrification = k_denitrification * NO3_soil[t-1]\\n        volatilization = k_volatilization * NH4_soil[t-1]\\n        leaching = k_leaching * NO3_soil[t-1]\\n        fixation = k_fixation * (1 + 0.3 * np.sin(2 * np.pi * t / 30))  # seasonal\\n        mineralization = k_mineralization\\n        \\n        # Plant uptake (prefers NH4+)\\n        nh4_uptake = min(uptake_rate * 0.7, NH4_soil[t-1] * 0.3)\\n        no3_uptake = min(uptake_rate * 0.3, NO3_soil[t-1] * 0.3)\\n        \\n        # Update state\\n        NH4_soil[t] = max(0, NH4_soil[t-1] + fert_input + fixation + mineralization\\n                          - nitrification - volatilization - nh4_uptake)\\n        NO3_soil[t] = max(0, NO3_soil[t-1] + nitrification\\n                          - denitrification - leaching - no3_uptake)\\n        N_plant[t] = N_plant[t-1] + nh4_uptake + no3_uptake\\n        N_lost_denit[t] = N_lost_denit[t-1] + denitrification\\n        N_lost_vol[t] = N_lost_vol[t-1] + volatilization\\n        N_lost_leach[t] = N_lost_leach[t-1] + leaching\\n        N_fixed[t] = N_fixed[t-1] + fixation\\n    \\n    nue = N_plant[-1] / N_applied_kg_ha * 100\\n    return {\\n        'days': np.arange(n_steps), 'NH4': NH4_soil, 'NO3': NO3_soil,\\n        'plant': N_plant, 'denit': N_lost_denit, 'vol': N_lost_vol,\\n        'leach': N_lost_leach, 'fixed': N_fixed, 'NUE': nue,\\n    }\\n\\n# Run scenarios\\nsingle = paddy_nitrogen_model(n_splits=1)\\nsplit3 = paddy_nitrogen_model(n_splits=3)\\nlow_n = paddy_nitrogen_model(N_applied_kg_ha=60, n_splits=2)\\n\\nfig, axes = plt.subplots(2, 3, figsize=(15, 9))\\nfig.patch.set_facecolor('#1f2937')\\nfig.suptitle('Nitrogen Cycling in Flooded Rice Paddies', color='white', fontsize=14, fontweight='bold', y=0.98)\\n\\nfor ax in axes.flat:\\n    ax.set_facecolor('#111827')\\n    ax.tick_params(colors='gray')\\n\\n# Plot 1: N pools over time\\nax = axes[0, 0]\\nax.plot(single['days'], single['NH4'], color='#22c55e', linewidth=2, label='NH₄⁺ soil')\\nax.plot(single['days'], single['NO3'], color='#3b82f6', linewidth=2, label='NO₃⁻ soil')\\nax.plot(single['days'], single['plant'], color='#a855f7', linewidth=2, label='Plant N')\\nax.set_xlabel('Days after transplanting', color='white')\\nax.set_ylabel('N (kg/ha)', color='white')\\nax.set_title('Nitrogen Pools (single application)', color='white', fontsize=11)\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 2: N losses\\nax = axes[0, 1]\\nax.fill_between(single['days'], 0, single['denit'], color='#ef4444', alpha=0.7, label='Denitrification')\\nax.fill_between(single['days'], single['denit'], single['denit']+single['vol'],\\n                color='#f59e0b', alpha=0.7, label='Volatilization')\\nax.fill_between(single['days'], single['denit']+single['vol'],\\n                single['denit']+single['vol']+single['leach'],\\n                color='#64748b', alpha=0.7, label='Leaching')\\nax.set_xlabel('Days', color='white')\\nax.set_ylabel('Cumulative N loss (kg/ha)', color='white')\\nax.set_title('Nitrogen Loss Pathways', color='white', fontsize=11)\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 3: NUE comparison\\nax = axes[0, 2]\\nscenarios = ['Single\\napplication', '3-split\\napplication', 'Low N\\n(60 kg, 2-split)']\\nnues = [single['NUE'], split3['NUE'], low_n['NUE']]\\ncolors_nue = ['#ef4444', '#22c55e', '#3b82f6']\\nax.bar(range(len(scenarios)), nues, color=colors_nue, edgecolor='none', width=0.6)\\nax.set_xticks(range(len(scenarios)))\\nax.set_xticklabels(scenarios, color='white', fontsize=9)\\nax.set_ylabel('Nitrogen Use Efficiency (%)', color='white')\\nax.set_title('NUE by Management Strategy', color='white', fontsize=11)\\nfor i, n in enumerate(nues):\\n    ax.text(i, n + 1, f'{n:.0f}%', ha='center', color='white', fontsize=12, fontweight='bold')\\n\\n# Plot 4: Split vs single application\\nax = axes[1, 0]\\nax.plot(single['days'], single['plant'], color='#ef4444', linewidth=2, label=f'Single (NUE={single[\"NUE\"]:.0f}%)')\\nax.plot(split3['days'], split3['plant'], color='#22c55e', linewidth=2, label=f'3-split (NUE={split3[\"NUE\"]:.0f}%)')\\nax.set_xlabel('Days', color='white')\\nax.set_ylabel('Plant N uptake (kg/ha)', color='white')\\nax.set_title('Plant N Uptake: Split vs Single', color='white', fontsize=11)\\nax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 5: N budget pie chart\\nax = axes[1, 1]\\ntotal_in = 120 + single['fixed'][-1]\\nbudget = [single['plant'][-1], single['denit'][-1], single['vol'][-1], single['leach'][-1],\\n          total_in - single['plant'][-1] - single['denit'][-1] - single['vol'][-1] - single['leach'][-1]]\\nlabels = ['Plant uptake', 'Denitrification', 'Volatilization', 'Leaching', 'Soil residual']\\ncolors_b = ['#22c55e', '#ef4444', '#f59e0b', '#64748b', '#3b82f6']\\nax.pie([max(0, b) for b in budget], labels=labels, autopct='%1.0f%%',\\n       colors=colors_b, textprops={'color': 'white', 'fontsize': 8})\\nax.set_title('Nitrogen Budget (120 kg N/ha)', color='white', fontsize=11)\\n\\n# Plot 6: BNF contribution\\nax = axes[1, 2]\\nax.plot(single['days'], single['fixed'], color='#06b6d4', linewidth=2.5)\\nax.fill_between(single['days'], 0, single['fixed'], color='#06b6d4', alpha=0.1)\\nax.set_xlabel('Days', color='white')\\nax.set_ylabel('Cumulative BNF (kg N/ha)', color='white')\\nax.set_title(f'Biological N Fixation: {single[\"fixed\"][-1]:.0f} kg/ha', color='white', fontsize=11)\\nax.annotate('Cyanobacteria +\\nAzolla contribution', xy=(80, single['fixed'][80]),\\n            color='#06b6d4', fontsize=9, fontweight='bold')\\n\\nplt.tight_layout()\\nplt.show()\\n\\nprint("Paddy Nitrogen Cycle Model")\\nprint("=" * 50)\\nprint()\\nprint(f"Applied: 120 kg N/ha | Season: 120 days")\\nprint(f"BNF contribution: {single['fixed'][-1]:.0f} kg N/ha")\\nprint()\\nprint(f"{'Scenario':<25} {'Plant N':>8} {'NUE':>6} {'Denit':>8} {'Vol':>6}")\\nprint("-" * 55)\\nfor name, data in [('Single application', single), ('3-split', split3), ('Low N 2-split', low_n)]:\\n    print(f"{name:<25} {data['plant'][-1]:>7.0f} {data['NUE']:>5.0f}% {data['denit'][-1]:>7.0f} {data['vol'][-1]:>5.0f}")\\nprint()\\nprint("Split application increases NUE by matching N supply to plant demand.")\\nprint("This is the simplest and most effective N management strategy.")`,
+      code: `import numpy as np\
+import matplotlib.pyplot as plt\
+\
+np.random.seed(42)\
+\
+# Nitrogen cycle model for flooded rice paddy\
+def paddy_nitrogen_model(days=120, N_applied_kg_ha=120, n_splits=1):\
+    """Simulate nitrogen transformations over a rice growing season."""\
+    dt = 1  # daily timestep\
+    n_steps = days\
+    \
+    # State variables (kg N/ha)\
+    NH4_soil = np.zeros(n_steps)\
+    NO3_soil = np.zeros(n_steps)\
+    N_plant = np.zeros(n_steps)\
+    N_lost_denit = np.zeros(n_steps)\
+    N_lost_vol = np.zeros(n_steps)\
+    N_lost_leach = np.zeros(n_steps)\
+    N_fixed = np.zeros(n_steps)\
+    \
+    # Initial conditions\
+    NH4_soil[0] = 10  # background soil N\
+    \
+    # Apply fertilizer\
+    fert_days = np.linspace(10, 80, n_splits).astype(int) if n_splits > 1 else [10]\
+    fert_per_split = N_applied_kg_ha / n_splits\
+    \
+    # Rate constants\
+    k_nitrification = 0.08    # day⁻¹ (NH4 → NO3)\
+    k_denitrification = 0.12  # day⁻¹ (NO3 → N2)\
+    k_volatilization = 0.03   # day⁻¹ (NH4 → NH3 gas)\
+    k_leaching = 0.02         # day⁻¹ (NO3 → groundwater)\
+    k_fixation = 0.5          # kg N/ha/day (BNF)\
+    k_mineralization = 0.3    # kg N/ha/day\
+    \
+    for t in range(1, n_steps):\
+        # Add fertilizer\
+        fert_input = fert_per_split if t in fert_days else 0\
+        \
+        # Plant uptake rate (sigmoid growth curve)\
+        growth_phase = 1 / (1 + np.exp(-0.05 * (t - 60)))  # peaks mid-season\
+        uptake_rate = 1.5 * growth_phase  # kg N/ha/day max\
+        \
+        # Transformations\
+        nitrification = k_nitrification * NH4_soil[t-1]\
+        denitrification = k_denitrification * NO3_soil[t-1]\
+        volatilization = k_volatilization * NH4_soil[t-1]\
+        leaching = k_leaching * NO3_soil[t-1]\
+        fixation = k_fixation * (1 + 0.3 * np.sin(2 * np.pi * t / 30))  # seasonal\
+        mineralization = k_mineralization\
+        \
+        # Plant uptake (prefers NH4+)\
+        nh4_uptake = min(uptake_rate * 0.7, NH4_soil[t-1] * 0.3)\
+        no3_uptake = min(uptake_rate * 0.3, NO3_soil[t-1] * 0.3)\
+        \
+        # Update state\
+        NH4_soil[t] = max(0, NH4_soil[t-1] + fert_input + fixation + mineralization\
+                          - nitrification - volatilization - nh4_uptake)\
+        NO3_soil[t] = max(0, NO3_soil[t-1] + nitrification\
+                          - denitrification - leaching - no3_uptake)\
+        N_plant[t] = N_plant[t-1] + nh4_uptake + no3_uptake\
+        N_lost_denit[t] = N_lost_denit[t-1] + denitrification\
+        N_lost_vol[t] = N_lost_vol[t-1] + volatilization\
+        N_lost_leach[t] = N_lost_leach[t-1] + leaching\
+        N_fixed[t] = N_fixed[t-1] + fixation\
+    \
+    nue = N_plant[-1] / N_applied_kg_ha * 100\
+    return {\
+        'days': np.arange(n_steps), 'NH4': NH4_soil, 'NO3': NO3_soil,\
+        'plant': N_plant, 'denit': N_lost_denit, 'vol': N_lost_vol,\
+        'leach': N_lost_leach, 'fixed': N_fixed, 'NUE': nue,\
+    }\
+\
+# Run scenarios\
+single = paddy_nitrogen_model(n_splits=1)\
+split3 = paddy_nitrogen_model(n_splits=3)\
+low_n = paddy_nitrogen_model(N_applied_kg_ha=60, n_splits=2)\
+\
+fig, axes = plt.subplots(2, 3, figsize=(15, 9))\
+fig.patch.set_facecolor('#1f2937')\
+fig.suptitle('Nitrogen Cycling in Flooded Rice Paddies', color='white', fontsize=14, fontweight='bold', y=0.98)\
+\
+for ax in axes.flat:\
+    ax.set_facecolor('#111827')\
+    ax.tick_params(colors='gray')\
+\
+# Plot 1: N pools over time\
+ax = axes[0, 0]\
+ax.plot(single['days'], single['NH4'], color='#22c55e', linewidth=2, label='NH₄⁺ soil')\
+ax.plot(single['days'], single['NO3'], color='#3b82f6', linewidth=2, label='NO₃⁻ soil')\
+ax.plot(single['days'], single['plant'], color='#a855f7', linewidth=2, label='Plant N')\
+ax.set_xlabel('Days after transplanting', color='white')\
+ax.set_ylabel('N (kg/ha)', color='white')\
+ax.set_title('Nitrogen Pools (single application)', color='white', fontsize=11)\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 2: N losses\
+ax = axes[0, 1]\
+ax.fill_between(single['days'], 0, single['denit'], color='#ef4444', alpha=0.7, label='Denitrification')\
+ax.fill_between(single['days'], single['denit'], single['denit']+single['vol'],\
+                color='#f59e0b', alpha=0.7, label='Volatilization')\
+ax.fill_between(single['days'], single['denit']+single['vol'],\
+                single['denit']+single['vol']+single['leach'],\
+                color='#64748b', alpha=0.7, label='Leaching')\
+ax.set_xlabel('Days', color='white')\
+ax.set_ylabel('Cumulative N loss (kg/ha)', color='white')\
+ax.set_title('Nitrogen Loss Pathways', color='white', fontsize=11)\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 3: NUE comparison\
+ax = axes[0, 2]\
+scenarios = ['Single\
+application', '3-split\
+application', 'Low N\
+(60 kg, 2-split)']\
+nues = [single['NUE'], split3['NUE'], low_n['NUE']]\
+colors_nue = ['#ef4444', '#22c55e', '#3b82f6']\
+ax.bar(range(len(scenarios)), nues, color=colors_nue, edgecolor='none', width=0.6)\
+ax.set_xticks(range(len(scenarios)))\
+ax.set_xticklabels(scenarios, color='white', fontsize=9)\
+ax.set_ylabel('Nitrogen Use Efficiency (%)', color='white')\
+ax.set_title('NUE by Management Strategy', color='white', fontsize=11)\
+for i, n in enumerate(nues):\
+    ax.text(i, n + 1, f'{n:.0f}%', ha='center', color='white', fontsize=12, fontweight='bold')\
+\
+# Plot 4: Split vs single application\
+ax = axes[1, 0]\
+ax.plot(single['days'], single['plant'], color='#ef4444', linewidth=2, label=f'Single (NUE={single[\"NUE\"]:.0f}%)')\
+ax.plot(split3['days'], split3['plant'], color='#22c55e', linewidth=2, label=f'3-split (NUE={split3[\"NUE\"]:.0f}%)')\
+ax.set_xlabel('Days', color='white')\
+ax.set_ylabel('Plant N uptake (kg/ha)', color='white')\
+ax.set_title('Plant N Uptake: Split vs Single', color='white', fontsize=11)\
+ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 5: N budget pie chart\
+ax = axes[1, 1]\
+total_in = 120 + single['fixed'][-1]\
+budget = [single['plant'][-1], single['denit'][-1], single['vol'][-1], single['leach'][-1],\
+          total_in - single['plant'][-1] - single['denit'][-1] - single['vol'][-1] - single['leach'][-1]]\
+labels = ['Plant uptake', 'Denitrification', 'Volatilization', 'Leaching', 'Soil residual']\
+colors_b = ['#22c55e', '#ef4444', '#f59e0b', '#64748b', '#3b82f6']\
+ax.pie([max(0, b) for b in budget], labels=labels, autopct='%1.0f%%',\
+       colors=colors_b, textprops={'color': 'white', 'fontsize': 8})\
+ax.set_title('Nitrogen Budget (120 kg N/ha)', color='white', fontsize=11)\
+\
+# Plot 6: BNF contribution\
+ax = axes[1, 2]\
+ax.plot(single['days'], single['fixed'], color='#06b6d4', linewidth=2.5)\
+ax.fill_between(single['days'], 0, single['fixed'], color='#06b6d4', alpha=0.1)\
+ax.set_xlabel('Days', color='white')\
+ax.set_ylabel('Cumulative BNF (kg N/ha)', color='white')\
+ax.set_title(f'Biological N Fixation: {single[\"fixed\"][-1]:.0f} kg/ha', color='white', fontsize=11)\
+ax.annotate('Cyanobacteria +\
+Azolla contribution', xy=(80, single['fixed'][80]),\
+            color='#06b6d4', fontsize=9, fontweight='bold')\
+\
+plt.tight_layout()\
+plt.show()\
+\
+print("Paddy Nitrogen Cycle Model")\
+print("=" * 50)\
+print()\
+print(f"Applied: 120 kg N/ha | Season: 120 days")\
+print(f"BNF contribution: {single['fixed'][-1]:.0f} kg N/ha")\
+print()\
+print(f"{'Scenario':<25} {'Plant N':>8} {'NUE':>6} {'Denit':>8} {'Vol':>6}")\
+print("-" * 55)\
+for name, data in [('Single application', single), ('3-split', split3), ('Low N 2-split', low_n)]:\
+    print(f"{name:<25} {data['plant'][-1]:>7.0f} {data['NUE']:>5.0f}% {data['denit'][-1]:>7.0f} {data['vol'][-1]:>5.0f}")\
+print()\
+print("Split application increases NUE by matching N supply to plant demand.")\
+print("This is the simplest and most effective N management strategy.")`,
       challenge: 'Add a nitrification inhibitor (e.g., DCD) to the model: it reduces the nitrification rate by 60% for 30 days after each application. How does this affect NUE and N₂O emissions? N₂O is produced as a byproduct of both nitrification and denitrification — model both pathways.',
       successHint: 'Nitrogen management in rice paddies is a global challenge. Improving NUE from 35% to 50% would save ~20 million tonnes of synthetic N fertilizer annually, reducing costs, greenhouse gas emissions, and water pollution. The science is understood; the challenge is implementation at scale.',
     },
@@ -40,7 +338,155 @@ export default function RicePlantedLevel3() {
       checkQuestion: 'If alternate wetting and drying (AWD) reduces methane emissions by 40% but also reduces yield by 5%, is it worth it from a climate perspective? Assume 5 tonnes/ha yield and 300 kg CH₄/ha/season emissions.',
       checkAnswer: 'AWD reduces CH₄ from 300 to 180 kg/ha (saving 120 kg CH₄). Methane has a GWP of 28 (over 100 years), so the climate benefit is 120 × 28 = 3,360 kg CO₂e/ha. The yield loss is 5 tonnes × 5% = 250 kg rice/ha. At ~$0.30/kg rice, that is $75/ha income loss. At a social cost of carbon of $50/tonne CO₂e, the climate benefit is worth $168/ha. So yes, AWD is worth it — the climate benefit ($168) exceeds the yield cost ($75). This is why AWD is one of the most recommended climate-smart rice practices.',
       codeIntro: 'Model methane production, oxidation, and emission from rice paddies under different water management regimes.',
-      code: `import numpy as np\\nimport matplotlib.pyplot as plt\\n\\nnp.random.seed(42)\\n\\n# Methane emission model for rice paddies\\ndef methane_model(days=120, water_regime='continuous', straw_incorporated=True):\\n    """Simulate CH4 production, oxidation, and emission."""\\n    dt = 1\\n    CH4_produced = np.zeros(days)\\n    CH4_oxidized = np.zeros(days)\\n    CH4_emitted = np.zeros(days)\\n    water_level = np.zeros(days)  # cm\\n    soil_temp = np.zeros(days)\\n    \\n    for t in range(days):\\n        # Soil temperature (seasonal curve)\\n        soil_temp[t] = 25 + 5 * np.sin(2 * np.pi * (t + 30) / 365)\\n        \\n        # Water management\\n        if water_regime == 'continuous':\\n            water_level[t] = 5  # 5 cm standing water\\n        elif water_regime == 'AWD':\\n            cycle = t % 14  # 14-day cycle\\n            water_level[t] = 5 if cycle < 10 else 0  # flood 10, drain 4\\n        elif water_regime == 'midseason_drain':\\n            water_level[t] = 0 if 40 < t < 55 else 5\\n        \\n        # CH4 production (methanogenesis)\\n        # Higher when: warm, flooded, organic matter available\\n        temp_factor = np.exp(0.1 * (soil_temp[t] - 25))  # Q10 ≈ 2.7\\n        flood_factor = 1.0 if water_level[t] > 0 else 0.05  # 95% reduction when drained\\n        substrate_factor = 1.3 if straw_incorporated else 0.8  # straw = more substrate\\n        # Root exudates increase mid-season\\n        root_factor = 0.5 + 0.5 * (1 / (1 + np.exp(-0.1 * (t - 50))))\\n        \\n        CH4_produced[t] = 3.0 * temp_factor * flood_factor * substrate_factor * root_factor\\n        \\n        # CH4 oxidation (methanotrophs at aerobic interfaces)\\n        oxidation_rate = 0.1 if water_level[t] > 0 else 0.6  # much higher when drained\\n        CH4_oxidized[t] = CH4_produced[t] * oxidation_rate\\n        \\n        # Net emission\\n        CH4_emitted[t] = max(0, CH4_produced[t] - CH4_oxidized[t])\\n    \\n    total_emission_kg_ha = np.sum(CH4_emitted)  # simplified\\n    return {\\n        'days': np.arange(days), 'produced': CH4_produced, 'oxidized': CH4_oxidized,\\n        'emitted': CH4_emitted, 'water': water_level, 'temp': soil_temp,\\n        'total_kg_ha': total_emission_kg_ha,\\n    }\\n\\ncontinuous = methane_model('continuous')\\nawd = methane_model(water_regime='AWD')\\nmid_drain = methane_model(water_regime='midseason_drain')\\nno_straw = methane_model(straw_incorporated=False)\\n\\nfig, axes = plt.subplots(2, 3, figsize=(15, 9))\\nfig.patch.set_facecolor('#1f2937')\\nfig.suptitle('Methane Emissions from Rice Paddies: Water Management Impact', color='white', fontsize=14, fontweight='bold', y=0.98)\\n\\nfor ax in axes.flat:\\n    ax.set_facecolor('#111827')\\n    ax.tick_params(colors='gray')\\n\\n# Plot 1: Daily emissions under continuous flooding\\nax = axes[0, 0]\\nax.fill_between(continuous['days'], 0, continuous['produced'], color='#ef4444', alpha=0.3, label='Produced')\\nax.fill_between(continuous['days'], 0, continuous['emitted'], color='#ef4444', alpha=0.7, label='Emitted')\\nax.plot(continuous['days'], continuous['oxidized'], color='#22c55e', linewidth=1.5, label='Oxidized')\\nax.set_xlabel('Days', color='white')\\nax.set_ylabel('CH₄ flux (kg/ha/day)', color='white')\\nax.set_title('Continuous Flooding', color='white', fontsize=11)\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 2: AWD effect on emissions\\nax = axes[0, 1]\\nax.fill_between(awd['days'], 0, awd['emitted'], color='#3b82f6', alpha=0.7, label='AWD emissions')\\nax.plot(awd['days'], awd['water'] / 5 * max(awd['emitted']), color='#06b6d4',\\n        linewidth=1, linestyle='--', alpha=0.5, label='Water level (scaled)')\\nax.set_xlabel('Days', color='white')\\nax.set_ylabel('CH₄ flux (kg/ha/day)', color='white')\\nax.set_title(f'AWD: {(1-awd[\"total_kg_ha\"]/continuous[\"total_kg_ha\"])*100:.0f}% reduction', color='white', fontsize=11)\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 3: Cumulative emissions comparison\\nax = axes[0, 2]\\nfor data, name, color in [\\n    (continuous, 'Continuous', '#ef4444'),\\n    (awd, 'AWD', '#3b82f6'),\\n    (mid_drain, 'Mid-drain', '#22c55e'),\\n    (no_straw, 'No straw', '#f59e0b')]:\\n    cum = np.cumsum(data['emitted'])\\n    ax.plot(data['days'], cum, color=color, linewidth=2.5, label=f'{name}: {data[\"total_kg_ha\"]:.0f} kg')\\nax.set_xlabel('Days', color='white')\\nax.set_ylabel('Cumulative CH₄ (kg/ha)', color='white')\\nax.set_title('Cumulative Emissions by Strategy', color='white', fontsize=11)\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 4: Climate impact (CO2e)\\nax = axes[1, 0]\\nregimes = ['Continuous', 'AWD', 'Mid-drain', 'No straw']\\ntotals = [continuous['total_kg_ha'], awd['total_kg_ha'], mid_drain['total_kg_ha'], no_straw['total_kg_ha']]\\nco2e = [t * 28 / 1000 for t in totals]  # tonnes CO2e per ha\\ncolors_r = ['#ef4444', '#3b82f6', '#22c55e', '#f59e0b']\\nax.bar(range(len(regimes)), co2e, color=colors_r, edgecolor='none', width=0.6)\\nax.set_xticks(range(len(regimes)))\\nax.set_xticklabels(regimes, color='white', fontsize=9)\\nax.set_ylabel('Tonnes CO₂e/ha/season', color='white')\\nax.set_title('Climate Impact (GWP₁₀₀ = 28)', color='white', fontsize=11)\\nfor i, c in enumerate(co2e):\\n    ax.text(i, c + 0.2, f'{c:.1f}', ha='center', color='white', fontsize=10)\\n\\n# Plot 5: Global rice CH4 context\\nax = axes[1, 1]\\nsources = ['Fossil fuels', 'Livestock', 'Rice paddies', 'Biomass\\nburning', 'Waste', 'Wetlands']\\nch4_mt = [100, 90, 30, 25, 60, 180]\\ncolors_s = ['#64748b', '#a855f7', '#ef4444', '#f59e0b', '#3b82f6', '#22c55e']\\nax.barh(range(len(sources)), ch4_mt, color=colors_s, edgecolor='none', height=0.6)\\nax.set_yticks(range(len(sources)))\\nax.set_yticklabels(sources, color='white', fontsize=9)\\nax.set_xlabel('CH₄ emissions (Mt/year)', color='white')\\nax.set_title('Global Methane Sources', color='white', fontsize=11)\\n\\n# Plot 6: Emission pathway breakdown\\nax = axes[1, 2]\\npathways = ['Plant\\ntransport', 'Ebullition', 'Diffusion']\\npcts = [85, 10, 5]\\ncolors_p = ['#22c55e', '#f59e0b', '#3b82f6']\\nax.pie(pcts, labels=pathways, autopct='%1.0f%%', colors=colors_p,\\n       textprops={'color': 'white', 'fontsize': 10})\\nax.set_title('CH₄ Emission Pathways', color='white', fontsize=11)\\n\\nplt.tight_layout()\\nplt.show()\\n\\nprint("Rice Paddy Methane Emissions")\\nprint("=" * 50)\\nprint()\\nprint(f"{'Regime':<15} {'CH4 (kg/ha)':>12} {'CO2e (t/ha)':>12} {'Reduction':>10}")\\nprint("-" * 50)\\nfor name, data in [('Continuous', continuous), ('AWD', awd), ('Mid-drain', mid_drain), ('No straw', no_straw)]:\\n    red = (1 - data['total_kg_ha'] / continuous['total_kg_ha']) * 100\\n    print(f"{name:<15} {data['total_kg_ha']:>12.0f} {data['total_kg_ha']*28/1000:>12.1f} {red:>9.0f}%")\\nprint()\\nprint("AWD is the most practical mitigation: 35-45% CH₄ reduction")\\nprint("with only 0-5% yield penalty. Adopted on millions of hectares in Asia.")`,
+      code: `import numpy as np\
+import matplotlib.pyplot as plt\
+\
+np.random.seed(42)\
+\
+# Methane emission model for rice paddies\
+def methane_model(days=120, water_regime='continuous', straw_incorporated=True):\
+    """Simulate CH4 production, oxidation, and emission."""\
+    dt = 1\
+    CH4_produced = np.zeros(days)\
+    CH4_oxidized = np.zeros(days)\
+    CH4_emitted = np.zeros(days)\
+    water_level = np.zeros(days)  # cm\
+    soil_temp = np.zeros(days)\
+    \
+    for t in range(days):\
+        # Soil temperature (seasonal curve)\
+        soil_temp[t] = 25 + 5 * np.sin(2 * np.pi * (t + 30) / 365)\
+        \
+        # Water management\
+        if water_regime == 'continuous':\
+            water_level[t] = 5  # 5 cm standing water\
+        elif water_regime == 'AWD':\
+            cycle = t % 14  # 14-day cycle\
+            water_level[t] = 5 if cycle < 10 else 0  # flood 10, drain 4\
+        elif water_regime == 'midseason_drain':\
+            water_level[t] = 0 if 40 < t < 55 else 5\
+        \
+        # CH4 production (methanogenesis)\
+        # Higher when: warm, flooded, organic matter available\
+        temp_factor = np.exp(0.1 * (soil_temp[t] - 25))  # Q10 ≈ 2.7\
+        flood_factor = 1.0 if water_level[t] > 0 else 0.05  # 95% reduction when drained\
+        substrate_factor = 1.3 if straw_incorporated else 0.8  # straw = more substrate\
+        # Root exudates increase mid-season\
+        root_factor = 0.5 + 0.5 * (1 / (1 + np.exp(-0.1 * (t - 50))))\
+        \
+        CH4_produced[t] = 3.0 * temp_factor * flood_factor * substrate_factor * root_factor\
+        \
+        # CH4 oxidation (methanotrophs at aerobic interfaces)\
+        oxidation_rate = 0.1 if water_level[t] > 0 else 0.6  # much higher when drained\
+        CH4_oxidized[t] = CH4_produced[t] * oxidation_rate\
+        \
+        # Net emission\
+        CH4_emitted[t] = max(0, CH4_produced[t] - CH4_oxidized[t])\
+    \
+    total_emission_kg_ha = np.sum(CH4_emitted)  # simplified\
+    return {\
+        'days': np.arange(days), 'produced': CH4_produced, 'oxidized': CH4_oxidized,\
+        'emitted': CH4_emitted, 'water': water_level, 'temp': soil_temp,\
+        'total_kg_ha': total_emission_kg_ha,\
+    }\
+\
+continuous = methane_model('continuous')\
+awd = methane_model(water_regime='AWD')\
+mid_drain = methane_model(water_regime='midseason_drain')\
+no_straw = methane_model(straw_incorporated=False)\
+\
+fig, axes = plt.subplots(2, 3, figsize=(15, 9))\
+fig.patch.set_facecolor('#1f2937')\
+fig.suptitle('Methane Emissions from Rice Paddies: Water Management Impact', color='white', fontsize=14, fontweight='bold', y=0.98)\
+\
+for ax in axes.flat:\
+    ax.set_facecolor('#111827')\
+    ax.tick_params(colors='gray')\
+\
+# Plot 1: Daily emissions under continuous flooding\
+ax = axes[0, 0]\
+ax.fill_between(continuous['days'], 0, continuous['produced'], color='#ef4444', alpha=0.3, label='Produced')\
+ax.fill_between(continuous['days'], 0, continuous['emitted'], color='#ef4444', alpha=0.7, label='Emitted')\
+ax.plot(continuous['days'], continuous['oxidized'], color='#22c55e', linewidth=1.5, label='Oxidized')\
+ax.set_xlabel('Days', color='white')\
+ax.set_ylabel('CH₄ flux (kg/ha/day)', color='white')\
+ax.set_title('Continuous Flooding', color='white', fontsize=11)\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 2: AWD effect on emissions\
+ax = axes[0, 1]\
+ax.fill_between(awd['days'], 0, awd['emitted'], color='#3b82f6', alpha=0.7, label='AWD emissions')\
+ax.plot(awd['days'], awd['water'] / 5 * max(awd['emitted']), color='#06b6d4',\
+        linewidth=1, linestyle='--', alpha=0.5, label='Water level (scaled)')\
+ax.set_xlabel('Days', color='white')\
+ax.set_ylabel('CH₄ flux (kg/ha/day)', color='white')\
+ax.set_title(f'AWD: {(1-awd[\"total_kg_ha\"]/continuous[\"total_kg_ha\"])*100:.0f}% reduction', color='white', fontsize=11)\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 3: Cumulative emissions comparison\
+ax = axes[0, 2]\
+for data, name, color in [\
+    (continuous, 'Continuous', '#ef4444'),\
+    (awd, 'AWD', '#3b82f6'),\
+    (mid_drain, 'Mid-drain', '#22c55e'),\
+    (no_straw, 'No straw', '#f59e0b')]:\
+    cum = np.cumsum(data['emitted'])\
+    ax.plot(data['days'], cum, color=color, linewidth=2.5, label=f'{name}: {data[\"total_kg_ha\"]:.0f} kg')\
+ax.set_xlabel('Days', color='white')\
+ax.set_ylabel('Cumulative CH₄ (kg/ha)', color='white')\
+ax.set_title('Cumulative Emissions by Strategy', color='white', fontsize=11)\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 4: Climate impact (CO2e)\
+ax = axes[1, 0]\
+regimes = ['Continuous', 'AWD', 'Mid-drain', 'No straw']\
+totals = [continuous['total_kg_ha'], awd['total_kg_ha'], mid_drain['total_kg_ha'], no_straw['total_kg_ha']]\
+co2e = [t * 28 / 1000 for t in totals]  # tonnes CO2e per ha\
+colors_r = ['#ef4444', '#3b82f6', '#22c55e', '#f59e0b']\
+ax.bar(range(len(regimes)), co2e, color=colors_r, edgecolor='none', width=0.6)\
+ax.set_xticks(range(len(regimes)))\
+ax.set_xticklabels(regimes, color='white', fontsize=9)\
+ax.set_ylabel('Tonnes CO₂e/ha/season', color='white')\
+ax.set_title('Climate Impact (GWP₁₀₀ = 28)', color='white', fontsize=11)\
+for i, c in enumerate(co2e):\
+    ax.text(i, c + 0.2, f'{c:.1f}', ha='center', color='white', fontsize=10)\
+\
+# Plot 5: Global rice CH4 context\
+ax = axes[1, 1]\
+sources = ['Fossil fuels', 'Livestock', 'Rice paddies', 'Biomass\
+burning', 'Waste', 'Wetlands']\
+ch4_mt = [100, 90, 30, 25, 60, 180]\
+colors_s = ['#64748b', '#a855f7', '#ef4444', '#f59e0b', '#3b82f6', '#22c55e']\
+ax.barh(range(len(sources)), ch4_mt, color=colors_s, edgecolor='none', height=0.6)\
+ax.set_yticks(range(len(sources)))\
+ax.set_yticklabels(sources, color='white', fontsize=9)\
+ax.set_xlabel('CH₄ emissions (Mt/year)', color='white')\
+ax.set_title('Global Methane Sources', color='white', fontsize=11)\
+\
+# Plot 6: Emission pathway breakdown\
+ax = axes[1, 2]\
+pathways = ['Plant\
+transport', 'Ebullition', 'Diffusion']\
+pcts = [85, 10, 5]\
+colors_p = ['#22c55e', '#f59e0b', '#3b82f6']\
+ax.pie(pcts, labels=pathways, autopct='%1.0f%%', colors=colors_p,\
+       textprops={'color': 'white', 'fontsize': 10})\
+ax.set_title('CH₄ Emission Pathways', color='white', fontsize=11)\
+\
+plt.tight_layout()\
+plt.show()\
+\
+print("Rice Paddy Methane Emissions")\
+print("=" * 50)\
+print()\
+print(f"{'Regime':<15} {'CH4 (kg/ha)':>12} {'CO2e (t/ha)':>12} {'Reduction':>10}")\
+print("-" * 50)\
+for name, data in [('Continuous', continuous), ('AWD', awd), ('Mid-drain', mid_drain), ('No straw', no_straw)]:\
+    red = (1 - data['total_kg_ha'] / continuous['total_kg_ha']) * 100\
+    print(f"{name:<15} {data['total_kg_ha']:>12.0f} {data['total_kg_ha']*28/1000:>12.1f} {red:>9.0f}%")\
+print()\
+print("AWD is the most practical mitigation: 35-45% CH₄ reduction")\
+print("with only 0-5% yield penalty. Adopted on millions of hectares in Asia.")`,
       challenge: 'Model the N₂O trade-off: AWD reduces CH₄ but can increase N₂O emissions (another greenhouse gas with GWP=265) during the drying phases when nitrification-denitrification is enhanced. Calculate the net climate benefit including both CH₄ reduction and N₂O increase. Is AWD still a net climate win?',
       successHint: 'Rice methane is a solvable climate problem. AWD, mid-season drainage, and straw management can reduce emissions by 30-50% with minimal yield loss. The challenge is adoption at scale — there are 160 million hectares of rice paddies worldwide, and most smallholder farmers have never heard of AWD.',
     },
@@ -52,7 +498,150 @@ export default function RicePlantedLevel3() {
       checkQuestion: 'The sd1 mutation reduces gibberellin levels, making rice shorter. If you applied exogenous gibberellin to an sd1 mutant rice plant, what would happen?',
       checkAnswer: 'The plant would grow taller, partially restoring the tall phenotype. The sd1 mutation reduces GA biosynthesis, not GA response. The GA receptor and signaling pathway are intact, so exogenous GA can "bypass" the mutation. This confirms that sd1 is a biosynthesis mutant, not a signaling mutant. In practice, this means the semi-dwarf trait can be overcome by GA application — which is how rice breeders test whether a new dwarf mutant is in the GA pathway or an alternative pathway.',
       codeIntro: 'Model the genetics of the Green Revolution: semi-dwarf gene effects on yield, lodging resistance, and fertilizer response.',
-      code: `import numpy as np\\nimport matplotlib.pyplot as plt\\n\\nnp.random.seed(42)\\n\\n# Green Revolution genetics model\\n\\ndef rice_yield_model(height_cm, fertilizer_kg_ha, variety='modern'):\\n    """Model rice yield as function of plant height and fertilizer input."""\\n    # Photosynthetic capacity (higher for erect-leaf modern varieties)\\n    if variety == 'modern':\\n        photo_capacity = 1.0\\n    else:\\n        photo_capacity = 0.7  # traditional droopy leaves shade lower leaves\\n    \\n    # Harvest index: fraction of biomass that is grain\\n    # Shorter plants have higher HI (less stem, more grain)\\n    HI = 0.55 - 0.002 * (height_cm - 100)  # modern ~0.50, traditional ~0.35\\n    HI = np.clip(HI, 0.25, 0.55)\\n    \\n    # Fertilizer response (diminishing returns)\\n    biomass = 8000 * photo_capacity * (1 - np.exp(-fertilizer_kg_ha / 80))  # kg/ha total\\n    \\n    # Lodging risk: tall + heavy grain = falls over\\n    lodging_risk = 1 / (1 + np.exp(-0.02 * (height_cm * fertilizer_kg_ha / 100 - 200)))\\n    lodging_loss = lodging_risk * 0.5  # up to 50% yield loss from lodging\\n    \\n    grain_yield = biomass * HI * (1 - lodging_loss) / 1000  # tonnes/ha\\n    return grain_yield, HI, lodging_risk\\n\\nfertilizer_range = np.linspace(0, 200, 100)\\n\\nfig, axes = plt.subplots(2, 3, figsize=(15, 9))\\nfig.patch.set_facecolor('#1f2937')\\nfig.suptitle('Green Revolution Genetics: Semi-Dwarf Rice', color='white', fontsize=14, fontweight='bold', y=0.98)\\n\\nfor ax in axes.flat:\\n    ax.set_facecolor('#111827')\\n    ax.tick_params(colors='gray')\\n\\n# Plot 1: Yield vs fertilizer for different heights\\nax = axes[0, 0]\\nfor height, color, label in [(170, '#ef4444', 'Traditional (170cm)'),\\n                               (130, '#f59e0b', 'Semi-tall (130cm)'),\\n                               (100, '#22c55e', 'Semi-dwarf (100cm)')]:\\n    yields = [rice_yield_model(height, f, 'modern' if height <= 130 else 'traditional')[0]\\n              for f in fertilizer_range]\\n    ax.plot(fertilizer_range, yields, color=color, linewidth=2.5, label=label)\\nax.set_xlabel('Fertilizer N (kg/ha)', color='white')\\nax.set_ylabel('Grain yield (t/ha)', color='white')\\nax.set_title('Yield Response: Height Matters', color='white', fontsize=11)\\nax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 2: Lodging risk\\nax = axes[0, 1]\\nfor height, color, label in [(170, '#ef4444', '170cm'), (130, '#f59e0b', '130cm'), (100, '#22c55e', '100cm')]:\\n    lodging = [rice_yield_model(height, f)[2] * 100 for f in fertilizer_range]\\n    ax.plot(fertilizer_range, lodging, color=color, linewidth=2.5, label=label)\\nax.set_xlabel('Fertilizer N (kg/ha)', color='white')\\nax.set_ylabel('Lodging risk (%)', color='white')\\nax.set_title('Lodging: Tall Plants Fall Over', color='white', fontsize=11)\\nax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 3: Harvest index comparison\\nax = axes[0, 2]\\nheights = np.linspace(80, 180, 50)\\nhis = [0.55 - 0.002 * (h - 100) for h in heights]\\nhis = np.clip(his, 0.25, 0.55)\\nax.plot(heights, his, color='#a855f7', linewidth=2.5)\\nax.fill_between(heights, 0, his, color='#a855f7', alpha=0.1)\\nax.axhline(0.50, color='#22c55e', linewidth=1, linestyle='--', label='Modern (HI~0.50)')\\nax.axhline(0.35, color='#ef4444', linewidth=1, linestyle='--', label='Traditional (HI~0.35)')\\nax.set_xlabel('Plant height (cm)', color='white')\\nax.set_ylabel('Harvest Index', color='white')\\nax.set_title('Harvest Index vs Height', color='white', fontsize=11)\\nax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 4: Historical yield timeline\\nax = axes[1, 0]\\nyears = [1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]\\nyields_global = [2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 3.9, 4.0, 4.2, 4.3, 4.4, 4.6, 4.7]\\nyields_asia = [1.8, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 4.8, 5.0, 5.2, 5.3, 5.5, 5.6]\\nax.plot(years, yields_global, color='#3b82f6', linewidth=2.5, marker='o', markersize=5, label='Global avg')\\nax.plot(years, yields_asia, color='#22c55e', linewidth=2.5, marker='s', markersize=5, label='Asia avg')\\nax.axvline(1966, color='#f59e0b', linewidth=2, linestyle='--', label='IR8 release (1966)')\\nax.set_xlabel('Year', color='white')\\nax.set_ylabel('Rice yield (t/ha)', color='white')\\nax.set_title('Global Rice Yield Revolution', color='white', fontsize=11)\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 5: Genetic diversity loss\\nax = axes[1, 1]\\ndecades = ['1950s', '1970s', '1990s', '2010s']\\nvarieties_in_use = [10000, 5000, 2000, 500]\\nax.bar(range(len(decades)), varieties_in_use, color=['#22c55e', '#f59e0b', '#ef4444', '#7f1d1d'],\\n       edgecolor='none', width=0.6)\\nax.set_xticks(range(len(decades)))\\nax.set_xticklabels(decades, color='white', fontsize=10)\\nax.set_ylabel('Rice varieties in active cultivation', color='white')\\nax.set_title('Genetic Diversity Loss', color='white', fontsize=11)\\nfor i, v in enumerate(varieties_in_use):\\n    ax.text(i, v + 200, f'{v:,}', ha='center', color='white', fontsize=10)\\nax.annotate('95% reduction\\nin 60 years', xy=(2.5, 3000), color='#ef4444',\\n            fontsize=10, fontweight='bold')\\n\\n# Plot 6: Key genes of Green Revolution\\nax = axes[1, 2]\\nax.axis('off')\\ngenes = [\\n    ('sd1', 'Semi-dwarf', 'Gibberellin biosynthesis', 'Yield +200%'),\\n    ('Xa21', 'Blight resistance', 'Receptor kinase', 'Disease -90%'),\\n    ('Sub1A', 'Submergence tolerance', 'Ethylene response', 'Flood survival 14d'),\\n    ('SPIKE', 'More grains', 'Cytokinin signaling', 'Yield +15%'),\\n    ('OsSWEET', 'Blight susceptibility', 'Sugar transporter', 'CRISPR target'),\\n]\\nax.text(0.5, 0.95, 'Key Rice Genes', transform=ax.transAxes, ha='center',\\n        color='#f59e0b', fontsize=12, fontweight='bold')\\nfor i, (gene, trait, function, impact) in enumerate(genes):\\n    ax.text(0.05, 0.80 - i * 0.16, f'{gene}', transform=ax.transAxes,\\n            color='#22c55e', fontsize=11, fontweight='bold', fontfamily='monospace')\\n    ax.text(0.25, 0.80 - i * 0.16, f'{trait} | {function}', transform=ax.transAxes,\\n            color='white', fontsize=9)\\n    ax.text(0.25, 0.73 - i * 0.16, f'Impact: {impact}', transform=ax.transAxes,\\n            color='#f59e0b', fontsize=8)\\n\\nplt.tight_layout()\\nplt.show()\\n\\nprint("Green Revolution Genetics")\\nprint("=" * 50)\\nprint()\\nprint("IR8 (1966): The Miracle Rice")\\nprint("  Key gene: sd1 (semi-dwarf 1)")\\nprint("  Mechanism: reduced gibberellin → shorter stem")\\nprint("  Impact: yield from 2 to 6-10 t/ha")\\nprint()\\nprint("Yield model at 120 kg N/ha:")\\nfor h, name in [(170, 'Traditional'), (130, 'Semi-tall'), (100, 'Semi-dwarf')]:\\n    y, hi, lodge = rice_yield_model(h, 120, 'modern' if h <= 130 else 'traditional')\\n    print(f"  {name} ({h}cm): {y:.1f} t/ha (HI={hi:.2f}, lodge={lodge*100:.0f}%)")\\nprint()\\nprint("The Green Revolution saved ~1 billion people from famine.")\\nprint("The challenge now: sustaining yields while reducing environmental impact.")`,
+      code: `import numpy as np\
+import matplotlib.pyplot as plt\
+\
+np.random.seed(42)\
+\
+# Green Revolution genetics model\
+\
+def rice_yield_model(height_cm, fertilizer_kg_ha, variety='modern'):\
+    """Model rice yield as function of plant height and fertilizer input."""\
+    # Photosynthetic capacity (higher for erect-leaf modern varieties)\
+    if variety == 'modern':\
+        photo_capacity = 1.0\
+    else:\
+        photo_capacity = 0.7  # traditional droopy leaves shade lower leaves\
+    \
+    # Harvest index: fraction of biomass that is grain\
+    # Shorter plants have higher HI (less stem, more grain)\
+    HI = 0.55 - 0.002 * (height_cm - 100)  # modern ~0.50, traditional ~0.35\
+    HI = np.clip(HI, 0.25, 0.55)\
+    \
+    # Fertilizer response (diminishing returns)\
+    biomass = 8000 * photo_capacity * (1 - np.exp(-fertilizer_kg_ha / 80))  # kg/ha total\
+    \
+    # Lodging risk: tall + heavy grain = falls over\
+    lodging_risk = 1 / (1 + np.exp(-0.02 * (height_cm * fertilizer_kg_ha / 100 - 200)))\
+    lodging_loss = lodging_risk * 0.5  # up to 50% yield loss from lodging\
+    \
+    grain_yield = biomass * HI * (1 - lodging_loss) / 1000  # tonnes/ha\
+    return grain_yield, HI, lodging_risk\
+\
+fertilizer_range = np.linspace(0, 200, 100)\
+\
+fig, axes = plt.subplots(2, 3, figsize=(15, 9))\
+fig.patch.set_facecolor('#1f2937')\
+fig.suptitle('Green Revolution Genetics: Semi-Dwarf Rice', color='white', fontsize=14, fontweight='bold', y=0.98)\
+\
+for ax in axes.flat:\
+    ax.set_facecolor('#111827')\
+    ax.tick_params(colors='gray')\
+\
+# Plot 1: Yield vs fertilizer for different heights\
+ax = axes[0, 0]\
+for height, color, label in [(170, '#ef4444', 'Traditional (170cm)'),\
+                               (130, '#f59e0b', 'Semi-tall (130cm)'),\
+                               (100, '#22c55e', 'Semi-dwarf (100cm)')]:\
+    yields = [rice_yield_model(height, f, 'modern' if height <= 130 else 'traditional')[0]\
+              for f in fertilizer_range]\
+    ax.plot(fertilizer_range, yields, color=color, linewidth=2.5, label=label)\
+ax.set_xlabel('Fertilizer N (kg/ha)', color='white')\
+ax.set_ylabel('Grain yield (t/ha)', color='white')\
+ax.set_title('Yield Response: Height Matters', color='white', fontsize=11)\
+ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 2: Lodging risk\
+ax = axes[0, 1]\
+for height, color, label in [(170, '#ef4444', '170cm'), (130, '#f59e0b', '130cm'), (100, '#22c55e', '100cm')]:\
+    lodging = [rice_yield_model(height, f)[2] * 100 for f in fertilizer_range]\
+    ax.plot(fertilizer_range, lodging, color=color, linewidth=2.5, label=label)\
+ax.set_xlabel('Fertilizer N (kg/ha)', color='white')\
+ax.set_ylabel('Lodging risk (%)', color='white')\
+ax.set_title('Lodging: Tall Plants Fall Over', color='white', fontsize=11)\
+ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 3: Harvest index comparison\
+ax = axes[0, 2]\
+heights = np.linspace(80, 180, 50)\
+his = [0.55 - 0.002 * (h - 100) for h in heights]\
+his = np.clip(his, 0.25, 0.55)\
+ax.plot(heights, his, color='#a855f7', linewidth=2.5)\
+ax.fill_between(heights, 0, his, color='#a855f7', alpha=0.1)\
+ax.axhline(0.50, color='#22c55e', linewidth=1, linestyle='--', label='Modern (HI~0.50)')\
+ax.axhline(0.35, color='#ef4444', linewidth=1, linestyle='--', label='Traditional (HI~0.35)')\
+ax.set_xlabel('Plant height (cm)', color='white')\
+ax.set_ylabel('Harvest Index', color='white')\
+ax.set_title('Harvest Index vs Height', color='white', fontsize=11)\
+ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 4: Historical yield timeline\
+ax = axes[1, 0]\
+years = [1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]\
+yields_global = [2.0, 2.2, 2.5, 2.8, 3.2, 3.5, 3.9, 4.0, 4.2, 4.3, 4.4, 4.6, 4.7]\
+yields_asia = [1.8, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 4.8, 5.0, 5.2, 5.3, 5.5, 5.6]\
+ax.plot(years, yields_global, color='#3b82f6', linewidth=2.5, marker='o', markersize=5, label='Global avg')\
+ax.plot(years, yields_asia, color='#22c55e', linewidth=2.5, marker='s', markersize=5, label='Asia avg')\
+ax.axvline(1966, color='#f59e0b', linewidth=2, linestyle='--', label='IR8 release (1966)')\
+ax.set_xlabel('Year', color='white')\
+ax.set_ylabel('Rice yield (t/ha)', color='white')\
+ax.set_title('Global Rice Yield Revolution', color='white', fontsize=11)\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 5: Genetic diversity loss\
+ax = axes[1, 1]\
+decades = ['1950s', '1970s', '1990s', '2010s']\
+varieties_in_use = [10000, 5000, 2000, 500]\
+ax.bar(range(len(decades)), varieties_in_use, color=['#22c55e', '#f59e0b', '#ef4444', '#7f1d1d'],\
+       edgecolor='none', width=0.6)\
+ax.set_xticks(range(len(decades)))\
+ax.set_xticklabels(decades, color='white', fontsize=10)\
+ax.set_ylabel('Rice varieties in active cultivation', color='white')\
+ax.set_title('Genetic Diversity Loss', color='white', fontsize=11)\
+for i, v in enumerate(varieties_in_use):\
+    ax.text(i, v + 200, f'{v:,}', ha='center', color='white', fontsize=10)\
+ax.annotate('95% reduction\
+in 60 years', xy=(2.5, 3000), color='#ef4444',\
+            fontsize=10, fontweight='bold')\
+\
+# Plot 6: Key genes of Green Revolution\
+ax = axes[1, 2]\
+ax.axis('off')\
+genes = [\
+    ('sd1', 'Semi-dwarf', 'Gibberellin biosynthesis', 'Yield +200%'),\
+    ('Xa21', 'Blight resistance', 'Receptor kinase', 'Disease -90%'),\
+    ('Sub1A', 'Submergence tolerance', 'Ethylene response', 'Flood survival 14d'),\
+    ('SPIKE', 'More grains', 'Cytokinin signaling', 'Yield +15%'),\
+    ('OsSWEET', 'Blight susceptibility', 'Sugar transporter', 'CRISPR target'),\
+]\
+ax.text(0.5, 0.95, 'Key Rice Genes', transform=ax.transAxes, ha='center',\
+        color='#f59e0b', fontsize=12, fontweight='bold')\
+for i, (gene, trait, function, impact) in enumerate(genes):\
+    ax.text(0.05, 0.80 - i * 0.16, f'{gene}', transform=ax.transAxes,\
+            color='#22c55e', fontsize=11, fontweight='bold', fontfamily='monospace')\
+    ax.text(0.25, 0.80 - i * 0.16, f'{trait} | {function}', transform=ax.transAxes,\
+            color='white', fontsize=9)\
+    ax.text(0.25, 0.73 - i * 0.16, f'Impact: {impact}', transform=ax.transAxes,\
+            color='#f59e0b', fontsize=8)\
+\
+plt.tight_layout()\
+plt.show()\
+\
+print("Green Revolution Genetics")\
+print("=" * 50)\
+print()\
+print("IR8 (1966): The Miracle Rice")\
+print("  Key gene: sd1 (semi-dwarf 1)")\
+print("  Mechanism: reduced gibberellin → shorter stem")\
+print("  Impact: yield from 2 to 6-10 t/ha")\
+print()\
+print("Yield model at 120 kg N/ha:")\
+for h, name in [(170, 'Traditional'), (130, 'Semi-tall'), (100, 'Semi-dwarf')]:\
+    y, hi, lodge = rice_yield_model(h, 120, 'modern' if h <= 130 else 'traditional')\
+    print(f"  {name} ({h}cm): {y:.1f} t/ha (HI={hi:.2f}, lodge={lodge*100:.0f}%)")\
+print()\
+print("The Green Revolution saved ~1 billion people from famine.")\
+print("The challenge now: sustaining yields while reducing environmental impact.")`,
       challenge: 'Model the "yield plateau" problem: global rice yields have been increasing more slowly since 2000 (~0.5%/year vs 2%/year in the 1970s). Is this because we are approaching a biological ceiling, or because new varieties are not reaching farmers? Simulate both hypotheses and determine which better fits the historical data.',
       successHint: 'The Green Revolution is the greatest application of genetics to food security in human history. A single gene (sd1) enabled rice to feed billions. But the story is incomplete: genetic diversity was sacrificed for yield, and environmental costs were deferred. The next green revolution must be greener.',
     },
@@ -64,7 +653,186 @@ export default function RicePlantedLevel3() {
       checkQuestion: 'If India\'s rice production (120 million tonnes) has an average water footprint of 2,500 L/kg, what is the total water use? How does this compare to India\'s total available renewable freshwater (~1,900 km³/year)?',
       checkAnswer: 'Total water for rice: 120 × 10⁶ tonnes × 2,500 L/kg = 300 × 10¹² L = 300 km³/year. India\'s total renewable freshwater is ~1,900 km³/year, so rice alone uses about 16% of India\'s entire freshwater supply. When you add wheat, sugarcane, and other crops, agriculture uses ~80% of India\'s water. This is why water management in rice is not just an agronomic issue — it is a national security issue.',
       codeIntro: 'Build a water footprint calculator for rice production under different management systems and climatic conditions.',
-      code: `import numpy as np\\nimport matplotlib.pyplot as plt\\n\\nnp.random.seed(42)\\n\\n# Water footprint model for rice production\\ndef rice_water_footprint(days=120, irrigation_method='flood', rainfall_mm=800,\\n                         ET_mm_day=5, soil_percolation_mm_day=5):\\n    """Calculate water footprint components for rice production."""\\n    green_water = 0  # rainwater used by crop\\n    blue_water = 0   # irrigation water\\n    grey_water = 0   # pollution dilution\\n    \\n    daily_rain = rainfall_mm / days * (1 + 0.5 * np.sin(2 * np.pi * np.arange(days) / days))\\n    \\n    for day in range(days):\\n        # Crop water demand\\n        crop_ET = ET_mm_day * (0.5 + 0.5 * min(1, day / 40))  # increases with growth\\n        \\n        # Standing water maintenance\\n        if irrigation_method == 'flood':\\n            standing_water_need = 5  # mm/day to maintain 5cm\\n            percolation = soil_percolation_mm_day\\n        elif irrigation_method == 'AWD':\\n            cycle = day % 14\\n            standing_water_need = 5 if cycle < 10 else 0\\n            percolation = soil_percolation_mm_day * (1 if cycle < 10 else 0.3)\\n        elif irrigation_method == 'SRI':\\n            standing_water_need = 2  # minimal flooding\\n            percolation = soil_percolation_mm_day * 0.5\\n        elif irrigation_method == 'drip':\\n            standing_water_need = 0\\n            percolation = soil_percolation_mm_day * 0.2\\n        \\n        total_demand = crop_ET + standing_water_need + percolation\\n        rain_supply = daily_rain[day]\\n        \\n        green_used = min(rain_supply, total_demand)\\n        irrigation_needed = max(0, total_demand - rain_supply)\\n        \\n        green_water += green_used\\n        blue_water += irrigation_needed\\n    \\n    # Grey water (fertilizer pollution)\\n    grey_water = 500  # mm baseline for flood\\n    if irrigation_method == 'drip':\\n        grey_water = 200\\n    \\n    # Convert to L/kg (assume 5 t/ha yield)\\n    yield_kg_ha = 5000\\n    total_mm = green_water + blue_water + grey_water\\n    total_L_per_kg = total_mm * 10 / (yield_kg_ha / 1000)  # 1mm on 1ha = 10,000 L\\n    \\n    return {\\n        'green_mm': green_water, 'blue_mm': blue_water, 'grey_mm': grey_water,\\n        'total_mm': total_mm,\\n        'green_L_kg': green_water * 10000 / yield_kg_ha,\\n        'blue_L_kg': blue_water * 10000 / yield_kg_ha,\\n        'grey_L_kg': grey_water * 10000 / yield_kg_ha,\\n        'total_L_kg': total_mm * 10000 / yield_kg_ha,\\n    }\\n\\nmethods = ['flood', 'AWD', 'SRI', 'drip']\\nresults = {m: rice_water_footprint(irrigation_method=m) for m in methods}\\n\\n# Climate scenarios\\nclimates = {\\n    'Assam (wet)': {'rainfall_mm': 1200, 'ET_mm_day': 4},\\n    'Punjab (moderate)': {'rainfall_mm': 600, 'ET_mm_day': 5},\\n    'Rajasthan (dry)': {'rainfall_mm': 200, 'ET_mm_day': 7},\\n}\\nclimate_results = {c: rice_water_footprint(**params) for c, params in climates.items()}\\n\\nfig, axes = plt.subplots(2, 3, figsize=(15, 9))\\nfig.patch.set_facecolor('#1f2937')\\nfig.suptitle('Water Footprint of Rice: Methods & Climate Impact', color='white', fontsize=14, fontweight='bold', y=0.98)\\n\\nfor ax in axes.flat:\\n    ax.set_facecolor('#111827')\\n    ax.tick_params(colors='gray')\\n\\ncolors_m = ['#ef4444', '#3b82f6', '#22c55e', '#a855f7']\\n\\n# Plot 1: Water footprint by method (L/kg)\\nax = axes[0, 0]\\nx = np.arange(len(methods))\\nfor i, m in enumerate(methods):\\n    r = results[m]\\n    ax.bar(i, r['green_L_kg'], 0.6, color='#22c55e', label='Green' if i == 0 else None, edgecolor='none')\\n    ax.bar(i, r['blue_L_kg'], 0.6, bottom=r['green_L_kg'], color='#3b82f6',\\n           label='Blue' if i == 0 else None, edgecolor='none')\\n    ax.bar(i, r['grey_L_kg'], 0.6, bottom=r['green_L_kg']+r['blue_L_kg'], color='#64748b',\\n           label='Grey' if i == 0 else None, edgecolor='none')\\nax.set_xticks(x)\\nax.set_xticklabels([m.upper() for m in methods], color='white', fontsize=9)\\nax.set_ylabel('Water footprint (L/kg rice)', color='white')\\nax.set_title('Water Footprint by Irrigation Method', color='white', fontsize=11)\\nax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 2: Water savings\\nax = axes[0, 1]\\nbaseline = results['flood']['total_L_kg']\\nsavings = [(1 - results[m]['total_L_kg'] / baseline) * 100 for m in methods]\\nax.bar(range(len(methods)), savings, color=colors_m, edgecolor='none', width=0.6)\\nax.set_xticks(range(len(methods)))\\nax.set_xticklabels([m.upper() for m in methods], color='white', fontsize=9)\\nax.set_ylabel('Water saving vs flood (%)', color='white')\\nax.set_title('Water Savings by Method', color='white', fontsize=11)\\nfor i, s in enumerate(savings):\\n    ax.text(i, s + 1, f'{s:.0f}%', ha='center', color='white', fontsize=10)\\n\\n# Plot 3: Climate effect\\nax = axes[0, 2]\\nclimate_names = list(climate_results.keys())\\nfor i, (name, r) in enumerate(climate_results.items()):\\n    color = ['#22c55e', '#f59e0b', '#ef4444'][i]\\n    ax.bar(i, r['total_L_kg'], 0.6, color=color, edgecolor='none')\\n    ax.text(i, r['total_L_kg'] + 50, f\"{r['total_L_kg']:.0f}\", ha='center', color='white', fontsize=10)\\nax.set_xticks(range(len(climate_names)))\\nax.set_xticklabels(climate_names, color='white', fontsize=8)\\nax.set_ylabel('Water footprint (L/kg)', color='white')\\nax.set_title('Climate Effect on Water Footprint', color='white', fontsize=11)\\n\\n# Plot 4: Global comparison\\nax = axes[1, 0]\\ncrops = ['Rice\\n(flood)', 'Rice\\n(SRI)', 'Wheat', 'Maize', 'Potato', 'Soybean']\\nwf = [results['flood']['total_L_kg'], results['SRI']['total_L_kg'], 900, 500, 250, 2000]\\ncolors_crop = ['#ef4444', '#22c55e', '#f59e0b', '#3b82f6', '#a855f7', '#ec4899']\\nax.barh(range(len(crops)), wf, color=colors_crop, edgecolor='none', height=0.6)\\nax.set_yticks(range(len(crops)))\\nax.set_yticklabels(crops, color='white', fontsize=9)\\nax.set_xlabel('Water footprint (L/kg)', color='white')\\nax.set_title('Crop Water Footprint Comparison', color='white', fontsize=11)\\n\\n# Plot 5: India rice water budget\\nax = axes[1, 1]\\nstates = ['Punjab', 'UP', 'W Bengal', 'Assam', 'AP/TS']\\nrice_Mt = [12, 15, 16, 5, 14]\\nwater_km3 = [r * 2.5 for r in rice_Mt]  # approx km³\\nax.bar(range(len(states)), water_km3, color='#3b82f6', edgecolor='none', width=0.6)\\nax.bar(range(len(states)), rice_Mt, color='#22c55e', edgecolor='none', width=0.3)\\nax.set_xticks(range(len(states)))\\nax.set_xticklabels(states, color='white', fontsize=9)\\nax.set_ylabel('Rice (Mt) / Water (km³)', color='white')\\nax.set_title('India: Rice Production & Water Use', color='white', fontsize=11)\\n\\n# Plot 6: Future projection\\nax = axes[1, 2]\\nyears = np.arange(2020, 2051)\\ndemand = 520 * (1.01 ** (years - 2020))  # 1% annual growth in rice demand\\nsupply_flood = 1900 * np.ones_like(years) * 0.16  # 16% of freshwater to rice\\nsupply_optimized = supply_flood * (1 + 0.01 * (years - 2020))  # improving efficiency\\nax.plot(years, demand, color='#ef4444', linewidth=2.5, label='Water demand (BAU)')\\nax.plot(years, supply_flood, color='#3b82f6', linewidth=2.5, label='Supply (current efficiency)')\\nax.plot(years, supply_optimized, color='#22c55e', linewidth=2.5, linestyle='--', label='Supply (improving efficiency)')\\nax.fill_between(years, supply_flood, demand, where=demand > supply_flood, alpha=0.1, color='#ef4444')\\nax.set_xlabel('Year', color='white')\\nax.set_ylabel('Water (km³/year)', color='white')\\nax.set_title('India Rice Water Gap Projection', color='white', fontsize=11)\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\nplt.tight_layout()\\nplt.show()\\n\\nprint("Rice Water Footprint Analysis")\\nprint("=" * 55)\\nprint()\\nprint(f"{'Method':<10} {'Green':>8} {'Blue':>8} {'Grey':>8} {'Total':>8} {'Save':>6}")\\nprint(f"{'':10} {'L/kg':>8} {'L/kg':>8} {'L/kg':>8} {'L/kg':>8} {'%':>6}")\\nprint("-" * 55)\\nfor m in methods:\\n    r = results[m]\\n    save = (1 - r['total_L_kg'] / results['flood']['total_L_kg']) * 100\\n    print(f"{m.upper():<10} {r['green_L_kg']:>8.0f} {r['blue_L_kg']:>8.0f} {r['grey_L_kg']:>8.0f} {r['total_L_kg']:>8.0f} {save:>5.0f}%")\\nprint()\\nprint("Drip irrigation saves ~60% water but requires infrastructure investment.")\\nprint("SRI saves ~35% with minimal investment — the best bang for the buck.")\\nprint("The future of rice is water-smart agriculture.")`,
+      code: `import numpy as np\
+import matplotlib.pyplot as plt\
+\
+np.random.seed(42)\
+\
+# Water footprint model for rice production\
+def rice_water_footprint(days=120, irrigation_method='flood', rainfall_mm=800,\
+                         ET_mm_day=5, soil_percolation_mm_day=5):\
+    """Calculate water footprint components for rice production."""\
+    green_water = 0  # rainwater used by crop\
+    blue_water = 0   # irrigation water\
+    grey_water = 0   # pollution dilution\
+    \
+    daily_rain = rainfall_mm / days * (1 + 0.5 * np.sin(2 * np.pi * np.arange(days) / days))\
+    \
+    for day in range(days):\
+        # Crop water demand\
+        crop_ET = ET_mm_day * (0.5 + 0.5 * min(1, day / 40))  # increases with growth\
+        \
+        # Standing water maintenance\
+        if irrigation_method == 'flood':\
+            standing_water_need = 5  # mm/day to maintain 5cm\
+            percolation = soil_percolation_mm_day\
+        elif irrigation_method == 'AWD':\
+            cycle = day % 14\
+            standing_water_need = 5 if cycle < 10 else 0\
+            percolation = soil_percolation_mm_day * (1 if cycle < 10 else 0.3)\
+        elif irrigation_method == 'SRI':\
+            standing_water_need = 2  # minimal flooding\
+            percolation = soil_percolation_mm_day * 0.5\
+        elif irrigation_method == 'drip':\
+            standing_water_need = 0\
+            percolation = soil_percolation_mm_day * 0.2\
+        \
+        total_demand = crop_ET + standing_water_need + percolation\
+        rain_supply = daily_rain[day]\
+        \
+        green_used = min(rain_supply, total_demand)\
+        irrigation_needed = max(0, total_demand - rain_supply)\
+        \
+        green_water += green_used\
+        blue_water += irrigation_needed\
+    \
+    # Grey water (fertilizer pollution)\
+    grey_water = 500  # mm baseline for flood\
+    if irrigation_method == 'drip':\
+        grey_water = 200\
+    \
+    # Convert to L/kg (assume 5 t/ha yield)\
+    yield_kg_ha = 5000\
+    total_mm = green_water + blue_water + grey_water\
+    total_L_per_kg = total_mm * 10 / (yield_kg_ha / 1000)  # 1mm on 1ha = 10,000 L\
+    \
+    return {\
+        'green_mm': green_water, 'blue_mm': blue_water, 'grey_mm': grey_water,\
+        'total_mm': total_mm,\
+        'green_L_kg': green_water * 10000 / yield_kg_ha,\
+        'blue_L_kg': blue_water * 10000 / yield_kg_ha,\
+        'grey_L_kg': grey_water * 10000 / yield_kg_ha,\
+        'total_L_kg': total_mm * 10000 / yield_kg_ha,\
+    }\
+\
+methods = ['flood', 'AWD', 'SRI', 'drip']\
+results = {m: rice_water_footprint(irrigation_method=m) for m in methods}\
+\
+# Climate scenarios\
+climates = {\
+    'Assam (wet)': {'rainfall_mm': 1200, 'ET_mm_day': 4},\
+    'Punjab (moderate)': {'rainfall_mm': 600, 'ET_mm_day': 5},\
+    'Rajasthan (dry)': {'rainfall_mm': 200, 'ET_mm_day': 7},\
+}\
+climate_results = {c: rice_water_footprint(**params) for c, params in climates.items()}\
+\
+fig, axes = plt.subplots(2, 3, figsize=(15, 9))\
+fig.patch.set_facecolor('#1f2937')\
+fig.suptitle('Water Footprint of Rice: Methods & Climate Impact', color='white', fontsize=14, fontweight='bold', y=0.98)\
+\
+for ax in axes.flat:\
+    ax.set_facecolor('#111827')\
+    ax.tick_params(colors='gray')\
+\
+colors_m = ['#ef4444', '#3b82f6', '#22c55e', '#a855f7']\
+\
+# Plot 1: Water footprint by method (L/kg)\
+ax = axes[0, 0]\
+x = np.arange(len(methods))\
+for i, m in enumerate(methods):\
+    r = results[m]\
+    ax.bar(i, r['green_L_kg'], 0.6, color='#22c55e', label='Green' if i == 0 else None, edgecolor='none')\
+    ax.bar(i, r['blue_L_kg'], 0.6, bottom=r['green_L_kg'], color='#3b82f6',\
+           label='Blue' if i == 0 else None, edgecolor='none')\
+    ax.bar(i, r['grey_L_kg'], 0.6, bottom=r['green_L_kg']+r['blue_L_kg'], color='#64748b',\
+           label='Grey' if i == 0 else None, edgecolor='none')\
+ax.set_xticks(x)\
+ax.set_xticklabels([m.upper() for m in methods], color='white', fontsize=9)\
+ax.set_ylabel('Water footprint (L/kg rice)', color='white')\
+ax.set_title('Water Footprint by Irrigation Method', color='white', fontsize=11)\
+ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 2: Water savings\
+ax = axes[0, 1]\
+baseline = results['flood']['total_L_kg']\
+savings = [(1 - results[m]['total_L_kg'] / baseline) * 100 for m in methods]\
+ax.bar(range(len(methods)), savings, color=colors_m, edgecolor='none', width=0.6)\
+ax.set_xticks(range(len(methods)))\
+ax.set_xticklabels([m.upper() for m in methods], color='white', fontsize=9)\
+ax.set_ylabel('Water saving vs flood (%)', color='white')\
+ax.set_title('Water Savings by Method', color='white', fontsize=11)\
+for i, s in enumerate(savings):\
+    ax.text(i, s + 1, f'{s:.0f}%', ha='center', color='white', fontsize=10)\
+\
+# Plot 3: Climate effect\
+ax = axes[0, 2]\
+climate_names = list(climate_results.keys())\
+for i, (name, r) in enumerate(climate_results.items()):\
+    color = ['#22c55e', '#f59e0b', '#ef4444'][i]\
+    ax.bar(i, r['total_L_kg'], 0.6, color=color, edgecolor='none')\
+    ax.text(i, r['total_L_kg'] + 50, f\"{r['total_L_kg']:.0f}\", ha='center', color='white', fontsize=10)\
+ax.set_xticks(range(len(climate_names)))\
+ax.set_xticklabels(climate_names, color='white', fontsize=8)\
+ax.set_ylabel('Water footprint (L/kg)', color='white')\
+ax.set_title('Climate Effect on Water Footprint', color='white', fontsize=11)\
+\
+# Plot 4: Global comparison\
+ax = axes[1, 0]\
+crops = ['Rice\
+(flood)', 'Rice\
+(SRI)', 'Wheat', 'Maize', 'Potato', 'Soybean']\
+wf = [results['flood']['total_L_kg'], results['SRI']['total_L_kg'], 900, 500, 250, 2000]\
+colors_crop = ['#ef4444', '#22c55e', '#f59e0b', '#3b82f6', '#a855f7', '#ec4899']\
+ax.barh(range(len(crops)), wf, color=colors_crop, edgecolor='none', height=0.6)\
+ax.set_yticks(range(len(crops)))\
+ax.set_yticklabels(crops, color='white', fontsize=9)\
+ax.set_xlabel('Water footprint (L/kg)', color='white')\
+ax.set_title('Crop Water Footprint Comparison', color='white', fontsize=11)\
+\
+# Plot 5: India rice water budget\
+ax = axes[1, 1]\
+states = ['Punjab', 'UP', 'W Bengal', 'Assam', 'AP/TS']\
+rice_Mt = [12, 15, 16, 5, 14]\
+water_km3 = [r * 2.5 for r in rice_Mt]  # approx km³\
+ax.bar(range(len(states)), water_km3, color='#3b82f6', edgecolor='none', width=0.6)\
+ax.bar(range(len(states)), rice_Mt, color='#22c55e', edgecolor='none', width=0.3)\
+ax.set_xticks(range(len(states)))\
+ax.set_xticklabels(states, color='white', fontsize=9)\
+ax.set_ylabel('Rice (Mt) / Water (km³)', color='white')\
+ax.set_title('India: Rice Production & Water Use', color='white', fontsize=11)\
+\
+# Plot 6: Future projection\
+ax = axes[1, 2]\
+years = np.arange(2020, 2051)\
+demand = 520 * (1.01 ** (years - 2020))  # 1% annual growth in rice demand\
+supply_flood = 1900 * np.ones_like(years) * 0.16  # 16% of freshwater to rice\
+supply_optimized = supply_flood * (1 + 0.01 * (years - 2020))  # improving efficiency\
+ax.plot(years, demand, color='#ef4444', linewidth=2.5, label='Water demand (BAU)')\
+ax.plot(years, supply_flood, color='#3b82f6', linewidth=2.5, label='Supply (current efficiency)')\
+ax.plot(years, supply_optimized, color='#22c55e', linewidth=2.5, linestyle='--', label='Supply (improving efficiency)')\
+ax.fill_between(years, supply_flood, demand, where=demand > supply_flood, alpha=0.1, color='#ef4444')\
+ax.set_xlabel('Year', color='white')\
+ax.set_ylabel('Water (km³/year)', color='white')\
+ax.set_title('India Rice Water Gap Projection', color='white', fontsize=11)\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+plt.tight_layout()\
+plt.show()\
+\
+print("Rice Water Footprint Analysis")\
+print("=" * 55)\
+print()\
+print(f"{'Method':<10} {'Green':>8} {'Blue':>8} {'Grey':>8} {'Total':>8} {'Save':>6}")\
+print(f"{'':10} {'L/kg':>8} {'L/kg':>8} {'L/kg':>8} {'L/kg':>8} {'%':>6}")\
+print("-" * 55)\
+for m in methods:\
+    r = results[m]\
+    save = (1 - r['total_L_kg'] / results['flood']['total_L_kg']) * 100\
+    print(f"{m.upper():<10} {r['green_L_kg']:>8.0f} {r['blue_L_kg']:>8.0f} {r['grey_L_kg']:>8.0f} {r['total_L_kg']:>8.0f} {save:>5.0f}%")\
+print()\
+print("Drip irrigation saves ~60% water but requires infrastructure investment.")\
+print("SRI saves ~35% with minimal investment — the best bang for the buck.")\
+print("The future of rice is water-smart agriculture.")`,
       challenge: 'Model a "virtual water trade" scenario: if India exports 10 million tonnes of rice, how much virtual water is exported? Compare this to importing rice from a wet region (e.g., Myanmar with 1,500 L/kg footprint) vs growing it domestically in Punjab (3,500 L/kg). What is the global water saving from optimizing the rice trade?',
       successHint: 'Water is the hidden cost of rice production. Every plate of rice carries 2,500 liters of embedded water. As climate change intensifies droughts and groundwater depletion accelerates, the water footprint of rice will become as important as its carbon footprint. The story of the first rice being planted near water is more relevant than ever.',
     },
@@ -76,7 +844,172 @@ export default function RicePlantedLevel3() {
       checkQuestion: 'The theoretical maximum rice yield is ~15 t/ha, but the current best is ~10-12 t/ha. What are the three biggest bottlenecks preventing rice from reaching its theoretical potential?',
       checkAnswer: '(1) Photosynthetic efficiency: rice uses the C3 pathway, which wastes ~30% of fixed carbon through photorespiration. Converting rice to C4 photosynthesis (the IRRI C4 Rice Project) could increase yield by 50%. (2) Respiration losses: rice loses 40-60% of photosynthetic products to maintenance respiration, especially at high temperatures. (3) Sink limitation: even when plants produce enough carbohydrates, the grain sometimes cannot store them all — the panicle has a limited number of grain sites. Increasing spikelet number per panicle is a current breeding target.',
       codeIntro: 'Model rice yield potential, analyze how different IRRI varieties have increased yields over 60 years, and project future gains.',
-      code: `import numpy as np\\nimport matplotlib.pyplot as plt\\n\\nnp.random.seed(42)\\n\\n# Rice yield potential model\\n\\ndef yield_potential(solar_radiation_MJ_m2_day=20, growing_days=120,\\n                   RUE=1.4, HI=0.50, C3_C4='C3'):\\n    """Calculate theoretical yield potential.\"\"\"\\n    # Radiation interception (fraction of PAR intercepted by canopy)\\n    PAR_fraction = 0.48  # PAR is ~48% of total solar\\n    interception = 0.85  # mature canopy intercepts ~85% of PAR\\n    \\n    # Radiation Use Efficiency (g biomass / MJ PAR intercepted)\\n    if C3_C4 == 'C4':\\n        RUE = RUE * 1.5  # C4 is ~50% more efficient\\n    \\n    total_PAR = solar_radiation_MJ_m2_day * PAR_fraction * growing_days  # MJ/m²\\n    intercepted_PAR = total_PAR * interception\\n    total_biomass = intercepted_PAR * RUE  # g/m²\\n    grain_yield = total_biomass * HI / 100  # t/ha\\n    \\n    return grain_yield\\n\\n# IRRI variety timeline\\nvarieties = {\\n    'Peta (trad.)': {'year': 1960, 'yield': 2.0, 'height': 170, 'HI': 0.30, 'resist': 0},\\n    'IR8': {'year': 1966, 'yield': 6.0, 'height': 100, 'HI': 0.50, 'resist': 2},\\n    'IR36': {'year': 1976, 'yield': 7.0, 'height': 98, 'HI': 0.48, 'resist': 8},\\n    'IR64': {'year': 1985, 'yield': 7.5, 'height': 95, 'HI': 0.50, 'resist': 6},\\n    'IR72': {'year': 1988, 'yield': 10.0, 'height': 90, 'HI': 0.52, 'resist': 5},\\n    'NSIC Rc222': {'year': 2007, 'yield': 9.0, 'height': 95, 'HI': 0.53, 'resist': 7},\\n    'IRRI NPT': {'year': 2020, 'yield': 11.0, 'height': 90, 'HI': 0.55, 'resist': 8},\\n}\\n\\nfig, axes = plt.subplots(2, 3, figsize=(15, 9))\\nfig.patch.set_facecolor('#1f2937')\\nfig.suptitle('IRRI & High-Yield Varieties: 60 Years of Rice Science', color='white', fontsize=14, fontweight='bold', y=0.98)\\n\\nfor ax in axes.flat:\\n    ax.set_facecolor('#111827')\\n    ax.tick_params(colors='gray')\\n\\n# Plot 1: Yield potential by pathway\\nax = axes[0, 0]\\nsolar_range = np.linspace(10, 30, 50)\\nfor hi, color, label in [(0.45, '#f59e0b', 'HI=0.45 (current)'),\\n                           (0.55, '#22c55e', 'HI=0.55 (NPT)'),\\n                           (0.60, '#3b82f6', 'HI=0.60 (theoretical)')]:\\n    yields_c3 = [yield_potential(s, HI=hi) for s in solar_range]\\n    ax.plot(solar_range, yields_c3, color=color, linewidth=2, label=f'C3, {label}')\\nc4_yields = [yield_potential(s, HI=0.55, C3_C4='C4') for s in solar_range]\\nax.plot(solar_range, c4_yields, color='#a855f7', linewidth=2, linestyle='--', label='C4, HI=0.55')\\nax.set_xlabel('Solar radiation (MJ/m²/day)', color='white')\\nax.set_ylabel('Yield potential (t/ha)', color='white')\\nax.set_title('Theoretical Yield Potential', color='white', fontsize=11)\\nax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\n\\n# Plot 2: IRRI variety timeline\\nax = axes[0, 1]\\nvar_names = list(varieties.keys())\\nyears_v = [varieties[v]['year'] for v in var_names]\\nyields_v = [varieties[v]['yield'] for v in var_names]\\ncolors_v = plt.cm.viridis(np.linspace(0.2, 0.9, len(var_names)))\\nfor i, (name, y, yld) in enumerate(zip(var_names, years_v, yields_v)):\\n    ax.scatter(y, yld, s=200, color=colors_v[i], edgecolor='white', linewidth=1, zorder=5)\\n    ax.annotate(name, (y, yld), textcoords='offset points', xytext=(8, 5),\\n                color='white', fontsize=7)\\nax.plot(years_v, yields_v, color='gray', linewidth=1, linestyle='--', alpha=0.5)\\nax.set_xlabel('Year', color='white')\\nax.set_ylabel('Yield potential (t/ha)', color='white')\\nax.set_title('IRRI Variety Evolution', color='white', fontsize=11)\\n\\n# Plot 3: Height vs HI vs yield\\nax = axes[0, 2]\\nheights_v = [varieties[v]['height'] for v in var_names]\\nhis_v = [varieties[v]['HI'] for v in var_names]\\nsc = ax.scatter(heights_v, his_v, c=yields_v, s=200, cmap='YlGn',\\n               edgecolor='white', linewidth=1, vmin=2, vmax=12)\\nplt.colorbar(sc, ax=ax, label='Yield (t/ha)')\\nfor i, name in enumerate(var_names):\\n    ax.annotate(name.split('(')[0].strip()[:8], (heights_v[i], his_v[i]),\\n                textcoords='offset points', xytext=(5, 5), color='white', fontsize=7)\\nax.set_xlabel('Plant height (cm)', color='white')\\nax.set_ylabel('Harvest Index', color='white')\\nax.set_title('Height vs HI (color=yield)', color='white', fontsize=11)\\n\\n# Plot 4: Breeding pipeline\\nax = axes[1, 0]\\nstages = ['Crossing', 'F1-F6\\nselection', 'Yield\\ntrials', 'Multi-loc.\\ntesting', 'Release']\\nyears_stage = [1, 3, 2, 2, 1]\\ncolors_stage = ['#22c55e', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444']\\nstart = 0\\nfor label, dur, color in zip(stages, years_stage, colors_stage):\\n    ax.barh(0, dur, left=start, height=0.4, color=color, edgecolor='none')\\n    ax.text(start + dur/2, 0, f'{label}\\n({dur}yr)', ha='center', va='center',\\n            color='white', fontsize=7, fontweight='bold')\\n    start += dur\\nax.set_xlabel('Years', color='white')\\nax.set_title(f'Breeding Pipeline: {sum(years_stage)} years to new variety', color='white', fontsize=11)\\nax.set_yticks([])\\nax.set_xlim(-0.5, sum(years_stage) + 0.5)\\n\\n# Plot 5: Yield gap analysis\\nax = axes[1, 1]\\nregions = ['Global\\navg', 'India\\navg', 'China\\navg', 'Japan\\navg', 'Exp.\\nstation']\\nyield_actual = [4.7, 3.8, 7.0, 6.8, 10.5]\\nyield_potential_r = [8, 7, 9, 8.5, 12]\\nax.bar(np.arange(len(regions)) - 0.15, yield_actual, 0.3, color='#f59e0b', label='Actual', edgecolor='none')\\nax.bar(np.arange(len(regions)) + 0.15, yield_potential_r, 0.3, color='#22c55e', label='Attainable', edgecolor='none')\\nax.set_xticks(range(len(regions)))\\nax.set_xticklabels(regions, color='white', fontsize=8)\\nax.set_ylabel('Yield (t/ha)', color='white')\\nax.set_title('Yield Gap: Actual vs Attainable', color='white', fontsize=11)\\nax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\\nfor i in range(len(regions)):\\n    gap = yield_potential_r[i] - yield_actual[i]\\n    ax.annotate(f'Gap: {gap:.1f}', (i, yield_potential_r[i] + 0.2),\\n                ha='center', color='#ef4444', fontsize=8)\\n\\n# Plot 6: Gene bank diversity\\nax = axes[1, 2]\\ncollections = ['IRRI\\n(Philippines)', 'NBPGR\\n(India)', 'NIAS\\n(Japan)', 'CNRRI\\n(China)', 'AfricaRice']\\naccessions = [130000, 90000, 40000, 70000, 20000]\\ncolors_gb = ['#f59e0b', '#22c55e', '#ef4444', '#3b82f6', '#a855f7']\\nax.barh(range(len(collections)), accessions, color=colors_gb, edgecolor='none', height=0.6)\\nax.set_yticks(range(len(collections)))\\nax.set_yticklabels(collections, color='white', fontsize=9)\\nax.set_xlabel('Accessions (varieties stored)', color='white')\\nax.set_title('Global Rice Gene Banks', color='white', fontsize=11)\\nfor i, a in enumerate(accessions):\\n    ax.text(a + 2000, i, f'{a:,}', va='center', color='white', fontsize=9)\\n\\nplt.tight_layout()\\nplt.show()\\n\\nprint("IRRI & High-Yield Rice Varieties")\\nprint("=" * 55)\\nprint()\\nprint(f"{'Variety':<15} {'Year':>6} {'Yield':>6} {'Height':>8} {'HI':>6}")\\nprint("-" * 45)\\nfor name, data in varieties.items():\\n    print(f"{name:<15} {data['year']:>6} {data['yield']:>5.1f}t {data['height']:>6}cm {data['HI']:>5.2f}")\\nprint()\\nprint("Yield potential analysis:")\\nfor label, hi, pathway in [('Current C3', 0.50, 'C3'), ('NPT C3', 0.55, 'C3'), ('C4 rice', 0.55, 'C4')]:\\n    yp = yield_potential(20, HI=hi, C3_C4=pathway)\\n    print(f"  {label}: {yp:.1f} t/ha (at 20 MJ/m²/day solar)")\\nprint()\\nprint("The yield gap (actual vs attainable) averages 40% globally.")\\nprint("Closing this gap through better management could feed 1 billion more people")\\nprint("WITHOUT needing any new genetic improvement.")`,
+      code: `import numpy as np\
+import matplotlib.pyplot as plt\
+\
+np.random.seed(42)\
+\
+# Rice yield potential model\
+\
+def yield_potential(solar_radiation_MJ_m2_day=20, growing_days=120,\
+                   RUE=1.4, HI=0.50, C3_C4='C3'):\
+    """Calculate theoretical yield potential.\"\"\"\
+    # Radiation interception (fraction of PAR intercepted by canopy)\
+    PAR_fraction = 0.48  # PAR is ~48% of total solar\
+    interception = 0.85  # mature canopy intercepts ~85% of PAR\
+    \
+    # Radiation Use Efficiency (g biomass / MJ PAR intercepted)\
+    if C3_C4 == 'C4':\
+        RUE = RUE * 1.5  # C4 is ~50% more efficient\
+    \
+    total_PAR = solar_radiation_MJ_m2_day * PAR_fraction * growing_days  # MJ/m²\
+    intercepted_PAR = total_PAR * interception\
+    total_biomass = intercepted_PAR * RUE  # g/m²\
+    grain_yield = total_biomass * HI / 100  # t/ha\
+    \
+    return grain_yield\
+\
+# IRRI variety timeline\
+varieties = {\
+    'Peta (trad.)': {'year': 1960, 'yield': 2.0, 'height': 170, 'HI': 0.30, 'resist': 0},\
+    'IR8': {'year': 1966, 'yield': 6.0, 'height': 100, 'HI': 0.50, 'resist': 2},\
+    'IR36': {'year': 1976, 'yield': 7.0, 'height': 98, 'HI': 0.48, 'resist': 8},\
+    'IR64': {'year': 1985, 'yield': 7.5, 'height': 95, 'HI': 0.50, 'resist': 6},\
+    'IR72': {'year': 1988, 'yield': 10.0, 'height': 90, 'HI': 0.52, 'resist': 5},\
+    'NSIC Rc222': {'year': 2007, 'yield': 9.0, 'height': 95, 'HI': 0.53, 'resist': 7},\
+    'IRRI NPT': {'year': 2020, 'yield': 11.0, 'height': 90, 'HI': 0.55, 'resist': 8},\
+}\
+\
+fig, axes = plt.subplots(2, 3, figsize=(15, 9))\
+fig.patch.set_facecolor('#1f2937')\
+fig.suptitle('IRRI & High-Yield Varieties: 60 Years of Rice Science', color='white', fontsize=14, fontweight='bold', y=0.98)\
+\
+for ax in axes.flat:\
+    ax.set_facecolor('#111827')\
+    ax.tick_params(colors='gray')\
+\
+# Plot 1: Yield potential by pathway\
+ax = axes[0, 0]\
+solar_range = np.linspace(10, 30, 50)\
+for hi, color, label in [(0.45, '#f59e0b', 'HI=0.45 (current)'),\
+                           (0.55, '#22c55e', 'HI=0.55 (NPT)'),\
+                           (0.60, '#3b82f6', 'HI=0.60 (theoretical)')]:\
+    yields_c3 = [yield_potential(s, HI=hi) for s in solar_range]\
+    ax.plot(solar_range, yields_c3, color=color, linewidth=2, label=f'C3, {label}')\
+c4_yields = [yield_potential(s, HI=0.55, C3_C4='C4') for s in solar_range]\
+ax.plot(solar_range, c4_yields, color='#a855f7', linewidth=2, linestyle='--', label='C4, HI=0.55')\
+ax.set_xlabel('Solar radiation (MJ/m²/day)', color='white')\
+ax.set_ylabel('Yield potential (t/ha)', color='white')\
+ax.set_title('Theoretical Yield Potential', color='white', fontsize=11)\
+ax.legend(fontsize=7, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+\
+# Plot 2: IRRI variety timeline\
+ax = axes[0, 1]\
+var_names = list(varieties.keys())\
+years_v = [varieties[v]['year'] for v in var_names]\
+yields_v = [varieties[v]['yield'] for v in var_names]\
+colors_v = plt.cm.viridis(np.linspace(0.2, 0.9, len(var_names)))\
+for i, (name, y, yld) in enumerate(zip(var_names, years_v, yields_v)):\
+    ax.scatter(y, yld, s=200, color=colors_v[i], edgecolor='white', linewidth=1, zorder=5)\
+    ax.annotate(name, (y, yld), textcoords='offset points', xytext=(8, 5),\
+                color='white', fontsize=7)\
+ax.plot(years_v, yields_v, color='gray', linewidth=1, linestyle='--', alpha=0.5)\
+ax.set_xlabel('Year', color='white')\
+ax.set_ylabel('Yield potential (t/ha)', color='white')\
+ax.set_title('IRRI Variety Evolution', color='white', fontsize=11)\
+\
+# Plot 3: Height vs HI vs yield\
+ax = axes[0, 2]\
+heights_v = [varieties[v]['height'] for v in var_names]\
+his_v = [varieties[v]['HI'] for v in var_names]\
+sc = ax.scatter(heights_v, his_v, c=yields_v, s=200, cmap='YlGn',\
+               edgecolor='white', linewidth=1, vmin=2, vmax=12)\
+plt.colorbar(sc, ax=ax, label='Yield (t/ha)')\
+for i, name in enumerate(var_names):\
+    ax.annotate(name.split('(')[0].strip()[:8], (heights_v[i], his_v[i]),\
+                textcoords='offset points', xytext=(5, 5), color='white', fontsize=7)\
+ax.set_xlabel('Plant height (cm)', color='white')\
+ax.set_ylabel('Harvest Index', color='white')\
+ax.set_title('Height vs HI (color=yield)', color='white', fontsize=11)\
+\
+# Plot 4: Breeding pipeline\
+ax = axes[1, 0]\
+stages = ['Crossing', 'F1-F6\
+selection', 'Yield\
+trials', 'Multi-loc.\
+testing', 'Release']\
+years_stage = [1, 3, 2, 2, 1]\
+colors_stage = ['#22c55e', '#3b82f6', '#f59e0b', '#a855f7', '#ef4444']\
+start = 0\
+for label, dur, color in zip(stages, years_stage, colors_stage):\
+    ax.barh(0, dur, left=start, height=0.4, color=color, edgecolor='none')\
+    ax.text(start + dur/2, 0, f'{label}\
+({dur}yr)', ha='center', va='center',\
+            color='white', fontsize=7, fontweight='bold')\
+    start += dur\
+ax.set_xlabel('Years', color='white')\
+ax.set_title(f'Breeding Pipeline: {sum(years_stage)} years to new variety', color='white', fontsize=11)\
+ax.set_yticks([])\
+ax.set_xlim(-0.5, sum(years_stage) + 0.5)\
+\
+# Plot 5: Yield gap analysis\
+ax = axes[1, 1]\
+regions = ['Global\
+avg', 'India\
+avg', 'China\
+avg', 'Japan\
+avg', 'Exp.\
+station']\
+yield_actual = [4.7, 3.8, 7.0, 6.8, 10.5]\
+yield_potential_r = [8, 7, 9, 8.5, 12]\
+ax.bar(np.arange(len(regions)) - 0.15, yield_actual, 0.3, color='#f59e0b', label='Actual', edgecolor='none')\
+ax.bar(np.arange(len(regions)) + 0.15, yield_potential_r, 0.3, color='#22c55e', label='Attainable', edgecolor='none')\
+ax.set_xticks(range(len(regions)))\
+ax.set_xticklabels(regions, color='white', fontsize=8)\
+ax.set_ylabel('Yield (t/ha)', color='white')\
+ax.set_title('Yield Gap: Actual vs Attainable', color='white', fontsize=11)\
+ax.legend(fontsize=8, facecolor='#1f2937', edgecolor='gray', labelcolor='white')\
+for i in range(len(regions)):\
+    gap = yield_potential_r[i] - yield_actual[i]\
+    ax.annotate(f'Gap: {gap:.1f}', (i, yield_potential_r[i] + 0.2),\
+                ha='center', color='#ef4444', fontsize=8)\
+\
+# Plot 6: Gene bank diversity\
+ax = axes[1, 2]\
+collections = ['IRRI\
+(Philippines)', 'NBPGR\
+(India)', 'NIAS\
+(Japan)', 'CNRRI\
+(China)', 'AfricaRice']\
+accessions = [130000, 90000, 40000, 70000, 20000]\
+colors_gb = ['#f59e0b', '#22c55e', '#ef4444', '#3b82f6', '#a855f7']\
+ax.barh(range(len(collections)), accessions, color=colors_gb, edgecolor='none', height=0.6)\
+ax.set_yticks(range(len(collections)))\
+ax.set_yticklabels(collections, color='white', fontsize=9)\
+ax.set_xlabel('Accessions (varieties stored)', color='white')\
+ax.set_title('Global Rice Gene Banks', color='white', fontsize=11)\
+for i, a in enumerate(accessions):\
+    ax.text(a + 2000, i, f'{a:,}', va='center', color='white', fontsize=9)\
+\
+plt.tight_layout()\
+plt.show()\
+\
+print("IRRI & High-Yield Rice Varieties")\
+print("=" * 55)\
+print()\
+print(f"{'Variety':<15} {'Year':>6} {'Yield':>6} {'Height':>8} {'HI':>6}")\
+print("-" * 45)\
+for name, data in varieties.items():\
+    print(f"{name:<15} {data['year']:>6} {data['yield']:>5.1f}t {data['height']:>6}cm {data['HI']:>5.2f}")\
+print()\
+print("Yield potential analysis:")\
+for label, hi, pathway in [('Current C3', 0.50, 'C3'), ('NPT C3', 0.55, 'C3'), ('C4 rice', 0.55, 'C4')]:\
+    yp = yield_potential(20, HI=hi, C3_C4=pathway)\
+    print(f"  {label}: {yp:.1f} t/ha (at 20 MJ/m²/day solar)")\
+print()\
+print("The yield gap (actual vs attainable) averages 40% globally.")\
+print("Closing this gap through better management could feed 1 billion more people")\
+print("WITHOUT needing any new genetic improvement.")`,
       challenge: 'Model the C4 Rice Project: if IRRI successfully engineers C4 photosynthesis into rice (a 20-year, $20M project), calculate the global impact: (1) additional yield per hectare, (2) total additional production (160M ha × yield gain), (3) additional people fed (250 kg rice/person/year), and (4) water savings (more yield per unit water). Is the $20M investment justified by the potential food security gain?',
       successHint: 'IRRI represents the best of agricultural science: systematic, data-driven, and oriented toward the most important crop for the most food-insecure people. From IR8 to CRISPR-edited varieties, the story is one of continuous innovation to feed a growing world on a changing planet. The story of the first rice planted is still being written.',
     },
