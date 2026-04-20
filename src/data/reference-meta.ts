@@ -38,7 +38,7 @@ export const referenceMeta: ReferenceGuideMeta[] = [
   { slug: 'genetics-and-dna', title: 'Genetics & DNA', category: 'biology', icon: '🧬', tagline: 'The code of life — how DNA determines whether a seed becomes bamboo or a banyan.' },
   { slug: 'human-body-systems', title: 'Human Body Systems', category: 'biology', icon: '🫀', tagline: 'How your heart pumps, lungs breathe, and brain thinks — the engineering inside you.' },
   { slug: 'evolution-and-natural-selection', title: 'Evolution & Natural Selection', category: 'zoology', icon: '🧬', tagline: 'How species change over millions of years — from ancient fish to Assam\'s one-horned rhino.' },
-  { slug: 'algebra-fundamentals', title: 'Algebra', category: 'math', icon: '📊', tagline: 'The language of patterns — using letters to describe relationships that numbers alone cannot.' },
+  { slug: 'algebra', title: 'Algebra', category: 'math', icon: '📊', tagline: 'The language of patterns — using letters to describe relationships that numbers alone cannot.' },
   { slug: 'geometry-essentials', title: 'Geometry Essentials', category: 'math', icon: '📐', tagline: 'Shapes, angles, and spatial reasoning — from bamboo huts to bridge arches.' },
   { slug: 'trigonometry', title: 'Trigonometry', category: 'math', icon: '📐', tagline: 'Triangles unlock the heights of mountains and the orbits of planets.' },
   { slug: 'probability-and-combinatorics', title: 'Probability & Combinatorics', category: 'math', icon: '🎲', tagline: 'The mathematics of chance — from coin flips to predicting monsoon rainfall.' },

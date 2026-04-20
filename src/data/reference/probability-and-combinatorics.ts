@@ -13,6 +13,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'What Is Probability?',
       beginnerContent:
+        'Roll the dice in the diagram above. Run a few hundred trials. Watch the empirical frequencies settle toward the theoretical probabilities — 1/6 for each face. That convergence isn\'t magic; it\'s the simple-but-deep rule the whole subject rests on.\n\n' +
         '**The basics:**\n\n' +
         'Probability measures how likely an event is, as a number between **0** (impossible) and **1** (certain).\n\n' +
         '`P(event) = favourable outcomes / total outcomes`\n\n' +
@@ -41,33 +42,35 @@ export const guide: ReferenceGuide = {
         '| **Total** | **16** | **16/52 = 4/13** |\n\n' +
         '**Complementary counting trick:** P(at least one heads in 3 flips) = 1 - P(no heads) = 1 - (1/2)³ = **7/8**. Often easier than computing the event directly.',
       advancedContent:
-        '**The complement trick — solving "at least one" problems the easy way:**\n\n' +
-        'What is the probability of rolling **at least one 6** in four rolls of a die?\n\n' +
-        'The hard way: P(exactly one 6) + P(exactly two 6s) + P(three 6s) + P(four 6s) — messy.\n\n' +
-        'The easy way: P(at least one 6) = 1 − P(zero 6s)\n\n' +
-        'P(not a 6 on one roll) = 5/6.\n' +
-        'P(not a 6 on four rolls) = (5/6)⁴ = 625/1296 = 0.482.\n' +
-        'P(at least one 6) = 1 − 0.482 = **0.518** (just over half)\n\n' +
-        'This is the same method used to solve the **birthday problem:**\n\n' +
-        'In a room of 23 people, what is the probability that at least two share a birthday?\n\n' +
-        'P(all different) = (365/365) × (364/365) × (363/365) × ... × (343/365)\n\n' +
+        'The addition rule from intermediate — P(A or B) with overlap — is useful. But in practice, most interesting probability questions aren\'t about "A or B" at all. They\'re about **"at least one"**, which lives at the edge of where direct counting breaks down.\n\n' +
+        '**The complement flip — the single most useful trick in probability.** What\'s the probability of rolling **at least one 6** in four rolls of a die?\n\n' +
+        'Try it the direct way: P(exactly one 6) + P(exactly two 6s) + P(three 6s) + P(four 6s). Four separate cases, each with its own multiplication. Painful.\n\n' +
+        'Now flip it. **P(at least one 6) = 1 − P(zero 6s).** "Zero 6s" is one clean case — every roll is a non-6, and the rolls are independent, so just multiply:\n\n' +
+        '| Step | Work |\n' +
+        '|------|------|\n' +
+        '| P(not 6 on one roll) | 5/6 |\n' +
+        '| P(not 6 on four rolls) | (5/6)⁴ = 625/1296 ≈ 0.482 |\n' +
+        '| P(at least one 6) | 1 − 0.482 = **0.518** |\n\n' +
+        'Just over half — slightly surprising on its own. But the real power of the complement shows up on a problem that looks impossibly hard.\n\n' +
+        '**The Birthday Problem — everyone guesses wrong.** In a room of 23 people, what\'s the probability at least two share a birthday?\n\n' +
+        'Most people guess near 5%. The actual answer: **just over 50%**.\n\n' +
+        'Flip to the complement. P(all different) is a straight product: first person can be any of 365, second must avoid 1 (so 364/365), third avoids 2 (so 363/365), and so on:\n\n' +
+        '`P(all different) = (365/365) × (364/365) × (363/365) × ... × (343/365)`\n\n' +
         '| People | P(all different) | P(at least one match) |\n' +
         '|--------|-----------------|----------------------|\n' +
         '| 10 | 0.883 | 11.7% |\n' +
         '| 23 | 0.493 | **50.7%** |\n' +
         '| 30 | 0.294 | 70.6% |\n' +
         '| 50 | 0.030 | 97.0% |\n\n' +
-        'Only 23 people are needed for a better-than-even chance of a match. This shocks most people because they confuse "someone shares MY birthday" (needs ~253 people) with "any two people share A birthday" (needs only 23).\n\n' +
-        '**Why this works — the addition rule for mutually exclusive events:**\n\n' +
-        'If events A and B cannot both happen (rolling a 3 and a 5 on one die), then P(A or B) = P(A) + P(B).\n' +
-        'If they CAN both happen (drawing a heart or a queen), you must subtract the overlap: P(A or B) = P(A) + P(B) − P(A and B). ' +
-        'The queen of hearts was counted in both P(heart) and P(queen), so subtract it once to avoid double-counting.',
+        'Why does intuition fail so badly? Because people mentally substitute a different question: *"what\'s the chance someone shares **my** birthday?"* That\'s the question that needs ~253 people for 50-50. The actual question — *"do **any two** people share **any** birthday?"* — involves C(23, 2) = 253 possible pairs of people, which is why 23 turns out to be enough.\n\n' +
+        'Once you\'ve seen the birthday problem, you start noticing that *most* surprising probability results — quality control statistics, hash collisions, password cracking, why your phone keeps offering the same "random" song — all hinge on the same idea: **when you have many chances, "something unusual happens" becomes almost certain.** And the complement flip is almost always how you actually calculate it.',
       diagram: 'ProbabilityDiceDiagram',
       interactive: { type: 'python-playground' as const, props: { starterCode: 'import random\n\n# Simulate rolling two dice 10,000 times\ntrials = 10000\ncount_seven = 0\nfor _ in range(trials):\n    d1 = random.randint(1, 6)\n    d2 = random.randint(1, 6)\n    if d1 + d2 == 7:\n        count_seven += 1\n\ntheory = 6/36  # 6 ways to make 7 out of 36\nprint(f"P(sum = 7) theory:  {theory:.4f}")\nprint(f"P(sum = 7) simulated: {count_seven/trials:.4f}")\nprint(f"Trials: {trials}")', title: 'Try it — Dice Probability' } },
     },
     {
       title: 'Permutations and Combinations',
       beginnerContent:
+        'Try the counter in the diagram above. Move n and r. Toggle between "order matters" (permutations) and "order doesn\'t" (combinations). For small n and r, every arrangement or group is actually listed out — so you can *see* why P(5,3) = 60 and C(5,3) = 10. Once the visual lands, the formulas stop being mysterious.\n\n' +
         '**Building the counting formulas from a simple question.**\n\n' +
         'You have 5 friends: Anu, Bina, Charu, Deepa, Eka. You need to pick 3 to form a team.\n\n' +
         '**First question: does the ORDER matter?**\n\n' +
@@ -96,27 +99,30 @@ export const guide: ReferenceGuide = {
         '**Pascal\'s triangle** encodes combinations: row n contains C(n,0), C(n,1), ..., C(n,n). Each entry is the sum of the two above it:\n\n' +
         '`C(n, r) = C(n-1, r-1) + C(n-1, r)`',
       advancedContent:
-        '**The Binomial Theorem — derived from counting:**\n\n' +
-        'Expand (a + b)³ by hand: (a+b)(a+b)(a+b)\n\n' +
-        'Each term picks either a or b from each bracket. The term a²b means: pick a from 2 brackets, b from 1.\n' +
-        'How many ways to choose which 1 bracket gives b? That is C(3,1) = 3. So the coefficient of a²b is **3**.\n\n' +
-        '(a+b)³ = C(3,0)a³ + C(3,1)a²b + C(3,2)ab² + C(3,3)b³ = **a³ + 3a²b + 3ab² + b³**\n\n' +
-        'In general: **(a+b)ⁿ = Σ C(n,k) × aⁿ⁻ᵏ × bᵏ** for k = 0 to n\n\n' +
-        'Each C(n,k) counts the ways to pick which k brackets contribute b.\n\n' +
-        '**Worked example:** Find the coefficient of x³ in (2x + 3)⁵.\n\n' +
-        'The x³ term has k=3 (three brackets contribute 2x) and n−k=2 (two contribute 3):\n' +
-        'Wait — actually x³ means we pick 2x from 3 brackets: C(5,3) × (2x)³ × (3)² = 10 × 8x³ × 9 = **720x³**.\n\n' +
-        '**The Pigeonhole Principle — surprisingly powerful:**\n\n' +
-        'If you put 13 pigeons into 12 holes, at least one hole has ≥ 2 pigeons. Obvious? But it proves:\n\n' +
-        '- In any group of **13 people**, at least 2 share a birth month (13 people, 12 months)\n' +
-        '- In any group of **367 people**, at least 2 share a birthday (367 people, 366 possible days)\n' +
-        '- Among any 5 integers, at least 2 have the same remainder when divided by 4 (5 numbers, 4 possible remainders)\n\n' +
-        'The proof is just one line: if every hole had ≤ 1 pigeon, the total would be ≤ 12 < 13. Contradiction. ∎',
+        'Combinations aren\'t just for counting teams. They hide inside algebra too — and that connection turns out to be deep.\n\n' +
+        '**The Binomial Theorem — combinations as algebra.** Expand (a + b)³ the long way: (a+b)(a+b)(a+b). When you multiply three brackets together, each term in the result is a choice — from each bracket, pick either a or b. The product a²b means "pick a from 2 brackets, pick b from 1." How many ways can you choose which 1 bracket gives you b? **C(3,1) = 3.** So the coefficient of a²b is 3:\n\n' +
+        '`(a + b)³ = C(3,0)·a³ + C(3,1)·a²b + C(3,2)·ab² + C(3,3)·b³ = a³ + 3a²b + 3ab² + b³`\n\n' +
+        'This isn\'t a coincidence. The general formula is:\n\n' +
+        '`(a + b)ⁿ = Σ C(n,k) · aⁿ⁻ᵏ · bᵏ` (summed for k from 0 to n)\n\n' +
+        'Every coefficient in any binomial expansion is a combination. The rows of Pascal\'s triangle you saw in intermediate are *literally* these coefficients.\n\n' +
+        '**Worked example:** find the coefficient of x³ in (2x + 3)⁵. We need three brackets to contribute 2x, two to contribute 3: C(5,3) · (2x)³ · (3)² = 10 · 8x³ · 9 = **720x³**. One formula, answer in seconds.\n\n' +
+        '**From counting to certainty — the Pigeonhole Principle.** Here\'s one more combinatorial idea that looks so obvious it barely seems worth stating:\n\n' +
+        '*If you put n+1 pigeons into n holes, at least one hole must contain 2 or more pigeons.*\n\n' +
+        'Proof: one line. If every hole had ≤ 1 pigeon, the total would be ≤ n < n+1. Contradiction. ∎\n\n' +
+        'Trivial, right? But it\'s one of the sharpest tools in combinatorics precisely because it converts *"some configuration exists"* into *absolute certainty*. No probability, no maybe — a mathematical guarantee. Examples:\n\n' +
+        '| Claim | Why Pigeonhole proves it |\n' +
+        '|-------|--------------------------|\n' +
+        'In any group of **13 people**, at least 2 share a birth month | 13 pigeons, 12 holes (months) |\n' +
+        'In any group of **367 people**, at least 2 share a birthday | 367 pigeons, 366 holes (days, including Feb 29) |\n' +
+        'Among any 5 integers, at least 2 have the same remainder mod 4 | 5 pigeons, 4 holes (remainders 0,1,2,3) |\n' +
+        'If you hash 10 items into 8 buckets, at least one bucket has a collision | 10 pigeons, 8 holes |\n\n' +
+        'That last one connects to computer science: hash tables, cryptographic collision attacks, memory allocation schemes — all have Pigeonhole sitting underneath. And together with the Birthday Problem from section 1, it captures both sides of the same story: **Pigeonhole tells you when collisions are certain, the Birthday calculation tells you when they become likely.** Combinations sit at the heart of both.',
       diagram: 'CombinatoricsGridDiagram',
     },
     {
       title: 'Independent vs Dependent Events',
       beginnerContent:
+        'Play with the tree above. Toggle between "with replacement" (independent) and "without replacement" (dependent). Watch the second-level probabilities update. Click any leaf to see its path probability calculated. **The visible difference between the two modes is exactly what "independent vs dependent" means.**\n\n' +
         '**Independent events:** One event does NOT affect the other.\n\n' +
         '`P(A and B) = P(A) x P(B)`\n\n' +
         '| Scenario | Calculation | Result |\n' +
@@ -139,27 +145,36 @@ export const guide: ReferenceGuide = {
         '**Dependent (chain rule):** `P(A and B and C) = P(A) x P(B|A) x P(C|A and B)`\n\n' +
         'Drawing 3 aces without replacement: (4/52)(3/51)(2/50) = 24/132,600 = **1 in 5,525**.',
       advancedContent:
-        '**A tricky example — when "independent" isn\'t what you think:**\n\n' +
-        'Toss two fair coins. Define three events:\n' +
-        '- A = "first coin is heads"\n' +
-        '- B = "second coin is heads"\n' +
-        '- C = "both coins show the same face"\n\n' +
-        'Check pairwise independence:\n' +
-        '- P(A) = 1/2, P(C) = 1/2, P(A and C) = P(HH) = 1/4 = P(A)×P(C) ✓ Independent!\n' +
-        '- P(B) = 1/2, P(C) = 1/2, P(B and C) = P(HH) = 1/4 = P(B)×P(C) ✓ Independent!\n' +
-        '- P(A) = 1/2, P(B) = 1/2, P(A and B) = P(HH) = 1/4 = P(A)×P(B) ✓ Independent!\n\n' +
-        'Every pair is independent. But all three together are NOT:\n' +
-        'P(A and B and C) = P(HH) = 1/4, but P(A)×P(B)×P(C) = 1/8. **Not equal!**\n\n' +
-        'Knowing A and B completely determines C. Three events can be pairwise independent yet dependent as a group.\n\n' +
-        '**The multiplication rule for dependent events — the chain rule:**\n\n' +
-        'P(A and B and C) = P(A) × P(B|A) × P(C|A and B)\n\n' +
-        '**Example:** Draw 3 cards without replacement. P(all hearts):\n\n' +
-        '| Draw | Hearts left | Cards left | P |\n' +
-        '|------|-----------|-----------|---|\n' +
-        '| 1st heart | 13 | 52 | 13/52 |\n' +
-        '| 2nd heart | 12 | 51 | 12/51 |\n' +
-        '| 3rd heart | 11 | 50 | 11/50 |\n' +
-        '| **All three** | | | (13×12×11)/(52×51×50) = **1716/132600 ≈ 1.29%** |',
+        '"Two events are independent if P(A and B) = P(A) × P(B)." Straightforward. But when you have **three or more** events, the definition of independence gets slippery in a way that catches even trained mathematicians.\n\n' +
+        '**Pairwise independence is not the same as mutual independence.** Here\'s a minimal example that shows the trap.\n\n' +
+        'Toss two fair coins. Define three events:\n\n' +
+        '- **A** = "first coin is heads"\n' +
+        '- **B** = "second coin is heads"\n' +
+        '- **C** = "both coins show the same face"\n\n' +
+        'Check each pair:\n\n' +
+        '| Pair | P(both) | P × P | Independent? |\n' +
+        '|------|---------|-------|--------------|\n' +
+        '| A and B | P(HH) = 1/4 | (1/2)(1/2) = 1/4 | ✓ |\n' +
+        '| A and C | P(HH) = 1/4 | (1/2)(1/2) = 1/4 | ✓ |\n' +
+        '| B and C | P(HH) = 1/4 | (1/2)(1/2) = 1/4 | ✓ |\n\n' +
+        'Every pair is independent. But are they **jointly** independent?\n\n' +
+        '`P(A ∧ B ∧ C) = P(HH) = 1/4`\n' +
+        '`P(A) × P(B) × P(C) = (1/2)(1/2)(1/2) = 1/8`\n\n' +
+        '**Not equal.** The three events are pairwise independent but NOT mutually independent. And you can see why intuitively: if I tell you A happened (first coin is heads) AND B happened (second coin is heads), I\'ve completely determined C (both faces match). The third event carries no independent information, even though it looks independent from any single other.\n\n' +
+        'This matters whenever you\'re reasoning about multiple pieces of evidence. "My smoke alarm went off" and "I smelled something burning" might look independent if you only check pairs — but together they both point at the same fire, and treating them as triply independent will give wrong answers.\n\n' +
+        '**Why conditional probability is the honest way to handle dependence.** Instead of squinting at whether "pairs look independent," just write the **chain rule** from intermediate and use conditionals throughout:\n\n' +
+        '`P(A ∧ B ∧ C) = P(A) · P(B | A) · P(C | A ∧ B)`\n\n' +
+        'In the coin example, `P(C | A ∧ B) = 1` (because A and B determine C). Plug that in:\n\n' +
+        '`P(A ∧ B ∧ C) = (1/2) · (1/2) · 1 = 1/4` ✓\n\n' +
+        'The chain rule always gives the right answer because it never assumes independence — it *measures* the dependence directly.\n\n' +
+        '**A longer worked example — drawing 3 aces from a deck without replacement:**\n\n' +
+        '| Draw | Aces left | Cards left | Conditional P |\n' +
+        '|------|----------|-----------|---------------|\n' +
+        '| 1st ace | 4 | 52 | 4/52 |\n' +
+        '| 2nd ace (given 1st was ace) | 3 | 51 | 3/51 |\n' +
+        '| 3rd ace (given first two were aces) | 2 | 50 | 2/50 |\n\n' +
+        '`P(3 aces) = (4/52) × (3/51) × (2/50) = 24 / 132,600 ≈ **1 in 5,525**`\n\n' +
+        'Every step updates the conditional probability based on what already happened. **This chain of conditionals is exactly the machinery that Bayesian inference runs on** — which is the whole next section.',
       diagram: 'TreeDiagramProbability',
     },
     {
@@ -222,6 +237,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Expected Value',
       beginnerContent:
+        'Play the game in the diagram above. Roll once and you could win nothing, ₹1, or ₹5. But hit "Roll 1000" and watch the running average march toward the dashed line — the **expected value**. The game\'s EV is built into the math; individual rolls scatter around it wildly, but enough rolls and the two lines must meet. Edit the payouts and see the EV shift in real time.\n\n' +
         '**What is expected value?**\n\n' +
         'The long-run average outcome: sum each outcome times its probability.\n\n' +
         '**Example: Fair die**\n\n' +

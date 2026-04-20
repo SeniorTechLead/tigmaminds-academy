@@ -1,120 +1,167 @@
+import { useState, useEffect } from 'react';
+
+// ── DNA Unzipping and Copying ────────────────────────────────
+// Animated semi-conservative replication. Helicase unwinds the
+// double helix into two strands. Polymerase attaches new bases
+// complementary to each template strand. Result: two identical
+// daughter helices from one parent. Track progress of synthesis.
+
 export default function DNAReplicationDiagram() {
+  const [tick, setTick] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(() => setTick(t => t + 1), 40);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  const W = 560, H = 340;
+  const cycle = tick % 300;
+  const progress = cycle / 300; // 0 to 1
+
+  // Progress of the replication fork (moves right)
+  const forkX = 120 + progress * 300;
+
+  // Base pairs
+  const basePairs = Array.from({ length: 20 }, (_, i) => {
+    const x = 120 + i * 20;
+    const basePair = ['A-T', 'T-A', 'G-C', 'C-G'][i % 4];
+    const [top, bot] = basePair.split('-');
+    const separated = x < forkX;
+    return { x, top, bot, separated };
+  });
+
   return (
-    <div className="my-4">
-      <svg viewBox="0 0 570 336" className="w-full max-w-lg mx-auto" role="img" aria-label="DNA Replication Fork diagram">
-        <defs>
-          <marker id="dnaArrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-            <polygon points="0 0, 7 2.5, 0 5" className="fill-gray-500" />
-          </marker>
-          <marker id="dnaArrowBlue" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-            <polygon points="0 0, 7 2.5, 0 5" className="fill-blue-500" />
-          </marker>
-          <marker id="dnaArrowRed" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-            <polygon points="0 0, 7 2.5, 0 5" className="fill-red-500" />
-          </marker>
-        </defs>
+    <div className="bg-gradient-to-b from-indigo-50 via-slate-50 to-purple-50 dark:from-indigo-950 dark:via-slate-950 dark:to-purple-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-wider">
+          Unzip and Copy
+        </p>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-indigo-700 dark:text-indigo-300 font-mono">
+            {Math.round(progress * 100)}% replicated
+          </span>
+          <button
+            onClick={() => setPaused(!paused)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            {paused ? '▶' : '⏸'}
+          </button>
+        </div>
+      </div>
 
-        {/* Title */}
-        <text x="250" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
-          DNA Replication Fork
-        </text>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
+        aria-label="Animated DNA replication — double helix unzipping and new strands being synthesized">
 
-        {/* Original double-stranded DNA (left, zipped) */}
-        {/* Top strand */}
-        <path d="M 30,100 Q 70,95 110,100 Q 150,105 180,115"
-          fill="none" className="stroke-blue-500 dark:stroke-blue-400" strokeWidth="3" />
-        {/* Bottom strand */}
-        <path d="M 30,140 Q 70,145 110,140 Q 150,135 180,125"
-          fill="none" className="stroke-red-500 dark:stroke-red-400" strokeWidth="3" />
+        {/* Original helix — ahead of fork */}
+        {basePairs.map((bp, i) => (
+          <g key={`bp-${i}`}>
+            {!bp.separated ? (
+              <>
+                {/* Top strand */}
+                <circle cx={bp.x} cy={130} r="8" fill="#6366f1" opacity="0.85" />
+                <text x={bp.x} y={134} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{bp.top}</text>
+                {/* Bottom strand */}
+                <circle cx={bp.x} cy={210} r="8" fill="#8b5cf6" opacity="0.85" />
+                <text x={bp.x} y={214} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{bp.bot}</text>
+                {/* Connector */}
+                <line x1={bp.x} y1={138} x2={bp.x} y2={202}
+                  stroke="#a78bfa" strokeWidth="1.5" opacity="0.6" strokeDasharray="2,2" />
+              </>
+            ) : (
+              <>
+                {/* Top strand (original) + newly added base */}
+                <circle cx={bp.x} cy={100} r="8" fill="#6366f1" opacity="0.85" />
+                <text x={bp.x} y={104} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{bp.top}</text>
+                <circle cx={bp.x} cy={140} r="8" fill="#10b981" opacity="0.85" />
+                <text x={bp.x} y={144} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{bp.bot}</text>
+                <line x1={bp.x} y1={108} x2={bp.x} y2={132}
+                  stroke="#10b981" strokeWidth="1.5" opacity="0.6" />
 
-        {/* Base pair rungs (zipped region) */}
-        {[40, 60, 80, 100, 120, 140, 160].map((x, i) => {
-          const topY = 100 + (x > 110 ? (x - 110) * 0.2 : 0) - (x < 70 ? (70 - x) * 0.05 : (x - 70) * 0.05);
-          const botY = 140 - (x > 110 ? (x - 110) * 0.2 : 0) + (x < 70 ? (70 - x) * 0.05 : (x - 70) * 0.05);
-          if (x > 155) return null;
-          return (
-            <line key={i} x1={x} y1={topY + 3} x2={x} y2={botY - 3}
-              className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" />
-          );
-        })}
-
-        {/* Helicase at the fork */}
-        <circle cx="185" cy="120" r="15" className="fill-yellow-300 dark:fill-yellow-600 stroke-yellow-500" strokeWidth="1.5" />
-        <text x="185" y="124" textAnchor="middle" className="fill-yellow-800 dark:fill-yellow-200" fontSize="8" fontWeight="bold">Heli-</text>
-        <text x="185" y="133" textAnchor="middle" className="fill-yellow-800 dark:fill-yellow-200" fontSize="8" fontWeight="bold">case</text>
-        {/* Helicase label line */}
-        <line x1="185" y1="136" x2="185" y2="165" className="stroke-gray-400" strokeWidth="1" />
-        <text x="185" y="178" textAnchor="middle" className="fill-yellow-600 dark:fill-yellow-400" fontSize="10" fontWeight="600">
-          Helicase
-        </text>
-        <text x="185" y="190" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">
-          (unzips DNA)
-        </text>
-
-        {/* Leading strand (top, continuous) */}
-        <path d="M 200,105 Q 260,80 340,65 Q 400,55 460,50"
-          fill="none" className="stroke-blue-500 dark:stroke-blue-400" strokeWidth="3" />
-        {/* New complementary strand (continuous) */}
-        <path d="M 210,115 Q 270,92 350,78 Q 410,68 460,63"
-          fill="none" className="stroke-emerald-500 dark:stroke-emerald-400" strokeWidth="2.5" strokeDasharray="0" />
-
-        {/* DNA polymerase on leading strand */}
-        <ellipse cx="350" cy="68" rx="18" ry="12" className="fill-emerald-200 dark:fill-emerald-800 stroke-emerald-500" strokeWidth="1" />
-        <text x="350" y="72" textAnchor="middle" className="fill-emerald-800 dark:fill-emerald-200" fontSize="7" fontWeight="bold">Pol III</text>
-
-        {/* Leading strand direction arrow */}
-        <line x1="400" y1="45" x2="445" y2="40" className="stroke-blue-500" strokeWidth="1.5" markerEnd="url(#dnaArrowBlue)" />
-        <text x="430" y="35" className="fill-blue-600 dark:fill-blue-400" fontSize="10" fontWeight="600">5′→3′</text>
-
-        {/* Lagging strand (bottom, Okazaki fragments) */}
-        <path d="M 200,135 Q 260,160 340,175 Q 400,185 460,190"
-          fill="none" className="stroke-red-500 dark:stroke-red-400" strokeWidth="3" />
-
-        {/* Okazaki fragments (new strand, discontinuous) */}
-        <path d="M 210,125 L 260,145" fill="none" className="stroke-emerald-500 dark:stroke-emerald-400" strokeWidth="2.5" />
-        <path d="M 270,148 L 320,163" fill="none" className="stroke-emerald-500 dark:stroke-emerald-400" strokeWidth="2.5" />
-        <path d="M 330,166 L 380,178" fill="none" className="stroke-emerald-500 dark:stroke-emerald-400" strokeWidth="2.5" />
-        <path d="M 390,181 L 440,190" fill="none" className="stroke-emerald-500 dark:stroke-emerald-400" strokeWidth="2.5" />
-
-        {/* Gaps between fragments */}
-        {[265, 325, 385].map(x => (
-          <text key={x} x={x} y={x * 0.33 + 70} textAnchor="middle" className="fill-gray-400" fontSize="12">⋯</text>
+                {/* Bottom strand (original) + newly added base */}
+                <circle cx={bp.x} cy={240} r="8" fill="#8b5cf6" opacity="0.85" />
+                <text x={bp.x} y={244} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{bp.bot}</text>
+                <circle cx={bp.x} cy={200} r="8" fill="#10b981" opacity="0.85" />
+                <text x={bp.x} y={204} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{bp.top}</text>
+                <line x1={bp.x} y1={208} x2={bp.x} y2={232}
+                  stroke="#10b981" strokeWidth="1.5" opacity="0.6" />
+              </>
+            )}
+          </g>
         ))}
 
-        {/* DNA polymerase on lagging strand */}
-        <ellipse cx="400" cy="182" rx="18" ry="12" className="fill-emerald-200 dark:fill-emerald-800 stroke-emerald-500" strokeWidth="1" />
-        <text x="400" y="186" textAnchor="middle" className="fill-emerald-800 dark:fill-emerald-200" fontSize="7" fontWeight="bold">Pol III</text>
+        {/* Backbone sugar-phosphate strands */}
+        <line x1={120} y1={100} x2={forkX} y2={100} stroke="#4338ca" strokeWidth="2.5" />
+        <line x1={forkX} y1={100} x2={forkX} y2={130} stroke="#4338ca" strokeWidth="2.5" />
+        <line x1={forkX} y1={130} x2={520} y2={130} stroke="#4338ca" strokeWidth="2.5" />
 
-        {/* Lagging strand direction arrow */}
-        <line x1="260" y1="155" x2="220" y2="138" className="stroke-red-500" strokeWidth="1.5" markerEnd="url(#dnaArrowRed)" />
-        <text x="230" y="163" className="fill-red-600 dark:fill-red-400" fontSize="10" fontWeight="600">3′→5′</text>
+        <line x1={120} y1={140} x2={forkX} y2={140} stroke="#10b981" strokeWidth="2.5" />
+        <line x1={120} y1={200} x2={forkX} y2={200} stroke="#10b981" strokeWidth="2.5" />
 
-        {/* Labels */}
-        <text x="440" y="45" textAnchor="start" className="fill-blue-600 dark:fill-blue-400" fontSize="10" fontWeight="bold">Leading strand</text>
-        <text x="440" y="55" textAnchor="start" className="fill-gray-500 dark:fill-gray-400" fontSize="10">(continuous)</text>
+        <line x1={120} y1={240} x2={forkX} y2={240} stroke="#6d28d9" strokeWidth="2.5" />
+        <line x1={forkX} y1={240} x2={forkX} y2={210} stroke="#6d28d9" strokeWidth="2.5" />
+        <line x1={forkX} y1={210} x2={520} y2={210} stroke="#6d28d9" strokeWidth="2.5" />
 
-        <text x="440" y="205" textAnchor="start" className="fill-red-600 dark:fill-red-400" fontSize="10" fontWeight="bold">Lagging strand</text>
-        <text x="440" y="215" textAnchor="start" className="fill-gray-500 dark:fill-gray-400" fontSize="10">(Okazaki fragments)</text>
-
-        {/* Legend */}
-        <g transform="translate(30, 230)">
-          <line x1="0" y1="5" x2="25" y2="5" className="stroke-blue-500" strokeWidth="3" />
-          <text x="30" y="9" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Original template</text>
-
-          <line x1="0" y1="25" x2="25" y2="25" className="stroke-red-500" strokeWidth="3" />
-          <text x="30" y="29" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Original template</text>
-
-          <line x1="200" y1="5" x2="225" y2="5" className="stroke-emerald-500" strokeWidth="2.5" />
-          <text x="230" y="9" className="fill-gray-600 dark:fill-gray-300" fontSize="10">New strand</text>
-
-          <circle cx="212" cy="25" r="8" className="fill-yellow-300 dark:fill-yellow-600" />
-          <text x="230" y="29" className="fill-gray-600 dark:fill-gray-300" fontSize="10">Helicase</text>
+        {/* Helicase (unzipping enzyme) at the fork */}
+        <g transform={`translate(${forkX}, 170)`}>
+          <ellipse cx={0} cy={0} rx={14} ry={22}
+            fill="#fbbf24" stroke="#d97706" strokeWidth="2" opacity="0.9" />
+          <text x={0} y={-30} textAnchor="middle" className="fill-amber-700 dark:fill-amber-300" fontSize="9" fontWeight="600">
+            Helicase
+          </text>
+          <text x={0} y={3} textAnchor="middle" fill="#7c2d12" fontSize="9" fontWeight="bold">
+            ⊗
+          </text>
         </g>
 
-        {/* Replication direction */}
-        <line x1="170" y1="290" x2="300" y2="290" className="stroke-gray-500" strokeWidth="1.5" markerEnd="url(#dnaArrow)" />
-        <text x="235" y="286" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Replication direction →</text>
+        {/* DNA polymerase (copying enzyme) — two of them, one per strand */}
+        <g transform={`translate(${forkX - 25}, 115)`}>
+          <rect x={-12} y={-10} width={24} height={20} rx={4}
+            fill="#ef4444" opacity="0.85" />
+          <text x={0} y={-15} textAnchor="middle" className="fill-rose-700 dark:fill-rose-300" fontSize="8" fontWeight="600">
+            DNA pol
+          </text>
+        </g>
+        <g transform={`translate(${forkX - 25}, 225)`}>
+          <rect x={-12} y={-10} width={24} height={20} rx={4}
+            fill="#ef4444" opacity="0.85" />
+        </g>
+
+        {/* Labels */}
+        <text x={80} y={110} className="fill-indigo-700 dark:fill-indigo-300" fontSize="9" fontWeight="600">
+          Parent strand 1
+        </text>
+        <text x={80} y={205} className="fill-purple-700 dark:fill-purple-300" fontSize="9" fontWeight="600">
+          Parent strand 2
+        </text>
+        <text x={80} y={150} className="fill-emerald-700 dark:fill-emerald-300" fontSize="9" fontWeight="600">
+          New daughter
+        </text>
+        <text x={80} y={258} className="fill-emerald-700 dark:fill-emerald-300" fontSize="9" fontWeight="600">
+          New daughter
+        </text>
+
+        {/* Key insight */}
+        <text x={W / 2} y={H - 15} textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="10" fontWeight="600">
+          Each new helix = 1 original strand + 1 newly synthesized strand (semi-conservative)
+        </text>
       </svg>
+
+      <div className="flex flex-wrap justify-center gap-3 mt-2 text-xs">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-indigo-500" /> Original template
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" /> Newly synthesized
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-amber-500" /> Helicase (unzips)
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-red-500" /> DNA polymerase (copies)
+        </span>
+      </div>
     </div>
   );
 }

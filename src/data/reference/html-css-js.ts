@@ -21,7 +21,16 @@ export const guide: ReferenceGuide = {
       intermediateContent:
         'The HTTP request/response cycle: your browser sends `GET /index.html HTTP/1.1` → the server responds with `HTTP/1.1 200 OK` and the HTML content. Status codes: 200=OK, 301=moved permanently, 404=not found, 500=server error. Chrome DevTools (F12) → Network tab shows every request, its size, and load time. A typical web page makes 50-100 requests (HTML, CSS, JS, images, fonts, analytics). **HTTPS** encrypts this traffic using TLS — the padlock icon means a man-in-the-middle cannot read your data. HTTP/2 multiplexes multiple requests over a single connection, and HTTP/3 uses QUIC (over UDP) for even faster connections.',
       advancedContent:
-        'The **Document Object Model (DOM)** is a tree representation of the HTML that the browser constructs. JavaScript manipulates this tree: `document.getElementById("title").textContent = "New Title"` changes visible text without reloading the page. Modern frameworks (React, Vue, Svelte) use a **virtual DOM** — a lightweight JavaScript copy of the real DOM — to compute the minimal set of changes needed, then batch-apply them. This diffing algorithm (O(n) heuristic instead of O(n³) exact tree comparison) is what makes single-page applications feel fast. Web Components (Custom Elements, Shadow DOM, Templates) bring component-based architecture to vanilla HTML, reducing framework dependency.',
+        'What actually happens between typing a URL and seeing the page? A 100+ step journey in under a second:\n\n' +
+        '1. **DNS lookup** — your computer asks "what IP address is `google.com`?" (often cached, ~20ms)\n' +
+        '2. **TCP handshake** — three packets exchanged to establish a reliable connection (~50ms)\n' +
+        '3. **TLS handshake** — if HTTPS, encryption keys negotiated (~100ms)\n' +
+        '4. **HTTP request sent** — your browser shouts "GET /"\n' +
+        '5. **Server processes** — database queries, template rendering, response assembly\n' +
+        '6. **Response streams back** — HTML arrives in chunks\n' +
+        '7. **Browser parses** HTML → builds DOM, fetches CSS → builds CSSOM, fetches JS → runs it\n' +
+        '8. **Render tree** computed from DOM + CSSOM, layout calculated, pixels painted, composited to screen\n\n' +
+        '**The modern web pushes every step:** CDNs (Cloudflare, Fastly) cache content at ~300 edge locations globally so step 6 takes 20ms instead of 200ms. **HTTP/2 multiplexes** many requests over one connection. **HTTP/3** ditches TCP entirely for QUIC (over UDP) — no head-of-line blocking on packet loss. **Service Workers** cache responses locally, enabling offline-first web apps. **Preload/prefetch hints** (`<link rel="preload">`) tell the browser "fetch this now, I\'ll need it soon." All of it aimed at one goal: shrink the journey from URL-typed to pixels-painted.',
       interactive: {
         type: 'matching',
         props: {
@@ -40,6 +49,7 @@ export const guide: ReferenceGuide = {
       title: 'HTML — The Structure',
       diagram: 'HTMLTagsDiagram',
       beginnerContent:
+        'Click tags in the diagram above. Each one is a labeled slot: `<h1>` marks a heading, `<p>` marks a paragraph, `<img>` places an image. HTML is just text wrapped in labels the browser knows how to render.\n\n' +
         'HTML (HyperText Markup Language) defines *what* is on the page. It uses tags — words in ' +
         'angle brackets — to label content. `<h1>` says "this is a main heading." `<p>` says "this ' +
         'is a paragraph." `<img>` places an image. `<a href="...">` creates a clickable link. ' +
@@ -66,6 +76,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'CSS — The Style',
       beginnerContent:
+        'Click around the box model diagram above. Every single element on every webpage is wrapped in this invisible sandwich: content, padding, border, margin. Once you see it, you can\'t unsee it. Every "why is there space there?!" moment you\'ve had with CSS is explained by this diagram.\n\n' +
         'CSS (Cascading Style Sheets) controls *how* things look. It uses rules that target HTML ' +
         'elements and apply visual properties. The rule `h1 { color: blue; font-size: 24px; }` ' +
         'makes all main headings blue and 24 pixels tall. You can target elements by tag name (h1), ' +
@@ -100,6 +111,7 @@ export const guide: ReferenceGuide = {
       title: 'How the Three Work Together',
       diagram: 'ComponentDiagram',
       beginnerContent:
+        'Watch the diagram above — the same component built in three layers: HTML (the skeleton), CSS (the skin), JavaScript (the muscles). Toggle each layer on and off to see what it contributes. Remove HTML — nothing left. Remove CSS — ugly but functional. Remove JS — static but usable. Put all three together — a real webpage.\n\n' +
         'Think of building a car. HTML is the frame and body panels — the structure that defines ' +
         'where the seats, dashboard, and wheels go. CSS is the paint job, upholstery, and trim — ' +
         'everything that makes it look good. JavaScript is the engine, steering, and electronics — ' +
@@ -183,6 +195,7 @@ export const guide: ReferenceGuide = {
       title: 'A Complete HTML Page',
       diagram: 'HTMLStructureDiagram',
       beginnerContent:
+        'Watch the document tree build itself above — `<!DOCTYPE>` first, then `<html>` wraps everything, with `<head>` (invisible metadata) and `<body>` (visible content) inside. Every webpage ever built follows this exact skeleton.\n\n' +
         'Every HTML file follows this structure. The `<!DOCTYPE html>` tells the browser which version ' +
         'of HTML to use. The `<head>` holds metadata; the `<body>` holds visible content.',
       code: `<!DOCTYPE html>
@@ -327,6 +340,7 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
       title: 'Putting It All Together: A Mini App',
       diagram: 'TodoDataFlowDiagram',
       beginnerContent:
+        'Trace the data flow in the diagram above. User types → input event fires → JS updates the state → DOM re-renders → user sees the change. That cycle — **input → state → render** — is the shape of every interactive app on the web, from a todo list to Instagram.\n\n' +
         'A complete mini-application that combines HTML structure, CSS styling, and JavaScript behavior into one working page.',
       code: `<!-- Save as index.html and open in a browser -->
 <!DOCTYPE html>
@@ -497,6 +511,7 @@ document.addEventListener("DOMContentLoaded", loadAnimals);`,
       title: 'The DOM — Selecting & Changing Elements',
       diagram: 'DOMManipulationDiagram',
       beginnerContent:
+        'Watch the tree in the diagram above. JavaScript doesn\'t edit your HTML file — it reaches into this live tree and modifies nodes directly. `document.querySelector(".btn")` finds a node. Change its `textContent` and the user sees new text instantly. That\'s the magic: the page updates without a reload.\n\n' +
         'The **DOM (Document Object Model)** is the browser\'s live representation of your HTML page as a tree of objects. JavaScript can read and change any part of it.\n\n' +
         '**Selecting elements:**\n' +
         '- `document.getElementById("myId")` — find one element by its id\n' +
@@ -557,6 +572,7 @@ li { list-style: none; }
       title: 'Events — Responding to User Actions',
       diagram: 'EventListenerDiagram',
       beginnerContent:
+        'Click the button in the diagram above. Watch the event fire, the listener catch it, and a handler function run. That\'s the entire model: user does something → event fires → your code responds. Every button, every form submission, every keystroke on the web flows through this loop.\n\n' +
         'An **event** is something the user does: click a button, type in an input, hover over an image, submit a form. JavaScript lets you run code when events happen.\n\n' +
         '**Adding event listeners:**\n' +
         '```\nconst btn = document.getElementById("myBtn");\nbtn.addEventListener("click", function() {\n  alert("Button clicked!");\n});\n```\n\n' +
@@ -679,6 +695,7 @@ document.getElementById("regForm").addEventListener("submit", (e) => {
       title: 'Flexbox — Layout Made Simple',
       diagram: 'FlexboxDiagram',
       beginnerContent:
+        'Toggle `justify-content` and `align-items` in the diagram above. Watch items shift around the container — center, edge, space-between, space-around. One CSS property, massive visual change. This is the layout engine that powers most modern websites.\n\n' +
         'Before flexbox, laying out elements side by side required hacks (floats, tables). Flexbox makes it one line: `display: flex`.\n\n' +
         '**Key properties on the container (parent):**\n' +
         '- `display: flex` — children line up in a row\n' +

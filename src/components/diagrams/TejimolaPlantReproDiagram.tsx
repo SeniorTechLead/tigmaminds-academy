@@ -1,111 +1,191 @@
+import { useState } from 'react';
+
+// ── Click to Explore — Plant Anatomy ─────────────────────────
+// Interactive plant diagram: click any part (root, stem, leaf,
+// flower, fruit) to highlight it and see its function.
+// Pulses gently to invite interaction.
+
+type Part = 'roots' | 'stem' | 'leaf' | 'flower' | 'fruit' | null;
+
+const PART_INFO: Record<string, { title: string; desc: string; color: string }> = {
+  roots: {
+    title: 'Roots',
+    desc: 'Anchor the plant, absorb water and minerals from soil, store food (starch). Root hairs multiply surface area by 100×.',
+    color: '#92400e',
+  },
+  stem: {
+    title: 'Stem',
+    desc: 'Supports leaves and flowers, transports water up (xylem) and sugar down (phloem). In trees, old xylem becomes wood.',
+    color: '#4d7c0f',
+  },
+  leaf: {
+    title: 'Leaves',
+    desc: 'Photosynthesis factory — captures sunlight, takes in CO₂, releases O₂. Stomata on the underside control gas exchange.',
+    color: '#15803d',
+  },
+  flower: {
+    title: 'Flower',
+    desc: 'Reproductive organ. Petals attract pollinators, anthers produce pollen (male), stigma receives pollen (female), ovary becomes fruit.',
+    color: '#be185d',
+  },
+  fruit: {
+    title: 'Fruit',
+    desc: 'Developed from the ovary after fertilization. Protects seeds and aids dispersal — by wind, water, animals, or explosion.',
+    color: '#dc2626',
+  },
+};
+
 export default function TejimolaPlantReproDiagram() {
+  const [selected, setSelected] = useState<Part>(null);
+
+  const isActive = (part: Part) => selected === part;
+  const opacity = (part: Part) => selected === null ? 0.85 : isActive(part) ? 1 : 0.3;
+  const stroke = (part: Part) => isActive(part) ? 'white' : 'none';
+  const strokeW = (part: Part) => isActive(part) ? 2 : 0;
+
+  const W = 400, H = 450;
+  const cx = 200;
+
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg
-        viewBox="0 0 600 440"
-        className="w-full h-auto"
-        role="img"
-        aria-label="Plant reproduction diagram comparing sexual (seed) and asexual (vegetative) propagation"
-      >
-        <rect width="600" height="440" rx="12" className="fill-slate-900" />
+    <div className="bg-gradient-to-b from-emerald-50 via-slate-50 to-amber-50 dark:from-emerald-950 dark:via-slate-950 dark:to-amber-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
+          Click to Explore — Plant Anatomy
+        </p>
+        {selected && (
+          <button
+            onClick={() => setSelected(null)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            Reset
+          </button>
+        )}
+      </div>
 
-        {/* Title */}
-        <text x="300" y="30" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#34d399">Seeds of Survival: How Plants Reproduce</text>
+      <div className="flex flex-col md:flex-row items-center gap-4">
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs" role="img"
+          aria-label="Interactive plant diagram — click each part to learn about it">
 
-        {/* Divider */}
-        <line x1="300" y1="50" x2="300" y2="430" className="stroke-gray-300 dark:stroke-slate-600" strokeWidth="1" strokeDasharray="6,4" />
+          {/* ── Soil ── */}
+          <rect x="0" y="340" width={W} height="110" fill="#451a03" opacity="0.4" rx="0" />
 
-        {/* LEFT: Sexual reproduction (seeds) */}
-        <text x="150" y="65" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#60a5fa">Sexual — Seeds</text>
-
-        {/* Flower */}
-        <g transform="translate(150, 120)">
-          {[0, 60, 120, 180, 240, 300].map((angle, i) => (
-            <ellipse key={i} cx="0" cy="-20" rx="10" ry="18" fill="#f472b6" opacity="0.8" transform={`rotate(${angle},0,0)`} />
-          ))}
-          <circle cx="0" cy="0" r="10" fill="#fbbf24" />
-          {/* Pollen grains */}
-          {[[-3, -2], [4, 1], [0, -5]].map(([x, y], i) => (
-            <circle key={`p${i}`} cx={x} cy={y} r="2" fill="#fef3c7" opacity="0.9" />
-          ))}
-          <text x="0" y="4" textAnchor="middle" fontSize="7" fill="#92400e">pollen</text>
-        </g>
-        <text x="150" y="155" textAnchor="middle" fontSize="10" fill="#d1d5db">Flower produces pollen + ovules</text>
-
-        {/* Arrow down */}
-        <line x1="150" y1="162" x2="150" y2="185" stroke="#60a5fa" strokeWidth="1.5" markerEnd="url(#arrowBlue)" />
-        <text x="150" y="200" textAnchor="middle" fontSize="10" fill="#93c5fd">Pollination (wind, bees, water)</text>
-
-        {/* Seed */}
-        <g transform="translate(150, 230)">
-          <ellipse cx="0" cy="0" rx="12" ry="8" fill="#a16207" stroke="#ca8a04" strokeWidth="1" />
-          <ellipse cx="0" cy="0" rx="6" ry="4" fill="#ca8a04" opacity="0.6" />
-          <text x="0" y="3" textAnchor="middle" fontSize="6" fill="#fef3c7">embryo</text>
-        </g>
-        <text x="150" y="255" textAnchor="middle" fontSize="10" fill="#d1d5db">Seed = embryo + food + coat</text>
-
-        {/* Arrow to seedling */}
-        <line x1="150" y1="262" x2="150" y2="285" stroke="#60a5fa" strokeWidth="1.5" markerEnd="url(#arrowBlue)" />
-
-        {/* Seedling */}
-        <g transform="translate(150, 310)">
-          <line x1="0" y1="0" x2="0" y2="-25" stroke="#22c55e" strokeWidth="2" />
-          <ellipse cx="-10" cy="-22" rx="8" ry="5" fill="#22c55e" transform="rotate(-30,-10,-22)" />
-          <ellipse cx="10" cy="-28" rx="8" ry="5" fill="#22c55e" transform="rotate(30,10,-28)" />
-          {/* Roots */}
-          <line x1="0" y1="0" x2="-8" y2="12" stroke="#a16207" strokeWidth="1.5" />
-          <line x1="0" y1="0" x2="8" y2="14" stroke="#a16207" strokeWidth="1.5" />
-          <line x1="0" y1="0" x2="0" y2="15" stroke="#a16207" strokeWidth="1.5" />
-        </g>
-        <text x="150" y="340" textAnchor="middle" fontSize="10" fill="#d1d5db">New plant (genetically unique)</text>
-
-        {/* Key point */}
-        <rect x="40" y="365" width="220" height="50" rx="6" fill="#1e3a5f" />
-        <text x="150" y="383" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#60a5fa">Two parents mix DNA</text>
-        <text x="150" y="398" textAnchor="middle" fontSize="10" fill="#93c5fd">Every offspring is different</text>
-        <text x="150" y="410" textAnchor="middle" fontSize="10" fill="#93c5fd">= genetic diversity</text>
-
-        {/* RIGHT: Vegetative propagation */}
-        <text x="450" y="65" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#34d399">Asexual — Cloning</text>
-
-        {/* Parent plant */}
-        <g transform="translate(450, 110)">
-          <line x1="0" y1="0" x2="0" y2="-35" stroke="#22c55e" strokeWidth="3" />
-          {[-20, -10, 5, 15].map((y, i) => (
-            <ellipse key={i} cx={i % 2 === 0 ? -14 : 14} cy={y} rx="10" ry="6" fill="#22c55e" opacity="0.85" transform={`rotate(${i % 2 === 0 ? -20 : 20}, ${i % 2 === 0 ? -14 : 14}, ${y})`} />
-          ))}
-        </g>
-        <text x="450" y="125" textAnchor="middle" fontSize="10" fill="#d1d5db">Parent plant</text>
-
-        {/* Four methods */}
-        {[
-          { y: 160, label: 'Cutting', desc: 'Stem piece grows roots', color: '#34d399' },
-          { y: 210, label: 'Runner', desc: 'Horizontal stem, new plants', color: '#22d3ee' },
-          { y: 260, label: 'Tuber', desc: 'Underground storage, sprouts', color: '#fbbf24' },
-          { y: 310, label: 'Tissue culture', desc: 'Lab: cells to whole plant', color: '#c084fc' },
-        ].map((m, i) => (
-          <g key={i}>
-            <rect x="340" y={m.y - 15} width="220" height="35" rx="6" fill={m.color} opacity="0.12" />
-            <circle cx="360" cy={m.y} r="8" fill={m.color} opacity="0.4" />
-            <text x="360" y={m.y + 3} textAnchor="middle" fontSize="10" fontWeight="bold" fill={m.color}>{i + 1}</text>
-            <text x="380" y={m.y - 3} fontSize="11" fontWeight="bold" fill={m.color}>{m.label}</text>
-            <text x="380" y={m.y + 11} fontSize="9" fill="#d1d5db">{m.desc}</text>
+          {/* ── Roots ── */}
+          <g onClick={() => setSelected(selected === 'roots' ? null : 'roots')}
+            className="cursor-pointer" opacity={opacity('roots')}>
+            <path d={`M ${cx},340 L ${cx - 60},400 M ${cx},340 L ${cx + 70},410 M ${cx},340 L ${cx},430 M ${cx - 60},400 L ${cx - 90},420 M ${cx + 70},410 L ${cx + 100},430`}
+              stroke="#92400e" strokeWidth="4" fill="none" strokeLinecap="round"
+              style={{ filter: isActive('roots') ? 'drop-shadow(0 0 6px #fbbf24)' : 'none' }} />
+            {/* Root hairs */}
+            {[-60, -30, 0, 40, 70].map((dx, i) => (
+              <line key={`rh-${i}`}
+                x1={cx + dx} y1={370 + i * 8}
+                x2={cx + dx + (i % 2 === 0 ? -15 : 15)} y2={375 + i * 8}
+                stroke="#b45309" strokeWidth="1" opacity="0.6" />
+            ))}
+            <text x={cx} y={H - 5} textAnchor="middle" fill="#fbbf24" fontSize="10"
+              stroke={stroke('roots')} strokeWidth={strokeW('roots') * 0.3}>
+              Roots
+            </text>
           </g>
-        ))}
 
-        {/* Key point */}
-        <rect x="340" y="365" width="220" height="50" rx="6" fill="#1a3a2a" />
-        <text x="450" y="383" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#34d399">One parent, no mixing</text>
-        <text x="450" y="398" textAnchor="middle" fontSize="10" fill="#6ee7b7">Every offspring is identical</text>
-        <text x="450" y="410" textAnchor="middle" fontSize="10" fill="#6ee7b7">= clones (fast but risky)</text>
+          {/* ── Stem ── */}
+          <g onClick={() => setSelected(selected === 'stem' ? null : 'stem')}
+            className="cursor-pointer" opacity={opacity('stem')}>
+            <rect x={cx - 6} y="130" width="12" height="210" fill="#4d7c0f" rx="4"
+              stroke={stroke('stem')} strokeWidth={strokeW('stem')}
+              style={{ filter: isActive('stem') ? 'drop-shadow(0 0 6px #84cc16)' : 'none' }} />
+            {/* Nodes */}
+            {[180, 230, 280].map(ny => (
+              <ellipse key={`node-${ny}`} cx={cx} cy={ny} rx="8" ry="3" fill="#365314" />
+            ))}
+          </g>
 
-        {/* Arrow markers */}
-        <defs>
-          <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" fill="#60a5fa" />
-          </marker>
-        </defs>
-      </svg>
+          {/* ── Leaves ── */}
+          <g onClick={() => setSelected(selected === 'leaf' ? null : 'leaf')}
+            className="cursor-pointer" opacity={opacity('leaf')}>
+            {[
+              { x: cx - 50, y: 180, rot: -30, rx: 30, ry: 12 },
+              { x: cx + 50, y: 170, rot: 25, rx: 28, ry: 11 },
+              { x: cx - 45, y: 230, rot: -20, rx: 25, ry: 10 },
+              { x: cx + 48, y: 240, rot: 15, rx: 26, ry: 10 },
+              { x: cx - 30, y: 280, rot: -35, rx: 22, ry: 9 },
+              { x: cx + 35, y: 290, rot: 30, rx: 24, ry: 9 },
+            ].map((l, i) => (
+              <g key={`leaf-${i}`}>
+                <line x1={cx} y1={l.y} x2={l.x} y2={l.y} stroke="#4d7c0f" strokeWidth="1.5" />
+                <ellipse cx={l.x} cy={l.y} rx={l.rx} ry={l.ry} fill="#22c55e"
+                  transform={`rotate(${l.rot}, ${l.x}, ${l.y})`}
+                  stroke={stroke('leaf')} strokeWidth={strokeW('leaf')}
+                  style={{ filter: isActive('leaf') ? 'drop-shadow(0 0 6px #4ade80)' : 'none' }} />
+                {/* Leaf vein */}
+                <line x1={l.x - l.rx * 0.6 * Math.cos(l.rot * Math.PI / 180)}
+                  y1={l.y - l.rx * 0.6 * Math.sin(l.rot * Math.PI / 180)}
+                  x2={l.x + l.rx * 0.6 * Math.cos(l.rot * Math.PI / 180)}
+                  y2={l.y + l.rx * 0.6 * Math.sin(l.rot * Math.PI / 180)}
+                  stroke="#166534" strokeWidth="0.5" opacity="0.5" />
+              </g>
+            ))}
+          </g>
+
+          {/* ── Flower ── */}
+          <g onClick={() => setSelected(selected === 'flower' ? null : 'flower')}
+            className="cursor-pointer" opacity={opacity('flower')}>
+            {/* Petals */}
+            {[0, 1, 2, 3, 4].map(i => {
+              const angle = (i * 72 - 90) * Math.PI / 180;
+              const px = cx + Math.cos(angle) * 22;
+              const py = 105 + Math.sin(angle) * 18;
+              return (
+                <ellipse key={`petal-${i}`} cx={px} cy={py} rx="14" ry="9" fill="#f472b6"
+                  transform={`rotate(${i * 72 - 90}, ${px}, ${py})`}
+                  stroke={stroke('flower')} strokeWidth={strokeW('flower')}
+                  style={{ filter: isActive('flower') ? 'drop-shadow(0 0 6px #f472b6)' : 'none' }} />
+              );
+            })}
+            {/* Center */}
+            <circle cx={cx} cy={105} r="8" fill="#fbbf24" />
+            {/* Stigma */}
+            <circle cx={cx} cy={98} r="3" fill="#16a34a" />
+          </g>
+
+          {/* ── Fruit ── */}
+          <g onClick={() => setSelected(selected === 'fruit' ? null : 'fruit')}
+            className="cursor-pointer" opacity={opacity('fruit')}>
+            <ellipse cx={cx + 35} cy={120} rx="12" ry="16" fill="#dc2626"
+              stroke={stroke('fruit')} strokeWidth={strokeW('fruit')}
+              style={{ filter: isActive('fruit') ? 'drop-shadow(0 0 6px #ef4444)' : 'none' }} />
+            <line x1={cx + 35} y1={104} x2={cx + 35} y2={98} stroke="#4d7c0f" strokeWidth="1.5" />
+            {/* Seeds inside */}
+            <circle cx={cx + 33} cy={118} r="2" fill="#fef9c3" opacity="0.6" />
+            <circle cx={cx + 37} cy={122} r="2" fill="#fef9c3" opacity="0.6" />
+          </g>
+
+          {/* Prompt text */}
+          {!selected && (
+            <text x={cx} y={25} textAnchor="middle" fill="#86efac" fontSize="10" opacity="0.6">
+              ↑ Click any part to learn about it
+            </text>
+          )}
+        </svg>
+
+        {/* Info panel */}
+        <div className="flex-1 min-w-[200px]">
+          {selected ? (
+            <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+              <h3 className="text-lg font-bold mb-2" style={{ color: PART_INFO[selected].color === '#15803d' ? '#4ade80' : PART_INFO[selected].color }}>
+                {PART_INFO[selected].title}
+              </h3>
+              <p className="text-sm text-gray-300 leading-relaxed">
+                {PART_INFO[selected].desc}
+              </p>
+            </div>
+          ) : (
+            <div className="text-center text-gray-500 text-sm py-8">
+              Click a plant part to explore its function
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

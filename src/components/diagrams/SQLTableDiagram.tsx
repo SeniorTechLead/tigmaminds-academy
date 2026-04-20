@@ -1,148 +1,164 @@
-/**
- * Visual diagram showing a database table with columns, rows, primary key,
- * and data type annotations. Uses an "elephants" table as the example.
- */
+import { useState } from 'react';
+
+// ── Click Inside a Table ──────────────────────────────────────
+// Interactive table. Click column headers or cells to see what
+// each part is called (primary key, foreign key, column, row,
+// data type, cell). Row hover highlights the whole row.
+
+type Part = 'pk' | 'fk' | 'column' | 'row' | 'cell' | 'datatype' | null;
+
+const INFO: Record<string, { title: string; desc: string; color: string }> = {
+  pk: {
+    title: 'Primary Key',
+    desc: 'A column that uniquely identifies each row. No two rows can have the same primary key value. The database uses this to find any row instantly.',
+    color: '#f59e0b',
+  },
+  fk: {
+    title: 'Foreign Key',
+    desc: 'A column that references the primary key of another table. It\'s how tables connect to each other — the glue of a relational database.',
+    color: '#8b5cf6',
+  },
+  column: {
+    title: 'Column',
+    desc: 'A category of data (name, age, weight). Every row has a value for every column. All values in one column must be the same type.',
+    color: '#3b82f6',
+  },
+  row: {
+    title: 'Row (Record)',
+    desc: 'A single record — one individual thing. One elephant, one student, one order. Every table is a list of rows.',
+    color: '#10b981',
+  },
+  cell: {
+    title: 'Cell',
+    desc: 'One piece of data — the intersection of a row and a column. This is the smallest unit of a database.',
+    color: '#ec4899',
+  },
+  datatype: {
+    title: 'Data Type',
+    desc: 'The KIND of value a column holds: INTEGER for whole numbers, TEXT for strings, REAL for decimals, DATE for dates. The database enforces the type.',
+    color: '#14b8a6',
+  },
+};
+
+const ROWS = [
+  { id: 1, name: 'Ranga', weight: 5200, park_id: 1 },
+  { id: 2, name: 'Tara', weight: 3800, park_id: 1 },
+  { id: 3, name: 'Bali', weight: 4650, park_id: 2 },
+  { id: 4, name: 'Kavita', weight: 4100, park_id: 2 },
+];
+
 export default function SQLTableDiagram() {
-  const columns = [
-    { name: 'id', type: 'INTEGER', pk: true },
-    { name: 'name', type: 'TEXT', pk: false },
-    { name: 'weight', type: 'REAL', pk: false },
-    { name: 'park', type: 'TEXT', pk: false },
-  ];
+  const [selected, setSelected] = useState<Part>(null);
+  const [hoverRow, setHoverRow] = useState<number | null>(null);
 
-  const rows = [
-    ['1', 'Ranga', '4500', 'Kaziranga'],
-    ['2', 'Mohini', '3800', 'Manas'],
-    ['3', 'Gaja', '5200', 'Kaziranga'],
-    ['4', 'Tara', '4100', 'Kaziranga'],
-  ];
-
-  const colW = [55, 95, 75, 110];
-  const rowH = 28;
-  const headerH = 32;
-  const typeH = 20;
-  const padL = 70;
-  const padT = 58;
-  const totalTableW = colW.reduce((a, b) => a + b, 0);
-  const totalW = padL + totalTableW + 130;
-  const totalH = padT + headerH + typeH + rows.length * rowH + 75;
-
-  const colX = (i: number) => padL + colW.slice(0, i).reduce((a, b) => a + b, 0);
+  const opacity = (part: Part) =>
+    selected === null ? 1 : selected === part ? 1 : 0.35;
 
   return (
-    <svg viewBox={`0 0 ${totalW} ${totalH}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Database table diagram showing elephants table with columns, types, and primary key">
-      {/* Title */}
-      <text x={totalW / 2} y="18" textAnchor="middle" className="fill-gray-800 dark:fill-gray-200" fontSize="13" fontWeight="700">
-        Table: elephants
-      </text>
-      <text x={totalW / 2} y="34" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">
-        Each row is a record. Each column is a field.
-      </text>
+    <div className="bg-gradient-to-b from-sky-50 via-slate-50 to-amber-50 dark:from-sky-950 dark:via-slate-950 dark:to-amber-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-bold text-sky-700 dark:text-sky-400 uppercase tracking-wider">
+          Click Inside a Table
+        </p>
+        {selected && (
+          <button
+            onClick={() => setSelected(null)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            Reset
+          </button>
+        )}
+      </div>
 
-      {/* Table border */}
-      <rect x={padL} y={padT} width={totalTableW} height={headerH + typeH + rows.length * rowH}
-        rx="8" className="fill-white dark:fill-gray-900 stroke-gray-300 dark:stroke-gray-600" strokeWidth="2" />
+      <div className="flex flex-col md:flex-row gap-4">
+        {/* Table */}
+        <div className="flex-1 overflow-x-auto">
+          <div className="bg-white dark:bg-slate-900 rounded-lg border-2 border-slate-300 dark:border-slate-700 overflow-hidden min-w-max">
+            {/* Table name header */}
+            <div className="bg-slate-100 dark:bg-slate-800 px-4 py-2 border-b-2 border-slate-300 dark:border-slate-700 font-mono text-sm font-bold text-slate-700 dark:text-slate-200">
+              elephants
+            </div>
 
-      {/* Column headers */}
-      <rect x={padL} y={padT} width={totalTableW} height={headerH}
-        rx="8" className="fill-sky-100 dark:fill-sky-900/40 stroke-sky-300 dark:stroke-sky-700" strokeWidth="1.5" />
-      {/* Bottom corners aren't rounded */}
-      <rect x={padL} y={padT + 8} width={totalTableW} height={headerH - 8}
-        className="fill-sky-100 dark:fill-sky-900/40" />
+            {/* Column headers */}
+            <div className="flex border-b-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+              {[
+                { key: 'id', label: 'id', type: 'INTEGER', isPK: true },
+                { key: 'name', label: 'name', type: 'TEXT', isPK: false },
+                { key: 'weight', label: 'weight', type: 'INTEGER', isPK: false },
+                { key: 'park_id', label: 'park_id', type: 'INTEGER', isFK: true },
+              ].map(col => (
+                <div key={col.key}
+                  onClick={() => setSelected(col.isPK ? 'pk' : col.isFK ? 'fk' : 'column')}
+                  className={`flex-1 min-w-[80px] px-3 py-2 cursor-pointer transition font-mono text-xs font-bold select-none hover:bg-blue-50 dark:hover:bg-blue-900/20 border-r border-slate-200 dark:border-slate-700 last:border-r-0`}
+                  style={{
+                    opacity: opacity(col.isPK ? 'pk' : col.isFK ? 'fk' : 'column'),
+                    background: selected === 'column' && !col.isPK && !col.isFK ? '#dbeafe' :
+                              selected === 'pk' && col.isPK ? '#fef3c7' :
+                              selected === 'fk' && col.isFK ? '#ede9fe' : undefined,
+                  }}>
+                  <div className="flex items-center gap-1">
+                    {col.isPK && <span title="PK" className="text-amber-500">🔑</span>}
+                    {col.isFK && <span title="FK" className="text-purple-500">🔗</span>}
+                    <span className="text-slate-900 dark:text-slate-100">{col.label}</span>
+                  </div>
+                  <div
+                    onClick={(e) => { e.stopPropagation(); setSelected('datatype'); }}
+                    className="text-[10px] text-teal-600 dark:text-teal-400 font-normal mt-0.5 cursor-pointer"
+                    style={{ opacity: opacity('datatype') }}>
+                    {col.type}
+                  </div>
+                </div>
+              ))}
+            </div>
 
-      {columns.map((col, i) => (
-        <g key={i}>
-          <text x={colX(i) + colW[i] / 2} y={padT + 20} textAnchor="middle"
-            className="fill-sky-800 dark:fill-sky-200" fontSize="11" fontWeight="700" fontFamily="monospace">
-            {col.name}
-          </text>
-          {/* Primary key icon */}
-          {col.pk && (
-            <g transform={`translate(${colX(i) + colW[i] / 2 + 16}, ${padT + 8})`}>
-              <text className="fill-amber-500" fontSize="10">🔑</text>
-            </g>
-          )}
-        </g>
-      ))}
-
-      {/* Data types row */}
-      <rect x={padL} y={padT + headerH} width={totalTableW} height={typeH}
-        className="fill-gray-50 dark:fill-gray-800/50" />
-      {columns.map((col, i) => (
-        <text key={i} x={colX(i) + colW[i] / 2} y={padT + headerH + 13} textAnchor="middle"
-          className="fill-gray-400 dark:fill-gray-500" fontSize="8" fontFamily="monospace">
-          {col.type}
-        </text>
-      ))}
-
-      {/* Data rows */}
-      {rows.map((row, ri) => {
-        const y = padT + headerH + typeH + ri * rowH;
-        const isEven = ri % 2 === 0;
-        return (
-          <g key={ri}>
-            {/* Zebra stripe */}
-            <rect x={padL} y={y} width={totalTableW} height={rowH}
-              className={isEven ? 'fill-white dark:fill-gray-900' : 'fill-gray-50 dark:fill-gray-800/30'}
-              rx={ri === rows.length - 1 ? 8 : undefined} />
-            {/* Cell values */}
-            {row.map((val, ci) => (
-              <text key={ci} x={colX(ci) + colW[ci] / 2} y={y + 17} textAnchor="middle"
-                className={ci === 0
-                  ? 'fill-amber-600 dark:fill-amber-400'
-                  : 'fill-gray-700 dark:fill-gray-300'}
-                fontSize="10" fontWeight={ci === 0 ? '700' : '500'} fontFamily="monospace">
-                {val}
-              </text>
+            {/* Rows */}
+            {ROWS.map((r, i) => (
+              <div key={r.id}
+                onClick={() => setSelected('row')}
+                onMouseEnter={() => setHoverRow(i)}
+                onMouseLeave={() => setHoverRow(null)}
+                className={`flex border-b border-slate-100 dark:border-slate-700 last:border-b-0 cursor-pointer transition ${
+                  hoverRow === i ? 'bg-emerald-50 dark:bg-emerald-900/20' : 'hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
+                }`}
+                style={{ opacity: opacity('row') }}>
+                {Object.entries(r).map(([k, v], j) => (
+                  <div key={j}
+                    onClick={(e) => { e.stopPropagation(); setSelected('cell'); }}
+                    className="flex-1 min-w-[80px] px-3 py-2 font-mono text-sm text-slate-800 dark:text-slate-200 border-r border-slate-100 dark:border-slate-700 last:border-r-0 hover:ring-2 hover:ring-pink-500/50 transition"
+                    style={{
+                      background: selected === 'cell' ? '#fce7f3' : undefined,
+                      opacity: opacity('cell'),
+                    }}>
+                    {v}
+                  </div>
+                ))}
+              </div>
             ))}
-            {/* Row separator */}
-            {ri < rows.length - 1 && (
-              <line x1={padL} y1={y + rowH} x2={padL + totalTableW} y2={y + rowH}
-                className="stroke-gray-200 dark:stroke-gray-700" strokeWidth="0.5" />
-            )}
-          </g>
-        );
-      })}
+          </div>
 
-      {/* Column separators */}
-      {columns.slice(1).map((_, i) => (
-        <line key={i} x1={colX(i + 1)} y1={padT} x2={colX(i + 1)} y2={padT + headerH + typeH + rows.length * rowH}
-          className="stroke-gray-200 dark:stroke-gray-700" strokeWidth="0.5" />
-      ))}
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+            Click any part — column header, cell, row, or the data type
+          </p>
+        </div>
 
-      {/* Annotations */}
-      {/* Row arrow */}
-      <g transform={`translate(${padL + totalTableW + 8}, ${padT + headerH + typeH + 12})`}>
-        <line x1="0" y1="0" x2="25" y2="0" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1" />
-        <text x="30" y="4" className="fill-gray-500 dark:fill-gray-400" fontSize="9" fontWeight="600">
-          → row (record)
-        </text>
-      </g>
-
-      {/* Column arrow */}
-      <g transform={`translate(${colX(2) + colW[2] / 2}, ${padT - 4})`}>
-        <text x="0" y="-4" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="9" fontWeight="600">
-          ↑ column (field)
-        </text>
-      </g>
-
-      {/* PK annotation */}
-      <g transform={`translate(${padL - 6}, ${padT + headerH + typeH + 10})`}>
-        <text x="0" y="4" textAnchor="end" className="fill-amber-600 dark:fill-amber-400" fontSize="9" fontWeight="600">
-          PK
-        </text>
-        <text x="0" y="16" textAnchor="end" className="fill-gray-400 dark:fill-gray-500" fontSize="7">
-          unique
-        </text>
-        <text x="0" y="26" textAnchor="end" className="fill-gray-400 dark:fill-gray-500" fontSize="7">
-          per row
-        </text>
-      </g>
-
-      {/* Footnote */}
-      <text x={totalW / 2} y={totalH - 8} textAnchor="middle" className="fill-gray-400 dark:fill-gray-500" fontSize="9">
-        PRIMARY KEY = unique identifier. TEXT, INTEGER, REAL = data types. NOT NULL = required.
-      </text>
-    </svg>
+        {/* Info panel */}
+        <div className="flex-1 min-w-[200px] max-w-sm">
+          {selected ? (
+            <div className="bg-white/70 dark:bg-white/5 rounded-lg p-4 border border-white/10 h-full">
+              <h3 className="text-lg font-bold mb-2" style={{ color: INFO[selected].color }}>
+                {INFO[selected].title}
+              </h3>
+              <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
+                {INFO[selected].desc}
+              </p>
+            </div>
+          ) : (
+            <div className="text-center text-gray-500 dark:text-gray-400 text-sm py-8 h-full flex items-center justify-center">
+              Click anywhere in the table to explore
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

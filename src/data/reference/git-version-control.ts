@@ -29,7 +29,9 @@ export const guide: ReferenceGuide = {
     },
     {
       title: 'Git Basics: init, add, commit, status, log',
+      diagram: 'GitStagingDiagram',
       beginnerContent:
+        'Try the three-zone diagram above. Click **edit** on a file to modify it (it moves to Working). Click **git add** to stage it. Type a message and **commit**. Watch files flow Working → Staged → Committed. This is what every Git workflow comes down to: three zones and the commands that move files between them.\n\n' +
         'Git works in three stages. First, you make changes to files in your *working directory* — this ' +
         'is just your normal folder. Second, you *stage* the changes you want to save using `git add`. ' +
         'Staging is like placing items on a conveyor belt: you choose exactly which changes to include. ' +
@@ -62,6 +64,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Branches: Creating, Switching, and Merging',
       beginnerContent:
+        'Step through the branch history in the diagram above. A branch forks off main, gets its own commits, and eventually merges back. Notice how a branch is just a pointer to a commit — not a full copy of files. That\'s why creating branches in Git is instant.\n\n' +
         'A branch is a parallel copy of your project where you can experiment without affecting the main ' +
         'version. Imagine a tree: the trunk is your main code, and each branch grows in its own ' +
         'direction. You might create a branch called "add-dark-mode" to try a new feature. If it works ' +

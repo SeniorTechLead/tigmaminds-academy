@@ -1,65 +1,153 @@
+import { useState } from 'react';
+
+// ── linspace vs arange ───────────────────────────────────────
+// Interactive demo of NumPy's range-making functions. User picks
+// count or step; ruler ticks update live. Shows the difference
+// between linspace (count-based) and arange (step-based).
+
+type Mode = 'linspace' | 'arange';
+
 export default function NumPyRulerDiagram() {
-  const fewPoints = [0, 0.33, 0.67, 1.0, 1.33, 1.67, 2.0, 2.33, 2.67, 3.0];
-  const manyPoints = Array.from({ length: 31 }, (_, i) => i * 0.1);
+  const [mode, setMode] = useState<Mode>('linspace');
+  const [count, setCount] = useState(10); // for linspace
+  const [step, setStep] = useState(0.5); // for arange
+  const start = 0, stop = 3;
+
+  // Compute values
+  let values: number[] = [];
+  let code = '';
+  if (mode === 'linspace') {
+    if (count > 1) {
+      const stepSize = (stop - start) / (count - 1);
+      values = Array.from({ length: count }, (_, i) => start + i * stepSize);
+    } else {
+      values = [start];
+    }
+    code = `np.linspace(${start}, ${stop}, ${count})`;
+  } else {
+    values = [];
+    for (let v = start; v <= stop + 0.0001; v += step) values.push(Number(v.toFixed(4)));
+    code = `np.arange(${start}, ${stop + step}, ${step})`;
+  }
+
+  const W = 580, H = 200;
+  const padX = 30;
+  const plotW = W - padX * 2;
+  const xAt = (v: number) => padX + ((v - start) / (stop - start)) * plotW;
+  const lineY = 80;
 
   return (
-    <svg viewBox="0 0 670 210" className="w-full max-w-xl mx-auto my-6" role="img" aria-label="Two rulers comparing 10 points vs 30 points on a 0-3 scale">
-      {/* Title area */}
-      <text x="300" y="18" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="11" fontWeight="600">
-        np.linspace(0, 3, count) — more points = finer detail
-      </text>
+    <div className="bg-gradient-to-b from-indigo-50 via-slate-50 to-emerald-50 dark:from-indigo-950 dark:via-slate-950 dark:to-emerald-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <p className="text-xs font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-wider">
+          linspace vs arange
+        </p>
+        <div className="flex gap-1">
+          <button
+            onClick={() => setMode('linspace')}
+            className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded transition ${
+              mode === 'linspace'
+                ? 'bg-indigo-500 text-white'
+                : 'bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20'
+            }`}>
+            linspace
+          </button>
+          <button
+            onClick={() => setMode('arange')}
+            className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded transition ${
+              mode === 'arange'
+                ? 'bg-emerald-500 text-white'
+                : 'bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20'
+            }`}>
+            arange
+          </button>
+        </div>
+      </div>
 
-      {/* Ruler 1: 10 points (coarse) */}
-      <g transform="translate(40, 40)">
-        <text x="0" y="0" className="fill-amber-600 dark:fill-amber-400" fontSize="12" fontWeight="700">10 points</text>
-        {/* Rail */}
-        <line x1="0" y1="25" x2="520" y2="25" className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="2" />
-        {/* Ticks */}
-        {fewPoints.map((val, i) => {
-          const x = (val / 3) * 520;
-          return (
-            <g key={i}>
-              <line x1={x} y1="15" x2={x} y2="35" className="stroke-amber-500" strokeWidth="3" strokeLinecap="round" />
-              <circle cx={x} cy="25" r="5" className="fill-amber-500" />
-              {i % 3 === 0 && (
-                <text x={x} y="52" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10" fontFamily="monospace">{val.toFixed(1)}</text>
-              )}
-            </g>
-          );
-        })}
-        <text x="540" y="30" className="fill-gray-400" fontSize="10">sec</text>
-      </g>
+      {/* Ruler */}
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl mx-auto" role="img"
+        aria-label="Interactive ruler showing linspace and arange spacing">
+        {/* Main line */}
+        <line x1={padX} y1={lineY} x2={W - padX} y2={lineY}
+          stroke="#334155" strokeWidth="2" />
 
-      {/* Ruler 2: 30 points (fine) */}
-      <g transform="translate(40, 110)">
-        <text x="0" y="0" className="fill-emerald-600 dark:fill-emerald-400" fontSize="12" fontWeight="700">30 points</text>
-        {/* Rail */}
-        <line x1="0" y1="25" x2="520" y2="25" className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="2" />
-        {/* Ticks */}
-        {manyPoints.map((val, i) => {
-          const x = (val / 3) * 520;
-          return (
-            <g key={i}>
-              <line x1={x} y1="18" x2={x} y2="32" className="stroke-emerald-500" strokeWidth="2" strokeLinecap="round" />
-              <circle cx={x} cy="25" r="3" className="fill-emerald-500" />
-              {i % 10 === 0 && (
-                <text x={x} y="50" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10" fontFamily="monospace">{val.toFixed(1)}</text>
-              )}
-            </g>
-          );
-        })}
-        <text x="540" y="30" className="fill-gray-400" fontSize="10">sec</text>
-      </g>
+        {/* Major ticks at 0, 1, 2, 3 */}
+        {[0, 1, 2, 3].map(v => (
+          <g key={`maj-${v}`}>
+            <line x1={xAt(v)} y1={lineY - 10} x2={xAt(v)} y2={lineY + 10}
+              stroke="#334155" strokeWidth="1.5" />
+            <text x={xAt(v)} y={lineY + 26} textAnchor="middle"
+              className="fill-slate-700 dark:fill-slate-200" fontSize="11" fontWeight="bold">
+              {v}
+            </text>
+          </g>
+        ))}
 
-      {/* Gap labels */}
-      <g transform="translate(40, 75)">
-        <line x1="0" y1="0" x2={520 / 3 / 3} y2="0" className="stroke-amber-400" strokeWidth="1" strokeDasharray="3,3" />
-        <text x={520 / 3 / 6} y="13" textAnchor="middle" className="fill-amber-500" fontSize="9">gap: 0.33s</text>
-      </g>
-      <g transform="translate(40, 155)">
-        <line x1="0" y1="0" x2={520 / 30} y2="0" className="stroke-emerald-400" strokeWidth="1" strokeDasharray="3,3" />
-        <text x={520 / 30 / 2 + 30} y="13" textAnchor="start" className="fill-emerald-500" fontSize="9">gap: 0.10s</text>
-      </g>
-    </svg>
+        {/* Generated points */}
+        {values.map((v, i) => (
+          <g key={`pt-${i}`}>
+            <circle cx={xAt(v)} cy={lineY}
+              r="5"
+              fill={mode === 'linspace' ? '#6366f1' : '#10b981'}
+              stroke="white" strokeWidth="1.5" />
+            {values.length <= 20 && (
+              <text x={xAt(v)} y={lineY - 18} textAnchor="middle"
+                className={mode === 'linspace' ? 'fill-indigo-700 dark:fill-indigo-300' : 'fill-emerald-700 dark:fill-emerald-300'}
+                fontSize="8" fontWeight="bold">
+                {v.toFixed(2)}
+              </text>
+            )}
+          </g>
+        ))}
+
+        {/* Code snippet */}
+        <rect x={padX} y={H - 50} width={W - padX * 2} height={38} rx={6}
+          fill="#0f172a" />
+        <text x={padX + 10} y={H - 36}
+          className="fill-gray-400" fontSize="9" fontFamily="monospace">
+          Python / NumPy:
+        </text>
+        <text x={padX + 10} y={H - 20}
+          fill={mode === 'linspace' ? '#818cf8' : '#34d399'}
+          fontSize="12" fontFamily="monospace" fontWeight="bold">
+          {code}
+        </text>
+      </svg>
+
+      {/* Control for current mode */}
+      <div className="max-w-sm mx-auto mt-3">
+        {mode === 'linspace' ? (
+          <>
+            <label className="text-xs text-gray-600 dark:text-gray-400 flex justify-between mb-1">
+              <span>Count (number of points)</span>
+              <span className="font-mono font-bold text-indigo-700 dark:text-indigo-300">{count}</span>
+            </label>
+            <input type="range" min={2} max={31} value={count}
+              onChange={e => setCount(+e.target.value)}
+              className="w-full accent-indigo-500" />
+            <p className="text-[11px] text-gray-600 dark:text-gray-400 mt-1 text-center">
+              <strong>linspace</strong> — you pick the COUNT; NumPy picks the step.
+            </p>
+          </>
+        ) : (
+          <>
+            <label className="text-xs text-gray-600 dark:text-gray-400 flex justify-between mb-1">
+              <span>Step size</span>
+              <span className="font-mono font-bold text-emerald-700 dark:text-emerald-300">{step.toFixed(2)}</span>
+            </label>
+            <input type="range" min={0.1} max={1.5} step={0.05} value={step}
+              onChange={e => setStep(+e.target.value)}
+              className="w-full accent-emerald-500" />
+            <p className="text-[11px] text-gray-600 dark:text-gray-400 mt-1 text-center">
+              <strong>arange</strong> — you pick the STEP; NumPy picks the count.
+            </p>
+          </>
+        )}
+      </div>
+
+      <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+        Both create a 1D NumPy array — the difference is which parameter you control.
+      </p>
+    </div>
   );
 }

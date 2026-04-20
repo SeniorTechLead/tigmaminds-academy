@@ -1,135 +1,216 @@
-const DoseResponseDiagram = () => {
+import { useState, useEffect } from 'react';
+
+// ── The Evolution Trap ───────────────────────────────────────
+// Interactive antibiotic resistance demo. Bacteria with varying
+// resistance levels (colored by resistance). Apply antibiotic —
+// sensitive ones die, resistant ones survive and multiply.
+// Over rounds, the population shifts fully resistant.
+// Visceral demo of why "finish your antibiotics" matters.
+
+interface Bug {
+  id: number;
+  x: number;
+  y: number;
+  resistance: number; // 0 (sensitive) to 1 (resistant)
+  alive: boolean;
+  deathAge: number;
+}
+
+let bugId = 0;
+
+const W = 520, H = 300;
+const POP_SIZE = 60;
+
+function makeInitialPop(): Bug[] {
+  const pop: Bug[] = [];
+  for (let i = 0; i < POP_SIZE; i++) {
+    // Starting population: mostly sensitive, a few resistant (normal distribution)
+    const r = Math.max(0, Math.min(1, 0.2 + (Math.random() - 0.5) * 0.4));
+    pop.push({
+      id: bugId++,
+      x: 20 + Math.random() * (W - 40),
+      y: 30 + Math.random() * (H - 60),
+      resistance: r,
+      alive: true,
+      deathAge: 0,
+    });
+  }
+  return pop;
+}
+
+export default function DoseResponseDiagram() {
+  const [pop, setPop] = useState<Bug[]>(() => makeInitialPop());
+  const [round, setRound] = useState(0);
+  const [tick, setTick] = useState(0);
+  const [applyingAntibiotic, setApplyingAntibiotic] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => setTick(t => t + 1), 40);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Gentle drift motion
+  useEffect(() => {
+    setPop(prev => prev.map(b => {
+      if (!b.alive) return { ...b, deathAge: b.deathAge + 1 };
+      const vx = Math.sin(tick * 0.05 + b.id) * 0.8;
+      const vy = Math.cos(tick * 0.06 + b.id * 0.7) * 0.6;
+      let nx = b.x + vx;
+      let ny = b.y + vy;
+      if (nx < 15) nx = 15; if (nx > W - 15) nx = W - 15;
+      if (ny < 20) ny = 20; if (ny > H - 25) ny = H - 25;
+      return { ...b, x: nx, y: ny };
+    }));
+  }, [tick]);
+
+  const aliveCount = pop.filter(b => b.alive).length;
+  const avgResistance = aliveCount > 0
+    ? pop.filter(b => b.alive).reduce((s, b) => s + b.resistance, 0) / aliveCount
+    : 0;
+  const resistantPct = Math.round(avgResistance * 100);
+
+  const applyAntibiotic = () => {
+    setApplyingAntibiotic(true);
+    setTimeout(() => setApplyingAntibiotic(false), 1500);
+
+    setTimeout(() => {
+      setPop(prev => {
+        const survivors = prev.map(b => {
+          if (!b.alive) return b;
+          // Kill probability based on resistance — high resistance survives
+          const killChance = 1 - b.resistance;
+          if (Math.random() < killChance * 0.95) {
+            return { ...b, alive: false, deathAge: 0 };
+          }
+          return b;
+        });
+        return survivors;
+      });
+    }, 800);
+
+    // Then repopulate from survivors (survivors reproduce)
+    setTimeout(() => {
+      setPop(prev => {
+        const survivors = prev.filter(b => b.alive);
+        if (survivors.length === 0) return prev;
+        const nextGen: Bug[] = [...prev];
+        // Each surviving bug produces offspring with slight variation
+        while (nextGen.filter(b => b.alive).length < POP_SIZE) {
+          const parent = survivors[Math.floor(Math.random() * survivors.length)];
+          const mutation = (Math.random() - 0.3) * 0.15; // slight bias toward more resistant
+          const newR = Math.max(0, Math.min(1, parent.resistance + mutation));
+          nextGen.push({
+            id: bugId++,
+            x: parent.x + (Math.random() - 0.5) * 20,
+            y: parent.y + (Math.random() - 0.5) * 20,
+            resistance: newR,
+            alive: true,
+            deathAge: 0,
+          });
+        }
+        return nextGen.filter(b => b.alive || b.deathAge < 30);
+      });
+      setRound(r => r + 1);
+    }, 2500);
+  };
+
+  const reset = () => {
+    setPop(makeInitialPop());
+    setRound(0);
+  };
+
+  // Color for resistance level: green (sensitive) → yellow → red (resistant)
+  const resistanceColor = (r: number) => {
+    if (r < 0.33) return '#10b981'; // green — sensitive
+    if (r < 0.66) return '#eab308'; // yellow — intermediate
+    return '#ef4444'; // red — resistant
+  };
+
   return (
-    <div className="w-full max-w-lg mx-auto">
-      <svg
-        viewBox="0 0 440 370"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto"
-        role="img"
-        aria-label="Dose-response sigmoidal curve showing antibiotic concentration vs bacterial survival with MIC, EC50, and MBC marked"
-      >
-        <style>{`
-          .label-text { font-family: system-ui, sans-serif; font-size: 11px; }
-          .title-text { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
-          .small-text { font-family: system-ui, sans-serif; font-size: 9px; }
-          .axis-text { font-family: system-ui, sans-serif; font-size: 10px; }
-        `}</style>
+    <div className="bg-gradient-to-b from-rose-50 via-slate-50 to-emerald-50 dark:from-rose-950 dark:via-slate-950 dark:to-emerald-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+        <p className="text-xs font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider">
+          The Evolution Trap
+        </p>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-rose-700 dark:text-rose-300 font-mono">
+            Round {round} • {resistantPct}% resistant
+          </span>
+          <button
+            onClick={reset}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
 
-        <defs>
-          <marker id="dose-arrow" viewBox="0 0 10 10" refX="9" refY="5"
-            markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
-          </marker>
-          <linearGradient id="therapeutic-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.15" />
-            <stop offset="100%" stopColor="#22c55e" stopOpacity="0.15" />
-          </linearGradient>
-        </defs>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
+        aria-label="Animated antibiotic resistance — applying antibiotic kills sensitive bacteria, resistant ones survive and repopulate">
 
-        {/* Background */}
-        <rect width="420" height="350" rx="8"
-          className="fill-white dark:fill-slate-900 stroke-slate-200 dark:stroke-slate-700" strokeWidth="1" />
+        {/* Petri dish boundary */}
+        <rect x={5} y={5} width={W - 10} height={H - 10} rx={12}
+          fill="none" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="3,2" opacity="0.4" />
 
-        {/* Title */}
-        <text x="210" y="24" textAnchor="middle"
-          className="title-text fill-slate-800 dark:fill-slate-100">
-          Dose-Response Curve (Antibiotic)
-        </text>
+        {/* Antibiotic wash effect */}
+        {applyingAntibiotic && (
+          <rect x={5} y={5} width={W - 10} height={H - 10} rx={12}
+            fill="#60a5fa" opacity="0.15">
+            <animate attributeName="opacity" values="0;0.25;0" dur="1.5s" />
+          </rect>
+        )}
 
-        {/* Axes */}
-        {/* Y-axis */}
-        <line x1="70" y1="50" x2="70" y2="280"
-          className="stroke-slate-500 dark:stroke-slate-400" strokeWidth="1.5" markerEnd="url(#dose-arrow)" />
-        {/* X-axis */}
-        <line x1="70" y1="280" x2="390" y2="280"
-          className="stroke-slate-500 dark:stroke-slate-400" strokeWidth="1.5" markerEnd="url(#dose-arrow)" />
-
-        {/* Y-axis label */}
-        <text x="20" y="165" textAnchor="middle"
-          className="axis-text fill-slate-600 dark:fill-slate-300"
-          transform="rotate(-90, 20, 165)">
-          Bacterial survival (%)
-        </text>
-
-        {/* Y-axis ticks */}
-        <text x="65" y="74" textAnchor="end" className="small-text fill-slate-500 dark:fill-slate-400">100</text>
-        <text x="65" y="122" textAnchor="end" className="small-text fill-slate-500 dark:fill-slate-400">75</text>
-        <text x="65" y="170" textAnchor="end" className="small-text fill-slate-500 dark:fill-slate-400">50</text>
-        <text x="65" y="218" textAnchor="end" className="small-text fill-slate-500 dark:fill-slate-400">25</text>
-        <text x="65" y="282" textAnchor="end" className="small-text fill-slate-500 dark:fill-slate-400">0</text>
-
-        {/* X-axis label */}
-        <text x="230" y="310" textAnchor="middle"
-          className="axis-text fill-slate-600 dark:fill-slate-300">
-          Antibiotic concentration (log scale)
-        </text>
-
-        {/* Grid lines */}
-        {[70, 118, 166, 214].map((y) => (
-          <line key={y} x1="70" y1={y} x2="385" y2={y}
-            className="stroke-slate-200 dark:stroke-slate-700" strokeWidth="0.5" />
-        ))}
-
-        {/* Sigmoidal curve */}
-        <path
-          d="M 80 72 Q 120 72, 155 74 Q 190 78, 210 100 Q 230 130, 245 166 Q 260 200, 280 240 Q 300 260, 340 272 Q 360 276, 385 278"
-          fill="none" stroke="#8b5cf6" strokeWidth="3" />
-
-        {/* Therapeutic window shading */}
-        <rect x="165" y="50" width="130" height="230" rx="4"
-          fill="url(#therapeutic-grad)" />
-        <text x="230" y="46" textAnchor="middle"
-          className="small-text fill-green-600 dark:fill-green-400" fontWeight="600">
-          Therapeutic window
-        </text>
-
-        {/* MIC line */}
-        <line x1="165" y1="50" x2="165" y2="280"
-          stroke="#f97316" strokeWidth="1.5" strokeDasharray="5 3" />
-        <text x="165" y="295" textAnchor="middle"
-          className="label-text fill-orange-500 dark:fill-orange-400" fontWeight="600">
-          MIC
-        </text>
-
-        {/* EC50 line */}
-        <line x1="245" y1="50" x2="245" y2="280"
-          stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="5 3" />
-        {/* EC50 horizontal guide */}
-        <line x1="70" y1="166" x2="245" y2="166"
-          stroke="#3b82f6" strokeWidth="1" strokeDasharray="3 3" opacity="0.5" />
-        <text x="245" y="295" textAnchor="middle"
-          className="label-text fill-blue-500 dark:fill-blue-400" fontWeight="600">
-          EC50
-        </text>
-        <circle cx="245" cy="166" r="4" fill="#3b82f6" />
-
-        {/* MBC line */}
-        <line x1="295" y1="50" x2="295" y2="280"
-          stroke="#ef4444" strokeWidth="1.5" strokeDasharray="5 3" />
-        <text x="295" y="295" textAnchor="middle"
-          className="label-text fill-red-500 dark:fill-red-400" fontWeight="600">
-          MBC
-        </text>
-
-        {/* Legend */}
-        <text x="80" y="330" className="small-text fill-orange-500 dark:fill-orange-400">
-          MIC = Min. Inhibitory Conc.
-        </text>
-        <text x="210" y="330" className="small-text fill-blue-500 dark:fill-blue-400">
-          EC50 = 50% effective
-        </text>
-        <text x="340" y="330" className="small-text fill-red-500 dark:fill-red-400">
-          MBC = Min. Bactericidal
-        </text>
-
-        {/* Bottom note */}
-        <text x="210" y="345" textAnchor="middle"
-          className="small-text fill-slate-500 dark:fill-slate-400" style={{ fontStyle: 'italic' }}>
-          Dose within therapeutic window: effective but below toxic levels
-        </text>
+        {/* Bacteria */}
+        {pop.map(b => {
+          if (!b.alive && b.deathAge > 30) return null;
+          const color = resistanceColor(b.resistance);
+          const opacity = b.alive ? 0.9 : Math.max(0, 1 - b.deathAge / 30);
+          const scale = b.alive ? 1 : 1.5 + b.deathAge / 15;
+          return (
+            <g key={b.id} opacity={opacity}>
+              <ellipse cx={b.x} cy={b.y} rx={6 * scale} ry={4 * scale}
+                fill={color} stroke={b.alive ? '#1e293b' : '#7f1d1d'} strokeWidth="0.5" />
+              {!b.alive && (
+                <>
+                  <line x1={b.x - 4} y1={b.y - 4} x2={b.x + 4} y2={b.y + 4}
+                    stroke="#991b1b" strokeWidth="1" opacity="0.8" />
+                  <line x1={b.x - 4} y1={b.y + 4} x2={b.x + 4} y2={b.y - 4}
+                    stroke="#991b1b" strokeWidth="1" opacity="0.8" />
+                </>
+              )}
+            </g>
+          );
+        })}
       </svg>
+
+      {/* Controls and legend */}
+      <div className="flex flex-col items-center gap-2 mt-2">
+        <button
+          onClick={applyAntibiotic}
+          disabled={applyingAntibiotic}
+          className="text-sm px-4 py-1.5 rounded-lg bg-blue-500 hover:bg-blue-600 disabled:opacity-50 text-white font-semibold shadow transition"
+        >
+          💊 Apply antibiotic
+        </button>
+
+        <div className="flex flex-wrap justify-center gap-3 text-xs">
+          <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" /> Sensitive (dies)
+          </span>
+          <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+            <span className="inline-block w-2 h-2 rounded-full bg-yellow-500" /> Intermediate
+          </span>
+          <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+            <span className="inline-block w-2 h-2 rounded-full bg-red-500" /> Resistant (survives)
+          </span>
+        </div>
+
+        {round >= 3 && resistantPct > 70 && (
+          <p className="text-xs text-rose-700 dark:text-rose-300 font-semibold mt-1">
+            ⚠ This is how superbugs evolve — in hospitals, in livestock, in undertreated infections.
+          </p>
+        )}
+      </div>
     </div>
   );
-};
-
-export default DoseResponseDiagram;
+}

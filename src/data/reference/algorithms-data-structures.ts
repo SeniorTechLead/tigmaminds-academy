@@ -129,25 +129,12 @@ for val in [10, 20, 30, 40, 50]:
         '**Rule of thumb:** Use arrays when you need fast random access. Use linked lists when you frequently insert/delete in the middle.\n\n' +
         '**Python lists** are dynamic arrays — they automatically double their capacity when full. That is why `append()` is O(1) amortized: most appends are instant, but occasionally the entire array must be copied to a larger block.',
       advancedContent:
-        '**Hash maps — O(1) lookup by key:**\n\n' +
-        'A hash function converts any key to an array index:\n\n' +
-        '| Step | What happens |\n' +
-        '|------|-------------|\n' +
-        '| 1. Key in | `"Priya"` |\n' +
-        '| 2. Hash function | `hash("Priya") = 7429...` |\n' +
-        '| 3. Modulo | `7429 % 16 = 5` → slot 5 |\n' +
-        '| 4. Store/retrieve | Go directly to slot 5 — **O(1)** |\n\n' +
-        '**Collisions** (two keys mapping to the same slot):\n\n' +
-        '| Strategy | How it works |\n' +
-        '|----------|-------------|\n' +
-        '| Chaining | Each slot holds a linked list of entries |\n' +
-        '| Open addressing | Probe the next empty slot |\n\n' +
-        'Python dicts resize when ~⅔ full (load factor). This keeps collision chains short.\n\n' +
-        '**Stacks vs Queues:**\n\n' +
-        '| Structure | Order | Real-world use |\n' +
-        '|-----------|-------|---------------|\n' +
-        '| Stack (LIFO) | Last in, first out | Undo history, function calls, bracket matching |\n' +
-        '| Queue (FIFO) | First in, first out | Print jobs, BFS, message passing |',
+        '**How arrays actually work in memory.** An array isn\'t magic — it\'s a single contiguous block of RAM where each slot holds one fixed-size value. `arr[5]` doesn\'t "search" for the 6th element; it computes `base_address + 5 × element_size` and jumps directly there. One multiply, one add, one memory load. That\'s why O(1) access is truly O(1) — constant time regardless of array size.\n\n' +
+        '**This reveals a hidden cost:** if `arr[5]` is a string of variable length, the array can\'t hold the string *itself* — it holds a **pointer** to the string. That\'s why Python lists are slower than C arrays for numerical work: every element access is two memory fetches (pointer, then value). NumPy arrays store raw numbers contiguously, which is why they\'re 10-100× faster for arithmetic.\n\n' +
+        '**Dynamic arrays — the trick Python uses.** Python lists have a fixed capacity behind the scenes, larger than what\'s visible to you. When you `append()`, Python just writes to the next free slot — O(1). But when the capacity fills up, Python allocates a new array (typically 1.5× larger), copies everything over, frees the old one — O(n) for that one operation.\n\n' +
+        'Averaged across many appends, this works out to **O(1) amortized** — the expensive resize costs are spread thin across all the cheap appends. Over a million appends, only about 20 resizes happen (each doubling). Total cost: ~2 million operations, averaging 2 per append.\n\n' +
+        '**Linked lists — the opposite trade-off.** Each node stores (value, next_pointer). No contiguous block needed — nodes can live anywhere in memory, connected by pointers. Insertion at a known position is O(1): update two pointers and you\'re done. But accessing `list[500]` means walking through 500 nodes, following 500 pointers — O(n), and *slow* O(n) because each pointer jump is a cache miss.\n\n' +
+        'In practice, modern CPUs love arrays (predictable memory access, cache-friendly) and hate linked lists (random memory jumps, cache misses everywhere). For most workloads, even linked-list operations that are theoretically O(1) lose to dynamic array operations that are O(n) — because constant factors dominate. **This is why Python\'s `list` is a dynamic array, not a linked list, and most real code uses arrays.**',
       interactive: {
         type: 'matching',
         props: {
@@ -233,21 +220,21 @@ for val in [10, 20, 30, 40, 50]:
         '| Operations | 1,000,000,000,000 | 20,000,000 |\n' +
         '| Time at 1B ops/sec | **~17 minutes** | **~0.02 seconds** |',
       advancedContent:
-        '**Beyond basic sorting — the algorithms that power real systems:**\n\n' +
-        '| Structure/Algorithm | What it does | Time | Used in |\n' +
-        '|-------|------|------|--------|\n' +
-        '| Hash table | O(1) lookup by key | O(1) avg | Python dict, databases, caches |\n' +
-        '| BST (balanced) | Sorted order + fast search | O(log n) | File systems, databases |\n' +
-        '| Heap | Instant access to min/max | O(1) peek, O(log n) insert | Priority queues, Dijkstra, OS schedulers |\n' +
-        '| BFS/DFS | Graph traversal | O(V+E) | Shortest paths, web crawlers |\n' +
-        '| Dijkstra | Shortest weighted path | O(E log V) | Google Maps, network routing |\n' +
-        '| A* | Heuristic shortest path | O(E log V) | Game AI, robot navigation |\n\n' +
-        '**Dynamic programming — the key to optimization:**\n\n' +
-        '| Approach | Fibonacci(40) | Time |\n' +
-        '|----------|--------------|------|\n' +
-        '| Naive recursion | 2⁴⁰ ≈ 1 trillion calls | Minutes |\n' +
-        '| With memoization | 40 calls (each computed once) | Instant |\n\n' +
-        'DP caches subproblem results to avoid recomputation. It is the single most important technique for coding interviews and real-world optimization.',
+        '**Why does Python use Timsort?** Real-world data isn\'t random. It\'s often mostly sorted — user clicks arriving in timestamp order, log lines coming in nearly sequentially, database rows that were inserted in some pattern. Tim Peters (a Python core developer) realized in 2002 that optimizing for random data was missing the point. He designed Timsort around a simple observation: **find runs of already-sorted data and merge them.**\n\n' +
+        '**How Timsort works:**\n\n' +
+        '1. Walk the list finding "runs" — consecutive elements that are already sorted (ascending OR descending, flipping the latter)\n' +
+        '2. When a run is too short, extend it using insertion sort up to a `minrun` size (typically 32-64)\n' +
+        '3. Push each run onto a stack; merge runs greedily to maintain certain size invariants\n' +
+        '4. Use **galloping mode** during merges: when one run is much longer, jump ahead exponentially instead of comparing one-by-one\n\n' +
+        'The payoff: on already-sorted data, Timsort is **O(n)** — a single pass to find one giant run, no merges needed. On random data, it degrades gracefully to O(n log n). Real workloads average much closer to O(n) than the worst case.\n\n' +
+        '**The fundamental lower bound.** No comparison-based sort can beat O(n log n). The proof: sorting n items means distinguishing between n! possible orderings, and a binary comparison tree of depth d can distinguish 2^d outcomes. So d ≥ log₂(n!) ≈ n log n. Merge sort, quick sort, and Timsort all hit this bound — they\'re optimal for comparison-based sorting.\n\n' +
+        '**Beating the bound with non-comparison sorts:** If you know more about your data than just how to compare two elements, you can do better.\n\n' +
+        '| Algorithm | Time | Requirement |\n' +
+        '|-----------|------|-------------|\n' +
+        '| **Counting sort** | O(n + k) | Small range of integers (k = max value) |\n' +
+        '| **Radix sort** | O(nk) | Fixed-width keys (integers, strings) |\n' +
+        '| **Bucket sort** | O(n) avg | Uniformly distributed input |\n\n' +
+        'Sorting 1 billion 32-bit integers? Radix sort does it in O(n × 4) — faster than any comparison sort could possibly manage. This is the trick databases use when indexing millions of integer IDs.',
       interactive: {
         type: 'true-false',
         props: {
@@ -360,6 +347,7 @@ for val in [10, 20, 30, 40, 50]:
       title: 'Priority Scheduling',
       diagram: 'PrioritySchedulerDiagram',
       beginnerContent:
+        'Click "Patient arrives" a few times in the diagram above. Watch the queue reorder itself every time — the highest-priority patient always floats to the top. Now hit "Treat next" and see the most urgent case processed first, no matter who arrived when. That\'s a **priority queue** in action.\n\n' +
         'Imagine you are a doctor in an emergency room. A patient with a paper cut and a patient having a heart attack arrive at the same time. You treat the heart attack first because it has higher priority. Computers use the same idea to decide which tasks to run.\n\n' +
         'An operating system juggles dozens of programs at once: your music player, web browser, system updates, antivirus scans. Each task gets a *priority level*. The data structure that makes this efficient is a *priority queue* — it always gives you the highest-priority item in O(log n) time using a *heap*.\n\n' +
         '**Preemptive vs non-preemptive scheduling:**\n\n' +
@@ -476,6 +464,7 @@ for val in [10, 20, 30, 40, 50]:
       title: 'Linear and Binary Search',
       diagram: 'BinarySearchDiagram',
       beginnerContent:
+        'Toggle between Linear and Binary search in the diagram above. Type a number to search for. Watch how linear crawls through element by element, while binary makes massive jumps and finds the answer in a handful of steps. Same array, dramatically different paths.\n\n' +
         'Linear search checks every element one by one — O(n). Binary search halves the search space each step — O(log n), but the data must be sorted.\n\n' +
         'Binary search is the reason looking up a word in a dictionary is fast: you open to the middle, check if your word comes before or after, and repeat on the correct half.',
       code: `# ── Linear search — check every element ──
@@ -534,6 +523,7 @@ print(find_closest(temps, 1500))  # 1000 or 2000`,
       title: 'Sorting Algorithms',
       diagram: 'BubbleSortDiagram',
       beginnerContent:
+        'Watch the bars above swap their way into order. Each comparison is shown; each swap animates. This is **bubble sort**: compare adjacent pairs, swap if wrong, repeat. Simple to understand — and excruciatingly slow for anything real.\n\n' +
         'Sorting puts elements in order. Python\'s built-in `sorted()` uses Timsort (O(n log n)), but understanding simpler algorithms teaches you how sorting works.\n\n' +
         '**Bubble sort** — repeatedly swap adjacent out-of-order pairs. Simple but slow: O(n\u00B2).\n' +
         '**Insertion sort** — build the sorted portion one element at a time. Fast on nearly-sorted data.\n' +
@@ -589,6 +579,7 @@ print(by_weight_desc[0])  # ('elephant', 4500)`,
       title: 'Two-Pointer Technique',
       diagram: 'TwoPointerDiagram',
       beginnerContent:
+        'Watch the two pointers in the diagram above converge from opposite ends. They move independently based on what they see. This single idea turns many O(n²) brute-force problems into elegant O(n) solutions.\n\n' +
         'The two-pointer technique uses two indices that move through a list from opposite ends (or at different speeds). ' +
         'It solves many problems in O(n) that would otherwise need O(n\u00B2).\n\n' +
         '**Common uses:**\n' +
@@ -650,6 +641,7 @@ print(is_symmetric([5, 8, 10, 8.1, 4.9], 0.2))  # True`,
       title: 'Sliding Window',
       diagram: 'SlidingWindowDiagram',
       beginnerContent:
+        'Watch the window slide across the array above. Notice what happens at each step: ONE element exits the left, ONE new element enters the right. You don\'t recompute everything — you just subtract the outgoing and add the incoming. That\'s the trick that turns many O(n²) problems into O(n).\n\n' +
         'The sliding window technique processes a fixed-size window that moves across a list. Instead of recalculating everything ' +
         'for each position, you update the result by subtracting what left the window and adding what entered.\n\n' +
         'This reduces O(n \u00D7 k) brute force to O(n), where k is the window size.',
@@ -708,6 +700,7 @@ print(longest_positive_streak(growth))  # 3`,
       title: 'BFS and DFS — Graph Traversal',
       diagram: 'BFSDFSDiagram',
       beginnerContent:
+        'Toggle BFS vs DFS in the diagram above. Watch them explore the same graph completely differently. BFS spreads outward in rings — it finds things nearby before things far away. DFS dives deep into one path, backtracks, then tries another. Same graph, same nodes, radically different paths.\n\n' +
         'Graphs model connections: villages connected by bridges, cells in a grid, nodes in a network. ' +
         'Two fundamental ways to explore a graph:\n\n' +
         '**BFS (Breadth-First Search)** — explore all neighbors first, then their neighbors. Uses a queue. ' +
@@ -798,6 +791,7 @@ print(shortest_path(village_graph, "A", "D"))  # 2`,
       title: 'Recursion',
       diagram: 'RecursionTreeDiagram',
       beginnerContent:
+        'Watch the recursion tree above unfold. `fib(5)` calls `fib(4)` and `fib(3)`. Each of those calls two more. Nine total calls to compute fib(5). Try fib(6): **15 calls.** Try fib(10): **177 calls.** Notice the explosion — the same subproblems (like fib(2)) are computed over and over. This is the trap of naive recursion, and the reason memoization exists.\n\n' +
         'A recursive function calls itself with a smaller version of the problem. Every recursive function needs:\n\n' +
         '1. **Base case** — the simplest version that returns directly (stops the recursion)\n' +
         '2. **Recursive case** — breaks the problem down and calls itself\n\n' +

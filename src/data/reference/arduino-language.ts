@@ -42,6 +42,7 @@ export const guide: ReferenceGuide = {
       id: 'arduino-setup',
       title: 'The setup() and loop() Mental Model',
       beginnerContent:
+        'Watch the diagram above. Power on → `setup()` runs ONCE (green flash) → `loop()` starts and runs FOREVER (blue cycle), thousands of times per second, until the board loses power. That shape — one-time init, then an endless heartbeat — is every Arduino program you\'ll ever write.\n\n' +
         'Every Arduino program (called a "sketch") has exactly two required functions. `setup()` ' +
         'runs once when the board powers on or resets — use it to configure pins and start serial ' +
         'communication. Think of it as setting the table before dinner. `loop()` runs over and over, ' +
@@ -58,6 +59,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Digital vs Analog — Two Ways to Talk',
       beginnerContent:
+        'Toggle between "Compare" and "PWM trick" in the diagram above. In Compare mode: see the smooth analog wave next to the stepped digital signal — two fundamentally different ways electronics carry information. In PWM mode: drag the duty cycle slider and watch a digital pin pretend to be analog by flicking on/off fast.\n\n' +
         'Digital pins deal in absolutes: HIGH (5V, on) or LOW (0V, off). They are perfect for ' +
         'buttons (pressed or not), LEDs (on or off), and switches. Analog pins deal in ranges: ' +
         'analogRead() returns a value from 0 to 1023, representing voltage from 0V to 5V. This ' +
@@ -103,7 +105,9 @@ export const guide: ReferenceGuide = {
   build: [
     {
       title: 'Blink an LED — The Hello World',
+      diagram: 'LEDBlinkDiagram',
       beginnerContent:
+        'Watch the LED above blink along with the code. `digitalWrite(HIGH)` flips the pin to 5V — LED on. `delay(1000)` pauses for a second. `digitalWrite(LOW)` drops to 0V — LED off. Four lines, infinite loop, and you\'ve made hardware do something.\n\n' +
         'The simplest Arduino project: turn the built-in LED on and off. This teaches you setup(), loop(), and digital output.',
       code: `// Every Arduino sketch needs setup() and loop()
 
@@ -131,7 +135,9 @@ delay(1000);
     },
     {
       title: 'Read a Sensor and Print Values',
+      diagram: 'SerialLoggerDiagram',
       beginnerContent:
+        'Watch the serial monitor above fill up with live sensor readings. Every `Serial.println()` call pushes a new line to your laptop over USB. This is your window into what\'s happening on the board — without it, debugging Arduino code is like flying blind.\n\n' +
         'Read an analog sensor (like a light sensor or potentiometer) and print the value to the serial monitor for debugging.',
       code: `const int sensorPin = A0;   // analog input pin
 
@@ -163,7 +169,9 @@ delay(500);  // read twice per second
     },
     {
       title: 'Sensor + LED: A Reactive Project',
+      diagram: 'PWMBrightnessDiagram',
       beginnerContent:
+        'Slide the duty cycle in the diagram above — watch the LED brightness change smoothly even though the pin is only ever HIGH or LOW. This is PWM in action: `analogWrite(pin, 0-255)` sets the duty cycle, and the LED "sees" the average voltage. Used everywhere — LED dimmers, motor speed control, servo position.\n\n' +
         'Combine reading a sensor with controlling an output — the fundamental pattern of every Arduino project.',
       code: `const int sensorPin = A0;   // light sensor
 const int ledPin = 9;       // LED with resistor (PWM pin)
@@ -202,7 +210,9 @@ delay(200);
     },
     {
       title: 'Multiple Sensors and Outputs',
+      diagram: 'LEDPatternDiagram',
       beginnerContent:
+        'Watch the LED pattern above — multiple LEDs driven by a single loop with different timing. This is exactly how the weather station sketch below thinks: read two sensors, pick one of three states, drive the right LED. Scale this up and you have traffic lights, elevator indicators, dashboard gauges — entire user interfaces built from a handful of output pins.\n\n' +
         'A more advanced sketch that reads two sensors and controls multiple outputs with different logic.',
       code: `// Weather station: temperature + light sensor
 // Outputs: LED indicator + serial dashboard

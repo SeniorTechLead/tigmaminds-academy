@@ -11,18 +11,10 @@ export const guide: ReferenceGuide = {
     {
       title: 'What Is a Database?',
       beginnerContent:
-        'A database is an organized collection of data stored so that it can be easily accessed, searched, ' +
-        'and updated. You might wonder: why not just use a spreadsheet or a text file? For small amounts ' +
-        'of data, those work fine. But imagine an online store with 10 million products, 50 million ' +
-        'customers, and billions of past orders. A spreadsheet would grind to a halt. A database engine ' +
-        'is built to handle this scale while keeping queries fast — often answering in milliseconds.\n\n' +
-        'Most databases organize data into *tables*. A table looks like a spreadsheet: it has *columns* ' +
-        '(the categories of information, like name, email, age) and *rows* (each individual record, like ' +
-        'one customer). A "students" table might have columns for roll_number, name, class, and marks. ' +
-        'Each student is one row. Tables can relate to each other — a "marks" table can reference the ' +
-        '"students" table by roll number — which is why these are called *relational databases*. This ' +
-        'structure avoids duplication: you store each student\'s name once, and every table that needs ' +
-        'it just points to the right row.',
+        'Click around the table above. Click a column header, a row, a cell, a data type. Every part has a name. Put these names together and you can describe where any piece of data lives in any database on Earth — *this row, in this column, in this table*.\n\n' +
+        'A database is just an organized collection of data. But why not use a spreadsheet? For a hundred rows, a spreadsheet works fine. For a million rows, it crashes. For 10 million products, 50 million customers, and billions of orders — the scale of any real app you use daily (Instagram, Zomato, your bank) — a spreadsheet isn\'t even in the conversation. Databases are built specifically for this scale, and they answer queries in **milliseconds**.\n\n' +
+        'Most databases organize data into **tables** — rectangles with columns (categories like name, email, age) and rows (each individual record — one customer, one elephant, one order). A students table has columns for roll_number, name, class, marks. Each student is one row. Simple.\n\n' +
+        'The real superpower: tables can **relate** to each other. A "marks" table references the "students" table by roll_number — that\'s why this is called a *relational* database. Store each student\'s name once in the students table; every other table just points to it. Update the name in one place and the entire system stays consistent.',
       advancedContent:
         'When your database grows, two problems appear: **redundancy** (the same data stored in multiple places) and **speed** (finding data in millions of rows).\n\n' +
         '**The redundancy problem.** Imagine you store each elephant\'s park name directly in the sightings table: every time Ranga is sighted, "Kaziranga National Park, Assam, India" is written again. Now Kaziranga changes its official name. You have to find and update every single sighting row — miss one, and your data contradicts itself. The fix: store park information once in a `parks` table, and in sightings just store `park_id = 1`. One update to the parks table fixes everything. This process of removing redundancy is called **normalization**.\n\n' +
@@ -42,31 +34,23 @@ export const guide: ReferenceGuide = {
     {
       title: 'SQL Basics: SELECT, FROM, WHERE',
       beginnerContent:
-        'SQL (Structured Query Language, often pronounced "sequel") is the language you use to talk to a ' +
-        'relational database. The most common operation is reading data, and the basic pattern is:\n\n' +
-        '`SELECT column1, column2 FROM table_name WHERE condition;`\n\n' +
-        'For example, `SELECT name, marks FROM students WHERE class = 10;` asks: "Give me the name and ' +
-        'marks of every student in class 10." `SELECT *` means "all columns." If you leave out the WHERE ' +
-        'clause, you get every row in the table.\n\n' +
-        'SQL is **declarative** — you describe *what* data you want, not *how* to get it. Compare finding students with marks above 80:\n\n' +
-        '**Python (imperative — you write every step):**\n`results = []\nfor student in students:\n    if student["marks"] > 80:\n        results.append(student["name"])`\n\n' +
-        '**SQL (declarative — you describe the goal):**\n`SELECT name FROM students WHERE marks > 80;`\n\n' +
-        'The database engine figures out the fastest way to find those rows. SQL was designed in the 1970s and is still the standard today. Almost every app you use — Instagram, Google, Zomato, banking apps — runs SQL queries behind the scenes every time you tap a button.',
+        'Watch a query execute in the diagram above. A SQL query isn\'t one action — it\'s a pipeline. The database reads `FROM table`, filters with `WHERE`, picks columns with `SELECT`, and hands you the result. Three steps, one English-like sentence, powered by decades of optimisation.\n\n' +
+        'SQL (Structured Query Language, pronounced "sequel") is how you talk to a relational database. The most common thing you do is read data, and the basic shape is:\n\n' +
+        '```sql\nSELECT column1, column2 FROM table_name WHERE condition;\n```\n\n' +
+        '`SELECT name, marks FROM students WHERE class = 10;` asks: *"give me the name and marks of every student in class 10."* That\'s it. `SELECT *` means "all columns." No WHERE clause = every row in the table.\n\n' +
+        'Here\'s the superpower: SQL is **declarative**. You describe *what* you want, not *how* to get it. Compare finding top students in Python vs SQL:\n\n' +
+        '```python\n# Python — imperative, you write every step\nresults = []\nfor student in students:\n    if student["marks"] > 80:\n        results.append(student["name"])\n```\n\n' +
+        '```sql\n-- SQL — declarative, describe the goal\nSELECT name FROM students WHERE marks > 80;\n```\n\n' +
+        'The database figures out the fastest path to those rows — maybe it reads sequentially, maybe it uses an index, maybe it parallelises. You don\'t care. **This is why SQL, designed in the 1970s, is still the standard 50 years later.** Every app you use — Instagram, Google, Zomato, your bank — is firing SQL queries behind every button tap.',
       diagram: 'SQLQueryFlowDiagram',
     },
     {
       title: 'Filtering and Sorting: ORDER BY, LIMIT, LIKE, AND/OR',
       beginnerContent:
-        'Real-world queries almost always need more than a simple WHERE. `ORDER BY` sorts your results: ' +
-        '`SELECT name, marks FROM students ORDER BY marks DESC;` returns students ranked from highest ' +
-        'to lowest marks. Add `LIMIT 5` to get only the top five. These two clauses together are how ' +
-        'leaderboards and "top 10" lists work in every app.\n\n' +
-        '`LIKE` lets you search for patterns in text. `SELECT name FROM students WHERE name LIKE \'A%\';` ' +
-        'finds all students whose name starts with "A". The `%` symbol means "anything can follow." ' +
-        'You can combine conditions with `AND` and `OR`: `WHERE class = 10 AND marks > 80` finds ' +
-        'high-scoring students in class 10, while `WHERE class = 10 OR class = 12` finds students in ' +
-        'either class. These operators let you express surprisingly complex questions in a single readable ' +
-        'sentence — no loops, no if-statements, just a clear description of the data you want.',
+        'Play with the filters above. Tick conditions, change the sort direction, set a limit — watch rows appear and disappear. This is exactly how leaderboards, search results, and "top 10" lists work in every app.\n\n' +
+        '**`ORDER BY`** sorts your results. `SELECT name, marks FROM students ORDER BY marks DESC;` returns students ranked from highest to lowest. Add `LIMIT 5` to get only the top five. That\'s how leaderboards, best-selling lists, and "trending now" sections work.\n\n' +
+        '**`LIKE`** searches for text patterns. `SELECT name FROM students WHERE name LIKE \'A%\';` finds every name starting with A. `%` means "anything can follow." This is the building block of search-as-you-type, autocomplete, and fuzzy lookups.\n\n' +
+        '**`AND` / `OR`** combine conditions: `WHERE class = 10 AND marks > 80` finds high-scoring 10th graders; `WHERE class = 10 OR class = 12` finds any student in either class. No loops, no if-statements — just describe the data you want, and the database finds it.',
       interactive: {
         type: 'matching',
         props: {
@@ -85,39 +69,27 @@ export const guide: ReferenceGuide = {
     {
       title: 'Joins: Combining Tables',
       beginnerContent:
-        'The real power of relational databases comes from *joins* — combining data from two or more tables ' +
-        'in a single query. Suppose you have a "students" table (roll_number, name, class) and a "marks" ' +
-        'table (roll_number, subject, score). To see each student\'s name alongside their scores, you ' +
-        'write:\n\n' +
-        '`SELECT students.name, marks.subject, marks.score FROM students JOIN marks ON students.roll_number = marks.roll_number;`\n\n' +
-        'The `JOIN ... ON` clause tells the database which column connects the two tables. This is a ' +
-        '*one-to-many* relationship: one student has many marks rows (one per subject). Without joins, ' +
-        'you would have to repeat the student\'s name, class, and address in every single marks row — ' +
-        'wasteful and error-prone.\n\n' +
-        'There are several types of joins. An *INNER JOIN* (the default) returns only rows where both ' +
-        'tables have a match. A *LEFT JOIN* returns all rows from the left table even if there is no ' +
-        'match in the right table — useful for finding students who have not submitted any marks yet. ' +
-        'Understanding joins is the key to working with any real database, because real-world data is ' +
-        'almost always split across multiple related tables.',
+        'Toggle between INNER, LEFT, RIGHT, and FULL in the diagram above. Watch the Venn diagrams light up and the result table change. The difference between join types is visual — once you see it, you never forget it.\n\n' +
+        'Real databases split data across many tables. A students table (roll_number, name, class) and a marks table (roll_number, subject, score). To see each student\'s name alongside their marks, you need to **combine** the two — that\'s a **join**:\n\n' +
+        '```sql\nSELECT students.name, marks.subject, marks.score\nFROM students JOIN marks ON students.roll_number = marks.roll_number;\n```\n\n' +
+        'The `JOIN ... ON` clause tells the database which column connects the two tables. This is a **one-to-many** relationship: one student has many marks rows (one per subject). Without joins, you\'d have to repeat the student\'s name and class in every single marks row — massive duplication, guaranteed errors.\n\n' +
+        'Three common join types:\n\n' +
+        '- **INNER JOIN** (the default) — only rows where BOTH tables have a match. Students who have marks recorded.\n' +
+        '- **LEFT JOIN** — all rows from the left table, even if no match in the right. Useful for "which students haven\'t submitted marks yet?"\n' +
+        '- **RIGHT JOIN** — the mirror image. All rows from the right.\n\n' +
+        '**Joins are the single most important SQL concept.** Real-world data is always split across related tables, and combining them is the daily job of anyone working with a database.',
       diagram: 'SQLJoinDiagram',
     },
     {
       title: 'Creating and Modifying Data',
       beginnerContent:
-        'Reading data is only half the story. `INSERT INTO students (name, class) VALUES (\'Ananya\', 10);` ' +
-        'adds a new row. `UPDATE students SET class = 11 WHERE name = \'Ananya\';` changes existing data. ' +
-        '`DELETE FROM students WHERE roll_number = 42;` removes a row. And `CREATE TABLE` defines a brand ' +
-        'new table with its columns and types:\n\n' +
-        '`CREATE TABLE students (roll_number INTEGER PRIMARY KEY, name TEXT NOT NULL, class INTEGER, marks REAL);`\n\n' +
-        'The `PRIMARY KEY` constraint ensures each roll number is unique — the database will refuse to ' +
-        'insert a duplicate. `NOT NULL` means the name column must always have a value. These constraints ' +
-        'act as safety rails, preventing bad data from entering the system. In real applications, you also ' +
-        'define *foreign keys* that link one table to another, so the database enforces the relationships ' +
-        'automatically.\n\n' +
-        'One critical concept is the *transaction*: a group of operations that either all succeed or all ' +
-        'fail. If you are transferring money from one bank account to another, you need the debit and ' +
-        'credit to happen together — a crash in between would lose money. Databases guarantee this ' +
-        'atomicity, which is why banks, airlines, and hospitals trust them with critical data.',
+        'Pick an operation in the diagram above — INSERT, UPDATE, or DELETE — and watch rows change. Each operation changes the table in a specific, irreversible way. This is the dangerous, powerful side of SQL.\n\n' +
+        'Reading data is only half the story. The four big write operations:\n\n' +
+        '```sql\n-- Add a new row\nINSERT INTO students (name, class) VALUES (\'Ananya\', 10);\n\n-- Change existing data\nUPDATE students SET class = 11 WHERE name = \'Ananya\';\n\n-- Remove a row\nDELETE FROM students WHERE roll_number = 42;\n\n-- Define a new table from scratch\nCREATE TABLE students (\n  roll_number INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  class INTEGER,\n  marks REAL\n);\n```\n\n' +
+        '**Constraints** are the guardrails. `PRIMARY KEY` forbids duplicates. `NOT NULL` forbids missing values. `FOREIGN KEY` forbids pointing to a non-existent row in another table. These aren\'t suggestions — the database **refuses** to accept bad data. That\'s why they\'re called constraints, not recommendations.\n\n' +
+        'And here\'s the single most important concept in this section: the **transaction**. A transaction is a group of operations that either ALL succeed or ALL fail — nothing in between. Transfer money between bank accounts: debit Account A, credit Account B. If the system crashes between those two lines, the money would vanish. Transactions make that impossible:\n\n' +
+        '```sql\nBEGIN;\nUPDATE accounts SET balance = balance - 100 WHERE id = 1;\nUPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;\n```\n\n' +
+        'If anything in this block fails, the whole thing rolls back. Neither account changes. This property — **atomicity** — is why banks, airlines, and hospitals have trusted SQL databases for 50 years. The world\'s money moves through transactions.',
       interactive: {
         type: 'true-false',
         props: {
@@ -137,6 +109,7 @@ export const guide: ReferenceGuide = {
       id: 'sql-select',
       title: 'SELECT — Reading Data',
       beginnerContent:
+        'Try a few queries in the flow diagram above. See how every query breaks into clear stages: pick a table, filter rows, pick columns, return. That\'s SELECT.\n\n' +
         '`SELECT` is the most common SQL statement. It reads data from one or more tables.\n\n' +
         '**Basic pattern:** `SELECT columns FROM table WHERE condition ORDER BY column LIMIT n;`\n\n' +
         '**SELECT *:** returns all columns — convenient for exploration, but in production name the columns you need. Why? With `SELECT *` the database sends every column (name, weight, park, species, created_at, notes, photo_url...) when you only needed name and weight. That\'s wasted memory and network bandwidth, especially with millions of rows.\n\n' +
@@ -205,6 +178,7 @@ FROM elephants;`,
       id: 'sql-aggregate',
       title: 'Aggregates & GROUP BY',
       beginnerContent:
+        'Watch the alias diagram above — see how table aliases and column aliases get resolved at different stages of query execution. This is the single most common trap in SQL: you write `WHERE avg_weight > 4000` and it fails, because the alias doesn\'t exist yet when WHERE runs.\n\n' +
         '**Aggregate functions** collapse multiple rows into a single value: `COUNT()`, `SUM()`, `AVG()`, `MIN()`, `MAX()`.\n\n' +
         '**GROUP BY** splits rows into groups and applies aggregates to each group separately. `SELECT park, COUNT(*) FROM elephants GROUP BY park` gives the count per park.\n\n' +
         '**HAVING** filters groups (like WHERE, but runs after GROUP BY). `HAVING COUNT(*) > 2` keeps only groups with more than 2 rows.\n\n' +
@@ -288,6 +262,7 @@ HAVING AVG(weight) > 4000;`,
       id: 'sql-joins',
       title: 'Joins — Combining Tables',
       beginnerContent:
+        'Click through the join types in the diagram above: INNER, LEFT, RIGHT, FULL. Watch the Venn diagram change, watch the result table change. This single diagram explains 80% of SQL\'s power.\n\n' +
         '**JOIN** combines rows from two or more tables based on a related column (usually a foreign key).\n\n' +
         '**INNER JOIN:** Returns only rows where both tables have a match. If an elephant has no sightings, it won\'t appear. If a sighting references a deleted elephant, it won\'t appear.\n\n' +
         '**LEFT JOIN:** All rows from the left table + matching rows from the right. If no match, right-side columns are NULL. Perfect for "show all elephants, even those never sighted."\n\n' +
@@ -347,6 +322,7 @@ WHERE ABS(a.weight - b.weight) < 500;`,
       id: 'sql-relationships',
       title: 'Relationships & Foreign Keys',
       beginnerContent:
+        'Hover over arrows in the diagram above — each one is a **foreign key** linking one table to another. These arrows are the glue that makes tables *relational*. Without them, every table would be an isolated spreadsheet.\n\n' +
         'Tables relate to each other through **foreign keys** — a column in one table that references the primary key of another.\n\n' +
         '**One-to-Many (1:N):** One elephant has many sightings. The sightings table has `elephant_id` pointing to `elephants.id`. This is the most common relationship.\n\n' +
         '**Many-to-Many (M:N):** An elephant visits many parks, and a park has many elephants. This requires a **junction table** (also called a bridge or linking table) with two foreign keys: `park_elephants(elephant_id, park_id)`.\n\n' +
@@ -424,6 +400,7 @@ DELETE FROM elephants WHERE id = 1;
       id: 'sql-create-modify',
       title: 'CREATE, INSERT, UPDATE, DELETE',
       beginnerContent:
+        'Interact with the table above. Try INSERTing, UPDATEing, or DELETing rows — watch the table state change. These are the four operations that do real work: creating, reading, updating, deleting (the classic **CRUD** cycle every app is built on).\n\n' +
         '**DDL (Data Definition Language):** `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE` — define and change the structure.\n\n' +
         '**DML (Data Manipulation Language):** `INSERT`, `UPDATE`, `DELETE` — add, change, and remove data.\n\n' +
         '**Constraints** enforce data rules: `PRIMARY KEY` (unique identifier), `NOT NULL` (required), `UNIQUE` (no duplicates), `CHECK` (value rules), `DEFAULT` (auto-fill), `FOREIGN KEY` (must reference existing row).\n\n' +
@@ -488,6 +465,7 @@ COMMIT;
       id: 'sql-subqueries',
       title: 'Subqueries & Advanced Patterns',
       beginnerContent:
+        'Watch the subquery unfold above. The inner query runs first, produces a result, and that result becomes the input to the outer query. Queries within queries — it\'s SQL\'s way of letting you answer multi-step questions in one statement.\n\n' +
         'A **subquery** is a SELECT inside another query. It lets you use the result of one query as input to another.\n\n' +
         '**WHERE subqueries:** `WHERE id IN (SELECT ...)` filters rows based on another query\'s results. `WHERE weight > (SELECT AVG(weight) FROM elephants)` compares against a computed value.\n\n' +
         '**FROM subqueries:** Use a query result as a temporary table: `SELECT * FROM (SELECT ...) AS temp`.\n\n' +
@@ -580,6 +558,7 @@ FROM elephants;
       id: 'sql-normalization',
       title: 'Normalization — Why We Split Tables',
       beginnerContent:
+        'Compare the two diagrams above. On one side: one fat "denormalized" table with duplicated data everywhere. On the other: two separate tables with a foreign key connecting them. Same information — wildly different quality. **Normalization** is the formal name for cleaning up that mess.\n\n' +
         'Imagine a wildlife ranger keeps one giant spreadsheet for everything:\n\n' +
         '| sighting_id | elephant_name | elephant_weight | park_name | park_state | date | location |\n' +
         '|---|---|---|---|---|---|---|\n' +
@@ -662,6 +641,7 @@ DROP TABLE bad_sightings;`,
       id: 'sql-sorting',
       title: 'Sorting & Pagination',
       beginnerContent:
+        'Play with the sort controls above — flip ASC/DESC, try multi-column sort, move the LIMIT/OFFSET sliders. Every infinite-scroll feed, every paginated search result, every leaderboard in every app uses this exact pattern.\n\n' +
         '`ORDER BY` sorts your results. By default, sorting is **ascending** (ASC) — smallest first for numbers, A→Z for text. Add `DESC` for descending — largest first, Z→A.\n\n' +
         '**Multi-column sorting:** `ORDER BY park ASC, weight DESC` — first sorts by park alphabetically, then within each park, sorts by weight heaviest first.\n\n' +
         '**Pagination with LIMIT + OFFSET:** Real apps don\'t show 10,000 results at once. `LIMIT 10` returns only 10 rows. `OFFSET 20` skips the first 20. Together: `LIMIT 10 OFFSET 20` = rows 21-30 (page 3 of 10-per-page).\n\n' +
@@ -701,6 +681,7 @@ ORDER BY weight_lbs DESC;`,
       id: 'sql-case',
       title: 'CASE, COALESCE & Conditional Logic',
       beginnerContent:
+        'Watch the flowchart above. `CASE WHEN` is SQL\'s answer to if/else — it walks through conditions in order and returns a value from whichever branch matches first. Same shape as a decision tree in code, but happening row-by-row inside the database.\n\n' +
         '`CASE WHEN` is SQL\'s if/else. It tests conditions for each row and returns a value based on which condition matches first:\n\n' +
         '```\nCASE\n  WHEN weight > 4500 THEN \'heavy\'\n  WHEN weight > 3500 THEN \'medium\'\n  ELSE \'light\'\nEND\n```\n\n' +
         'Conditions are checked **in order** — the first match wins. If Gaja (5200kg) matches "weight > 4500", it gets "heavy" and the remaining conditions are skipped.\n\n' +
@@ -750,6 +731,7 @@ GROUP BY park;`,
       id: 'sql-string-date',
       title: 'String & Date Functions',
       beginnerContent:
+        'Try the playground above — pick a string function, see the transformation applied to each row instantly. This is what SQL does best: apply one operation to millions of rows in parallel.\n\n' +
         'SQL has built-in functions for manipulating text and dates.\n\n' +
         '**String functions:**\n' +
         '- `UPPER(name)` → "RANGA" — converts to uppercase\n' +
@@ -807,6 +789,7 @@ FROM elephants;`,
       id: 'sql-set-operations',
       title: 'Set Operations & Views',
       beginnerContent:
+        'Flip through UNION, INTERSECT, and EXCEPT in the diagram above. Set theory, applied to rows: combine them, find the overlap, or subtract one from the other. These operations treat query results as mathematical sets — a whole new way to slice your data.\n\n' +
         '**Set operations** combine the results of two SELECT queries:\n\n' +
         '- **UNION** — all rows from both queries, duplicates removed\n' +
         '- **UNION ALL** — all rows from both, duplicates kept\n' +

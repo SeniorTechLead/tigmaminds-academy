@@ -272,15 +272,12 @@ export default function SectionRenderer({ section, level = 0, searchQuery }: Pro
         <HighlightText text={section.title} k={99999} />
       </h4>
 
-      {/* Beginner — everyone sees this */}
-      {section.beginnerContent && renderContent(section.beginnerContent)}
-
-      {/* Diagram — after beginner content sets context, before deeper levels */}
+      {/* Diagram — render FIRST so the animation hooks the reader before any text */}
       {DiagramComponent && (
         <ClientOnly>
           <DiagramErrorBoundary>
-            <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mt-3" />}>
-              <div className="mt-3 mb-3">
+            <Suspense fallback={<div className="h-48 rounded-xl bg-gray-100 dark:bg-gray-700/30 animate-pulse mb-3" />}>
+              <div className="mb-3">
                 <DiagramZoom>
                   <DiagramComponent />
                 </DiagramZoom>
@@ -289,6 +286,9 @@ export default function SectionRenderer({ section, level = 0, searchQuery }: Pro
           </DiagramErrorBoundary>
         </ClientOnly>
       )}
+
+      {/* Beginner — everyone sees this */}
+      {section.beginnerContent && renderContent(section.beginnerContent)}
 
       {/* Intermediate — formulas, calculations */}
       {level >= 1 && section.intermediateContent && (

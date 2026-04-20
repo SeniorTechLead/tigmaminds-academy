@@ -70,24 +70,27 @@ export const guide: ReferenceGuide = {
         'Since **a** · **b** = −7 (negative), the angle between them is **obtuse** (> 90°).\n\n' +
         'The exact angle: cos θ = (a·b) / (|a| × |b|) = −7 / (√13 × √26) = −7 / √338 ≈ −0.381, so θ ≈ **112°**.',
       advancedContent:
-        '**Tensors — what they actually are, not just the name:**\n\n' +
-        'A scalar (temperature: 25°C) is a single number — rank 0. A vector (velocity: 3 m/s east, 4 m/s north) is a list of numbers — rank 1. ' +
-        'A matrix is a grid of numbers — rank 2. The pattern continues: rank 3, 4, ...\n\n' +
-        '**The stress tensor — a rank-2 example you can feel:**\n\n' +
-        'Squeeze a rubber block. At every point inside, forces act on every possible internal surface. ' +
-        'The stress tensor σᵢⱼ is a 3×3 matrix — click each face to see its force components:\n\n' +
-        '[diagram:StressTensorDiagram]\n\n' +
+        'Here\'s something the boat example quietly assumed: **a vector is independent of the coordinate system you describe it in.** The boat moves the same way no matter whether I label my axes "east/north" or "up-valley/across-valley." The *components* change if I rotate my axes. The *vector itself* does not.\n\n' +
+        'That invariance — the physical arrow is real, the numbers describing it are just a chosen notation — turns out to be surprisingly deep. It\'s the difference between a vector (a real directional quantity) and any random list of numbers (which may or may not represent one). And it\'s the doorway into **tensors**.\n\n' +
+        '**Tensors — the full hierarchy.** Think of tensors as the generalization of this invariance from one-axis quantities to many-axis quantities:\n\n' +
+        '| Rank | Name | Example | How many components in 3D |\n' +
+        '|------|------|---------|---------------------------|\n' +
+        '| 0 | Scalar | Temperature: 25°C | 1 |\n' +
+        '| 1 | Vector | Velocity: (3, 4, 0) m/s | 3 |\n' +
+        '| 2 | Matrix-like | Stress at a point | 9 (3×3) |\n' +
+        '| 3 | | Piezoelectric response | 27 |\n' +
+        '| 4 | | Elasticity tensor | 81 |\n\n' +
+        'Each step up adds one more "direction" the quantity can depend on. **A rank-2 tensor at a point takes one direction in and gives one direction out** — hence 3×3 in 3D.\n\n' +
+        '**Stress as a rank-2 tensor — a vector-idea you can feel.** Squeeze a rubber block. Inside, at every point, there are forces acting on every possible internal slice of material. The **stress tensor** σᵢⱼ tells you: *for a surface facing direction i, what force (in the j direction) is acting on it?*\n\n' +
         '| | Force in x | Force in y | Force in z |\n' +
         '|---|---|---|---|\n' +
         '| Surface facing x | σ_xx (compression) | σ_xy (shear) | σ_xz (shear) |\n' +
         '| Surface facing y | σ_yx (shear) | σ_yy (compression) | σ_yz (shear) |\n' +
         '| Surface facing z | σ_zx (shear) | σ_zy (shear) | σ_zz (compression) |\n\n' +
-        'The diagonal entries are compression/tension. The off-diagonal entries are shear (sliding forces). ' +
-        'This 3×3 matrix at every point is what structural engineers compute to know if a bridge will hold.\n\n' +
-        '**Why "tensor" and not just "matrix"?** A tensor has a specific transformation rule under coordinate rotation. ' +
-        'If you rotate your coordinate axes, the components change but the physical quantity (stress, curvature) stays the same. ' +
-        'A random 3×3 matrix of numbers is NOT a tensor — it must transform correctly. This rule is what makes tensors useful in physics: ' +
-        'the laws of physics don\'t depend on which direction you call "x."',
+        '[diagram:StressTensorDiagram]\n\n' +
+        'Diagonal entries are compression (squeezing). Off-diagonal are shear (sliding). Nine numbers describe the state of stress at one point inside your material. This 3×3 tensor, evaluated at every point of a bridge, is what civil engineers solve for to check whether the bridge will hold.\n\n' +
+        '**The defining test — invariance under rotation.** If you rotate your coordinate axes by 30°, all nine numbers in the stress tensor change. But the *physical stress* hasn\'t changed — the rubber block doesn\'t know which way your axes point. A real tensor\'s components transform by a specific rule under rotation, such that the underlying physical quantity stays the same. A random 3×3 grid of numbers does **not** generally satisfy this rule — and therefore is not a tensor.\n\n' +
+        'This is what distinguishes a genuine physical vector from just a list of numbers, generalized to higher rank. It\'s why tensors became indispensable in physics: **the laws of physics can\'t depend on which direction you call "x".** Einstein\'s field equations of general relativity are written in tensor language precisely because they must be true regardless of the observer\'s reference frame. Every "vector" you learn here — velocity, force, field — is really a rank-1 tensor hiding in comfortable clothes.',
     },
     {
       title: 'Vector Operations',
@@ -154,6 +157,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Matrices and Multiplication',
       beginnerContent:
+        'Click any cell in the result matrix in the diagram above. Watch one row of A and one column of B light up, and see the dot-product recipe that produced that number. **Every cell in a matrix product is a dot product** — learn this one pattern and matrix multiplication stops being mysterious forever.\n\n' +
         '**What is a matrix? A grid of numbers — and why it matters.**\n\n' +
         'Exam scores for 3 students in 2 subjects:\n\n' +
         '| | Maths | Science |\n' +
@@ -189,27 +193,28 @@ export const guide: ReferenceGuide = {
         'Inverse of [2 1; 5 3]: det = 6−5 = 1. Inverse = [3 −1; −5 2].\n\n' +
         '[apple; banana] = [3 −1; −5 2] × [8; 19] = [24−19; −40+38] = **[5; −2]**\n\n' +
         'Apple = ₹5, banana = ... ₹−2? That means our data is inconsistent (or bananas are giving you a refund). In real problems, check that the answer makes sense!',
+        // Intermediate — deepen the themes from beginner rather than repeat them
       intermediateContent:
-        '**The determinant** of a 2×2 matrix tells you whether the matrix has an inverse:\n\n' +
-        '| Matrix | Formula | Result |\n' +
-        '|--------|---------|--------|\n' +
-        '| `[a b; c d]` | ad − bc | The determinant |\n' +
-        '| `[3 1; 2 4]` | 3×4 − 1×2 | **10** |\n\n' +
-        'If det = 0, the matrix is **singular** — no inverse exists. The transformation collapses 2D to a line or a point.\n\n' +
-        '**Finding the inverse** of `[3 1; 2 4]`:\n\n' +
-        '| Step | Calculation |\n' +
-        '|------|------------|\n' +
-        '| Swap diagonal, negate off-diagonal | `[4 −1; −2 3]` |\n' +
-        '| Divide by determinant (10) | (1/10) × `[4 −1; −2 3]` |\n\n' +
-        '**Check:** `[3 1; 2 4]` × (1/10)`[4 −1; −2 3]` = (1/10)`[10 0; 0 10]` = `[1 0; 0 1]` ✓ — identity matrix.\n\n' +
-        '**Solving Ax = b with inverses:**\n\n' +
-        'Given A = `[2 1; 5 3]` and b = `[8; 19]`:\n\n' +
-        '| Step | Calculation |\n' +
-        '|------|------------|\n' +
-        '| Determinant | 2×3 − 1×5 = **1** |\n' +
-        '| Inverse | `[3 −1; −5 2]` |\n' +
-        '| x = A⁻¹b | `[3 −1; −5 2]` × `[8; 19]` |\n' +
-        '| Result | (24−19, −40+38) = **(5, −2)** |',
+        'You\'ve seen the mechanics of multiplication, determinant, and inverse. Now let\'s look at what those mechanics *mean*.\n\n' +
+        '**Matrix multiplication isn\'t commutative.** Unlike numbers (where 3 × 5 = 5 × 3), AB ≠ BA in general. Try it:\n\n' +
+        '| | Calculation | Result |\n' +
+        '|---|-------------|--------|\n' +
+        '| AB where A = `[0 1; 0 0]`, B = `[0 0; 1 0]` | AB | `[1 0; 0 0]` |\n' +
+        '| BA (same matrices, reversed) | BA | `[0 0; 0 1]` |\n\n' +
+        'These are *completely different matrices* — one puts a 1 in the top-left, the other in the bottom-right. The next section shows exactly why: each matrix is a transformation, and applying "rotate then scale" generally isn\'t the same as "scale then rotate."\n\n' +
+        '**What the determinant really measures.** You saw that det `[3 1; 2 4]` = 10. That number isn\'t arbitrary — it\'s the **area scale factor** of the transformation. A unit square (area 1) becomes a parallelogram of area 10. Some key consequences:\n\n' +
+        '| Determinant | Geometric meaning |\n' +
+        '|-------------|-------------------|\n' +
+        '| det > 0 | Preserves orientation, scales area by det |\n' +
+        '| det < 0 | Flips orientation (reflection), area scales by \\|det\\| |\n' +
+        '| det = 0 | Collapses 2D to a line (or a point) — irreversible |\n' +
+        '| det = 1 | Pure rotation or shear — area is preserved |\n\n' +
+        'This is why `det = 0` means no inverse exists: you can\'t un-squish a line back into a plane. Information has been destroyed.\n\n' +
+        '**The inverse recipe — why that specific formula works.** For a 2×2 matrix A = `[a b; c d]`:\n\n' +
+        '`A⁻¹ = (1/det) × [d −b; −c a]`\n\n' +
+        'Swap the diagonal, negate the off-diagonal, divide by det. Verify once by multiplying A × A⁻¹ and watching the determinant cancel everything off-diagonal — it must give you `[1 0; 0 1]`, the identity.\n\n' +
+        '**Solving systems of equations — Ax = b.** This is where matrices earn their keep. The Ax = b we saw in beginner (the apples-and-bananas problem) generalizes to hundreds of thousands of unknowns. That\'s how traffic simulations, circuit analysis, weather models, and structural engineering all work — set up a giant system, apply A⁻¹ (or a faster algorithm like Gaussian elimination or LU decomposition), read off x.\n\n' +
+        '**Key takeaway for section 4.** All of this — multiplication, determinant, inverse — makes geometric sense once you see a matrix as a **transformation of space**. Which is exactly what comes next.',
       advancedContent:
         '**Eigenvalues — finding them by hand for a 2×2 matrix:**\n\n' +
         'Given A = `[4 1; 2 3]`. An eigenvector **v** satisfies A**v** = λ**v** — the matrix only stretches it, no rotation.\n\n' +
@@ -239,6 +244,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Transformations — Matrices in Action',
       beginnerContent:
+        'Pick a preset in the diagram above — Rotate 45°, Scale, Shear, Flip — and watch the unit square morph. Or type your own numbers into the 2×2 matrix. The red and green arrows show where the basis vectors î and ĵ land. **The columns of a transformation matrix literally are "where î and ĵ go."** That\'s the whole trick.\n\n' +
         '**What happens when you multiply a matrix by a point?**\n\n' +
         'Start with the point (1, 0) — one unit to the right of the origin.\n\n' +
         '**Scaling:** Multiply by [2 0; 0 3]:\n\n' +
@@ -276,34 +282,29 @@ export const guide: ReferenceGuide = {
         'Combined = [0 −2; 2 0]. Apply: [0 −2; 2 0] × [1; 0] = **(0, 2)** ✓ Same answer!\n\n' +
         'The single matrix [0 −2; 2 0] does both operations at once. This is why games and ML use matrix composition — multiply 10 transformation matrices into one, then apply that one matrix to millions of points.',
       advancedContent:
-        '**Does the order of transformations matter?**\n\n' +
-        'Let\'s test: rotate 90° then scale by 2 vs. scale by 2 then rotate 90°.\n\n' +
-        '**The two matrices:**\n\n' +
-        '| Transformation | Matrix | What it does to (1, 0) |\n' +
-        '|---------------|--------|----------------------|\n' +
-        '| Rotation 90° | R = `[0 −1; 1 0]` | (1, 0) → (0, 1) |\n' +
-        '| Uniform scaling ×2 | S = `[2 0; 0 2]` | (1, 0) → (2, 0) |\n\n' +
-        '**Test 1 — uniform scaling (same factor both axes):**\n\n' +
-        '| Order | Combined matrix | (1, 0) maps to |\n' +
-        '|-------|----------------|---------------|\n' +
-        '| Rotate then scale (SR) | `[2 0; 0 2]` × `[0 −1; 1 0]` = `[0 −2; 2 0]` | **(0, 2)** |\n' +
-        '| Scale then rotate (RS) | `[0 −1; 1 0]` × `[2 0; 0 2]` = `[0 −2; 2 0]` | **(0, 2)** |\n\n' +
-        'Same result! Uniform scaling commutes with rotation because it stretches equally in all directions.\n\n' +
-        '**Test 2 — non-uniform scaling (different factors per axis):**\n\n' +
-        'Now S = `[3 0; 0 1]` (stretch x by 3, keep y unchanged):\n\n' +
-        '| Order | Combined matrix | (1, 0) maps to |\n' +
-        '|-------|----------------|---------------|\n' +
-        '| Rotate then scale (SR) | `[3 0; 0 1]` × `[0 −1; 1 0]` = `[0 −3; 1 0]` | **(0, 1)** |\n' +
-        '| Scale then rotate (RS) | `[0 −1; 1 0]` × `[3 0; 0 1]` = `[0 −1; 3 0]` | **(0, 3)** |\n\n' +
-        '**Different!** In one order the point ends up at (0, 1), in the other at (0, 3). Non-uniform transformations do not commute — **order matters.**\n\n' +
-        '**Neural networks are matrix transformations:**\n\n' +
-        'A neural network layer: y = activation(W × x + b). The weight matrix W transforms the input vector into a new space.\n\n' +
-        '| Part | Size | Meaning |\n' +
-        '|------|------|--------|\n' +
-        '| Input x | 784 × 1 | A 28×28 image flattened to a column |\n' +
-        '| Weight matrix W | 128 × 784 | 128 "templates" the neurons look for |\n' +
-        '| Output Wx | 128 × 1 | 128 features extracted from the image |\n\n' +
-        'Training adjusts W so these templates detect useful features (edges, curves, textures). A deep network chains many such transformations: each layer\'s output becomes the next layer\'s input.',
+        'Composition is the real power of matrices. Each matrix is a single transformation. But because matrix multiplication chains them together, you can build arbitrarily complex transformations out of simple pieces — and that\'s how almost every computational system that matters works.\n\n' +
+        '**First, a crucial subtlety: order matters.** With plain numbers 3 × 5 = 5 × 3. With matrices, AB ≠ BA in general. Prove it to yourself — rotate 90° then stretch x by 3, vs. stretch x by 3 then rotate 90°:\n\n' +
+        '| Order | Combined matrix | Where (1, 0) ends up |\n' +
+        '|-------|----------------|---------------------|\n' +
+        '| Rotate, then stretch | `[3 0; 0 1] × [0 −1; 1 0]` = `[0 −3; 1 0]` | **(0, 1)** |\n' +
+        '| Stretch, then rotate | `[0 −1; 1 0] × [3 0; 0 1]` = `[0 −1; 3 0]` | **(0, 3)** |\n\n' +
+        'Completely different endpoints — from the same two operations. Every 3D animation engine, game physics loop, and robot arm controller is built around this carefully-ordered composition. "Translate, then rotate, then translate again" gives you pivot-point rotations. Scramble the order and the character\'s hand attaches to its shoulder instead of its elbow.\n\n' +
+        '(Uniform scaling is the one happy exception: a scale-by-2 matrix commutes with rotation, because stretching equally in all directions doesn\'t care which way you\'re facing.)\n\n' +
+        '**Why composition is the whole game.** Once you realise matrix multiplication is composition, you can build enormous pipelines with just simple parts. GPUs and ML libraries exist to do this fast:\n\n' +
+        '- **3D graphics:** Model-to-world × world-to-camera × camera-to-screen × perspective. Four 4×4 matrices, multiplied once, then applied to every vertex in the scene. A modern game renders this for a million triangles sixty times per second.\n' +
+        '- **Robotics:** A 6-joint robot arm\'s tip position is the product of 6 transformation matrices (one per joint). Change one joint angle, update one matrix, and the tip position falls out automatically.\n' +
+        '- **Quantum computing:** Each quantum gate is a unitary matrix. A quantum algorithm is a product of them. Running the algorithm = multiplying a pile of small matrices together.\n\n' +
+        '**And this is exactly what a neural network is.** A single layer of a neural network is nothing more than a matrix transformation (with a non-linear "bend" applied at the end):\n\n' +
+        '`y = activation(W · x + b)`\n\n' +
+        '| Symbol | Shape | Meaning |\n' +
+        '|--------|-------|---------|\n' +
+        '| x | input vector (e.g., 784×1 pixel values) | What goes in |\n' +
+        '| W | weight matrix (e.g., 128×784) | The learned transformation |\n' +
+        '| b | bias vector | A shift |\n' +
+        '| activation | a simple nonlinearity (ReLU, sigmoid) | Adds the "bend" — a purely linear network would be dull |\n' +
+        '| y | output vector (128×1) | The next layer\'s input |\n\n' +
+        'A "deep" network just composes many such transformations — the output of layer 1 becomes the input to layer 2, and so on, for dozens of layers. Training is the process of adjusting all those W matrices so the final output is useful (edges → shapes → objects → words → meaning).\n\n' +
+        'Look closely and this is *exactly* the same idea as composing a rotation with a scale. The math is identical. The only difference is scale — a game might chain 4 transformation matrices; a large language model chains hundreds, each one with billions of entries. **Linear algebra isn\'t abstract — it\'s the substrate on which modern computing runs.**',
       diagram: 'TransformationMatrixDiagram',
       interactive: {
         type: 'matching',

@@ -13,54 +13,129 @@ export const guide: ReferenceGuide = {
       title: 'What Is a Program?',
       beginnerContent:
         'A program is a set of instructions that tells a computer what to do, step by step. ' +
-        'Think of it like a recipe: you list ingredients (data) and steps (instructions), and ' +
-        'the computer follows them in order. When Priya wrote code to track elephants, her ' +
-        'program was really just a recipe — take a photo, look for an elephant shape, write ' +
-        'down where it was.',
+        'Think of it like a recipe: ingredients (data) and steps (instructions), and the computer ' +
+        'follows them in order. A simple recipe has three moves: take something in (eat the list ' +
+        'of ingredients), do something with it (chop, mix, cook), then give back a result ' +
+        '(the finished dish). Every program, from a calculator to a self-driving car, does the ' +
+        'same three things: **input → processing → output**. That\'s it. Everything else is detail.',
       intermediateContent:
-        'Programs are built from four fundamental operations: **input** (getting data from the user, a file, or a sensor), **processing** (performing calculations and making decisions), **output** (displaying results or sending data), and **storage** (saving data for later). Every program, from a simple calculator to an AI system, is a combination of these four. A Python program to calculate elephant BMI: `weight = float(input("Weight in kg: "))`, `height = float(input("Height in m: "))`, `bmi = weight / height**2`, `print(f"BMI: {bmi:.1f}")`. This uses all four: input → processing → output, with variables providing temporary storage.',
+        'Zoom in on those three moves. Consider a program to calculate elephant BMI:\n\n' +
+        '```python\nweight = float(input("Weight in kg: "))   # INPUT\nheight = float(input("Height in m: "))    # INPUT\nbmi = weight / height**2                  # PROCESSING\nprint(f"BMI: {bmi:.1f}")                  # OUTPUT\n```\n\n' +
+        'Four lines. Two inputs captured into `weight` and `height`. One line of processing (the division). One line of output. Every program you\'ll ever write is this pattern, scaled up. A web browser? Input is keystrokes and mouse clicks; processing is rendering HTML; output is pixels on the screen. A neural network? Input is training data; processing is millions of matrix multiplications; output is a prediction. **The variables between steps (like `weight`, `height`, `bmi`) are the program\'s temporary memory — the cook\'s bowls and plates between recipe steps.**',
       advancedContent:
-        'At the hardware level, a program is a sequence of binary instructions (machine code) stored in memory. The CPU fetches each instruction, decodes it, and executes it — the fetch-decode-execute cycle, billions of times per second. Python is an **interpreted** language: the Python interpreter reads your source code, converts it to bytecode (.pyc files), and executes that bytecode on the Python Virtual Machine (PVM). This is slower than compiled languages (C, Rust) but much faster to develop with. **Just-in-time (JIT)** compilers like PyPy compile frequently-executed bytecode to machine code at runtime, achieving 10-100× speedups for computational workloads.',
+        'Beneath your recipe-like Python code, the computer doesn\'t see words. It sees binary: sequences of 1s and 0s called **machine code**, loaded into memory, one instruction at a time. The CPU executes these with the **fetch-decode-execute cycle**: fetch the next instruction from memory, decode what it means (ADD? MOVE? COMPARE?), execute it. Your quad-core laptop runs this cycle **billions of times per second**, per core.\n\n' +
+        'Python adds two layers of translation. When you run `python script.py`: (1) the Python interpreter compiles your source into **bytecode** (stored in `.pyc` files — portable, lower-level but not machine code yet); (2) the **Python Virtual Machine (PVM)** reads that bytecode one instruction at a time and runs it. This interpretation step is why Python is slower than compiled languages like C or Rust — for every single operation in your code, the PVM is doing extra lookup work. But it\'s also why Python feels so fast to *develop* in: you skip the multi-minute compile step and run instantly. **Just-in-time (JIT) compilers** like PyPy get the best of both: watch the bytecode, notice which functions run often, compile those to machine code on the fly. 10-100× speedups on compute-heavy workloads.',
     },
     {
       title: 'How Computers Follow Instructions',
       beginnerContent:
-        'Computers are incredibly fast but completely literal. If you tell a person "go to the ' +
-        'shop and buy milk", they figure out the details. A computer needs every micro-step: ' +
-        'stand up, turn left, walk 12 steps, open the door... Python lets you write those ' +
-        'instructions in words that look almost like English, so you can focus on *what* you ' +
-        'want to happen rather than every tiny detail.',
+        'Computers are ridiculously fast but completely literal. Tell a human "go buy milk" and ' +
+        'they figure out the details — which shop, how much, which brand. A computer can\'t do ' +
+        'that. It needs every micro-step: stand up, turn left, walk 12 steps, open the door, look ' +
+        'for the word "MILK"... A program is just that list, written down. Python is special because ' +
+        'you can write these instructions in words that look almost like English — `if temperature > 35: warn("hot")` — and Python handles translating it into the zillions of tiny steps the computer needs. ' +
+        'You focus on *what* you want; Python handles *how*.',
       intermediateContent:
-        'Tracing code execution manually is a crucial debugging skill. For this code: `x = 5`, `y = x + 3`, `x = y * 2`, `print(x, y)` — trace step by step: after line 1, x=5. After line 2, y=8. After line 3, x=16 (x is reassigned, y unchanged). Output: **16 8**. Common mistake: thinking `x = y * 2` also changes y. Variables store values independently after assignment — changing x does not retroactively change y. Python evaluates the right side completely before assigning to the left side.',
+        'So what does "literal" actually look like when Python runs your code? **It runs top to bottom, one line at a time, exactly as written** — no jumping ahead, no guessing what you meant. Walk through this:\n\n' +
+        '```python\nx = 5          # 1\ny = x + 3      # 2\nx = y * 2      # 3\nprint(x, y)    # 4\n```\n\n' +
+        'Line 1: `x` is 5. Line 2: Python looks up `x` (finds 5), adds 3, stores the result in `y`. Now `y` is 8. Line 3: Python looks up `y` (finds 8), multiplies by 2, stores in `x`. **`x` is now 16. But `y` is still 8.** Line 4 prints: `16 8`.\n\n' +
+        'A common confusion: "but didn\'t I change x in line 3? Doesn\'t that update y, which depended on x?" No. Python doesn\'t remember where values came from. Line 2 grabbed the value 5 out of `x` and used it once. After that, `y` has no connection to `x`. **Assignments always evaluate the right side completely first, THEN assign to the left.** This is the rule — there\'s no magic "oh I see what you meant."',
       advancedContent:
-        'Python uses **dynamic typing** (variables can change type at runtime) and **reference semantics** (variables are names pointing to objects in memory, not boxes containing values). When you write `a = [1, 2, 3]` and `b = a`, both names point to the SAME list object. Modifying `b.append(4)` also changes a, because they reference the same object. Use `b = a.copy()` or `b = a[:]` for an independent copy. This distinction between mutable objects (lists, dicts, sets) and immutable objects (ints, strings, tuples) is essential for avoiding subtle bugs in larger programs.',
+        'If Python follows your instructions literally, what *is* a variable to Python? Not a box containing a value — a **name that points to an object in memory**. This is called **reference semantics**, and it has a surprising consequence:\n\n' +
+        '```python\na = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)    # [1, 2, 3, 4]  ← a changed too!\n```\n\n' +
+        'Why? Because `b = a` didn\'t copy the list. It made `b` point to the *same list object* as `a`. One object; two names. Modify through either name and the change is visible from both.\n\n' +
+        'This matters because Python has two kinds of objects: **mutable** (lists, dicts, sets — you can modify them in place) and **immutable** (ints, strings, tuples — you can\'t). With immutables, the trap doesn\'t arise, because there\'s no "modify in place" to share. With mutables, you need `b = a.copy()` or `b = a[:]` to get an independent copy.\n\n' +
+        'Python also uses **dynamic typing** — a variable can hold an int one moment and a string the next. The type is attached to the *value*, not the variable. Combined with reference semantics, this means Python pushes responsibility onto the programmer: you\'re the one who needs to know whether you\'re sharing a reference or copying. The language trusts you — which is freeing, and also where most subtle Python bugs come from.',
     },
     {
       title: 'Variables Are Labeled Boxes',
       beginnerContent:
-        'A variable is a named container that holds a value. Imagine you have a row of boxes, ' +
-        'each with a label on the front. One box is labeled "name" and inside it is the text ' +
-        '"Priya". Another is labeled "age" and holds the number 14. You can peek inside a box, ' +
-        'change what\'s in it, or use its contents in a calculation. That\'s all a variable is — ' +
-        'a labeled box the computer remembers for you.',
+        'Watch the program step through in the diagram above. Each line runs in order; the boxes ' +
+        'on the right fill in as variables get assigned. When line 3 reassigns `x`, notice that `y` ' +
+        'stays put — the boxes are independent once they\'re set.\n\n' +
+        'A variable is a named container that holds a value. Imagine a row of boxes with labels ' +
+        'on the front. One is labeled `name` and holds the text `"Priya"`. Another is labeled ' +
+        '`age` and holds the number `14`. You can look inside a box, change what\'s in it, or use ' +
+        'its contents in a calculation. That\'s the whole idea — a labeled box the computer ' +
+        'remembers for you.\n\n' +
+        'In Python, you make one like this: `age = 14`. Read it: "age is 14." Python creates the ' +
+        'box, puts 14 inside, and sticks the label `age` on it. From now on, wherever you write ' +
+        '`age` in your code, Python looks up the box and reads the value.',
       intermediateContent:
-        'Variable naming conventions in Python: use `snake_case` for variables and functions (`elephant_weight`, `calculate_bmi`), `UPPER_CASE` for constants (`MAX_SPEED = 299792458`), and `PascalCase` for classes (`ElephantTracker`). Names must start with a letter or underscore, cannot contain spaces or special characters, and cannot be Python keywords (`if`, `for`, `class`, etc.). Type annotations document expected types: `weight: float = 4500.0`, `name: str = "Ranga"`. While Python does not enforce these types at runtime, tools like mypy check them statically, catching bugs before the code runs.',
+        'Good variable names make code readable. The box analogy is only useful if the label ' +
+        'actually tells you what\'s inside. Python conventions:\n\n' +
+        '- **`snake_case`** for regular variables and functions: `elephant_weight`, `calculate_bmi`\n' +
+        '- **`UPPER_CASE`** for constants — things that never change: `MAX_SPEED = 299_792_458`\n' +
+        '- **`PascalCase`** for classes (you\'ll meet these later): `ElephantTracker`\n\n' +
+        'Names must start with a letter or underscore, can\'t contain spaces or special characters, ' +
+        'and can\'t be Python keywords (`if`, `for`, `class`, etc.). `1st_name` is illegal; ' +
+        '`first_name` is fine.\n\n' +
+        'Python optionally lets you **annotate** a variable with its expected type: ' +
+        '`weight: float = 4500.0` says "this box is supposed to hold a decimal number." Python ' +
+        'doesn\'t enforce this at runtime, but tools like `mypy` check it statically and catch ' +
+        'bugs like assigning a string to a box you\'d declared as a number. The label isn\'t just a ' +
+        'name — it can tell you what shape of thing lives inside.',
       advancedContent:
-        'Python\'s memory model uses **reference counting** and **garbage collection**. Each object has a reference count — when it reaches zero, the memory is freed. The `id()` function shows an object\'s memory address: `x = 42; print(id(x))` → something like 140234567890. Python **interns** small integers (-5 to 256) and short strings, meaning `a = 256; b = 256; a is b` returns True (same object), but `a = 257; b = 257; a is b` may return False (different objects with equal values). The `is` operator checks identity (same object), while `==` checks equality (same value) — a critical distinction when debugging.',
+        'Here\'s where the "labeled box" analogy breaks down. In Python, a variable isn\'t really a ' +
+        'box. It\'s a **name that points to an object in memory**. The object lives somewhere in ' +
+        'the heap; the variable is just a label hanging off it. Surprising consequences follow:\n\n' +
+        '```python\na = 42\nprint(id(a))   # e.g. 140234567890 — the memory address of the object 42\n```\n\n' +
+        'Python **interns** small immutable objects for efficiency. Integers from -5 to 256 are ' +
+        'pre-allocated once at startup. So:\n\n' +
+        '```python\na = 256\nb = 256\nprint(a is b)   # True — both names point to the SAME object\n\na = 257\nb = 257\nprint(a is b)   # False (usually) — separate objects with equal value\n```\n\n' +
+        'The `is` operator checks **identity** (same object in memory). The `==` operator checks ' +
+        '**equality** (same value). For small integers they happen to agree; for larger values or ' +
+        'mutable objects they often don\'t. Most bugs from confusing these come from the habit of ' +
+        'using `is` when you meant `==`. Rule of thumb: **use `==` for values, use `is` only for ' +
+        '`None`, `True`, `False`** (where there\'s only one instance ever).\n\n' +
+        'When the last name pointing to an object disappears, Python\'s **garbage collector** ' +
+        'reclaims the memory. No manual allocation, no manual freeing — one of the reasons Python ' +
+        'is easy to write and slightly slower to run than languages where you manage memory by hand.',
       diagram: 'VariablesDiagram',
     },
     {
       title: 'Making Decisions (If / Else)',
       beginnerContent:
-        'Programs often need to choose between actions. Think of a fork in a trail: if it\'s ' +
-        'raining, take the sheltered path; otherwise, take the scenic route. In Python this ' +
-        'looks like `if temperature > 35: warn("heat alert")`. The computer checks the ' +
-        'condition and picks one branch. You can chain conditions with `elif` (else-if) to ' +
-        'handle many possibilities, like choosing clothing for different weather.',
+        'Programs often need to choose between actions. A fork in a trail: if it\'s raining, take ' +
+        'the sheltered path; otherwise, take the scenic route. In Python:\n\n' +
+        '```python\nif temperature > 35:\n    print("Heat alert — stay hydrated")\nelse:\n    print("Temperature is fine")\n```\n\n' +
+        'The computer checks the condition, picks one branch, runs it, skips the other. ' +
+        'For more than two possibilities, chain with `elif` (short for "else if"):\n\n' +
+        '```python\nif temperature > 35:\n    print("Hot")\nelif temperature > 25:\n    print("Warm")\nelif temperature > 15:\n    print("Cool")\nelse:\n    print("Cold")\n```\n\n' +
+        'Only **one** branch runs — the first one whose condition is true. Everything else is ' +
+        'skipped. That\'s all if/elif/else is: a ladder of conditions, and the first true rung wins.',
       intermediateContent:
-        'Chained comparisons in Python: `18 <= age < 65` is equivalent to `age >= 18 and age < 65` but more readable. Boolean operators: `and` (both true), `or` (at least one true), `not` (inverts). Short-circuit evaluation: `if x != 0 and 10/x > 2` is safe because Python stops evaluating after `x != 0` is False, never dividing by zero. The ternary expression `result = "adult" if age >= 18 else "minor"` is a one-line if/else. Truthy/falsy values: `0`, `""`, `[]`, `None`, `False` are falsy; everything else is truthy.',
+        'The condition inside `if` doesn\'t have to be one comparison. Python lets you combine ' +
+        'conditions for more expressive decisions:\n\n' +
+        '- **Chained comparisons:** `if 18 <= age < 65:` reads like math and means exactly that — age is at least 18 AND strictly less than 65.\n' +
+        '- **`and`** — both must be true: `if is_raining and has_umbrella:`\n' +
+        '- **`or`** — at least one must be true: `if is_holiday or is_weekend:`\n' +
+        '- **`not`** — flips true and false: `if not logged_in:`\n\n' +
+        'Python evaluates these with a clever shortcut called **short-circuit evaluation**. In ' +
+        '`if x != 0 and 10/x > 2:`, Python checks `x != 0` first. If x IS zero, Python stops right ' +
+        'there — it never tries to divide by zero, even though the division is written in the code. ' +
+        'Same with `or`: if the first part is true, the second part is never evaluated.\n\n' +
+        'And if you just need a quick one-line choice, Python has a **ternary expression**:\n\n' +
+        '```python\nresult = "adult" if age >= 18 else "minor"\n```\n\n' +
+        'One last subtlety: Python\'s `if` doesn\'t only take True/False. It has a concept of ' +
+        '**truthiness** — `0`, `""` (empty string), `[]` (empty list), `{}` (empty dict), `None`, ' +
+        '`False` are all "falsy." Everything else is "truthy." So `if my_list:` checks "is the list ' +
+        'non-empty?" — idiomatic and readable once you\'re used to it.',
       advancedContent:
-        'Pattern matching (Python 3.10+) uses `match/case` for structural pattern matching: `match command: case "quit": exit()`, `case ["move", x, y]: move_to(int(x), int(y))`, `case _: print("unknown")`. This is more powerful than if/elif chains for complex decision trees. Guard clauses (`case x if x > 0:`) add conditions to patterns. Under the hood, Python compiles match statements into efficient decision trees. In functional programming languages (Haskell, Erlang), pattern matching is the primary control flow mechanism — Python\'s adoption reflects the convergence of programming paradigms.',
+        'For decision trees that are more complex than a handful of `elif` branches, Python 3.10 ' +
+        'introduced **structural pattern matching** with `match/case`. Instead of comparing ' +
+        'values, you match *shapes*:\n\n' +
+        '```python\nmatch command:\n    case "quit":\n        exit()\n    case ["move", x, y]:\n        move_to(int(x), int(y))\n    case {"type": "click", "x": x, "y": y}:\n        handle_click(x, y)\n    case _:\n        print("unknown command")\n```\n\n' +
+        'This isn\'t just a prettier switch statement. Each `case` can **destructure** lists, ' +
+        'dicts, tuples, even custom classes — pulling named values out of the matched shape and ' +
+        'binding them to variables in one step. The `_` is a wildcard that matches anything.\n\n' +
+        '**Guard clauses** add conditions to a pattern:\n\n' +
+        '```python\nmatch point:\n    case (x, y) if x == y:\n        print("on the diagonal")\n    case (x, y) if x * y < 0:\n        print("one axis is negative")\n```\n\n' +
+        'Python compiles match statements into efficient decision trees — often faster than the ' +
+        'equivalent `if/elif` chain when there are many cases. This pattern-matching style came ' +
+        'to Python from functional languages (Haskell, OCaml, Erlang) where it\'s the primary ' +
+        'control flow. If you find yourself writing a 10-branch `elif` chain that all dispatches ' +
+        'on the shape of some data, `match` is almost always the cleaner choice.',
     },
     {
       title: 'Repeating Things (Loops)',
@@ -91,19 +166,56 @@ export const guide: ReferenceGuide = {
     {
       title: 'How a Program Runs — Line by Line',
       beginnerContent:
-        'A computer reads your program from top to bottom, one line at a time, like reading ' +
-        'a book. It finishes the current line completely before moving to the next. This is ' +
-        'called *sequential execution*. If you write `mood = "calm"` and then `print(mood)`, ' +
-        'the computer stores the word first, then prints it. But if you flip the order — ' +
-        '`print(mood)` before `mood = "calm"` — you get a NameError because the computer ' +
-        'hasn\'t seen `mood` yet. Order matters in every program. In Priya\'s elephant ' +
-        'monitoring code, the camera must capture a photo *before* the classifier can analyze ' +
-        'it, and the classifier must produce a result *before* the alert can be sent. Each ' +
-        'step depends on the one before it, just like following a recipe in the right order.',
+        'A computer reads your program from top to bottom, one line at a time, like reading a ' +
+        'book. It finishes the current line completely before moving to the next. This is called ' +
+        '**sequential execution**.\n\n' +
+        '```python\nmood = "calm"      # 1. store the word\nprint(mood)        # 2. print it\n```\n\n' +
+        'Flip the order:\n\n' +
+        '```python\nprint(mood)        # ERROR: mood isn\'t defined yet\nmood = "calm"\n```\n\n' +
+        'Python explodes with a `NameError` on line 1 because it hasn\'t seen `mood` yet. Line 2 ' +
+        'never runs — Python halts at the first error. **Order matters in every program.** Step ' +
+        'must happen before the step that depends on it. A camera must capture a photo *before* ' +
+        'a classifier can analyze it. A classifier must produce a result *before* an alert can be ' +
+        'sent. Programs are recipes; recipes have an order.',
       intermediateContent:
-        'The call stack tracks function execution. When `main()` calls `analyze()` which calls `sort()`, the stack is [main → analyze → sort]. When sort finishes, execution returns to analyze. A `RecursionError: maximum recursion depth exceeded` means the stack grew too deep — usually from a recursive function missing its base case. Python\'s default limit is 1,000 frames. Stack traces (tracebacks) read bottom-to-top: the last line is where the error occurred, and each line above shows the caller. Learning to read tracebacks is the single most valuable debugging skill.',
+        'Sequential execution gets more interesting when functions enter the picture. When Python ' +
+        'hits a function call, it doesn\'t just "move to the next line" — it pauses the current ' +
+        'line, jumps into the function, runs it to completion, then comes back to the paused line ' +
+        'with the function\'s return value. To keep track, Python uses a structure called the ' +
+        '**call stack**.\n\n' +
+        '```python\ndef analyze(data):\n    return sorted(data)[0]   # calls sorted(), returns minimum\n\ndef main():\n    result = analyze([3, 1, 2])\n    print(result)\n\nmain()\n```\n\n' +
+        'Walk through it. Python reads `main()` — pushes `main` onto the stack. Inside main, ' +
+        '`analyze([3, 1, 2])` is called — `analyze` goes on top. Inside analyze, `sorted(data)` ' +
+        'runs — `sorted` goes on top. `sorted` finishes, returns `[1, 2, 3]`, pops off. Back in ' +
+        'analyze: `[0]` gets the first element, returns `1`. Analyze pops off. Back in main: ' +
+        'prints `1`. Main pops off. Done.\n\n' +
+        'When something goes wrong, Python prints the **traceback** — the state of the stack at ' +
+        'the moment of the error. **Read tracebacks bottom-to-top**: the last line is where the ' +
+        'error actually happened; the lines above show who called who to get there. This is the ' +
+        'single most valuable debugging skill — most errors are obvious once you read the traceback ' +
+        'calmly. And `RecursionError: maximum recursion depth exceeded` means the stack grew past ' +
+        'Python\'s limit (1,000 frames by default) — almost always a recursive function missing ' +
+        'its base case.',
       advancedContent:
-        'Python\'s Global Interpreter Lock (GIL) means only one thread executes Python bytecode at a time — even on multi-core CPUs. For CPU-bound work, use `multiprocessing` (separate processes with separate GILs) instead of `threading`. For I/O-bound work (network requests, file reads), `threading` or `asyncio` (cooperative multitasking) works well because the GIL is released during I/O waits. The `asyncio` event loop uses `async/await` syntax: `async def fetch(url): response = await session.get(url)`. Understanding concurrency models — threading, multiprocessing, and async — is essential for building responsive, high-performance Python applications.',
+        'Sequential execution is simple — but sometimes you need the program to do more than one ' +
+        'thing at a time. Download 100 web pages without waiting for each one to finish sequentially. ' +
+        'Process video frames while also reading audio. Keep a UI responsive while a long calculation ' +
+        'runs. These need **concurrency**, and Python gives you three models:\n\n' +
+        '**1. `threading`** — multiple threads, each running their own sequence. But Python has a ' +
+        '**Global Interpreter Lock (GIL)** that ensures only one thread executes Python bytecode at ' +
+        'a time. So threading doesn\'t speed up CPU-bound work on a multi-core machine — but it *does* ' +
+        'help with I/O-bound work (downloads, file reads), because the GIL is released while a thread ' +
+        'waits on I/O.\n\n' +
+        '**2. `multiprocessing`** — spawn separate Python processes, each with its own GIL. Real ' +
+        'parallelism on multi-core CPUs. Use this for CPU-bound work (image processing, ML training).\n\n' +
+        '**3. `asyncio`** — cooperative multitasking in a single thread. Functions marked `async` ' +
+        'can `await` slow operations, and while they wait, the event loop runs other tasks:\n\n' +
+        '```python\nasync def fetch(url):\n    response = await session.get(url)\n    return response.text()\n```\n\n' +
+        'One thread handles thousands of simultaneous network connections by interleaving them ' +
+        'whenever one is waiting on I/O. No GIL fight — just one thread, taking turns efficiently.\n\n' +
+        '**The rule of thumb:** CPU-bound work → multiprocessing. I/O-bound work → asyncio or ' +
+        'threading. If in doubt, start sequential — only reach for concurrency when you actually ' +
+        'have a bottleneck. Concurrent code is dramatically harder to reason about.',
     },
     {
       title: 'Debugging — Finding and Fixing Mistakes',
@@ -206,6 +318,8 @@ print(isinstance("hi", str))     # True`,
       title: 'Strings',
       diagram: 'StringSlicingDiagram',
       beginnerContent:
+        'Try the slicer above. Drag the `start` and `stop` sliders — watch which letters light up. ' +
+        'Push `step` negative to reverse the slice. This is what string indexing *is* in Python.\n\n' +
         'Strings are sequences of characters. Every character has a position number (index), starting from 0. ' +
         'Negative indices count from the end: -1 is the last character, -2 is second-to-last.\n\n' +
         '**Slicing** extracts a portion of a string using `s[start:stop:step]`:\n' +
@@ -561,6 +675,7 @@ print(by_weight[0])  # ('dolphin', 150)`,
       title: 'Dictionaries',
       diagram: 'DictCounterDiagram',
       beginnerContent:
+        'Play with the counter above. Add words and watch how the dictionary keeps a running tally — each key (the word) points to a value (how many times it appeared). **That\'s all a dictionary is: a set of labeled slots.**\n\n' +
         'Dictionaries map **keys** to **values**. Keys must be immutable (strings, numbers, tuples). Values can be anything.\n\n' +
         '**Key methods:**\n' +
         '- `d[key]` — get value (raises KeyError if missing)\n' +
@@ -752,6 +867,7 @@ with open("elephant_data.csv", "r") as f:
       id: 'py-errors',
       title: 'Error Handling — try / except',
       beginnerContent:
+        'Watch the flow diagram above. When an error happens inside a `try` block, execution jumps immediately to the matching `except` block — it doesn\'t crash, and it doesn\'t continue normally. That\'s the whole mechanism in one picture.\n\n' +
         'Errors happen. `try/except` catches them so your program doesn\u2019t crash.\n\n' +
         '**Common errors:** `ValueError` (wrong value), `TypeError` (wrong type), `KeyError` (missing dict key), ' +
         '`IndexError` (list index out of range), `ZeroDivisionError`.\n\n' +
@@ -952,6 +1068,7 @@ print(filled)  # [1, 2, 3, 1, 2, 3, 1]`,
       id: 'py-tuples-sets',
       title: 'Tuples & Sets',
       beginnerContent:
+        'Compare the two side by side in the diagram above. A **tuple** is an ordered sequence — positions matter, duplicates allowed, can\'t be changed after creation. A **set** is an unordered collection — no duplicates, ultra-fast membership checks, can\'t hold mutable items. Different shapes for different jobs.\n\n' +
         '**Tuples** are immutable sequences — once created, they cannot be changed. Create them with parentheses `()` or just commas. They\'re perfect for fixed data like coordinates, RGB colors, or database records.\n\n' +
         '**Tuple unpacking** lets you assign multiple variables at once: `lat, lon = (26.14, 91.74)`. This works in for-loops too.\n\n' +
         '**Named tuples** from `collections` give each position a name, making code more readable than raw index access.\n\n' +
@@ -1041,6 +1158,7 @@ print("forest" in habitat)  # True`,
       id: 'py-classes',
       title: 'Classes — Building Your Own Types',
       beginnerContent:
+        'Click **+ Create instance** in the diagram above. Notice how the class on the left stays unchanged, but each click spawns a new independent object on the right — same shape, different data. That\'s the entire concept: one blueprint, many objects.\n\n' +
         'A **class** is a blueprint for creating objects. An **instance** is a specific object built from that blueprint. Think of it like a "species card" template (the class) vs. a card filled out for a specific elephant (the instance).\n\n' +
         '`__init__` is the constructor — it runs when you create a new instance and sets up its data. `self` refers to the specific instance being created or used.\n\n' +
         '**Instance variables** (set via `self.name = ...`) belong to each object individually. **Methods** are functions defined inside the class that operate on the instance\'s data.\n\n' +
@@ -1336,6 +1454,7 @@ print(f"{len(name) = }")  # len(name) = 5`,
       id: 'py-math',
       title: 'Math & Numbers — Beyond Arithmetic',
       beginnerContent:
+        'Try the calculator above — switch between functions (`sqrt`, `log`, `sin`, `cos`...) and slide the input. Watch how each one maps input to output. Python\'s `math` module gives you a toolbox of these mathematical functions, ready to call by name.\n\n' +
         'Python\'s built-in `math` module provides essential mathematical functions: rounding, powers, roots, logarithms, trigonometry, and constants like `math.pi` and `math.e`.\n\n' +
         '**Rounding family:** `math.floor(x)` always rounds down, `math.ceil(x)` always rounds up, `round(x)` rounds to nearest (with banker\'s rounding for .5). `round(x, n)` rounds to n decimal places.\n\n' +
         '**Powers & roots:** `x ** n` for integer powers, `math.sqrt(x)` for square roots, `math.pow(x, n)` for float powers. `math.log(x, base)` for logarithms.\n\n' +
@@ -1404,6 +1523,7 @@ print(math.isclose(a, 0.3))   # True (within tolerance)`,
       id: 'py-data',
       title: 'Data Processing — Filter, Transform, Aggregate',
       beginnerContent:
+        'Watch the pipeline above. Raw data goes in one end; it flows through filter → transform → aggregate, getting smaller and more refined at each stage. This is the shape of nearly every data analysis you\'ll ever write — in Python, in SQL, in pandas, in spreadsheets. Once you see the pattern, you see it everywhere.\n\n' +
         'Data processing follows a pipeline pattern: **raw data → filter → transform → aggregate → result**. Python\'s built-in tools make each step clean and composable.\n\n' +
         '**Filtering** selects items that match a condition. Use list comprehensions with `if`: `[x for x in data if x > 0]`. For complex filters, `filter(fn, data)` works too.\n\n' +
         '**Transforming** (mapping) applies a function to each item: `[fn(x) for x in data]` or `map(fn, data)`. Extract fields, convert types, compute derived values.\n\n' +

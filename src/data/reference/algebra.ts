@@ -1,7 +1,7 @@
 import type { ReferenceGuide } from '../reference';
 
 export const guide: ReferenceGuide = {
-  slug: 'algebra-fundamentals',
+  slug: 'algebra',
   title: 'Algebra',
   category: 'math',
   icon: '📊',
@@ -12,6 +12,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Variables and Expressions',
       beginnerContent:
+        'Drag the slider in the diagram above. Watch three different expressions evaluate in real time as x changes. **One letter, infinitely many calculations** — that\'s the trick variables pull. You stop thinking about one specific number and start thinking about *every possible number at once*.\n\n' +
         '**What is a variable?**\n\n' +
         'A variable is a letter (like `x`, `y`, or `n`) that stands for a number you don\'t know yet. Think of it as an **empty box** waiting to be filled.\n\n' +
         '**What is an expression?**\n\n' +
@@ -47,17 +48,27 @@ export const guide: ReferenceGuide = {
         '| 4 | Add: 50 + 5 | **55** |\n\n' +
         '⚠️ **Common mistake:** `2(3x − 1)² ≠ (6x − 2)²` — the exponent applies before the coefficient.',
       advancedContent:
-        'In abstract algebra, variables generalize beyond numbers:\n\n' +
-        '- A **polynomial ring** `R[x]` consists of all polynomials with coefficients from R\n' +
-        '- The **Fundamental Theorem of Algebra** states every degree-n polynomial has exactly n complex roots\n' +
-        '- **Groups, rings, and fields** generalize arithmetic — addition and multiplication become abstract operations satisfying axioms (associativity, commutativity, distributivity)\n\n' +
-        'This abstraction powers modern **cryptography**, **coding theory**, and **quantum computing**.',
+        'A variable starts as a simple idea — a letter standing in for a number. Push it a little further and it becomes the most powerful abstraction in mathematics.\n\n' +
+        '**Expressions as objects in their own right.** In beginner, you treated `3x + 2` as *instructions waiting for a value of x*. Once x = 5 came along, the expression evaluated to 17 and was done. But mathematicians realized: why not treat the expression **itself** as a thing? Forget about plugging in values — study the rules for adding, multiplying, and comparing expressions like they were numbers.\n\n' +
+        'This shift gives us **polynomials as objects**. The set of all polynomials with, say, real-number coefficients forms a system called a **polynomial ring** (written `ℝ[x]`). You can add two polynomials to get another, multiply them to get another, and the familiar rules of arithmetic still apply. Polynomials become numbers in a bigger number system.\n\n' +
+        '**Why care?** Because suddenly powerful statements about "all polynomials" become possible. The most celebrated is the **Fundamental Theorem of Algebra**:\n\n' +
+        '> Every non-constant polynomial of degree n has exactly n complex roots (counted with multiplicity).\n\n' +
+        'Think about what this claims. Pick *any* polynomial — `x² + 1` which has no real roots, `x⁵ − 7x + 1` with messy irrational roots, anything. The theorem guarantees you\'ll always find exactly n solutions if you\'re willing to include complex numbers. This is not obvious; it took until 1799 (Gauss) to prove properly, and the proof uses tools far beyond algebra.\n\n' +
+        '**Even further abstraction — groups, rings, and fields.** Once you have the idea that polynomials form a system with their own "addition" and "multiplication," the natural question is: *what other systems behave the same way?*\n\n' +
+        '| System | What it is | Everyday example |\n' +
+        '|--------|-----------|------------------|\n' +
+        '| **Group** | A set with one operation and an "undo" for every element | Rotations of a square (compose, every one has a reverse) |\n' +
+        '| **Ring** | A set with two operations (add + multiply) satisfying the familiar rules, except division may not exist | The integers; polynomials |\n' +
+        '| **Field** | A ring where division works (except by 0) | The rationals, the reals, the complex numbers |\n\n' +
+        'This move — strip away the specific *values* and study the *rules* — is what modern mathematicians mean by "abstract algebra." The same abstract machinery that describes integer arithmetic describes the symmetries of a molecule, the rotations of a Rubik\'s cube, and the error-correction scheme on your phone.\n\n' +
+        '**The payoff:** RSA encryption, QR-code error correction, quantum computing, and much of modern cryptography are built on finite fields — sets of numbers where arithmetic "wraps around." `x + y` where x and y are two-digit binary numbers follows the same algebraic rules you learned with integers, except `1 + 1 = 0`. That single shift turns arithmetic into error-correcting codes. **The variable in `3x + 2` and the variable powering WhatsApp encryption are the same idea, one pushed much further than the other.**',
       diagram: 'ExpressionEvaluatorDiagram',
       interactive: { type: 'python-playground' as const, props: { starterCode: '# Try evaluating expressions yourself\nx = 5\nprint(f"3x + 2 = {3*x + 2}")\nprint(f"x² - 4 = {x**2 - 4}")\nprint(f"(x + 1)(x - 1) = {(x+1)*(x-1)}")\n\n# Change x and run again!', title: 'Try it — Expressions' } },
     },
     {
       title: 'Solving Linear Equations',
       beginnerContent:
+        'Step through the balance scale above. Every time you do something to one side, the diagram forces you to do the same to the other — because that\'s the entire rule of algebra. Break the rule and the equation breaks. Follow the rule and the variable marches toward its answer.\n\n' +
         '**The golden rule:** Whatever you do to one side, you must do to the other.\n\n' +
         'Think of it as a **seesaw** — both sides must stay balanced.\n\n' +
         '**Example: Solve 2x + 3 = 11**\n\n' +
@@ -98,6 +109,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Inequalities',
       beginnerContent:
+        'Play with the number line above — change the operator, move the boundary. The shaded region is every number that satisfies your inequality. Notice: unlike an equation, an inequality never has one answer. It has *a range* of answers — sometimes a huge one.\n\n' +
         '**Inequality symbols:**\n\n' +
         '| Symbol | Meaning | Example |\n' +
         '|--------|---------|--------|\n' +
@@ -126,16 +138,31 @@ export const guide: ReferenceGuide = {
         '- Case 2: `2x − 3 < −7` → `x < −2`\n' +
         '- Solution: `(−∞, −2) ∪ (5, ∞)`',
       advancedContent:
-        '**Linear programming** optimizes a linear function subject to inequality constraints:\n\n' +
-        '- The feasible region is a **convex polygon**\n' +
-        '- The **Simplex algorithm** (Dantzig, 1947) proves the optimum occurs at a vertex\n' +
-        '- Powers logistics, scheduling, and resource allocation\n\n' +
-        '**Convex optimization** (non-linear inequalities) underpins modern ML — support vector machines find the optimal separating hyperplane via quadratic programming.',
+        'Equations pin down points. Inequalities pin down *regions*. And once you notice that, a whole kind of real-world problem opens up.\n\n' +
+        '**From one variable to many.** A single inequality like `x > 3` carves up the number line. Two inequalities in two variables carve up the 2D plane. For example:\n\n' +
+        '- `x + y ≤ 10` (budget constraint: you can\'t spend more than ₹10)\n' +
+        '- `x ≥ 0, y ≥ 0` (you can\'t buy negative amounts)\n' +
+        '- `2x + y ≤ 14` (shelf space constraint)\n\n' +
+        'Each inequality carves the plane with a straight-line boundary. Overlay all of them and you get a **feasible region** — a convex polygon containing every solution that satisfies all constraints simultaneously. Every point inside this polygon represents a valid choice; every point outside violates at least one rule.\n\n' +
+        '**The big question: given the region of valid choices, which one is best?** This is **linear programming**, and it\'s one of the most-used mathematical techniques ever invented.\n\n' +
+        'George Dantzig in 1947 proved a remarkable fact: **if you\'re maximizing a linear function over a convex polygon, the maximum always occurs at a vertex (corner).** You don\'t need to check the interior or the edges — just the corners. His **Simplex algorithm** walks from vertex to vertex, climbing uphill in the objective function, until it can\'t climb any further. That\'s the optimum.\n\n' +
+        'Why this matters:\n\n' +
+        '| Industry | What LP optimizes |\n' +
+        '|----------|-------------------|\n' +
+        '| Airlines | Assign crews to flights subject to rest and licence constraints |\n' +
+        '| Oil refineries | Mix crude grades to maximize gasoline yield subject to emissions limits |\n' +
+        '| Hospitals | Schedule surgeries subject to OR availability, staff hours, equipment |\n' +
+        '| Power grids | Dispatch generators to meet demand at minimum cost |\n\n' +
+        'The global economy runs on optimization over inequality-defined regions. Every major company has LP solvers built into its supply chain.\n\n' +
+        '**When the constraints aren\'t linear: convex optimization.** Swap the straight-line boundaries for curved ones (while keeping the region *convex* — no dents or holes) and you get a richer class of problems that still have a guaranteed single best answer. This is where modern machine learning lives.\n\n' +
+        'The classic example: a **support vector machine** is trained by finding the separating hyperplane that maximizes the margin between two classes of data points — subject to the constraint that no point is on the wrong side. Constraints are inequalities. The objective is quadratic. The solution is unique. Train a spam filter, a medical diagnostic, or a face-detection model and underneath, convex optimization is quietly solving a high-dimensional version of "maximize this subject to those inequalities."\n\n' +
+        '**The through-line:** beginner-level inequalities ask *"what values of x work?"* Advanced inequalities ask *"which allowed configuration is best?"* Same grammar, vastly more powerful question.',
       diagram: 'InequalityNumberLineDiagram',
     },
     {
       title: 'The Coordinate Plane',
       beginnerContent:
+        'Click anywhere in the plane above to plot a point. Watch its coordinates and the quadrant label update. Every pixel on your screen, every GPS location, every pixel in every photo ever taken — all addressed by this same two-number scheme.\n\n' +
         '**Two perpendicular number lines create a map for numbers:**\n\n' +
         '- **x-axis** — horizontal (left/right)\n' +
         '- **y-axis** — vertical (up/down)\n' +
@@ -172,6 +199,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Linear Equations and Graphs',
       beginnerContent:
+        'Drag the m and b sliders above. Watch the line tilt (m) and slide up/down (b). **Two numbers, every possible straight line.** That\'s the economy of the equation: y = mx + b can describe literally any line in the plane — which is why it shows up in every graph you\'ll ever draw.\n\n' +
         '**Every linear equation graphs as a straight line:**\n\n' +
         '`y = mx + b`\n\n' +
         'Two parameters control the line:\n\n' +
@@ -199,11 +227,25 @@ export const guide: ReferenceGuide = {
         '**x-intercept** (where y = 0): set y = 0 and solve for x.\n\n' +
         'For `y = 4x − 3`: `0 = 4x − 3` → `x = 0.75`',
       advancedContent:
-        'Linear equations generalize to **linear algebra:**\n\n' +
-        '- n equations in n unknowns → linear transformation from Rⁿ to Rⁿ\n' +
-        '- **Determinant** tells if the inverse exists and how areas/volumes scale\n' +
-        '- **Eigenvalues/eigenvectors** (solutions to `Ax = λx`) reveal fundamental modes\n\n' +
-        'Applications: Google\'s **PageRank**, **quantum mechanics**, vibration analysis, computer graphics.',
+        '`y = mx + b` describes one relationship between two things: x and y. What happens when you have thousands of relationships between thousands of things?\n\n' +
+        '**From one line to a system of lines.** In intermediate, you saw systems like:\n\n' +
+        '`2x + 3y = 12`\n' +
+        '`x − y = 1`\n\n' +
+        'Two linear equations, two unknowns — graphically, two lines intersecting at a single point (3, 2). Scale this up: real-world models often have *thousands* of linear relationships among *thousands* of variables. A single Amazon delivery route plans dozens of constraints (truck capacity, driver hours, time windows, fuel economy) across hundreds of delivery points. Every constraint is a linear equation; solving the whole system together is how routes get planned.\n\n' +
+        'Once you\'re past three variables, pictures stop helping. So mathematicians did what they always do when problems get big: **invent better notation**. A system of many linear equations becomes a single matrix equation, `Ax = b`. The familiar slope-intercept idea extends: each row of A is one linear relationship; the whole system is solved at once.\n\n' +
+        '**And here\'s where it gets beautiful.** Once you package a bunch of linear equations into one matrix, A starts behaving like its own kind of "number":\n\n' +
+        '| Property | What it tells you |\n' +
+        '|----------|-------------------|\n' +
+        '| **Determinant** | Does the system have a unique solution? (Nonzero = yes; zero = lines collapse onto each other) |\n' +
+        '| **Inverse** | The "reciprocal" of the matrix — exists when det ≠ 0 — lets you solve for x in one step |\n' +
+        '| **Eigenvectors** | Special directions that the matrix *only stretches* without rotating — the "natural axes" of whatever system the matrix describes |\n\n' +
+        'That last one is extraordinary. An eigenvector `v` satisfies `Av = λv` — the matrix acts on it like a scalar multiplication. Most matrices have just a few eigenvectors, and those few directions encode almost everything about how the system behaves.\n\n' +
+        '**Why should you care? Because eigenvectors show up *everywhere*.**\n\n' +
+        '- **Google PageRank** models the web as a giant matrix of links. The dominant eigenvector tells you how "important" each page is. That single calculation ranks 500 billion web pages.\n' +
+        '- **Quantum mechanics** describes every state of every particle as an eigenvector of some operator. The measurable outcomes of any experiment are the corresponding eigenvalues.\n' +
+        '- **Vibration analysis** finds the "natural frequencies" of a bridge by computing eigenvalues. Miss the wrong frequency from crosswind and you get the Tacoma Narrows collapse.\n' +
+        '- **PCA in machine learning** uses eigenvectors to compress high-dimensional data by finding its most important directions of variation.\n\n' +
+        'The road from y = mx + b to PageRank is surprisingly short: one line → many lines in a system → matrix equation → eigenvectors → the structure behind half of modern computation. **Linear algebra is what you get when you take y = mx + b seriously.**',
       diagram: 'SlopeExplorerDiagram',
       interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Explore y = mx + b\nm = 2    # slope\nb = -1   # y-intercept\n\nx_vals = np.array([-3, -2, -1, 0, 1, 2, 3])\ny_vals = m * x_vals + b\n\nprint(f"y = {m}x + {b}")\nprint("  x  |   y")\nprint("-" * 14)\nfor xi, yi in zip(x_vals, y_vals):\n    print(f"  {xi:>2} | {yi:>4}")\n\n# Try changing m and b!', title: 'Try it — Linear Graphs' } },
     },

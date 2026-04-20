@@ -1,230 +1,335 @@
-export default function WaterCycleDiagram() {
-  return (
-    <div className="my-4">
-      <svg viewBox="0 0 600 400" className="w-full max-w-2xl mx-auto" role="img" aria-label="Animated water cycle showing evaporation, condensation, precipitation, runoff, infiltration, and groundwater flow">
-        <defs>
-          <style>{`
-            @keyframes wc-sunPulse {
-              0%, 100% { transform: scale(1); opacity: 1; }
-              50% { transform: scale(1.15); opacity: 0.85; }
-            }
-            @keyframes wc-rayRotate {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-            @keyframes wc-evapRise {
-              0% { transform: translateY(0); opacity: 0.8; }
-              80% { opacity: 0.5; }
-              100% { transform: translateY(-90px); opacity: 0; }
-            }
-            @keyframes wc-cloudGrow {
-              0%, 100% { transform: scale(1); }
-              50% { transform: scale(1.06); }
-            }
-            @keyframes wc-rainFall {
-              0% { transform: translateY(0); opacity: 1; }
-              100% { transform: translateY(50px); opacity: 0; }
-            }
-            @keyframes wc-riverFlow {
-              0% { stroke-dashoffset: 20; }
-              100% { stroke-dashoffset: 0; }
-            }
-            @keyframes wc-groundSeep {
-              0% { transform: translateX(0); opacity: 0.7; }
-              100% { transform: translateX(-40px); opacity: 0; }
-            }
-            @keyframes wc-waveRoll {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-30px); }
-            }
-            @keyframes wc-transpiRise {
-              0% { transform: translateY(0); opacity: 0.7; }
-              100% { transform: translateY(-30px); opacity: 0; }
-            }
-            .wc-sunCore { transform-origin: 58px 42px; animation: wc-sunPulse 3s ease-in-out infinite; }
-            .wc-sunRays { transform-origin: 58px 42px; animation: wc-rayRotate 30s linear infinite; }
-            .wc-evapP { animation: wc-evapRise 2.5s ease-out infinite; }
-            .wc-evapP2 { animation: wc-evapRise 2.5s ease-out 0.6s infinite; }
-            .wc-evapP3 { animation: wc-evapRise 2.5s ease-out 1.2s infinite; }
-            .wc-evapP4 { animation: wc-evapRise 2.5s ease-out 1.8s infinite; }
-            .wc-evapP5 { animation: wc-evapRise 2.5s ease-out 0.3s infinite; }
-            .wc-evapP6 { animation: wc-evapRise 2.5s ease-out 0.9s infinite; }
-            .wc-evapP7 { animation: wc-evapRise 2.5s ease-out 1.5s infinite; }
-            .wc-evapP8 { animation: wc-evapRise 2.5s ease-out 2.1s infinite; }
-            .wc-cloud1 { transform-origin: 250px 68px; animation: wc-cloudGrow 4s ease-in-out infinite; }
-            .wc-cloud2 { transform-origin: 420px 80px; animation: wc-cloudGrow 4s ease-in-out 1s infinite; }
-            .wc-rainD { animation: wc-rainFall 1s linear infinite; }
-            .wc-rainD2 { animation: wc-rainFall 1s linear 0.25s infinite; }
-            .wc-rainD3 { animation: wc-rainFall 1s linear 0.5s infinite; }
-            .wc-rainD4 { animation: wc-rainFall 1s linear 0.75s infinite; }
-            .wc-rainD5 { animation: wc-rainFall 1s linear 0.15s infinite; }
-            .wc-rainD6 { animation: wc-rainFall 1s linear 0.4s infinite; }
-            .wc-rainD7 { animation: wc-rainFall 1s linear 0.6s infinite; }
-            .wc-rainD8 { animation: wc-rainFall 1s linear 0.85s infinite; }
-            .wc-river { stroke-dasharray: 10 5; animation: wc-riverFlow 0.6s linear infinite; }
-            .wc-gndP { animation: wc-groundSeep 3s linear infinite; }
-            .wc-gndP2 { animation: wc-groundSeep 3s linear 0.8s infinite; }
-            .wc-gndP3 { animation: wc-groundSeep 3s linear 1.6s infinite; }
-            .wc-gndP4 { animation: wc-groundSeep 3s linear 2.4s infinite; }
-            .wc-wave { animation: wc-waveRoll 2s linear infinite; }
-            .wc-transp { animation: wc-transpiRise 2s ease-out infinite; }
-            .wc-transp2 { animation: wc-transpiRise 2s ease-out 0.7s infinite; }
-          `}</style>
+import { useState, useEffect } from 'react';
 
-          <linearGradient id="wc-sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" className="[stop-color:#7dd3fc] dark:[stop-color:#0c4a6e]" />
-            <stop offset="100%" className="[stop-color:#e0f2fe] dark:[stop-color:#172554]" />
+// ── The Endless Journey of Water ─────────────────────────────
+// Animated water cycle: droplets evaporate from a river, rise as
+// vapor, form clouds, fall as rain, run off mountains, seep into
+// groundwater, and flow back to the river. Continuous loop.
+
+interface Drop {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  phase: 'river' | 'vapor' | 'cloud' | 'rain' | 'runoff' | 'ground';
+  age: number;
+  size: number;
+}
+
+let dropId = 0;
+
+export default function WaterCycleDiagram() {
+  const [tick, setTick] = useState(0);
+  const [drops, setDrops] = useState<Drop[]>([]);
+  const [paused, setPaused] = useState(false);
+  const [evapCount, setEvapCount] = useState(0);
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(() => setTick(t => t + 1), 30);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  const W = 600, H = 400;
+  const sunX = 520, sunY = 60;
+  const mountainPeakX = 200, mountainPeakY = 150;
+  const riverY = 330;
+  const cloudX = 250, cloudY = 80;
+
+  useEffect(() => {
+    if (paused) return;
+
+    setDrops(prev => {
+      const next: Drop[] = [];
+
+      // Spawn: evaporation from river surface (every 6 ticks)
+      if (tick % 6 === 0) {
+        const sx = 350 + Math.random() * 200;
+        next.push({
+          id: dropId++, phase: 'vapor',
+          x: sx, y: riverY - 5,
+          vx: -0.5 - Math.random() * 0.3,
+          vy: -1.0 - Math.random() * 0.5,
+          age: 0, size: 2,
+        });
+        setEvapCount(c => c + 1);
+      }
+
+      for (const d of prev) {
+        const nd = { ...d, x: d.x + d.vx, y: d.y + d.vy, age: d.age + 1 };
+
+        switch (nd.phase) {
+          case 'vapor':
+            // Rise and drift left toward clouds, slow down near cloud height
+            nd.vy = Math.max(-0.3, nd.vy + 0.005);
+            nd.vx = -0.4;
+            nd.size = 1.5 + Math.sin(nd.age * 0.1) * 0.5;
+            if (nd.y < cloudY + 20 && nd.x < cloudX + 60) {
+              nd.phase = 'cloud';
+              nd.vx = 0;
+              nd.vy = 0;
+            }
+            if (nd.age > 200) continue; // expired
+            break;
+
+          case 'cloud':
+            // Sit in cloud briefly, then become rain
+            nd.x = cloudX + (Math.random() - 0.5) * 80;
+            nd.y = cloudY + Math.random() * 20;
+            if (nd.age > 40) {
+              nd.phase = 'rain';
+              nd.vy = 2.5 + Math.random();
+              nd.vx = 0.2;
+              nd.size = 2.5;
+            }
+            break;
+
+          case 'rain':
+            // Fall fast
+            nd.vy += 0.05; // accelerate
+            nd.size = 2.5;
+            // Hit mountain slope or ground
+            const mountainSlope = mountainPeakY + ((nd.x - mountainPeakX) / 250) * (riverY - mountainPeakY);
+            if (nd.y > mountainSlope && nd.x < 400) {
+              nd.phase = Math.random() > 0.4 ? 'runoff' : 'ground';
+              nd.vy = nd.phase === 'runoff' ? 0.8 : 0.3;
+              nd.vx = nd.phase === 'runoff' ? 1.2 : 0;
+            }
+            if (nd.y > riverY) {
+              nd.phase = 'river' as const;
+              nd.y = riverY;
+              nd.vy = 0;
+              nd.vx = 0.5;
+            }
+            break;
+
+          case 'runoff':
+            // Flow down mountainside to river
+            nd.vx = 1.0 + Math.random() * 0.3;
+            nd.vy = 0.6;
+            nd.size = 2;
+            if (nd.y > riverY - 5) {
+              nd.phase = 'river';
+              nd.y = riverY;
+              nd.vy = 0;
+            }
+            break;
+
+          case 'ground':
+            // Seep slowly downward and rightward (groundwater)
+            nd.vx = 0.3;
+            nd.vy = 0.15;
+            nd.size = 1.5;
+            if (nd.y > riverY + 30 || nd.x > 550) continue; // absorbed
+            break;
+
+          case 'river':
+            // Drift right in river, eventually re-evaporate
+            nd.vx = 0.3;
+            nd.vy = 0;
+            if (nd.age > 30) continue; // cycles back via next evaporation
+            break;
+        }
+
+        if (nd.age < 300 && nd.x > -10 && nd.x < W + 10 && nd.y < H + 10) {
+          next.push(nd);
+        }
+      }
+
+      return [...prev.filter(d => d.age < 300 && d.x > -10 && d.x < W + 10 && d.y < H + 10).map(d => {
+        // simplified re-update (same logic)
+        return d;
+      }), ...next].slice(-120);
+    });
+  }, [tick, paused]);
+
+  // Sun ray animation
+  const sunAngle = tick * 0.4;
+
+  // Cloud puffiness
+  const cloudPuff = Math.sin(tick * 0.04) * 3;
+
+  const phaseColor: Record<string, string> = {
+    vapor: '#a5b4fc',   // light purple (steam)
+    cloud: '#e2e8f0',   // white-gray
+    rain: '#60a5fa',    // blue
+    runoff: '#38bdf8',  // light blue
+    ground: '#6366f1',  // indigo (underground)
+    river: '#3b82f6',   // blue
+  };
+
+  return (
+    <div className="bg-gradient-to-b from-sky-50 via-sky-50 to-emerald-50 dark:from-sky-900 dark:via-sky-950 dark:to-emerald-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-bold text-sky-700 dark:text-sky-400 uppercase tracking-wider">
+          The Endless Journey of Water
+        </p>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-blue-700 dark:text-blue-300 font-mono">{evapCount} molecules evaporated</span>
+          <button
+            onClick={() => setPaused(!paused)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            {paused ? '▶ Play' : '⏸ Pause'}
+          </button>
+        </div>
+      </div>
+
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl mx-auto" role="img"
+        aria-label="Animated water cycle showing evaporation, cloud formation, rain, runoff, and groundwater">
+
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#0c4a6e" />
+            <stop offset="60%" stopColor="#164e63" />
+            <stop offset="100%" stopColor="#14532d" />
           </linearGradient>
-          <linearGradient id="wc-ocean" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" className="[stop-color:#3b82f6] dark:[stop-color:#1e3a5f]" />
-            <stop offset="100%" className="[stop-color:#1d4ed8] dark:[stop-color:#0f172a]" />
-          </linearGradient>
-          <linearGradient id="wc-ground" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" className="[stop-color:#65a30d] dark:[stop-color:#365314]" />
-            <stop offset="60%" className="[stop-color:#92400e] dark:[stop-color:#431407]" />
-          </linearGradient>
-          <linearGradient id="wc-mtn" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" className="[stop-color:#e7e5e4] dark:[stop-color:#a8a29e]" />
-            <stop offset="40%" className="[stop-color:#78716c] dark:[stop-color:#57534e]" />
-            <stop offset="100%" className="[stop-color:#57534e] dark:[stop-color:#44403c]" />
+          <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#365314" />
+            <stop offset="100%" stopColor="#1c1917" />
           </linearGradient>
         </defs>
 
-        {/* Sky */}
-        <rect x="0" y="0" width="600" height="240" fill="url(#wc-sky)" />
+        {/* Sky background */}
+        <rect x="0" y="0" width={W} height={riverY - 20} fill="url(#skyGrad)" opacity="0.3" />
 
-        {/* Sun with pulsing core and rotating rays */}
-        <g className="wc-sunRays">
-          {[0,30,60,90,120,150,180,210,240,270,300,330].map((a) => {
-            const r = (a * Math.PI) / 180;
-            return (
-              <line key={a}
-                x1={58 + Math.cos(r) * 28} y1={42 + Math.sin(r) * 28}
-                x2={58 + Math.cos(r) * 40} y2={42 + Math.sin(r) * 40}
-                stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" opacity="0.8" />
-            );
-          })}
+        {/* ── Sun ── */}
+        <circle cx={sunX} cy={sunY} r="30" fill="#fde047" opacity="0.8" />
+        {Array.from({ length: 10 }, (_, i) => {
+          const a = ((sunAngle + i * 36) * Math.PI) / 180;
+          const len = 8 + Math.sin(tick * 0.08 + i) * 3;
+          return (
+            <line key={`sr-${i}`}
+              x1={sunX + Math.cos(a) * 33} y1={sunY + Math.sin(a) * 33}
+              x2={sunX + Math.cos(a) * (33 + len)} y2={sunY + Math.sin(a) * (33 + len)}
+              stroke="#fde047" strokeWidth="2" strokeLinecap="round"
+              opacity={0.5 + Math.sin(tick * 0.06 + i) * 0.3} />
+          );
+        })}
+
+        {/* Heat waves from sun to river (evaporation driver) */}
+        {[0, 1, 2].map(i => (
+          <line key={`heat-${i}`}
+            x1={sunX - 20 - i * 30} y1={sunY + 30 + i * 15}
+            x2={400 + i * 30} y2={riverY - 20}
+            stroke="#fde047" strokeWidth="1" opacity="0.1"
+            strokeDasharray="8,12">
+            <animate attributeName="stroke-dashoffset" from="40" to="0" dur={`${2 + i * 0.5}s`} repeatCount="indefinite" />
+          </line>
+        ))}
+
+        {/* ── Mountain ── */}
+        <path d={`M 50,${riverY} L ${mountainPeakX},${mountainPeakY} L 350,${riverY} Z`}
+          fill="#1e3a22" stroke="#365314" strokeWidth="1" />
+        {/* Snow cap */}
+        <path d={`M ${mountainPeakX - 20},${mountainPeakY + 20} L ${mountainPeakX},${mountainPeakY} L ${mountainPeakX + 25},${mountainPeakY + 25}`}
+          fill="white" opacity="0.6" />
+        {/* Trees on mountain */}
+        {[100, 140, 280, 310].map((tx, i) => {
+          const ty = mountainPeakY + ((tx - mountainPeakX) / 250) * (riverY - mountainPeakY) - 8;
+          return (
+            <g key={`tree-${i}`}>
+              <line x1={tx} y1={ty} x2={tx} y2={ty + 12} stroke="#4a3728" strokeWidth="2" />
+              <circle cx={tx} cy={ty - 3} r="6" fill="#166534" opacity="0.8" />
+            </g>
+          );
+        })}
+
+        {/* ── Cloud ── */}
+        <g>
+          <circle cx={cloudX - 25} cy={cloudY + 5 + cloudPuff * 0.5} r="20" fill="#cbd5e1" opacity="0.7" />
+          <circle cx={cloudX} cy={cloudY - 5 + cloudPuff} r="28" fill="#e2e8f0" opacity="0.8" />
+          <circle cx={cloudX + 30} cy={cloudY + 3 + cloudPuff * 0.3} r="22" fill="#cbd5e1" opacity="0.75" />
+          <circle cx={cloudX + 55} cy={cloudY + 8} r="16" fill="#94a3b8" opacity="0.6" />
+          {/* Dark underside */}
+          <ellipse cx={cloudX + 10} cy={cloudY + 20} rx="50" ry="8" fill="#64748b" opacity="0.4" />
         </g>
-        <circle className="wc-sunCore" cx="58" cy="42" r="22" fill="#fbbf24" />
-        <circle cx="58" cy="42" r="14" fill="#fde047" />
 
-        {/* Sun heat rays down to ocean */}
-        <line x1="76" y1="58" x2="130" y2="220" stroke="#fde047" strokeWidth="1" strokeDasharray="4,6" opacity="0.5" />
-        <line x1="80" y1="54" x2="170" y2="210" stroke="#fde047" strokeWidth="1" strokeDasharray="4,6" opacity="0.4" />
+        {/* ── River / Lake ── */}
+        <path d={`M 0,${riverY} Q 150,${riverY - 8} 300,${riverY} Q 450,${riverY + 8} ${W},${riverY} L ${W},${H} L 0,${H} Z`}
+          fill="#1e3a5f" opacity="0.7" />
+        {/* River surface shimmer */}
+        {[0, 1, 2, 3, 4].map(i => {
+          const wx = 100 + i * 110 + Math.sin(tick * 0.04 + i) * 15;
+          return (
+            <line key={`wave-${i}`}
+              x1={wx} y1={riverY + 2} x2={wx + 30} y2={riverY + 2}
+              stroke="#60a5fa" strokeWidth="1" opacity="0.3" strokeLinecap="round" />
+          );
+        })}
 
-        {/* Ocean */}
-        <rect x="0" y="240" width="220" height="160" fill="url(#wc-ocean)" />
-        {/* Animated waves */}
-        <g className="wc-wave" clipPath="url(#wc-oceanClip)">
-          <path d="M -30,248 Q 0,238 30,248 Q 60,258 90,248 Q 120,238 150,248 Q 180,258 210,248 Q 240,238 270,248" fill="none" stroke="#93c5fd" strokeWidth="1.5" opacity="0.6" />
-          <path d="M -30,260 Q 0,250 30,260 Q 60,270 90,260 Q 120,250 150,260 Q 180,270 210,260 Q 240,250 270,260" fill="none" stroke="#60a5fa" strokeWidth="1" opacity="0.4" />
-        </g>
-        <defs><clipPath id="wc-oceanClip"><rect x="0" y="240" width="220" height="160" /></clipPath></defs>
-        <text x="110" y="310" textAnchor="middle" className="fill-blue-100 dark:fill-blue-200" fontSize="13" fontWeight="bold">Ocean</text>
-
-        {/* Evaporating particles (rising from ocean) */}
-        <circle className="wc-evapP" cx="90" cy="235" r="3" fill="#93c5fd" opacity="0.8" />
-        <circle className="wc-evapP2" cx="120" cy="238" r="2.5" fill="#bfdbfe" opacity="0.7" />
-        <circle className="wc-evapP3" cx="150" cy="232" r="3" fill="#93c5fd" opacity="0.8" />
-        <circle className="wc-evapP4" cx="105" cy="236" r="2" fill="#bfdbfe" opacity="0.7" />
-        <circle className="wc-evapP5" cx="135" cy="234" r="2.5" fill="#93c5fd" opacity="0.7" />
-        <circle className="wc-evapP6" cx="165" cy="237" r="2" fill="#bfdbfe" opacity="0.6" />
-        <circle className="wc-evapP7" cx="80" cy="233" r="3" fill="#93c5fd" opacity="0.8" />
-        <circle className="wc-evapP8" cx="180" cy="236" r="2.5" fill="#bfdbfe" opacity="0.7" />
-
-        {/* Evaporation label */}
-        <text x="95" y="185" className="fill-blue-600 dark:fill-blue-300" fontSize="11" fontWeight="bold" transform="rotate(-60,95,185)">Evaporation</text>
-        <text x="135" y="180" className="fill-blue-500 dark:fill-blue-400" fontSize="10" opacity="0.8">
-          <tspan>&#x2191;</tspan> <tspan>&#x2191;</tspan> <tspan>&#x2191;</tspan>
+        {/* Ground layer (underground) */}
+        <rect x="0" y={riverY + 15} width={W} height={H - riverY - 15} fill="url(#groundGrad)" opacity="0.5" />
+        {/* Groundwater flow arrows */}
+        <path d={`M 200,${riverY + 35} Q 300,${riverY + 50} 450,${riverY + 30}`}
+          fill="none" stroke="#6366f1" strokeWidth="1" opacity="0.3" strokeDasharray="4,6">
+          <animate attributeName="stroke-dashoffset" from="20" to="0" dur="3s" repeatCount="indefinite" />
+        </path>
+        <text x="320" y={riverY + 55} textAnchor="middle" fill="#818cf8" fontSize="8" opacity="0.5">
+          groundwater flow
         </text>
 
-        {/* Cloud 1 (main, grows as condensation happens) */}
-        <g className="wc-cloud1">
-          <ellipse cx="230" cy="72" rx="30" ry="16" className="fill-gray-200 dark:fill-gray-500" />
-          <ellipse cx="250" cy="62" rx="35" ry="18" className="fill-gray-100 dark:fill-gray-400" />
-          <ellipse cx="270" cy="72" rx="30" ry="14" className="fill-gray-200 dark:fill-gray-500" />
-          <ellipse cx="248" cy="78" rx="38" ry="12" className="fill-gray-300 dark:fill-gray-600" />
+        {/* ── Process labels ── */}
+        <g opacity="0.7">
+          {/* Evaporation */}
+          <text x="450" y={riverY - 30} textAnchor="middle" fill="#a5b4fc" fontSize="10" fontWeight="600">
+            Evaporation ↑
+          </text>
+          {/* Condensation */}
+          <text x={cloudX + 80} y={cloudY - 20} fill="#94a3b8" fontSize="10" fontWeight="600">
+            Condensation
+          </text>
+          {/* Precipitation */}
+          <text x={cloudX - 40} y={cloudY + 50} fill="#60a5fa" fontSize="10" fontWeight="600">
+            Rain ↓
+          </text>
+          {/* Runoff */}
+          <text x="130" y={riverY - 50} fill="#38bdf8" fontSize="9" fontWeight="600">
+            Runoff →
+          </text>
+          {/* Infiltration */}
+          <text x="280" y={riverY + 28} fill="#818cf8" fontSize="9" fontWeight="600">
+            Infiltration ↓
+          </text>
         </g>
-        <text x="250" y="48" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="10" fontWeight="bold">Condensation</text>
 
-        {/* Cloud 2 near mountain (orographic) */}
-        <g className="wc-cloud2">
-          <ellipse cx="405" cy="82" rx="28" ry="14" className="fill-gray-300 dark:fill-gray-500" />
-          <ellipse cx="420" cy="74" rx="30" ry="15" className="fill-gray-200 dark:fill-gray-400" />
-          <ellipse cx="440" cy="82" rx="25" ry="12" className="fill-gray-300 dark:fill-gray-500" />
-        </g>
+        {/* ── Water droplets ── */}
+        {drops.map(d => {
+          const color = phaseColor[d.phase];
+          const opacity = Math.min(1, d.age / 5) * (d.phase === 'ground' ? 0.5 : 0.8);
+          return (
+            <circle key={d.id} cx={d.x} cy={d.y} r={d.size} fill={color} opacity={opacity} />
+          );
+        })}
 
-        {/* Rain from cloud 1 */}
-        {[228,240,252,264,237,249,261].map((x, i) => (
-          <line key={`r1-${i}`}
-            className={`wc-rainD${i < 4 ? (i + 1 === 1 ? '' : (i + 1).toString()) : (i).toString()}`}
-            x1={x} y1={88} x2={x - 2} y2={96}
-            stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" />
-        ))}
-
-        {/* Rain from cloud 2 (orographic) */}
-        {[400,412,424,436,406,418,430].map((x, i) => (
-          <line key={`r2-${i}`}
-            className={`wc-rainD${i < 4 ? (i + 1 === 1 ? '' : (i + 1).toString()) : (i).toString()}`}
-            x1={x} y1={96} x2={x - 2} y2={104}
-            stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
-        ))}
-        <text x="312" y="100" className="fill-blue-700 dark:fill-blue-300" fontSize="11" fontWeight="bold">Precipitation</text>
-        <text x="470" y="74" className="fill-blue-600 dark:fill-blue-300" fontSize="10">Orographic rain</text>
-
-        {/* Land */}
-        <rect x="220" y="250" width="380" height="150" fill="url(#wc-ground)" />
-
-        {/* Mountain */}
-        <polygon points="360,250 435,120 510,250" fill="url(#wc-mtn)" />
-        <polygon points="435,120 415,155 455,155" className="fill-white dark:fill-gray-300" opacity="0.85" />
-        <text x="435" y="220" textAnchor="middle" className="fill-stone-200 dark:fill-stone-300" fontSize="10" fontWeight="600">Mountain</text>
-
-        {/* River flowing from mountain to ocean (animated) */}
-        <path d="M 470,250 Q 440,270 390,278 Q 340,286 290,280 Q 255,276 220,268"
-          fill="none" className="wc-river stroke-blue-400 dark:stroke-blue-500" strokeWidth="4" strokeLinecap="round" />
-        <text x="330" y="272" textAnchor="middle" className="fill-blue-200 dark:fill-blue-300" fontSize="11" fontWeight="600">River</text>
-
-        {/* Runoff label */}
-        <text x="505" y="248" className="fill-blue-600 dark:fill-blue-300" fontSize="10" fontWeight="bold">Runoff</text>
-        <path d="M 500,250 Q 490,258 475,254" fill="none" stroke="#3b82f6" strokeWidth="1.5" markerEnd="url(#wc-arw)" />
-
-        {/* Infiltration arrows */}
-        <line x1="310" y1="250" x2="310" y2="290" stroke="#60a5fa" strokeWidth="1.5" strokeDasharray="3,3" />
-        <line x1="350" y1="250" x2="350" y2="295" stroke="#60a5fa" strokeWidth="1.5" strokeDasharray="3,3" />
-        <text x="330" y="310" textAnchor="middle" className="fill-blue-400 dark:fill-blue-400" fontSize="10" fontWeight="bold">Infiltration</text>
-
-        {/* Groundwater layer */}
-        <rect x="220" y="340" width="380" height="30" className="fill-blue-400/20 dark:fill-blue-600/25" />
-        <text x="410" y="360" textAnchor="middle" className="fill-blue-500 dark:fill-blue-400" fontSize="10" fontWeight="600">Groundwater</text>
-
-        {/* Groundwater seep particles flowing toward ocean */}
-        <circle className="wc-gndP" cx="290" cy="350" r="2.5" fill="#60a5fa" />
-        <circle className="wc-gndP2" cx="310" cy="355" r="2" fill="#93c5fd" />
-        <circle className="wc-gndP3" cx="280" cy="358" r="2.5" fill="#60a5fa" />
-        <circle className="wc-gndP4" cx="300" cy="348" r="2" fill="#93c5fd" />
-
-        {/* Trees on land with transpiration */}
-        {[265, 530].map((x) => (
-          <g key={`t-${x}`}>
-            <line x1={x} y1={250} x2={x} y2={232} stroke="#92400e" strokeWidth="3" />
-            <circle cx={x} cy={226} r="10" className="fill-green-500 dark:fill-green-600" />
-            <circle cx={x - 5} cy={222} r="7" className="fill-green-400 dark:fill-green-500" />
-            <circle cx={x + 5} cy={222} r="7" className="fill-green-400 dark:fill-green-500" />
-          </g>
-        ))}
-        {/* Transpiration vapor */}
-        <circle className="wc-transp" cx="265" cy="216" r="2" fill="#86efac" opacity="0.6" />
-        <circle className="wc-transp2" cx="270" cy="214" r="1.5" fill="#86efac" opacity="0.5" />
-        <text x="255" y="198" className="fill-green-600 dark:fill-green-400" fontSize="9">Transpiration</text>
-
-        {/* Arrow marker */}
-        <defs>
-          <marker id="wc-arw" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
-          </marker>
-        </defs>
+        {/* Evaporation steam wisps (rising squiggles near river) */}
+        {[380, 430, 480, 530].map((sx, i) => {
+          const offset = Math.sin(tick * 0.05 + i * 1.5) * 8;
+          const yOff = (tick * 0.3 + i * 20) % 40;
+          return (
+            <path key={`steam-${i}`}
+              d={`M ${sx + offset},${riverY - 5 - yOff} Q ${sx + 5 + offset},${riverY - 15 - yOff} ${sx + offset},${riverY - 25 - yOff}`}
+              fill="none" stroke="#a5b4fc" strokeWidth="1" opacity={0.15 - yOff * 0.003}
+              strokeLinecap="round" />
+          );
+        })}
       </svg>
+
+      {/* Legend */}
+      <div className="flex flex-wrap justify-center gap-3 mt-2 text-xs">
+        {[
+          ['#a5b4fc', 'Water vapor (rising)'],
+          ['#e2e8f0', 'Cloud (condensed)'],
+          ['#60a5fa', 'Rain (falling)'],
+          ['#38bdf8', 'Surface runoff'],
+          ['#6366f1', 'Groundwater'],
+        ].map(([color, label]) => (
+          <span key={label} className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+            <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
+            {label}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

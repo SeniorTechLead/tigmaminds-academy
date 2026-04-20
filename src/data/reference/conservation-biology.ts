@@ -31,7 +31,7 @@ export const guide: ReferenceGuide = {
       interactive: {
         type: 'matching',
         props: {
-          title: 'Match each threat to its NE India example',
+          title: 'Match each threat to a real-world example',
           pairs: [
             ['Habitat loss', 'Forest conversion to tea plantations and rubber estates; shortened jhum fallow cycles'],
             ['Overexploitation', 'Hunting of hoolock gibbons and pangolins; overfishing of golden hilsa'],
@@ -48,7 +48,7 @@ export const guide: ReferenceGuide = {
       interactive: {
         type: 'matching',
         props: {
-          title: 'Match each IUCN category to its NE India species',
+          title: 'Match each IUCN category to an example species',
           pairs: [
             ['Critically Endangered (CR)', 'Pygmy hog — fewer than 250 individuals, found only in Assam grasslands'],
             ['Endangered (EN)', 'Indian one-horned rhinoceros — about 4,000 individuals'],
@@ -65,7 +65,7 @@ export const guide: ReferenceGuide = {
       beginnerContent: 'Protected areas are geographically defined spaces managed for the long-term conservation of nature and ecosystem services. India\'s protected area network includes **national parks** (strict protection, no human settlement or resource extraction allowed), **wildlife sanctuaries** (some regulated human activities permitted), **conservation reserves**, and **community reserves**. India has 106 national parks, 567 wildlife sanctuaries, and 99 conservation reserves, covering about 5.3% of the country\'s land area.\n\n**Biosphere reserves** are a broader concept — large areas that include a core zone of strict protection, a buffer zone with limited human activity, and a transition zone where sustainable development is practiced. India has 18 biosphere reserves, including the Nokrek Biosphere Reserve in Meghalaya (protecting wild citrus species and the hoolock gibbon) and the Manas Biosphere Reserve in Assam.\n\nNE India has an impressive protected area network: Kaziranga National Park (UNESCO World Heritage Site, home to two-thirds of the world\'s Indian rhinos), Manas National Park (another UNESCO site, with tigers, elephants, golden langurs, and pygmy hogs), Namdapha National Park in Arunachal Pradesh (one of the largest protected areas in eastern India, spanning 1,985 sq km across tropical to alpine habitats), and Keibul Lamjao National Park in Manipur (the world\'s only floating national park, protecting the sangai deer). However, protected areas alone are not sufficient — animals do not respect park boundaries, and isolated parks without connecting corridors become ecological islands where populations dwindle over time.',
     },
     {
-      title: 'Conservation Success Stories in NE India',
+      title: 'Conservation Success Stories',
       interactive: {
         type: 'did-you-know',
         props: {

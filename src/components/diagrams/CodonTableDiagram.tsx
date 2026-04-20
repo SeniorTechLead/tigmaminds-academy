@@ -1,114 +1,123 @@
-export default function CodonTableDiagram() {
-  // Simplified codon table: show key codons grouped by amino acid property
-  const codons: { codon: string; aa: string; type: 'start' | 'stop' | 'nonpolar' | 'polar' | 'charged' }[] = [
-    { codon: 'AUG', aa: 'Met', type: 'start' },
-    { codon: 'UUU', aa: 'Phe', type: 'nonpolar' },
-    { codon: 'UUA', aa: 'Leu', type: 'nonpolar' },
-    { codon: 'GUU', aa: 'Val', type: 'nonpolar' },
-    { codon: 'GCU', aa: 'Ala', type: 'nonpolar' },
-    { codon: 'AUU', aa: 'Ile', type: 'nonpolar' },
-    { codon: 'UCU', aa: 'Ser', type: 'polar' },
-    { codon: 'ACU', aa: 'Thr', type: 'polar' },
-    { codon: 'UAU', aa: 'Tyr', type: 'polar' },
-    { codon: 'AAU', aa: 'Asn', type: 'polar' },
-    { codon: 'CAA', aa: 'Gln', type: 'polar' },
-    { codon: 'UGU', aa: 'Cys', type: 'polar' },
-    { codon: 'GAU', aa: 'Asp', type: 'charged' },
-    { codon: 'GAA', aa: 'Glu', type: 'charged' },
-    { codon: 'AAA', aa: 'Lys', type: 'charged' },
-    { codon: 'CGU', aa: 'Arg', type: 'charged' },
-    { codon: 'CAU', aa: 'His', type: 'charged' },
-    { codon: 'UGG', aa: 'Trp', type: 'nonpolar' },
-    { codon: 'GGU', aa: 'Gly', type: 'nonpolar' },
-    { codon: 'CCU', aa: 'Pro', type: 'nonpolar' },
-    { codon: 'UAA', aa: 'Stop', type: 'stop' },
-    { codon: 'UAG', aa: 'Stop', type: 'stop' },
-    { codon: 'UGA', aa: 'Stop', type: 'stop' },
-  ];
+import { useState } from 'react';
 
-  const colorMap = {
-    start: { bg: 'fill-emerald-200 dark:fill-emerald-800', text: 'fill-emerald-800 dark:fill-emerald-200' },
-    stop: { bg: 'fill-red-200 dark:fill-red-800', text: 'fill-red-800 dark:fill-red-200' },
-    nonpolar: { bg: 'fill-amber-100 dark:fill-amber-900/40', text: 'fill-amber-800 dark:fill-amber-300' },
-    polar: { bg: 'fill-blue-100 dark:fill-blue-900/40', text: 'fill-blue-800 dark:fill-blue-300' },
-    charged: { bg: 'fill-purple-100 dark:fill-purple-900/40', text: 'fill-purple-800 dark:fill-purple-300' },
+// ── Decode a Codon ────────────────────────────────────────────
+// Interactive codon lookup. Type or click 3 DNA/RNA bases, see
+// which amino acid they code for. Color-coded by amino acid
+// class. Highlights start/stop codons.
+
+const CODON_MAP: Record<string, string> = {
+  UUU: 'Phe', UUC: 'Phe', UUA: 'Leu', UUG: 'Leu',
+  CUU: 'Leu', CUC: 'Leu', CUA: 'Leu', CUG: 'Leu',
+  AUU: 'Ile', AUC: 'Ile', AUA: 'Ile', AUG: 'Met',
+  GUU: 'Val', GUC: 'Val', GUA: 'Val', GUG: 'Val',
+  UCU: 'Ser', UCC: 'Ser', UCA: 'Ser', UCG: 'Ser',
+  CCU: 'Pro', CCC: 'Pro', CCA: 'Pro', CCG: 'Pro',
+  ACU: 'Thr', ACC: 'Thr', ACA: 'Thr', ACG: 'Thr',
+  GCU: 'Ala', GCC: 'Ala', GCA: 'Ala', GCG: 'Ala',
+  UAU: 'Tyr', UAC: 'Tyr', UAA: 'STOP', UAG: 'STOP',
+  CAU: 'His', CAC: 'His', CAA: 'Gln', CAG: 'Gln',
+  AAU: 'Asn', AAC: 'Asn', AAA: 'Lys', AAG: 'Lys',
+  GAU: 'Asp', GAC: 'Asp', GAA: 'Glu', GAG: 'Glu',
+  UGU: 'Cys', UGC: 'Cys', UGA: 'STOP', UGG: 'Trp',
+  CGU: 'Arg', CGC: 'Arg', CGA: 'Arg', CGG: 'Arg',
+  AGU: 'Ser', AGC: 'Ser', AGA: 'Arg', AGG: 'Arg',
+  GGU: 'Gly', GGC: 'Gly', GGA: 'Gly', GGG: 'Gly',
+};
+
+const AA_COLOR: Record<string, string> = {
+  Phe: '#fb923c', Leu: '#fb923c', Ile: '#fb923c', Val: '#fb923c',
+  Met: '#facc15', Ala: '#fb923c', Trp: '#fb923c',
+  Ser: '#60a5fa', Thr: '#60a5fa', Asn: '#60a5fa', Gln: '#60a5fa', Cys: '#60a5fa', Tyr: '#60a5fa',
+  Gly: '#4ade80', Pro: '#4ade80',
+  Asp: '#f87171', Glu: '#f87171',
+  Lys: '#a78bfa', Arg: '#a78bfa', His: '#a78bfa',
+  STOP: '#ef4444',
+};
+
+const BASES = ['U', 'C', 'A', 'G'] as const;
+
+export default function CodonTableDiagram() {
+  const [codon, setCodon] = useState(['A', 'U', 'G']);
+  const codonStr = codon.join('');
+  const aa = CODON_MAP[codonStr] || '?';
+  const aaColor = AA_COLOR[aa] || '#94a3b8';
+
+  const setBase = (idx: number, base: string) => {
+    const next = [...codon];
+    next[idx] = base;
+    setCodon(next);
   };
 
-  const cols = 5;
-  const cellW = 90;
-  const cellH = 36;
-  const startX = 25;
-  const startY = 55;
-
   return (
-    <div className="my-4">
-      <svg viewBox="0 0 525 445" className="w-full max-w-lg mx-auto" role="img" aria-label="Simplified codon table">
-        {/* Title */}
-        <text x="250" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
-          Genetic Code: Codons → Amino Acids
-        </text>
+    <div className="bg-gradient-to-b from-slate-50 via-blue-50 to-emerald-50 dark:from-slate-950 dark:via-blue-950 dark:to-emerald-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <p className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider mb-3">
+        Decode a Codon
+      </p>
 
-        {/* Column headers */}
-        <text x={startX + cellW / 2} y={startY - 5} textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10" fontWeight="bold">Codon</text>
-        <text x={startX + cellW / 2} y={startY + 5} textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">→ AA</text>
-        {[1, 2, 3, 4].map(c => (
-          <g key={c}>
-            <text x={startX + c * (cellW + 5) + cellW / 2} y={startY - 5} textAnchor="middle"
-              className="fill-gray-500 dark:fill-gray-400" fontSize="10" fontWeight="bold">Codon</text>
-            <text x={startX + c * (cellW + 5) + cellW / 2} y={startY + 5} textAnchor="middle"
-              className="fill-gray-500 dark:fill-gray-400" fontSize="10">→ AA</text>
-          </g>
-        ))}
-
-        {/* Codon grid */}
-        {codons.map((c, i) => {
-          const col = i % cols;
-          const row = Math.floor(i / cols);
-          const x = startX + col * (cellW + 5);
-          const y = startY + 15 + row * (cellH + 4);
-          const colors = colorMap[c.type];
-
-          return (
-            <g key={c.codon + i}>
-              <rect x={x} y={y} width={cellW} height={cellH} rx="5" className={colors.bg}
-                stroke="currentColor" strokeWidth="0.5" opacity="0.9" />
-              <text x={x + 30} y={y + 15} textAnchor="middle" className={colors.text} fontSize="12" fontWeight="bold" fontFamily="monospace">
-                {c.codon}
-              </text>
-              <text x={x + 30} y={y + 29} textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10">
-                → {c.aa}
-              </text>
-              {c.type === 'start' && (
-                <text x={x + 70} y={y + 22} textAnchor="middle" className="fill-emerald-600 dark:fill-emerald-400" fontSize="10" fontWeight="bold">START</text>
-              )}
-              {c.type === 'stop' && (
-                <text x={x + 70} y={y + 22} textAnchor="middle" className="fill-red-600 dark:fill-red-400" fontSize="10" fontWeight="bold">STOP</text>
-              )}
-            </g>
-          );
-        })}
-
-        {/* Legend */}
-        <g transform="translate(25, 360)">
-          {[
-            { label: 'Start', color: 'fill-emerald-300 dark:fill-emerald-700' },
-            { label: 'Stop', color: 'fill-red-300 dark:fill-red-700' },
-            { label: 'Nonpolar', color: 'fill-amber-200 dark:fill-amber-800' },
-            { label: 'Polar', color: 'fill-blue-200 dark:fill-blue-800' },
-            { label: 'Charged', color: 'fill-purple-200 dark:fill-purple-800' },
-          ].map((item, i) => (
-            <g key={item.label} transform={`translate(${i * 95}, 0)`}>
-              <rect x="0" y="0" width="14" height="14" rx="3" className={item.color} />
-              <text x="18" y="12" className="fill-gray-600 dark:fill-gray-300" fontSize="10">{item.label}</text>
-            </g>
+      {/* The codon picker */}
+      <div className="flex flex-col items-center gap-4">
+        <div className="flex items-center justify-center gap-2">
+          {[0, 1, 2].map(idx => (
+            <div key={idx} className="flex flex-col items-center gap-1">
+              <span className="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                {idx === 0 ? '1st' : idx === 1 ? '2nd' : '3rd'}
+              </span>
+              <div className="flex flex-col gap-0.5">
+                {BASES.map(b => (
+                  <button key={b}
+                    onClick={() => setBase(idx, b)}
+                    className={`w-9 h-9 rounded font-mono font-bold text-sm transition ${
+                      codon[idx] === b
+                        ? 'bg-purple-500 text-white shadow'
+                        : 'bg-white/70 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-purple-200 dark:hover:bg-purple-800'
+                    }`}>
+                    {b}
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
-        </g>
+        </div>
 
-        {/* Note */}
-        <text x="250" y="395" textAnchor="middle" className="fill-gray-400 dark:fill-gray-500" fontSize="10">
-          Each codon = 3 mRNA bases. 64 codons encode 20 amino acids + Stop.
-        </text>
-      </svg>
+        {/* Current codon big */}
+        <div className="text-3xl font-mono font-bold text-purple-700 dark:text-purple-300 tracking-wider">
+          {codonStr}
+        </div>
+
+        {/* Arrow */}
+        <div className="text-2xl text-gray-400">↓</div>
+
+        {/* Amino acid result */}
+        <div
+          className="px-6 py-4 rounded-xl shadow-lg text-white font-bold text-2xl"
+          style={{ backgroundColor: aaColor }}
+        >
+          {aa}
+        </div>
+
+        {/* Context hint */}
+        {aa === 'Met' && codonStr === 'AUG' && (
+          <p className="text-xs text-amber-700 dark:text-amber-300 font-semibold">
+            ⭐ AUG is the START codon — always the first codon of every protein.
+          </p>
+        )}
+        {aa === 'STOP' && (
+          <p className="text-xs text-rose-700 dark:text-rose-300 font-semibold">
+            ⛔ STOP codon — tells the ribosome to release the finished protein.
+          </p>
+        )}
+      </div>
+
+      {/* Facts */}
+      <div className="mt-4 p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-white/10">
+        <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+          <span className="font-semibold text-blue-700 dark:text-blue-300">64 possible codons</span> code for just{' '}
+          <span className="font-semibold text-emerald-700 dark:text-emerald-300">20 amino acids</span> (plus stop signals) — so
+          most amino acids have multiple codons. This <strong>redundancy</strong> protects against some mutations:
+          if a single base changes but the codon still codes for the same amino acid, the protein is unaffected.
+          This is called a <strong>silent mutation</strong>.
+        </p>
+      </div>
     </div>
   );
 }

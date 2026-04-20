@@ -11,8 +11,14 @@ function highlightMatch(text: string, query: string): React.ReactNode {
   const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
   const parts = text.split(regex);
   if (parts.length === 1) return text;
-  return parts.map((part, i) =>
-    regex.test(part) ? <mark key={i} className="bg-amber-200 dark:bg-amber-700/50 text-inherit rounded px-0.5">{part}</mark> : part
+  return (
+    <>
+      {parts.map((part, i) =>
+        regex.test(part)
+          ? <mark key={i} className="bg-amber-200 dark:bg-amber-700/50 text-inherit rounded px-0.5">{part}</mark>
+          : <span key={i}>{part}</span>
+      )}
+    </>
   );
 }
 
@@ -60,8 +66,42 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
   const [isExpanded, setIsExpanded] = useState(expandedSlug === guide.slug);
   const pendingScrollRef = useRef<number | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [activeSectionId, setActiveSectionId] = useState<string | null>(null);
   const [showFloatingNav, setShowFloatingNav] = useState(false);
+  const [justCopied, setJustCopied] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  const buildShareUrl = (includeSection: boolean) => {
+    const base = `${window.location.origin}/reference/${guide.slug}`;
+    return includeSection && activeSectionId ? `${base}#${activeSectionId}` : base;
+  };
+
+  const copyToClipboard = async (url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    setJustCopied(true);
+    setTimeout(() => setJustCopied(false), 1800);
+  };
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Header button copies the guide URL (no section — user is at the top)
+    copyToClipboard(buildShareUrl(false));
+  };
+
+  const handleShareSection = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Floating button copies guide + section anchor when available
+    copyToClipboard(buildShareUrl(true));
+  };
 
   // Re-expand when expandedSlug changes
   useEffect(() => {
@@ -141,7 +181,10 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
         for (const entry of entries) {
           if (entry.isIntersecting) {
             const idx = ids.indexOf(entry.target.id);
-            if (idx >= 0) setActiveSection(allSections[idx].title);
+            if (idx >= 0) {
+              setActiveSection(allSections[idx].title);
+              setActiveSectionId(entry.target.id);
+            }
           }
         }
       },
@@ -225,6 +268,36 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
             </div>
           )}
         </div>
+
+        {/* Share button */}
+        <button
+          onClick={handleShare}
+          onKeyDown={(e) => e.stopPropagation()}
+          className={`flex-shrink-0 flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
+            justCopied
+              ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300'
+              : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-200'
+          }`}
+          title={justCopied ? 'Link copied!' : 'Copy shareable link'}
+          aria-label={justCopied ? 'Link copied' : 'Copy shareable link'}
+        >
+          {justCopied ? (
+            <>
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span className="hidden sm:inline">Copied</span>
+            </>
+          ) : (
+            <>
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+              </svg>
+              <span className="hidden sm:inline">Share</span>
+            </>
+          )}
+        </button>
+
         <svg
           className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-300 ${
             isExpanded ? 'rotate-180' : ''
@@ -270,7 +343,7 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
           {/* All sections — understand + build combined */}
           <div className="space-y-1">
             {(isSignedIn || (searchQuery && searchQuery.length >= 2) ? allSections : allSections.slice(0, 1)).map((section, i) => (
-              <div key={i} id={section.id || `section-${guide.slug}-${i}`} className="scroll-mt-20">
+              <div key={section.id || `${guide.slug}-${i}`} id={section.id || `section-${guide.slug}-${i}`} className="scroll-mt-20">
                 <SectionRenderer section={section} level={level} searchQuery={searchQuery} />
               </div>
             ))}
@@ -308,16 +381,39 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
               <p className="text-xs text-amber-600 dark:text-amber-400 mt-0.5 truncate">{activeSection}</p>
             )}
           </div>
-          {/* Back to top button */}
-          <button
-            onClick={() => document.getElementById(`ref-${guide.slug}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-            className="bg-amber-500 hover:bg-amber-600 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-xl transition-colors"
-            title="Back to top of guide"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Share current section */}
+            <button
+              onClick={handleShareSection}
+              className={`rounded-full w-10 h-10 flex items-center justify-center shadow-xl transition-colors ${
+                justCopied
+                  ? 'bg-emerald-500 text-white'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
+              }`}
+              title={justCopied ? 'Link copied!' : activeSectionId ? `Copy link to section: ${activeSection}` : 'Copy link to this guide'}
+              aria-label={justCopied ? 'Link copied' : 'Copy shareable link to current section'}
+            >
+              {justCopied ? (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+              )}
+            </button>
+            {/* Back to top button */}
+            <button
+              onClick={() => document.getElementById(`ref-${guide.slug}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              className="bg-amber-500 hover:bg-amber-600 text-white rounded-full w-10 h-10 flex items-center justify-center shadow-xl transition-colors"
+              title="Back to top of guide"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
       )}
     </div>

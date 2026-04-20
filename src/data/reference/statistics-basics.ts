@@ -52,6 +52,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Mean, Median, and Mode',
       beginnerContent:
+        'Drag the outlier slider in the diagram above. Watch the mean swing wildly as one value moves, while the median barely budges. That single observation explains why the median is often a better summary for lopsided data — household incomes, house prices, CEO salaries. One billionaire inflates the mean; the median stays honest.\n\n' +
         'These three values each try to answer "what is a typical value?" but in different ways. ' +
         'The *mean* (average) adds everything up and divides by the count. For scores 70, 80, 80, ' +
         '90, 100, the mean is (70+80+80+90+100)/5 = 84. The *median* is the middle value when you ' +
@@ -85,6 +86,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Standard Deviation — How Spread Out?',
       beginnerContent:
+        'Click through the datasets in the diagram above — Tight, Moderate, Wide, Extreme. Same mean (~150 cm), wildly different spreads. The shaded ±1σ band tells you how much variation is normal. **The mean tells you where. The standard deviation tells you how much you can trust it.**\n\n' +
         'Knowing the average is not enough. Two classes can have the same average score of 80, ' +
         'but one class might have everyone between 75 and 85, while the other has scores from 40 ' +
         'to 100. Standard deviation (SD) measures this spread. A small SD means values cluster ' +
@@ -116,6 +118,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Histograms — Seeing the Shape of Data',
       beginnerContent:
+        'Adjust the bin count in the diagram above. Fewer bins = smoother, less detail. More bins = spikier, more detail. Finding the right bin count is an art — too few hides the shape, too many buries it in noise. Every histogram is a negotiation between signal and noise.\n\n' +
         'A histogram groups numbers into bins (ranges) and shows how many values fall into each bin. ' +
         'Imagine sorting 100 exam scores into bins: 0-10, 10-20, ..., 90-100. Then you draw a bar ' +
         'for each bin, where the bar height equals the count. The shape tells a story: a bell shape ' +
@@ -223,6 +226,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Correlation — When Two Things Move Together',
       beginnerContent:
+        'Slide through the correlation values in the diagram above. At r = +1, every point sits on a perfect line. At r = 0, the scatter is pure noise. At r = −1, the perfect inverse. Notice: correlation measures LINEAR patterns — curved relationships can have r ≈ 0 even when two variables are tightly linked. **Never trust a correlation number without looking at the scatter.**\n\n' +
         'Correlation measures whether two variables increase or decrease together. It ranges from ' +
         '-1 to +1. A correlation of +1 means they move perfectly together (more study hours = ' +
         'higher scores). A correlation of -1 means one goes up as the other goes down (more ' +

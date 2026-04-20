@@ -1,83 +1,214 @@
-export default function SkeletonMuscleDiagram() {
-  return (
-    <div className="my-4">
-      <svg viewBox="0 0 430 345" className="w-full max-w-md mx-auto" role="img" aria-label="Bicep and tricep antagonistic muscle pair diagram">
-        {/* Title */}
-        <text x="200" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Antagonistic Muscle Pair: Bicep &amp; Tricep</text>
+import { useState, useEffect } from 'react';
 
-        {/* === State 1: Bicep contracted (arm bent) === */}
-        <text x="100" y="42" textAnchor="middle" className="fill-blue-600 dark:fill-blue-300" fontSize="12" fontWeight="600">Flexion (bending)</text>
+// ── The Antagonist Pair ──────────────────────────────────────
+// Animated arm flexion: when bicep contracts (shortens, bulges),
+// tricep relaxes (lengthens). Forearm swings up. When tricep
+// contracts, bicep relaxes, arm extends. Classic antagonistic
+// muscle pair demo. Click to manually flex.
+
+export default function SkeletonMuscleDiagram() {
+  const [tick, setTick] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [autoFlex, setAutoFlex] = useState(true);
+  const [manualFlex, setManualFlex] = useState(0); // 0 extended, 1 flexed
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(() => setTick(t => t + 1), 40);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  const W = 440, H = 380;
+
+  // Flexion amount (0 = extended, 1 = fully flexed)
+  const flex = autoFlex
+    ? 0.5 + Math.sin(tick * 0.04) * 0.5
+    : manualFlex;
+
+  // Upper arm is fixed (vertical, left side)
+  const shoulderX = 220, shoulderY = 60;
+  const upperArmLength = 130;
+  const elbowX = shoulderX, elbowY = shoulderY + upperArmLength;
+
+  // Forearm rotates around elbow
+  // At flex=0: forearm points down (extended). At flex=1: forearm points up-right (flexed)
+  const forearmAngle = (Math.PI / 2) + flex * (Math.PI * 0.75); // 90° to 225°
+  const forearmLength = 120;
+  const handX = elbowX + Math.cos(forearmAngle - Math.PI / 2) * forearmLength;
+  const handY = elbowY + Math.sin(forearmAngle - Math.PI / 2) * forearmLength;
+
+  // Wait, simpler: at flex=0, forearm extends down; at flex=1, it's horizontal or pointing up
+  // Let's redo with angle from vertical
+  // extended: forearm straight down (angle 0 from vertical = pointing down)
+  // flexed: forearm pointing right-up (angle ~135°)
+  const armAngle = -Math.PI / 2 + flex * (Math.PI * 0.75); // from straight-down to up-right
+  const hx = elbowX + Math.cos(armAngle) * forearmLength;
+  const hy = elbowY + Math.sin(armAngle) * forearmLength;
+
+  // Bicep position — on the front of upper arm, bulges when contracted (flex high)
+  const bicepBulge = 12 + flex * 14;
+  const bicepY = shoulderY + upperArmLength * 0.5;
+
+  // Tricep on the back of upper arm, bulges when extended (flex low)
+  const tricepBulge = 12 + (1 - flex) * 14;
+
+  return (
+    <div className="bg-gradient-to-b from-rose-50 via-orange-50 to-amber-50 dark:from-rose-950 dark:via-orange-950 dark:to-amber-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider">
+          The Antagonist Pair
+        </p>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-orange-700 dark:text-orange-300 font-mono">
+            Flexion: {Math.round(flex * 100)}%
+          </span>
+          <button
+            onClick={() => setAutoFlex(!autoFlex)}
+            className={`text-xs px-2 py-0.5 rounded transition ${
+              autoFlex
+                ? 'bg-rose-500/20 text-rose-700 dark:text-rose-300 ring-1 ring-rose-500/50'
+                : 'bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20'
+            }`}
+          >
+            {autoFlex ? 'Auto ●' : 'Manual'}
+          </button>
+          <button
+            onClick={() => setPaused(!paused)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            {paused ? '▶' : '⏸'}
+          </button>
+        </div>
+      </div>
+
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" role="img"
+        aria-label="Animated arm flexion showing bicep contracting while tricep relaxes">
+
+        {/* Shoulder joint */}
+        <circle cx={shoulderX} cy={shoulderY} r={18}
+          fill="#e5e7eb" stroke="#64748b" strokeWidth="2" opacity="0.8" />
+        <text x={shoulderX + 25} y={shoulderY + 4} className="fill-gray-600 dark:fill-gray-300" fontSize="9" fontWeight="600">
+          Shoulder
+        </text>
 
         {/* Upper arm bone (humerus) */}
-        <line x1="50" y1="70" x2="50" y2="180" className="stroke-gray-300 dark:stroke-gray-500" strokeWidth="10" strokeLinecap="round" />
-        {/* Forearm bone (bent up) */}
-        <line x1="50" y1="180" x2="130" y2="110" className="stroke-gray-300 dark:stroke-gray-500" strokeWidth="8" strokeLinecap="round" />
-        {/* Joint */}
-        <circle cx="50" cy="180" r="8" className="fill-gray-200 dark:fill-gray-600" stroke="#6b7280" strokeWidth="1.5" />
+        <rect x={shoulderX - 6} y={shoulderY} width={12} height={upperArmLength}
+          fill="#f3f4f6" stroke="#9ca3af" strokeWidth="2" rx={6} />
 
-        {/* Bicep (contracted - short and thick) */}
-        <path d="M 45,80 Q 25,120 30,140 Q 35,155 50,160 Q 65,155 70,140 Q 75,120 55,80 Z"
-          className="fill-red-400 dark:fill-red-600" opacity="0.8" stroke="#dc2626" strokeWidth="1" />
-        <text x="50" y="128" textAnchor="middle" className="fill-red-900 dark:fill-red-100" fontSize="10" fontWeight="bold">Bicep</text>
-        <text x="50" y="140" textAnchor="middle" className="fill-red-800 dark:fill-red-200" fontSize="10">(contracts)</text>
+        {/* Bicep (front) — bulges when flexed */}
+        <ellipse
+          cx={shoulderX - 22 - bicepBulge * 0.3}
+          cy={bicepY}
+          rx={bicepBulge}
+          ry={upperArmLength * 0.35}
+          fill="#dc2626"
+          stroke="#991b1b"
+          strokeWidth="1.5"
+          opacity="0.85"
+        />
+        {/* Muscle fiber hint */}
+        {[0, 1, 2, 3].map(i => (
+          <line key={`bf-${i}`}
+            x1={shoulderX - 22 - bicepBulge * 0.3 - bicepBulge + 2}
+            y1={bicepY - upperArmLength * 0.3 + i * (upperArmLength * 0.2)}
+            x2={shoulderX - 22 - bicepBulge * 0.3 + bicepBulge - 2}
+            y2={bicepY - upperArmLength * 0.3 + i * (upperArmLength * 0.2)}
+            stroke="#7f1d1d" strokeWidth="0.5" opacity="0.5" />
+        ))}
 
-        {/* Tricep (relaxed - long and thin) */}
-        <path d="M 55,80 Q 65,120 63,150 Q 60,170 55,180 Q 50,170 48,150 Q 46,120 55,80 Z"
-          className="fill-blue-300 dark:fill-blue-700" opacity="0.6" stroke="#3b82f6" strokeWidth="1" />
-        <text x="80" y="165" className="fill-blue-700 dark:fill-blue-200" fontSize="10">Tricep</text>
-        <text x="80" y="177" className="fill-blue-600 dark:fill-blue-300" fontSize="10">(relaxes)</text>
+        <text x={shoulderX - 55 - bicepBulge} y={bicepY - 30} className="fill-rose-700 dark:fill-rose-300" fontSize="9" fontWeight="600">
+          Bicep
+        </text>
+        <text x={shoulderX - 55 - bicepBulge} y={bicepY - 18} className="fill-rose-600 dark:fill-rose-400" fontSize="7">
+          {flex > 0.55 ? '▼ CONTRACTED' : flex < 0.45 ? 'relaxed' : 'contracting...'}
+        </text>
+
+        {/* Tricep (back) — bulges when extended */}
+        <ellipse
+          cx={shoulderX + 22 + tricepBulge * 0.3}
+          cy={bicepY}
+          rx={tricepBulge}
+          ry={upperArmLength * 0.35}
+          fill="#dc2626"
+          stroke="#991b1b"
+          strokeWidth="1.5"
+          opacity="0.85"
+        />
+        {[0, 1, 2, 3].map(i => (
+          <line key={`tf-${i}`}
+            x1={shoulderX + 22 + tricepBulge * 0.3 - tricepBulge + 2}
+            y1={bicepY - upperArmLength * 0.3 + i * (upperArmLength * 0.2)}
+            x2={shoulderX + 22 + tricepBulge * 0.3 + tricepBulge - 2}
+            y2={bicepY - upperArmLength * 0.3 + i * (upperArmLength * 0.2)}
+            stroke="#7f1d1d" strokeWidth="0.5" opacity="0.5" />
+        ))}
+
+        <text x={shoulderX + 50} y={bicepY - 30} className="fill-rose-700 dark:fill-rose-300" fontSize="9" fontWeight="600">
+          Tricep
+        </text>
+        <text x={shoulderX + 50} y={bicepY - 18} className="fill-rose-600 dark:fill-rose-400" fontSize="7">
+          {flex < 0.45 ? '▼ CONTRACTED' : flex > 0.55 ? 'relaxed' : 'relaxing...'}
+        </text>
+
+        {/* Elbow joint */}
+        <circle cx={elbowX} cy={elbowY} r={10}
+          fill="#e5e7eb" stroke="#64748b" strokeWidth="2" />
+        <text x={elbowX + 15} y={elbowY + 3} className="fill-gray-600 dark:fill-gray-300" fontSize="8">Elbow (hinge)</text>
+
+        {/* Forearm bone */}
+        <line x1={elbowX} y1={elbowY} x2={hx} y2={hy}
+          stroke="#9ca3af" strokeWidth="12" strokeLinecap="round" />
+        <line x1={elbowX} y1={elbowY} x2={hx} y2={hy}
+          stroke="#f3f4f6" strokeWidth="8" strokeLinecap="round" />
 
         {/* Hand */}
-        <circle cx="135" cy="105" r="10" className="fill-amber-200 dark:fill-amber-700" stroke="#d97706" strokeWidth="1" />
-        <text x="148" y="108" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Hand</text>
+        <circle cx={hx} cy={hy} r={12}
+          fill="#fecaca" stroke="#fb7185" strokeWidth="1.5" opacity="0.9" />
 
-        {/* Movement arrow */}
-        <path d="M 150,130 Q 145,115 140,105" className="stroke-green-500" strokeWidth="2" fill="none" />
-        <polygon points="138,110 140,102 145,112" className="fill-green-500" />
+        {/* Tendon connection visualization — bicep tendon to forearm */}
+        {flex > 0.3 && (
+          <line
+            x1={shoulderX - 22 - bicepBulge * 0.3 + bicepBulge * 0.5}
+            y1={bicepY + upperArmLength * 0.3}
+            x2={elbowX - 2 + Math.cos(armAngle) * 20}
+            y2={elbowY + 2 + Math.sin(armAngle) * 20}
+            stroke="#facc15" strokeWidth="1.5" opacity={0.5 + flex * 0.3} strokeDasharray="3,2" />
+        )}
 
-        {/* Shoulder */}
-        <circle cx="50" cy="70" r="6" className="fill-gray-200 dark:fill-gray-600" stroke="#6b7280" strokeWidth="1" />
-        <text x="50" y="62" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Shoulder</text>
-
-        {/* === State 2: Tricep contracted (arm straight) === */}
-        <text x="300" y="42" textAnchor="middle" className="fill-blue-600 dark:fill-blue-300" fontSize="12" fontWeight="600">Extension (straightening)</text>
-
-        {/* Upper arm bone */}
-        <line x1="260" y1="70" x2="260" y2="180" className="stroke-gray-300 dark:stroke-gray-500" strokeWidth="10" strokeLinecap="round" />
-        {/* Forearm bone (straight down) */}
-        <line x1="260" y1="180" x2="260" y2="260" className="stroke-gray-300 dark:stroke-gray-500" strokeWidth="8" strokeLinecap="round" />
-        {/* Joint */}
-        <circle cx="260" cy="180" r="8" className="fill-gray-200 dark:fill-gray-600" stroke="#6b7280" strokeWidth="1.5" />
-
-        {/* Bicep (relaxed - long and thin) */}
-        <path d="M 255,80 Q 245,120 247,150 Q 250,170 255,180 Q 260,170 262,150 Q 264,120 258,80 Z"
-          className="fill-red-300 dark:fill-red-800" opacity="0.6" stroke="#dc2626" strokeWidth="1" />
-        <text x="230" y="128" textAnchor="end" className="fill-red-600 dark:fill-red-300" fontSize="10">Bicep</text>
-        <text x="230" y="140" textAnchor="end" className="fill-red-500 dark:fill-red-400" fontSize="10">(relaxes)</text>
-
-        {/* Tricep (contracted - short and thick) */}
-        <path d="M 265,80 Q 290,110 285,140 Q 280,155 265,160 Q 250,155 247,140 Q 242,110 265,80 Z"
-          className="fill-blue-400 dark:fill-blue-600" opacity="0.8" stroke="#3b82f6" strokeWidth="1" />
-        <text x="300" y="128" className="fill-blue-800 dark:fill-blue-100" fontSize="10" fontWeight="bold">Tricep</text>
-        <text x="300" y="140" className="fill-blue-700 dark:fill-blue-200" fontSize="10">(contracts)</text>
-
-        {/* Hand */}
-        <circle cx="260" cy="268" r="10" className="fill-amber-200 dark:fill-amber-700" stroke="#d97706" strokeWidth="1" />
-
-        {/* Movement arrow */}
-        <path d="M 275,240 Q 272,252 270,262" className="stroke-green-500" strokeWidth="2" fill="none" />
-        <polygon points="267,258 270,266 275,256" className="fill-green-500" />
-
-        {/* Shoulder */}
-        <circle cx="260" cy="70" r="6" className="fill-gray-200 dark:fill-gray-600" stroke="#6b7280" strokeWidth="1" />
-        <text x="260" y="62" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Shoulder</text>
-
-        {/* Divider */}
-        <line x1="195" y1="35" x2="195" y2="285" className="stroke-gray-200 dark:stroke-gray-700" strokeWidth="1" strokeDasharray="4,4" />
-
-        {/* Bottom note */}
-        <text x="200" y="295" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">When one muscle contracts, the other relaxes — they work as a pair</text>
+        {/* Status */}
+        <text x={W / 2} y={H - 60} textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="11" fontWeight="bold">
+          {flex > 0.7 ? '💪 FLEXED' : flex < 0.3 ? '↓ EXTENDED' : flex > 0.5 ? 'Flexing...' : 'Extending...'}
+        </text>
+        <text x={W / 2} y={H - 42} textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="9">
+          Bicep contracts → forearm swings up. Tricep contracts → forearm swings down.
+        </text>
+        <text x={W / 2} y={H - 28} textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="8">
+          Muscles only pull, never push — so every joint needs an antagonistic pair
+        </text>
       </svg>
+
+      {/* Manual control slider */}
+      {!autoFlex && (
+        <div className="flex items-center justify-center gap-2 mt-2">
+          <span className="text-xs text-gray-600 dark:text-gray-400">Extended</span>
+          <input type="range" min="0" max="100" value={Math.round(manualFlex * 100)}
+            onChange={(e) => setManualFlex(Number(e.target.value) / 100)}
+            className="flex-1 max-w-xs accent-rose-500" />
+          <span className="text-xs text-gray-600 dark:text-gray-400">Flexed</span>
+        </div>
+      )}
+
+      <div className="flex flex-wrap justify-center gap-3 mt-2 text-xs">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-red-600" /> Muscle (contracts to pull)
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-gray-300" /> Bone
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-yellow-400" /> Tendon
+        </span>
+      </div>
     </div>
   );
 }
