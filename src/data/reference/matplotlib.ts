@@ -12,6 +12,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Why Visualize Data?',
       beginnerContent:
+        'Move the correlation slider in the diagram above. At r = 0, the scatter looks random. Bump it to 0.8 and a trend emerges. That\'s the whole point of visualization — your eyes see patterns in pictures that no amount of staring at numbers can reveal.\n\n' +
         'A table of 500 numbers is hard to interpret. Your eyes glaze over after the first few rows. ' +
         'But plot those same numbers as a line chart and you instantly see trends, spikes, and patterns. ' +
         'A famous example: Anscombe\'s Quartet is four datasets that have identical means, standard ' +
@@ -45,6 +46,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Chart Types and When to Use Each',
       beginnerContent:
+        'Adjust the bin count in the diagram above. A histogram slices one variable into bins and shows how many values fall in each — revealing the SHAPE of your data. Use it when you want to know "how is this distributed?" — as opposed to a line or scatter which asks "how are these two things related?"\n\n' +
         '*Line charts* show how a value changes over time — temperature across months, stock prices ' +
         'across years. Use them when the x-axis has a natural order. *Scatter plots* show the ' +
         'relationship between two variables — study hours vs exam scores. Each dot is one data point. ' +
@@ -89,6 +91,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Anatomy of a Plot',
       beginnerContent:
+        'Click any part of the chart above — title, label, axis, legend, data line, grid, tick mark. Each piece shows its name AND the matplotlib code that creates it. Learn this vocabulary once and you can read or modify any matplotlib chart ever written.\n\n' +
         'Every Matplotlib chart has a *Figure* (the overall canvas or window) and one or more *Axes* ' +
         '(individual chart areas within the figure). Each Axes has an x-axis and y-axis with tick ' +
         'marks and labels, a title, and the actual data drawn as lines, bars, or dots. You can also ' +

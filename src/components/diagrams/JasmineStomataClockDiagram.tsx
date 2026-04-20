@@ -1,106 +1,227 @@
+import { useState, useEffect } from 'react';
+
+// ── The Leaf's Breathing Pores ───────────────────────────────
+// Animated stomata: guard cells swell with water → pore opens →
+// CO₂ drifts in, O₂ and water vapor drift out. Toggle day/night
+// to see stomata open (day) and close (night, saving water).
+// Close-up view of the leaf underside.
+
 export default function JasmineStomataClockDiagram() {
+  const [tick, setTick] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [isDay, setIsDay] = useState(true);
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(() => setTick(t => t + 1), 30);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  const W = 460, H = 360;
+
+  // Stomata opening: 0 (closed) to 1 (fully open)
+  const targetOpen = isDay ? 1 : 0;
+  const openAmount = targetOpen + Math.sin(tick * 0.02) * 0.05; // slight flutter
+  const smoothOpen = Math.max(0, Math.min(1, openAmount));
+
+  // Guard cell turgidity drives opening
+  const guardCellWidth = 8 + smoothOpen * 6; // swells when turgid
+  const poreGap = smoothOpen * 12;
+
+  // Particle positions for gas exchange
+  const co2Particles = isDay ? Array.from({ length: 4 }, (_, i) => ({
+    x: 180 + Math.sin(tick * 0.04 + i * 1.5) * 20 + i * 5,
+    y: 30 + i * 15 + Math.sin(tick * 0.06 + i) * 5 + (tick * 0.3 + i * 20) % 80,
+    opacity: smoothOpen * 0.7,
+  })) : [];
+
+  const o2Particles = isDay ? Array.from({ length: 3 }, (_, i) => ({
+    x: 260 + Math.sin(tick * 0.05 + i * 2) * 15,
+    y: 120 - (tick * 0.4 + i * 25) % 90,
+    opacity: smoothOpen * 0.6,
+  })) : [];
+
+  const h2oVapor = Array.from({ length: 4 }, (_, i) => ({
+    x: 220 + Math.cos(tick * 0.03 + i * 1.8) * 30,
+    y: 50 - (tick * 0.25 + i * 20) % 70,
+    opacity: smoothOpen * 0.4,
+  }));
+
+  // Epidermal cells (the leaf surface cells around the stomata)
+  const epidermis = Array.from({ length: 6 }, (_, i) => ({
+    x: 80 + i * 65,
+    y: 160 + Math.sin(i * 1.2) * 8,
+  }));
+
   return (
-    <div className="w-full max-w-xl mx-auto my-4">
-      <svg
-        viewBox="0 0 700 380"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto"
-        role="img"
-        aria-label="Stomata open-close cycle: guard cells swell to open the pore for gas exchange during the day and close at night to conserve water"
-      >
-        <rect width="700" height="380" rx="10" className="fill-white dark:fill-slate-950" />
+    <div className="bg-gradient-to-b from-emerald-50 via-green-50 to-slate-50 dark:from-emerald-950 dark:via-green-950 dark:to-slate-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
+          The Leaf&apos;s Breathing Pores
+        </p>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setIsDay(!isDay)}
+            className={`text-xs px-3 py-0.5 rounded transition ${
+              isDay
+                ? 'bg-yellow-500/20 text-yellow-300 ring-1 ring-yellow-500/50'
+                : 'bg-indigo-500/20 text-indigo-300 ring-1 ring-indigo-500/50'
+            }`}
+          >
+            {isDay ? '☀ Day — stomata open' : '🌙 Night — stomata closed'}
+          </button>
+          <button
+            onClick={() => setPaused(!paused)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            {paused ? '▶' : '⏸'}
+          </button>
+        </div>
+      </div>
 
-        <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-emerald-600 dark:fill-emerald-400">
-          Stomata: Breathing on a Clock
-        </text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          Guard cells open and close the pore on a circadian rhythm
-        </text>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg mx-auto" role="img"
+        aria-label="Animated stomata — guard cells swell to open pore during day, close at night">
 
-        {/* Open stomata */}
-        <g transform="translate(120, 90)">
-          <text x="0" y="0" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-emerald-700 dark:fill-emerald-300">Day: OPEN</text>
+        {/* Background: leaf surface (epidermal cells) */}
+        {epidermis.map((cell, i) => (
+          <g key={`epi-${i}`}>
+            <rect x={cell.x - 28} y={cell.y - 20} width="56" height="40" rx="8"
+              fill="#166534" opacity="0.4" stroke="#15803d" strokeWidth="1" />
+          </g>
+        ))}
 
-          {/* Guard cells - open */}
-          <ellipse cx="-30" cy="70" rx="18" ry="55" fill="#22c55e" opacity="0.5" transform="rotate(-15, -30, 70)" />
-          <ellipse cx="30" cy="70" rx="18" ry="55" fill="#22c55e" opacity="0.5" transform="rotate(15, 30, 70)" />
+        {/* Central stoma — the main attraction */}
+        <g transform={`translate(${W / 2}, 180)`}>
+          {/* Guard cell left */}
+          <ellipse cx={-poreGap - 2} cy="0" rx={guardCellWidth} ry="28"
+            fill="#22c55e" stroke="#166534" strokeWidth="2"
+            transform={`rotate(-8, ${-poreGap - 2}, 0)`} />
+          {/* Chloroplasts in guard cell (they have chloroplasts!) */}
+          {[0, 1, 2, 3].map(j => (
+            <circle key={`chl-l-${j}`}
+              cx={-poreGap - 5 + (j % 2) * 6}
+              cy={-10 + j * 7}
+              r="2.5" fill="#15803d" opacity="0.7" />
+          ))}
 
-          {/* Pore */}
-          <ellipse cx="0" cy="70" rx="12" ry="40" fill="none" stroke="#16a34a" strokeWidth="2" />
+          {/* Guard cell right */}
+          <ellipse cx={poreGap + 2} cy="0" rx={guardCellWidth} ry="28"
+            fill="#22c55e" stroke="#166534" strokeWidth="2"
+            transform={`rotate(8, ${poreGap + 2}, 0)`} />
+          {[0, 1, 2, 3].map(j => (
+            <circle key={`chl-r-${j}`}
+              cx={poreGap + 5 - (j % 2) * 6}
+              cy={-10 + j * 7}
+              r="2.5" fill="#15803d" opacity="0.7" />
+          ))}
 
-          {/* Arrows: CO2 in, O2 out, H2O out */}
-          <text x="-70" y="50" fontSize="11" fontWeight="600" className="fill-blue-600 dark:fill-blue-400">CO\u2082 in</text>
-          <line x1="-52" y1="52" x2="-14" y2="62" stroke="#3b82f6" strokeWidth="1.5" markerEnd="url(#arr-stom)" />
+          {/* The pore itself */}
+          <ellipse cx="0" cy="0" rx={poreGap * 0.7} ry={poreGap > 2 ? 18 : 2}
+            fill="#0a1f0a" opacity={smoothOpen * 0.8} />
 
-          <text x="70" y="50" fontSize="11" fontWeight="600" className="fill-red-500 dark:fill-red-400">O\u2082 out</text>
-          <line x1="14" y1="62" x2="52" y2="52" stroke="#ef4444" strokeWidth="1.5" markerEnd="url(#arr-stom-r)" />
+          {/* Guard cell labels */}
+          <text x={-poreGap - guardCellWidth - 10} y="4" textAnchor="end"
+            fill="#86efac" fontSize="8" fontWeight="600">Guard cell</text>
+          <text x={poreGap + guardCellWidth + 10} y="4"
+            fill="#86efac" fontSize="8" fontWeight="600">Guard cell</text>
 
-          <text x="0" y="140" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-cyan-600 dark:fill-cyan-400">H\u2082O out</text>
-          <line x1="0" y1="115" x2="0" y2="128" stroke="#06b6d4" strokeWidth="1.5" markerEnd="url(#arr-stom-c)" />
-
-          <text x="0" y="165" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Guard cells swell with water</text>
-          <text x="0" y="178" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u2192 pore opens for gas exchange</text>
+          {smoothOpen > 0.3 && (
+            <text x="0" y="4" textAnchor="middle" fill="#4ade80" fontSize="7" fontWeight="bold">
+              PORE
+            </text>
+          )}
         </g>
 
-        {/* Closed stomata */}
-        <g transform="translate(450, 90)">
-          <text x="0" y="0" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-indigo-700 dark:fill-indigo-300">Night: CLOSED</text>
+        {/* Gas exchange particles */}
+        {/* CO₂ coming IN (from above, into the pore) */}
+        {co2Particles.map((p, i) => (
+          <g key={`co2-${i}`} opacity={p.opacity}>
+            <circle cx={p.x} cy={p.y} r="4" fill="#9ca3af" />
+            <text x={p.x} y={p.y + 1} textAnchor="middle" fill="white" fontSize="5" fontWeight="bold">CO₂</text>
+          </g>
+        ))}
 
-          {/* Guard cells - closed */}
-          <ellipse cx="-12" cy="70" rx="14" ry="50" fill="#6b7280" opacity="0.4" transform="rotate(-3, -12, 70)" />
-          <ellipse cx="12" cy="70" rx="14" ry="50" fill="#6b7280" opacity="0.4" transform="rotate(3, 12, 70)" />
+        {/* O₂ going OUT (from pore upward) */}
+        {o2Particles.map((p, i) => (
+          <g key={`o2-${i}`} opacity={p.opacity}>
+            <circle cx={p.x} cy={p.y} r="3.5" fill="#67e8f9" />
+            <text x={p.x} y={p.y + 1} textAnchor="middle" fill="white" fontSize="5" fontWeight="bold">O₂</text>
+          </g>
+        ))}
 
-          {/* Pore closed */}
-          <line x1="0" y1="28" x2="0" y2="112" stroke="#374151" strokeWidth="2" />
+        {/* Water vapor going OUT */}
+        {h2oVapor.map((p, i) => (
+          <g key={`h2o-${i}`} opacity={p.opacity}>
+            <circle cx={p.x} cy={p.y} r="2.5" fill="#a5b4fc" />
+          </g>
+        ))}
 
-          {/* X marks */}
-          <text x="-60" y="55" fontSize="11" className="fill-gray-400 dark:fill-gray-500">CO\u2082 \u2715</text>
-          <text x="50" y="55" fontSize="11" className="fill-gray-400 dark:fill-gray-500">O\u2082 \u2715</text>
+        {/* Flow arrows when open */}
+        {smoothOpen > 0.3 && (
+          <g opacity={smoothOpen * 0.5}>
+            {/* CO₂ in arrow */}
+            <text x={150} y={80} fill="#9ca3af" fontSize="9" fontWeight="600">CO₂ →</text>
+            {/* O₂ out arrow */}
+            <text x={280} y={80} fill="#67e8f9" fontSize="9" fontWeight="600">← O₂</text>
+            {/* H₂O out */}
+            <text x={W / 2} y={45} textAnchor="middle" fill="#a5b4fc" fontSize="8">↑ H₂O vapor (transpiration)</text>
+          </g>
+        )}
 
-          <text x="0" y="140" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-indigo-600 dark:fill-indigo-400">Water conserved</text>
+        {/* State explanation */}
+        <text x={W / 2} y={260} textAnchor="middle" fill={isDay ? '#fde047' : '#818cf8'} fontSize="10" fontWeight="600">
+          {isDay
+            ? 'Guard cells absorb water → swell → pore opens → gas exchange happens'
+            : 'Guard cells lose water → shrink → pore closes → water conserved'}
+        </text>
 
-          <text x="0" y="165" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Guard cells release water</text>
-          <text x="0" y="178" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u2192 pore closes to prevent drying</text>
+        {/* Cross-section label */}
+        <text x={W / 2} y={280} textAnchor="middle" fill="#6b7280" fontSize="8">
+          View: underside of a leaf, magnified ~400×
+        </text>
+
+        {/* Turgor pressure indicator */}
+        <g transform={`translate(50, 300)`}>
+          <text x="0" y="0" fill="#86efac" fontSize="9" fontWeight="600">Guard cell turgor:</text>
+          <rect x="110" y="-10" width="100" height="12" rx="6" fill="#1a2e1a" stroke="#166534" strokeWidth="1" />
+          <rect x="111" y="-9" width={smoothOpen * 98} height="10" rx="5" fill="#22c55e" opacity="0.8" />
+          <text x={111 + smoothOpen * 98 + 5} y="0" fill="#86efac" fontSize="8">{Math.round(smoothOpen * 100)}%</text>
         </g>
 
-        {/* Arrow between states */}
-        <g>
-          <path d="M220,140 Q300,120 360,140" fill="none" stroke="#f59e0b" strokeWidth="1.5" markerEnd="url(#arr-stom-y)" />
-          <text x="290" y="118" textAnchor="middle" fontSize="10" className="fill-amber-600 dark:fill-amber-400">Sunset triggers</text>
-          <path d="M360,210 Q300,230 220,210" fill="none" stroke="#6366f1" strokeWidth="1.5" strokeDasharray="4 3" markerEnd="url(#arr-stom-p)" />
-          <text x="290" y="245" textAnchor="middle" fontSize="10" className="fill-indigo-500 dark:fill-indigo-400">Sunrise triggers</text>
-        </g>
+        {/* K⁺ ions driving osmosis */}
+        {isDay && smoothOpen > 0.3 && (
+          <g opacity="0.5">
+            <text x={W / 2} y={320} textAnchor="middle" fill="#c084fc" fontSize="8">
+              K⁺ ions pump into guard cells → water follows by osmosis → cells swell
+            </text>
+          </g>
+        )}
 
-        {/* Bottom: circadian note */}
-        <rect x="50" y="300" width="600" height="65" rx="8" className="fill-purple-50 dark:fill-purple-950/20" stroke="#9333ea" strokeWidth="1" />
-        <text x="350" y="322" textAnchor="middle" fontSize="12" fontWeight="700" className="fill-purple-700 dark:fill-purple-300">
-          Clock-controlled, not just light-reactive
-        </text>
-        <text x="350" y="340" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">
-          Even in constant darkness, stomata continue their open/close rhythm for several days
-        </text>
-        <text x="350" y="356" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">
-          \u2014 proving the circadian clock runs independently of current light conditions
-        </text>
-
-        <defs>
-          <marker id="arr-stom" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8" fill="#3b82f6" />
-          </marker>
-          <marker id="arr-stom-r" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8" fill="#ef4444" />
-          </marker>
-          <marker id="arr-stom-c" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto">
-            <path d="M0,0 L4,8 L8,0" fill="#06b6d4" />
-          </marker>
-          <marker id="arr-stom-y" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8" fill="#f59e0b" />
-          </marker>
-          <marker id="arr-stom-p" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-            <path d="M0,0 L8,4 L0,8" fill="#6366f1" />
-          </marker>
-        </defs>
+        {/* Night: ABA hormone note */}
+        {!isDay && (
+          <g opacity="0.5">
+            <text x={W / 2} y={320} textAnchor="middle" fill="#818cf8" fontSize="8">
+              Abscisic acid (ABA) signals: close stomata, save water during drought or darkness
+            </text>
+          </g>
+        )}
       </svg>
+
+      {/* Legend */}
+      <div className="flex flex-wrap justify-center gap-3 mt-2 text-xs">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-gray-400" /> CO₂ (in)
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-cyan-400" /> O₂ (out)
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-indigo-300" /> H₂O vapor (out)
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-green-500" /> Guard cells
+        </span>
+      </div>
     </div>
   );
 }

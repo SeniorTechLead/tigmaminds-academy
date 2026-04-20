@@ -1,134 +1,109 @@
-/**
- * Visual diagram showing class as blueprint → instances as concrete objects.
- * Left: the class template. Right: two instances with their own data.
- */
+import { useState } from 'react';
+
+// ── Blueprint vs Instances ────────────────────────────────────
+// Shows a Python class (the blueprint) on the left and lets the
+// user spawn instances on the right by clicking. Each instance
+// gets its own data (name, weight) — demonstrating that a single
+// class can produce many independent objects.
+
+interface Elephant {
+  id: number;
+  name: string;
+  weight: number;
+}
+
+const NAMES = ['Ranga', 'Tara', 'Bali', 'Kavita', 'Gajendra', 'Meena', 'Lakshmi', 'Arjun'];
+let idCounter = 0;
+
+function makeElephant(): Elephant {
+  const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+  const weight = 3500 + Math.floor(Math.random() * 2500);
+  return { id: idCounter++, name, weight };
+}
+
 export default function ClassBlueprintDiagram() {
-  const totalW = 520;
-  const totalH = 280;
+  const [instances, setInstances] = useState<Elephant[]>([]);
+
+  const spawn = () => {
+    setInstances(prev => [...prev, makeElephant()].slice(-8));
+  };
+
+  const reset = () => setInstances([]);
 
   return (
-    <svg viewBox={`0 0 ${totalW} ${totalH}`} className="w-full max-w-xl mx-auto" role="img" aria-label="Class blueprint creating two elephant tracker instances">
-      {/* Title */}
-      <text x={totalW / 2} y="18" textAnchor="middle" className="fill-gray-800 dark:fill-gray-200" fontSize="13" fontWeight="700">
-        Class → Instance
-      </text>
-      <text x={totalW / 2} y="34" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">
-        One blueprint, many objects
-      </text>
+    <div className="bg-gradient-to-b from-amber-50 via-slate-50 to-emerald-50 dark:from-amber-950 dark:via-slate-950 dark:to-emerald-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <p className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">
+          Blueprint vs Instances
+        </p>
+        <div className="flex gap-2">
+          <button
+            onClick={spawn}
+            className="text-xs px-3 py-1 rounded bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow transition"
+          >
+            + Create instance
+          </button>
+          {instances.length > 0 && (
+            <button
+              onClick={reset}
+              className="text-xs px-2 py-1 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+            >
+              Reset
+            </button>
+          )}
+        </div>
+      </div>
 
-      {/* ── CLASS (blueprint) ── */}
-      <g transform="translate(20, 48)">
-        {/* Dashed border = template */}
-        <rect x="0" y="0" width="155" height="195" rx="12"
-          className="fill-violet-50 dark:fill-violet-900/15 stroke-violet-400 dark:stroke-violet-600"
-          strokeWidth="2" strokeDasharray="6 3" />
+      <div className="grid md:grid-cols-2 gap-4">
+        {/* Class definition (blueprint) */}
+        <div className="bg-slate-900 dark:bg-slate-950 rounded-lg p-4 font-mono text-xs">
+          <div className="text-gray-500 mb-2 text-[10px] uppercase tracking-wider">CLASS (blueprint)</div>
+          <div className="text-blue-300">class <span className="text-yellow-300">Elephant</span>:</div>
+          <div className="text-gray-400 ml-4">&quot;&quot;&quot;Shape of every elephant.&quot;&quot;&quot;</div>
+          <div className="text-blue-300 ml-4 mt-2">def <span className="text-green-300">__init__</span>(self, name, weight):</div>
+          <div className="text-white ml-8">self.name = name</div>
+          <div className="text-white ml-8">self.weight = weight</div>
+          <div className="text-blue-300 ml-4 mt-2">def <span className="text-green-300">describe</span>(self):</div>
+          <div className="text-white ml-8">return f<span className="text-orange-300">&quot;{'{'}self.name{'}'} ({'{'}self.weight{'}'}kg)&quot;</span></div>
+        </div>
 
-        {/* Class header */}
-        <rect x="0" y="0" width="155" height="32" rx="12"
-          className="fill-violet-200 dark:fill-violet-800/50 stroke-violet-400 dark:stroke-violet-600"
-          strokeWidth="2" />
-        <text x="78" y="21" textAnchor="middle" className="fill-violet-800 dark:fill-violet-200" fontSize="12" fontWeight="800" fontFamily="monospace">
-          ElephantTracker
-        </text>
+        {/* Instance zoo (right side) */}
+        <div className="bg-white/60 dark:bg-white/5 rounded-lg p-4 border border-white/10">
+          <div className="text-gray-600 dark:text-gray-400 text-[10px] uppercase tracking-wider mb-2">
+            INSTANCES (live objects)
+          </div>
+          {instances.length === 0 ? (
+            <div className="flex items-center justify-center h-32 text-gray-400 dark:text-gray-500 text-sm">
+              Click &quot;Create instance&quot; — each call makes a new object
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {instances.map(e => (
+                <div key={e.id}
+                  className="flex items-center gap-3 bg-amber-100 dark:bg-amber-900/40 rounded-md p-2 ring-1 ring-amber-300 dark:ring-amber-700">
+                  <span className="text-2xl">🐘</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-mono text-sm font-bold text-amber-900 dark:text-amber-200">
+                      Elephant({e.name}, {e.weight}kg)
+                    </div>
+                    <div className="font-mono text-[10px] text-gray-500 dark:text-gray-400 truncate">
+                      id: {0x7f0000 + e.id * 48}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
-        {/* Attributes section */}
-        <text x="12" y="52" className="fill-violet-600 dark:fill-violet-400" fontSize="9" fontWeight="700">ATTRIBUTES</text>
-        <text x="12" y="67" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontFamily="monospace">self.name</text>
-        <text x="12" y="82" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontFamily="monospace">self.species</text>
-        <text x="12" y="97" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontFamily="monospace">self.sightings</text>
+          <div className="mt-3 text-xs text-gray-600 dark:text-gray-400">
+            One class → as many instances as you want, each with its own data.
+          </div>
+        </div>
+      </div>
 
-        {/* Methods section */}
-        <line x1="10" y1="108" x2="145" y2="108" className="stroke-violet-300 dark:stroke-violet-700" strokeWidth="1" />
-        <text x="12" y="124" className="fill-violet-600 dark:fill-violet-400" fontSize="9" fontWeight="700">METHODS</text>
-        <text x="12" y="139" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontFamily="monospace">__init__()</text>
-        <text x="12" y="154" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontFamily="monospace">record_sighting()</text>
-        <text x="12" y="169" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontFamily="monospace">total_sightings()</text>
-        <text x="12" y="184" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontFamily="monospace">__str__()</text>
-
-        {/* Blueprint label */}
-        <text x="78" y="-8" textAnchor="middle" className="fill-violet-500 dark:fill-violet-400" fontSize="9" fontWeight="700">
-          BLUEPRINT (class)
-        </text>
-      </g>
-
-      {/* ── Arrows ── */}
-      <g>
-        {/* Arrow to instance 1 */}
-        <line x1="175" y1="120" x2="220" y2="90" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" />
-        <polygon points="218,86 224,90 218,94" className="fill-gray-400 dark:fill-gray-500" />
-        {/* Arrow to instance 2 */}
-        <line x1="175" y1="170" x2="220" y2="200" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" />
-        <polygon points="218,196 224,200 218,204" className="fill-gray-400 dark:fill-gray-500" />
-
-        <text x="198" y="145" textAnchor="middle" className="fill-gray-400 dark:fill-gray-500" fontSize="8" fontWeight="600" transform="rotate(-15, 198, 145)">
-          creates
-        </text>
-      </g>
-
-      {/* ── INSTANCE 1: Ranga ── */}
-      <g transform="translate(225, 48)">
-        <rect x="0" y="0" width="145" height="100" rx="10"
-          className="fill-amber-50 dark:fill-amber-900/20 stroke-amber-400 dark:stroke-amber-600"
-          strokeWidth="2" />
-        <rect x="0" y="0" width="145" height="28" rx="10"
-          className="fill-amber-200 dark:fill-amber-800/40 stroke-amber-400 dark:stroke-amber-600"
-          strokeWidth="2" />
-        <text x="72" y="18" textAnchor="middle" className="fill-amber-800 dark:fill-amber-200" fontSize="11" fontWeight="800" fontFamily="monospace">
-          ranga
-        </text>
-
-        <text x="10" y="46" className="fill-gray-600 dark:fill-gray-300" fontSize="9" fontFamily="monospace">
-          name = "Ranga"
-        </text>
-        <text x="10" y="60" className="fill-gray-600 dark:fill-gray-300" fontSize="9" fontFamily="monospace">
-          species = "Asian"
-        </text>
-        <text x="10" y="74" className="fill-gray-600 dark:fill-gray-300" fontSize="9" fontFamily="monospace">
-          sightings = [▪▪]
-        </text>
-        <text x="10" y="90" className="fill-amber-600 dark:fill-amber-400" fontSize="8" fontWeight="600">
-          2 sightings recorded
-        </text>
-
-        <text x="72" y="-8" textAnchor="middle" className="fill-amber-500 dark:fill-amber-400" fontSize="9" fontWeight="700">
-          INSTANCE 1
-        </text>
-      </g>
-
-      {/* ── INSTANCE 2: Mohini ── */}
-      <g transform="translate(225, 164)">
-        <rect x="0" y="0" width="145" height="100" rx="10"
-          className="fill-sky-50 dark:fill-sky-900/20 stroke-sky-400 dark:stroke-sky-600"
-          strokeWidth="2" />
-        <rect x="0" y="0" width="145" height="28" rx="10"
-          className="fill-sky-200 dark:fill-sky-800/40 stroke-sky-400 dark:stroke-sky-600"
-          strokeWidth="2" />
-        <text x="72" y="18" textAnchor="middle" className="fill-sky-800 dark:fill-sky-200" fontSize="11" fontWeight="800" fontFamily="monospace">
-          mohini
-        </text>
-
-        <text x="10" y="46" className="fill-gray-600 dark:fill-gray-300" fontSize="9" fontFamily="monospace">
-          name = "Mohini"
-        </text>
-        <text x="10" y="60" className="fill-gray-600 dark:fill-gray-300" fontSize="9" fontFamily="monospace">
-          species = "Asian"
-        </text>
-        <text x="10" y="74" className="fill-gray-600 dark:fill-gray-300" fontSize="9" fontFamily="monospace">
-          sightings = [▪]
-        </text>
-        <text x="10" y="90" className="fill-sky-600 dark:fill-sky-400" fontSize="8" fontWeight="600">
-          1 sighting recorded
-        </text>
-
-        <text x="72" y="-8" textAnchor="middle" className="fill-sky-500 dark:fill-sky-400" fontSize="9" fontWeight="700">
-          INSTANCE 2
-        </text>
-      </g>
-
-      {/* Key insight */}
-      <text x={totalW / 2} y={totalH - 8} textAnchor="middle" className="fill-gray-400 dark:fill-gray-500" fontSize="9">
-        Same methods, different data. Each instance is independent.
-      </text>
-    </svg>
+      <div className="mt-3 text-xs text-gray-700 dark:text-gray-300 text-center">
+        <span className="font-semibold">The class is the cookie cutter.</span> Each instance is a separate cookie with its own flavour.
+      </div>
+    </div>
   );
 }

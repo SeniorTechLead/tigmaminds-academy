@@ -11,7 +11,9 @@ export const guide: ReferenceGuide = {
   understand: [
     {
       title: 'What Is TypeScript?',
+      diagram: 'TypeCheckerDiagram',
       beginnerContent:
+        'Toggle between JavaScript and TypeScript in the diagram above. Same code, same bug. In JS, the bug sails through and crashes at runtime. In TS, a red squiggle stops you on the exact line. This is the whole TypeScript value proposition in one comparison.\n\n' +
         'You know how Python lets you put anything in a variable? `x = 5` then `x = "hello"` — Python doesn\'t care. That flexibility is great for beginners, but in large programs it causes bugs: you pass a string to a function expecting a number, and everything breaks at runtime.\n\n' +
         'TypeScript is **JavaScript with type checking**. You tell the computer what type each variable should hold, and it catches mistakes *before* your code runs — at compile time, not at runtime.\n\n' +
         '**JavaScript:**\n`let age = 25;\nage = "twenty-five";  // No error — but now math breaks: age + 1 = "twenty-five1"`\n\n' +
@@ -88,7 +90,9 @@ export const guide: ReferenceGuide = {
     },
     {
       title: 'Union Types — One or the Other',
+      diagram: 'UnionNarrowingDiagram',
       beginnerContent:
+        'Try it above. Switch the value between a number and a string, and watch how TypeScript narrows the type inside each branch of a `typeof` check. Outside the `if`, the type is `number | string`. Inside the `if (typeof id === "number")`, TS knows it\'s exactly `number`. Outside in the `else`, it\'s exactly `string`. This is **type narrowing** — the compiler follows your runtime checks.\n\n' +
         'Sometimes a value can be one of several types. A **union type** uses `|` to say "this or that":\n\n' +
         '`let id: number | string = 42;`\n`id = "E-042";  // Also valid — string is allowed`\n`id = true;     // ERROR: boolean is not number | string`\n\n' +
         'This is useful when a function can accept multiple input types:\n\n' +
@@ -103,7 +107,9 @@ export const guide: ReferenceGuide = {
     },
     {
       title: 'Handling Null Safely',
+      diagram: 'NullSafetyDiagram',
       beginnerContent:
+        'Toggle between a valid object and null in the diagram above. Watch the different access patterns: unsafe access crashes when null, `?.` returns undefined safely, `??` gives you a fallback value. TypeScript refuses to compile the unsafe version unless you explicitly handle the null case first — eliminating the single most common JavaScript crash of all time.\n\n' +
         'The most common bug in programming: trying to use a value that\'s `null` or `undefined`. In JavaScript, `null.name` crashes with "Cannot read property of null." TypeScript prevents this.\n\n' +
         'With **strict null checks** (the default), you must explicitly handle null:\n\n' +
         '```\nfunction findElephant(name: string): Elephant | null {\n  // might return null if not found\n}\n\nconst el = findElephant("Ranga");\nel.weight;  // ERROR: el might be null\n\n// Fix: check first\nif (el !== null) {\n  el.weight;  // OK — TypeScript knows el is not null here\n}\n```\n\n' +
@@ -371,7 +377,9 @@ console.log(lastSeenStr);  // "Never sighted" (lastSeen is null)
     {
       id: 'ts-generics',
       title: 'Generics — Reusable Typed Functions',
+      diagram: 'GenericsDiagram',
       beginnerContent:
+        'Click through the input types above. Same function, three different calls — and watch TypeScript resolve `T` to `number`, then `string`, then `Elephant`. The return type updates to match. One function, infinite type combinations, all still fully type-checked.\n\n' +
         'What if you want a function that works with any type, but still preserves type safety? **Generics** let you write a function once and use it with different types.\n\n' +
         'Think of `<T>` as a placeholder: "I don\'t know the type yet, but whatever you pass in, I\'ll use the same type for the output."',
       code: `// ── Without generics: you'd write separate functions ──

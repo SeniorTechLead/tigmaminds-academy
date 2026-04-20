@@ -2086,7 +2086,7 @@ export const scienceReferences: ReferenceGuide[] = [
   // 17. Algebra Fundamentals
   // ──────────────────────────────────────────────────────────────
   {
-    slug: 'algebra-fundamentals',
+    slug: 'algebra',
     title: 'Algebra',
     category: 'math',
     icon: '📊',

@@ -306,7 +306,7 @@ import { guide as cellStructure } from './reference/cell-structure';
 import { guide as geneticsAndDna } from './reference/genetics-and-dna';
 import { guide as humanBodySystems } from './reference/human-body-systems';
 import { guide as evolutionAndNaturalSelection } from './reference/evolution-and-natural-selection';
-import { guide as algebraFundamentals } from './reference/algebra-fundamentals';
+import { guide as algebra } from './reference/algebra';
 import { guide as geometryEssentials } from './reference/geometry-essentials';
 import { guide as trigonometry } from './reference/trigonometry';
 import { guide as probabilityAndCombinatorics } from './reference/probability-and-combinatorics';
@@ -387,7 +387,7 @@ export const references: ReferenceGuide[] = [
   ecologyAndPopulations, weatherAndClimate, materialsAndChemistry, electricityAndCurrent,
   magnetismAndElectromagnetism, opticsAndLenses, wavesAndProperties, heatAndThermodynamics,
   energyAndWork, cellStructure, geneticsAndDna, humanBodySystems,
-  evolutionAndNaturalSelection, algebraFundamentals, geometryEssentials, trigonometry,
+  evolutionAndNaturalSelection, algebra, geometryEssentials, trigonometry,
   probabilityAndCombinatorics, nuclearPhysics, gravityAndOrbits, fluidMechanics,
   introToRelativity, atomsAndStructure, periodicTable, chemicalBonding,
   chemicalReactions, microbiology, classificationOfLife, molecularBiology,

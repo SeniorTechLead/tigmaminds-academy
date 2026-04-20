@@ -1,109 +1,184 @@
-export default function TranslationDiagram() {
-  const codons = [
-    { mRNA: ['A', 'U', 'G'], aa: 'Met', tRNA: ['U', 'A', 'C'] },
-    { mRNA: ['G', 'C', 'U'], aa: 'Ala', tRNA: ['C', 'G', 'A'] },
-    { mRNA: ['A', 'A', 'G'], aa: 'Lys', tRNA: ['U', 'U', 'C'] },
-    { mRNA: ['U', 'U', 'U'], aa: 'Phe', tRNA: ['A', 'A', 'A'] },
-    { mRNA: ['G', 'A', 'C'], aa: 'Asp', tRNA: ['C', 'U', 'G'] },
-  ];
+import { useState, useEffect } from 'react';
 
-  const sx = 30, bw = 16, codonW = bw * 3 + 4, gap = 6;
+// ── mRNA → Protein ───────────────────────────────────────────
+// Animated translation. Ribosome slides along mRNA, reading
+// codons (groups of 3). tRNA with matching anticodon delivers
+// the correct amino acid. Amino acids chain up into a growing
+// protein emerging from the ribosome.
+
+const CODON_TABLE: Record<string, { aa: string; color: string }> = {
+  AUG: { aa: 'Met', color: '#facc15' },
+  GCC: { aa: 'Ala', color: '#34d399' },
+  UAC: { aa: 'Tyr', color: '#60a5fa' },
+  CCA: { aa: 'Pro', color: '#f472b6' },
+  GGU: { aa: 'Gly', color: '#a78bfa' },
+  UAA: { aa: 'STOP', color: '#ef4444' },
+};
+
+const MRNA_CODONS = ['AUG', 'GCC', 'UAC', 'CCA', 'GGU', 'UAA'];
+
+export default function TranslationDiagram() {
+  const [tick, setTick] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(() => setTick(t => t + 1), 50);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  const W = 580, H = 340;
+  const cycle = tick % (MRNA_CODONS.length * 80);
+  const codonIdx = Math.min(MRNA_CODONS.length - 1, Math.floor(cycle / 80));
+  const withinCodon = (cycle % 80) / 80;
+
+  // Ribosome position on mRNA
+  const codonWidth = 60;
+  const mrnaStartX = 60;
+  const ribosomeX = mrnaStartX + codonIdx * codonWidth + codonWidth / 2 + withinCodon * codonWidth * 0.2;
+  const ribosomeY = 180;
+
+  // How many amino acids are chained so far
+  const proteinLength = Math.min(codonIdx + (withinCodon > 0.5 ? 1 : 0), MRNA_CODONS.length - 1);
 
   return (
-    <div className="my-4">
-      <svg viewBox="0 0 525 295" className="w-full max-w-lg mx-auto" role="img" aria-label="Translation diagram showing ribosome on mRNA with tRNA bringing amino acids to build a polypeptide chain">
-        <text x="250" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Translation: mRNA → Protein</text>
+    <div className="bg-gradient-to-b from-emerald-50 via-slate-50 to-amber-50 dark:from-emerald-950 dark:via-slate-950 dark:to-amber-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
+          mRNA → Protein
+        </p>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-emerald-700 dark:text-emerald-300 font-mono">
+            Codon {codonIdx + 1} / {MRNA_CODONS.length}
+          </span>
+          <button
+            onClick={() => setPaused(!paused)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            {paused ? '▶' : '⏸'}
+          </button>
+        </div>
+      </div>
+
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl mx-auto" role="img"
+        aria-label="Animated translation — ribosome reading mRNA codons and building a protein">
 
         {/* mRNA strand */}
-        <rect x={sx - 5} y={155} width={codons.length * (codonW + gap) + 10} height={24} rx="4" className="fill-amber-100 dark:fill-amber-900/30 stroke-amber-400" strokeWidth="1" />
-        <text x={sx - 12} y={170} className="fill-amber-600 dark:fill-amber-400" fontSize="10" fontWeight="bold">5'</text>
-        {codons.map((codon, ci) => (
-          <g key={`c${ci}`}>
-            {codon.mRNA.map((base, bi) => (
-              <text key={`mb${ci}${bi}`}
-                x={sx + ci * (codonW + gap) + bi * (bw) + bw / 2}
-                y={171}
-                textAnchor="middle"
-                className="fill-amber-700 dark:fill-amber-300"
-                fontSize="11"
-                fontWeight="bold"
-              >
-                {base}
-              </text>
-            ))}
+        <line x1={mrnaStartX - 20} y1={220} x2={mrnaStartX + MRNA_CODONS.length * codonWidth + 20} y2={220}
+          stroke="#8b5cf6" strokeWidth="3" opacity="0.4" />
+
+        {/* Codons */}
+        {MRNA_CODONS.map((codon, i) => {
+          const cx = mrnaStartX + i * codonWidth + codonWidth / 2;
+          const isCurrent = i === codonIdx;
+          const isDone = i < codonIdx;
+          return (
+            <g key={`c-${i}`}>
+              {isCurrent && (
+                <rect x={cx - 28} y={205} width={56} height={30} rx={4}
+                  fill="#fbbf24" opacity="0.2" />
+              )}
+              {codon.split('').map((base, j) => (
+                <g key={`b-${i}-${j}`}>
+                  <circle cx={cx - 15 + j * 15} cy={220} r="7"
+                    fill={isDone ? '#a78bfa' : isCurrent ? '#8b5cf6' : '#c4b5fd'}
+                    opacity="0.95" />
+                  <text x={cx - 15 + j * 15} y={224} textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">
+                    {base}
+                  </text>
+                </g>
+              ))}
+            </g>
+          );
+        })}
+
+        {/* Ribosome */}
+        <g transform={`translate(${ribosomeX}, ${ribosomeY})`}>
+          {/* Large subunit */}
+          <ellipse cx={0} cy={-8} rx={55} ry={35}
+            fill="#64748b" stroke="#334155" strokeWidth="2" opacity="0.9" />
+          {/* Small subunit */}
+          <ellipse cx={0} cy={20} rx={50} ry={22}
+            fill="#94a3b8" stroke="#475569" strokeWidth="2" opacity="0.9" />
+          <text x={0} y={-35} textAnchor="middle" className="fill-slate-700 dark:fill-slate-200" fontSize="9" fontWeight="600">
+            Ribosome
+          </text>
+        </g>
+
+        {/* tRNA delivering current amino acid — shown coming down into the ribosome */}
+        {codonIdx < MRNA_CODONS.length && (
+          <g transform={`translate(${ribosomeX + 20}, ${ribosomeY - 60 + withinCodon * 30})`}
+            opacity={withinCodon > 0.8 ? 2 - withinCodon * 2 : 1}>
+            {/* tRNA stem */}
+            <line x1={0} y1={25} x2={0} y2={50} stroke="#d97706" strokeWidth="3" />
+            {/* tRNA "cloverleaf" simplified as a blob */}
+            <path d="M -12,5 Q -15,15 0,20 Q 15,15 12,5 Q 5,-5 0,0 Q -5,-5 -12,5 Z"
+              fill="#fbbf24" stroke="#d97706" strokeWidth="1.5" />
+            {/* Amino acid attached on top */}
+            <circle cx={0} cy={-8} r="10"
+              fill={CODON_TABLE[MRNA_CODONS[codonIdx]]?.color || '#fbbf24'}
+              stroke="#1e293b" strokeWidth="1.5" />
+            <text x={0} y={-5} textAnchor="middle" fill="#1e293b" fontSize="7" fontWeight="bold">
+              {CODON_TABLE[MRNA_CODONS[codonIdx]]?.aa || '?'}
+            </text>
+            <text x={0} y={65} textAnchor="middle" className="fill-amber-700 dark:fill-amber-300" fontSize="7" fontWeight="600">
+              tRNA
+            </text>
           </g>
-        ))}
-        <text x={sx + codons.length * (codonW + gap) + 2} y={170} className="fill-amber-600 dark:fill-amber-400" fontSize="10" fontWeight="bold">3'</text>
-        <text x={sx + codons.length * (codonW + gap) / 2} y={190} textAnchor="middle" className="fill-amber-500 dark:fill-amber-400" fontSize="10">mRNA</text>
+        )}
 
-        {/* Ribosome (large oval around current codons being read) */}
-        <ellipse cx={sx + 2 * (codonW + gap) + codonW / 2} cy={140} rx="55" ry="45" className="fill-gray-200 dark:fill-gray-700 stroke-gray-400 dark:stroke-gray-500" strokeWidth="2" opacity="0.5" />
-        <text x={sx + 2 * (codonW + gap) + codonW / 2} y={108} textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="bold">Ribosome</text>
-
-        {/* tRNA molecules bringing amino acids (showing 2 in the ribosome) */}
-        {[1, 2].map(idx => {
-          const codon = codons[idx];
-          const cx = sx + idx * (codonW + gap) + codonW / 2;
+        {/* Growing protein chain (emerging from ribosome top-left) */}
+        {Array.from({ length: proteinLength }, (_, i) => {
+          const codon = MRNA_CODONS[i];
+          const aa = CODON_TABLE[codon];
+          if (!aa || aa.aa === 'STOP') return null;
+          const x = ribosomeX - 80 - i * 22;
+          const y = ribosomeY - 40 - i * 4;
           return (
-            <g key={`trna${idx}`}>
-              {/* tRNA body (inverted T shape) */}
-              <path d={`M ${cx},${155} L ${cx},${130} L ${cx - 12},${118} M ${cx},${130} L ${cx + 12},${118}`}
-                fill="none" className="stroke-emerald-500 dark:stroke-emerald-400" strokeWidth="2" />
-              {/* Anticodon */}
-              <text x={cx} y={148} textAnchor="middle" className="fill-emerald-700 dark:fill-emerald-300" fontSize="10" fontWeight="bold">
-                {codon.tRNA.join('')}
+            <g key={`aa-${i}`}>
+              <circle cx={x} cy={y} r="12"
+                fill={aa.color} stroke="#1e293b" strokeWidth="1.5" opacity="0.95" />
+              <text x={x} y={y + 3} textAnchor="middle" fill="#1e293b" fontSize="8" fontWeight="bold">
+                {aa.aa}
               </text>
-              <text x={cx} y={140} textAnchor="middle" className="fill-gray-400 dark:fill-gray-500" fontSize="10">anticodon</text>
-            </g>
-          );
-        })}
-
-        {/* Amino acids on tRNAs */}
-        {[1, 2].map(idx => {
-          const codon = codons[idx];
-          const cx = sx + idx * (codonW + gap) + codonW / 2;
-          return (
-            <g key={`aa${idx}`}>
-              <circle cx={cx} cy={112} r="12" className="fill-blue-300 dark:fill-blue-600 stroke-blue-500" strokeWidth="1" />
-              <text x={cx} y={116} textAnchor="middle" className="fill-blue-800 dark:fill-blue-200" fontSize="10" fontWeight="bold">{codon.aa}</text>
-            </g>
-          );
-        })}
-
-        {/* Growing polypeptide chain */}
-        <text x="40" y="55" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="bold">Polypeptide chain:</text>
-        {codons.slice(0, 3).map((codon, i) => {
-          const px = 60 + i * 45;
-          return (
-            <g key={`poly${i}`}>
-              <rect x={px} y={60} width={38} height={22} rx="11" className="fill-blue-200 dark:fill-blue-700 stroke-blue-400" strokeWidth="1" />
-              <text x={px + 19} y={75} textAnchor="middle" className="fill-blue-700 dark:fill-blue-200" fontSize="10" fontWeight="bold">{codon.aa}</text>
-              {i < 2 && (
-                <line x1={px + 38} y1={71} x2={px + 45} y2={71} className="stroke-blue-400" strokeWidth="1.5" />
+              {/* Peptide bond to previous */}
+              {i > 0 && (
+                <line x1={x + 12} y1={y} x2={x + 10} y2={y - 4}
+                  stroke="#475569" strokeWidth="2" />
               )}
             </g>
           );
         })}
-        <text x="200" y="75" className="fill-gray-500 dark:fill-gray-400" fontSize="10">...</text>
 
-        {/* Codon-anticodon matching label */}
-        <rect x="300" y="42" width="180" height="55" rx="6" className="fill-gray-100 dark:fill-gray-800" />
-        <text x="390" y="58" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="10" fontWeight="600">Codon–Anticodon Match</text>
-        <text x="390" y="72" textAnchor="middle" className="fill-amber-600 dark:fill-amber-400" fontSize="10">mRNA codon: GCU</text>
-        <text x="390" y="86" textAnchor="middle" className="fill-emerald-600 dark:fill-emerald-400" fontSize="10">tRNA anticodon: CGA</text>
+        {/* Label arrows */}
+        {codonIdx === 0 && withinCodon < 0.1 && (
+          <text x={mrnaStartX + codonWidth / 2} y={260} textAnchor="middle" className="fill-amber-700 dark:fill-amber-300" fontSize="9" fontWeight="600">
+            Start codon (AUG = Met)
+          </text>
+        )}
+        {codonIdx === MRNA_CODONS.length - 1 && (
+          <text x={ribosomeX} y={260} textAnchor="middle" className="fill-rose-700 dark:fill-rose-300" fontSize="9" fontWeight="600">
+            Stop codon → release protein
+          </text>
+        )}
 
-        {/* Direction arrow */}
-        <line x1="30" y1="210" x2="280" y2="210" className="stroke-gray-300 dark:stroke-gray-600" strokeWidth="1" markerEnd="url(#tlArrow)" />
-        <text x="155" y="225" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Ribosome moves along mRNA →</text>
-
-        <text x="250" y="245" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Each codon (3 bases) codes for one amino acid</text>
-
-        <defs>
-          <marker id="tlArrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-            <polygon points="0 0, 7 2.5, 0 5" className="fill-gray-300 dark:fill-gray-600" />
-          </marker>
-        </defs>
+        {/* Caption */}
+        <text x={W / 2} y={H - 15} textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="10" fontWeight="600">
+          Ribosome reads 3 bases at a time (codon) → tRNA delivers matching amino acid → peptide bond forms
+        </text>
       </svg>
+
+      <div className="flex flex-wrap justify-center gap-3 mt-2 text-xs">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-purple-500" /> mRNA codons
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-slate-500" /> Ribosome
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-amber-400" /> tRNA (delivers amino acid)
+        </span>
+      </div>
     </div>
   );
 }

@@ -14,6 +14,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'The Two Ways to Solve a Problem',
       beginnerContent:
+        'Click the buttons in the diagram above. Toggle between "Rules" and "Examples" — same problem (dog vs cat), two fundamentally different ways to solve it. The rule-based approach is what programmers did for decades. The example-based approach is machine learning.\n\n' +
         'You want a computer to tell dogs apart from cats in photographs. There are two approaches.\n\n' +
         '**Approach 1 — Write the rules yourself.** You code: "If it has pointed ears AND a short snout ' +
         'AND slit pupils, it\'s a cat." But dogs can have pointed ears too. Cats can have round pupils. ' +
@@ -54,6 +55,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'The Postman Who Sorts by Feel',
       beginnerContent:
+        'Try sorting the parcels in the diagram above. Each one has features — weight, size, shape. You drop it in the right bag based on what you feel. No rulebook, just patterns you\'ve learned over time. That\'s how human classification works — and machine learning classifiers do exactly the same thing, just with numbers instead of hands.\n\n' +
         'Here is a simpler example that makes classification physical.\n\n' +
         'A postman in Shillong gets a pile of parcels every morning. He needs to sort them into ' +
         'three bags: the **bike pouch** (for letters), the **shoulder bag** (small packages), and the ' +
@@ -289,6 +291,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Training vs Testing — Why You Hide the Exam',
       beginnerContent:
+        'Drag the split slider in the diagram above. Watch training and test portions change. Every model you ever build follows this exact pattern: train on one set of examples, test on another the model has never seen. Why? Because the whole point is to predict NEW data — not just memorize old answers.\n\n' +
         'Imagine a student who gets a perfect score on every homework assignment — because she copied ' +
         'the answer key. Has she learned anything? To find out, you give her a test with questions ' +
         'she has never seen. That is the difference between training and testing.\n\n' +
@@ -320,6 +323,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'K-Nearest Neighbors — The Simplest Classifier',
       beginnerContent:
+        'Click a point in the diagram above to classify it. K-NN draws lines to its K closest labelled neighbors; the point inherits the majority class. Change K to see how the decision boundary shifts. This is literally the whole algorithm — no training, no math beyond distance, no fancy techniques. And yet it works.\n\n' +
         'Now you know features, labels, and train/test splits. How does the actual classification work?\n\n' +
         'K-Nearest Neighbors is the simplest algorithm and the one you build in the Elephant story. ' +
         'When a new rumble arrives (a point in feature space), k-NN does three things:\n\n' +

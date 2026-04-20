@@ -8,43 +8,318 @@ export const guide: ReferenceGuide = {
   tagline: "Why nothing travels faster than light, and why time itself can slow down.",
   relatedStories: ['little-train', 'stars-ziro-valley'],
   understand: [
+    // ── Section 1: The Speed of Light ─────────────────────────
     {
       title: 'The Speed of Light',
       beginnerContent:
-        'The speed of light in a vacuum is exactly 299,792,458 metres per second — a value so fundamental that it defines the metre itself. Scientists use the symbol c for this speed. In 1905, Albert Einstein proposed that c is the ultimate speed limit of the universe: no object with mass can reach it, and no information can travel faster. This is not just an engineering limitation — it is a fundamental law of nature. As an object with mass accelerates towards c, its kinetic energy grows without bound, approaching infinity. You would need infinite energy to accelerate even a single electron to the speed of light, which is physically impossible.\n\nBecause the universe is vast, astronomers measure distances in light-years — the distance light travels in one year, roughly 9.46 trillion kilometres. The nearest star to the Sun, Proxima Centauri, is 4.24 light-years away, meaning the light you see from it tonight left the star over four years ago. The Andromeda galaxy is 2.5 million light-years distant — you see it as it was 2.5 million years ago. When we look deep into space, we are literally looking back in time. Light from the most distant observable objects has been travelling for over 13 billion years, showing us the universe when it was young.',
+        'The speed of light in a vacuum is exactly **299,792,458 metres per second**. Scientists call it **c** — the fastest anything can travel in the universe. This is not an engineering limit to overcome with better engines. It is a law woven into the fabric of space and time itself.\n\n' +
+        '**Analogy:** Imagine a river with a maximum current speed. No matter how powerful your boat engine, the river itself won\'t carry anything faster than that current. Light speed is the universe\'s "maximum current."\n\n' +
+        '| Quantity | Value | Comparison |\n' +
+        '|----------|-------|------------|\n' +
+        '| Speed of light | 299,792 km/s | Circles Earth 7.5 times in 1 second |\n' +
+        '| Speed of sound | 0.343 km/s | Takes 4.5 hours to circle Earth once |\n' +
+        '| Fastest rocket (Parker Solar Probe) | 192 km/s | Still only 0.064% of light speed |\n' +
+        '| Rajdhani Express (max) | 0.044 km/s | 6.8 billion times slower than light |\n\n' +
+        'Because the universe is vast, astronomers measure distances in **light-years** — the distance light travels in one year:\n\n' +
+        '| Object | Distance | What you see |\n' +
+        '|--------|----------|--------------|\n' +
+        '| The Moon | 1.3 light-seconds | As it was 1.3 seconds ago |\n' +
+        '| The Sun | 8.3 light-minutes | As it was 8 minutes ago |\n' +
+        '| Proxima Centauri (nearest star) | 4.24 light-years | As it was in 2022 |\n' +
+        '| Andromeda Galaxy | 2.5 million light-years | As it was before humans existed |\n\n' +
+        'When you look at the night sky from Ziro Valley in Arunachal Pradesh — one of the least light-polluted places in India — you are literally looking back in time. Every star you see is a snapshot from the past.\n\n' +
+        '**Quick check:** If a star is 100 light-years away, and it exploded today, when would we see the explosion?\n\n' +
+        '*In 100 years. The light carrying news of the explosion takes 100 years to reach us.*',
       intermediateContent:
-        'The speed of light was first measured accurately by Rømer (1676) from the varying timing of Jupiter\'s moon Io eclipses, giving c ≈ 220,000 km/s. Fizeau (1849) measured it terrestrially using a spinning toothed wheel: light passed through a gap, reflected from a mirror 8.6 km away, and returned. At the right wheel speed (12.6 rev/s with 720 teeth), the returning light passed through the next gap. c = 2d/(gap time) = 2 × 8,633/(1/(12.6 × 720)) = **315,000 km/s** (within 5% of the true value). The modern value **c = 299,792,458 m/s** is exact by definition — since 1983, the metre is defined as the distance light travels in 1/299,792,458 seconds. The relativistic energy-momentum relation: **E² = (pc)² + (mc²)²**. For a photon (m = 0): E = pc. For a particle at rest (p = 0): E = mc². For a moving particle: the total energy E = γmc², where γ = 1/√(1−v²/c²). At v = 0.9c: γ = 2.29, so total energy is 2.29 times the rest energy.',
+        '**How was the speed of light measured?**\n\n' +
+        '| Year | Scientist | Method | Result | Error |\n' +
+        '|------|-----------|--------|--------|-------|\n' +
+        '| 1676 | Romer | Timing of Jupiter\'s moon Io eclipses | 220,000 km/s | 27% low |\n' +
+        '| 1849 | Fizeau | Spinning toothed wheel + mirror 8.6 km away | 315,000 km/s | 5% high |\n' +
+        '| 1862 | Foucault | Rotating mirror | 298,000 km/s | 0.6% low |\n' +
+        '| 1983 | CGPM | Defined exactly (redefined the metre) | **299,792,458 m/s** | Exact |\n\n' +
+        '**Fizeau\'s method (1849):** Light passes through a gap in a spinning toothed wheel, reflects off a mirror 8.6 km away, and returns. At the right wheel speed (12.6 rev/s, 720 teeth), the returning light passes through the *next* gap:\n\n' +
+        '`c = 2d / (gap time) = 2 x 8,633 / (1/(12.6 x 720)) = 315,000 km/s`\n\n' +
+        'Since 1983, the metre is *defined* as the distance light travels in 1/299,792,458 of a second, making c exact by definition.\n\n' +
+        '**The energy of a moving object:**\n\n' +
+        'The full relativistic energy-momentum relation:\n\n' +
+        '`E² = (pc)² + (mc²)²`\n\n' +
+        '| Particle type | Mass | Momentum | Energy formula |\n' +
+        '|---------------|------|----------|----------------|\n' +
+        '| Photon (light) | m = 0 | p > 0 | E = pc |\n' +
+        '| Particle at rest | m > 0 | p = 0 | E = mc² |\n' +
+        '| Moving particle | m > 0 | p > 0 | E = gamma x mc² |\n\n' +
+        'At v = 0.9c: gamma = 1/sqrt(1 - 0.81) = 1/sqrt(0.19) = **2.29**, so total energy is 2.29 times the rest energy.',
       advancedContent:
-        'The constancy of c is a postulate of special relativity, but it can also be derived from Maxwell\'s equations: c = 1/√(μ₀ε₀), independent of the motion of the source or observer. This was the crisis that led to relativity — Newtonian mechanics predicted that light speed should depend on the observer\'s motion (like throwing a ball from a moving train), but the **Michelson-Morley experiment** (1887) found no such variation. Einstein resolved this by abandoning absolute time: if c is the same for all observers, then time and space must be relative (observer-dependent). The **Lorentz transformation** x\' = γ(x − vt), t\' = γ(t − vx/c²) replaces the Galilean transformation, mixing space and time coordinates. The invariant spacetime interval **ds² = c²dt² − dx² − dy² − dz²** is the same for all observers — a four-dimensional "distance" that combines space and time. **Tachyons** (hypothetical particles with v > c) would require imaginary rest mass (m² < 0) and would travel backward in time in some reference frames, violating causality. No tachyon has ever been detected, and most physicists consider them unphysical.',
+        '**Why is c constant for all observers?**\n\n' +
+        'Maxwell\'s equations predict: `c = 1/sqrt(mu_0 x epsilon_0)`, independent of the source or observer\'s motion. In Newtonian mechanics, velocities add: a ball thrown at 20 m/s from a train moving at 30 m/s travels at 50 m/s for a ground observer. If light followed the same rule, its speed would depend on the source\'s motion.\n\n' +
+        'The **Michelson-Morley experiment** (1887) tested this. An interferometer split a light beam into two perpendicular paths, reflected them back, and recombined them. If Earth\'s motion through space affected light speed, the two beams would return out of sync. Result: **no difference detected** — light speed was the same in all directions.\n\n' +
+        '**The Lorentz transformation** (replacing the Galilean transformation):\n\n' +
+        '| Galilean (wrong at high v) | Lorentz (correct) |\n' +
+        '|---------------------------|-------------------|\n' +
+        '| x\' = x - vt | x\' = gamma(x - vt) |\n' +
+        '| t\' = t | t\' = gamma(t - vx/c²) |\n\n' +
+        'Notice: in the Lorentz version, **time itself depends on position** (the vx/c² term). Space and time are mixed — they are not independent. This is why we speak of **spacetime** as a single entity.\n\n' +
+        'The **spacetime interval** `ds² = c²dt² - dx² - dy² - dz²` is invariant — all observers agree on its value, even though they disagree on individual space and time measurements. This is the relativistic replacement for Euclidean distance.\n\n' +
+        '**Tachyons** (hypothetical v > c particles) would require imaginary rest mass (m² < 0) and travel backward in time in some frames, violating causality. No tachyon has ever been detected.',
     },
+
+    // ── Section 2: Time Dilation ──────────────────────────────
     {
       title: 'Time Dilation',
-      beginnerContent:
-        'One of Einstein\'s most startling predictions is time dilation: time passes more slowly for objects that are moving relative to an observer. This is not an illusion or a trick of perception — moving clocks genuinely tick more slowly, and this has been confirmed by countless experiments. The effect is described by the Lorentz factor: gamma = 1/sqrt(1 - v²/c²). At everyday speeds the effect is negligibly small — a car travelling at 100 km/h experiences time dilation of less than one part in a trillion. But at speeds approaching c, the effect becomes dramatic. At 87% of the speed of light, time passes at half the normal rate. At 99.5% of c, time slows by a factor of 10.\n\nIn 1971, physicists Joseph Hafele and Richard Keating placed ultra-precise atomic clocks on commercial airliners that flew around the world, then compared them to identical clocks that stayed on the ground. The flying clocks lost about 59 nanoseconds relative to the ground clocks — exactly matching Einstein\'s predictions when both special relativity (velocity-based time dilation) and general relativity (gravitational time dilation) were accounted for. Muons — subatomic particles created when cosmic rays hit the upper atmosphere — provide even more dramatic evidence. Muons decay in about 2.2 microseconds at rest, which should mean they travel only 660 metres before vanishing. Yet they are routinely detected at the Earth\'s surface, 10 km below where they were created. They survive the journey because, travelling at 99.8% of c, their internal "clock" runs roughly 15 times slower from our perspective.\n\nThe most practical demonstration of time dilation is the Global Positioning System. GPS satellites orbit at 20,200 km altitude and travel at about 14,000 km/h. Special relativity causes their clocks to lose about 7 microseconds per day relative to ground clocks (because they are moving). However, general relativity causes their clocks to gain about 45 microseconds per day (because they are higher in Earth\'s gravitational field, where gravity is weaker and time runs faster). The net effect is a gain of about 38 microseconds per day. If this were not corrected, GPS positions would drift by about 10 km per day, rendering the system useless. Every GPS satellite carries corrections based on Einstein\'s equations — your phone\'s map depends on relativity.',
-      intermediateContent:
-        'The time dilation formula: **Δt = γΔt₀**, where Δt₀ is the proper time (measured by a clock at rest relative to the event) and γ = 1/√(1 − v²/c²). At v = 0.6c: γ = 1/√(1 − 0.36) = 1/√0.64 = **1.25** — a moving clock ticks 25% slower. At v = 0.87c: γ = **2.0** — time passes at half the rate. At v = 0.99c: γ = **7.09**. At v = 0.999c: γ = **22.4**. Muon example: muons created at 10 km altitude travel at 0.998c (γ = 15.8). In the muon\'s frame, it lives for 2.2 μs and travels only 2.2×10⁻⁶ × 0.998 × 3×10⁸ = **659 m**. But from Earth\'s frame, its lifetime is dilated to 15.8 × 2.2 = **34.8 μs**, during which it travels 34.8×10⁻⁶ × 0.998 × 3×10⁸ = **10,418 m** — reaching the ground. GPS correction: satellite clocks gain 38 μs/day (45 μs from gravitational time dilation minus 7 μs from velocity time dilation). Without correction, positions would drift by c × 38×10⁻⁶ = **11.4 km per day**.',
-      advancedContent:
-        'Time dilation leads to the famous **twin paradox**: if one twin travels to a star at near-light speed and returns, they age less than the twin who stayed on Earth. This is NOT a true paradox — the travelling twin experiences acceleration (changing reference frames), breaking the symmetry. The proper time along a worldline is τ = ∫√(1 − v²/c²)dt, and the stay-at-home twin\'s worldline is always longer in spacetime (a straight line maximises proper time in Minkowski spacetime — the opposite of Euclidean geometry where straight lines minimise distance). **Gravitational time dilation** (from general relativity): Δt = Δt₀/√(1 − 2GM/(rc²)) = Δt₀/√(1 − r_s/r). On Earth\'s surface: clocks tick slower by a factor of ~1 − 7 × 10⁻¹⁰ compared to a clock at infinity. At the event horizon of a black hole (r = r_s): time stops from the perspective of a distant observer. The recently imaged black holes (M87*, Sgr A* by the Event Horizon Telescope, 2019/2022) show the "shadow" predicted by the extreme time dilation and light bending near the event horizon.',
       diagram: 'LightClockDiagram',
+      beginnerContent:
+        'Moving clocks tick more slowly. This is not a metaphor or an illusion — it is a measured, confirmed fact of nature.\n\n' +
+        '**Analogy:** Imagine two people walking from A to B. One walks straight. The other zigzags. The zigzagger covers more ground and takes longer. A moving clock is like the zigzagger — its "path through time" is longer, so it ticks fewer times.\n\n' +
+        '**Try the diagram above** — drag the velocity slider to see how the light clock\'s bouncing light takes a longer path when the clock moves, causing it to tick slower.\n\n' +
+        'The formula is: **time_observed = gamma x time_proper**, where gamma = 1/sqrt(1 - v²/c²)\n\n' +
+        '| Speed (v) | gamma | What happens |\n' +
+        '|-----------|-------|--------------|\n' +
+        '| 0 (standing still) | 1.00 | No effect — time passes normally |\n' +
+        '| 0.1c (10% of light) | 1.005 | Time 0.5% slower — unnoticeable |\n' +
+        '| 0.5c (50% of light) | 1.15 | Time 15% slower |\n' +
+        '| 0.87c | 2.00 | Time passes at **half** the rate |\n' +
+        '| 0.99c | 7.09 | 1 year of travel = 7 years on Earth |\n' +
+        '| 0.999c | 22.4 | 1 year of travel = 22 years on Earth |\n\n' +
+        '**Real evidence:**\n\n' +
+        '| Experiment | What happened | Match with Einstein? |\n' +
+        '|-----------|--------------|---------------------|\n' +
+        '| Hafele-Keating (1971) | Atomic clocks flown around the world lost 59 ns vs ground clocks | Yes, exact |\n' +
+        '| Cosmic ray muons | Muons (lifespan 2.2 us) detected 10 km below creation point | Yes — gamma ~ 15 stretches their life |\n' +
+        '| GPS satellites | Clocks drift 38 us/day without relativistic correction | Yes — corrected in firmware |\n\n' +
+        '**The GPS story:** Without Einstein\'s corrections, your phone\'s map would be wrong by **10 km per day**. Every GPS satellite carries relativistic corrections. Relativity is not abstract — it is in your pocket.',
+      intermediateContent:
+        '**Worked example — muon survival:**\n\n' +
+        'Muons are created at ~10 km altitude, travelling at 0.998c. Their rest-frame lifetime is 2.2 microseconds.\n\n' +
+        '| Frame | Calculation | Result |\n' +
+        '|-------|------------|--------|\n' +
+        '| Muon\'s frame | Distance = v x t = 0.998c x 2.2 us | **659 m** — should not reach ground |\n' +
+        '| Earth\'s frame | gamma = 1/sqrt(1 - 0.998²) = **15.8** | |\n' +
+        '| | Dilated lifetime = 15.8 x 2.2 us = **34.8 us** | |\n' +
+        '| | Distance = 0.998c x 34.8 us = **10,418 m** | Reaches the ground! |\n\n' +
+        '(From the muon\'s frame, it\'s the Earth\'s atmosphere that is length-contracted to 659 m — same physics, different perspective.)\n\n' +
+        '**Worked example — GPS correction:**\n\n' +
+        '| Effect | Source | Daily drift |\n' +
+        '|--------|--------|-------------|\n' +
+        '| Special relativity (velocity) | Satellite speed v ~ 3.87 km/s | Clocks **lose** 7.2 us/day |\n' +
+        '| General relativity (gravity) | Altitude h = 20,200 km | Clocks **gain** 45.9 us/day |\n' +
+        '| **Net effect** | | **+38.7 us/day** |\n' +
+        '| Position error without correction | c x 38.7 us | **11.6 km per day** |\n\n' +
+        '**Calculation detail:**\n\n' +
+        '- SR effect: (v/c)²/2 = (3870 / 3x10⁸)² / 2 = 8.35 x 10⁻¹¹ → 7.2 us/day slower\n' +
+        '- GR effect: g x h / c² = 9.81 x 20,200,000 / (3x10⁸)² = 2.18 x 10⁻⁹ → 45.9 us/day faster',
+      advancedContent:
+        '**The Twin Paradox — resolved:**\n\n' +
+        'Twin A stays on Earth. Twin B flies to Alpha Centauri (4.37 ly) at 0.9c and returns.\n\n' +
+        '| Quantity | Twin A (Earth) | Twin B (traveller) |\n' +
+        '|----------|---------------|-------------------|\n' +
+        '| gamma | 1 | 2.29 |\n' +
+        '| Trip distance (one way) | 4.37 ly | 4.37 / 2.29 = 1.91 ly (length-contracted) |\n' +
+        '| Trip time (one way) | 4.37 / 0.9 = 4.86 years | 4.86 / 2.29 = 2.12 years |\n' +
+        '| Total round trip | **9.71 years** | **4.24 years** |\n' +
+        '| Age difference on return | Twin B is **5.47 years younger** | |\n\n' +
+        'This is NOT a paradox. The situation is asymmetric: Twin B accelerates (changes frames), Twin A does not. The proper time along a worldline is `tau = integral of sqrt(1 - v²/c²) dt`. A straight worldline through spacetime (staying put) **maximises** proper time — the opposite of Euclidean geometry, where straight lines minimise distance.\n\n' +
+        '**Gravitational time dilation** (general relativity):\n\n' +
+        '`dt_observed = dt_proper / sqrt(1 - 2GM/(rc²)) = dt_proper / sqrt(1 - r_s/r)`\n\n' +
+        '| Location | Time dilation relative to infinity |\n' +
+        '|----------|-----------------------------------|\n' +
+        '| Earth\'s surface | Slower by ~7 x 10⁻¹⁰ (0.7 parts per billion) |\n' +
+        '| ISS orbit (408 km) | ~3% less gravitational dilation than surface |\n' +
+        '| GPS orbit (20,200 km) | Noticeably faster — 45.9 us/day gain |\n' +
+        '| Event horizon (r = r_s) | Time **stops** for a distant observer |\n\n' +
+        'The Event Horizon Telescope images of M87* (2019) and Sgr A* (2022) show the "shadow" predicted by extreme time dilation and light bending near a black hole.',
+      interactive: {
+        type: 'true-false',
+        props: {
+          statements: [
+            { text: 'A clock moving at 0.87c runs at about half the rate of a stationary clock.', answer: true, explanation: 'At v = 0.87c, γ ≈ 2, so the moving clock ticks twice as slowly — elapsed time is halved from the stationary observer\'s perspective.' },
+            { text: 'The twin paradox is a true paradox with no resolution in special relativity.', answer: false, explanation: 'It is not a real paradox. The travelling twin accelerates (changes reference frames), breaking the symmetry. The stay-at-home twin ages more.' },
+            { text: 'GPS satellites must correct for both special and general relativistic time dilation to stay accurate.', answer: true, explanation: 'GPS clocks gain ~45.9 μs/day from weaker gravity (general relativity) and lose ~7.2 μs/day from orbital speed (special relativity). Without corrections, positions would drift ~10 km/day.' },
+            { text: 'At the event horizon of a black hole, time passes normally for a falling observer.', answer: true, explanation: 'A freely falling observer notices nothing special at the event horizon — time passes normally for them. It is only a distant observer who sees the falling clock slow to a stop.' },
+          ],
+        },
+      },
     },
+
+    // ── Section 3: E = mc² ────────────────────────────────────
     {
       title: 'E = mc²',
-      beginnerContent:
-        'Einstein\'s most famous equation, E = mc², states that mass and energy are two forms of the same thing, interconvertible at a rate governed by the speed of light squared. Because c is so large (about 3 × 10⁸ m/s), c² is enormous: 9 × 10¹⁶ m²/s². This means a tiny amount of mass contains a staggering amount of energy. One kilogram of matter, if fully converted to energy, would yield 9 × 10¹⁶ Joules — equivalent to the energy released by about 21 megatons of TNT, or enough to power a large city for several years. In practice, complete mass-to-energy conversion occurs only when matter meets antimatter; nuclear reactions convert less than 1% of the mass involved.\n\nNuclear weapons demonstrate E = mc² with terrifying directness. The bomb dropped on Hiroshima converted less than one gram of matter into energy — about the mass of a paperclip — yet released energy equivalent to 15,000 tonnes of TNT, devastating an entire city. In nuclear fission, the mass of the products is slightly less than the mass of the starting materials; this "mass defect" appears as kinetic energy of the fragments and radiation. In fusion, the same principle applies: four hydrogen nuclei (total mass 4.03130 atomic mass units) fuse into one helium nucleus (mass 4.00268 amu), and the difference of 0.02862 amu is released as energy. That 0.7% mass difference is what powers every star.\n\nE = mc² also explains why no massive object can reach the speed of light. As an object accelerates, its kinetic energy increases — and since energy is equivalent to mass, the object\'s effective inertia (its resistance to further acceleration) increases too. Near the speed of light, the effective inertia approaches infinity, requiring infinite energy for any further acceleration. This is not a technical barrier to be overcome by better engines — it is woven into the fabric of spacetime itself. The equation unifies concepts that Newton treated as entirely separate (mass and energy) into a single, elegant framework that has withstood over a century of experimental testing without a single confirmed violation.',
-      intermediateContent:
-        'Worked examples of mass-energy equivalence. (1) A 1 kg mass fully converted: E = 1 × (3×10⁸)² = **9 × 10¹⁶ J = 25 billion kWh** — enough to power India for about 20 days. (2) Nuclear fission of 1 kg of ²³⁵U: only 0.09% of mass converts to energy. E = 0.0009 × 1 × (3×10⁸)² = **8.1 × 10¹³ J = 22.5 million kWh**. (3) Burning 1 kg of coal: releases ~30 MJ = 3 × 10⁷ J. Mass converted: m = E/c² = 3×10⁷/(9×10¹⁶) = **3.3 × 10⁻¹⁰ kg** — about 0.3 nanograms, far too small to measure. (4) The Sun: converts 4.3 × 10⁹ kg/s of mass to energy. Over its 10-billion-year lifetime, it will convert ~0.07% of its total mass. (5) Electron-positron annihilation: E = 2 × m_e × c² = 2 × 9.109×10⁻³¹ × (3×10⁸)² = **1.637 × 10⁻¹³ J = 1.022 MeV**, producing two 511 keV gamma-ray photons. This is exactly what PET scanners detect.',
-      advancedContent:
-        'The full energy-momentum relation **E² = (pc)² + (m₀c²)²** is a hyperbola in energy-momentum space. For massless particles (photons, gravitons): E = pc, giving the radiation pressure P_rad = I/c (for absorbed light) or 2I/c (for reflected light). Solar radiation pressure at Earth\'s distance: P = 1361/(3×10⁸) = **4.5 × 10⁻⁶ Pa** — tiny, but enough to push a solar sail spacecraft. The concept of **mass-energy equivalence** extends to binding energy: a helium atom has less mass than 2 protons + 2 neutrons + 2 electrons separately. The mass deficit of 0.0304 u = 28.3 MeV is the binding energy — the energy released when the nucleus assembled. This is why atomic masses are not exact integers. The **AME (Atomic Mass Evaluation)** database lists all measured nuclear masses to precisions of ~10⁻⁹ u, enabling prediction of nuclear reaction energies. In particle physics, the Higgs field gives elementary particles their mass through the **Higgs mechanism**: particles that interact strongly with the Higgs field (like the top quark, m = 173 GeV/c²) are heavy, while those that don\'t interact (photons) are massless. The Higgs boson discovery at CERN (2012, Nobel Prize) confirmed this mechanism.',
       diagram: 'EMCSquaredDiagram',
+      beginnerContent:
+        'Einstein\'s most famous equation says: **mass and energy are two forms of the same thing.**\n\n' +
+        '**Analogy:** Think of ice and water. They look different, but they are the same substance in different forms. Mass and energy are like that — you can convert one into the other. The "exchange rate" is c², which is enormous.\n\n' +
+        '`E = mc²`\n' +
+        '`c² = (3 x 10⁸)² = 9 x 10¹⁶ m²/s²`\n\n' +
+        'This means a tiny amount of mass contains a staggering amount of energy:\n\n' +
+        '| Mass converted | Energy released | Equivalent to |\n' +
+        '|---------------|----------------|---------------|\n' +
+        '| 1 kg | 9 x 10¹⁶ J | 21 megatons of TNT — powers a city for years |\n' +
+        '| 1 g (a paperclip) | 9 x 10¹³ J | Hiroshima bomb (15,000 tonnes of TNT) |\n' +
+        '| 1 mg (a grain of sand) | 9 x 10¹⁰ J | 21 tonnes of TNT |\n' +
+        '| 0.3 nanograms | 3 x 10⁷ J | Burning 1 kg of coal |\n\n' +
+        '**Where does this happen in nature?**\n\n' +
+        '| Process | Mass converted | Where |\n' +
+        '|---------|---------------|-------|\n' +
+        '| Nuclear fusion (4H -> He) | 0.7% of hydrogen mass | Every star, including the Sun |\n' +
+        '| Nuclear fission (U-235 splitting) | 0.09% of uranium mass | Nuclear power plants, reactors |\n' +
+        '| Matter-antimatter annihilation | 100% of both particles | PET medical scanners |\n' +
+        '| Chemical burning (coal, petrol) | 0.0000001% | Too small to measure on a scale |\n\n' +
+        'The Sun converts **4.3 million tonnes of mass into energy every second** — and has been doing so for 4.6 billion years. The warmth on your face in a Jorhat tea garden is E = mc² at work, from 150 million km away.\n\n' +
+        '**Why you can\'t reach light speed:** As an object speeds up, its kinetic energy increases. Since energy = mass (E = mc²), the object\'s effective inertia grows. Near c, the inertia approaches infinity, requiring infinite energy. This is not a barrier to overcome — it is the structure of spacetime.',
+      intermediateContent:
+        '**Worked example 1 — Full conversion (1 kg):**\n\n' +
+        '`E = mc² = 1 x (3 x 10⁸)² = 9 x 10¹⁶ J`\n\n' +
+        'India consumed ~1,600 TWh of electricity in 2023. That is 1,600 x 10⁹ x 3600 = 5.76 x 10¹⁸ J per year. So 1 kg of matter fully converted would power India for 9 x 10¹⁶ / (5.76 x 10¹⁸ / 365) = **~5.7 days**.\n\n' +
+        '**Worked example 2 — Nuclear fission of 1 kg U-235:**\n\n' +
+        '`Only 0.09% converts: E = 0.0009 x 1 x (3 x 10⁸)² = 8.1 x 10¹³ J = 22.5 million kWh`\n\n' +
+        '**Worked example 3 — The Sun\'s energy budget:**\n\n' +
+        '| Quantity | Value |\n' +
+        '|----------|-------|\n' +
+        '| Luminosity (power output) | 3.846 x 10²⁶ W |\n' +
+        '| Mass converted per second | P/c² = 3.846 x 10²⁶ / (9 x 10¹⁶) = **4.27 x 10⁹ kg/s** |\n' +
+        '| Total mass | 1.989 x 10³⁰ kg |\n' +
+        '| Fraction converted in 10 billion years | ~0.07% |\n\n' +
+        '**Worked example 4 — Electron-positron annihilation (PET scanner):**\n\n' +
+        '`E = 2 x m_e x c² = 2 x 9.109 x 10⁻³¹ x (3 x 10⁸)² = 1.637 x 10⁻¹³ J = 1.022 MeV`\n\n' +
+        'This produces two gamma-ray photons, each with 511 keV, flying in opposite directions. PET scanners detect these pairs to build 3D images of tumour locations.\n\n' +
+        '**Energy comparison table:**\n\n' +
+        '| Fuel source (1 kg) | Energy (J) | Mass converted | Ratio to coal |\n' +
+        '|--------------------|-----------|---------------|---------------|\n' +
+        '| Coal (burning) | 3 x 10⁷ | 0.3 ng | 1x |\n' +
+        '| TNT (detonation) | 4.6 x 10⁶ | 0.05 ng | 0.15x |\n' +
+        '| Uranium-235 (fission) | 8.1 x 10¹³ | 0.9 g | **2,700,000x** |\n' +
+        '| Deuterium (fusion) | 3.4 x 10¹⁴ | 3.8 g | **11,300,000x** |\n' +
+        '| Full conversion (matter + antimatter) | 9 x 10¹⁶ | 1,000 g | **3,000,000,000x** |',
+      advancedContent:
+        '**The full energy-momentum relation:**\n\n' +
+        '`E² = (pc)² + (m₀c²)²`\n\n' +
+        'This is a hyperbola in energy-momentum space. Three special cases:\n\n' +
+        '| Case | Condition | Result |\n' +
+        '|------|-----------|--------|\n' +
+        '| Particle at rest | p = 0 | E = m₀c² (rest energy) |\n' +
+        '| Massless particle | m₀ = 0 | E = pc (all energy is momentum) |\n' +
+        '| Ultrarelativistic | E >> m₀c² | E ≈ pc (mass is negligible) |\n\n' +
+        '**Radiation pressure** from massless photons:\n\n' +
+        '- Absorbed light: P = I/c = 1361 / (3 x 10⁸) = **4.5 x 10⁻⁶ Pa** (at Earth\'s distance from Sun)\n' +
+        '- Reflected light: P = 2I/c = **9.1 x 10⁻⁶ Pa**\n\n' +
+        'This tiny pressure is enough to push a solar sail spacecraft — JAXA\'s IKAROS (2010) demonstrated this.\n\n' +
+        '**Nuclear binding energy and the mass defect:**\n\n' +
+        'A helium-4 nucleus weighs less than its parts:\n\n' +
+        '| Component | Mass (u) |\n' +
+        '|-----------|----------|\n' +
+        '| 2 protons | 2 x 1.00728 = 2.01456 |\n' +
+        '| 2 neutrons | 2 x 1.00866 = 2.01732 |\n' +
+        '| **Sum of parts** | **4.03188** |\n' +
+        '| Helium-4 nucleus | **4.00260** |\n' +
+        '| **Mass defect** | **0.02928 u = 27.3 MeV** |\n\n' +
+        'This 0.7% mass defect is the binding energy — released when the nucleus assembles. It is why atomic masses are not exact integers, and why fusion powers stars.\n\n' +
+        '**The Higgs mechanism:** Elementary particles get mass through interaction with the Higgs field. Strongly interacting particles (top quark: m = 173 GeV/c²) are heavy; non-interacting particles (photon) are massless. Confirmed by the Higgs boson discovery at CERN in 2012.',
+      interactive: {
+        type: 'matching',
+        props: {
+          title: 'Match each process to its mass-energy conversion',
+          pairs: [
+            ['Chemical burning (coal)', 'Converts ~0.0000001% of mass — too small to weigh'],
+            ['Nuclear fission (uranium)', 'Converts ~0.09% of mass — powers nuclear reactors'],
+            ['Nuclear fusion (hydrogen)', 'Converts ~0.7% of mass — powers every star'],
+            ['Matter-antimatter annihilation', 'Converts 100% of mass — used in PET scanners'],
+          ],
+        },
+      },
     },
+
+    // ── Section 4: Relativity in Daily Life ───────────────────
     {
       title: 'Relativity in Daily Life',
       beginnerContent:
-        'Relativity is often perceived as abstract theory with no connection to everyday experience, but this could not be further from the truth. GPS navigation, as discussed, relies on relativistic corrections — without them, your phone\'s location would be off by kilometres. Particle accelerators like CERN\'s Large Hadron Collider routinely accelerate protons to 99.9999991% of the speed of light, where relativistic effects dominate entirely. At this speed, a proton\'s effective inertia is over 7,000 times its rest mass, and the machine\'s magnets must be designed accordingly. Every element heavier than iron in the periodic table was forged in stellar explosions where E = mc² governed the energy budget.\n\nIn medicine, Positron Emission Tomography (PET) scans work because of E = mc². A radioactive tracer injected into the body emits positrons (antimatter electrons), which immediately collide with ordinary electrons. Each matter-antimatter pair annihilates completely, converting all their mass into two gamma rays that fly off in opposite directions. Detectors around the patient capture these gamma ray pairs and use their timing to reconstruct a 3D image of where the tracer accumulated — revealing tumours, brain activity, or heart function. Nuclear power plants split uranium atoms and convert mass into energy that heats water to spin turbines. Even the warmth of the Sun on your face is a consequence of mass being converted to energy 150 million kilometres away. Relativity is not esoteric — it is the physics behind your phone, your medical scans, and the star that sustains all life on Earth.',
+        'Relativity is not abstract — it is the physics behind your phone, your medical scans, and the star that sustains all life.\n\n' +
+        '**Analogy:** People think of relativity like quantum mechanics — weird, irrelevant, only for physicists. But while you may never meet a quantum effect in daily life, you *use* relativity every time you open Google Maps.\n\n' +
+        '| Application | Relativistic effect | What happens without it |\n' +
+        '|-------------|--------------------|-----------------------|\n' +
+        '| GPS navigation | Time dilation (SR + GR) | Position off by 10+ km/day |\n' +
+        '| PET medical scans | E = mc² (matter-antimatter annihilation) | No way to image tumours non-invasively |\n' +
+        '| Nuclear power | E = mc² (fission) | No nuclear energy |\n' +
+        '| Sunshine | E = mc² (fusion) | No Sun, no life |\n' +
+        '| Gold\'s colour | Relativistic electron speeds | Gold would look silver |\n' +
+        '| Lead-acid car batteries | Relativistic effect on lead | Batteries would produce 80% less voltage |\n\n' +
+        '**The gold connection:** Gold\'s inner electrons orbit so fast (due to the heavy nucleus) that relativistic effects shrink their orbits and change which wavelengths of light gold absorbs. Without relativity, gold would reflect all visible light equally — it would look **silver**. The same effect makes mercury liquid at room temperature.\n\n' +
+        'The Indian Space Research Organisation (ISRO) applies relativistic corrections to the NavIC satellite navigation system (India\'s regional GPS alternative, 7 satellites). IIT Guwahati conducts research on relativistic plasma physics and high-energy particle interactions, while Tezpur University has published on relativistic astrophysics, studying pulsars and neutron star physics.\n\n' +
+        '**Quick check:** If GPS satellites did not correct for relativity, how far off would your location be after one week?\n\n' +
+        '*About 10 km/day x 7 = 70 km — you\'d think you were in a completely different district!*',
       intermediateContent:
-        'GPS relativistic correction: each satellite carries an atomic clock accurate to ~1 ns. Special relativity (satellite speed v ≈ 3.87 km/s): time dilation = (v/c)²/2 = (3870/3×10⁸)²/2 = **8.35 × 10⁻¹¹**, causing clocks to lose ~7.2 μs/day. General relativity (altitude h = 20,200 km): gravitational time dilation ≈ gh/c² = 9.81 × 20,200,000/(3×10⁸)² = **2.18 × 10⁻⁹**, causing clocks to gain ~45.9 μs/day. Net: gain of **38.7 μs/day**. Position error without correction: c × 38.7×10⁻⁶ = **11.6 km per day**. PET scan physics: ¹⁸F-fluorodeoxyglucose (FDG) emits a positron that annihilates with a nearby electron within ~1 mm. The two 511 keV gamma rays emerge at almost exactly 180° (conservation of momentum). Coincidence detection within a ~10 ns time window localises the annihilation to a line, and tomographic reconstruction from many such lines produces a 3D image with ~4 mm spatial resolution.',
+        '**GPS — the most precise test of relativity in your pocket:**\n\n' +
+        '| Parameter | Value |\n' +
+        '|-----------|-------|\n' +
+        '| Number of satellites | 24-32 (US GPS); 7 (NavIC, India) |\n' +
+        '| Orbital altitude | 20,200 km (GPS); 36,000 km (NavIC GEO) |\n' +
+        '| Orbital speed | 3.87 km/s (GPS) |\n' +
+        '| Clock precision | ~1 nanosecond |\n' +
+        '| SR time dilation (velocity) | Clocks lose 7.2 us/day |\n' +
+        '| GR time dilation (gravity) | Clocks gain 45.9 us/day |\n' +
+        '| Net daily correction | +38.7 us/day |\n' +
+        '| Error without correction | 11.6 km/day |\n\n' +
+        '**PET scanner physics — E = mc² in a hospital:**\n\n' +
+        '| Step | What happens |\n' +
+        '|------|-------------|\n' +
+        '| 1. Injection | Patient receives ¹⁸F-FDG (radioactive glucose) |\n' +
+        '| 2. Accumulation | Cancer cells consume more glucose → tracer concentrates in tumours |\n' +
+        '| 3. Decay | ¹⁸F emits a positron (antimatter electron) |\n' +
+        '| 4. Annihilation | Positron meets electron within ~1 mm → both destroyed |\n' +
+        '| 5. Gamma rays | Two 511 keV photons fly in opposite directions (E = mc²) |\n' +
+        '| 6. Detection | Ring of detectors captures both photons within ~10 ns |\n' +
+        '| 7. Reconstruction | Computer builds 3D image from thousands of photon pairs |\n\n' +
+        '**Particle accelerators — where relativity dominates:**\n\n' +
+        '| Accelerator | Particle speed | gamma | Effective mass |\n' +
+        '|------------|---------------|-------|----------------|\n' +
+        '| Medical cyclotron | 0.14c | 1.01 | ~1% heavier |\n' +
+        '| Tevatron (Fermilab) | 0.99999954c | 1,000 | 1,000x rest mass |\n' +
+        '| LHC (CERN) | 0.999999991c | 7,462 | 7,462x rest mass |\n\n' +
+        'At LHC energies, each proton has kinetic energy equivalent to a flying mosquito (~1 microjoule) — concentrated in a volume of ~1 femtometre cubed.',
       advancedContent:
-        'The interplay of special and general relativity is tested to extraordinary precision by modern experiments. **Gravity Probe B** (2004-2005) measured the geodetic precession of gyroscopes in orbit (6,606 milliarcseconds/year, matching GR to 0.28%) and the frame-dragging effect (37.2 mas/yr, matching GR to 19%). The **ACES mission** (Atomic Clock Ensemble in Space) on the ISS will compare space and ground clocks to 10⁻¹⁶ fractional frequency — testing the gravitational redshift to parts per million. **Relativistic heavy-ion collisions** at CERN\'s LHC (Pb-Pb at √s_NN = 5.02 TeV) create a quark-gluon plasma at temperatures exceeding 4 × 10¹² K, where quarks and gluons exist freely for ~10⁻²³ seconds before hadronizing. This reproduces conditions ~10 microseconds after the Big Bang. At the LHC, proton bunches cross at relative γ ≈ 7,462 — each proton has kinetic energy equivalent to a flying mosquito (~1 μJ), concentrated in a volume of ~1 fm³. The discovery of gravitational waves from merging neutron stars (GW170817) enabled a test of the speed of gravity versus light: they arrived within 1.7 seconds of each other after travelling 130 million light-years, constraining |v_gravity − c|/c < **3 × 10⁻¹⁵**.',
+        '**Modern precision tests of relativity:**\n\n' +
+        '| Experiment | Year | What was tested | Precision |\n' +
+        '|-----------|------|----------------|----------|\n' +
+        '| Gravity Probe B | 2004-05 | Geodetic precession of gyroscopes in orbit | 0.28% match with GR |\n' +
+        '| Gravity Probe B | 2004-05 | Frame-dragging (spacetime twisted by Earth\'s rotation) | 19% match with GR |\n' +
+        '| LIGO/Virgo (GW150914) | 2015 | Gravitational waves from merging black holes | Confirmed GR prediction |\n' +
+        '| EHT (M87*) | 2019 | Black hole shadow — extreme time dilation + light bending | Matches GR |\n' +
+        '| EHT (Sgr A*) | 2022 | Milky Way\'s central black hole | Matches GR |\n' +
+        '| GW170817 | 2017 | Speed of gravity vs speed of light | |v_grav - c|/c < 3 x 10⁻¹⁵ |\n\n' +
+        '**Gravitational waves — ripples in spacetime:**\n\n' +
+        'When massive objects accelerate (merging black holes, neutron stars), they create ripples in spacetime itself — gravitational waves. LIGO detects these by measuring length changes of ~10⁻¹⁸ metres (1/1000 the diameter of a proton) over 4 km arms.\n\n' +
+        'The neutron star merger GW170817 (2017) was detected in both gravitational waves and light (gamma rays). The signals arrived within **1.7 seconds** of each other after travelling **130 million light-years**. This constrains:\n\n' +
+        '`|v_gravity - c| / c < 3 x 10⁻¹⁵`\n\n' +
+        '— the most precise confirmation that gravity travels at exactly the speed of light.\n\n' +
+        '**Relativistic heavy-ion collisions** at the LHC (Pb-Pb at sqrt(s_NN) = 5.02 TeV) create a **quark-gluon plasma** at temperatures exceeding 4 x 10¹² K, where quarks and gluons exist freely for ~10⁻²³ seconds before hadronising. This reproduces conditions ~10 microseconds after the Big Bang.\n\n' +
+        '**Why gold is gold and mercury is liquid:**\n\n' +
+        'Gold\'s 79 electrons include inner s-electrons that "orbit" at ~58% of light speed. At this speed, gamma = 1.22, causing the orbital to contract by ~22%. This shifts gold\'s absorption edge into the blue range, making it reflect yellow/red — giving gold its distinctive colour. Without relativity, gold would reflect uniformly like silver. The same relativistic contraction weakens mercury\'s interatomic bonds, making it liquid at room temperature.',
+      interactive: {
+        type: 'true-false',
+        props: {
+          statements: [
+            {
+              text: 'GPS would work fine without relativistic corrections — the error is too small to matter.',
+              answer: false,
+              explanation: 'Without corrections, GPS positions would drift by ~11.6 km per day. After a week, your phone would place you 80 km away. Every GPS satellite carries Einstein\'s equations in its firmware.',
+            },
+            {
+              text: 'Gold\'s yellow colour is caused by relativistic effects on its inner electrons.',
+              answer: true,
+              explanation: 'Gold\'s inner s-electrons move at ~58% of c. Relativistic orbital contraction shifts which wavelengths gold absorbs, making it reflect yellow. Without relativity, gold would look silver.',
+            },
+            {
+              text: 'The speed of gravity has been confirmed to equal the speed of light.',
+              answer: true,
+              explanation: 'The neutron star merger GW170817 produced gravitational waves and gamma rays that arrived within 1.7 seconds of each other after 130 million light-years of travel, confirming |v_gravity - c|/c < 3 x 10⁻¹⁵.',
+            },
+            {
+              text: 'PET scanners detect X-rays bouncing off tumours.',
+              answer: false,
+              explanation: 'PET scanners detect gamma rays from matter-antimatter annihilation (E = mc²). A positron from a radioactive tracer meets an electron, both are destroyed, and two 511 keV gamma photons fly in opposite directions.',
+            },
+          ],
+        },
+      },
     },
   ],
 };

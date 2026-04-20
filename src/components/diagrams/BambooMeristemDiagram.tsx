@@ -1,110 +1,209 @@
+import { useState, useEffect } from 'react';
+
+// ── Watch It Grow ────────────────────────────────────────────
+// Animated bamboo shoot growing upward in real time. New cells
+// divide at the apical meristem (glowing tip), elongate below,
+// and the stem visibly extends. Growth counter shows cm/hour.
+
+interface Cell {
+  id: number;
+  y: number;
+  height: number;
+  age: number;
+  dividing: boolean;
+}
+
+let cId = 0;
+
 export default function BambooMeristemDiagram() {
+  const [tick, setTick] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [cells, setCells] = useState<Cell[]>(() =>
+    Array.from({ length: 8 }, (_, i) => ({
+      id: cId++, y: 300 - i * 25, height: 22, age: 100 + i * 20, dividing: false,
+    }))
+  );
+  const [totalGrowth, setTotalGrowth] = useState(0);
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(() => setTick(t => t + 1), 40);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  const W = 340, H = 420;
+  const stemX = W / 2;
+  const stemWidth = 40;
+
+  useEffect(() => {
+    if (paused) return;
+
+    setCells(prev => {
+      let updated = prev.map(c => {
+        // Young cells elongate (grow taller)
+        if (c.age < 60) {
+          const growth = 0.15;
+          setTotalGrowth(g => g + growth);
+          return { ...c, height: c.height + growth, y: c.y - growth, age: c.age + 1 };
+        }
+        return { ...c, age: c.age + 1 };
+      });
+
+      // Top cell divides every ~80 ticks
+      if (tick % 80 === 0 && updated.length < 20) {
+        const topCell = updated.reduce((a, b) => a.y < b.y ? a : b);
+        const newCell: Cell = {
+          id: cId++,
+          y: topCell.y - 12,
+          height: 10,
+          age: 0,
+          dividing: true,
+        };
+        updated = [...updated, newCell];
+        // Flash the dividing state
+        setTimeout(() => {
+          setCells(c => c.map(cell => cell.id === newCell.id ? { ...cell, dividing: false } : cell));
+        }, 500);
+      }
+
+      // Shift everything down slightly to keep the growing tip in view
+      if (updated.length > 12) {
+        const shift = 0.1;
+        updated = updated.map(c => ({ ...c, y: c.y + shift }));
+        // Remove cells that go below view
+        updated = updated.filter(c => c.y < H - 20);
+      }
+
+      return updated;
+    });
+  }, [tick, paused]);
+
+  // Meristem glow at the tip
+  const topY = cells.length > 0 ? Math.min(...cells.map(c => c.y)) : 100;
+  const meristemGlow = 0.4 + Math.sin(tick * 0.1) * 0.2;
+
+  // Growth rate display
+  const growthCm = (totalGrowth * 0.1).toFixed(1);
+
   return (
-    <div className="w-full max-w-xl mx-auto my-4">
-      <svg
-        viewBox="0 0 700 500"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-auto"
-        role="img"
-        aria-label="Bamboo intercalary growth: meristems at every node grow simultaneously, like building every floor at once"
-      >
-        <rect width="700" height="500" rx="10" className="fill-white dark:fill-slate-950" />
-        <text x="350" y="32" textAnchor="middle" fontSize="15" fontWeight="700" className="fill-emerald-600 dark:fill-emerald-400">
-          Meristems: 60 Growth Engines in Parallel
-        </text>
+    <div className="bg-gradient-to-b from-emerald-50 via-lime-50 to-stone-50 dark:from-emerald-950 dark:via-lime-950 dark:to-stone-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-xs font-bold text-lime-700 dark:text-lime-400 uppercase tracking-wider">
+          Watch It Grow — Bamboo Meristem
+        </p>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-lime-700 dark:text-lime-300 font-mono">{growthCm} cm grown</span>
+          <button
+            onClick={() => setPaused(!paused)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            {paused ? '▶ Play' : '⏸ Pause'}
+          </button>
+        </div>
+      </div>
 
-        {/* Bamboo culm cross-section */}
-        <rect x="40" y="60" width="280" height="400" rx="8" className="fill-gray-50 dark:fill-slate-900/50 stroke-gray-200 dark:stroke-slate-700" strokeWidth="1" />
-        <text x="180" y="82" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">Bamboo Culm</text>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xs mx-auto" role="img"
+        aria-label="Animated bamboo shoot growing — cells divide at the meristem and elongate below">
 
-        {/* Segments with nodes */}
-        {[0, 1, 2, 3, 4, 5].map((i) => {
-          const y = 100 + i * 55;
+        {/* Bamboo stem background */}
+        <rect x={stemX - stemWidth / 2} y={topY - 10} width={stemWidth} height={H - topY}
+          fill="#365314" opacity="0.3" rx="6" />
+
+        {/* Individual cells */}
+        {cells.map(cell => {
+          const youngness = Math.max(0, 1 - cell.age / 80);
+          const cellColor = cell.dividing
+            ? '#fde047' // flash yellow when dividing
+            : `rgb(${34 + youngness * 100}, ${197 - youngness * 50}, ${94 - youngness * 30})`;
+          const borderColor = cell.dividing ? '#fbbf24' : '#166534';
+
           return (
-            <g key={i}>
-              {/* Internode (segment) */}
-              <rect x="140" y={y} width="80" height={i < 5 ? 42 : 0} rx="3" className="fill-emerald-100 dark:fill-emerald-900/30" stroke="#10b981" strokeWidth="1" />
-              {i < 5 && <text x="180" y={y + 25} textAnchor="middle" fontSize="9" className="fill-emerald-700 dark:fill-emerald-300">Internode</text>}
-              {/* Node (growth zone) */}
-              <rect x="130" y={y + 42} width="100" height="10" rx="2" fill="#f59e0b" opacity="0.5" stroke="#d97706" strokeWidth="1" />
-              {/* Growth arrows */}
-              <path d={`M 120 ${y + 47} L 120 ${y + 30}`} fill="none" stroke="#ef4444" strokeWidth="1.5" markerEnd="url(#arrow-red-bm)" />
-              <path d={`M 240 ${y + 47} L 240 ${y + 30}`} fill="none" stroke="#ef4444" strokeWidth="1.5" markerEnd="url(#arrow-red-bm)" />
+            <g key={cell.id}>
+              <rect
+                x={stemX - stemWidth / 2 + 3}
+                y={cell.y}
+                width={stemWidth - 6}
+                height={Math.max(2, cell.height - 2)}
+                fill={cellColor}
+                stroke={borderColor}
+                strokeWidth="1"
+                rx="3"
+                opacity={0.8}
+              />
+              {/* Nucleus dot */}
+              <circle
+                cx={stemX}
+                cy={cell.y + cell.height / 2}
+                r={cell.dividing ? 3 : 2}
+                fill={cell.dividing ? '#fde047' : '#0f5132'}
+                opacity="0.7"
+              />
+              {/* Division line when splitting */}
+              {cell.dividing && (
+                <line x1={stemX - 12} y1={cell.y + cell.height / 2}
+                  x2={stemX + 12} y2={cell.y + cell.height / 2}
+                  stroke="#fde047" strokeWidth="1.5" strokeDasharray="3,2" />
+              )}
             </g>
           );
         })}
 
-        {/* Node labels */}
-        <text x="70" y="152" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-amber-600 dark:fill-amber-400">Node</text>
-        <text x="70" y="165" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">(meristem)</text>
-        <line x1="95" y1="150" x2="130" y2="147" className="stroke-amber-400 dark:stroke-amber-600" strokeWidth="1" />
+        {/* Meristem glow at tip */}
+        <circle cx={stemX} cy={topY - 5} r="20"
+          fill="#84cc16" opacity={meristemGlow * 0.3} />
+        <circle cx={stemX} cy={topY - 5} r="10"
+          fill="#a3e635" opacity={meristemGlow * 0.5} />
 
-        <text x="275" y="132" textAnchor="end" fontSize="9" className="fill-red-500 dark:fill-red-400">\u2191 Growth</text>
+        {/* Labels */}
+        <g opacity="0.7">
+          {/* Meristem label */}
+          <line x1={stemX + 30} y1={topY - 5} x2={stemX + 70} y2={topY - 20}
+            stroke="#84cc16" strokeWidth="1" />
+          <text x={stemX + 73} y={topY - 22} fill="#a3e635" fontSize="9" fontWeight="600">
+            Apical meristem
+          </text>
+          <text x={stemX + 73} y={topY - 12} fill="#86efac" fontSize="7">
+            (cell division zone)
+          </text>
 
-        <defs>
-          <marker id="arrow-red-bm" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
-            <path d="M0,0 L6,2.5 L0,5" fill="#ef4444" />
-          </marker>
-        </defs>
+          {/* Elongation zone */}
+          <line x1={stemX + 30} y1={topY + 40} x2={stemX + 70} y2={topY + 50}
+            stroke="#22c55e" strokeWidth="1" />
+          <text x={stemX + 73} y={topY + 48} fill="#22c55e" fontSize="9" fontWeight="600">
+            Elongation zone
+          </text>
+          <text x={stemX + 73} y={topY + 58} fill="#86efac" fontSize="7">
+            (cells stretch 10-100×)
+          </text>
 
-        {/* Right panel: comparison */}
-        <rect x="360" y="60" width="310" height="180" rx="8" className="fill-gray-50 dark:fill-slate-900/50 stroke-gray-200 dark:stroke-slate-700" strokeWidth="1" />
-        <text x="515" y="82" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">Skyscraper Analogy</text>
-
-        {/* Normal tree = one floor at a time */}
-        <g transform="translate(400, 100)">
-          <rect x="0" y="90" width="50" height="20" rx="2" className="fill-blue-200 dark:fill-blue-800" stroke="#3b82f6" strokeWidth="1" />
-          <rect x="0" y="110" width="50" height="20" rx="2" className="fill-gray-200 dark:fill-gray-700" stroke="#9ca3af" strokeWidth="1" />
-          <rect x="0" y="70" width="50" height="20" rx="2" fill="none" stroke="#9ca3af" strokeWidth="1" strokeDasharray="3 3" />
-          <text x="25" y="105" textAnchor="middle" fontSize="8" className="fill-blue-700 dark:fill-blue-300">Active</text>
-          <text x="25" y="125" textAnchor="middle" fontSize="8" className="fill-gray-500 dark:fill-slate-400">Done</text>
-          <text x="25" y="85" textAnchor="middle" fontSize="8" className="fill-gray-400 dark:fill-slate-500">Waiting</text>
-          <text x="25" y="155" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-gray-600 dark:fill-slate-400">Normal tree</text>
-          <text x="25" y="168" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">1 floor at a time</text>
+          {/* Mature zone */}
+          <line x1={stemX + 30} y1={topY + 120} x2={stemX + 70} y2={topY + 130}
+            stroke="#166534" strokeWidth="1" />
+          <text x={stemX + 73} y={topY + 128} fill="#4ade80" fontSize="9" fontWeight="600">
+            Mature cells
+          </text>
+          <text x={stemX + 73} y={topY + 138} fill="#86efac" fontSize="7">
+            (fully grown, thickened walls)
+          </text>
         </g>
 
-        {/* Bamboo = all floors at once */}
-        <g transform="translate(520, 100)">
-          {[0, 1, 2, 3].map((i) => (
-            <rect key={i} x="0" y={50 + i * 20} width="50" height="20" rx="2" className="fill-emerald-200 dark:fill-emerald-800" stroke="#10b981" strokeWidth="1" />
-          ))}
-          {[0, 1, 2, 3].map((i) => (
-            <text key={i} x="25" y={65 + i * 20} textAnchor="middle" fontSize="8" className="fill-emerald-700 dark:fill-emerald-300">Active</text>
-          ))}
-          <text x="25" y="155" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-emerald-600 dark:fill-emerald-400">Bamboo</text>
-          <text x="25" y="168" textAnchor="middle" fontSize="9" className="fill-gray-500 dark:fill-slate-400">ALL floors at once!</text>
-        </g>
-
-        {/* Cell elongation process */}
-        <rect x="360" y="260" width="310" height="200" rx="8" className="fill-gray-50 dark:fill-slate-900/50 stroke-gray-200 dark:stroke-slate-700" strokeWidth="1" />
-        <text x="515" y="282" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">How Cells Elongate</text>
-
-        {/* Cell stages */}
-        {[
-          { x: 390, w: 30, h: 30, label: 'Small cell', color: 'fill-emerald-300 dark:fill-emerald-700' },
-          { x: 450, w: 30, h: 55, label: 'Auxin loosens\ncell wall', color: 'fill-emerald-200 dark:fill-emerald-600' },
-          { x: 520, w: 30, h: 80, label: 'Water rushes in\n(turgor pressure)', color: 'fill-emerald-100 dark:fill-emerald-500/40' },
-          { x: 590, w: 30, h: 100, label: 'Wall re-stiffens\nwith cellulose', color: 'fill-emerald-200 dark:fill-emerald-700' },
-        ].map(({ x, w, h, label, color }, i) => (
-          <g key={i}>
-            <rect x={x} y={380 - h} width={w} height={h} rx="3" className={color} stroke="#10b981" strokeWidth="1" />
-            {label.split('\n').map((line, li) => (
-              <text key={li} x={x + 15} y={395 + li * 12} textAnchor="middle" fontSize="8" className="fill-gray-600 dark:fill-slate-400">{line}</text>
-            ))}
-            {i < 3 && <text x={x + 40} y={345} fontSize="14" className="fill-emerald-500 dark:fill-emerald-400">\u2192</text>}
-          </g>
-        ))}
-
-        <text x="515" y="440" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          Entire cycle: under 24 hours per cell
-        </text>
-
-        {/* Bottom fact */}
-        <rect x="60" y="468" width="580" height="24" rx="6" className="fill-emerald-50 dark:fill-emerald-950/30 stroke-emerald-200 dark:stroke-emerald-800" strokeWidth="1" />
-        <text x="350" y="484" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">
-          60 nodes \u00d7 parallel growth = up to 91 cm/day
+        {/* Growth speed note */}
+        <text x={stemX} y={H - 10} textAnchor="middle" fill="#6b7280" fontSize="9">
+          Real bamboo grows up to 91 cm/day — the fastest growth of any plant
         </text>
       </svg>
+
+      <div className="flex flex-wrap justify-center gap-3 mt-2 text-xs">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-lime-400" /> New cells (dividing)
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-green-500" /> Elongating
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-green-900" /> Mature
+        </span>
+      </div>
     </div>
   );
 }

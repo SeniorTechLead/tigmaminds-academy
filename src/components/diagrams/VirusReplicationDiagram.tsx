@@ -1,113 +1,234 @@
+import { useState, useEffect } from 'react';
+
+// ── Hijack, Copy, Burst ───────────────────────────────────────
+// Animated lytic cycle: phage lands on bacterium → injects DNA
+// → bacterium bloats with copies → bursts → releases 100+ new
+// viruses. Continuous loop with phase labels. Release counter.
+
 export default function VirusReplicationDiagram() {
-  const steps = [
-    { x: 30, label: '1. Attachment', desc: 'Virus binds\nto cell' },
-    { x: 140, label: '2. Injection', desc: 'DNA enters\ncell' },
-    { x: 250, label: '3. Replication', desc: 'Cell copies\nviral DNA' },
-    { x: 360, label: '4. Assembly', desc: 'New viruses\nassemble' },
-    { x: 470, label: '5. Lysis', desc: 'Cell bursts\nopen' },
-  ];
+  const [tick, setTick] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [burstsCount, setBurstsCount] = useState(0);
+  const [virionsReleased, setVirionsReleased] = useState(0);
+
+  useEffect(() => {
+    if (paused) return;
+    const interval = setInterval(() => setTick(t => t + 1), 30);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  // Lytic cycle: one complete cycle = 300 ticks
+  // 0-50: phage approaching
+  // 50-80: attachment
+  // 80-120: DNA injection
+  // 120-220: replication (bacterium bloats, interior fills with virions)
+  // 220-240: burst
+  // 240-300: new phages drift away, clean slate
+  const cycleTick = tick % 300;
+
+  const W = 520, H = 340;
+  const cx = 260, cy = 170;
+
+  // ── Phase derivations ──
+  const approaching = cycleTick < 50;
+  const attaching = cycleTick >= 50 && cycleTick < 80;
+  const injecting = cycleTick >= 80 && cycleTick < 120;
+  const replicating = cycleTick >= 120 && cycleTick < 220;
+  const bursting = cycleTick >= 220 && cycleTick < 240;
+  const spreading = cycleTick >= 240;
+
+  // Phage (approaches from top-right)
+  const phageX = approaching
+    ? 460 - (cycleTick / 50) * 150
+    : attaching || injecting
+    ? 310
+    : 310;
+  const phageY = approaching
+    ? 40 + (cycleTick / 50) * 100
+    : 140;
+  const phageVisible = cycleTick < 120;
+
+  // Bacterium size (bloats during replication, peaks before burst)
+  const bacteriumScale = replicating
+    ? 1 + ((cycleTick - 120) / 100) * 0.6
+    : bursting
+    ? 1.6 - ((cycleTick - 220) / 20) * 1.6
+    : 1;
+
+  // Internal viruses (appearing during replication)
+  const internalViruses = replicating
+    ? Math.min(40, Math.floor((cycleTick - 120) / 2))
+    : 0;
+
+  // Burst particles (flying out radially)
+  const burstParticles = bursting || spreading
+    ? Array.from({ length: 24 }, (_, i) => {
+        const t = spreading ? (cycleTick - 220) / 60 : (cycleTick - 220) / 20;
+        const angle = (i / 24) * Math.PI * 2;
+        const dist = t * 200;
+        return {
+          x: cx + Math.cos(angle) * dist,
+          y: cy + Math.sin(angle) * dist,
+          opacity: Math.max(0, 1 - t),
+        };
+      })
+    : [];
+
+  // Fire burst counter once per cycle
+  useEffect(() => {
+    if (cycleTick === 220) {
+      setBurstsCount(c => c + 1);
+      setVirionsReleased(v => v + 100);
+    }
+  }, [cycleTick]);
+
+  const phaseLabel = approaching
+    ? '1. Phage approaches bacterium'
+    : attaching
+    ? '2. Tail fibres attach to host surface'
+    : injecting
+    ? '3. DNA injected through tail'
+    : replicating
+    ? '4. Host machinery hijacked — 100s of new viruses assembled'
+    : bursting
+    ? '5. Cell BURSTS (lysis) — viruses released'
+    : '6. New phages drift off to find fresh hosts';
 
   return (
-    <div className="my-4">
-      <svg viewBox="0 0 620 265" className="w-full max-w-xl mx-auto" role="img" aria-label="Virus replication cycle in 5 steps: attachment, injection, replication, assembly, and lysis">
-        <text x="270" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Lytic Cycle (Virus Replication)</text>
+    <div className="bg-gradient-to-b from-purple-50 via-slate-50 to-rose-50 dark:from-purple-950 dark:via-slate-950 dark:to-rose-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+      <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+        <p className="text-xs font-bold text-purple-700 dark:text-purple-400 uppercase tracking-wider">
+          Hijack, Copy, Burst
+        </p>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-rose-700 dark:text-rose-300 font-mono">
+            {burstsCount} bursts • {virionsReleased.toLocaleString()} virions
+          </span>
+          <button
+            onClick={() => setPaused(!paused)}
+            className="text-xs px-2 py-0.5 rounded bg-black/10 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-black/20 dark:hover:bg-white/20 transition"
+          >
+            {paused ? '▶' : '⏸'}
+          </button>
+        </div>
+      </div>
 
-        {/* Step 1: Attachment - virus on cell surface */}
-        <g>
-          <circle cx="65" cy="105" r="35" className="fill-sky-100 dark:fill-sky-900/30 stroke-sky-400" strokeWidth="1.5" />
-          {/* Virus particle on outside */}
-          <polygon points="65,62 60,50 65,55 70,50" className="fill-red-400 dark:fill-red-500" />
-          <circle cx="65" cy="62" r="5" className="fill-red-400 dark:fill-red-500 stroke-red-600" strokeWidth="1" />
-          <text x="65" y="65" textAnchor="middle" className="fill-white" fontSize="10">V</text>
-          <text x="65" y="155" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="600">1. Attach</text>
-          <text x="65" y="168" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Virus binds</text>
-        </g>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
+        aria-label="Animated viral lytic cycle — phage attaches, injects DNA, cell bursts, new viruses released">
 
-        {/* Arrow */}
-        <line x1="105" y1="105" x2="130" y2="105" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" markerEnd="url(#vrArrow)" />
+        {/* ── Bacterium ── */}
+        {!spreading && (
+          <g transform={`translate(${cx}, ${cy}) scale(${bacteriumScale})`}>
+            {/* Cell membrane */}
+            <ellipse cx={0} cy={0} rx={55} ry={40}
+              fill="#10b981" stroke="#047857" strokeWidth="2" opacity="0.75" />
+            {/* Inner cytoplasm tint */}
+            <ellipse cx={0} cy={0} rx={48} ry={34}
+              fill="#34d399" opacity="0.4" />
+            {/* Bacterial DNA (nucleoid) — visible until replication takes over */}
+            {cycleTick < 180 && (
+              <path d="M -20,-5 Q -10,-15 0,-10 Q 10,-5 15,5 Q 5,15 -10,10 Q -25,5 -20,-5"
+                fill="none" stroke="#064e3b" strokeWidth="2" opacity={0.6 - (replicating ? (cycleTick - 120) / 100 : 0) * 0.6} />
+            )}
 
-        {/* Step 2: Injection */}
-        <g>
-          <circle cx="175" cy="105" r="35" className="fill-sky-100 dark:fill-sky-900/30 stroke-sky-400" strokeWidth="1.5" />
-          {/* Empty virus shell on top */}
-          <circle cx="175" cy="62" r="5" fill="none" className="stroke-red-400 dark:stroke-red-500" strokeWidth="1" />
-          {/* DNA line going into cell */}
-          <path d="M 175,67 L 175,85" className="stroke-red-400" strokeWidth="1.5" strokeDasharray="2,1" />
-          {/* DNA inside cell */}
-          <path d="M 165,90 Q 175,100 185,90 Q 175,85 165,90" className="fill-red-300 dark:fill-red-500" opacity="0.6" />
-          <text x="175" y="155" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="600">2. Inject</text>
-          <text x="175" y="168" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">DNA enters</text>
-        </g>
+            {/* Viruses being assembled inside */}
+            {Array.from({ length: internalViruses }, (_, i) => {
+              const a = (i / 40) * Math.PI * 2;
+              const r = 10 + (i % 5) * 6;
+              return (
+                <circle key={`iv-${i}`}
+                  cx={Math.cos(a) * r}
+                  cy={Math.sin(a) * r}
+                  r="2.5" fill="#a855f7" opacity="0.85" />
+              );
+            })}
 
-        <line x1="215" y1="105" x2="240" y2="105" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" markerEnd="url(#vrArrow)" />
+            {/* Stress cracks right before burst */}
+            {cycleTick > 215 && cycleTick < 220 && (
+              [0, 1, 2, 3].map(i => {
+                const a = i * (Math.PI / 2);
+                return (
+                  <line key={`crack-${i}`}
+                    x1={0} y1={0}
+                    x2={Math.cos(a) * 50} y2={Math.sin(a) * 38}
+                    stroke="#fbbf24" strokeWidth="2" opacity="0.8" />
+                );
+              })
+            )}
+          </g>
+        )}
 
-        {/* Step 3: Replication */}
-        <g>
-          <circle cx="285" cy="105" r="35" className="fill-sky-100 dark:fill-sky-900/30 stroke-sky-400" strokeWidth="1.5" />
-          {/* Multiple DNA copies inside */}
-          {[{ x: 275, y: 95 }, { x: 285, y: 105 }, { x: 295, y: 95 }, { x: 280, y: 110 }, { x: 290, y: 112 }].map((p, i) => (
-            <path key={i} d={`M ${p.x - 4},${p.y} Q ${p.x},${p.y + 5} ${p.x + 4},${p.y}`} className="stroke-red-400" strokeWidth="1.5" fill="none" />
-          ))}
-          <text x="285" y="155" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="600">3. Copy</text>
-          <text x="285" y="168" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Cell replicates</text>
-        </g>
+        {/* Burst flash */}
+        {bursting && cycleTick < 230 && (
+          <g>
+            <circle cx={cx} cy={cy} r={100 - (cycleTick - 220) * 4}
+              fill="none" stroke="#fde047" strokeWidth="3" opacity={1 - (cycleTick - 220) / 10} />
+            <circle cx={cx} cy={cy} r={60 - (cycleTick - 220) * 2}
+              fill="#fde047" opacity={0.4 - (cycleTick - 220) / 25} />
+          </g>
+        )}
 
-        <line x1="325" y1="105" x2="350" y2="105" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" markerEnd="url(#vrArrow)" />
+        {/* Released virions after burst */}
+        {burstParticles.map((p, i) => (
+          <g key={`bp-${i}`} opacity={p.opacity}>
+            <circle cx={p.x} cy={p.y} r="4" fill="#a855f7" />
+            {/* Tiny tail on each */}
+            <line x1={p.x} y1={p.y + 4} x2={p.x} y2={p.y + 10}
+              stroke="#7c3aed" strokeWidth="1" />
+          </g>
+        ))}
 
-        {/* Step 4: Assembly */}
-        <g>
-          <circle cx="395" cy="105" r="35" className="fill-sky-100 dark:fill-sky-900/30 stroke-sky-400" strokeWidth="1.5" />
-          {/* Assembled virus particles inside */}
-          {[{ x: 385, y: 95 }, { x: 400, y: 100 }, { x: 390, y: 112 }, { x: 405, y: 110 }].map((p, i) => (
-            <g key={i}>
-              <circle cx={p.x} cy={p.y} r="4" className="fill-red-400 dark:fill-red-500" />
-              <polygon points={`${p.x},${p.y - 6} ${p.x - 2},${p.y - 10} ${p.x},${p.y - 8} ${p.x + 2},${p.y - 10}`} className="fill-red-300" />
-            </g>
-          ))}
-          <text x="395" y="155" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="600">4. Assemble</text>
-          <text x="395" y="168" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">New viruses</text>
-        </g>
+        {/* ── Phage (bacteriophage) — T4 style with icosahedral head + tail ── */}
+        {phageVisible && (
+          <g transform={`translate(${phageX}, ${phageY})`}>
+            {/* Head (hexagonal icosahedron) */}
+            <polygon points="-8,-14 8,-14 14,-4 8,6 -8,6 -14,-4"
+              fill="#a855f7" stroke="#6b21a8" strokeWidth="1.5" />
+            {/* DNA inside head — getting smaller as injection proceeds */}
+            <circle cx={0} cy={-4} r={injecting ? Math.max(0, 5 - (cycleTick - 80) / 8) : 5}
+              fill="#ede9fe" opacity="0.9" />
+            {/* Tail sheath */}
+            <rect x={-3} y={6} width={6} height={injecting ? 24 - (cycleTick - 80) / 5 : 22}
+              fill="#7c3aed" opacity="0.9" />
+            {/* Tail fibres (legs) — anchor to bacterium when attached */}
+            {[-1, 0, 1].map(i => (
+              <line key={`fib-${i}`}
+                x1={i * 3} y1={28}
+                x2={i * 8} y2={attaching || injecting ? 40 : 36}
+                stroke="#581c87" strokeWidth="1.2" />
+            ))}
 
-        <line x1="435" y1="105" x2="460" y2="105" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="1.5" markerEnd="url(#vrArrow)" />
+            {/* Injection squirt — DNA flowing out during injection */}
+            {injecting && (
+              <line x1={0} y1={28} x2={0} y2={42}
+                stroke="#fde047" strokeWidth="2" opacity={0.8} strokeDasharray="2,2" />
+            )}
+          </g>
+        )}
 
-        {/* Step 5: Lysis */}
-        <g>
-          {/* Broken cell */}
-          <path d="M 490,75 Q 505,70 515,80 Q 520,95 518,105" className="stroke-sky-400" strokeWidth="1.5" fill="none" strokeDasharray="3,2" />
-          <path d="M 518,105 Q 520,115 515,130 Q 505,140 490,135" className="stroke-sky-400" strokeWidth="1.5" fill="none" strokeDasharray="3,2" />
-          <path d="M 490,135 Q 475,140 465,130 Q 460,115 462,105" className="stroke-sky-400" strokeWidth="1.5" fill="none" strokeDasharray="3,2" />
-          <path d="M 462,105 Q 460,95 465,80 Q 475,70 490,75" className="stroke-sky-400" strokeWidth="1.5" fill="none" strokeDasharray="3,2" />
+        {/* Phase caption */}
+        <text x={W / 2} y={H - 15} textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="11" fontWeight="600">
+          {phaseLabel}
+        </text>
 
-          {/* Viruses escaping */}
-          {[
-            { x: 490, y: 60, a: -20 }, { x: 520, y: 90, a: 30 },
-            { x: 510, y: 130, a: 15 }, { x: 465, y: 85, a: -25 },
-            { x: 475, y: 125, a: -10 }, { x: 505, y: 115, a: 20 },
-          ].map((v, i) => (
-            <g key={i}>
-              <circle cx={v.x} cy={v.y} r="3.5" className="fill-red-400 dark:fill-red-500" />
-              <line x1={v.x} y1={v.y} x2={v.x + Math.cos(v.a * Math.PI / 180) * 8} y2={v.y + Math.sin(v.a * Math.PI / 180) * 8}
-                className="stroke-red-300" strokeWidth="1" />
-            </g>
-          ))}
-          <text x="490" y="155" textAnchor="middle" className="fill-gray-600 dark:fill-gray-300" fontSize="10" fontWeight="600">5. Lysis</text>
-          <text x="490" y="168" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Cell bursts!</text>
-        </g>
-
-        {/* Legend */}
-        <circle cx="140" cy="195" r="4" className="fill-red-400 dark:fill-red-500" />
-        <text x="150" y="199" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Virus</text>
-        <circle cx="210" cy="195" r="6" fill="none" className="stroke-sky-400" strokeWidth="1.5" />
-        <text x="222" y="199" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Host cell</text>
-
-        <text x="270" y="215" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Released viruses go on to infect more cells</text>
-
-        <defs>
-          <marker id="vrArrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-            <polygon points="0 0, 7 2.5, 0 5" className="fill-gray-400 dark:fill-gray-500" />
-          </marker>
-        </defs>
+        {/* Step progress bar */}
+        <rect x={40} y={H - 35} width={W - 80} height={4} rx={2}
+          fill="#e5e7eb" className="dark:fill-gray-700" />
+        <rect x={40} y={H - 35} width={(cycleTick / 300) * (W - 80)} height={4} rx={2}
+          fill="#a855f7" />
       </svg>
+
+      <div className="flex flex-wrap justify-center gap-3 mt-2 text-xs">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-purple-500" /> Bacteriophage
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" /> Bacterium (host)
+        </span>
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
+          <span className="inline-block w-2 h-2 rounded-full bg-yellow-400" /> Viral DNA
+        </span>
+      </div>
     </div>
   );
 }

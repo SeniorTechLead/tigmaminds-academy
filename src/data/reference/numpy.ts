@@ -14,6 +14,7 @@ export const guide: ReferenceGuide = {
     {
       title: 'Why Arrays Matter',
       beginnerContent:
+        'Play with the ruler in the diagram above. Toggle `linspace` vs `arange`. Slide the control. Watch how NumPy creates entire arrays of evenly-spaced numbers from just a handful of arguments. That\'s the NumPy mindset: **describe the array you want, don\'t build it one element at a time.**\n\n' +
         'Imagine you have 1,000 temperature readings and you want to convert all of them from ' +
         'Celsius to Fahrenheit. With a plain Python list, you would write a loop that visits each ' +
         'value one by one — 1,000 trips. NumPy does the same conversion in a single operation ' +

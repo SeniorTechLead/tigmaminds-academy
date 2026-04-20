@@ -3,7 +3,7 @@ import type { ReferenceGuide } from '../reference';
 const loaders: Record<string, () => Promise<{ guide: ReferenceGuide }>> = {
   'acids-bases-and-ph': () => import('./acids-bases-and-ph'),
   'aerodynamics-and-flight': () => import('./aerodynamics-and-flight'),
-  'algebra-fundamentals': () => import('./algebra-fundamentals'),
+  'algebra': () => import('./algebra'),
   'algorithms-data-structures': () => import('./algorithms-data-structures'),
   'altitude-and-atmosphere': () => import('./altitude-and-atmosphere'),
   'animal-senses-and-behavior': () => import('./animal-senses-and-behavior'),

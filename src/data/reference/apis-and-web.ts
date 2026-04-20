@@ -10,7 +10,9 @@ export const guide: ReferenceGuide = {
   understand: [
     {
       title: 'How the Internet Works',
+      diagram: 'APIRequestFlowDiagram',
       beginnerContent:
+        'Click "Send request" above and watch the six-step journey that happens every time you load a webpage. DNS lookup, server connection, HTTP request, processing, response, render — typically finished in under 300 milliseconds.\n\n' +
         'When you type "google.com" into your browser and press Enter, a chain of events happens in ' +
         'milliseconds. First, your computer asks a *DNS server* (like a phone book for the internet) ' +
         'to translate "google.com" into an IP address — a numerical address like 142.250.190.78. Then ' +
@@ -67,7 +69,9 @@ export const guide: ReferenceGuide = {
     },
     {
       title: 'REST APIs: GET, POST, PUT, DELETE, and JSON',
+      diagram: 'RESTMethodsDiagram',
       beginnerContent:
+        'Click each method in the diagram above — GET, POST, PUT, DELETE — and watch how it affects the server\'s data. GET reads without changing. POST creates. PUT updates. DELETE removes. This four-verb alphabet describes almost every operation in every web API ever built.\n\n' +
         'REST (Representational State Transfer) is the most common style of API on the web. It uses ' +
         'standard HTTP methods as verbs: *GET* retrieves data (like viewing a profile), *POST* creates ' +
         'new data (like submitting a form), *PUT* updates existing data (like editing your bio), and ' +

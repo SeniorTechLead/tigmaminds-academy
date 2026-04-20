@@ -11,9 +11,9 @@ export const guide: ReferenceGuide = {
     {
       title: 'Limits — Approaching Without Arriving',
       beginnerContent:
-        '**What is a limit?**\n\n' +
+        'Drag the slider in the diagram above toward x = 1. Do it slowly. Notice the weird thing: **there\'s a hole at x = 1** — the function is literally undefined there, because you\'d have to divide by zero. But as x creeps toward 1 from either side, f(x) marches toward 2. The function never *reaches* that value — but it clearly *wants* to be 2. That "wants to be" is the limit.\n\n' +
         'A limit describes what value a function **approaches** as its input gets closer to a point — even if the function never reaches that value.\n\n' +
-        '**Example:** `f(x) = (x² - 1)/(x - 1)`\n\n' +
+        '**The example above:** `f(x) = (x² − 1)/(x − 1)`\n\n' +
         '| x | f(x) |\n' +
         '|---|------|\n' +
         '| 0.9 | 1.9 |\n' +
@@ -28,56 +28,47 @@ export const guide: ReferenceGuide = {
         '- `lim(x->infinity) 1/x = 0` — captures the idea of infinity\n\n' +
         'Limits are the **foundation** upon which ALL of calculus is built.',
       intermediateContent:
-        '**Techniques for evaluating limits:**\n\n' +
-        '| Technique | Example | Result |\n' +
-        '|-----------|---------|--------|\n' +
-        '| Factoring | lim(x->4) (x²-16)/(x-4) = lim(x+4) | **8** |\n' +
-        '| L\'Hopital\'s Rule (0/0 or inf/inf) | lim(x->0) sin(x)/x = cos(x)/1 | **1** |\n' +
-        '| Divide by highest power | lim(x->inf) (3x²+1)/(5x²-2) | **3/5** |\n\n' +
-        '**One-sided limits matter:**\n\n' +
-        '- `lim(x->0+) 1/x = +infinity`\n' +
-        '- `lim(x->0-) 1/x = -infinity`\n\n' +
-        'If left and right limits disagree, the two-sided limit does not exist.',
+        'Sliding a slider to see a limit is intuitive — but you can\'t always slide. Every serious use of calculus needs techniques for *computing* limits algebraically when direct substitution gives you the dreaded 0/0 or ∞/∞.\n\n' +
+        '**Three techniques that handle almost everything:**\n\n' +
+        '| Technique | When to use it | Example | Result |\n' +
+        '|-----------|----------------|---------|--------|\n' +
+        '| **Factoring** | 0/0 forms with polynomials — the hole cancels | lim(x→4) (x²−16)/(x−4) = lim(x+4) | **8** |\n' +
+        '| **L\'Hôpital\'s Rule** | Any 0/0 or ∞/∞ — take derivative of top and bottom | lim(x→0) sin(x)/x = cos(0)/1 | **1** |\n' +
+        '| **Divide by highest power** | ∞/∞ in rational functions — compare growth rates | lim(x→∞) (3x²+1)/(5x²−2) | **3/5** |\n\n' +
+        'The function from the diagram — (x²−1)/(x−1) — is a factoring case in disguise. Factor the top, cancel, evaluate: `(x+1)(x−1)/(x−1) = x+1`, which equals 2 at x = 1. The hole doesn\'t change the limit because once the common factor cancels, what remains *is* defined there.\n\n' +
+        '**One more subtlety: direction matters.** You can approach a point from the left or the right, and the two sides don\'t always agree:\n\n' +
+        '- `lim(x→0⁺) 1/x = +∞` — approach from the right (positive side)\n' +
+        '- `lim(x→0⁻) 1/x = −∞` — approach from the left (negative side)\n\n' +
+        'When the two sides disagree, the two-sided limit simply doesn\'t exist. Calculus is picky about this — and next up you\'ll see why. Getting this rigorously right is what makes the whole edifice stand up.',
       advancedContent:
-        '**The Epsilon-Delta Definition — A Challenge Game**\n\n' +
-        'Think of the rigorous definition of a limit as a two-player game:\n\n' +
-        '1. **Your opponent** picks an epsilon (e) — a tiny tolerance. They say: "I want f(x) within e of L."\n' +
-        '2. **You** must find a delta (d) — a range around the target point — so that whenever x is within d of c, f(x) is within e of L.\n' +
-        '3. If you can **always win** no matter how small epsilon is, the limit exists and equals L.\n\n' +
-        '**Formal statement:** `lim(x->c) f(x) = L` means: for every e > 0, there exists d > 0 such that `0 < |x - c| < d` implies `|f(x) - L| < e`.\n\n' +
-        '**Concrete example:** Prove `lim(x->3) 2x + 1 = 7`.\n\n' +
+        '**The intuition is great. But "gets closer" is not a proof.** For 150 years after Newton and Leibniz, mathematicians used limits productively while philosophers and rival mathematicians (Bishop Berkeley famously called them "ghosts of departed quantities") kept asking: *what exactly is an "infinitely small" number?* The whole edifice of calculus rested on a concept no one could define precisely.\n\n' +
+        'Cauchy and Weierstrass fixed it in the 1800s with a definition so precise it looks like a game:\n\n' +
+        '**The ε-δ definition — a two-player challenge**\n\n' +
+        'A skeptic hands you any tolerance they want — call it ε (epsilon), as small as they please. Their challenge: *"prove f(x) can get within ε of L."*\n\n' +
+        'You must respond with a δ (delta) — a range around the target point — such that whenever x is within δ of c, f(x) is guaranteed within ε of L. If you can **always win**, no matter how cruelly small the ε, the limit exists.\n\n' +
+        'Formally: `lim(x→c) f(x) = L` means: for every ε > 0, there exists δ > 0 such that `0 < |x − c| < δ` implies `|f(x) − L| < ε`.\n\n' +
+        'Look at the diagram above. The skeptic says "give me f(x) within 0.01 of 2." You slide x to within 0.01 of 1 — done. They say "within 0.0001 of 2." You slide x to within 0.0001 of 1 — done. Forever. That\'s what makes the limit real: **you can always win.**\n\n' +
+        '**Worked proof** that `lim(x→3) 2x + 1 = 7`:\n\n' +
         '| Step | Work |\n' +
         '|------|------|\n' +
-        '| We need | \\|f(x) - 7\\| < e whenever \\|x - 3\\| < d |\n' +
-        '| Simplify | \\|(2x+1) - 7\\| = \\|2x - 6\\| = 2\\|x - 3\\| |\n' +
-        '| Choose d | Set d = e/2. Then 2\\|x - 3\\| < 2(e/2) = e |\n' +
-        '| Result | No matter how small e is, d = e/2 works. The limit is proven. |\n\n' +
-        '---\n\n' +
-        '**Intermediate Value Theorem (IVT) — No Teleporting Allowed**\n\n' +
-        'The intuition is simple: **continuous functions cannot skip values.** If you drive from 0 mph to 60 mph, at some point you were going exactly 30 mph. You cannot teleport from 0 to 60 without passing through every speed in between.\n\n' +
-        '**Formal statement:** If f is continuous on [a, b] and k is any value between f(a) and f(b), then there exists some c in (a, b) where f(c) = k.\n\n' +
-        '**Why should you care?** IVT is how we prove roots exist. If f(1) = -3 and f(2) = 5, and f is continuous, then f(c) = 0 for some c between 1 and 2. The root **must** be there, even before we find it. This is the theoretical foundation behind root-finding algorithms like bisection and Newton\'s method.\n\n' +
-        '---\n\n' +
-        '**Squeeze Theorem — Trapped Between Converging Walls**\n\n' +
-        'Imagine walking down a narrowing corridor. The left wall and right wall are closing in toward the same point. You are between them. Where do you end up? At that same point. You have no choice.\n\n' +
-        '**Formal statement:** If `g(x) <= f(x) <= h(x)` near a point, and `lim g(x) = lim h(x) = L`, then `lim f(x) = L`.\n\n' +
-        '**Classic example:** Prove `lim(x->0) x²sin(1/x) = 0`.\n\n' +
-        '| Piece | Reasoning |\n' +
-        '|-------|-----------|\n' +
-        '| sin(1/x) oscillates wildly | But it is always between -1 and 1 |\n' +
-        '| So -x² <= x²sin(1/x) <= x² | f(x) is trapped between -x² and x² |\n' +
-        '| lim(x->0) -x² = 0 | Left wall goes to 0 |\n' +
-        '| lim(x->0) x² = 0 | Right wall goes to 0 |\n' +
-        '| Conclusion | x²sin(1/x) is squeezed to 0 |\n\n' +
-        'Developed by Cauchy and Weierstrass in the 19th century, these foundations replaced vague notions of "infinitely small" with precise, provable definitions — turning calculus from an intuitive tool into a rigorous branch of mathematics.',
+        '| We need | \\|(2x+1) − 7\\| < ε whenever \\|x − 3\\| < δ |\n' +
+        '| Simplify the left side | \\|2x − 6\\| = 2·\\|x − 3\\| |\n' +
+        '| Pick δ so the left side is forced under ε | δ = ε/2 works: 2·\\|x − 3\\| < 2·(ε/2) = ε ✓ |\n\n' +
+        'One rule — δ = ε/2 — answers *every possible challenge*. The limit is proven.\n\n' +
+        '**Why the rigor matters: it unlocks deep results.**\n\n' +
+        'Once limits are rigorously defined, strange-looking claims about continuous functions become provable. Here are two that calculus leans on constantly:\n\n' +
+        '**Intermediate Value Theorem.** If f is continuous on [a, b] and k is between f(a) and f(b), then f(c) = k for some c in (a, b). In plain English: **continuous functions cannot teleport.** Drive from 0 to 60 mph — at some instant, you were going exactly 30.\n\n' +
+        'This is why we know roots *exist* before we find them. If f(1) = −3 and f(2) = +5, and f is continuous, somewhere between 1 and 2 the function must cross zero. Bisection, Newton\'s method, every root-finding algorithm you\'ve ever used — they all depend on IVT being true.\n\n' +
+        '**Squeeze Theorem.** If g(x) ≤ f(x) ≤ h(x) near a point and g and h both converge to L, then f is trapped and must also converge to L. In plain English: **if you\'re pinched between two walls that close to the same point, you end up at that point too.**\n\n' +
+        'This tames functions that oscillate badly. Consider `f(x) = x² · sin(1/x)` near x = 0. The `sin(1/x)` factor oscillates infinitely fast and won\'t let us use normal techniques. But sin of anything is between −1 and +1, so `−x² ≤ f(x) ≤ +x²`. Both walls go to 0 as x → 0. The wild middle function has nowhere to go. **Limit is 0** — proven without ever computing the function directly.\n\n' +
+        'These aren\'t abstract curiosities. Every derivative formula you\'ll meet next (including the entire chain rule) secretly relies on ε-δ rigor underneath — it\'s the floor the whole building stands on.',
       diagram: 'LimitDiagram',
     },
     {
       title: 'Derivatives — The Slope at a Point',
       beginnerContent:
-        '**What is a derivative?**\n\n' +
-        'The derivative measures the **instantaneous rate of change** — how fast the output changes relative to the input at one exact moment.\n\n' +
-        'If you plot bamboo height over time, the derivative at any point tells you how fast it is growing **right then**.\n\n' +
+        'Pick a function in the diagram above and drag the point along the curve. Watch the tangent line pivot — at any moment, its slope tells you how fast the function is rising or falling *right there*, at that exact instant. That instantaneous slope is the derivative.\n\n' +
+        'The derivative measures the **instantaneous rate of change** — how fast the output changes relative to the input at one exact moment. If you plot bamboo height over time, the derivative at any point tells you how fast it\'s growing *right then*. Not the average rate over an hour. The rate at one instant.\n\n' +
         '**Formal definition:**\n\n' +
         '`f\'(x) = lim(h->0) [f(x+h) - f(x)] / h`\n\n' +
         '**Worked example:** f(x) = x²\n\n' +
@@ -97,51 +88,57 @@ export const guide: ReferenceGuide = {
         '- f\'(x) = 0 → **peak, valley, or inflection point**\n\n' +
         'Finding where f\'(x) = 0 locates maxima and minima — the heart of **optimisation**.',
       intermediateContent:
-        '**Derivatives to know:**\n\n' +
-        '| Function | Derivative |\n' +
-        '|----------|----------|\n' +
-        '| x^n | n*x^(n-1) |\n' +
-        '| sin x | cos x |\n' +
-        '| cos x | -sin x |\n' +
-        '| e^x | e^x |\n' +
-        '| ln x | 1/x |\n' +
-        '| tan x | sec²x |\n\n' +
-        '**Worked optimisation:** Maximise area of a rectangle in a semicircle of radius r.\n\n' +
+        'Computing every derivative from the limit definition is tedious. Fortunately, a small table of rules covers almost everything you\'ll ever meet:\n\n' +
+        '| Function | Derivative | Memory tip |\n' +
+        '|----------|-----------|------------|\n' +
+        '| xⁿ | n · xⁿ⁻¹ | Power rule — the workhorse |\n' +
+        '| sin x | cos x | Cycle: sin → cos → −sin → −cos → sin |\n' +
+        '| cos x | −sin x | Same cycle, one step back |\n' +
+        '| eˣ | eˣ | The magical self-derivative |\n' +
+        '| ln x | 1/x | Derivative of log is the reciprocal |\n' +
+        '| tan x | sec²x | Follows from quotient rule on sin/cos |\n\n' +
+        '**Where derivatives earn their keep: optimisation.** If `f′(x) = 0` marks peaks and valleys, then finding those zeros finds the best-possible value of whatever f measures — shortest path, maximum area, minimum cost, highest profit.\n\n' +
+        '**Classic example:** fit the largest possible rectangle inside a semicircle of radius r.\n\n' +
         '| Step | Work |\n' +
         '|------|------|\n' +
-        '| Setup | A = 2x * sqrt(r²-x²) |\n' +
-        '| Set dA/dx = 0 | x = r/sqrt(2) |\n' +
-        '| Max area | **r²** |\n\n' +
-        'Second derivative test confirms it is a maximum.',
+        '| Set up the area as a function of one variable | A(x) = 2x · √(r² − x²) |\n' +
+        '| Find the derivative and set it to zero | dA/dx = 0 when x = r/√2 |\n' +
+        '| Plug back in | Max area = **r²** (the rectangle is a square tilted into the half-circle) |\n' +
+        '| Confirm it\'s a max, not a min | Second derivative test: A″ < 0 ✓ |\n\n' +
+        'Every engineering design decision — the shape of a soup can that uses the least metal for a given volume, the launch angle that maximises rocket range, the shutter speed that balances motion blur and noise — comes out of this exact pattern: *write the thing you want as a function, differentiate, set to zero, solve.*\n\n' +
+        'And notice something: we just took a derivative of a derivative (the "second derivative test"). That\'s not an accident — it\'s the tip of a much deeper iceberg, as you\'ll see next.',
       advancedContent:
-        '**Physical meaning chain:** position -> velocity -> acceleration (successive derivatives). Each derivative peels back one layer of motion.\n\n' +
-        '---\n\n' +
-        '**Related Rates — Step by Step**\n\n' +
-        'Related rates problems ask: "Two quantities are changing. I know the rate of one. What is the rate of the other?" The chain rule connects them.\n\n' +
-        '**Example:** A balloon inflates at dV/dt = 100 cm³/s. How fast is the radius growing when r = 10 cm?\n\n' +
-        '| Step | What you do | Work |\n' +
-        '|------|-------------|------|\n' +
-        '| 1. Write the relationship | V and r are related by geometry | V = (4/3)pi*r³ |\n' +
-        '| 2. Differentiate both sides with respect to time | Chain rule — r depends on t | dV/dt = 4*pi*r² * dr/dt |\n' +
-        '| 3. Plug in what you know | dV/dt = 100, r = 10 | 100 = 4*pi*(100) * dr/dt |\n' +
-        '| 4. Solve for what you want | Isolate dr/dt | dr/dt = 100/(400*pi) ≈ **0.08 cm/s** |\n\n' +
-        '**Key insight:** You never differentiate with respect to r or V directly. Everything is differentiated with respect to **time**, because time is the hidden variable driving both changes.\n\n' +
-        '---\n\n' +
-        '**Taylor Series — Approximating Curves with Polynomials**\n\n' +
-        'The big idea: **any smooth function can be approximated by a polynomial**, and the more terms you keep, the better the approximation.\n\n' +
-        'Why polynomials? Because they are trivially easy to compute — just addition and multiplication. This is literally how your calculator evaluates sin, cos, e^x, and ln.\n\n' +
-        '**Formula:** `f(x) = f(a) + f\'(a)(x-a) + f\'\'(a)(x-a)²/2! + f\'\'\'(a)(x-a)³/3! + ...`\n\n' +
-        'Each term captures one more "layer" of the function\'s behavior at the point a: its value, its slope, its curvature, the rate of change of curvature, and so on.\n\n' +
-        '**Example: sin(x) around x = 0**\n\n' +
-        '`sin(x) ≈ x - x³/6 + x⁵/120 - x⁷/5040 + ...`\n\n' +
-        'Watch how adding terms improves accuracy:\n\n' +
-        '| x = 0.5 | Approximation | Value | Error |\n' +
-        '|---------|--------------|-------|-------|\n' +
-        '| Just x | 0.5 | 0.500000 | 0.0206 |\n' +
-        '| x - x³/6 | 0.5 - 0.0208 | 0.479167 | 0.0003 |\n' +
-        '| x - x³/6 + x⁵/120 | + 0.000260 | 0.479427 | 0.000001 |\n' +
-        '| Exact sin(0.5) | — | 0.479426 | — |\n\n' +
-        'Three terms give **six decimal places of accuracy** at x = 0.5. This is why Taylor series are so powerful — a handful of simple arithmetic operations replaces a transcendental function.',
+        'The derivative is a rate. That\'s the whole concept. But once you really believe it — once you let that single idea do the work — it unlocks a startling amount.\n\n' +
+        '**Layer 1: derivatives stack.** Take the derivative of position and you get velocity. Take the derivative of velocity and you get acceleration. Take the derivative of acceleration and you get *jerk* (yes, real physics term — why poorly-designed elevators make you queasy). Each successive derivative peels back one layer of motion:\n\n' +
+        '| Quantity | Symbol | What it measures |\n' +
+        '|----------|--------|------------------|\n' +
+        '| Position | s(t) | Where you are |\n' +
+        '| Velocity | s′(t) | How fast position changes |\n' +
+        '| Acceleration | s″(t) | How fast velocity changes |\n' +
+        '| Jerk | s‴(t) | How fast acceleration changes |\n\n' +
+        'The same "rate" idea, applied recursively, gives you the entire vocabulary of motion. Ballistics, orbits, spring dynamics, every Newtonian physics problem — all of it is tracking one derivative deeper.\n\n' +
+        '**Layer 2: rates of one thing drive rates of another.** Derivatives aren\'t just about time. They can chain between *any* two changing quantities via the chain rule. This is the entire domain of **related rates problems**.\n\n' +
+        'A balloon inflates at `dV/dt = 100 cm³/s`. How fast does its radius grow when r = 10 cm?\n\n' +
+        '| Step | Work |\n' +
+        '|------|------|\n' +
+        '| Geometric relationship | V = (4/3)π r³ |\n' +
+        '| Differentiate both sides w.r.t. time | dV/dt = 4π r² · dr/dt |\n' +
+        '| Plug in the knowns | 100 = 4π(100) · dr/dt |\n' +
+        '| Solve | **dr/dt ≈ 0.08 cm/s** |\n\n' +
+        'The key move is *differentiate w.r.t. time* — not w.r.t. V or r directly. Time is the hidden variable driving both, so differentiating the equation w.r.t. time exposes how their rates relate. This trick powers everything from ladder-sliding-down-a-wall problems to epidemiology models: given dI/dt for infections, what is dR/dt for hospital bed demand?\n\n' +
+        '**Layer 3: derivatives determine entire functions.** If derivatives tell you how functions change, maybe they can tell you the whole function. They can — that\'s **Taylor series**.\n\n' +
+        'The Taylor series of f at point a is a polynomial built entirely from derivatives of f at that one point:\n\n' +
+        '`f(x) = f(a) + f′(a)(x−a) + f″(a)(x−a)²/2! + f‴(a)(x−a)³/3! + ...`\n\n' +
+        'Read that term by term. The value, plus a correction using the slope, plus a correction using the curvature, plus a correction using the change-in-curvature... each new derivative adds one more layer of fidelity.\n\n' +
+        'Watch it converge for sin(x) at x = 0.5:\n\n' +
+        '| Approximation | Value | Error |\n' +
+        '|---------------|-------|-------|\n' +
+        '| Just x | 0.500000 | 0.0206 |\n' +
+        '| x − x³/6 | 0.479167 | 0.0003 |\n' +
+        '| x − x³/6 + x⁵/120 | 0.479427 | 0.000001 |\n' +
+        '| Exact sin(0.5) | 0.479426 | — |\n\n' +
+        'Three terms — value, slope, curvature, change-in-curvature — give you **six decimal places**. This is literally how your phone\'s calculator computes sin, cos, eˣ, ln: it doesn\'t have a sine chip, it has a Taylor expansion.\n\n' +
+        '**Where this all lands: AI.** The same rate-of-change machinery — stacked derivatives, chained rates, polynomial approximations — is what runs inside every neural network you\'ve heard of. Training a language model with 100 billion parameters means asking: *how does the loss change when I nudge this parameter?* Derivative. For every parameter. Simultaneously. That\'s **backpropagation** — and it\'s just the chain rule, applied at inhuman scale. The derivative you\'re learning to compute by hand on x² is the same operation that powers GPT.',
       diagram: 'DerivativeVisualizerDiagram',
       interactive: { type: 'python-playground' as const, props: { starterCode: '# Explore derivatives numerically\ndef f(x):\n    return x**3 - 3*x + 1\n\ndef derivative(f, x, h=0.0001):\n    return (f(x + h) - f(x)) / h\n\nprint("x     f(x)    f\'(x)")\nprint("-" * 28)\nfor x in [-2, -1, 0, 1, 2, 3]:\n    print(f"{x:>3}   {f(x):>6.1f}   {derivative(f, x):>6.1f}")\n\n# Where is f\'(x) = 0? (peaks/valleys)\n# Try changing f(x) above!', title: 'Try it — Derivatives' } },
     },
@@ -212,8 +209,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Integration — Area Under a Curve',
       beginnerContent:
-        '**Integration is the reverse of differentiation.**\n\n' +
-        'Where derivatives break a curve into slopes, integrals add up infinitely many thin slices to find the **total area** under a curve.\n\n' +
+        'Pick a function in the diagram above and drag the `n` slider. Watch the rectangles fill the space under the curve — few and crude at first, then more and more until they paint the area perfectly. The count on the left (the Riemann sum) closes in on the exact area. **That\'s integration: adding up infinitely many infinitely thin rectangles.**\n\n' +
+        'Integration is the **reverse of differentiation**. Where derivatives break a curve into slopes, integrals add up infinitely many thin slices to find the **total area** under the curve.\n\n' +
         '**The definite integral** from a to b of f(x) represents the signed area between f(x) and the x-axis. "Signed" means area above the axis is positive, below is negative.\n\n' +
         '**How it works:**\n\n' +
         '1. Divide [a, b] into n thin rectangles (width = (b-a)/n)\n' +
