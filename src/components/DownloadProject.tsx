@@ -82,11 +82,7 @@ npm run build
 
 ## Database Setup
 
-The project uses Supabase for data persistence. Migrations are located in \`supabase/migrations/\`.
-
-To apply migrations:
-1. Install Supabase CLI
-2. Run: \`supabase db push\`
+The project uses Supabase for data persistence. Schema is managed directly in the Supabase dashboard — pull a current schema dump from there when bootstrapping a new environment.
 
 ## Project Structure
 
@@ -99,7 +95,6 @@ To apply migrations:
   /utils          - Helper functions
 /supabase
   /functions      - Edge functions
-  /migrations     - Database migrations
 \`\`\`
 
 ## License
@@ -207,8 +202,8 @@ Thumbs.db
    - README.md (documentation)
    - .gitignore (version control)
 
-3. Database migrations are in: supabase/migrations/
-4. Edge functions are in: supabase/functions/
+3. Edge functions are in: supabase/functions/
+4. Database schema lives in the Supabase dashboard — pull a fresh dump from there as needed.
 
 Instructions:
 - Use your IDE or file manager to copy/export the entire project folder
