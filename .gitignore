@@ -33,3 +33,6 @@ compareimagevariants/
 public/content/*
 !public/content/illustrations/
 .vercel
+
+# Claude Code runtime artifacts (settings, scheduled tasks, etc.)
+.claude/
