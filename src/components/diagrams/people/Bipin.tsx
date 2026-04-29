@@ -17,12 +17,15 @@ export type BipinPose =
   | 'measuring'    // crouched with hands on a measuring tape
   | 'thinking';
 
+export type BipinDirection = 'front' | 'left' | 'right';
+
 interface BipinProps {
   x?: number;
   y?: number;
   scale?: number;
-  flip?: boolean;
+  flip?: boolean;       // (legacy) mirror — equivalent to direction='left'
   pose?: BipinPose;
+  direction?: BipinDirection;
   style?: CSSProperties;
 }
 
@@ -36,12 +39,18 @@ const SHORTS = '#1e3a5f';      // navy school shorts
 const STROKE = '#1f2937';
 
 export default function Bipin({
-  x = 0, y = 0, scale = 1, flip = false, pose = 'standing', style,
+  x = 0, y = 0, scale = 1, flip = false, pose = 'standing', direction, style,
 }: BipinProps) {
-  const transform = `translate(${x}, ${y}) scale(${flip ? -scale : scale}, ${scale})`;
+  // Default direction is 'right' (character looking at something to their right).
+  // Use direction="front" for present-to-reader scenes.
+  const dir: BipinDirection = direction ?? (flip ? 'left' : 'right');
+  const xs = dir === 'left' ? -scale : scale;
+  const transform = `translate(${x}, ${y}) scale(${xs}, ${scale})`;
   return (
     <g transform={transform} style={style}>
-      <BipinBody pose={pose} />
+      {dir === 'front'
+        ? <BipinBody pose={pose} />
+        : <BipinProfile pose={pose} />}
     </g>
   );
 }
@@ -276,6 +285,179 @@ function Arms({ pose }: { pose: BipinPose }) {
       <circle cx="-14" cy="-38" r="3.5" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
       {armPath("M 10 -66 L 13 -50 L 14 -38", 'R')}
       <circle cx="14" cy="-38" r="3.5" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
+    </g>
+  );
+}
+
+/**
+ * Side-on profile of Bipin, facing RIGHT. Pose controls head tilt, eye, and arms.
+ * Uses the new character look: side-parted black hair (no cap), white school
+ * shirt with a red tie, navy shorts.
+ */
+function BipinProfile({ pose }: { pose: BipinPose }) {
+  if (pose === 'measuring') return <BipinCrouching />;
+
+  const headTilt = pose === 'lookingUp' ? -20 : pose === 'lookingDown' ? 14 : pose === 'thinking' ? 6 : 0;
+  const eyeDir: 'forward' | 'up' | 'down' = pose === 'lookingUp' ? 'up' : pose === 'lookingDown' ? 'down' : 'forward';
+
+  return (
+    <g>
+      {/* Legs in shorts — narrow profile */}
+      {pose === 'walking' ? (
+        <>
+          <path d="M -2 0 L 2 -28 L 5 -28 L 1 0 Z" fill={SHORTS} stroke={STROKE} strokeWidth="1" strokeLinejoin="round" />
+          <path d="M 5 0 L 1 -28 L -2 -28 L 2 0 Z" fill={SHORTS} stroke={STROKE} strokeWidth="1" strokeLinejoin="round" opacity="0.85" />
+        </>
+      ) : (
+        <>
+          <rect x="-5" y="-44" width="6" height="14" rx="2" fill={SHORTS} stroke={STROKE} strokeWidth="1" />
+          <rect x="2" y="-44" width="6" height="14" rx="2" fill={SHORTS} stroke={STROKE} strokeWidth="1" />
+          {/* Bare calves */}
+          <rect x="-4.5" y="-30" width="5" height="28" rx="2" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+          <rect x="2.5" y="-30" width="5" height="28" rx="2" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+        </>
+      )}
+      <ellipse cx="-2" cy="-1" rx="6" ry="2.5" fill={STROKE} />
+      <ellipse cx="6" cy="-1" rx="6" ry="2.5" fill={STROKE} />
+
+      {/* Torso — white school shirt, side profile */}
+      <path d="M -7 -44 L -5 -68 L 7 -68 L 9 -44 Z" fill={SHIRT} stroke={STROKE} strokeWidth="1.2" strokeLinejoin="round" />
+      {/* Collar — visible V on the front side */}
+      <path d="M 1 -68 L 4 -64 L 6 -65 L 6 -68" fill={SHIRT} stroke={STROKE} strokeWidth="1" strokeLinejoin="round" />
+      {/* Tie knot + body — visible on front */}
+      <path d="M 4 -64 L 6 -64 L 7 -60 L 5 -58 L 3 -60 Z" fill={TIE} stroke={TIE_DARK} strokeWidth="0.7" />
+      <path d="M 3 -58 L 7 -58 L 6 -46 L 5 -42 L 4 -46 Z" fill={TIE} stroke={TIE_DARK} strokeWidth="0.7" />
+
+      {/* Arms */}
+      <BipinProfileArms pose={pose} />
+
+      {/* Neck */}
+      <path d="M 1 -72 L 1 -66 L 5 -66 L 5 -72 Z" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+
+      {/* Head — profile facing right */}
+      <g transform={`rotate(${headTilt}, 4, -86)`}>
+        {/* Head silhouette */}
+        <path
+          d="M -8 -100 Q -10 -90 -8 -82 Q -6 -78 -2 -76 Q 4 -74 10 -76 Q 14 -78 14 -84 Q 14 -94 10 -100 Q 4 -104 -2 -103 Q -6 -103 -8 -100 Z"
+          fill={SKIN} stroke={STROKE} strokeWidth="1.2" strokeLinejoin="round"
+        />
+        {/* Hair — short, with fringe over forehead, side-parted */}
+        <path
+          d="M -8 -100 Q -10 -106 -2 -107 Q 7 -107 12 -103 Q 14 -100 13 -96 Q 11 -98 8 -97 Q 3 -97 -1 -95 Q -5 -97 -8 -96 Z"
+          fill={HAIR} stroke={STROKE} strokeWidth="0.9" strokeLinejoin="round"
+        />
+        {/* Sideburn */}
+        <path d="M -7 -94 Q -7 -88 -6 -84" fill="none" stroke={HAIR} strokeWidth="2" strokeLinecap="round" />
+
+        {/* Eye */}
+        {(() => {
+          const px = 7;
+          const py = -92.5 + (eyeDir === 'up' ? -1.2 : eyeDir === 'down' ? 1.2 : 0);
+          return (
+            <>
+              <ellipse cx="6" cy="-91" rx="2.7" ry="3" fill="white" stroke={STROKE} strokeWidth="0.9" />
+              <circle cx={px} cy={py} r="1.6" fill="#1f1410" />
+              <circle cx={px + 0.4} cy={py - 0.5} r="0.5" fill="white" />
+            </>
+          );
+        })()}
+
+        {/* Eyebrow — thicker for masculine read */}
+        <path
+          d={eyeDir === 'up' ? "M 3 -96 Q 6 -98 9 -96" : "M 3 -95 Q 6 -97 9 -95"}
+          fill="none" stroke={HAIR} strokeWidth="1.7" strokeLinecap="round"
+        />
+
+        {/* Nose */}
+        <path d="M 11 -88 Q 13 -85 11 -82" fill="none" stroke={STROKE} strokeWidth="1" strokeLinecap="round" />
+
+        {/* Mouth */}
+        <path
+          d={pose === 'lookingUp' ? "M 7 -78 Q 9 -75 11 -78" : "M 7 -78 Q 9 -76 11 -78"}
+          fill="none" stroke="#7c2d12" strokeWidth="1.3" strokeLinecap="round"
+        />
+
+        {/* Ear hint */}
+        <path d="M -3 -88 Q -5 -86 -3 -82" fill="none" stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    </g>
+  );
+}
+
+/** Arm rendering for Bipin's side-profile body (facing right). Double-stroked because the shirt is white. */
+function BipinProfileArms({ pose }: { pose: BipinPose }) {
+  const armPath = (d: string, k: string | number) => (
+    <g key={k}>
+      <path d={d} fill="none" stroke={STROKE} strokeWidth="7.4" strokeLinecap="round" />
+      <path d={d} fill="none" stroke={SHIRT} strokeWidth="6" strokeLinecap="round" />
+    </g>
+  );
+
+  if (pose === 'lookingUp') {
+    return (
+      <g>
+        {/* Far arm — at side */}
+        {armPath("M -3 -66 L -5 -50 L -6 -38", 'far')}
+        <circle cx="-6" cy="-38" r="3" fill={SKIN} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {/* Near arm — bent up to brow */}
+        {armPath("M 6 -66 L 14 -78 L 8 -90", 'near')}
+        <circle cx="8" cy="-90" r="3.5" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    );
+  }
+
+  if (pose === 'pointing') {
+    return (
+      <g>
+        {armPath("M -3 -66 L -5 -50 L -6 -38", 'far')}
+        <circle cx="-6" cy="-38" r="3" fill={SKIN} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {armPath("M 6 -66 L 18 -68 L 30 -64", 'near')}
+        <circle cx="30" cy="-64" r="3" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+        <line x1="30" y1="-64" x2="36" y2="-63" stroke={SKIN} strokeWidth="2.2" strokeLinecap="round" />
+      </g>
+    );
+  }
+
+  if (pose === 'thinking') {
+    return (
+      <g>
+        {armPath("M -3 -66 L -2 -52 L 3 -50", 'far')}
+        <circle cx="3" cy="-50" r="2.8" fill={SKIN} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {armPath("M 6 -66 L 12 -76 L 10 -82", 'near')}
+        <circle cx="10" cy="-82" r="3.2" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    );
+  }
+
+  if (pose === 'lookingDown') {
+    return (
+      <g>
+        {armPath("M -3 -66 L -3 -52 L -2 -42", 'far')}
+        <circle cx="-2" cy="-42" r="3" fill={SKIN} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {armPath("M 6 -66 L 7 -52 L 7 -42", 'near')}
+        <circle cx="7" cy="-42" r="3.2" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    );
+  }
+
+  if (pose === 'walking') {
+    return (
+      <g>
+        {armPath("M -3 -66 L -7 -56 L -7 -44", 'far')}
+        <circle cx="-7" cy="-44" r="3" fill={SKIN} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {armPath("M 6 -66 L 10 -54 L 10 -42", 'near')}
+        <circle cx="10" cy="-42" r="3.2" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    );
+  }
+
+  // standing
+  return (
+    <g>
+      {armPath("M -3 -66 L -4 -52 L -4 -40", 'far')}
+      <circle cx="-4" cy="-40" r="3" fill={SKIN} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+      {armPath("M 6 -66 L 7 -52 L 7 -40", 'near')}
+      <circle cx="7" cy="-40" r="3.2" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
     </g>
   );
 }
