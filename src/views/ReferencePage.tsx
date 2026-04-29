@@ -173,9 +173,17 @@ export default function ReferencePage() {
     }
   }, [searchQuery]); // only debounced value
 
-  // Build the filtered list from metadata + cached full guides where available
+  // Build the filtered list from metadata + cached full guides where available.
+  // When a category is selected, show primary-category matches before tag-only matches,
+  // so Mathematics pill lists the 13 math guides before the "also tagged math" cross-refs.
   const filtered = referenceMeta
     .filter(g => filteredSlugs.has(g.slug))
+    .sort((a, b) => {
+      if (!selectedCategory) return 0;
+      const aPrimary = a.category === selectedCategory ? 0 : 1;
+      const bPrimary = b.category === selectedCategory ? 0 : 1;
+      return aPrimary - bPrimary;
+    })
     .map(meta => guideCache[meta.slug] || { ...meta, understand: [], relatedStories: [] } as unknown as ReferenceGuide);
 
   // Group by category group (science / coding)
