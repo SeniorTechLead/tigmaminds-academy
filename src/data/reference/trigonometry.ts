@@ -90,7 +90,6 @@ export const guide: ReferenceGuide = {
         '**Numerical computation.** Calculators do not store sin tables — they compute via Taylor series:\n\n' +
         '`sin x = x − x³/3! + x⁵/5! − x⁷/7! + ...`\n\n' +
         'Convergence is fast for small x. For large x, calculators reduce the angle modulo 2π first (or modulo π/2 with sign flips), then apply the series. Modern hardware uses CORDIC (rotation-based bit-shift algorithms) on simple chips, and lookup tables with interpolation on faster processors.',
-      diagram: 'SOHCAHTOADiagram',
       interactive: { type: 'python-playground', props: { starterCode: '# Find the missing sides of a right triangle\nimport math\n\nhypotenuse = 10  # cm\nangle_deg = 30\n\n# Convert to radians (Python\'s math functions use radians)\nangle_rad = math.radians(angle_deg)\n\nopposite = hypotenuse * math.sin(angle_rad)\nadjacent = hypotenuse * math.cos(angle_rad)\n\nprint(f"At {angle_deg}° with hypotenuse {hypotenuse} cm:")\nprint(f"  opposite = {opposite:.2f} cm")\nprint(f"  adjacent = {adjacent:.2f} cm")\n\n# Verify with Pythagoras\ncheck = opposite**2 + adjacent**2\nprint(f"\\nopp² + adj² = {check:.2f} (should equal hyp² = {hypotenuse**2})")\n\n# Now try changing angle_deg to 45 or 60 and re-run!\n', title: 'Try it — SOH CAH TOA in code' } },
       practice: practiceSohCahToa,
     },
@@ -162,7 +161,6 @@ export const guide: ReferenceGuide = {
         '`X[k] = Σ x[n] · e^(−2πikn/N)`\n\n' +
         'where the e^(...) factors are exactly the Nth roots of unity. Each X[k] tells you "how much frequency k is in your signal." This is what your phone uses to identify which musical notes are in a recording, what an MRI machine uses to reconstruct an image from raw measurements, and what your video player uses to decode H.264.\n\n' +
         '**Why O(N²) becomes O(N log N) — the FFT.** Computing X[k] naively for all k takes N² operations. Cooley & Tukey (1965) noticed that the DFT of length N can be split into two DFTs of length N/2 — using the symmetry of the roots of unity. Recursing gives O(N log N). Without the FFT, real-time audio and video on a phone would be impossible. The unit circle\'s structure is *why* this speedup exists.',
-      diagram: 'UnitCircleDiagram',
       practice: practiceUnitCircle,
     },
 
@@ -228,7 +226,6 @@ export const guide: ReferenceGuide = {
         '— odd harmonics with rapidly shrinking weights. Try just three terms: the result already looks square-ish. With ten terms it is sharper. With infinitely many it would be exact. **But not quite** — the partial sums always overshoot the corners by about 9% (the **Gibbs phenomenon**). Truncating a Fourier series introduces ringing artifacts at sharp edges. The faint "halos" around hard edges in low-quality JPEG images are exactly this — JPEG truncates the discrete cosine transform and the truncation rings.\n\n' +
         '**The Heisenberg uncertainty in signal processing.** A sharp pulse in time has a wide Fourier spectrum; a single pure frequency exists for all time. The product of "duration in time" and "spread in frequency" has a lower bound: Δt · Δω ≥ 1/2. This is not metaphorical; it is the same inequality as Heisenberg\'s uncertainty principle in quantum mechanics — both express the fact that a function and its Fourier transform cannot both be sharply localised.\n\n' +
         '**Why audio engineers think in terms of sine waves.** Any sound — a violin, a voice, a thunderclap — is a wave that can be decomposed into sine components. Equalisers boost or cut specific frequencies. Lossy compressors throw away components humans cannot hear. Synthesizers add components to build new sounds. The graph of y = sin x is the atomic unit of all of this.',
-      diagram: 'TrigGraphsDiagram',
       interactive: { type: 'python-playground', props: { starterCode: '# Plot a sinusoid and see how A, B, C, D change its shape\nimport math\n\nA = 1.5     # amplitude\nB = 0.507   # angular frequency (period = 2π/B ≈ 12.4)\nC = 0       # phase shift\nD = 2       # vertical shift\n\nprint(f"Tide model: h(t) = {A} sin({B}t + {C}) + {D}")\nprint(f"Period: {2*math.pi/B:.2f} hours\\n")\n\n# Sample every 2 hours over one full period\nfor hours in range(0, 13, 2):\n    h = A * math.sin(B * hours + C) + D\n    bar = "▇" * int(h * 5)  # crude bar chart\n    print(f"t = {hours:>2}h:  h = {h:.2f} m  {bar}")\n\n# Try changing A or B and re-running.\n', title: 'Try it — Sinusoid playground' } },
       practice: practiceTrigGraphs,
     },

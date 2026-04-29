@@ -778,8 +778,7 @@ export const guide: ReferenceGuide = {
         '2. **LoRA (Low-Rank Adaptation):** Full fine-tuning updates all weights (billions of parameters, huge GPU memory). ' +
         'LoRA freezes the original weights and adds tiny trainable matrices (rank 4-16) at each layer. ' +
         'These matrices learn the task-specific adjustment. Result: 10× less GPU memory, similar performance.',
-      diagram: 'TransformerAttentionDiagram',
-    },
+      },
   ],
 
   build: [

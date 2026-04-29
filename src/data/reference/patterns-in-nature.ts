@@ -49,8 +49,7 @@ export const guide: ReferenceGuide = {
         '- Spots on a leopard, stripes on a zebra, lines on an angelfish — different boundary conditions, same equations.\n' +
         '- The Belousov-Zhabotinsky reaction in a petri dish produces chemical spirals indistinguishable from those on a seashell.\n' +
         '- 2017: researchers verified that the spacing of fingerprints, ridges in the mouse palate, and even hair follicles are governed by Turing-like systems.',
-      diagram: 'TaraSunflowerDiagram',
-    },
+      },
 
     // ─────────────────────────────────────────────────────────────
     // 2. The Fibonacci Sequence
@@ -113,7 +112,6 @@ export const guide: ReferenceGuide = {
         'All the partial denominators are 1 — the slowest possible convergence. Every other irrational has at least one larger partial denominator, leading to occasional very-good rational approximations. φ has no such "rational shortcuts," which is *exactly* what plants need: a rotation angle that never lands on a previous position.\n\n' +
         '**Pisano period.** F(n) mod m is always eventually periodic. For m = 10, the period is 60. For m = 100, it\'s 300. For prime m, the period divides m − 1 (if 5 is a quadratic residue mod m) or m + 1 (otherwise). This gives a fast way to compute F(n) mod m for huge n.\n\n' +
         '**Zeckendorf\'s theorem.** Every positive integer has a *unique* representation as a sum of non-consecutive Fibonacci numbers. Examples: 30 = 21 + 8 + 1, 100 = 89 + 8 + 3. This is used in efficient encoding (Fibonacci coding) for storing variable-length integers.',
-      diagram: 'FibonacciSpiralDiagram',
       practice: practiceFibonacci,
     },
 
@@ -217,7 +215,6 @@ export const guide: ReferenceGuide = {
         'The 2015 discovery used a brute-force computer search over a parametrised family. The 2017 proof reduced the problem to checking ~371 cases — each verified by computer. A century-old question, finally closed.\n\n' +
         '**Penrose tilings (1974).** Two tile shapes (a "kite" and "dart") tile the plane *aperiodically* — they fill the plane but the pattern never repeats. They have 5-fold symmetry, which classical crystallography forbade. The discovery led directly to the recognition of quasicrystals (see the Golden Ratio section).\n\n' +
         '**The new aperiodic monotile (2023).** For 50 years, the open question was: can a *single* tile shape force aperiodicity? In March 2023, David Smith and three collaborators announced "the hat" — a 13-sided tile that tiles the plane only aperiodically. Months later they refined to "the spectre," which works without requiring reflections. A 50-year problem solved by a hobbyist and three professionals.',
-      diagram: 'TessellationDiagram',
       practice: practiceTessellations,
     },
 
@@ -271,7 +268,6 @@ export const guide: ReferenceGuide = {
         '| Stock market analysis | Price movements show fractal scaling; Mandelbrot\'s "multifractal" model fits returns better than Gaussian |\n' +
         '| Heart rate variability | A healthy heart shows fractal-like rhythm fluctuations; loss of fractal scaling is a marker of cardiac disease |\n\n' +
         '**Heisenberg uncertainty meets fractals.** A signal compressed in time is spread out in frequency, and vice versa. Wavelet transforms — a multi-resolution fractal-style decomposition — give the right tradeoff for non-stationary signals (speech, ECG, seismic), beating both pure time and pure frequency views.',
-      diagram: 'FractalTreeDiagram',
       practice: practiceFractals,
     },
 
@@ -331,7 +327,6 @@ export const guide: ReferenceGuide = {
         '| SU(2) | Weak force | W±, Z |\n' +
         '| U(1) | Electromagnetic | photon |\n\n' +
         '**Symmetry breaking.** Many systems have governing equations with high symmetry but *settle* into states with lower symmetry. A pencil balanced on its tip has rotational symmetry; once it falls, that symmetry is broken. The Higgs mechanism is exactly this — the universe\'s ground state breaks an SU(2) symmetry, giving particles mass. Without that broken symmetry, every particle would be massless and neither atoms nor stars would form.',
-      diagram: 'SymmetryDiagram',
       practice: practiceSymmetry,
     },
 

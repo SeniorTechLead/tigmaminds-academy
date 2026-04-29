@@ -85,7 +85,6 @@ export const guide: ReferenceGuide = {
         '| Cross-section of a muscle | k² |\n' +
         '| Body mass (volume × density) | k³ |\n\n' +
         'Strength ÷ weight scales as k² / k³ = 1/k. Double the size → halve the strength-to-weight ratio. An ant with k = 0.001 of human size has a k³/k² = 0.001 disadvantage in mass-per-cross-section, so its tiny legs can carry many times its tiny weight.',
-      diagram: 'PithaRatioDiagram',
       practice: practiceRatios,
     },
 
