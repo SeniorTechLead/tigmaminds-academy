@@ -5,7 +5,7 @@ export default function CirclePropertiesDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 420 368" className="w-full max-w-md mx-auto" role="img" aria-label="Circle properties diagram">
+      <svg viewBox="0 0 420 368" className="w-full max-w-xl mx-auto" role="img" aria-label="Circle properties diagram">
         {/* Title */}
         <text x="200" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Properties of a Circle

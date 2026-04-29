@@ -1,7 +1,7 @@
 export default function RotGyroscopeDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 520 400" className="w-full h-auto" role="img"
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 532 400" className="w-full h-auto" role="img"
         aria-label="Diagram showing angular momentum keeping a spinning gyroscope upright, compared to a bicycle wheel">
         <defs>
           <marker id="rg-arr-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">

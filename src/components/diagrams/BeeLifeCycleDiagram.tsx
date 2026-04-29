@@ -12,7 +12,7 @@ export default function BeeLifeCycleDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 546 399" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee life cycle diagram from egg through larva and pupa to adult">
+      <svg viewBox="0 0 546 399" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee life cycle diagram from egg through larva and pupa to adult">
         <rect width="520" height="380" rx="12" className="fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Bee Life Cycle</text>

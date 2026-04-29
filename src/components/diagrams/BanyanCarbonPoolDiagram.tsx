@@ -18,7 +18,7 @@ export default function BanyanCarbonPoolDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 525 435" className="w-full max-w-lg mx-auto" role="img" aria-label="Forest carbon pools showing above-ground biomass, below-ground biomass, dead wood, litter, and soil organic carbon as a stacked bar chart">
+      <svg viewBox="0 0 525 435" className="w-full max-w-2xl mx-auto" role="img" aria-label="Forest carbon pools showing above-ground biomass, below-ground biomass, dead wood, litter, and soil organic carbon as a stacked bar chart">
         <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

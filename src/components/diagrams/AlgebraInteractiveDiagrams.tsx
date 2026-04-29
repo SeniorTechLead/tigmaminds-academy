@@ -20,7 +20,7 @@ export function ExpressionEvaluator() {
   ];
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Expression Evaluator</span>
       </div>
@@ -63,7 +63,7 @@ export function EquationBalanceScale() {
   const s = steps[step];
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Solving: 2x + 3 = 11</span>
         <div className="flex gap-1">
@@ -123,7 +123,7 @@ export function InequalityNumberLine() {
   const isRight = operator === '>' || operator === '≥';
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Inequality Visualizer</span>
       </div>
@@ -202,7 +202,7 @@ export function SlopeExplorer() {
   const y1 = m * x1 + b, y2 = m * x2 + b;
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-2">
         <span className={`${LABEL} ${TEXT_MUTED}`}>y = mx + b</span>
         <span className="font-mono text-sm text-emerald-400">y = {m}x {b >= 0 ? '+' : ''} {b}</span>

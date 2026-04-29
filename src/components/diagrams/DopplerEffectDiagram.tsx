@@ -14,7 +14,7 @@ export default function DopplerEffectDiagram() {
   const offsetPerWave = moving ? 12 : 0;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-6">
+    <div className="w-full max-w-2xl mx-auto my-6">
       {/* Toggle button */}
       <div className="flex justify-center mb-3">
         <button

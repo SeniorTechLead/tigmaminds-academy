@@ -8,7 +8,7 @@ export default function ArkCapacityDiagram() {
   ];
   let y = 90;
   return (
-    <svg viewBox="0 0 500 340" className="w-full max-w-lg mx-auto">
+    <svg viewBox="0 0 500 340" className="w-full max-w-2xl mx-auto">
       <text x="250" y="25" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">Ark Capacity Breakdown</text>
       <text x="250" y="45" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">135 m x 22.5 m x 13.5 m = ~41,000 m³ | 3 decks</text>
 

@@ -4,7 +4,7 @@ export default function FireflyForLoopDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="For-loop visualization: counter 0 to 9 lighting LEDs in sequence">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="For-loop visualization: counter 0 to 9 lighting LEDs in sequence">
         <rect width={w} height={h} rx="12" className="fill-slate-900" />
 
         <text x={w / 2} y="28" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="700">The For-Loop: Lighting LEDs One by One</text>

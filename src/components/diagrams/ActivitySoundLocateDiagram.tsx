@@ -2,7 +2,7 @@ export default function ActivitySoundLocateDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
       <svg
-        viewBox="0 0 700 400"
+        viewBox="0 0 729 400"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -77,10 +77,10 @@ export default function ActivitySoundLocateDiagram() {
         {/* Expected results */}
         <rect x="50" y="340" width="600" height="50" rx="8" className="fill-emerald-50 dark:fill-emerald-950/30" stroke="#16a34a" strokeWidth="1" />
         <text x="350" y="358" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">
-          Expected: Two ears \u2192 good accuracy (especially left/right). One ear \u2192 front/back confusion!
+          Expected: Two ears → good accuracy (especially left/right). One ear → front/back confusion!
         </text>
         <text x="350" y="376" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          Owls solve front/back AND up/down with asymmetric ears \u2014 their accuracy is 1\u20132\u00b0, enough to catch mice in pitch darkness
+          Owls solve front/back AND up/down with asymmetric ears — their accuracy is 1–2°, enough to catch mice in pitch darkness
         </text>
       </svg>
     </div>

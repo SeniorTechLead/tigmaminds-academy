@@ -77,7 +77,7 @@ export default function ElephantSpectrogramDiagram() {
   return (
     <svg
       viewBox="0 0 630 406"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Comparison of waveform and spectrogram views of an elephant rumble, showing how the spectrogram reveals frequency structure"
     >

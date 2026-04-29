@@ -12,7 +12,7 @@ export default function TransectMethodDiagram() {
       <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Transect survey method: walk a fixed path and count every butterfly within 5 meters on each side">
         <rect width="700" height="380" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">The Transect Method</text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Walk a fixed path at a steady pace \u2014 count everything you see within 5 m on each side</text>
+        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Walk a fixed path at a steady pace — count everything you see within 5 m on each side</text>
 
         {/* Transect path */}
         <line x1="100" y1="170" x2="600" y2="170" stroke="#22c55e" strokeWidth="3" strokeDasharray="10 5" />
@@ -26,7 +26,7 @@ export default function TransectMethodDiagram() {
 
         {/* Walker icon */}
         <circle cx="320" cy="170" r="8" fill="#22c55e" opacity="0.3" />
-        <text x="320" y="174" textAnchor="middle" fontSize="10">\uD83D\uDEB6</text>
+        <text x="320" y="174" textAnchor="middle" fontSize="10">🚶</text>
 
         {/* Butterflies */}
         {butterflies.map((b, i) => (
@@ -52,10 +52,10 @@ export default function TransectMethodDiagram() {
           'Same walking speed',
           'Record weather conditions',
         ].map((r, i) => (
-          <text key={i} x="380" y={278 + i * 14} fontSize="10" className="fill-gray-600 dark:fill-slate-300">\u2022 {r}</text>
+          <text key={i} x="380" y={278 + i * 14} fontSize="10" className="fill-gray-600 dark:fill-slate-300">• {r}</text>
         ))}
 
-        <text x="350" y="356" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Consistency is everything \u2014 if you change the method, you can\u2019t compare results</text>
+        <text x="350" y="356" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Consistency is everything — if you change the method, you can’t compare results</text>
       </svg>
     </div>
   );

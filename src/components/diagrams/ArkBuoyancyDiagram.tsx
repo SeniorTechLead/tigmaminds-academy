@@ -1,6 +1,6 @@
 export default function ArkBuoyancyDiagram() {
   return (
-    <svg viewBox="0 0 500 320" className="w-full max-w-lg mx-auto">
+    <svg viewBox="0 0 500 320" className="w-full max-w-2xl mx-auto">
       {/* Water */}
       <rect x="0" y="160" width="500" height="160" fill="#1e3a5f" opacity="0.5" />
       <text x="460" y="250" textAnchor="end" fill="#60a5fa" fontSize="11" fontStyle="italic">Water</text>

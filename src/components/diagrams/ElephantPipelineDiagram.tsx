@@ -29,7 +29,7 @@ export default function ElephantPipelineDiagram() {
   return (
     <svg
       viewBox="0 0 670 298"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Full classifier pipeline: Raw Audio to Feature Extraction to Classification to Mood Output, with six elephant mood categories"
     >

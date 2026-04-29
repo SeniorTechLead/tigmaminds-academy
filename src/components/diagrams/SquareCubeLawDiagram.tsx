@@ -14,7 +14,7 @@ export default function SquareCubeLawDiagram() {
           The Square-Cube Law: Why Small Animals Glide Better
         </text>
         <text x="390" y="54" textAnchor="middle" fontSize="12" className="fill-gray-500 dark:fill-slate-400">
-          Double the size \u2192 surface area \u00d74, but volume (mass) \u00d78
+          Double the size → surface area ×4, but volume (mass) ×8
         </text>
 
         {/* Three cubes of increasing size */}
@@ -56,10 +56,10 @@ export default function SquareCubeLawDiagram() {
             />
 
             <text x={c.x} y="242" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-              Surface: {c.sa} units\u00b2
+              Surface: {c.sa} units²
             </text>
             <text x={c.x} y="260" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-              Volume: {c.vol} units\u00b3
+              Volume: {c.vol} units³
             </text>
             <text x={c.x} y="280" textAnchor="middle" fontSize="12" fontWeight="700" fill={c.color}>
               SA/Vol = {c.ratio}
@@ -85,10 +85,10 @@ export default function SquareCubeLawDiagram() {
         {/* The math */}
         <rect x="120" y="390" width="540" height="55" rx="8" className="fill-slate-50 dark:fill-slate-900" stroke="#94a3b8" strokeWidth="1" />
         <text x="390" y="410" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">
-          The Math: Surface area scales as L\u00b2, volume as L\u00b3
+          The Math: Surface area scales as L², volume as L³
         </text>
         <text x="390" y="430" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          Wing loading (mass / wing area) increases with size \u2192 bigger animals need powered flight
+          Wing loading (mass / wing area) increases with size → bigger animals need powered flight
         </text>
       </svg>
     </div>

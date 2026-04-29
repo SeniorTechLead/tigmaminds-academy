@@ -1,7 +1,7 @@
 export default function BanyanPhotosynthesisDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 395" className="w-full max-w-lg mx-auto" role="img" aria-label="Photosynthesis in a banyan leaf showing sunlight, CO2, and water converting to glucose and oxygen">
+      <svg viewBox="0 0 570 395" className="w-full max-w-2xl mx-auto" role="img" aria-label="Photosynthesis in a banyan leaf showing sunlight, CO2, and water converting to glucose and oxygen">
         <rect width="500" height="360" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

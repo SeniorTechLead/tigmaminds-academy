@@ -1,6 +1,6 @@
 export default function ClimateChangeDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 540 420" className="w-full h-auto" role="img"
         aria-label="Animated greenhouse effect: sun rays, trapped heat, CO2 accumulation, rising temperature, shrinking ice">
         <style>{`

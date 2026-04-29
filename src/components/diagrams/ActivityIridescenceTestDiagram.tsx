@@ -27,7 +27,7 @@ export default function ActivityIridescenceTestDiagram() {
         <path d="M 100 135 Q 120 128 140 133 Q 160 138 180 130" fill="none" stroke="#3b82f6" strokeWidth="1.5" opacity="0.6" />
         <path d="M 100 145 Q 120 140 140 145 Q 160 150 180 142" fill="none" stroke="#10b981" strokeWidth="1.5" opacity="0.6" />
         <text x="140" y="202" textAnchor="middle" fontSize="10" className="fill-indigo-600 dark:fill-indigo-400">Colors shift as you tilt</text>
-        <text x="140" y="216" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u2192 Structural color!</text>
+        <text x="140" y="216" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">→ Structural color!</text>
 
         {/* Step 2: Soap bubble */}
         <rect x="250" y="70" width="200" height="160" rx="8" className="fill-cyan-50 dark:fill-cyan-950/30 stroke-cyan-200 dark:stroke-cyan-700" strokeWidth="1" />
@@ -37,15 +37,15 @@ export default function ActivityIridescenceTestDiagram() {
         <path d="M 325 150 Q 345 140 365 150" fill="none" stroke="#3b82f6" strokeWidth="1" opacity="0.5" />
         <path d="M 328 165 Q 348 158 368 165" fill="none" stroke="#10b981" strokeWidth="1" opacity="0.5" />
         <text x="350" y="202" textAnchor="middle" fontSize="10" className="fill-cyan-600 dark:fill-cyan-400">Swirling rainbow bands</text>
-        <text x="350" y="216" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u2192 Thin-film interference!</text>
+        <text x="350" y="216" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">→ Thin-film interference!</text>
 
         {/* Step 3: Painted object */}
         <rect x="460" y="70" width="200" height="160" rx="8" className="fill-amber-50 dark:fill-amber-950/30 stroke-amber-200 dark:stroke-amber-700" strokeWidth="1" />
         <text x="560" y="90" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-amber-700 dark:fill-amber-300">Step 3: Red Paint</text>
         <rect x="525" y="110" width="70" height="70" rx="4" fill="#ef4444" opacity="0.7" />
-        <text x="560" y="150" textAnchor="middle" fontSize="20">\ud83c\udfa8</text>
+        <text x="560" y="150" textAnchor="middle" fontSize="20">🎨</text>
         <text x="560" y="202" textAnchor="middle" fontSize="10" className="fill-amber-600 dark:fill-amber-400">Red from every angle</text>
-        <text x="560" y="216" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u2192 Pigment color (chemical)</text>
+        <text x="560" y="216" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">→ Pigment color (chemical)</text>
 
         {/* Comparison table */}
         <rect x="60" y="250" width="580" height="110" rx="8" className="fill-gray-50 dark:fill-slate-900/50 stroke-gray-200 dark:stroke-slate-700" strokeWidth="1" />
@@ -74,7 +74,7 @@ export default function ActivityIridescenceTestDiagram() {
           Peacock feathers use structural color
         </text>
         <text x="350" y="418" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
-          Melanin rods arranged in nano-layers create thin-film interference \u2014
+          Melanin rods arranged in nano-layers create thin-film interference —
         </text>
         <text x="350" y="434" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
           the same physics as your CD and soap bubble, just smaller and more precise.

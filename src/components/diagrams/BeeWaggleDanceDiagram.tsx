@@ -1,7 +1,7 @@
 export default function BeeWaggleDanceDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 546 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee waggle dance diagram showing direction and distance encoding">
+      <svg viewBox="0 0 546 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee waggle dance diagram showing direction and distance encoding">
         <rect width="520" height="400" rx="12" className="fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">The Waggle Dance</text>

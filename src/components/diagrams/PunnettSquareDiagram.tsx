@@ -56,7 +56,7 @@ export default function PunnettSquareDiagram() {
         </button>
       </div>
 
-      <svg viewBox="0 0 420 388" className="w-full max-w-md mx-auto" role="img" aria-label="Punnett square diagram">
+      <svg viewBox="0 0 420 388" className="w-full max-w-xl mx-auto" role="img" aria-label="Punnett square diagram">
         {/* Title */}
         <text x="200" y="25" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="12" fontWeight="bold">
           {data.title}

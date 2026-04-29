@@ -53,7 +53,7 @@ export default function BFSDFSDiagram() {
   const dfsColors = ['fill-orange-500', 'fill-orange-400', 'fill-orange-300', 'fill-orange-300', 'fill-orange-400', 'fill-orange-300', 'fill-orange-300'];
 
   return (
-    <svg viewBox="0 0 370 260" className="w-full max-w-md mx-auto" role="img" aria-label="BFS vs DFS graph traversal animation">
+    <svg viewBox="0 0 370 260" className="w-full max-w-xl mx-auto" role="img" aria-label="BFS vs DFS graph traversal animation">
       {/* Title */}
       <text x="185" y="16" textAnchor="middle" className="fill-gray-800 dark:fill-gray-200" fontSize="13" fontWeight="700">
         {mode === 'bfs' ? 'BFS: Breadth-First (Layer by Layer)' : 'DFS: Depth-First (Go Deep First)'}

@@ -1,7 +1,7 @@
 export default function ActivitySeedGerminateDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 360" className="w-full max-w-lg mx-auto" role="img" aria-label="Home seed germination experiment: compare storage conditions">
+      <svg viewBox="0 0 520 360" className="w-full max-w-2xl mx-auto" role="img" aria-label="Home seed germination experiment: compare storage conditions">
         <rect width="520" height="360" rx="12" className="fill-white dark:fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" className="fill-lime-400" fontSize="14" fontWeight="bold">Activity: Seed Germination Experiment</text>

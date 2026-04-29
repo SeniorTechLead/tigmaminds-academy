@@ -1,6 +1,6 @@
 export default function SonarEchoDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 520 360" className="w-full h-auto" role="img"
         aria-label="Diagram showing sound echo bouncing off a canyon wall to measure distance">
         <defs>

@@ -66,7 +66,7 @@ export default function ElephantKNNDiagram() {
   return (
     <svg
       viewBox="0 0 630 384"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="k-Nearest Neighbors: a new unknown sound is classified by the majority vote of its 5 closest neighbors in feature space"
     >

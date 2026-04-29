@@ -103,10 +103,10 @@ export default function TurtleEarthquakeDiagram() {
           ))}
 
           <text x="300" y="82" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">
-            Each whole number = 32\u00d7 more energy released
+            Each whole number = 32× more energy released
           </text>
           <text x="300" y="98" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-            The 1950 Assam earthquake was magnitude 8.6 \u2014 one of the strongest ever recorded
+            The 1950 Assam earthquake was magnitude 8.6 — one of the strongest ever recorded
           </text>
         </g>
 

@@ -32,7 +32,7 @@ export default function ElephantSineWaveDiagram() {
   return (
     <svg
       viewBox="0 0 675 651"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Elephant sine wave diagram showing vibrations through ground, a sine wave with labels, and frequency comparison"
     >

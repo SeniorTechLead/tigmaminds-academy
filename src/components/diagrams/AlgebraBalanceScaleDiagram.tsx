@@ -48,7 +48,7 @@ export default function AlgebraBalanceScaleDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 400 260" className="w-full" role="img" aria-label="Balance scale showing equation solving step by step">
         <rect width="400" height="260" className="fill-white dark:fill-slate-950" rx="8" />
         <text x="200" y="22" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">Al-Jabr: Keep the Balance</text>

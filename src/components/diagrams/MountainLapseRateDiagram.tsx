@@ -30,7 +30,7 @@ export default function MountainLapseRateDiagram() {
   const gridAlts = [0, 1000, 2000, 3000, 4000, 5000];
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 609 420"
         className="w-full"

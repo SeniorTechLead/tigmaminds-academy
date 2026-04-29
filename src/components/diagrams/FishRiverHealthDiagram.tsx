@@ -17,7 +17,7 @@ export default function FishRiverHealthDiagram() {
   return (
     <svg
       viewBox="0 0 592 420"
-      className="w-full max-w-lg mx-auto my-6"
+      className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="River health indicators showing how fish behavior signals water quality, with a citizen science observation protocol"
     >

@@ -1,7 +1,7 @@
 export default function BanyanEcosystemDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 582 475" className="w-full max-w-lg mx-auto" role="img" aria-label="Banyan tree as an ecosystem showing birds, insects, epiphytes, animals, and mycorrhizal fungi">
+      <svg viewBox="0 0 582 475" className="w-full max-w-2xl mx-auto" role="img" aria-label="Banyan tree as an ecosystem showing birds, insects, epiphytes, animals, and mycorrhizal fungi">
         <rect width="500" height="440" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

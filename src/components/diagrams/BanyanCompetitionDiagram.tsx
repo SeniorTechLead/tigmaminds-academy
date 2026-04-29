@@ -1,7 +1,7 @@
 export default function BanyanCompetitionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 443" className="w-full max-w-lg mx-auto" role="img" aria-label="Forest canopy layers showing competition for light: emergent, canopy, understory, forest floor, and the banyan's spreading strategy">
+      <svg viewBox="0 0 560 443" className="w-full max-w-2xl mx-auto" role="img" aria-label="Forest canopy layers showing competition for light: emergent, canopy, understory, forest floor, and the banyan's spreading strategy">
         <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

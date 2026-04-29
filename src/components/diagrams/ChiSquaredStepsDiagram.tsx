@@ -63,7 +63,7 @@ export default function ChiSquaredStepsDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Step buttons */}
       <div className="flex flex-wrap gap-1 mb-2 justify-center">
         {STEP_LABELS.map(s => (
@@ -164,10 +164,10 @@ export default function ChiSquaredStepsDiagram() {
             {step === 4 && (
               <>
                 <text x={headsCx} y={barBaseY + 32} textAnchor="middle" fill="#f59e0b" fontSize="8" fontFamily="system-ui, sans-serif">
-                  ({diffH})\u00b2/{EXPECTED} = {chiH.toFixed(1)}
+                  ({diffH})²/{EXPECTED} = {chiH.toFixed(1)}
                 </text>
                 <text x={tailsCx} y={barBaseY + 32} textAnchor="middle" fill="#f59e0b" fontSize="8" fontFamily="system-ui, sans-serif">
-                  ({diffT})\u00b2/{EXPECTED} = {chiT.toFixed(1)}
+                  ({diffT})²/{EXPECTED} = {chiT.toFixed(1)}
                 </text>
               </>
             )}

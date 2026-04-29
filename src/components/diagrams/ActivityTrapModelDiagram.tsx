@@ -1,7 +1,7 @@
 export default function ActivityTrapModelDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Step-by-step instructions for building a pitcher plant trap model from household materials">
+      <svg viewBox="0 0 560 400" className="w-full max-w-2xl mx-auto" role="img" aria-label="Step-by-step instructions for building a pitcher plant trap model from household materials">
         <rect width="560" height="400" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Build a Pitcher Plant Trap Model</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Test which design features capture the most "insects" (small beads)</text>

@@ -7,7 +7,7 @@ export default function OrographicRainDiagram() {
   const totalH = 240;
 
   return (
-    <svg viewBox={`0 0 ${totalW} ${totalH}`} className="w-full max-w-lg mx-auto my-6" role="img" aria-label="Orographic rainfall: moist air rises over mountain, drops rain, creates dry rain shadow">
+    <svg viewBox={`0 0 ${totalW} ${totalH}`} className="w-full max-w-2xl mx-auto my-6" role="img" aria-label="Orographic rainfall: moist air rises over mountain, drops rain, creates dry rain shadow">
       {/* Title */}
       <text x={totalW / 2} y="16" textAnchor="middle" className="fill-gray-800 dark:fill-gray-200" fontSize="12" fontWeight="700">
         Orographic Rainfall &amp; Rain Shadow

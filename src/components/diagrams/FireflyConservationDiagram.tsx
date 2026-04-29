@@ -27,7 +27,7 @@ export default function FireflyConservationDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Firefly conservation: threats of light pollution, habitat loss, pesticides and their solutions">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Firefly conservation: threats of light pollution, habitat loss, pesticides and their solutions">
         <rect width={w} height={h} rx="12" className="fill-slate-900" />
 
         <text x={w / 2} y="28" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="700">Fireflies Are Disappearing Worldwide</text>

@@ -5,7 +5,7 @@ export default function LatLongGridDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 420 435" className="w-full max-w-lg mx-auto" role="img" aria-label="Globe with latitude and longitude grid, Guwahati marked">
+      <svg viewBox="0 0 420 435" className="w-full max-w-2xl mx-auto" role="img" aria-label="Globe with latitude and longitude grid, Guwahati marked">
         {/* Globe background */}
         <circle cx={cx} cy={cy} r={r} className="fill-blue-100 dark:fill-blue-950" />
         <circle cx={cx} cy={cy} r={r} fill="none" className="stroke-gray-500 dark:stroke-gray-400" strokeWidth="1.5" />

@@ -1,7 +1,7 @@
 export default function BeeColonyCollapseDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 430" className="w-full max-w-lg mx-auto" role="img" aria-label="Colony collapse disorder diagram showing threats from pesticides, mites, and habitat loss">
+      <svg viewBox="0 0 560 430" className="w-full max-w-2xl mx-auto" role="img" aria-label="Colony collapse disorder diagram showing threats from pesticides, mites, and habitat loss">
         <rect width="560" height="430" rx="12" className="fill-slate-900" />
 
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#ef4444">Colony Collapse Disorder</text>

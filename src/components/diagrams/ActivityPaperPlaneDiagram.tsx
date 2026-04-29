@@ -1,8 +1,8 @@
 export default function ActivityPaperPlaneDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
-        viewBox="0 0 520 380"
+        viewBox="0 0 639 380"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"

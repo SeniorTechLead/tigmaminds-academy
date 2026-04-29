@@ -1,7 +1,7 @@
 export default function CarbonCycleDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 558 434" className="w-full max-w-lg mx-auto" role="img" aria-label="Carbon cycle diagram">
+      <svg viewBox="0 0 558 434" className="w-full max-w-2xl mx-auto" role="img" aria-label="Carbon cycle diagram">
         <defs>
           <marker id="ccArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" className="fill-gray-400 dark:fill-gray-500" />

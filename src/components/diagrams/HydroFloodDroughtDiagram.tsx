@@ -1,7 +1,7 @@
 export default function HydroFloodDroughtDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 400" className="w-full max-w-xl mx-auto" role="img" aria-label="Flood cycle and drought impact showing causes and effects of too much and too little water">
+      <svg viewBox="0 0 592 400" className="w-full max-w-xl mx-auto" role="img" aria-label="Flood cycle and drought impact showing causes and effects of too much and too little water">
         {/* Title */}
         <text x="260" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Floods & Droughts — Too Much and Too Little

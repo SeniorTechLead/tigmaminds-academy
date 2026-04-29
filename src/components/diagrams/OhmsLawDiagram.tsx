@@ -53,7 +53,7 @@ export default function OhmsLawDiagram() {
   const triSize = 40;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-6">
+    <div className="w-full max-w-2xl mx-auto my-6">
       <svg
         viewBox={`0 0 ${w} ${h}`}
         className="w-full"

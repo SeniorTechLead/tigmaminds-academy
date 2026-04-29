@@ -1,7 +1,7 @@
 export default function LoktakPhumdiDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Cross-section of a phumdi floating island showing layers of vegetation, organic matter, and trapped gas">
+      <svg viewBox="0 0 590 400" className="w-full max-w-2xl mx-auto" role="img" aria-label="Cross-section of a phumdi floating island showing layers of vegetation, organic matter, and trapped gas">
         <rect width="560" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

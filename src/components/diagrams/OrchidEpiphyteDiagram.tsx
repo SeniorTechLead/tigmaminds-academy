@@ -1,7 +1,7 @@
 export default function OrchidEpiphyteDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing how epiphytic orchids grow on trees without parasitizing them, using aerial roots and velamen to capture water">
+      <svg viewBox="0 0 560 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing how epiphytic orchids grow on trees without parasitizing them, using aerial roots and velamen to capture water">
         <rect width="560" height="440" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Epiphytes — Growing Without Soil</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Orchids live on trees but are NOT parasites — they make their own food</text>

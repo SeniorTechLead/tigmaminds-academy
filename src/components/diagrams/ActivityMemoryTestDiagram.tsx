@@ -71,13 +71,13 @@ export default function ActivityMemoryTestDiagram() {
         ))}
 
         <text x="390" y="450" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          (Sample numbers shown \u2014 fill in your real scores)
+          (Sample numbers shown — fill in your real scores)
         </text>
 
         {/* Bottom insight */}
         <rect x="120" y="462" width="540" height="28" rx="6" className="fill-indigo-50 dark:fill-indigo-950" stroke="#6366f1" strokeWidth="1" />
         <text x="390" y="481" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-indigo-600 dark:fill-indigo-400">
-          You are replicating Ebbinghaus's 1885 experiment \u2014 the foundation of learning science
+          You are replicating Ebbinghaus's 1885 experiment — the foundation of learning science
         </text>
       </svg>
     </div>

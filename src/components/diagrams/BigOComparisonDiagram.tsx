@@ -106,7 +106,7 @@ export default function BigOComparisonDiagram() {
     : 'At n=10,000, O(n²) needs 100 million ops. O(n log n) needs only ~130,000.';
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Scale buttons */}
       <div className="flex items-center gap-2 mb-2 flex-wrap">
         <span className="text-xs font-semibold text-gray-600 dark:text-slate-400">Max n:</span>

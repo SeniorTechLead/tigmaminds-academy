@@ -1,7 +1,7 @@
 export default function ActivityFlowerDissectDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 380" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing how to dissect a flower and identify its parts: petals, sepals, stamens, pistil, and ovary">
+      <svg viewBox="0 0 560 380" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing how to dissect a flower and identify its parts: petals, sepals, stamens, pistil, and ovary">
         <rect width="560" height="380" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#f59e0b">Activity: Dissect a Flower</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Open up any flower to find these parts — use tweezers or your fingers</text>

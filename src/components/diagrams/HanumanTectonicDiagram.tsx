@@ -1,7 +1,7 @@
 export default function HanumanTectonicDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 380" className="w-full max-w-lg mx-auto" role="img" aria-label="Tectonic plates converging to form the Himalayas">
+      <svg viewBox="0 0 560 380" className="w-full max-w-2xl mx-auto" role="img" aria-label="Tectonic plates converging to form the Himalayas">
         {/* Background — cross-section of Earth's crust */}
         <rect x="0" y="200" width="560" height="180" className="fill-amber-800/30 dark:fill-amber-900/40" />
 

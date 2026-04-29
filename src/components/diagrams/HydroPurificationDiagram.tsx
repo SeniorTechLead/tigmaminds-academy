@@ -1,7 +1,7 @@
 export default function HydroPurificationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 320" className="w-full max-w-xl mx-auto" role="img" aria-label="Water purification process: screening, settling, filtering, disinfection">
+      <svg viewBox="0 0 566 320" className="w-full max-w-xl mx-auto" role="img" aria-label="Water purification process: screening, settling, filtering, disinfection">
         <defs>
           <marker id="hydro-arr" markerWidth="7" markerHeight="7" refX="7" refY="3.5" orient="auto">
             <polygon points="0 0, 7 3.5, 0 7" className="fill-blue-400" />

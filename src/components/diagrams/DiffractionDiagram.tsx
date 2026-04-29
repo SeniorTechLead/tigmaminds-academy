@@ -25,7 +25,7 @@ export default function DiffractionDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 510 295" className="w-full max-w-lg mx-auto" role="img" aria-label="Diffraction through a slit diagram">
+      <svg viewBox="0 0 510 295" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diffraction through a slit diagram">
         {/* Title */}
         <text x="225" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Diffraction: Waves Bending Through a Slit

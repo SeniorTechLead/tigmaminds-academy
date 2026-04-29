@@ -1,7 +1,7 @@
 export default function PitcherAnatomyDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 480" className="w-full max-w-lg mx-auto" role="img" aria-label="Cross-section diagram of a pitcher plant showing peristome, waxy zone, digestive fluid, and trapping mechanism">
+      <svg viewBox="0 0 560 480" className="w-full max-w-2xl mx-auto" role="img" aria-label="Cross-section diagram of a pitcher plant showing peristome, waxy zone, digestive fluid, and trapping mechanism">
         <rect width="560" height="480" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">The Perfect Trap: Pitcher Anatomy</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Cross-section of a Nepenthes pitcher</text>

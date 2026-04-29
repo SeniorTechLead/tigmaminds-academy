@@ -1,7 +1,7 @@
 export default function ActivityHerbIdentifyDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 380" className="w-full max-w-lg mx-auto" role="img" aria-label="Offline activity: identify local plants using leaf shape, smell, and a simple key">
+      <svg viewBox="0 0 520 380" className="w-full max-w-2xl mx-auto" role="img" aria-label="Offline activity: identify local plants using leaf shape, smell, and a simple key">
         {/* Title */}
         <text x="260" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Activity: Be a Plant Detective

@@ -1,7 +1,7 @@
 export default function BanyanConservationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 538 455" className="w-full max-w-lg mx-auto" role="img" aria-label="Conservation value of old trees as carbon stores, biodiversity hotspots, and cultural heritage with cost-benefit comparison">
+      <svg viewBox="0 0 538 455" className="w-full max-w-2xl mx-auto" role="img" aria-label="Conservation value of old trees as carbon stores, biodiversity hotspots, and cultural heritage with cost-benefit comparison">
         <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

@@ -1,6 +1,6 @@
 export default function OceanCurrentDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 540 420" className="w-full h-auto" role="img"
         aria-label="Animated thermohaline ocean conveyor belt with warm and cold currents flowing, sinking at poles, rising at equator">
         <style>{`

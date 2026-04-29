@@ -121,7 +121,7 @@ export default function CombinatoricsGridDiagram() {
       </div>
 
       {/* Controls */}
-      <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-3">
+      <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto mb-3">
         <div>
           <label className="text-xs text-gray-600 dark:text-gray-400 flex justify-between">
             <span>n (pool size)</span>

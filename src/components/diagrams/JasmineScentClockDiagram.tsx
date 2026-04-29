@@ -110,7 +110,7 @@ export default function JasmineScentClockDiagram() {
         {/* Bottom summary */}
         <rect x="50" y="390" width="600" height="24" rx="6" className="fill-purple-50 dark:fill-purple-950/30" stroke="#9333ea" strokeWidth="1" />
         <text x="350" y="407" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-purple-800 dark:fill-purple-200">
-          Scent at dusk, silence at dawn \u2014 the circadian clock saves energy by timing VOCs to pollinator activity
+          Scent at dusk, silence at dawn — the circadian clock saves energy by timing VOCs to pollinator activity
         </text>
 
         <defs>

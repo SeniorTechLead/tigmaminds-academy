@@ -1,7 +1,7 @@
 export default function HydroRiverStagesDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 380" className="w-full max-w-xl mx-auto" role="img" aria-label="River valley stages showing young V-shaped valley, mature meandering valley, and old wide floodplain">
+      <svg viewBox="0 0 576 380" className="w-full max-w-xl mx-auto" role="img" aria-label="River valley stages showing young V-shaped valley, mature meandering valley, and old wide floodplain">
         {/* Title */}
         <text x="260" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           River Valley Stages — How Water Carves Landscapes

@@ -11,7 +11,7 @@ export default function PostmanTerrainCostDiagram() {
         <rect width="700" height="380" rx="10" className="fill-white dark:fill-slate-950" />
 
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-blue-600 dark:fill-blue-400">
-          Terrain Cost: Why Shortest \u2260 Fastest
+          Terrain Cost: Why Shortest ≠ Fastest
         </text>
 
         {/* Cross-section of terrain */}
@@ -39,7 +39,7 @@ export default function PostmanTerrainCostDiagram() {
             strokeDasharray="6 3"
           />
           <text x="200" y="30" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-red-600 dark:fill-red-400">Route A: 5 km direct</text>
-          <text x="200" y="44" textAnchor="middle" fontSize="10" className="fill-red-500 dark:fill-red-400">\u2191500m climb \u2192 3 hours!</text>
+          <text x="200" y="44" textAnchor="middle" fontSize="10" className="fill-red-500 dark:fill-red-400">↑500m climb → 3 hours!</text>
 
           {/* Route B: around the base (longer distance) */}
           <path
@@ -49,22 +49,22 @@ export default function PostmanTerrainCostDiagram() {
             strokeWidth="2.5"
           />
           <text x="200" y="165" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-green-600 dark:fill-green-400">Route B: 8 km around</text>
-          <text x="200" y="155" textAnchor="middle" fontSize="10" className="fill-green-500 dark:fill-green-400">Mostly flat \u2192 1.5 hours!</text>
+          <text x="200" y="155" textAnchor="middle" fontSize="10" className="fill-green-500 dark:fill-green-400">Mostly flat → 1.5 hours!</text>
 
           {/* Energy cost labels */}
           <g transform="translate(400, 20)">
             <rect width="180" height="70" rx="6" className="fill-white dark:fill-slate-900" stroke="#6b7280" strokeWidth="1" />
             <text x="90" y="18" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-gray-700 dark:fill-gray-300">Energy Cost</text>
-            <text x="90" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Uphill: 4\u00d7 flat ground</text>
-            <text x="90" y="50" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Steep downhill: 2\u00d7 flat</text>
-            <text x="90" y="64" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Gentle downhill: 0.8\u00d7 flat</text>
+            <text x="90" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Uphill: 4× flat ground</text>
+            <text x="90" y="50" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Steep downhill: 2× flat</text>
+            <text x="90" y="64" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Gentle downhill: 0.8× flat</text>
           </g>
         </g>
 
         {/* Tobler's function */}
         <g transform="translate(50, 250)">
           <rect width="600" height="110" rx="8" className="fill-blue-50 dark:fill-blue-950/20" stroke="#3b82f6" strokeWidth="1" />
-          <text x="300" y="22" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-blue-700 dark:fill-blue-300">Tobler\u2019s Hiking Function</text>
+          <text x="300" y="22" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-blue-700 dark:fill-blue-300">Tobler’s Hiking Function</text>
 
           {/* Simplified speed vs slope chart */}
           <g transform="translate(40, 35)">
@@ -82,7 +82,7 @@ export default function PostmanTerrainCostDiagram() {
 
             {/* Labels */}
             <text x="0" y="68" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Steep up</text>
-            <text x="90" y="68" fontSize="10" fontWeight="600" className="fill-blue-600 dark:fill-blue-400">\u22125%</text>
+            <text x="90" y="68" fontSize="10" fontWeight="600" className="fill-blue-600 dark:fill-blue-400">−5%</text>
             <text x="190" y="68" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Steep down</text>
             <text x="-35" y="30" fontSize="10" className="fill-gray-500 dark:fill-slate-400" transform="rotate(-90, -15, 30)">Speed</text>
 
@@ -92,10 +92,10 @@ export default function PostmanTerrainCostDiagram() {
 
           {/* Key numbers */}
           <g transform="translate(300, 35)">
-            <text x="0" y="14" fontSize="11" className="fill-gray-700 dark:fill-gray-300">\u2022 Flat ground: \u223c5 km/h</text>
-            <text x="0" y="32" fontSize="11" className="fill-gray-700 dark:fill-gray-300">\u2022 30% grade uphill: \u223c1.7 km/h</text>
-            <text x="0" y="50" fontSize="11" className="fill-gray-700 dark:fill-gray-300">\u2022 Gentle downhill (\u22125%): \u223c6 km/h (fastest)</text>
-            <text x="0" y="68" fontSize="11" fontWeight="600" className="fill-blue-600 dark:fill-blue-400">\u2192 GPS apps use this to predict arrival time</text>
+            <text x="0" y="14" fontSize="11" className="fill-gray-700 dark:fill-gray-300">• Flat ground: ∼5 km/h</text>
+            <text x="0" y="32" fontSize="11" className="fill-gray-700 dark:fill-gray-300">• 30% grade uphill: ∼1.7 km/h</text>
+            <text x="0" y="50" fontSize="11" className="fill-gray-700 dark:fill-gray-300">• Gentle downhill (−5%): ∼6 km/h (fastest)</text>
+            <text x="0" y="68" fontSize="11" fontWeight="600" className="fill-blue-600 dark:fill-blue-400">→ GPS apps use this to predict arrival time</text>
           </g>
         </g>
       </svg>

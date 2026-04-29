@@ -40,7 +40,7 @@ export default function RaceAccelerationDiagram() {
   const accelPoly = `${tX(0)},${vY(0)} ${tX(3)},${vY(Math.min(27, maxV))} ${tX(3)},${vY(0)}`;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Velocity versus time graph showing a cheetah accelerating rapidly then tiring, compared to a tortoise with slow steady velocity">
         <rect width={w} height={h} rx={10} className="fill-white dark:fill-slate-900" />
 

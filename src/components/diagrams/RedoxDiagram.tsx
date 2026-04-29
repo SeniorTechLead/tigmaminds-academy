@@ -1,7 +1,7 @@
 export default function RedoxDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 472 262" className="w-full max-w-lg mx-auto" role="img" aria-label="Redox diagram showing oxidation and reduction with electron transfer and OIL RIG mnemonic">
+      <svg viewBox="0 0 472 262" className="w-full max-w-2xl mx-auto" role="img" aria-label="Redox diagram showing oxidation and reduction with electron transfer and OIL RIG mnemonic">
         <text x="225" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Oxidation &amp; Reduction (Redox)</text>
 
         {/* Atom A - loses electron (oxidation) */}

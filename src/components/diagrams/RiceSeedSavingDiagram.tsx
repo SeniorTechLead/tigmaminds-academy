@@ -1,7 +1,7 @@
 export default function RiceSeedSavingDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 635 360" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Comparison of traditional seed saving versus hybrid seeds showing genetic diversity trade-offs">
         <style>{`
           .label { font-family: system-ui, sans-serif; font-size: 12px; }
@@ -38,11 +38,11 @@ export default function RiceSeedSavingDiagram() {
         {/* Benefits */}
         <rect x="30" y="225" width="250" height="110" rx="6" fill="#ecfdf5" stroke="#6ee7b7" strokeWidth="1" className="dark:fill-emerald-900/10 dark:stroke-emerald-800" />
         <text x="155" y="245" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">Advantages</text>
-        <text x="45" y="262" className="small fill-slate-600 dark:fill-slate-400">\u2713 Free — farmer keeps own seeds</text>
-        <text x="45" y="278" className="small fill-slate-600 dark:fill-slate-400">\u2713 Adapted to local conditions over time</text>
-        <text x="45" y="294" className="small fill-slate-600 dark:fill-slate-400">\u2713 Maintains genetic diversity</text>
-        <text x="45" y="310" className="small fill-slate-600 dark:fill-slate-400">\u2713 Independence from seed companies</text>
-        <text x="45" y="326" className="small fill-amber-600 dark:fill-amber-400">\u2717 Lower yield than hybrids</text>
+        <text x="45" y="262" className="small fill-slate-600 dark:fill-slate-400">✓ Free — farmer keeps own seeds</text>
+        <text x="45" y="278" className="small fill-slate-600 dark:fill-slate-400">✓ Adapted to local conditions over time</text>
+        <text x="45" y="294" className="small fill-slate-600 dark:fill-slate-400">✓ Maintains genetic diversity</text>
+        <text x="45" y="310" className="small fill-slate-600 dark:fill-slate-400">✓ Independence from seed companies</text>
+        <text x="45" y="326" className="small fill-amber-600 dark:fill-amber-400">✗ Lower yield than hybrids</text>
 
         {/* RIGHT: Hybrid Seeds */}
         <text x="465" y="58" textAnchor="middle" className="label fill-blue-600 dark:fill-blue-400" fontWeight="700">Hybrid / HYV Seeds</text>
@@ -72,11 +72,11 @@ export default function RiceSeedSavingDiagram() {
         {/* Disadvantages */}
         <rect x="340" y="225" width="250" height="110" rx="6" fill="#eff6ff" stroke="#93c5fd" strokeWidth="1" className="dark:fill-blue-900/10 dark:stroke-blue-800" />
         <text x="465" y="245" textAnchor="middle" className="small fill-blue-600 dark:fill-blue-400" fontWeight="600">Trade-offs</text>
-        <text x="355" y="262" className="small fill-slate-600 dark:fill-slate-400">\u2713 Higher yields (2\u20134\u00D7 traditional)</text>
-        <text x="355" y="278" className="small fill-slate-600 dark:fill-slate-400">\u2713 Uniform crop for market</text>
-        <text x="355" y="294" className="small fill-amber-600 dark:fill-amber-400">\u2717 Expensive: must buy every season</text>
-        <text x="355" y="310" className="small fill-amber-600 dark:fill-amber-400">\u2717 Needs fertilizer, pesticide, irrigation</text>
-        <text x="355" y="326" className="small fill-amber-600 dark:fill-amber-400">\u2717 Narrows genetic diversity</text>
+        <text x="355" y="262" className="small fill-slate-600 dark:fill-slate-400">✓ Higher yields (2–4× traditional)</text>
+        <text x="355" y="278" className="small fill-slate-600 dark:fill-slate-400">✓ Uniform crop for market</text>
+        <text x="355" y="294" className="small fill-amber-600 dark:fill-amber-400">✗ Expensive: must buy every season</text>
+        <text x="355" y="310" className="small fill-amber-600 dark:fill-amber-400">✗ Needs fertilizer, pesticide, irrigation</text>
+        <text x="355" y="326" className="small fill-amber-600 dark:fill-amber-400">✗ Narrows genetic diversity</text>
 
         <defs>
           <marker id="seed-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">

@@ -2,7 +2,7 @@ export default function ActivityEarthShakeDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
       <svg
-        viewBox="0 0 700 380"
+        viewBox="0 0 807 380"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -65,10 +65,10 @@ export default function ActivityEarthShakeDiagram() {
         {/* Observations to record */}
         <rect x="50" y="250" width="600" height="115" rx="8" className="fill-emerald-50 dark:fill-emerald-950/30" stroke="#16a34a" strokeWidth="1" />
         <text x="350" y="272" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-emerald-700 dark:fill-emerald-300">Record Your Observations</text>
-        <text x="70" y="295" fontSize="11" className="fill-gray-700 dark:fill-gray-300">\u2022 Part 1: How long before the books slipped? Did the slip feel sudden? (That\u2019s elastic rebound.)</text>
-        <text x="70" y="315" fontSize="11" className="fill-gray-700 dark:fill-gray-300">\u2022 Part 2: How many folds formed? Are they all the same height? (Mountain ranges have varied peaks too.)</text>
-        <text x="70" y="335" fontSize="11" className="fill-gray-700 dark:fill-gray-300">\u2022 Try with rough vs smooth books \u2014 rough surfaces grip longer and slip harder (bigger \u201cearthquake\u201d).</text>
-        <text x="70" y="355" fontSize="11" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">\u2022 India is still pushing into Eurasia at \u223c4 cm/year \u2014 the Himalayas grow \u223c5 mm taller each year.</text>
+        <text x="70" y="295" fontSize="11" className="fill-gray-700 dark:fill-gray-300">• Part 1: How long before the books slipped? Did the slip feel sudden? (That’s elastic rebound.)</text>
+        <text x="70" y="315" fontSize="11" className="fill-gray-700 dark:fill-gray-300">• Part 2: How many folds formed? Are they all the same height? (Mountain ranges have varied peaks too.)</text>
+        <text x="70" y="335" fontSize="11" className="fill-gray-700 dark:fill-gray-300">• Try with rough vs smooth books — rough surfaces grip longer and slip harder (bigger “earthquake”).</text>
+        <text x="70" y="355" fontSize="11" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">• India is still pushing into Eurasia at ∼4 cm/year — the Himalayas grow ∼5 mm taller each year.</text>
 
         <defs>
           <marker id="arr-shake" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">

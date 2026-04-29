@@ -1,7 +1,7 @@
 export default function BeeRobotDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 546 420" className="w-full max-w-lg mx-auto" role="img" aria-label="RoboBee diagram showing bee-inspired flight mechanics">
+      <svg viewBox="0 0 546 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="RoboBee diagram showing bee-inspired flight mechanics">
         <rect width="520" height="400" rx="12" className="fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">RoboBee: Bee-Inspired Robotics</text>

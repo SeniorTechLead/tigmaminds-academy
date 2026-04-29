@@ -1,7 +1,7 @@
 export default function EyeAnatomyDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 322" className="w-full max-w-lg mx-auto" role="img" aria-label="Human eye anatomy cross-section">
+      <svg viewBox="0 0 570 322" className="w-full max-w-2xl mx-auto" role="img" aria-label="Human eye anatomy cross-section">
         {/* Outer eye shape (sclera) */}
         <ellipse cx="220" cy="150" rx="160" ry="110" className="fill-gray-100 dark:fill-gray-800 stroke-gray-400 dark:stroke-gray-500" strokeWidth="2" />
 

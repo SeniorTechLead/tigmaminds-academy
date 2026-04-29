@@ -42,7 +42,7 @@ export default function RuinsTimelineDiagram() {
 
         {/* Bottom key idea */}
         <rect x="100" y="248" width="500" height="46" rx="8" className="fill-amber-50 dark:fill-amber-900/20" stroke="#f59e0b" strokeWidth="1" />
-        <text x="350" y="268" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-slate-200">Every phase of a building\u2019s life leaves physical evidence.</text>
+        <text x="350" y="268" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-slate-200">Every phase of a building’s life leaves physical evidence.</text>
         <text x="350" y="284" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">Archaeologists read these clues to reconstruct stories from stone.</text>
       </svg>
     </div>

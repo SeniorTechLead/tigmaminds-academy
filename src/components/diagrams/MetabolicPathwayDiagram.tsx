@@ -66,7 +66,7 @@ export default function MetabolicPathwayDiagram() {
   const W = 460, H = 310;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <div className="flex flex-wrap gap-1 mb-2 justify-center">
         {PATHWAY_BTNS.map((b) => (
           <button

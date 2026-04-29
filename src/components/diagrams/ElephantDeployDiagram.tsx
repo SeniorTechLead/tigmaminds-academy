@@ -18,7 +18,7 @@ export default function ElephantDeployDiagram() {
   return (
     <svg
       viewBox="0 0 674 359"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Deployed monitoring system: ground sensor in the field picks up elephant audio, sends it wirelessly to a server running the classifier pipeline, which outputs a distress alert to the ranger team"
     >

@@ -104,7 +104,7 @@ export default function ActivityCorridorMapDiagram() {
         {/* Bottom */}
         <rect x="60" y="420" width="580" height="30" rx="6" className="fill-green-50 dark:fill-green-950/30 stroke-green-200 dark:stroke-green-800" strokeWidth="1" />
         <text x="350" y="440" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-green-700 dark:fill-green-300">
-          You just did GIS corridor modeling \u2014 using paper instead of a computer!
+          You just did GIS corridor modeling — using paper instead of a computer!
         </text>
       </svg>
     </div>

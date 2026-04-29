@@ -64,7 +64,7 @@ export default function OwlAsymmetricEarsDiagram() {
             <rect width="250" height="75" rx="6" className="fill-blue-100 dark:fill-blue-900/20" stroke="#3b82f6" strokeWidth="1" />
             <text x="125" y="18" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-blue-700 dark:fill-blue-300">Horizontal Direction</text>
             <text x="125" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Sound arrives at left ear first?</text>
-            <text x="125" y="50" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">\u2192 Source is to the LEFT</text>
+            <text x="125" y="50" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">→ Source is to the LEFT</text>
             <text x="125" y="66" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-blue-600 dark:fill-blue-400">Uses: time difference between ears</text>
           </g>
 
@@ -73,7 +73,7 @@ export default function OwlAsymmetricEarsDiagram() {
             <rect width="250" height="75" rx="6" className="fill-red-100 dark:fill-red-900/20" stroke="#ef4444" strokeWidth="1" />
             <text x="125" y="18" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-red-700 dark:fill-red-300">Vertical Direction</text>
             <text x="125" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Sound louder in higher ear?</text>
-            <text x="125" y="50" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">\u2192 Source is ABOVE</text>
+            <text x="125" y="50" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">→ Source is ABOVE</text>
             <text x="125" y="66" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">Uses: intensity difference (asymmetric ears)</text>
           </g>
 
@@ -81,16 +81,16 @@ export default function OwlAsymmetricEarsDiagram() {
           <g transform="translate(15, 225)">
             <rect width="250" height="70" rx="6" className="fill-emerald-100 dark:fill-emerald-900/20" stroke="#16a34a" strokeWidth="1" />
             <text x="125" y="18" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-emerald-700 dark:fill-emerald-300">Result: 3D Sound Map</text>
-            <text x="125" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Accuracy: 1\u20132\u00b0 in both planes</text>
+            <text x="125" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Accuracy: 1–2° in both planes</text>
             <text x="125" y="52" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Barn owls strike prey in TOTAL darkness</text>
-            <text x="125" y="65" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-emerald-600 dark:fill-emerald-400">Sound \u2192 strike in \u223c100 milliseconds</text>
+            <text x="125" y="65" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-emerald-600 dark:fill-emerald-400">Sound → strike in ∼100 milliseconds</text>
           </g>
         </g>
 
         {/* Bottom */}
         <rect x="50" y="390" width="600" height="24" rx="6" className="fill-purple-50 dark:fill-purple-950/30" stroke="#9333ea" strokeWidth="1" />
         <text x="350" y="407" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-purple-800 dark:fill-purple-200">
-          Human ears are symmetric \u2192 we can locate left/right but struggle with up/down. Owls can do both.
+          Human ears are symmetric → we can locate left/right but struggle with up/down. Owls can do both.
         </text>
       </svg>
     </div>

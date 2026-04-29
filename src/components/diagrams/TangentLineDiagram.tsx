@@ -54,7 +54,7 @@ export default function TangentLineDiagram() {
     <div className="my-4">
       <svg
         viewBox={`0 0 ${vw} ${vh}`}
-        className="w-full max-w-lg mx-auto"
+        className="w-full max-w-2xl mx-auto"
         role="img"
         aria-label={`Tangent and secant lines on y=x² at x=${px.toFixed(1)}`}
       >
@@ -186,7 +186,7 @@ export default function TangentLineDiagram() {
       </svg>
 
       {/* Controls */}
-      <div className="mt-3 space-y-2 px-4 max-w-lg mx-auto">
+      <div className="mt-3 space-y-2 px-4 max-w-2xl mx-auto">
         <div className="flex items-center gap-3">
           <label className="text-xs font-medium text-gray-600 dark:text-gray-400 w-28 shrink-0">
             Point x = {xPos.toFixed(1)}

@@ -25,7 +25,7 @@ export default function TurtleConvectionDiagram() {
           {/* Plates with gap */}
           <rect x="10" y="0" width="270" height="24" rx="4" fill="#92400e" opacity="0.3" />
           <rect x="320" y="0" width="270" height="24" rx="4" fill="#92400e" opacity="0.3" />
-          <text x="295" y="16" textAnchor="middle" fontSize="18" className="fill-red-600 dark:fill-red-400">\u2195</text>
+          <text x="295" y="16" textAnchor="middle" fontSize="18" className="fill-red-600 dark:fill-red-400">↕</text>
 
           {/* Plate movement arrows at top */}
           <line x1="250" y1="12" x2="180" y2="12" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arr-conv-y)" />
@@ -65,13 +65,13 @@ export default function TurtleConvectionDiagram() {
 
           {/* Core at bottom */}
           <rect x="150" y="255" width="300" height="22" rx="6" fill="#fbbf24" opacity="0.4" />
-          <text x="300" y="270" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-amber-700 dark:fill-amber-300">CORE (5,200\u00b0C \u2014 heats mantle from below)</text>
+          <text x="300" y="270" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-amber-700 dark:fill-amber-300">CORE (5,200°C — heats mantle from below)</text>
         </g>
 
         {/* Key insight */}
         <rect x="50" y="350" width="600" height="40" rx="6" className="fill-amber-50 dark:fill-amber-950/30" stroke="#f59e0b" strokeWidth="1" />
         <text x="350" y="368" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-amber-800 dark:fill-amber-200">
-          Convection moves plates 2\u201315 cm/year \u2014 about as fast as your fingernails grow
+          Convection moves plates 2–15 cm/year — about as fast as your fingernails grow
         </text>
         <text x="350" y="383" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
           Over millions of years, this slow motion builds mountains, opens oceans, and causes earthquakes

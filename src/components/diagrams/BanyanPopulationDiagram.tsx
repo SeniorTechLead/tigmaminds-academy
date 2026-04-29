@@ -23,7 +23,7 @@ export default function BanyanPopulationDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 525 436" className="w-full max-w-lg mx-auto" role="img" aria-label="Tree population dynamics showing age structure and exponential mortality explaining why old trees are rare">
+      <svg viewBox="0 0 525 436" className="w-full max-w-2xl mx-auto" role="img" aria-label="Tree population dynamics showing age structure and exponential mortality explaining why old trees are rare">
         <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

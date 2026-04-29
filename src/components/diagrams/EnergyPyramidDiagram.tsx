@@ -130,7 +130,7 @@ export default function EnergyPyramidDiagram() {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl mx-auto" role="img"
         aria-label="Animated energy pyramid — watch 90% of energy lost as heat at each trophic level">
 
         {/* Pyramid levels (bottom to top) */}

@@ -42,7 +42,7 @@ export default function BambooAuxinDiagram() {
           Polar Auxin Transport
         </text>
         <text x="190" y="355" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
-          Auxin flows one-way: apex \u2192 base
+          Auxin flows one-way: apex → base
         </text>
         <text x="190" y="370" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
           Concentrates where growth is needed

@@ -68,7 +68,7 @@ export default function GlideRatioOutputDiagram() {
           Generated with Python + Matplotlib from your measured launch heights and distances
         </text>
         <text x="390" y="392" textAnchor="middle" fontSize="10" className="fill-gray-400 dark:fill-slate-500">
-          Flying squirrels optimize for short, precise glides \u2014 not maximum distance
+          Flying squirrels optimize for short, precise glides — not maximum distance
         </text>
       </svg>
     </div>

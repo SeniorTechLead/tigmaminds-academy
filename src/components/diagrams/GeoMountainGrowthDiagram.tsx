@@ -1,7 +1,7 @@
 export default function GeoMountainGrowthDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 420" className="w-full max-w-xl mx-auto" role="img" aria-label="Animated Himalaya plate collision showing Indian plate converging with Eurasian plate, mountain rising, and erosion">
+      <svg viewBox="0 0 580 420" className="w-full max-w-xl mx-auto" role="img" aria-label="Animated Himalaya plate collision showing Indian plate converging with Eurasian plate, mountain rising, and erosion">
         <defs>
           <style>{`
             @keyframes mg-plateLeft {

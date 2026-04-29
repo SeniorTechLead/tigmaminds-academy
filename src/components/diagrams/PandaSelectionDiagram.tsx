@@ -12,7 +12,7 @@ export default function PandaSelectionDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 430" className="w-full max-w-xl mx-auto" role="img" aria-label="Natural selection over generations: dark-furred finches survive better on dark volcanic rock">
+      <svg viewBox="0 0 581 430" className="w-full max-w-xl mx-auto" role="img" aria-label="Natural selection over generations: dark-furred finches survive better on dark volcanic rock">
         <rect width="560" height="430" rx="12" className="fill-slate-900" />
 
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Natural Selection in Action</text>

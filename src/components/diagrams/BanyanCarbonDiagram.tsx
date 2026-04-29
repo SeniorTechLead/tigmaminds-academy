@@ -1,7 +1,7 @@
 export default function BanyanCarbonDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 575 411" className="w-full max-w-lg mx-auto" role="img" aria-label="Carbon cycle through a banyan tree showing CO2 absorption, carbon storage in wood, and O2 release">
+      <svg viewBox="0 0 575 411" className="w-full max-w-2xl mx-auto" role="img" aria-label="Carbon cycle through a banyan tree showing CO2 absorption, carbon storage in wood, and O2 release">
         <rect width="500" height="380" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

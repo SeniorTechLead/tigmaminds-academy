@@ -213,7 +213,7 @@ export default function GraphTraversalDiagram() {
   const tColor = mode === 'BFS' ? '#3b82f6' : '#a855f7';
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Controls */}
       <div className="flex flex-wrap gap-2 mb-2 items-center justify-center">
         <button onClick={toggleMode} className="px-3 py-1 rounded text-xs font-semibold text-white" style={{ background: tColor }}>

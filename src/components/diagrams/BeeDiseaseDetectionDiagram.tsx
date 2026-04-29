@@ -1,7 +1,7 @@
 export default function BeeDiseaseDetectionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Varroa mite detection pipeline diagram from image capture to classification to alert">
+      <svg viewBox="0 0 570 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Varroa mite detection pipeline diagram from image capture to classification to alert">
         <rect width="570" height="420" rx="12" className="fill-slate-900" />
 
         <text x="285" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Varroa Mite Detection Pipeline</text>

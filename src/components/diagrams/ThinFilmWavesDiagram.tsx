@@ -4,7 +4,7 @@ export default function ThinFilmWavesDiagram() {
       <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Thin-film interference showing how two reflected waves add up or cancel">
         <rect width="700" height="400" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Thin-Film Interference</text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Light reflects off top and bottom of a thin layer \u2014 the two waves interfere</text>
+        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Light reflects off top and bottom of a thin layer — the two waves interfere</text>
 
         {/* Thin film layers */}
         <rect x="200" y="120" width="300" height="12" rx="2" fill="#93c5fd" opacity="0.4" stroke="#3b82f6" strokeWidth="1" />
@@ -14,7 +14,7 @@ export default function ThinFilmWavesDiagram() {
 
         {/* Air gap */}
         <rect x="200" y="132" width="300" height="48" fill="#e0f2fe" opacity="0.15" />
-        <text x="350" y="160" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">Air gap (~150\u2013200 nm)</text>
+        <text x="350" y="160" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">Air gap (~150–200 nm)</text>
 
         {/* Incoming light */}
         <line x1="160" y1="70" x2="280" y2="120" stroke="#fbbf24" strokeWidth="2.5" />
@@ -50,7 +50,7 @@ export default function ThinFilmWavesDiagram() {
         <text x="505" y="348" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Other colors are suppressed</text>
 
         {/* Bottom summary */}
-        <text x="350" y="385" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">The gap thickness determines which color survives \u2014 ~200 nm gaps reinforce blue light</text>
+        <text x="350" y="385" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">The gap thickness determines which color survives — ~200 nm gaps reinforce blue light</text>
       </svg>
     </div>
   );

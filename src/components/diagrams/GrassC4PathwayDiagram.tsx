@@ -26,26 +26,26 @@ export default function GrassC4PathwayDiagram() {
           {/* RuBisCO with problem */}
           <circle cx="100" cy="120" r="24" className="fill-blue-100 dark:fill-blue-900/40" stroke="#3b82f6" strokeWidth="1.5" />
           <text x="100" y="116" textAnchor="middle" fontSize="10" fontWeight="700" className="fill-blue-700 dark:fill-blue-300">RuBisCO</text>
-          <text x="100" y="128" textAnchor="middle" fontSize="9" className="fill-blue-600 dark:fill-blue-400">grabs O\u2082!</text>
+          <text x="100" y="128" textAnchor="middle" fontSize="9" className="fill-blue-600 dark:fill-blue-400">grabs O₂!</text>
 
           {/* CO2 arrow */}
-          <text x="45" y="88" fontSize="11" fontWeight="600" className="fill-gray-600 dark:fill-gray-400">CO\u2082</text>
+          <text x="45" y="88" fontSize="11" fontWeight="600" className="fill-gray-600 dark:fill-gray-400">CO₂</text>
           <line x1="65" y1="85" x2="80" y2="100" stroke="#6b7280" strokeWidth="1.5" markerEnd="url(#arr-c4)" />
 
           {/* O2 arrow (problem) */}
-          <text x="160" y="88" fontSize="11" fontWeight="600" className="fill-red-600 dark:fill-red-400">O\u2082</text>
+          <text x="160" y="88" fontSize="11" fontWeight="600" className="fill-red-600 dark:fill-red-400">O₂</text>
           <line x1="165" y1="92" x2="125" y2="110" stroke="#ef4444" strokeWidth="1.5" markerEnd="url(#arr-c4-red)" />
 
           {/* Photorespiration */}
           <rect x="140" y="105" width="115" height="48" rx="6" className="fill-red-100 dark:fill-red-900/30" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 2" />
           <text x="198" y="122" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-red-700 dark:fill-red-300">Photorespiration</text>
           <text x="198" y="135" textAnchor="middle" fontSize="10" className="fill-red-600 dark:fill-red-400">Wastes energy</text>
-          <text x="198" y="147" textAnchor="middle" fontSize="10" className="fill-red-600 dark:fill-red-400">\u22120% to \u221230% output</text>
+          <text x="198" y="147" textAnchor="middle" fontSize="10" className="fill-red-600 dark:fill-red-400">−0% to −30% output</text>
 
           {/* Result bar */}
           <rect x="30" y="190" width="240" height="30" rx="6" className="fill-red-100 dark:fill-red-900/30" />
           <text x="150" y="210" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-red-800 dark:fill-red-200">
-            Hot conditions = more O\u2082 grabs = less sugar
+            Hot conditions = more O₂ grabs = less sugar
           </text>
 
           {/* Productivity bar */}
@@ -54,8 +54,8 @@ export default function GrassC4PathwayDiagram() {
           <text x="150" y="257" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">Productivity in heat: moderate</text>
 
           {/* Temperature note */}
-          <text x="150" y="290" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">Optimal: 15\u201325\u00b0C</text>
-          <text x="150" y="306" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">Struggles above 30\u00b0C</text>
+          <text x="150" y="290" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">Optimal: 15–25°C</text>
+          <text x="150" y="306" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">Struggles above 30°C</text>
         </g>
 
         {/* C4 Panel */}
@@ -66,7 +66,7 @@ export default function GrassC4PathwayDiagram() {
           {/* Mesophyll cell */}
           <rect x="30" y="50" width="240" height="55" rx="12" className="fill-green-100 dark:fill-green-900/30" stroke="#16a34a" strokeWidth="1" />
           <text x="150" y="68" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-green-800 dark:fill-green-200">Mesophyll Cell</text>
-          <text x="150" y="83" textAnchor="middle" fontSize="10" className="fill-green-700 dark:fill-green-300">CO\u2082 \u2192 C4 acid (concentrates CO\u2082)</text>
+          <text x="150" y="83" textAnchor="middle" fontSize="10" className="fill-green-700 dark:fill-green-300">CO₂ → C4 acid (concentrates CO₂)</text>
 
           {/* Arrow down */}
           <line x1="150" y1="108" x2="150" y2="122" stroke="#16a34a" strokeWidth="2" markerEnd="url(#arr-c4)" />
@@ -79,11 +79,11 @@ export default function GrassC4PathwayDiagram() {
           {/* RuBisCO happy */}
           <circle cx="100" cy="170" r="18" className="fill-blue-100 dark:fill-blue-900/40" stroke="#3b82f6" strokeWidth="1.5" />
           <text x="100" y="167" textAnchor="middle" fontSize="9" fontWeight="700" className="fill-blue-700 dark:fill-blue-300">RuBisCO</text>
-          <text x="100" y="178" textAnchor="middle" fontSize="8" className="fill-emerald-600 dark:fill-emerald-400">high CO\u2082</text>
+          <text x="100" y="178" textAnchor="middle" fontSize="8" className="fill-emerald-600 dark:fill-emerald-400">high CO₂</text>
 
           {/* Check mark */}
-          <text x="160" y="170" fontSize="20" className="fill-emerald-500">\u2713</text>
-          <text x="185" y="172" fontSize="10" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">No wasted O\u2082 grabs</text>
+          <text x="160" y="170" fontSize="20" className="fill-emerald-500">✓</text>
+          <text x="185" y="172" fontSize="10" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">No wasted O₂ grabs</text>
 
           {/* Result bar */}
           <rect x="30" y="210" width="240" height="30" rx="6" className="fill-emerald-100 dark:fill-emerald-900/30" />
@@ -94,11 +94,11 @@ export default function GrassC4PathwayDiagram() {
           {/* Productivity bar */}
           <rect x="30" y="260" width="240" height="24" rx="4" className="fill-gray-100 dark:fill-gray-800/40" />
           <rect x="30" y="260" width="220" height="24" rx="4" className="fill-emerald-400 dark:fill-emerald-600" opacity="0.7" />
-          <text x="150" y="277" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">Productivity in heat: 50\u2013100% higher</text>
+          <text x="150" y="277" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">Productivity in heat: 50–100% higher</text>
 
           {/* Temperature note */}
-          <text x="150" y="310" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">Optimal: 30\u201345\u00b0C</text>
-          <text x="150" y="326" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">Grows 5\u20136m per season!</text>
+          <text x="150" y="310" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">Optimal: 30–45°C</text>
+          <text x="150" y="326" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">Grows 5–6m per season!</text>
         </g>
 
         {/* Markers */}
@@ -114,7 +114,7 @@ export default function GrassC4PathwayDiagram() {
         {/* Bottom insight */}
         <rect x="50" y="410" width="600" height="24" rx="6" className="fill-emerald-50 dark:fill-emerald-950/30" stroke="#16a34a" strokeWidth="1" />
         <text x="350" y="427" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-emerald-800 dark:fill-emerald-200">
-          Kaziranga\u2019s C4 grasses grow tall enough to hide 2,000+ rhinos
+          Kaziranga’s C4 grasses grow tall enough to hide 2,000+ rhinos
         </text>
       </svg>
     </div>

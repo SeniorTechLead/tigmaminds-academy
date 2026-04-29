@@ -1,6 +1,6 @@
 export default function LaminarTurbulentDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Comparison of laminar flow with smooth parallel streamlines versus turbulent flow with chaotic eddies, with Reynolds number threshold">
         <style>{`
@@ -56,10 +56,10 @@ export default function LaminarTurbulentDiagram() {
         <rect x="40" y="205" width="540" height="70" rx="6" fill="#f0fdfa" stroke="#5eead4" strokeWidth="1" className="dark:fill-teal-900/15 dark:stroke-teal-700" />
         <text x="310" y="225" textAnchor="middle" className="label fill-teal-700 dark:fill-teal-300" fontWeight="600">Reynolds Number — Predicts Flow Type</text>
         <text x="310" y="248" textAnchor="middle" className="formula fill-teal-800 dark:fill-teal-200">
-          Re = (\u03C1 \u00D7 v \u00D7 D) / \u03BC
+          Re = (ρ × v × D) / μ
         </text>
         <text x="310" y="268" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">
-          \u03C1 = fluid density, v = velocity, D = pipe/river width, \u03BC = viscosity
+          ρ = fluid density, v = velocity, D = pipe/river width, μ = viscosity
         </text>
 
         {/* Threshold scale */}
@@ -72,14 +72,14 @@ export default function LaminarTurbulentDiagram() {
 
         <text x="140" y="322" textAnchor="middle" className="small fill-cyan-600 dark:fill-cyan-400" fontWeight="600">Re &lt; 2,000</text>
         <text x="140" y="335" textAnchor="middle" className="small fill-cyan-600 dark:fill-cyan-400">Laminar</text>
-        <text x="310" y="322" textAnchor="middle" className="small fill-amber-600 dark:fill-amber-400" fontWeight="600">2,000\u20134,000</text>
+        <text x="310" y="322" textAnchor="middle" className="small fill-amber-600 dark:fill-amber-400" fontWeight="600">2,000–4,000</text>
         <text x="310" y="335" textAnchor="middle" className="small fill-amber-600 dark:fill-amber-400">Transitional</text>
         <text x="480" y="322" textAnchor="middle" className="small fill-red-600 dark:fill-red-400" fontWeight="600">Re &gt; 4,000</text>
         <text x="480" y="335" textAnchor="middle" className="small fill-red-600 dark:fill-red-400">Turbulent</text>
 
         {/* River note */}
         <text x="310" y="365" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">
-          The Brahmaputra at Nimatighat: Re \u2248 10,000,000+ — wildly turbulent!
+          The Brahmaputra at Nimatighat: Re ≈ 10,000,000+ — wildly turbulent!
         </text>
       </svg>
     </div>

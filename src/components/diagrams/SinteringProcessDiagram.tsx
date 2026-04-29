@@ -29,7 +29,7 @@ export default function SinteringProcessDiagram() {
             <circle key={i} cx={cx} cy={cy} r="18" fill="#d97706" opacity="0.6" stroke="#92400e" strokeWidth="1" />
           ))}
           <text x="0" y="200" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-            \u2248 25\u00b0C
+            ≈ 25°C
           </text>
         </g>
 
@@ -63,7 +63,7 @@ export default function SinteringProcessDiagram() {
             <line key={`n${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#9a3412" strokeWidth="3" opacity="0.5" />
           ))}
           <text x="0" y="200" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-            \u2248 900\u00b0C
+            ≈ 900°C
           </text>
         </g>
 
@@ -92,7 +92,7 @@ export default function SinteringProcessDiagram() {
             Dense
           </text>
           <text x="0" y="200" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-            \u2248 1200\u00b0C+
+            ≈ 1200°C+
           </text>
         </g>
 
@@ -111,10 +111,10 @@ export default function SinteringProcessDiagram() {
             <stop offset="100%" stopColor="#dc2626" />
           </linearGradient>
         </defs>
-        <text x="80" y="390" fontSize="10" className="fill-gray-500 dark:fill-slate-400">25\u00b0C</text>
-        <text x="700" y="390" textAnchor="end" fontSize="10" className="fill-gray-500 dark:fill-slate-400">1400\u00b0C</text>
+        <text x="80" y="390" fontSize="10" className="fill-gray-500 dark:fill-slate-400">25°C</text>
+        <text x="700" y="390" textAnchor="end" fontSize="10" className="fill-gray-500 dark:fill-slate-400">1400°C</text>
         <text x="390" y="390" textAnchor="middle" fontSize="10" className="fill-red-500 dark:fill-red-400" fontWeight="600">
-          573\u00b0C quartz inversion zone (critical!)
+          573°C quartz inversion zone (critical!)
         </text>
 
         {/* Bottom summary */}
@@ -123,7 +123,7 @@ export default function SinteringProcessDiagram() {
           Sintering fuses particles by atomic diffusion at contact points
         </text>
         <text x="390" y="450" textAnchor="middle" fontSize="11" className="fill-orange-600 dark:fill-orange-400">
-          The pot shrinks 8\u201315% as pores close and density increases
+          The pot shrinks 8–15% as pores close and density increases
         </text>
       </svg>
     </div>

@@ -5,7 +5,7 @@ export default function ElephantTimeAxisDiagram() {
   return (
     <svg
       viewBox="0 0 670 441"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Diagram comparing coarse and fine time axes using np.linspace, with a geophone sensor and elephant silhouette"
     >

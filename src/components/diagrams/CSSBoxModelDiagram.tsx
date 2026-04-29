@@ -77,7 +77,7 @@ export default function CSSBoxModelDiagram() {
     active === id ? "brightness(1.25)" : "none";
 
   return (
-    <div className="w-full max-w-lg mx-auto my-6 select-none">
+    <div className="w-full max-w-2xl mx-auto my-6 select-none">
       <svg
         viewBox="0 0 525 367"
         className="w-full"

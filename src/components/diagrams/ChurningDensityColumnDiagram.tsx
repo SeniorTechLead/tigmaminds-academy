@@ -9,7 +9,7 @@ export default function ChurningDensityColumnDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 400 280" className="w-full max-w-md mx-auto" role="img" aria-label="Density column showing liquids layered by density">
+      <svg viewBox="0 0 400 280" className="w-full max-w-xl mx-auto" role="img" aria-label="Density column showing liquids layered by density">
         <text x="200" y="16" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">Density Column</text>
 
         {/* Glass container */}

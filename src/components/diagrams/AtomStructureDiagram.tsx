@@ -86,7 +86,7 @@ export default function AtomStructureDiagram() {
         </div>
       </div>
 
-      <svg viewBox="0 0 460 420" className="w-full max-w-lg mx-auto" role="img"
+      <svg viewBox="0 0 460 420" className="w-full max-w-2xl mx-auto" role="img"
         aria-label="Animated carbon atom with orbiting electrons — click to excite">
 
         <defs>

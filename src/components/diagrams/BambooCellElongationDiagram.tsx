@@ -19,14 +19,14 @@ export default function BambooCellElongationDiagram() {
         {/* Cell Division panel */}
         <rect x="40" y="70" width="300" height="200" rx="10" className="fill-blue-50 dark:fill-blue-950/20 stroke-blue-300 dark:stroke-blue-700" strokeWidth="1.5" />
         <text x="190" y="94" textAnchor="middle" fontSize="12" fontWeight="700" className="fill-blue-700 dark:fill-blue-300">Cell Division (Mitosis)</text>
-        <text x="190" y="110" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">One cell \u2192 two cells</text>
+        <text x="190" y="110" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">One cell → two cells</text>
 
         {/* Division stages */}
         <rect x="70" y="130" width="30" height="30" rx="4" className="fill-blue-200 dark:fill-blue-700" stroke="#3b82f6" strokeWidth="1.5" />
-        <text x="115" y="150" fontSize="16" className="fill-blue-400 dark:fill-blue-500">\u2192</text>
+        <text x="115" y="150" fontSize="16" className="fill-blue-400 dark:fill-blue-500">→</text>
         <rect x="130" y="130" width="30" height="30" rx="4" className="fill-blue-200 dark:fill-blue-700" stroke="#3b82f6" strokeWidth="1.5" />
         <line x1="145" y1="145" x2="145" y2="145" className="stroke-blue-400" strokeWidth="1" />
-        <text x="175" y="150" fontSize="16" className="fill-blue-400 dark:fill-blue-500">\u2192</text>
+        <text x="175" y="150" fontSize="16" className="fill-blue-400 dark:fill-blue-500">→</text>
         <rect x="190" y="128" width="28" height="14" rx="3" className="fill-blue-200 dark:fill-blue-700" stroke="#3b82f6" strokeWidth="1" />
         <rect x="190" y="146" width="28" height="14" rx="3" className="fill-blue-200 dark:fill-blue-700" stroke="#3b82f6" strokeWidth="1" />
 
@@ -41,20 +41,20 @@ export default function BambooCellElongationDiagram() {
         {/* Cell Elongation panel */}
         <rect x="360" y="70" width="300" height="200" rx="10" className="fill-emerald-50 dark:fill-emerald-950/20 stroke-emerald-300 dark:stroke-emerald-700" strokeWidth="1.5" />
         <text x="510" y="94" textAnchor="middle" fontSize="12" fontWeight="700" className="fill-emerald-700 dark:fill-emerald-300">Cell Elongation</text>
-        <text x="510" y="110" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Same cell \u2192 much bigger</text>
+        <text x="510" y="110" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Same cell → much bigger</text>
 
         {/* Elongation stages */}
         <rect x="390" y="135" width="24" height="24" rx="3" className="fill-emerald-200 dark:fill-emerald-700" stroke="#10b981" strokeWidth="1.5" />
-        <text x="430" y="150" fontSize="16" className="fill-emerald-400 dark:fill-emerald-500">\u2192</text>
+        <text x="430" y="150" fontSize="16" className="fill-emerald-400 dark:fill-emerald-500">→</text>
         <rect x="445" y="125" width="24" height="44" rx="3" className="fill-emerald-200 dark:fill-emerald-700" stroke="#10b981" strokeWidth="1.5" />
-        <text x="485" y="150" fontSize="16" className="fill-emerald-400 dark:fill-emerald-500">\u2192</text>
+        <text x="485" y="150" fontSize="16" className="fill-emerald-400 dark:fill-emerald-500">→</text>
         <rect x="500" y="110" width="24" height="74" rx="3" className="fill-emerald-100 dark:fill-emerald-600/40" stroke="#10b981" strokeWidth="1.5" />
 
         {/* Water arrows */}
-        <text x="512" y="200" textAnchor="middle" fontSize="8" className="fill-cyan-600 dark:fill-cyan-400">\ud83d\udca7 water rushes in</text>
+        <text x="512" y="200" textAnchor="middle" fontSize="8" className="fill-cyan-600 dark:fill-cyan-400">💧 water rushes in</text>
 
         <text x="510" y="225" textAnchor="middle" fontSize="10" className="fill-emerald-600 dark:fill-emerald-400">Same number of cells</text>
-        <text x="510" y="240" textAnchor="middle" fontSize="10" className="fill-emerald-600 dark:fill-emerald-400">but each stretches 10-100\u00d7</text>
+        <text x="510" y="240" textAnchor="middle" fontSize="10" className="fill-emerald-600 dark:fill-emerald-400">but each stretches 10-100×</text>
         <text x="510" y="250" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Faster: hours per elongation</text>
         <text x="510" y="255" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">
           Adds ~90% of height

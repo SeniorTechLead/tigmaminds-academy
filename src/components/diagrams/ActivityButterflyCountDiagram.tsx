@@ -59,7 +59,7 @@ export default function ActivityButterflyCountDiagram() {
         </g>
 
         {/* Bottom */}
-        <text x="350" y="386" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">Congratulations \u2014 you just conducted a real transect survey!</text>
+        <text x="350" y="386" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">Congratulations — you just conducted a real transect survey!</text>
         <text x="350" y="404" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">This is exactly how scientists in Namdapha track butterfly populations</text>
       </svg>
     </div>

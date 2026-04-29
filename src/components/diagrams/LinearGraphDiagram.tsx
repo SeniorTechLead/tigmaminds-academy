@@ -34,7 +34,7 @@ export default function LinearGraphDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Interactive linear graph y = mx + b">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Interactive linear graph y = mx + b">
         {/* Background */}
         <rect width={w} height={h} className="fill-white dark:fill-gray-900" rx="8" />
 
@@ -90,7 +90,7 @@ export default function LinearGraphDiagram() {
       </svg>
 
       {/* Sliders below the SVG */}
-      <div className="mt-3 space-y-2 max-w-lg mx-auto px-2">
+      <div className="mt-3 space-y-2 max-w-2xl mx-auto px-2">
         <label className="flex items-center gap-3 text-sm font-medium text-gray-700 dark:text-gray-300">
           <span className="w-28">Slope (m): {m}</span>
           <input

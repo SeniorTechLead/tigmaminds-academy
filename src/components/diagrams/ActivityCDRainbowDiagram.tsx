@@ -50,7 +50,7 @@ export default function ActivityCDRainbowDiagram() {
           </g>
         ))}
 
-        <text x="350" y="405" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Structural color always shifts with viewing angle \u2014 pigment color does not</text>
+        <text x="350" y="405" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Structural color always shifts with viewing angle — pigment color does not</text>
       </svg>
     </div>
   );

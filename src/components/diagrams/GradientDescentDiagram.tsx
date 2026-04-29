@@ -113,7 +113,7 @@ export default function GradientDescentDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Controls */}
       <div className="flex flex-wrap gap-2 mb-2 justify-center">
         {presets.map(p => (

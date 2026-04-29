@@ -1,7 +1,7 @@
 export default function HornbillCallDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing hornbill vocal communication: syrinx produces sound, casque amplifies it, and calls carry through the forest">
+      <svg viewBox="0 0 520 400" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing hornbill vocal communication: syrinx produces sound, casque amplifies it, and calls carry through the forest">
         <rect width="520" height="400" rx="12" className="fill-slate-900" />
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Communication Without Words</text>
 

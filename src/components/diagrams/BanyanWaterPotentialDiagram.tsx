@@ -10,7 +10,7 @@ export default function BanyanWaterPotentialDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 525 455" className="w-full max-w-lg mx-auto" role="img" aria-label="Water potential gradient from soil to atmosphere showing how decreasing water potential drives transpiration">
+      <svg viewBox="0 0 525 455" className="w-full max-w-2xl mx-auto" role="img" aria-label="Water potential gradient from soil to atmosphere showing how decreasing water potential drives transpiration">
         <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

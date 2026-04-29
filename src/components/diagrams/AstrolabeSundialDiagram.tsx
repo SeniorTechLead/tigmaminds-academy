@@ -21,7 +21,7 @@ export default function AstrolabeSundialDiagram() {
   const sunLabels = ['7am', '9am', '11am', '1pm', '3pm', '5pm'];
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 400 260" className="w-full" role="img" aria-label="How sundials tell time from the sun's position">
         <rect width="400" height="260" className="fill-white dark:fill-slate-950" rx="8" />
 

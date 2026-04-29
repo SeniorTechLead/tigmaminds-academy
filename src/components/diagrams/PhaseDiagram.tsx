@@ -26,7 +26,7 @@ export default function PhaseDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-6">
+    <div className="w-full max-w-2xl mx-auto my-6">
       {/* Phase slider */}
       <div className="flex items-center justify-center gap-3 mb-2">
         <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">Phase offset:</span>

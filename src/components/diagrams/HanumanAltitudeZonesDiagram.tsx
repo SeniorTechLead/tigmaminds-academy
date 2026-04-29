@@ -10,7 +10,7 @@ export default function HanumanAltitudeZonesDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 370" className="w-full max-w-lg mx-auto" role="img" aria-label="Altitude zones on a Himalayan mountain showing plant types at each level">
+      <svg viewBox="0 0 520 370" className="w-full max-w-2xl mx-auto" role="img" aria-label="Altitude zones on a Himalayan mountain showing plant types at each level">
         {/* Title */}
         <text x="260" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Himalayan Altitude Zones

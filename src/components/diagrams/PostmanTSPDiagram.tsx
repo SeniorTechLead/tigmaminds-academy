@@ -14,7 +14,7 @@ export default function PostmanTSPDiagram() {
           The Travelling Salesman Problem (TSP)
         </text>
         <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          Visit every village exactly once and return home \u2014 what\u2019s the shortest route?
+          Visit every village exactly once and return home — what’s the shortest route?
         </text>
 
         {/* Small example: 4 villages */}

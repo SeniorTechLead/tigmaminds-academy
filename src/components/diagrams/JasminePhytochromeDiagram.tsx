@@ -43,7 +43,7 @@ export default function JasminePhytochromeDiagram() {
         <g>
           <path d="M425,115 Q300,155 175,115" fill="none" stroke="#6366f1" strokeWidth="2" strokeDasharray="6 3" markerEnd="url(#arr-phy-blue)" />
           <text x="300" y="145" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-indigo-600 dark:fill-indigo-400">Darkness (slow reversion)</text>
-          <text x="300" y="160" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">This is the \u201ctimer\u201d</text>
+          <text x="300" y="160" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">This is the “timer”</text>
         </g>
 
         {/* Pfr level graph over time */}
@@ -89,7 +89,7 @@ export default function JasminePhytochromeDiagram() {
         {/* Bottom summary */}
         <rect x="70" y="395" width="560" height="20" rx="4" className="fill-purple-50 dark:fill-purple-950/30" />
         <text x="350" y="410" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-purple-800 dark:fill-purple-200">
-          Long night \u2192 Pfr drops below threshold \u2192 flowering genes activate
+          Long night → Pfr drops below threshold → flowering genes activate
         </text>
 
         <defs>

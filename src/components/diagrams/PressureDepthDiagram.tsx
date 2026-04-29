@@ -1,6 +1,6 @@
 const PressureDepthDiagram = () => {
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-xl mx-auto">
       <svg
         viewBox="0 0 403 384"
         xmlns="http://www.w3.org/2000/svg"

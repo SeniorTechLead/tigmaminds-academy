@@ -22,7 +22,7 @@ export default function PhaseTransitionDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 420 435" className="w-full max-w-md mx-auto" role="img" aria-label="Phase transition diagram showing melting, boiling, condensation, freezing, sublimation, and deposition">
+      <svg viewBox="0 0 420 435" className="w-full max-w-xl mx-auto" role="img" aria-label="Phase transition diagram showing melting, boiling, condensation, freezing, sublimation, and deposition">
         <text x="200" y="30" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Phase Transitions</text>
 
         {/* State nodes */}

@@ -54,7 +54,7 @@ export default function StdDevBellCurveDiagram() {
   const hi = MU + rule.sigmas * SIGMA;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Toggle buttons */}
       <div className="flex justify-center gap-2 mb-2">
         {RULES.map(r => (
@@ -65,7 +65,7 @@ export default function StdDevBellCurveDiagram() {
         ))}
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
         aria-label={`Bell curve showing the ${rule.pct} rule`}>
         <rect width={W} height={H} className="fill-white dark:fill-gray-900" rx="8" />
         <text x={W / 2} y={20} textAnchor="middle" fontSize="12" fontWeight="700" className="fill-gray-700 dark:fill-gray-200">

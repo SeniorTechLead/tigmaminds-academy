@@ -1,7 +1,7 @@
 export default function ChurningPolarityDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 500 260" className="w-full h-auto" role="img" aria-label="Molecular polarity diagram showing polar water molecule versus nonpolar oil molecule">
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 524 260" className="w-full h-auto" role="img" aria-label="Molecular polarity diagram showing polar water molecule versus nonpolar oil molecule">
         <style>{`
           .cp-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
           .cp-label { font-family: system-ui, sans-serif; font-size: 10px; }

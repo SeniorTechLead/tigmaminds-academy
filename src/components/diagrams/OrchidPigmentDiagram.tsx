@@ -1,7 +1,7 @@
 export default function OrchidPigmentDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing three plant pigment families and the wavelengths they absorb versus reflect">
+      <svg viewBox="0 0 560 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing three plant pigment families and the wavelengths they absorb versus reflect">
         <rect width="560" height="420" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#e879f9">Why Are Flowers Colored?</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Three pigment families absorb different wavelengths, reflecting the colors you see</text>

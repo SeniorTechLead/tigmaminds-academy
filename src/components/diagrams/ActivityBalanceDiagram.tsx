@@ -4,8 +4,8 @@
  */
 export default function ActivityBalanceDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 400 240" className="w-full" role="img" aria-label="DIY balance scale activity using a ruler, pencil, and coins">
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 411 240" className="w-full" role="img" aria-label="DIY balance scale activity using a ruler, pencil, and coins">
         <rect width="400" height="240" className="fill-white dark:fill-slate-950" rx="8" />
         <text x="200" y="20" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">Build a Balance Scale Equation Solver</text>
 

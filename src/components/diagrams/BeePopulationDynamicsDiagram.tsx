@@ -34,7 +34,7 @@ export default function BeePopulationDynamicsDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 546 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee colony population dynamics showing spring buildup, summer peak, and winter decline">
+      <svg viewBox="0 0 546 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee colony population dynamics showing spring buildup, summer peak, and winter decline">
         <rect width="520" height="400" rx="12" className="fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Colony Population Dynamics</text>

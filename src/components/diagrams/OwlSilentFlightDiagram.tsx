@@ -107,7 +107,7 @@ export default function OwlSilentFlightDiagram() {
         {/* Bottom result */}
         <rect x="50" y="375" width="600" height="36" rx="6" className="fill-indigo-50 dark:fill-indigo-950/30" stroke="#6366f1" strokeWidth="1" />
         <text x="350" y="393" textAnchor="middle" fontSize="12" fontWeight="700" className="fill-indigo-700 dark:fill-indigo-300">
-          Combined: \u221218 dB (1/60th the loudness of a pigeon)
+          Combined: −18 dB (1/60th the loudness of a pigeon)
         </text>
         <text x="350" y="407" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
           At frequencies above 2 kHz, owl flight falls below the hearing threshold of mice

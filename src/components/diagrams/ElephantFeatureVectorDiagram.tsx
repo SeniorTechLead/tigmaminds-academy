@@ -27,7 +27,7 @@ export default function ElephantFeatureVectorDiagram() {
   return (
     <svg
       viewBox="0 0 630 315"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Waveform converted to a feature vector of 8 named features with example values"
     >

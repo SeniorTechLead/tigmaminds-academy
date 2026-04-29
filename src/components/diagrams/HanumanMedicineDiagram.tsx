@@ -1,7 +1,7 @@
 export default function HanumanMedicineDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 340" className="w-full max-w-lg mx-auto" role="img" aria-label="Pipeline from plant to medicine: collection, extraction, purification, testing, drug">
+      <svg viewBox="0 0 560 340" className="w-full max-w-2xl mx-auto" role="img" aria-label="Pipeline from plant to medicine: collection, extraction, purification, testing, drug">
         {/* Title */}
         <text x="280" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           From Plant to Medicine

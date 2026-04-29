@@ -1,6 +1,6 @@
 export default function DholSizePitchDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 350" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="How drum size and membrane tension affect pitch with three drums of different sizes">
         <style>{`
@@ -52,10 +52,10 @@ export default function DholSizePitchDiagram() {
         {/* Formula box */}
         <rect x="40" y="215" width="540" height="50" rx="6" fill="#fef3c7" stroke="#fbbf24" strokeWidth="1" className="dark:fill-amber-900/15 dark:stroke-amber-700" />
         <text x="310" y="235" textAnchor="middle" className="formula fill-amber-800 dark:fill-amber-300">
-          f = (0.766 / D) \u00D7 \u221A(T / \u03C3)
+          f = (0.766 / D) × √(T / σ)
         </text>
         <text x="310" y="255" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">
-          f = frequency, D = diameter, T = tension (force/length), \u03C3 = surface density (mass/area)
+          f = frequency, D = diameter, T = tension (force/length), σ = surface density (mass/area)
         </text>
 
         {/* Three factors */}

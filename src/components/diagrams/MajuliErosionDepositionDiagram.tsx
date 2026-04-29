@@ -1,7 +1,7 @@
 export default function MajuliErosionDepositionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 580 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing river erosion on the outer bank and deposition on the inner bank of a river bend">
+      <svg viewBox="0 0 580 400" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing river erosion on the outer bank and deposition on the inner bank of a river bend">
         <defs>
           <linearGradient id="majEDwater" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#1e3a5f" />

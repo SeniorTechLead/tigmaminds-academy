@@ -42,7 +42,7 @@ export default function IntervalRatioDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-6">
+    <div className="w-full max-w-2xl mx-auto my-6">
       {/* Interval selector */}
       <div className="flex justify-center gap-1 mb-3 flex-wrap">
         {intervals.map((iv, i) => (

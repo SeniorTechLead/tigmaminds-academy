@@ -63,7 +63,7 @@ export default function FireflySyncDiagram() {
       <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
         How Fireflies Learn to Flash Together
       </p>
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Firefly synchronization diagram">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Firefly synchronization diagram">
         {/* Tiny background stars */}
         {Array.from({ length: 20 }, (_, i) => (
           <circle

@@ -43,7 +43,7 @@ export default function RhythmAnalyzerOutputDiagram() {
         <text x="80" y="175" textAnchor="end" fontSize="9" fill="#94a3b8">500 Hz</text>
         <text x="80" y="210" textAnchor="end" fontSize="9" fill="#94a3b8">100 Hz</text>
         <text x="390" y="230" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          Time \u2192
+          Time →
         </text>
 
         {/* Frequency spectrum below */}

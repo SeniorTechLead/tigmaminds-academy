@@ -28,7 +28,7 @@ export default function HilsaOlfactoryDiagram() {
 
       <svg
         viewBox="0 0 592 320"
-        className="w-full max-w-lg mx-auto my-6"
+        className="w-full max-w-2xl mx-auto my-6"
         role="img"
         aria-label="Fish olfactory navigation: detecting chemical gradients to find home river"
       >

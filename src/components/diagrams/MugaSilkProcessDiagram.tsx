@@ -19,7 +19,7 @@ export default function MugaSilkProcessDiagram() {
 
   return (
     <svg
-      viewBox="0 0 620 340"
+      viewBox="0 0 657 340"
       className="w-full max-w-2xl mx-auto"
       role="img"
       aria-label="Five-stage diagram of muga silk production: caterpillar spinning, cocoon formation, boiling and reeling, degumming, and weaving into fabric"

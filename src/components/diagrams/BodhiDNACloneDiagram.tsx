@@ -1,7 +1,7 @@
 export default function BodhiDNACloneDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 380" className="w-full max-w-lg mx-auto" role="img" aria-label="DNA in clones: why clones are genetically identical">
+      <svg viewBox="0 0 570 380" className="w-full max-w-2xl mx-auto" role="img" aria-label="DNA in clones: why clones are genetically identical">
         <rect width="570" height="380" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="285" y="28" textAnchor="middle" className="fill-violet-400" fontSize="14" fontWeight="bold">What Does "Genetically Identical" Mean?</text>
 

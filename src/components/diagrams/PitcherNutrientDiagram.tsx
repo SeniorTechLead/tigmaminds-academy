@@ -1,7 +1,7 @@
 export default function PitcherNutrientDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram comparing nutrient availability in normal soil versus pitcher plant bog soil">
+      <svg viewBox="0 0 560 400" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram comparing nutrient availability in normal soil versus pitcher plant bog soil">
         <rect width="560" height="400" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Why Would a Plant Eat Insects?</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Nutrient availability: normal soil vs pitcher plant habitat</text>

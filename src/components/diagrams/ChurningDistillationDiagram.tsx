@@ -1,6 +1,6 @@
 export default function ChurningDistillationDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 520 300" className="w-full h-auto" role="img" aria-label="Simple distillation apparatus showing liquid heated in flask, vapor rising through condenser, and collecting as purified liquid">
         <style>{`
           .cd-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }

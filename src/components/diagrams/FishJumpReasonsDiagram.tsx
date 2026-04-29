@@ -39,7 +39,7 @@ export default function FishJumpReasonsDiagram() {
   return (
     <svg
       viewBox="0 0 592 370"
-      className="w-full max-w-lg mx-auto my-6"
+      className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="Diagram showing four main reasons fish jump: low oxygen, parasite removal, predator escape, and migration barriers"
     >

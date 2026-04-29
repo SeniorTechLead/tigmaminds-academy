@@ -1,7 +1,7 @@
 export default function BeeCommunicationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 430" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee communication diagram showing pheromones, dance, and vibrations">
+      <svg viewBox="0 0 570 430" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee communication diagram showing pheromones, dance, and vibrations">
         <rect width="570" height="430" rx="12" className="fill-slate-900" />
 
         <text x="285" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Bee Communication</text>

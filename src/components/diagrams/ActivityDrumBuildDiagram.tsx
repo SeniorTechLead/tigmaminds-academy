@@ -1,6 +1,6 @@
 export default function ActivityDrumBuildDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 280" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Offline activity showing how to build a simple drum from a bowl and plastic wrap to observe vibration patterns">
         <style>{`
@@ -68,9 +68,9 @@ export default function ActivityDrumBuildDiagram() {
         {/* Questions to investigate */}
         <rect x="40" y="178" width="540" height="88" rx="6" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" className="dark:fill-slate-800 dark:stroke-slate-700" />
         <text x="60" y="198" className="label fill-slate-700 dark:fill-slate-300" fontWeight="600">Questions to investigate:</text>
-        <text x="60" y="216" className="small fill-slate-600 dark:fill-slate-400">\u2022 Does tapping the center vs the edge produce different salt patterns?</text>
-        <text x="60" y="232" className="small fill-slate-600 dark:fill-slate-400">\u2022 Does pulling the wrap tighter change the patterns? What about the pitch?</text>
-        <text x="60" y="248" className="small fill-slate-600 dark:fill-slate-400">\u2022 Try a bigger bowl vs a smaller one — which produces a deeper sound?</text>
+        <text x="60" y="216" className="small fill-slate-600 dark:fill-slate-400">• Does tapping the center vs the edge produce different salt patterns?</text>
+        <text x="60" y="232" className="small fill-slate-600 dark:fill-slate-400">• Does pulling the wrap tighter change the patterns? What about the pitch?</text>
+        <text x="60" y="248" className="small fill-slate-600 dark:fill-slate-400">• Try a bigger bowl vs a smaller one — which produces a deeper sound?</text>
         <text x="60" y="264" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">You are seeing Chladni patterns — the same physics that drives every drum, from dhol to tabla!</text>
 
         <defs>

@@ -94,7 +94,7 @@ export default function AnimalCellDiagram() {
       </div>
 
       <div className="flex flex-col md:flex-row items-stretch gap-4">
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" role="img"
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
           aria-label="Animated animal cell — click organelles to learn their functions">
 
           <g onClick={() => setSelected(selected === 'membrane' ? null : 'membrane')}

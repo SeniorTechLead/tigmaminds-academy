@@ -27,7 +27,7 @@ export default function ElephantPlotAnatomyDiagram() {
   return (
     <svg
       viewBox="0 0 630 390"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Anatomy of a scientific chart showing title, x-axis, y-axis, and data line using elephant vibration data"
     >

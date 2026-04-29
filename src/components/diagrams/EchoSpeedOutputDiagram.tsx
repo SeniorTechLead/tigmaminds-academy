@@ -1,7 +1,7 @@
 export default function EchoSpeedOutputDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 637 320" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Project output showing speed of sound measurement results with bar chart comparing student value to accepted value">
         <style>{`
           .label { font-family: system-ui, sans-serif; font-size: 12px; }
@@ -73,9 +73,9 @@ export default function EchoSpeedOutputDiagram() {
         {/* Error analysis */}
         <rect x="40" y="210" width="540" height="95" rx="6" fill="#faf5ff" stroke="#c084fc" strokeWidth="1" className="dark:fill-purple-900/10 dark:stroke-purple-700" />
         <text x="310" y="230" textAnchor="middle" className="label fill-purple-700 dark:fill-purple-300" fontWeight="600">Error Analysis</text>
-        <text x="60" y="248" className="small fill-slate-600 dark:fill-slate-400">Percentage error: |(343 - 337) / 343| \u00D7 100 = 1.75% \u2014 excellent for a hand-clap experiment!</text>
+        <text x="60" y="248" className="small fill-slate-600 dark:fill-slate-400">Percentage error: |(343 - 337) / 343| × 100 = 1.75% — excellent for a hand-clap experiment!</text>
         <text x="60" y="266" className="small fill-slate-700 dark:fill-slate-300" fontWeight="600">Sources of error:</text>
-        <text x="60" y="282" className="small fill-slate-600 dark:fill-slate-400">\u2022 Reaction time delay (adds ~0.02 s)  \u2022 Wind carrying sound  \u2022 Temperature affects speed</text>
+        <text x="60" y="282" className="small fill-slate-600 dark:fill-slate-400">• Reaction time delay (adds ~0.02 s)  • Wind carrying sound  • Temperature affects speed</text>
         <text x="60" y="298" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">Averaging multiple trials reduces random error — a core principle of experimental science</text>
       </svg>
     </div>

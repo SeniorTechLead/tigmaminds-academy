@@ -17,7 +17,7 @@ export default function HeightDistanceDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Height and distance diagram with angle of elevation">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Height and distance diagram with angle of elevation">
         <rect width={w} height={h} className="fill-white dark:fill-gray-900" rx="8" />
 
         {/* Ground */}

@@ -1,7 +1,7 @@
 export default function ReverberationDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 667 340" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Comparison of a single distinct echo versus reverberation with many overlapping reflections">
         <style>{`
           .label { font-family: system-ui, sans-serif; font-size: 12px; }
@@ -47,7 +47,7 @@ export default function ReverberationDiagram() {
             fill="#3b82f6" opacity={0.6 - i * 0.06} />
         ))}
         <text x="350" y="168" className="small fill-slate-500 dark:fill-slate-400">0</text>
-        <text x="530" y="168" className="small fill-slate-500 dark:fill-slate-400">fades over 0.5\u20132 s</text>
+        <text x="530" y="168" className="small fill-slate-500 dark:fill-slate-400">fades over 0.5–2 s</text>
 
         {/* Room diagrams */}
         <text x="165" y="208" textAnchor="middle" className="label fill-slate-700 dark:fill-slate-300" fontWeight="600">Where echoes happen:</text>
@@ -72,7 +72,7 @@ export default function ReverberationDiagram() {
         {/* Minimum distance */}
         <rect x="40" y="288" width="540" height="42" rx="6" fill="#fef3c7" stroke="#fbbf24" strokeWidth="1" className="dark:fill-amber-900/15 dark:stroke-amber-700" />
         <text x="310" y="306" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-400" fontWeight="600">Minimum distance for a distinct echo: ~17 metres</text>
-        <text x="310" y="322" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Sound needs \u2265100 ms round-trip delay. At 343 m/s: 343 \u00D7 0.1 / 2 = 17.15 m</text>
+        <text x="310" y="322" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Sound needs ≥100 ms round-trip delay. At 343 m/s: 343 × 0.1 / 2 = 17.15 m</text>
 
         <defs>
           <marker id="rv-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">

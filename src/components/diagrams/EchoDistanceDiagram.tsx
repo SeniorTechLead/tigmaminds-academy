@@ -1,6 +1,6 @@
 export default function EchoDistanceDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="How to calculate distance from echo timing using the speed of sound formula">
         <style>{`
@@ -47,16 +47,16 @@ export default function EchoDistanceDiagram() {
         <rect x="40" y="195" width="540" height="85" rx="6" fill="#faf5ff" stroke="#c084fc" strokeWidth="1" className="dark:fill-purple-900/15 dark:stroke-purple-700" />
         <text x="310" y="215" textAnchor="middle" className="label fill-purple-700 dark:fill-purple-300" fontWeight="600">The Echo Distance Formula</text>
         <text x="310" y="238" textAnchor="middle" className="formula fill-purple-800 dark:fill-purple-200">
-          d = (v \u00D7 t) / 2
+          d = (v × t) / 2
         </text>
-        <text x="310" y="260" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">d = distance (m), v = speed of sound (343 m/s at 20\u00B0C), t = echo return time (s)</text>
+        <text x="310" y="260" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">d = distance (m), v = speed of sound (343 m/s at 20°C), t = echo return time (s)</text>
         <text x="310" y="275" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">Divide by 2 because sound travels THERE and BACK</text>
 
         {/* Worked example */}
         <rect x="40" y="290" width="540" height="40" rx="6" fill="#ecfdf5" stroke="#6ee7b7" strokeWidth="1" className="dark:fill-emerald-900/10 dark:stroke-emerald-800" />
         <text x="50" y="308" className="small fill-emerald-700 dark:fill-emerald-400" fontWeight="600">Example:</text>
         <text x="120" y="308" className="small fill-slate-600 dark:fill-slate-400">You clap and hear the echo 1.2 seconds later.</text>
-        <text x="50" y="323" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">d = (343 \u00D7 1.2) / 2 = 205.8 m</text>
+        <text x="50" y="323" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">d = (343 × 1.2) / 2 = 205.8 m</text>
         <text x="310" y="323" className="small fill-slate-500 dark:fill-slate-400">— the cliff is about 206 metres away.</text>
 
         <defs>

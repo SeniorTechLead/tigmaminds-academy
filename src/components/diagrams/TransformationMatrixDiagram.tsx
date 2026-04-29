@@ -101,7 +101,7 @@ export default function TransformationMatrixDiagram() {
       <div className="flex flex-col md:flex-row gap-3">
         {/* Grid + Square */}
         <div className="flex-1">
-          <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg mx-auto" role="img"
+          <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl mx-auto" role="img"
             aria-label="Interactive transformation matrix — edit entries or pick a preset to see the unit square morph">
 
             {/* Grid */}

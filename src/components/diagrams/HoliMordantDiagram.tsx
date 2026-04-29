@@ -2,7 +2,7 @@ export default function HoliMordantDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
       <svg
-        viewBox="0 0 700 440"
+        viewBox="0 0 721 440"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -34,14 +34,14 @@ export default function HoliMordantDiagram() {
 
         {/* Water washing */}
         <path d="M 70 200 Q 120 210 180 205 Q 230 200 290 210" fill="none" stroke="#3b82f6" strokeWidth="1.5" />
-        <text x="180" y="225" textAnchor="middle" fontSize="10" className="fill-blue-500 dark:fill-blue-400">\ud83d\udca7 Water washes dye away</text>
+        <text x="180" y="225" textAnchor="middle" fontSize="10" className="fill-blue-500 dark:fill-blue-400">💧 Water washes dye away</text>
 
         {/* Arrows showing detachment */}
         {[90, 140, 190, 240].map((x) => (
           <path key={`a${x}`} d={`M ${x} 147 L ${x} 130`} fill="none" stroke="#ef4444" strokeWidth="1" markerEnd="url(#arrow-red-mo)" strokeDasharray="3 2" />
         ))}
         <text x="185" y="260" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">
-          Color fades after 1\u20132 washes
+          Color fades after 1–2 washes
         </text>
 
         <defs>
@@ -77,7 +77,7 @@ export default function HoliMordantDiagram() {
           Metal ion bonds to BOTH dye and fiber
         </text>
 
-        <text x="515" y="225" textAnchor="middle" fontSize="10" className="fill-blue-500 dark:fill-blue-400">\ud83d\udca7 Water cannot break the bond</text>
+        <text x="515" y="225" textAnchor="middle" fontSize="10" className="fill-blue-500 dark:fill-blue-400">💧 Water cannot break the bond</text>
 
         <text x="515" y="260" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-emerald-600 dark:fill-emerald-400">
           Color survives 50+ washes

@@ -1,6 +1,6 @@
 export default function FerryVectorDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Vector addition diagram showing how a ferry must angle upstream to cross a river current in a straight line">
         <style>{`
@@ -21,7 +21,7 @@ export default function FerryVectorDiagram() {
         {[80, 120, 160, 200].map(y => (
           <line key={y} x1="40" y1={y} x2="280" y2={y} stroke="#60a5fa" strokeWidth="1" opacity="0.4" markerEnd="url(#ferry-curr)" />
         ))}
-        <text x="165" y="72" textAnchor="middle" className="small fill-blue-500 dark:fill-blue-400">Current: 3 m/s \u2192</text>
+        <text x="165" y="72" textAnchor="middle" className="small fill-blue-500 dark:fill-blue-400">Current: 3 m/s →</text>
 
         {/* Banks */}
         <rect x="25" y="55" width="10" height="200" rx="2" fill="#92400e" opacity="0.5" className="dark:fill-amber-900/40" />
@@ -41,7 +41,7 @@ export default function FerryVectorDiagram() {
         <line x1="100" y1="220" x2="170" y2="130" stroke="#ef4444" strokeWidth="2.5" strokeDasharray="6,3" markerEnd="url(#ferry-result)" />
         <text x="155" y="168" className="small fill-red-500 dark:fill-red-400">Actual</text>
         <text x="155" y="180" className="small fill-red-500 dark:fill-red-400">path!</text>
-        <text x="165" y="245" textAnchor="middle" className="small fill-red-500 dark:fill-red-400">Arrives downstream \u2717</text>
+        <text x="165" y="245" textAnchor="middle" className="small fill-red-500 dark:fill-red-400">Arrives downstream ✗</text>
 
         {/* RIGHT SIDE: Correct approach */}
         <rect x="330" y="55" width="270" height="200" rx="4" fill="#0c4a6e" opacity="0.15" className="dark:fill-blue-900/20" />
@@ -66,22 +66,22 @@ export default function FerryVectorDiagram() {
         {/* Resultant - straight across */}
         <line x1="420" y1="220" x2="420" y2="130" stroke="#10b981" strokeWidth="3" markerEnd="url(#ferry-straight)" />
         <text x="440" y="175" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">Straight</text>
-        <text x="440" y="188" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">across! \u2713</text>
+        <text x="440" y="188" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">across! ✓</text>
 
         {/* Angle label */}
         <path d="M 420 200 Q 410 195 405 185" fill="none" stroke="#d97706" strokeWidth="1.5" />
-        <text x="400" y="208" textAnchor="end" className="small fill-amber-600 dark:fill-amber-400">37\u00B0</text>
+        <text x="400" y="208" textAnchor="end" className="small fill-amber-600 dark:fill-amber-400">37°</text>
 
         {/* Formula */}
         <rect x="40" y="270" width="540" height="50" rx="6" fill="#f0fdfa" stroke="#5eead4" strokeWidth="1" className="dark:fill-teal-900/15 dark:stroke-teal-700" />
         <text x="310" y="290" textAnchor="middle" className="label fill-teal-700 dark:fill-teal-300" fontWeight="600">Required upstream angle:</text>
         <text x="310" y="310" textAnchor="middle" className="formula fill-teal-800 dark:fill-teal-200">
-          \u03B8 = arcsin(v_current / v_ferry) = arcsin(3/5) = 37\u00B0
+          θ = arcsin(v_current / v_ferry) = arcsin(3/5) = 37°
         </text>
 
         {/* Key insight */}
         <rect x="40" y="332" width="540" height="38" rx="6" fill="#fef3c7" stroke="#fbbf24" strokeWidth="1" className="dark:fill-amber-900/15 dark:stroke-amber-700" />
-        <text x="310" y="350" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-400" fontWeight="600">If current speed \u2265 ferry speed, the ferry CANNOT cross straight — it will always drift downstream.</text>
+        <text x="310" y="350" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-400" fontWeight="600">If current speed ≥ ferry speed, the ferry CANNOT cross straight — it will always drift downstream.</text>
         <text x="310" y="364" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Nimatighat ferrymen adjust angle continuously as current varies across the river width.</text>
 
         <defs>

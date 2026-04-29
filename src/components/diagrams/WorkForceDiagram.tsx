@@ -1,7 +1,7 @@
 export default function WorkForceDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 490 290" className="w-full max-w-lg mx-auto" role="img" aria-label="Work and force diagram showing a person pushing a box with force vector, displacement, and angle theta">
+      <svg viewBox="0 0 490 290" className="w-full max-w-2xl mx-auto" role="img" aria-label="Work and force diagram showing a person pushing a box with force vector, displacement, and angle theta">
         {/* Ground */}
         <line x1="30" y1="185" x2="420" y2="185" className="stroke-gray-400 dark:stroke-gray-500" strokeWidth="2" />
         {/* Ground hatching */}

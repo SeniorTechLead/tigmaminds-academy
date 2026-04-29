@@ -1,6 +1,6 @@
 export default function MapGPSDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 525 360"
         className="w-full"

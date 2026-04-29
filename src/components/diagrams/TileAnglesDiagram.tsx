@@ -43,7 +43,7 @@ export default function TileAnglesDiagram() {
   const pentCenter = { x: panels[3].x + panelW / 2, y: panels[3].y + panelH / 2 - 5 };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 568 220"
         className="w-full"

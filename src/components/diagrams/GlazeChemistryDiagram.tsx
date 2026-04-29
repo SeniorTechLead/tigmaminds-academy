@@ -24,13 +24,13 @@ export default function GlazeChemistryDiagram() {
           Glass Former
         </text>
         <text x="155" y="122" textAnchor="middle" fontSize="12" className="fill-teal-600 dark:fill-teal-400">
-          SiO\u2082 (silica)
+          SiO₂ (silica)
         </text>
         <text x="155" y="142" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
           Creates the glass network
         </text>
         <text x="155" y="160" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          Melts at \u22481700\u00b0C alone
+          Melts at ≈1700°C alone
         </text>
         <text x="155" y="196" textAnchor="middle" fontSize="22">&#x1F52C;</text>
 
@@ -40,13 +40,13 @@ export default function GlazeChemistryDiagram() {
           Flux
         </text>
         <text x="385" y="122" textAnchor="middle" fontSize="12" className="fill-red-600 dark:fill-red-400">
-          Na\u2082O, K\u2082O, CaO
+          Na₂O, K₂O, CaO
         </text>
         <text x="385" y="142" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
           Lowers melting point
         </text>
         <text x="385" y="160" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          to 900\u20131200\u00b0C
+          to 900–1200°C
         </text>
         <text x="385" y="196" textAnchor="middle" fontSize="22">&#x1F525;</text>
 
@@ -59,13 +59,13 @@ export default function GlazeChemistryDiagram() {
           Metal oxides
         </text>
         <text x="620" y="145" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          CuO \u2192 green/blue
+          CuO → green/blue
         </text>
         <text x="620" y="162" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          Fe\u2082O\u2083 \u2192 brown/red
+          Fe₂O₃ → brown/red
         </text>
         <text x="620" y="179" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          CoO \u2192 deep blue
+          CoO → deep blue
         </text>
         <text x="620" y="196" textAnchor="middle" fontSize="22">&#x1F3A8;</text>
 
@@ -82,7 +82,7 @@ export default function GlazeChemistryDiagram() {
         {/* Glaze layer */}
         <rect x="140" y="290" width="500" height="40" rx="4" fill="#67e8f9" opacity="0.6" stroke="#06b6d4" strokeWidth="1.5" />
         <text x="390" y="315" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-cyan-800 dark:fill-cyan-200">
-          Glaze (glass layer) \u2014 waterproof, smooth, colored
+          Glaze (glass layer) — waterproof, smooth, colored
         </text>
 
         {/* Interface */}

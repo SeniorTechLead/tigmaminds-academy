@@ -13,7 +13,7 @@ export default function MuezzinInverseSquareDiagram() {
   ];
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 420 280" className="w-full" role="img" aria-label="Inverse square law: sound intensity drops as 1 over distance squared">
         <rect width="420" height="280" className="fill-white dark:fill-slate-950" rx="8" />
         <text x="210" y="22" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">Why the Muezzin Needs Height: Inverse Square Law</text>

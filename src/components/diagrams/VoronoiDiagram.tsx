@@ -53,7 +53,7 @@ const cells: { seed: [number, number]; polygon: string; fill: string }[] = [
 
 export default function VoronoiDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-6">
+    <div className="w-full max-w-2xl mx-auto my-6">
       <svg viewBox="0 0 525 430" className="w-full" aria-label="Voronoi diagram showing how nature divides space">
         {/* Title label */}
         <text

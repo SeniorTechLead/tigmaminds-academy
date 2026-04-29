@@ -39,7 +39,7 @@ export default function HilsaPopulationDiagram() {
   return (
     <svg
       viewBox="0 0 592 310"
-      className="w-full max-w-lg mx-auto my-6"
+      className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="Overfishing simulation: population under no fishing, sustainable harvest, MSY, and overfishing collapse"
     >

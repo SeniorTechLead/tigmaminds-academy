@@ -89,7 +89,7 @@ export default function BinarySearchDiagram() {
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Controls */}
       <div className="flex items-center gap-2 mb-2 flex-wrap">
         <label className="text-xs font-semibold text-gray-600 dark:text-slate-400">Target:</label>

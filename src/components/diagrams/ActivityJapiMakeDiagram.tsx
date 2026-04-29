@@ -6,7 +6,7 @@ export default function ActivityJapiMakeDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-6">
       <svg
-        viewBox="0 0 560 400"
+        viewBox="0 0 584 400"
         className="w-full"
         role="img"
         aria-label="Step-by-step guide to making a paper japi hat: draw circle, cut sector, fold into cone, measure angles"

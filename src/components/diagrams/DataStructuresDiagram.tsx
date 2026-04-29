@@ -251,7 +251,7 @@ export default function DataStructuresDiagram() {
   const info = DS_INFO[selected];
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* DS selector */}
       <div className="flex items-center gap-1.5 mb-2 flex-wrap">
         {(['array', 'stack', 'queue', 'hashmap'] as DS[]).map(ds => (

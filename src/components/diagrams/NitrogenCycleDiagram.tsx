@@ -13,7 +13,7 @@ export default function NitrogenCycleDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 540 442" className="w-full max-w-lg mx-auto" role="img" aria-label="Nitrogen cycle diagram showing circular flow from atmospheric nitrogen through organisms and back">
+      <svg viewBox="0 0 540 442" className="w-full max-w-2xl mx-auto" role="img" aria-label="Nitrogen cycle diagram showing circular flow from atmospheric nitrogen through organisms and back">
         <text x="250" y="25" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">The Nitrogen Cycle</text>
 
         {/* Step nodes */}

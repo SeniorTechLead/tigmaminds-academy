@@ -1,7 +1,7 @@
 export default function ElementBoxDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 440 337" className="w-full max-w-lg mx-auto" role="img" aria-label="Periodic table element box for Iron">
+      <svg viewBox="0 0 440 337" className="w-full max-w-2xl mx-auto" role="img" aria-label="Periodic table element box for Iron">
         {/* Element box */}
         <rect x="100" y="40" width="150" height="180" rx="8" className="fill-gray-100 dark:fill-gray-800 stroke-blue-500 dark:stroke-blue-400" strokeWidth="3" />
 

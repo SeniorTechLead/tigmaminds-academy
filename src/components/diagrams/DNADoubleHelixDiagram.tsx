@@ -61,7 +61,7 @@ export default function DNADoubleHelixDiagram() {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl mx-auto" role="img"
         aria-label="Animated rotating DNA double helix with base pairs">
 
         {/* Sugar-phosphate backbone curves (behind bases) */}

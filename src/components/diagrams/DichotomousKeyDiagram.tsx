@@ -1,7 +1,7 @@
 export default function DichotomousKeyDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 340" className="w-full max-w-lg mx-auto" role="img" aria-label="Dichotomous key for NE India animals">
+      <svg viewBox="0 0 570 340" className="w-full max-w-2xl mx-auto" role="img" aria-label="Dichotomous key for NE India animals">
         {/* Title */}
         <text x="250" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Dichotomous Key: Identify NE India Animals

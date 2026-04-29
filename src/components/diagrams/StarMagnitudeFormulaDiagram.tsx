@@ -1,6 +1,6 @@
 export default function StarMagnitudeFormulaDiagram() {
   return (
-    <svg viewBox="0 0 546 333" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Magnitude formula m1 minus m2 equals negative 2.5 log base 10 of flux ratio">
+    <svg viewBox="0 0 546 333" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Magnitude formula m1 minus m2 equals negative 2.5 log base 10 of flux ratio">
       <rect width="520" height="300" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">The Magnitude Formula</text>

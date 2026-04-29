@@ -2,7 +2,7 @@ export default function SolarCellBasicsDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
       <svg
-        viewBox="0 0 780 460"
+        viewBox="0 0 797 460"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -11,7 +11,7 @@ export default function SolarCellBasicsDiagram() {
         <rect width="780" height="460" rx="10" className="fill-white dark:fill-slate-950" />
 
         <text x="390" y="32" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-yellow-600 dark:fill-yellow-400">
-          Solar Cell: Sunlight \u2192 Electricity
+          Solar Cell: Sunlight → Electricity
         </text>
         <text x="390" y="54" textAnchor="middle" fontSize="12" className="fill-gray-500 dark:fill-slate-400">
           Photons knock electrons free in silicon, creating electric current
@@ -46,7 +46,7 @@ export default function SolarCellBasicsDiagram() {
           N-type Silicon (extra electrons)
         </text>
         <text x="390" y="182" textAnchor="middle" fontSize="10" className="fill-blue-500 dark:fill-blue-400">
-          Doped with phosphorus \u2014 has free electrons
+          Doped with phosphorus — has free electrons
         </text>
 
         {/* Junction */}
@@ -59,7 +59,7 @@ export default function SolarCellBasicsDiagram() {
           P-type Silicon (missing electrons = "holes")
         </text>
         <text x="390" y="270" textAnchor="middle" fontSize="10" className="fill-red-500 dark:fill-red-400">
-          Doped with boron \u2014 has positive "holes"
+          Doped with boron — has positive "holes"
         </text>
 
         {/* Metal back contact */}

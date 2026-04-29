@@ -40,8 +40,8 @@ export default function OwlTapetumDiagram() {
           <line x1="80" y1="10" x2="-140" y2="10" stroke="#fbbf24" strokeWidth="1.5" opacity="0.4" strokeDasharray="4 2" />
 
           {/* Labels on light */}
-          <text x="-80" y="-20" fontSize="10" fontWeight="600" className="fill-amber-600 dark:fill-amber-400">Light in \u2192</text>
-          <text x="-80" y="25" fontSize="10" className="fill-amber-500 dark:fill-amber-400">\u2190 Reflected back</text>
+          <text x="-80" y="-20" fontSize="10" fontWeight="600" className="fill-amber-600 dark:fill-amber-400">Light in →</text>
+          <text x="-80" y="25" fontSize="10" className="fill-amber-500 dark:fill-amber-400">← Reflected back</text>
 
           {/* First pass label */}
           <text x="30" y="-25" fontSize="9" className="fill-green-600 dark:fill-green-400">1st pass</text>
@@ -59,7 +59,7 @@ export default function OwlTapetumDiagram() {
           <g transform="translate(15, 40)">
             <text x="0" y="0" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">1. Light enters the eye</text>
             <text x="0" y="20" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">2. Passes through retina (rods detect some)</text>
-            <text x="0" y="40" fontSize="11" fontWeight="600" className="fill-amber-700 dark:fill-amber-300">3. Hits tapetum \u2192 REFLECTED back</text>
+            <text x="0" y="40" fontSize="11" fontWeight="600" className="fill-amber-700 dark:fill-amber-300">3. Hits tapetum → REFLECTED back</text>
             <text x="0" y="60" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">4. Passes through retina AGAIN</text>
             <text x="0" y="80" fontSize="11" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">= Double chance to detect each photon</text>
           </g>
@@ -67,21 +67,21 @@ export default function OwlTapetumDiagram() {
           {/* Eye shine explanation */}
           <g transform="translate(15, 145)">
             <rect width="250" height="50" rx="6" className="fill-indigo-100 dark:fill-indigo-900/20" stroke="#6366f1" strokeWidth="1" />
-            <text x="125" y="18" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-indigo-700 dark:fill-indigo-300">Why eyes \u201cglow\u201d at night</text>
+            <text x="125" y="18" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-indigo-700 dark:fill-indigo-300">Why eyes “glow” at night</text>
             <text x="125" y="36" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Some reflected light escapes back out</text>
-            <text x="125" y="48" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">through the pupil \u2192 eye shine in photos!</text>
+            <text x="125" y="48" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">through the pupil → eye shine in photos!</text>
           </g>
 
           {/* Animals with tapetum */}
           <text x="15" y="218" fontSize="11" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">Animals with tapetum:</text>
           <text x="15" y="236" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Cats, dogs, deer, owls, crocodiles</text>
-          <text x="15" y="250" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">Humans lack a tapetum \u2192 no eye shine</text>
+          <text x="15" y="250" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">Humans lack a tapetum → no eye shine</text>
         </g>
 
         {/* Bottom */}
         <rect x="50" y="348" width="600" height="24" rx="6" className="fill-indigo-50 dark:fill-indigo-950/30" stroke="#6366f1" strokeWidth="1" />
         <text x="350" y="365" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-indigo-800 dark:fill-indigo-200">
-          The tapetum effectively doubles the light available to the retina \u2014 essential for hunting by starlight
+          The tapetum effectively doubles the light available to the retina — essential for hunting by starlight
         </text>
       </svg>
     </div>

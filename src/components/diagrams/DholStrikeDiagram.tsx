@@ -1,6 +1,6 @@
 export default function DholStrikeDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Physics of a drumstick strike showing impulse, force transfer, and membrane deformation">
         <style>{`
@@ -65,8 +65,8 @@ export default function DholStrikeDiagram() {
         {/* Impulse-momentum box */}
         <rect x="40" y="200" width="540" height="60" rx="6" fill="#fef3c7" stroke="#fbbf24" strokeWidth="1" className="dark:fill-amber-900/15 dark:stroke-amber-700" />
         <text x="310" y="218" textAnchor="middle" className="label fill-amber-700 dark:fill-amber-400" fontWeight="600">Impulse-Momentum Theorem</text>
-        <text x="310" y="236" textAnchor="middle" className="small fill-slate-700 dark:fill-slate-300">Impulse = F \u00D7 \u0394t = change in momentum of the membrane</text>
-        <text x="310" y="252" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">A harder strike (more F) or longer contact (\u0394t) transfers more energy → louder sound</text>
+        <text x="310" y="236" textAnchor="middle" className="small fill-slate-700 dark:fill-slate-300">Impulse = F × Δt = change in momentum of the membrane</text>
+        <text x="310" y="252" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">A harder strike (more F) or longer contact (Δt) transfers more energy → louder sound</text>
 
         {/* Stick tip vs flat comparison */}
         <rect x="40" y="272" width="540" height="55" rx="6" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" className="dark:fill-slate-800 dark:stroke-slate-700" />

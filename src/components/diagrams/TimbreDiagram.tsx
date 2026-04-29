@@ -14,7 +14,7 @@ export default function TimbreDiagram() {
           Timbre: Why Instruments Sound Different
         </text>
         <text x="390" y="54" textAnchor="middle" fontSize="12" className="fill-gray-500 dark:fill-slate-400">
-          Same note, same loudness \u2014 different harmonic mixtures
+          Same note, same loudness — different harmonic mixtures
         </text>
 
         {/* Flute */}
@@ -23,7 +23,7 @@ export default function TimbreDiagram() {
             Bamboo Flute (muri)
           </text>
           <text x="80" y="32" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-            Mostly fundamental, weak harmonics \u2192 pure, clear
+            Mostly fundamental, weak harmonics → pure, clear
           </text>
           {/* Waveform */}
           <path
@@ -47,7 +47,7 @@ export default function TimbreDiagram() {
             Dimasa Drum (khram)
           </text>
           <text x="80" y="32" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-            Non-harmonic overtones \u2192 rich, complex thud
+            Non-harmonic overtones → rich, complex thud
           </text>
           {/* Waveform */}
           <path
@@ -73,7 +73,7 @@ export default function TimbreDiagram() {
             Silk String
           </text>
           <text x="80" y="32" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-            Strong odd and even harmonics \u2192 rich, warm
+            Strong odd and even harmonics → rich, warm
           </text>
           {/* Waveform */}
           <path

@@ -24,7 +24,7 @@ export default function HoliTeaConnectionDiagram() {
           'Tannins bind to metal ions (iron = black)',
           'CTC process controls oxidation rate',
         ].map((text, i) => (
-          <text key={i} x="65" y={102 + i * 20} fontSize="10" className="fill-gray-600 dark:fill-slate-400">\u2022 {text}</text>
+          <text key={i} x="65" y={102 + i * 20} fontSize="10" className="fill-gray-600 dark:fill-slate-400">• {text}</text>
         ))}
 
         {/* Holi side */}
@@ -38,7 +38,7 @@ export default function HoliTeaConnectionDiagram() {
           'Mordants bind dye to fabric (alum, iron)',
           'Extraction method controls color intensity',
         ].map((text, i) => (
-          <text key={i} x="385" y={102 + i * 20} fontSize="10" className="fill-gray-600 dark:fill-slate-400">\u2022 {text}</text>
+          <text key={i} x="385" y={102 + i * 20} fontSize="10" className="fill-gray-600 dark:fill-slate-400">• {text}</text>
         ))}
 
         {/* Shared principles - center bridge */}
@@ -56,7 +56,7 @@ export default function HoliTeaConnectionDiagram() {
           <g key={title}>
             <text x="150" y={284 + i * 24} fontSize="12">{icon}</text>
             <text x="170" y={284 + i * 24} fontSize="10" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">{title}</text>
-            <text x="320" y={284 + i * 24} fontSize="9" className="fill-gray-500 dark:fill-slate-400">\u2014 {desc}</text>
+            <text x="320" y={284 + i * 24} fontSize="9" className="fill-gray-500 dark:fill-slate-400">— {desc}</text>
           </g>
         ))}
 
@@ -66,7 +66,7 @@ export default function HoliTeaConnectionDiagram() {
           The tea worker celebrating Holi uses the same chemistry at work and at play
         </text>
         <text x="350" y="424" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          Curcumin, anthocyanins, catechins \u2014 all plant polyphenols, all color molecules, all pH-sensitive
+          Curcumin, anthocyanins, catechins — all plant polyphenols, all color molecules, all pH-sensitive
         </text>
       </svg>
     </div>

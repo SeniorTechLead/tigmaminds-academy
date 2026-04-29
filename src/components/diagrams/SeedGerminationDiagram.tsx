@@ -1,7 +1,7 @@
 export default function SeedGerminationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Seed germination stages: from dormant seed to seedling, showing internal anatomy and requirements">
+      <svg viewBox="0 0 538 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Seed germination stages: from dormant seed to seedling, showing internal anatomy and requirements">
         <rect width="520" height="440" rx="12" className="fill-white dark:fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" className="fill-lime-400" fontSize="14" fontWeight="bold">Germination — Waking Up a Seed</text>

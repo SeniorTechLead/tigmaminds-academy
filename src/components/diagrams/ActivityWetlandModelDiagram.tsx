@@ -1,7 +1,7 @@
 export default function ActivityWetlandModelDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 380" className="w-full max-w-lg mx-auto" role="img" aria-label="Activity diagram showing how to build a mini floating island model with a bowl of water and sponges">
+      <svg viewBox="0 0 560 380" className="w-full max-w-2xl mx-auto" role="img" aria-label="Activity diagram showing how to build a mini floating island model with a bowl of water and sponges">
         <rect width="560" height="380" rx="12" className="fill-slate-900" />
 
         {/* Title */}

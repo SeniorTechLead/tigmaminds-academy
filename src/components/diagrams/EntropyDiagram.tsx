@@ -59,7 +59,7 @@ export default function EntropyDiagram() {
   const dieMaxH = Math.log2(20);
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Mode toggle */}
       <div className="flex gap-2 mb-2 items-center justify-center">
         <button onClick={() => setModeType('coin')}

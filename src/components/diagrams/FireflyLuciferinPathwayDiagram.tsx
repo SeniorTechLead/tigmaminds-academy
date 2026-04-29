@@ -4,7 +4,7 @@ export default function FireflyLuciferinPathwayDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Biochemical pathway: Luciferin plus ATP yields Luciferyl-AMP, then with oxygen produces Oxyluciferin plus light">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Biochemical pathway: Luciferin plus ATP yields Luciferyl-AMP, then with oxygen produces Oxyluciferin plus light">
         <rect width={w} height={h} rx="12" className="fill-slate-900" />
 
         <text x={cx} y="28" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="700">The Bioluminescence Pathway</text>

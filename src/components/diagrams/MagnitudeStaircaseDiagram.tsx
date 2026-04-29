@@ -20,7 +20,7 @@ export default function MagnitudeStaircaseDiagram() {
       <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
         The Magnitude Staircase — Each Step Multiplies by 2.5×
       </p>
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto">
         {/* Stars background */}
         {Array.from({ length: 30 }, (_, i) => (
           <circle

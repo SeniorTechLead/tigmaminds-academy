@@ -9,7 +9,7 @@ export default function MajuliShrinkingDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 580 430" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing Majuli island shrinking from 880 square kilometers in 1901 to 352 square kilometers in 2020">
+      <svg viewBox="0 0 580 430" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing Majuli island shrinking from 880 square kilometers in 1901 to 352 square kilometers in 2020">
         <rect width="580" height="430" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

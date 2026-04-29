@@ -11,7 +11,7 @@ export default function PostmanShortestPathDiagram() {
         <rect width="700" height="420" rx="10" className="fill-white dark:fill-slate-950" />
 
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-blue-600 dark:fill-blue-400">
-          Shortest Path: Dijkstra\u2019s Algorithm
+          Shortest Path: Dijkstra’s Algorithm
         </text>
 
         {/* Graph with nodes */}
@@ -71,7 +71,7 @@ export default function PostmanShortestPathDiagram() {
 
           {/* Path highlight label */}
           <text x="290" y="230" textAnchor="middle" fontSize="12" fontWeight="700" className="fill-blue-600 dark:fill-blue-400">
-            Shortest path: S \u2192 A \u2192 D \u2192 E (total: 9)
+            Shortest path: S → A → D → E (total: 9)
           </text>
         </g>
 

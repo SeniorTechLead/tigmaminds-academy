@@ -20,7 +20,7 @@ export default function HilsaRiverHealthDiagram() {
   return (
     <svg
       viewBox="0 0 592 340"
-      className="w-full max-w-lg mx-auto my-6"
+      className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="River health indicators: dissolved oxygen levels, water temperature, and indicator species for healthy, stressed, and polluted rivers"
     >

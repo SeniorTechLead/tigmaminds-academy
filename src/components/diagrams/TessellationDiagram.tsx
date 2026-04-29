@@ -87,7 +87,7 @@ export default function TessellationDiagram() {
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto my-6">
+    <div className="w-full max-w-2xl mx-auto my-6">
       <svg
         viewBox="0 0 525 367"
         xmlns="http://www.w3.org/2000/svg"

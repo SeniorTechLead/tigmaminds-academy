@@ -34,7 +34,7 @@ export default function ActivityDropletTestDiagram() {
         {/* Explanation */}
         <rect x="80" y="240" width="500" height="40" rx="6" className="fill-blue-50 dark:fill-blue-900/15" stroke="#3b82f6" strokeWidth="1" />
         <text x="330" y="258" textAnchor="middle" fontSize="11" className="fill-gray-700 dark:fill-slate-200">Rounder droplet = higher contact angle = more hydrophobic surface</text>
-        <text x="330" y="272" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Lotus leaves would score the highest \u2014 water barely touches them</text>
+        <text x="330" y="272" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Lotus leaves would score the highest — water barely touches them</text>
 
         {/* Steps */}
         {[
@@ -50,7 +50,7 @@ export default function ActivityDropletTestDiagram() {
           </g>
         ))}
 
-        <text x="330" y="408" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">The lotus effect: water rolls off and takes the dirt with it \u2014 nature\u2019s self-cleaning surface</text>
+        <text x="330" y="408" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">The lotus effect: water rolls off and takes the dirt with it — nature’s self-cleaning surface</text>
       </svg>
     </div>
   );

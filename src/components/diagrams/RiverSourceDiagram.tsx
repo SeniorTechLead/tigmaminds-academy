@@ -15,7 +15,7 @@ export default function RiverSourceDiagram() {
 
   return (
     <div className="w-full max-w-2xl mx-auto my-4">
-      <svg viewBox="0 0 600 400" className="w-full h-auto" role="img"
+      <svg viewBox="0 0 631 400" className="w-full h-auto" role="img"
         aria-label="Animated diagram showing how rivers begin: rain falls on mountains, water gathers into streams, streams merge into tributaries, and tributaries form a river">
         <style>{`
           @keyframes rs-rain {

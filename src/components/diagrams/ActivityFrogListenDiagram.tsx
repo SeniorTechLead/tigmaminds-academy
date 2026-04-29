@@ -59,7 +59,7 @@ export default function ActivityFrogListenDiagram() {
           You are doing real bioacoustics fieldwork!
         </text>
         <text x="350" y="456" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          Ecologists use the exact same method \u2014 with microphones instead of ears \u2014 to monitor frog populations
+          Ecologists use the exact same method — with microphones instead of ears — to monitor frog populations
         </text>
       </svg>
     </div>

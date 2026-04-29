@@ -59,7 +59,7 @@ export default function GlycaemicIndexDiagram() {
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <div className="flex flex-wrap gap-2 mb-2 justify-center items-center">
         <label className="text-xs text-slate-600 dark:text-slate-300 font-medium">High GI:</label>
         <select

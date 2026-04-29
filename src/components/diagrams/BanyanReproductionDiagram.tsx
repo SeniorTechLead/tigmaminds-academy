@@ -1,7 +1,7 @@
 export default function BanyanReproductionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 530 428" className="w-full max-w-lg mx-auto" role="img" aria-label="Banyan reproduction cycle: fig fruit to bird dispersal to epiphyte growth to strangler takeover">
+      <svg viewBox="0 0 530 428" className="w-full max-w-2xl mx-auto" role="img" aria-label="Banyan reproduction cycle: fig fruit to bird dispersal to epiphyte growth to strangler takeover">
         <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

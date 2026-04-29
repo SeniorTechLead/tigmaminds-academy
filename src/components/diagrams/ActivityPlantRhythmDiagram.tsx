@@ -11,7 +11,7 @@ export default function ActivityPlantRhythmDiagram() {
         <rect width="700" height="400" rx="10" className="fill-white dark:fill-slate-950" />
 
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fcd34d">
-          Try This: Track a Plant\u2019s Daily Rhythm
+          Try This: Track a Plant’s Daily Rhythm
         </text>
         <text x="350" y="50" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
           You need: a houseplant or garden plant, a notebook, 3 days of patience
@@ -53,7 +53,7 @@ export default function ActivityPlantRhythmDiagram() {
           Best plants: prayer plant (folds leaves at night), mimosa, oxalis, or any flowering plant
         </text>
         <text x="350" y="386" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          You\u2019re documenting the same circadian rhythm that controls night jasmine blooming
+          You’re documenting the same circadian rhythm that controls night jasmine blooming
         </text>
       </svg>
     </div>

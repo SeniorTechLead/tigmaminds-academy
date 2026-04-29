@@ -1,7 +1,7 @@
 export default function HornbillNestDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Hornbill sealed nesting cavity showing female inside, mud wall, and feeding slit">
+      <svg viewBox="0 0 520 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Hornbill sealed nesting cavity showing female inside, mud wall, and feeding slit">
         <rect width="520" height="420" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Why Hornbills Seal Themselves In</text>
 

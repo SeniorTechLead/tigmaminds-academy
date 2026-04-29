@@ -15,7 +15,7 @@ export default function StarExtinctionDiagram() {
   const plotY = (v: number) => 70 + (v - 4.9) * 250;
 
   return (
-    <svg viewBox="0 0 600 334" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Atmospheric extinction plot showing magnitude increase with airmass">
+    <svg viewBox="0 0 600 334" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Atmospheric extinction plot showing magnitude increase with airmass">
       <rect width="520" height="300" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Atmospheric Extinction</text>

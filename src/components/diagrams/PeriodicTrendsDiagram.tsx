@@ -1,7 +1,7 @@
 export default function PeriodicTrendsDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 585 333" className="w-full max-w-lg mx-auto" role="img" aria-label="Periodic trends diagram showing atomic radius and electronegativity trends">
+      <svg viewBox="0 0 585 333" className="w-full max-w-2xl mx-auto" role="img" aria-label="Periodic trends diagram showing atomic radius and electronegativity trends">
         <text x="250" y="22" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">Periodic Trends</text>
 
         {/* Table outline - simplified grid */}

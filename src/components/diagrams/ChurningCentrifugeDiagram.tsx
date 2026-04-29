@@ -1,7 +1,7 @@
 export default function ChurningCentrifugeDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 480 300" className="w-full h-auto" role="img" aria-label="Centrifugal separation diagram showing cream separating from milk in a spinning container">
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 496 300" className="w-full h-auto" role="img" aria-label="Centrifugal separation diagram showing cream separating from milk in a spinning container">
         <style>{`
           .cc-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
           .cc-label { font-family: system-ui, sans-serif; font-size: 10px; }

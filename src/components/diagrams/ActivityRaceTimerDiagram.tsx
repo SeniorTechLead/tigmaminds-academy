@@ -49,7 +49,7 @@ export default function ActivityRaceTimerDiagram() {
     : null;
 
   return (
-    <div className="w-full max-w-md mx-auto my-4 rounded-xl bg-white dark:bg-slate-900 p-5 border border-gray-200 dark:border-slate-700">
+    <div className="w-full max-w-xl mx-auto my-4 rounded-xl bg-white dark:bg-slate-900 p-5 border border-gray-200 dark:border-slate-700">
       <h3 className="text-center text-gray-900 dark:text-slate-100 font-bold text-lg mb-1">
         Activity: Measure Your Speed
       </h3>

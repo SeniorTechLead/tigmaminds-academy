@@ -2,7 +2,7 @@ export default function GrassRhinoHabitatDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
       <svg
-        viewBox="0 0 700 420"
+        viewBox="0 0 798 420"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -11,7 +11,7 @@ export default function GrassRhinoHabitatDiagram() {
         <rect width="700" height="420" rx="10" className="fill-white dark:fill-slate-950" />
 
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-emerald-600 dark:fill-emerald-400">
-          Kaziranga: Grass \u2194 Rhino Symbiosis
+          Kaziranga: Grass ↔ Rhino Symbiosis
         </text>
 
         {/* Tall grass background */}
@@ -32,7 +32,7 @@ export default function GrassRhinoHabitatDiagram() {
 
         {/* Height marker */}
         <line x1="660" y1="80" x2="660" y2="260" stroke="#6b7280" strokeWidth="1" strokeDasharray="4 2" />
-        <text x="667" y="170" fontSize="11" fontWeight="600" className="fill-gray-600 dark:fill-gray-400" transform="rotate(90, 667, 170)">5\u20136 meters tall</text>
+        <text x="667" y="170" fontSize="11" fontWeight="600" className="fill-gray-600 dark:fill-gray-400" transform="rotate(90, 667, 170)">5–6 meters tall</text>
 
         {/* Rhino silhouette */}
         <g transform="translate(200, 170)">
@@ -75,7 +75,7 @@ export default function GrassRhinoHabitatDiagram() {
           <text x="65" y="20" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-emerald-700 dark:fill-emerald-300">Kaziranga</text>
           <text x="65" y="38" textAnchor="middle" fontSize="22" fontWeight="700" className="fill-emerald-600 dark:fill-emerald-400">2,613</text>
           <text x="65" y="55" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Indian rhinos</text>
-          <text x="65" y="72" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">World\u2019s largest</text>
+          <text x="65" y="72" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">World’s largest</text>
           <text x="65" y="85" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">population</text>
         </g>
 

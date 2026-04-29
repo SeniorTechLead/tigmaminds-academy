@@ -11,7 +11,7 @@ export default function ElephantPerceptronDiagram() {
   return (
     <svg
       viewBox="0 0 630 362"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Perceptron diagram: two inputs with weights feed into a summation neuron that outputs elephant or bird classification"
     >

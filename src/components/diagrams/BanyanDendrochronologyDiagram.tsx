@@ -1,7 +1,7 @@
 export default function BanyanDendrochronologyDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 580 433" className="w-full max-w-lg mx-auto" role="img" aria-label="Dendrochronology cross-dating technique matching ring patterns across multiple trees to build a centuries-long timeline">
+      <svg viewBox="0 0 580 433" className="w-full max-w-2xl mx-auto" role="img" aria-label="Dendrochronology cross-dating technique matching ring patterns across multiple trees to build a centuries-long timeline">
         <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

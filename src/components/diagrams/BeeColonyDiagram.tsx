@@ -1,7 +1,7 @@
 export default function BeeColonyDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 546 412" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee colony diagram showing queen, worker, and drone roles">
+      <svg viewBox="0 0 546 412" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee colony diagram showing queen, worker, and drone roles">
         <rect width="520" height="380" rx="12" className="fill-slate-900" />
 
         {/* Title */}

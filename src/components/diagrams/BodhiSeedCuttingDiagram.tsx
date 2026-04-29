@@ -1,7 +1,7 @@
 export default function BodhiSeedCuttingDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Seeds vs cuttings: sexual vs asexual plant reproduction">
+      <svg viewBox="0 0 570 400" className="w-full max-w-2xl mx-auto" role="img" aria-label="Seeds vs cuttings: sexual vs asexual plant reproduction">
         <rect width="570" height="400" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="285" y="28" textAnchor="middle" className="fill-emerald-400" fontSize="14" fontWeight="bold">Seeds vs Cuttings</text>
 

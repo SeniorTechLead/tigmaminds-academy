@@ -1,7 +1,7 @@
 export default function HydroAquiferDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 380" className="w-full max-w-xl mx-auto" role="img" aria-label="Cross-section showing aquifer, water table, and well">
+      <svg viewBox="0 0 534 380" className="w-full max-w-xl mx-auto" role="img" aria-label="Cross-section showing aquifer, water table, and well">
         {/* Title */}
         <text x="260" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Aquifers — Underground Sponges That Store Water

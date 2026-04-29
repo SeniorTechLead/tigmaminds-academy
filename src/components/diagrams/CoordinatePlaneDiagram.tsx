@@ -62,7 +62,7 @@ export default function CoordinatePlaneDiagram() {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-md mx-auto cursor-crosshair" role="img"
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-xl mx-auto cursor-crosshair" role="img"
         onClick={handleClick}
         aria-label="Interactive coordinate plane — click to plot a point">
         <rect width={w} height={h} className="fill-white dark:fill-slate-900" rx="8" />

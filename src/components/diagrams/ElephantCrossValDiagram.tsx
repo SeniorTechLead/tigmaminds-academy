@@ -14,7 +14,7 @@ export default function ElephantCrossValDiagram() {
   return (
     <svg
       viewBox="0 0 630 346"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="5-fold cross-validation diagram showing how data is split into train and test sets across 5 folds, with accuracy for each fold and mean plus standard deviation"
     >
