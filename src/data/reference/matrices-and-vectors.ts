@@ -12,8 +12,11 @@ export const guide: ReferenceGuide = {
     {
       title: 'Vectors — Magnitude and Direction',
       beginnerContent:
-        '**A boat is crossing the Brahmaputra.**\n\n' +
-        'The motor pushes the boat north at 8 km/h. The river current pushes it east at 3 km/h. Where does the boat actually go?\n\n' +
+        '**Tara is rowing across the Brahmaputra.**\n\n' +
+        '[diagram:RowboatVectorScene]\n\n' +
+        'Her paddle pushes the boat north at 4 m/s. The river current pushes it east at 3 m/s. Where does the boat *actually* go?\n\n' +
+        'You cannot answer this with a single number. You need TWO pieces of information: **how fast** and **which direction**. That is what a vector is — a quantity with both magnitude (size) and direction. The two arrows in the diagram add tip-to-tail to give the resultant: 5 m/s diagonally.\n\n' +
+        '**Vectors as arrows you add together.** The motor pushes the boat north at 8 km/h. The river current pushes it east at 3 km/h. Where does the boat actually go?\n\n' +
         'You cannot answer this with a single number. You need TWO pieces of information: **how fast** and **which direction**. That is what a vector is — a quantity with both magnitude (size) and direction.\n\n' +
         '**Representing the boat as a vector:**\n\n' +
         'Motor: (0, 8) — 0 km/h east, 8 km/h north\n' +

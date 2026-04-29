@@ -11,7 +11,9 @@ export const guide: ReferenceGuide = {
     {
       title: 'Limits — Approaching Without Arriving',
       beginnerContent:
-        'Drag the slider in the diagram above toward x = 1. Do it slowly. Notice the weird thing: **there\'s a hole at x = 1** — the function is literally undefined there, because you\'d have to divide by zero. But as x creeps toward 1 from either side, f(x) marches toward 2. The function never *reaches* that value — but it clearly *wants* to be 2. That "wants to be" is the limit.\n\n' +
+        '**Tara stands by the railway tracks watching a train pass.** She wants to know: *how fast is it moving right now?* Not "how far in 1 second" — that\'s an average. The exact speed *at this instant*. To get it, she has to imagine a smaller and smaller time window. 1 second. 0.1 second. 0.01 second. Closer and closer to a single moment. That\'s a **limit** — getting infinitely close without quite arriving.\n\n' +
+        '[diagram:MovingTrainCalculusScene]\n\n' +
+        '**A weirder limit example.** Look at `f(x) = (x² − 1)/(x − 1)`. At x = 1, you\'d divide by zero — undefined. But as x creeps toward 1 from either side, f(x) marches toward 2. The function never *reaches* that value — but it clearly *wants* to be 2. That "wants to be" is the limit.\n\n' +
         'A limit describes what value a function **approaches** as its input gets closer to a point — even if the function never reaches that value.\n\n' +
         '**The example above:** `f(x) = (x² − 1)/(x − 1)`\n\n' +
         '| x | f(x) |\n' +

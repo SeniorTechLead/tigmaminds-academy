@@ -13,7 +13,9 @@ export const guide: ReferenceGuide = {
     {
       title: 'What Is Probability?',
       beginnerContent:
-        'Roll the dice in the diagram above. Run a few hundred trials. Watch the empirical frequencies settle toward the theoretical probabilities — 1/6 for each face. That convergence isn\'t magic; it\'s the simple-but-deep rule the whole subject rests on.\n\n' +
+        '**Tara and Bipin sit on the floor with a single die.** They take turns rolling. Tara guesses she\'ll roll a 6 every time; Bipin says no, every face has the same chance. Who\'s right?\n\n' +
+        '[diagram:DiceRollScene]\n\n' +
+        '**Bipin.** A fair die has six faces, each equally likely — *probability 1/6 each*. Roll it 600 times and you\'ll see roughly 100 of each. Probability is the maths of "how often does each thing happen, in the long run?"\n\n' +
         '**The basics:**\n\n' +
         'Probability measures how likely an event is, as a number between **0** (impossible) and **1** (certain).\n\n' +
         '`P(event) = favourable outcomes / total outcomes`\n\n' +
