@@ -77,7 +77,7 @@ export default function MatrixTransformDiagram() {
         ))}
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm mx-auto">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto">
         <rect x="0" y="0" width={W} height={H} rx="6" fill="#fafafa" className="dark:fill-gray-900/50" />
 
         {/* Grid */}

@@ -121,7 +121,7 @@ export default function PCAStepsDiagram() {
         ))}
       </div>
 
-      <svg viewBox={`0 0 ${svgW} ${svgH}`} xmlns="http://www.w3.org/2000/svg" className="w-full max-w-lg h-auto" role="img" aria-label="PCA step-by-step diagram">
+      <svg viewBox={`0 0 ${svgW} ${svgH}`} xmlns="http://www.w3.org/2000/svg" className="w-full max-w-2xl h-auto" role="img" aria-label="PCA step-by-step diagram">
         <rect width={svgW} height={svgH} rx="8" className="fill-white dark:fill-slate-950" />
 
         {/* Title */}

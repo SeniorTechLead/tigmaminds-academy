@@ -151,7 +151,7 @@ export default function CNNFeatureHierarchyDiagram() {
         )}
       </div>
 
-      <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-lg h-auto" role="img" aria-label="CNN feature hierarchy diagram">
+      <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" className="w-full max-w-2xl h-auto" role="img" aria-label="CNN feature hierarchy diagram">
         <rect width="460" height="300" rx="8" className="fill-white dark:fill-slate-950" />
 
         {/* Title */}

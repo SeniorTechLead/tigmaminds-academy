@@ -60,7 +60,7 @@ export default function ConfusionMatrixDiagram() {
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <svg viewBox="0 0 460 280" className="w-full max-w-lg" role="img">
+      <svg viewBox="0 0 460 280" className="w-full max-w-2xl" role="img">
         <title>Confusion Matrix — Elephant Rumble Classification</title>
 
         {/* Title */}

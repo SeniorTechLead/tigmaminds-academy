@@ -56,7 +56,7 @@ export default function LeastSquaresDiagram() {
         <button onClick={() => setMode('squared')} className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${mode === 'squared' ? 'bg-emerald-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}`}>Squared errors</button>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {/* Grid */}
         {[2, 4, 6, 8, 10, 12].map(v => <line key={`gx${v}`} x1={sx(v)} y1={my} x2={sx(v)} y2={H - mb} stroke="#f1f5f9" strokeWidth="0.5" />)}
         {[2, 4, 6, 8, 10].map(v => <line key={`gy${v}`} x1={mx} y1={sy(v)} x2={W - mr} y2={sy(v)} stroke="#f1f5f9" strokeWidth="0.5" />)}

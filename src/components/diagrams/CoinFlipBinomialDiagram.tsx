@@ -53,7 +53,7 @@ export default function CoinFlipBinomialDiagram() {
         ))}
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {/* All 8 outcomes as coin rows */}
         {ALL_OUTCOMES.map((outcome, i) => {
           const heads = countHeads(outcome);

@@ -48,7 +48,7 @@ export default function WeightedMeanDiagram() {
 
   return (
     <div className="space-y-2">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {/* Title */}
         <text x={W / 2} y={18} fontSize="10" fill="#6b7280" textAnchor="middle" fontWeight="600">Each segment's width = its weight, shade = its score</text>
 

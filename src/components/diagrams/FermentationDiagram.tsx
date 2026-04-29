@@ -147,7 +147,7 @@ export default function FermentationDiagram() {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
         aria-label="Animated fermentation — yeast consumes sugar, produces CO₂ and ethanol">
 
         {/* Jar outline */}
