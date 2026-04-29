@@ -46,6 +46,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Frequency — How Fast It Repeats',
       beginnerContent:
+        '**Three sine waves, side by side. Same height, different speed.**\n\n' +
+        '[diagram:FrequencyScene]\n\n' +
         'Frequency tells you how many complete cycles happen in one second, measured in Hertz (Hz). ' +
         'A wave at 2 Hz completes two full up-down cycles per second. A guitar\'s low E string ' +
         'vibrates at about 82 Hz; the highest note on a piano is about 4,186 Hz. Your ears can ' +
@@ -76,6 +78,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Amplitude — How Strong the Wave Is',
       beginnerContent:
+        '**Same note, three volumes.** Amplitude controls loudness for sound, brightness for light, intensity for any wave.\n\n' +
+        '[diagram:AmplitudeScene]\n\n' +
         'Amplitude is the height of the wave from the center line to the peak. Think of it as ' +
         'how hard the Ferris wheel pushes the seat away from the middle. A whisper has tiny ' +
         'amplitude; a shout has large amplitude. On a graph, a wave with amplitude 3 swings from ' +
@@ -114,6 +118,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Phase — Where the Wave Starts',
       beginnerContent:
+        '**Two waves of identical shape, but one starts a quarter-cycle ahead.** That horizontal offset is the *phase*.\n\n' +
+        '[diagram:PhaseShiftScene]\n\n' +
         'Phase is the horizontal shift of a wave, measured in radians or degrees. Imagine two ' +
         'people on the same Ferris wheel, but one got on a quarter-turn later. They trace the same ' +
         'path at the same speed, but one is always a quarter-cycle behind — that\'s a 90-degree ' +
@@ -146,6 +152,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Harmonics — The Overtone Series',
       beginnerContent:
+        '**Pluck a bamboo flute and you don\'t get one sine wave — you get many at once.** The fundamental and its harmonics give every instrument its unique colour.\n\n' +
+        '[diagram:HarmonicsScene]\n\n' +
         'When a guitar string vibrates, it does not just vibrate at one frequency. It vibrates at ' +
         'its fundamental frequency (say 100 Hz) and also at 200 Hz, 300 Hz, 400 Hz, and so on — ' +
         'these are called harmonics. The fundamental gives the note its pitch; the harmonics give ' +
@@ -176,6 +184,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Beats — When Close Frequencies Meet',
       beginnerContent:
+        '**Two notes very close in pitch make a wobble — a "beat" you can hear.** Piano tuners use this to match strings.\n\n' +
+        '[diagram:BeatsScene]\n\n' +
         'When two sine waves have slightly different frequencies, they create a pulsing effect ' +
         'called *beats*. Imagine two tuning forks at 440 Hz and 442 Hz played together. Sometimes ' +
         'their peaks align (loud), sometimes their peaks and troughs align (quiet). You hear a ' +
@@ -219,6 +229,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Anatomy of a Sine Wave',
       beginnerContent:
+        '**One labelled wave, every key term in one place.**\n\n' +
+        '[diagram:SineAnatomyScene]\n\n' +
         'The sine function has three parameters: amplitude (A), frequency (f), and phase (phi). ' +
         'The formula is y = A * sin(2*pi*f*t + phi).',
       code: `import numpy as np
