@@ -16,8 +16,11 @@ export const guide: ReferenceGuide = {
     {
       title: 'SOH CAH TOA',
       beginnerContent:
-        '**Start with what you can already see.** Stand 50 paces from the base of a tall tree and tilt your head up until you are looking right at the top. The angle your gaze makes with the ground is fixed by two things: how far away you stood, and how tall the tree is. If somebody told you the angle and the distance, could you figure out the height *without climbing*?\n\n' +
+        '**Meet Tara.** She is standing 50 paces from a tall tree, tilting her head up until she is looking right at the top.\n\n' +
+        '[diagram:TreeGazeDiagram]\n\n' +
+        'The angle her gaze makes with the ground (call it θ) is fixed by two things: how far away she stood, and how tall the tree is. If somebody told her the angle and the distance, could she figure out the height *without climbing*?\n\n' +
         'That is the entire job of trigonometry: turn an angle and one side of a right triangle into the other sides.\n\n' +
+        '**Same picture, just the math.** Strip the tree, the grass, and Tara herself, and what remains is a right triangle with one acute angle marked θ:\n\n' +
         '[diagram:SOHCAHTOADiagram]\n\n' +
         '**Three names for three sides.** Pick one of the two non-right angles and call it θ (theta). Now look at the triangle from θ\'s point of view:\n\n' +
         '| Side | What it means | How to spot it |\n' +
