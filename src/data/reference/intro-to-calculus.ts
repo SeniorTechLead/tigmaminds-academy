@@ -69,7 +69,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Derivatives — The Slope at a Point',
       beginnerContent:
-        'Pick a function in the diagram above and drag the point along the curve. Watch the tangent line pivot — at any moment, its slope tells you how fast the function is rising or falling *right there*, at that exact instant. That instantaneous slope is the derivative.\n\n' +
+        '**Tara walks up a hill.** At the bottom, she\'s climbing steeply — positive slope. At the top, the path is flat — slope zero. Going down the other side, slope is negative. The *slope at every point* of her path is a function of where she is. That function is the **derivative**.\n\n' +
+        '[diagram:HillSlopeDerivativeScene]\n\n' +
         'The derivative measures the **instantaneous rate of change** — how fast the output changes relative to the input at one exact moment. If you plot bamboo height over time, the derivative at any point tells you how fast it\'s growing *right then*. Not the average rate over an hour. The rate at one instant.\n\n' +
         '**Formal definition:**\n\n' +
         '`f\'(x) = lim(h->0) [f(x+h) - f(x)] / h`\n\n' +
@@ -147,6 +148,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Rules of Differentiation',
       beginnerContent:
+        '**Once you know the power rule, every polynomial derivative is mechanical.** No more limits. Just bring the exponent down and subtract one.\n\n' +
+        '[diagram:PowerRuleScene]\n\n' +
         '**Rather than computing limits every time, use these rules:**\n\n' +
         '**The power rule** (the workhorse):\n\n' +
         '`d/dx(x^n) = n*x^(n-1)`\n\n' +
@@ -211,7 +214,10 @@ export const guide: ReferenceGuide = {
     {
       title: 'Integration — Area Under a Curve',
       beginnerContent:
-        'Pick a function in the diagram above and drag the `n` slider. Watch the rectangles fill the space under the curve — few and crude at first, then more and more until they paint the area perfectly. The count on the left (the Riemann sum) closes in on the exact area. **That\'s integration: adding up infinitely many infinitely thin rectangles.**\n\n' +
+        '**Tara wants to know the area of an oddly-shaped pond from a top-down photo.** Stack thin rectangles inside its boundary. Add up their areas. Make the rectangles thinner. The total approaches the *exact* area.\n\n' +
+        '[diagram:AreaUnderCurveScene]\n\n' +
+        '**That is integration: adding up infinitely many infinitely thin rectangles.**\n\n' +
+        'Drag the `n` slider in the diagram below. Watch the rectangles fill the space under the curve — few and crude at first, then more and more until they paint the area perfectly. The count on the left (the Riemann sum) closes in on the exact area.\n\n' +
         'Integration is the **reverse of differentiation**. Where derivatives break a curve into slopes, integrals add up infinitely many thin slices to find the **total area** under the curve.\n\n' +
         '**The definite integral** from a to b of f(x) represents the signed area between f(x) and the x-axis. "Signed" means area above the axis is positive, below is negative.\n\n' +
         '**How it works:**\n\n' +
@@ -285,6 +291,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'The Fundamental Theorem of Calculus',
       beginnerContent:
+        '**The biggest "aha" in mathematical history.** Differentiation breaks a curve into slopes. Integration adds up the slopes to get back the original curve. They are inverse operations — and that single insight launched modern physics.\n\n' +
+        '[diagram:FundamentalTheoremScene]\n\n' +
         '**The most important result in calculus** — it formally links differentiation and integration as inverse operations.\n\n' +
         '**Part 1:** If F(x) = integral from a to x of f(t) dt, then F\'(x) = f(x).\n\n' +
         'In plain language: the rate of change of the accumulated area under a curve equals the height of the curve at that point.\n\n' +

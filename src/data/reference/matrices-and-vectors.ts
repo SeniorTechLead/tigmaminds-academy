@@ -98,6 +98,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Vector Operations',
       beginnerContent:
+        '**Three things you can do with vectors:** add them tip-to-tail, stretch them by a number, or measure how aligned two are with a "dot product."\n\n' +
+        '[diagram:VectorOperationsScene]\n\n' +
         '**The dot product — "how similar are two vectors?"**\n\n' +
         'You have two vectors: **a** = (2, 3) and **b** = (4, 1). The dot product multiplies matching components and adds:\n\n' +
         '**a** · **b** = 2×4 + 3×1 = 8 + 3 = **11**\n\n' +
@@ -160,7 +162,10 @@ export const guide: ReferenceGuide = {
     {
       title: 'Matrices and Multiplication',
       beginnerContent:
-        'Click any cell in the result matrix in the diagram above. Watch one row of A and one column of B light up, and see the dot-product recipe that produced that number. **Every cell in a matrix product is a dot product** — learn this one pattern and matrix multiplication stops being mysterious forever.\n\n' +
+        '**Tara runs a tiny shop.** She tracks sales: 3 items × 3 days. That table is a 3×3 grid of numbers — a *matrix*.\n\n' +
+        '[diagram:MatrixSpreadsheetScene]\n\n' +
+        'Every spreadsheet you\'ve seen is a matrix. The maths of operating on whole grids at once is what makes images, simulations, and machine learning fast.\n\n' +
+        'Click any cell in the result matrix in the diagram below. Watch one row of A and one column of B light up, and see the dot-product recipe that produced that number. **Every cell in a matrix product is a dot product** — learn this one pattern and matrix multiplication stops being mysterious forever.\n\n' +
         '**What is a matrix? A grid of numbers — and why it matters.**\n\n' +
         'Exam scores for 3 students in 2 subjects:\n\n' +
         '| | Maths | Science |\n' +
@@ -247,7 +252,9 @@ export const guide: ReferenceGuide = {
     {
       title: 'Transformations — Matrices in Action',
       beginnerContent:
-        'Pick a preset in the diagram above — Rotate 45°, Scale, Shear, Flip — and watch the unit square morph. Or type your own numbers into the 2×2 matrix. The red and green arrows show where the basis vectors î and ĵ land. **The columns of a transformation matrix literally are "where î and ĵ go."** That\'s the whole trick.\n\n' +
+        '**A 2×2 matrix can rotate the entire plane.** Take a square; multiply every point by a rotation matrix; the whole shape rotates by 45°. The matrix doesn\'t just describe a transformation — it *is* the transformation.\n\n' +
+        '[diagram:RotationMatrixScene]\n\n' +
+        'Pick a preset in the diagram below — Rotate 45°, Scale, Shear, Flip — and watch the unit square morph. Or type your own numbers into the 2×2 matrix. The red and green arrows show where the basis vectors î and ĵ land. **The columns of a transformation matrix literally are "where î and ĵ go."** That\'s the whole trick.\n\n' +
         '**What happens when you multiply a matrix by a point?**\n\n' +
         'Start with the point (1, 0) — one unit to the right of the origin.\n\n' +
         '**Scaling:** Multiply by [2 0; 0 3]:\n\n' +

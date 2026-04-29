@@ -72,7 +72,9 @@ export const guide: ReferenceGuide = {
     {
       title: 'Permutations and Combinations',
       beginnerContent:
-        'Try the counter in the diagram above. Move n and r. Toggle between "order matters" (permutations) and "order doesn\'t" (combinations). For small n and r, every arrangement or group is actually listed out — so you can *see* why P(5,3) = 60 and C(5,3) = 10. Once the visual lands, the formulas stop being mysterious.\n\n' +
+        '**Tara has 4 teacups in different colours and wants to arrange them in a row on a tray.** How many ways are there?\n\n' +
+        '[diagram:ArrangingTeacupsScene]\n\n' +
+        '**24.** Pick the first cup: 4 choices. The second: 3 left. The third: 2 left. The last: 1. Multiply: 4 × 3 × 2 × 1 = 24. The exclamation mark in 4! captures this. *That* is counting.\n\n' +
         '**Building the counting formulas from a simple question.**\n\n' +
         'You have 5 friends: Anu, Bina, Charu, Deepa, Eka. You need to pick 3 to form a team.\n\n' +
         '**First question: does the ORDER matter?**\n\n' +
@@ -124,7 +126,9 @@ export const guide: ReferenceGuide = {
     {
       title: 'Independent vs Dependent Events',
       beginnerContent:
-        'Play with the tree above. Toggle between "with replacement" (independent) and "without replacement" (dependent). Watch the second-level probabilities update. Click any leaf to see its path probability calculated. **The visible difference between the two modes is exactly what "independent vs dependent" means.**\n\n' +
+        '**Tara flips a coin AND rolls a die.** The coin doesn\'t care what the die shows. The die doesn\'t care what the coin shows. They\'re *independent*. Probability of *both* heads AND a 6?\n\n' +
+        '[diagram:CoinDiceIndependentScene]\n\n' +
+        '**Multiply.** P(heads) × P(6) = 1/2 × 1/6 = **1/12**. Every joint outcome of two independent events comes from multiplying their separate probabilities.\n\n' +
         '**Independent events:** One event does NOT affect the other.\n\n' +
         '`P(A and B) = P(A) x P(B)`\n\n' +
         '| Scenario | Calculation | Result |\n' +
@@ -182,6 +186,9 @@ export const guide: ReferenceGuide = {
     {
       title: 'Conditional Probability',
       beginnerContent:
+        '**Tara takes a 95%-accurate test for a rare disease (1% of the population has it).** The test comes back POSITIVE. How worried should she be?\n\n' +
+        '[diagram:MedicalTestConditionalScene]\n\n' +
+        '**Surprise: only ~16% chance she\'s actually sick.** Even after a positive result. Because the disease is rare, *most* positive tests are false alarms (5% of 990 healthy people = ~50 false positives, vs only ~9 true positives). Conditional probability — P(A given B) — is the maths of "given that this happened, what now?"\n\n' +
         '[diagram:ConditionalProbDiagram]\n\n' +
         '**The question:** Given that B happened, what is the chance of A?\n\n' +
         '`P(A|B) = P(A and B) / P(B)`\n\n' +
@@ -239,7 +246,9 @@ export const guide: ReferenceGuide = {
     {
       title: 'Expected Value',
       beginnerContent:
-        'Play the game in the diagram above. Roll once and you could win nothing, ₹1, or ₹5. But hit "Roll 1000" and watch the running average march toward the dashed line — the **expected value**. The game\'s EV is built into the math; individual rolls scatter around it wildly, but enough rolls and the two lines must meet. Edit the payouts and see the EV shift in real time.\n\n' +
+        '**Tara is offered a lottery ticket: ₹100 to enter, 1-in-1,000 chance to win ₹50,000.** Should she play?\n\n' +
+        '[diagram:LotteryExpectedValueScene]\n\n' +
+        '**No.** The expected value is `(1/1000)(50,000) − 100 = −50` rupees per ticket. On *every* ticket, she loses ₹50 *on average*. The lottery looks tempting because of the big prize, but the maths says: long-run, you lose. EV is the engine behind every gambling, insurance, and investment decision.\n\n' +
         '**What is expected value?**\n\n' +
         'The long-run average outcome: sum each outcome times its probability.\n\n' +
         '**Example: Fair die**\n\n' +
