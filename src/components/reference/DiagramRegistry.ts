@@ -3,6 +3,11 @@ import { lazy, ComponentType } from 'react';
 // Lazy-loaded diagram registry — each diagram loads on demand
 // Uses Proxy to lazily create React.lazy components on first access
 const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = {
+  SharingChocolatesDiagram: () => import('../diagrams/SharingChocolatesDiagram'),
+  PrimeAtomsDiagram: () => import('../diagrams/PrimeAtomsDiagram'),
+  TwoBusesLCMDiagram: () => import('../diagrams/TwoBusesLCMDiagram'),
+  GaussSumDiagram: () => import('../diagrams/GaussSumDiagram'),
+  ClockArithmeticDiagram: () => import('../diagrams/ClockArithmeticDiagram'),
   LeopardGPSDiagram: () => import('../diagrams/LeopardGPSDiagram'),
   LeopardCameraTrapDiagram: () => import('../diagrams/LeopardCameraTrapDiagram'),
   LeopardMarkRecaptureDiagram: () => import('../diagrams/LeopardMarkRecaptureDiagram'),
