@@ -1,4 +1,5 @@
 import type { ReferenceGuide } from '../reference';
+import { practiceVariables, practiceLinearEquations, practiceInequalities, practiceCoordinatePlane, practiceLinearGraphs } from '../practice-algebra';
 
 export const guide: ReferenceGuide = {
   slug: 'algebra',
@@ -12,7 +13,10 @@ export const guide: ReferenceGuide = {
     {
       title: 'Variables and Expressions',
       beginnerContent:
-        'Drag the slider in the diagram above. Watch three different expressions evaluate in real time as x changes. **One letter, infinitely many calculations** — that\'s the trick variables pull. You stop thinking about one specific number and start thinking about *every possible number at once*.\n\n' +
+        '**Tara holds two boxes.** One has a "5" on the side — she knows what\'s inside. The other has just a letter, "x" — its contents are a mystery.\n\n' +
+        '[diagram:MysteryBoxAlgebraDiagram]\n\n' +
+        'A **variable** is just that mystery box: a letter (most often *x*, *y*, or *n*) standing in for a number you don\'t know yet. Algebra is what happens when you write rules that work for *every possible value* of x, all at once.\n\n' +
+        '**One letter, infinitely many calculations.** That\'s the trick variables pull. You stop thinking about one specific number and start thinking about *every possible number at once*.\n\n' +
         '**What is a variable?**\n\n' +
         'A variable is a letter (like `x`, `y`, or `n`) that stands for a number you don\'t know yet. Think of it as an **empty box** waiting to be filled.\n\n' +
         '**What is an expression?**\n\n' +
@@ -64,11 +68,14 @@ export const guide: ReferenceGuide = {
         '**The payoff:** RSA encryption, QR-code error correction, quantum computing, and much of modern cryptography are built on finite fields — sets of numbers where arithmetic "wraps around." `x + y` where x and y are two-digit binary numbers follows the same algebraic rules you learned with integers, except `1 + 1 = 0`. That single shift turns arithmetic into error-correcting codes. **The variable in `3x + 2` and the variable powering WhatsApp encryption are the same idea, one pushed much further than the other.**',
       diagram: 'ExpressionEvaluatorDiagram',
       interactive: { type: 'python-playground' as const, props: { starterCode: '# Try evaluating expressions yourself\nx = 5\nprint(f"3x + 2 = {3*x + 2}")\nprint(f"x² - 4 = {x**2 - 4}")\nprint(f"(x + 1)(x - 1) = {(x+1)*(x-1)}")\n\n# Change x and run again!', title: 'Try it — Expressions' } },
+      practice: practiceVariables,
     },
     {
       title: 'Solving Linear Equations',
       beginnerContent:
-        'Step through the balance scale above. Every time you do something to one side, the diagram forces you to do the same to the other — because that\'s the entire rule of algebra. Break the rule and the equation breaks. Follow the rule and the variable marches toward its answer.\n\n' +
+        '**Bipin holds a balance scale.** On the left pan: a mystery bag (call its weight *x* mangoes) plus 3 mangoes. On the right pan: 11 mangoes. The scale balances perfectly.\n\n' +
+        '[diagram:MangoBalanceDiagram]\n\n' +
+        'How heavy is the bag? Take 3 mangoes off the left side — the scale tips. Take 3 off the right side too, and balance is restored. Now the left pan has just the bag, the right pan has 8 mangoes. The bag weighs **8 mangoes**. We\'ve just solved x + 3 = 11, and the trick is the entire grammar of algebra.\n\n' +
         '**The golden rule:** Whatever you do to one side, you must do to the other.\n\n' +
         'Think of it as a **seesaw** — both sides must stay balanced.\n\n' +
         '**Example: Solve 2x + 3 = 11**\n\n' +
@@ -105,11 +112,14 @@ export const guide: ReferenceGuide = {
         'For millions of equations (engineering simulations), use iterative methods like **Gauss-Seidel**.',
       diagram: 'EquationBalanceScaleDiagram',
       interactive: { type: 'python-playground' as const, props: { starterCode: '# Solve equations with Python\n# 2x + 3 = 11\nx = (11 - 3) / 2\nprint(f"2x + 3 = 11  →  x = {x}")\n\n# Check: does it work?\nprint(f"Check: 2({x}) + 3 = {2*x + 3}")\n\n# Try solving: 5x - 7 = 18\nx2 = (18 + 7) / 5\nprint(f"\\n5x - 7 = 18  →  x = {x2}")', title: 'Try it — Equations' } },
+      practice: practiceLinearEquations,
     },
     {
       title: 'Inequalities',
       beginnerContent:
-        'Play with the number line above — change the operator, move the boundary. The shaded region is every number that satisfies your inequality. Notice: unlike an equation, an inequality never has one answer. It has *a range* of answers — sometimes a huge one.\n\n' +
+        '**Tara walks into the village shop holding ₹100.** "I can buy *anything* I want — as long as the total stays at or below ₹100." The tea costs ₹40, a notebook is ₹25, a pencil is ₹10, candy is ₹5. Many baskets satisfy her budget. A few don\'t.\n\n' +
+        '[diagram:PocketMoneyInequalityDiagram]\n\n' +
+        '**That phrase "at or below" is an inequality.** Unlike an equation (one specific answer), an inequality describes a *range* of answers. There\'s no single thing Tara has to buy — there\'s a whole space of valid baskets.\n\n' +
         '**Inequality symbols:**\n\n' +
         '| Symbol | Meaning | Example |\n' +
         '|--------|---------|--------|\n' +
@@ -158,11 +168,14 @@ export const guide: ReferenceGuide = {
         'The classic example: a **support vector machine** is trained by finding the separating hyperplane that maximizes the margin between two classes of data points — subject to the constraint that no point is on the wrong side. Constraints are inequalities. The objective is quadratic. The solution is unique. Train a spam filter, a medical diagnostic, or a face-detection model and underneath, convex optimization is quietly solving a high-dimensional version of "maximize this subject to those inequalities."\n\n' +
         '**The through-line:** beginner-level inequalities ask *"what values of x work?"* Advanced inequalities ask *"which allowed configuration is best?"* Same grammar, vastly more powerful question.',
       diagram: 'InequalityNumberLineDiagram',
+      practice: practiceInequalities,
     },
     {
       title: 'The Coordinate Plane',
       beginnerContent:
-        'Click anywhere in the plane above to plot a point. Watch its coordinates and the quadrant label update. Every pixel on your screen, every GPS location, every pixel in every photo ever taken — all addressed by this same two-number scheme.\n\n' +
+        '**Tara unrolls a treasure map** with the village square at the centre. Four landmarks: a tree at "1 step right, 2 steps up," a well "3 steps left, 1 step up," a stone "2 steps left, 3 steps down," a treasure chest "4 steps right, 2 steps down." Every place on the map is named by *two numbers* — that\'s the coordinate plane.\n\n' +
+        '[diagram:TreasureMapCoordinateDiagram]\n\n' +
+        'Every pixel on your screen, every GPS location, every photo ever taken — all addressed by this same two-number scheme.\n\n' +
         '**Two perpendicular number lines create a map for numbers:**\n\n' +
         '- **x-axis** — horizontal (left/right)\n' +
         '- **y-axis** — vertical (up/down)\n' +
@@ -195,11 +208,14 @@ export const guide: ReferenceGuide = {
         '**Curse of dimensionality:** In high dimensions, nearly all points are equidistant. 2D/3D intuition breaks down. **PCA** projects high-D data onto meaningful lower-D subspaces.',
       diagram: 'CoordinatePlaneDiagram',
       interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Distance between two points\np1 = np.array([1, 2])\np2 = np.array([4, 6])\n\ndistance = np.sqrt(np.sum((p2 - p1)**2))\nmidpoint = (p1 + p2) / 2\n\nprint(f"Point 1: {p1}")\nprint(f"Point 2: {p2}")\nprint(f"Distance: {distance}")\nprint(f"Midpoint: {midpoint}")', title: 'Try it — Coordinates' } },
+      practice: practiceCoordinatePlane,
     },
     {
       title: 'Linear Equations and Graphs',
       beginnerContent:
-        'Drag the m and b sliders above. Watch the line tilt (m) and slide up/down (b). **Two numbers, every possible straight line.** That\'s the economy of the equation: y = mx + b can describe literally any line in the plane — which is why it shows up in every graph you\'ll ever draw.\n\n' +
+        '**Bipin sells tea at ₹15 per cup.** A customer asks how much five cups cost. He doesn\'t need a calculator — he draws a line on paper. Every cup adds ₹15 to the price. The relationship between cups and cost is *exactly* a straight line:\n\n' +
+        '[diagram:TeaPriceLineDiagram]\n\n' +
+        '**Two numbers, every possible straight line.** That\'s the economy of the equation: y = mx + b can describe literally any line in the plane — which is why it shows up in every graph you\'ll ever draw.\n\n' +
         '**Every linear equation graphs as a straight line:**\n\n' +
         '`y = mx + b`\n\n' +
         'Two parameters control the line:\n\n' +
@@ -248,6 +264,7 @@ export const guide: ReferenceGuide = {
         'The road from y = mx + b to PageRank is surprisingly short: one line → many lines in a system → matrix equation → eigenvectors → the structure behind half of modern computation. **Linear algebra is what you get when you take y = mx + b seriously.**',
       diagram: 'SlopeExplorerDiagram',
       interactive: { type: 'python-playground' as const, props: { starterCode: 'import numpy as np\n\n# Explore y = mx + b\nm = 2    # slope\nb = -1   # y-intercept\n\nx_vals = np.array([-3, -2, -1, 0, 1, 2, 3])\ny_vals = m * x_vals + b\n\nprint(f"y = {m}x + {b}")\nprint("  x  |   y")\nprint("-" * 14)\nfor xi, yi in zip(x_vals, y_vals):\n    print(f"  {xi:>2} | {yi:>4}")\n\n# Try changing m and b!', title: 'Try it — Linear Graphs' } },
+      practice: practiceLinearGraphs,
     },
   ],
 };
