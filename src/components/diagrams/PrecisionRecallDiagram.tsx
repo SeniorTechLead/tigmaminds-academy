@@ -74,7 +74,7 @@ export default function PrecisionRecallDiagram() {
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-lg" role="img">
+      <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-2xl" role="img">
         <title>Precision vs Recall Trade-off — Elephant Danger Detection</title>
 
         {/* Title */}

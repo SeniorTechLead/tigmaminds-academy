@@ -125,7 +125,7 @@ export default function TransformCompositionDiagram() {
       </div>
 
       {/* Diagram */}
-      <svg viewBox="0 0 400 320" className="w-full max-w-lg bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+      <svg viewBox="0 0 400 320" className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {/* Grid */}
         {[-3, -2, -1, 0, 1, 2, 3, 4].map((v) => (
           <g key={v}>

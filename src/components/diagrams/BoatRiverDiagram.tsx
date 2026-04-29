@@ -25,7 +25,7 @@ export default function BoatRiverDiagram() {
 
   return (
     <div className="bg-gradient-to-b from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20 rounded-xl p-3 my-3">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm mx-auto">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto">
         {/* Water background */}
         <rect x="0" y="0" width={W} height={H} rx="8" fill="none" />
 

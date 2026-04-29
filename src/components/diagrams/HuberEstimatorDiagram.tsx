@@ -100,7 +100,7 @@ export default function HuberEstimatorDiagram() {
       </div>
 
       {/* SVG */}
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {/* Number line */}
         <line x1={mx} y1={cy + 30} x2={W - mr} y2={cy + 30} stroke="#d1d5db" strokeWidth="1" />
         {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(t => (

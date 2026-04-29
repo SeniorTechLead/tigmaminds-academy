@@ -109,7 +109,7 @@ export default function CapillaryActionDiagram() {
         </button>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-sm mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
         aria-label="Animated stem cross-section: water rises through xylem, sugar descends through phloem">
 
         {/* Leaf at top (transpiration source) */}

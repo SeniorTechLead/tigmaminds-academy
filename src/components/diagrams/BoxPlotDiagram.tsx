@@ -110,7 +110,7 @@ export default function BoxPlotDiagram() {
       </div>
 
       {/* Box plot SVG */}
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {/* Number line + ticks */}
         <line x1={mx} y1={cy + boxH / 2 + 18} x2={mx + mainPlotW} y2={cy + boxH / 2 + 18} stroke="#d1d5db" strokeWidth="1" />
         {ticks.map(t => (

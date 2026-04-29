@@ -73,7 +73,7 @@ export default function GeometricDistDiagram() {
         </button>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {/* Bus stop scene */}
         <text x={mx} y={16} fontSize="9" fill="#6b7280" fontWeight="600">Bus Stop — waiting for the bus (p = {(p * 100).toFixed(0)}% each minute)</text>
 

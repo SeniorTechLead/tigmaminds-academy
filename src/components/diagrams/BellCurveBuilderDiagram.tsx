@@ -119,7 +119,7 @@ export default function BellCurveBuilderDiagram() {
       )}
 
       {/* SVG */}
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
         {/* Grid */}
         {ticks.map(t => <line key={`g${t}`} x1={sx(t)} y1={my} x2={sx(t)} y2={H - mb} stroke="#f1f5f9" strokeWidth="0.5" />)}
 
