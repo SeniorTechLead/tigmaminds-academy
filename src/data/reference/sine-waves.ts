@@ -12,6 +12,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'The Circle Connection',
       beginnerContent:
+        '**Tara on a swing.** Push her once and she swings back and forth. Plot her height against time — the result is a smooth, repeating curve. Not a zig-zag. Not a square wave. *A sine wave.*\n\n' +
+        '[diagram:SwingPendulumScene]\n\n' +
         'Imagine a point moving around a circle at a steady speed, like a seat on a Ferris wheel. ' +
         'If you only watch the seat\'s height as the wheel spins and plot it against time, you get ' +
         'a smooth, repeating S-curve — that\'s a sine wave. The radius of the wheel determines how ' +
