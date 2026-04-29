@@ -101,10 +101,13 @@ export const guide: ReferenceGuide = {
     {
       title: 'The Unit Circle',
       beginnerContent:
+        '**Picture Tara on a merry-go-round.** She steps onto the platform, the ride starts spinning, and at any moment her position is a point on a circle. If you set up x and y axes through the centre, you can describe *exactly* where she is using two numbers — even though she is going in a circle.\n\n' +
+        '[diagram:MerryGoRoundUnitCircleDiagram]\n\n' +
         '**The problem with SOH CAH TOA.** Look back at our right triangle. What is sin 120°? You can\'t form a right triangle with an angle bigger than 90° — the sides would have to bend backwards. SOH CAH TOA breaks down. We need a definition that works for *any* angle: 120°, 270°, 1000°, even negative angles.\n\n' +
-        '**The fix — use a circle instead of a triangle.** Draw a circle of radius 1 centred at the origin. Pick any angle θ measured from the positive x-axis, going counter-clockwise. The point where your angle\'s ray crosses the circle has coordinates (x, y). We *define*:\n\n' +
+        '**The fix — use a circle instead of a triangle.** Draw a circle of radius 1 centred at the origin (this is the **unit circle**). Pick any angle θ measured from the positive x-axis, going counter-clockwise. The point where your angle\'s ray crosses the circle has coordinates (x, y). We *define*:\n\n' +
         '`cos θ = x`,  `sin θ = y`\n\n' +
-        'For acute angles this gives the same answer as SOH CAH TOA — but now it also works for any angle.\n\n' +
+        'For acute angles this gives the same answer as SOH CAH TOA — but now it also works for any angle. Tara at 60° on her merry-go-round sits at the point (cos 60°, sin 60°) = (1/2, √3/2).\n\n' +
+        '**Same picture, just the math.** Strip out the merry-go-round and the playground; what remains is the circle, the angle θ, and the point (cos θ, sin θ):\n\n' +
         '[diagram:UnitCircleDiagram]\n\n' +
         '**Why this matches the triangle definition.** Drop a vertical line from the point on the circle to the x-axis. You get a right triangle with hypotenuse 1, opposite = y, adjacent = x. Then sin θ = opp/hyp = y/1 = y. Same for cos θ = x. The unit circle is just SOH CAH TOA in disguise — but it keeps working as θ wraps around.\n\n' +
         '**Special angles you should be able to read off the circle.**\n\n' +
@@ -169,7 +172,10 @@ export const guide: ReferenceGuide = {
     {
       title: 'Graphs of Trig Functions',
       beginnerContent:
-        '**Trace the y-coordinate as θ goes around.** Stand at the unit circle. Walk counter-clockwise from 0° to 360°, watching the y-coordinate of your position. It starts at 0, climbs to 1 (at 90°), falls back to 0 (at 180°), goes down to −1 (at 270°), and returns to 0 (at 360°). Plot that y-coordinate against θ on a graph and you have drawn the **sine wave**.\n\n' +
+        '**Picture Tara on a Ferris wheel.** She gets in at the bottom. As the wheel turns, she rises, reaches the top, comes back down, and arrives at the bottom again — over and over, every revolution. Now plot her **height above the ground** against time. What shape does the graph have?\n\n' +
+        '[diagram:FerrisWheelSineDiagram]\n\n' +
+        'A perfect sine wave. Not because we forced it — because going steadily around a circle and measuring how high you are *is the definition* of sine.\n\n' +
+        '**Trace the y-coordinate as θ goes around.** Stand at the unit circle. Walk counter-clockwise from 0° to 360°, watching the y-coordinate of your position. It starts at 0, climbs to 1 (at 90°), falls back to 0 (at 180°), goes down to −1 (at 270°), and returns to 0 (at 360°). Plot that y-coordinate against θ on a graph and you have drawn the **sine wave** — the same shape as Tara\'s height on the Ferris wheel.\n\n' +
         '[diagram:TrigGraphsDiagram]\n\n' +
         '**Three properties that define every sine wave.**\n\n' +
         '| Property | y = sin x | What it means physically |\n' +
@@ -233,6 +239,8 @@ export const guide: ReferenceGuide = {
     {
       title: 'Heights and Distances',
       beginnerContent:
+        '**Tara wants to know the width of a river — without crossing it.** She stands on her bank directly across from a tree on the far side. She walks 30 m along her bank, turns, sights the tree, and measures the angle. That is enough to compute the width.\n\n' +
+        '[diagram:RiverWidthDiagram]\n\n' +
         '**The original use of trigonometry.** Long before phones and lasers, surveyors needed to know how tall a mountain was, how wide a river ran, how far a ship sat offshore — without climbing, swimming, or sailing. Trigonometry was *invented* to solve those problems. Two thousand years later, GPS satellites still use the same principles.\n\n' +
         '[diagram:HeightDistanceDiagram]\n\n' +
         '**Two angles you need to know.**\n\n' +
@@ -265,8 +273,9 @@ export const guide: ReferenceGuide = {
         '| 4 | | **≈ 57 m** |\n\n' +
         '**Check yourself.** A surveyor 60 m from a tower measures elevation 41°. Is the tower roughly (a) 30 m, (b) 50 m, or (c) 80 m tall? *(tan 41° is close to but less than 1, since 45° gives exactly 1. So height < 60 m. The closest is **(b) 50 m**.)*',
       intermediateContent:
-        '**Two-observation problems — when you cannot directly access the base.** Suppose the foot of a mountain is on the far side of a river you can\'t cross. Single-angle methods need the horizontal distance, which you don\'t have. Solution: take *two* readings from different positions along a line.\n\n' +
-        '**Worked example.** From point A on flat ground, the angle of elevation to a tower top is 30°. You walk 50 m straight toward the tower to point B; now the angle is 60°. How tall is the tower, and how far were you from its base at A?\n\n' +
+        '**Two-observation problems — when you cannot directly access the base.** Suppose the foot of a hill is on the far side of a river you can\'t cross. Single-angle methods need the horizontal distance to the base, which you don\'t have. Solution: take *two* readings from different positions along a line.\n\n' +
+        '[diagram:TwoObservationDiagram]\n\n' +
+        '**Worked example.** From point A on flat ground, the angle of elevation to a hill top is 30°. You walk 50 m straight toward the hill to point B; now the angle is 60°. How tall is the hill?\n\n' +
         '| Step | Reasoning | Equation |\n' +
         '|------|-----------|----------|\n' +
         '| 1 | Let h = tower height, d = distance from B to base. From B: tan 60° = h/d. tan 60° = √3. | h = d√3 |\n' +
