@@ -136,6 +136,7 @@ const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = 
   ReactionTypesDiagram: () => import('../diagrams/ReactionTypesDiagram'),
   SOHCAHTOADiagram: () => import('../diagrams/SOHCAHTOADiagram'),
   SieveOfEratosthenesDiagram: () => import('../diagrams/SieveOfEratosthenesDiagram'),
+  TreeGazeDiagram: () => import('../diagrams/TreeGazeDiagram'),
   SkeletonMuscleDiagram: () => import('../diagrams/SkeletonMuscleDiagram'),
   SubatomicParticlesDiagram: () => import('../diagrams/SubatomicParticlesDiagram'),
   TidesDiagram: () => import('../diagrams/TidesDiagram'),
