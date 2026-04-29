@@ -10,20 +10,32 @@
 import type { CSSProperties } from 'react';
 
 export type TaraPose =
-  | 'standing'      // arms at sides, looking forward
-  | 'lookingUp'     // head tilted up, one hand at brow (front view)
-  | 'lookingUpProfile' // side-on profile, looking up-and-forward (e.g. at a tall tree to her right)
-  | 'lookingDown'   // head tilted down, hands on hips (e.g. cliff edge)
-  | 'pointing'      // arm extended, finger pointing
+  | 'standing'      // arms at sides, neutral
+  | 'lookingUp'     // head tilted up, one hand shading brow
+  | 'lookingUpProfile' // legacy alias — same as direction='right' + pose='lookingUp'
+  | 'lookingDown'   // head tilted down (cliff edge etc.)
+  | 'pointing'      // arm extended forward
   | 'walking'       // mid-stride
   | 'thinking';     // hand on chin
+
+/**
+ * direction sets which way the character faces:
+ *   'front' — towards the reader (good for "presenting" scenes)
+ *   'right' — body in profile, facing right (most "watching/interacting" scenes)
+ *   'left'  — body in profile, facing left (mirror of right)
+ *
+ * Default is 'right' because most scenes have the character watching/pointing
+ * at something to their side. Use 'front' explicitly for present-to-reader scenes.
+ */
+export type TaraDirection = 'front' | 'left' | 'right';
 
 interface TaraProps {
   x?: number;            // horizontal position of feet (in parent SVG coords)
   y?: number;            // vertical position of feet
   scale?: number;        // 1 = ~120 units tall
-  flip?: boolean;        // mirror horizontally
+  flip?: boolean;        // (legacy) mirror horizontally — equivalent to direction='left'
   pose?: TaraPose;
+  direction?: TaraDirection;
   style?: CSSProperties;
 }
 
@@ -36,23 +48,31 @@ const LEGGINGS = '#1e3a5f';   // dark navy
 const STROKE = '#1f2937';     // outlines
 
 export default function Tara({
-  x = 0, y = 0, scale = 1, flip = false, pose = 'standing', style,
+  x = 0, y = 0, scale = 1, flip = false, pose = 'standing', direction, style,
 }: TaraProps) {
-  const transform = `translate(${x}, ${y}) scale(${flip ? -scale : scale}, ${scale})`;
+  // Resolve direction: explicit prop > legacy flip > default 'right' (most scenes
+  // have the character on the left of the SVG looking at something on the right).
+  // Use direction="front" explicitly for present-to-reader scenes.
+  const dir: TaraDirection = direction ?? (flip ? 'left' : 'right');
+  // legacy lookingUpProfile pose forces right-profile look-up
+  const isLegacyProfile = pose === 'lookingUpProfile';
+  const effectiveDir: TaraDirection = isLegacyProfile ? 'right' : dir;
+  const effectivePose = isLegacyProfile ? 'lookingUp' : pose;
+
+  // Build the inner transform: scale + horizontal flip for 'left'.
+  const xs = effectiveDir === 'left' ? -scale : scale;
+  const transform = `translate(${x}, ${y}) scale(${xs}, ${scale})`;
 
   return (
     <g transform={transform} style={style}>
-      <TaraBody pose={pose} />
+      {effectiveDir === 'front'
+        ? <TaraBody pose={effectivePose} />
+        : <TaraProfile pose={effectivePose} />}
     </g>
   );
 }
 
 function TaraBody({ pose }: { pose: TaraPose }) {
-  // Profile pose has its own dedicated renderer
-  if (pose === 'lookingUpProfile') {
-    return <TaraProfile />;
-  }
-
   // Head tilt for "lookingUp" / "lookingDown"
   const headTilt = pose === 'lookingUp' ? -20 : pose === 'lookingDown' ? 18 : 0;
   // Eye direction
@@ -294,16 +314,33 @@ function Arms({ pose }: { pose: TaraPose }) {
 }
 
 /**
- * Side-on profile of Tara, facing right, head tilted up — for scenes where she
- * looks up at something to her right (a tall tree, a cliff, a mountain peak).
- * Drawn with a single visible eye and the braid trailing behind on the left.
+ * Side-on profile of Tara, facing RIGHT (mirrored to face left via outer scale).
+ * Pose controls head tilt, eye direction, and arm positions:
+ *   - 'standing': arms at sides, head level, eyes forward
+ *   - 'lookingUp': head tilted back, near hand shading brow, eye looks up
+ *   - 'lookingDown': head tilted forward, hands at sides, eye looks down
+ *   - 'pointing': near arm extended forward, head level
+ *   - 'thinking': near hand to chin, head slightly down, eye thoughtful
+ *   - 'walking': mid-stride legs, arms swinging
  */
-function TaraProfile() {
+function TaraProfile({ pose }: { pose: TaraPose }) {
+  const headTilt = pose === 'lookingUp' ? -18 : pose === 'lookingDown' ? 14 : pose === 'thinking' ? 6 : 0;
+  const eyeDir: 'forward' | 'up' | 'down' = pose === 'lookingUp' ? 'up' : pose === 'lookingDown' ? 'down' : 'forward';
+
   return (
     <g>
-      {/* Legs side-by-side from this angle, near-leg slightly forward */}
-      <rect x="-5" y="-34" width="6" height="34" rx="2" fill={LEGGINGS} stroke={STROKE} strokeWidth="1" />
-      <rect x="2" y="-34" width="6" height="34" rx="2" fill={LEGGINGS} stroke={STROKE} strokeWidth="1" />
+      {/* Legs */}
+      {pose === 'walking' ? (
+        <>
+          <path d="M -2 0 L 2 -34 L 5 -34 L 1 0 Z" fill={LEGGINGS} stroke={STROKE} strokeWidth="1" strokeLinejoin="round" />
+          <path d="M 5 0 L 1 -34 L -2 -34 L 2 0 Z" fill={LEGGINGS} stroke={STROKE} strokeWidth="1" strokeLinejoin="round" opacity="0.85" />
+        </>
+      ) : (
+        <>
+          <rect x="-5" y="-34" width="6" height="34" rx="2" fill={LEGGINGS} stroke={STROKE} strokeWidth="1" />
+          <rect x="2" y="-34" width="6" height="34" rx="2" fill={LEGGINGS} stroke={STROKE} strokeWidth="1" />
+        </>
+      )}
       <ellipse cx="-2" cy="-1" rx="6" ry="2.5" fill={STROKE} />
       <ellipse cx="6" cy="-1" rx="6" ry="2.5" fill={STROKE} />
 
@@ -313,42 +350,34 @@ function TaraProfile() {
       <line x1="-7" y1="-37" x2="9" y2="-37" stroke={KURTA_DARK} strokeWidth="1.2" />
       <line x1="-7" y1="-39" x2="9" y2="-39" stroke="#fbbf24" strokeWidth="0.6" />
 
-      {/* FRONT pigtail braid — drapes from the front-side ear (right side from viewer's perspective)
-          down over the front of the chest. Visible because the body is in profile, this braid is in
-          the foreground. Drawn BEFORE the head so the head sits on top at the anchor point. */}
+      {/* FRONT pigtail braid — drapes over the front shoulder, visible from this angle */}
       <path d="M 8 -75 Q 12 -64 11 -52 Q 10 -42 7 -34"
         fill="none" stroke={HAIR} strokeWidth="5" strokeLinecap="round" />
       <path d="M 9 -64 L 11 -62 L 13 -64" fill="none" stroke="#3a2a20" strokeWidth="0.8" />
       <path d="M 8 -54 L 10 -52 L 12 -54" fill="none" stroke="#3a2a20" strokeWidth="0.8" />
       <ellipse cx="7" cy="-32" rx="2.5" ry="1.3" fill="#dc2626" stroke={STROKE} strokeWidth="0.5" />
 
-      {/* Far arm (back, behind torso) — relaxed at side */}
-      <path d="M -3 -66 L -5 -50 L -6 -38" fill="none" stroke={KURTA} strokeWidth="5" strokeLinecap="round" opacity="0.85" />
-      <circle cx="-6" cy="-38" r="3" fill={SKIN} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
-
-      {/* Near arm (front, foreground) — bent up to brow shading eyes */}
-      <path d="M 6 -66 L 14 -78 L 8 -90" fill="none" stroke={KURTA} strokeWidth="6" strokeLinecap="round" />
-      <circle cx="8" cy="-90" r="3.5" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+      {/* Arms vary by pose */}
+      <ProfileArms pose={pose} />
 
       {/* Neck — visible only on the front side */}
       <path d="M 1 -72 L 1 -66 L 5 -66 L 5 -72 Z" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
 
-      {/* Head — profile, facing right, tilted upward (back-of-head tilts back) */}
-      <g transform="rotate(-15, 4, -86)">
-        {/* Head silhouette — slightly egg-shaped, pointed slightly to the right (chin direction) */}
+      {/* Head — profile, facing right */}
+      <g transform={`rotate(${headTilt}, 4, -86)`}>
+        {/* Head silhouette */}
         <path
           d="M -8 -100 Q -10 -90 -8 -82 Q -6 -78 -2 -76 Q 4 -74 10 -76 Q 14 -78 14 -84 Q 14 -94 10 -100 Q 4 -104 -2 -103 Q -6 -103 -8 -100 Z"
           fill={SKIN} stroke={STROKE} strokeWidth="1.2" strokeLinejoin="round"
         />
-        {/* Hair top + back — covers the crown and back of head, with a forehead fringe arc */}
+        {/* Hair top + back */}
         <path
           d="M -8 -100 Q -10 -104 -2 -107 Q 6 -108 12 -103 Q 14 -100 13 -96 Q 11 -98 8 -97 Q 4 -98 0 -96 Q -3 -97 -7 -96 Z"
           fill={HAIR} stroke={STROKE} strokeWidth="0.9" strokeLinejoin="round"
         />
-        {/* Hair line at the temple / sideburn */}
         <path d="M -8 -96 Q -8 -90 -7 -86" fill="none" stroke={HAIR} strokeWidth="2" strokeLinecap="round" />
 
-        {/* BACK pigtail braid — trails behind/below from the back of the head */}
+        {/* BACK pigtail braid */}
         <path
           d="M -8 -94 Q -14 -88 -15 -78 Q -16 -68 -13 -58 Q -11 -52 -10 -48"
           fill="none" stroke={HAIR} strokeWidth="5" strokeLinecap="round"
@@ -357,26 +386,124 @@ function TaraProfile() {
         <path d="M -15 -68 L -13 -66 L -11 -68" fill="none" stroke="#3a2a20" strokeWidth="0.8" />
         <ellipse cx="-10" cy="-46" rx="2.5" ry="1.3" fill="#dc2626" stroke={STROKE} strokeWidth="0.5" />
 
-        {/* One visible eye — larger almond shape with lashes */}
-        <ellipse cx="6" cy="-91" rx="2.7" ry="3" fill="white" stroke={STROKE} strokeWidth="0.9" />
-        <circle cx="7" cy="-92.5" r="1.6" fill="#1f1410" />
-        <circle cx="7.4" cy="-93" r="0.5" fill="white" />
-        {/* Eyelashes — three short strokes */}
-        <path d="M 4 -94 L 3.5 -95.5 M 6.5 -94 L 6.5 -96 M 8.5 -94 L 9 -95.5" stroke={STROKE} strokeWidth="0.7" strokeLinecap="round" />
+        {/* Eye — pupil position shifts with gaze direction */}
+        {(() => {
+          const px = 7 + (eyeDir === 'down' ? -0.4 : 0);
+          const py = -92.5 + (eyeDir === 'up' ? -1.2 : eyeDir === 'down' ? 1.2 : 0);
+          return (
+            <>
+              <ellipse cx="6" cy="-91" rx="2.7" ry="3" fill="white" stroke={STROKE} strokeWidth="0.9" />
+              <circle cx={px} cy={py} r="1.6" fill="#1f1410" />
+              <circle cx={px + 0.4} cy={py - 0.5} r="0.5" fill="white" />
+              {/* Eyelashes */}
+              <path d="M 4 -94 L 3.5 -95.5 M 6.5 -94 L 6.5 -96 M 8.5 -94 L 9 -95.5" stroke={STROKE} strokeWidth="0.7" strokeLinecap="round" />
+            </>
+          );
+        })()}
 
-        {/* Eyebrow — slight arch */}
-        <path d="M 3 -95.5 Q 6 -97.5 9 -95.5" fill="none" stroke={HAIR} strokeWidth="1.4" strokeLinecap="round" />
+        {/* Eyebrow */}
+        <path
+          d={eyeDir === 'up' ? "M 3 -96 Q 6 -98 9 -96" : "M 3 -95 Q 6 -97 9 -95"}
+          fill="none" stroke={HAIR} strokeWidth="1.4" strokeLinecap="round"
+        />
 
-        {/* Nose — small bump on the right side */}
+        {/* Nose */}
         <path d="M 11 -88 Q 13 -85 11 -82" fill="none" stroke={STROKE} strokeWidth="1" strokeLinecap="round" />
 
-        {/* Mouth — tiny smile */}
-        <path d="M 7 -78 Q 9 -76 11 -78" fill="none" stroke="#7c2d12" strokeWidth="1.3" strokeLinecap="round" />
+        {/* Mouth — slight smile, opens wider when "lookingUp" or "thinking" */}
+        <path
+          d={pose === 'lookingUp' ? "M 7 -78 Q 9 -75 11 -78" : pose === 'lookingDown' ? "M 7 -77 Q 9 -78 11 -77" : "M 7 -78 Q 9 -76 11 -78"}
+          fill="none" stroke="#7c2d12" strokeWidth="1.3" strokeLinecap="round"
+        />
 
         {/* Ear + earring stud */}
         <path d="M -3 -88 Q -5 -86 -3 -82" fill="none" stroke={STROKE} strokeWidth="0.8" />
         <circle cx="-3" cy="-83" r="1.2" fill="#fbbf24" stroke={STROKE} strokeWidth="0.5" />
       </g>
+    </g>
+  );
+}
+
+/** Arm rendering for the side-profile body (facing right). */
+function ProfileArms({ pose }: { pose: TaraPose }) {
+  // Far arm — drawn behind the torso, slightly transparent so it reads as "back arm"
+  // Near arm — drawn in front, fully opaque
+  // Both anchor at shoulder approx (3, -68) for near, (1, -68) for far.
+  const sleeveFill = KURTA;
+  const skinFill = SKIN;
+
+  if (pose === 'lookingUp') {
+    return (
+      <g>
+        {/* Far arm — at side */}
+        <path d="M -3 -66 L -5 -50 L -6 -38" fill="none" stroke={sleeveFill} strokeWidth="5" strokeLinecap="round" opacity="0.85" />
+        <circle cx="-6" cy="-38" r="3" fill={skinFill} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {/* Near arm — bent up to brow */}
+        <path d="M 6 -66 L 14 -78 L 8 -90" fill="none" stroke={sleeveFill} strokeWidth="6" strokeLinecap="round" />
+        <circle cx="8" cy="-90" r="3.5" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    );
+  }
+
+  if (pose === 'pointing') {
+    return (
+      <g>
+        {/* Far arm — at side */}
+        <path d="M -3 -66 L -5 -50 L -6 -38" fill="none" stroke={sleeveFill} strokeWidth="5" strokeLinecap="round" opacity="0.85" />
+        <circle cx="-6" cy="-38" r="3" fill={skinFill} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {/* Near arm — extended forward and slightly up */}
+        <path d="M 6 -66 L 18 -68 L 30 -64" fill="none" stroke={sleeveFill} strokeWidth="6" strokeLinecap="round" />
+        <circle cx="30" cy="-64" r="3" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
+        {/* Pointing finger */}
+        <line x1="30" y1="-64" x2="36" y2="-63" stroke={skinFill} strokeWidth="2.2" strokeLinecap="round" />
+      </g>
+    );
+  }
+
+  if (pose === 'thinking') {
+    return (
+      <g>
+        {/* Far arm — folded across waist */}
+        <path d="M -3 -66 L -2 -52 L 3 -50" fill="none" stroke={sleeveFill} strokeWidth="5" strokeLinecap="round" opacity="0.85" />
+        <circle cx="3" cy="-50" r="2.8" fill={skinFill} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {/* Near arm — hand to chin */}
+        <path d="M 6 -66 L 12 -76 L 10 -82" fill="none" stroke={sleeveFill} strokeWidth="6" strokeLinecap="round" />
+        <circle cx="10" cy="-82" r="3.2" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    );
+  }
+
+  if (pose === 'lookingDown') {
+    return (
+      <g>
+        <path d="M -3 -66 L -3 -52 L -2 -42" fill="none" stroke={sleeveFill} strokeWidth="5" strokeLinecap="round" opacity="0.85" />
+        <circle cx="-2" cy="-42" r="3" fill={skinFill} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        <path d="M 6 -66 L 7 -52 L 7 -42" fill="none" stroke={sleeveFill} strokeWidth="6" strokeLinecap="round" />
+        <circle cx="7" cy="-42" r="3.2" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    );
+  }
+
+  if (pose === 'walking') {
+    return (
+      <g>
+        {/* Far arm — swinging back */}
+        <path d="M -3 -66 L -7 -56 L -7 -44" fill="none" stroke={sleeveFill} strokeWidth="5" strokeLinecap="round" opacity="0.85" />
+        <circle cx="-7" cy="-44" r="3" fill={skinFill} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+        {/* Near arm — swinging forward */}
+        <path d="M 6 -66 L 10 -54 L 10 -42" fill="none" stroke={sleeveFill} strokeWidth="6" strokeLinecap="round" />
+        <circle cx="10" cy="-42" r="3.2" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
+      </g>
+    );
+  }
+
+  // 'standing' — both arms hang at sides
+  return (
+    <g>
+      <path d="M -3 -66 L -4 -52 L -4 -40" fill="none" stroke={sleeveFill} strokeWidth="5" strokeLinecap="round" opacity="0.85" />
+      <circle cx="-4" cy="-40" r="3" fill={skinFill} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+      <path d="M 6 -66 L 7 -52 L 7 -40" fill="none" stroke={sleeveFill} strokeWidth="6" strokeLinecap="round" />
+      <circle cx="7" cy="-40" r="3.2" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
     </g>
   );
 }
