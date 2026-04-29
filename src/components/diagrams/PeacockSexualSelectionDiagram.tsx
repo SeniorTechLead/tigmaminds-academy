@@ -19,14 +19,14 @@ export default function PeacockSexualSelectionDiagram() {
         <text x="180" y="104" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">Traits that help SURVIVE</text>
         <text x="180" y="122" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">Sharp claws, camouflage,</text>
         <text x="180" y="138" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">fast running, disease resistance</text>
-        <text x="180" y="164" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-emerald-600 dark:fill-emerald-400">\u2192 Practical traits win</text>
+        <text x="180" y="164" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-emerald-600 dark:fill-emerald-400">→ Practical traits win</text>
 
         <rect x="380" y="60" width="280" height="120" rx="10" className="fill-purple-50 dark:fill-purple-950/30 stroke-purple-300 dark:stroke-purple-700" strokeWidth="1.5" />
         <text x="520" y="84" textAnchor="middle" fontSize="12" fontWeight="700" className="fill-purple-700 dark:fill-purple-300">Sexual Selection</text>
         <text x="520" y="104" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">Traits that help REPRODUCE</text>
         <text x="520" y="122" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">Bright colors, long tails,</text>
         <text x="520" y="138" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">loud songs, elaborate dances</text>
-        <text x="520" y="164" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-purple-600 dark:fill-purple-400">\u2192 Attractive traits win</text>
+        <text x="520" y="164" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-purple-600 dark:fill-purple-400">→ Attractive traits win</text>
 
         {/* Runaway feedback loop */}
         <text x="350" y="210" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-indigo-600 dark:fill-indigo-400">

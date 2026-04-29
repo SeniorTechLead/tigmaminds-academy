@@ -10,7 +10,7 @@ export default function DataQualityTargetDiagram() {
       <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Data quality target diagrams showing accuracy vs precision and the difference between them">
         <rect width="700" height="380" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Data Quality: Accuracy vs Precision</text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Good data needs both \u2014 and awareness of bias</text>
+        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Good data needs both — and awareness of bias</text>
 
         {targets.map((t, i) => (
           <g key={i}>
@@ -32,14 +32,14 @@ export default function DataQualityTargetDiagram() {
         ))}
 
         {/* Status indicators */}
-        <text x="150" y="265" textAnchor="middle" fontSize="12" fill="#22c55e">\u2713 Ideal</text>
-        <text x="350" y="265" textAnchor="middle" fontSize="12" fill="#f59e0b">\u26A0 Needs more data</text>
-        <text x="550" y="265" textAnchor="middle" fontSize="12" fill="#ef4444">\u2717 Systematic bias</text>
+        <text x="150" y="265" textAnchor="middle" fontSize="12" fill="#22c55e">✓ Ideal</text>
+        <text x="350" y="265" textAnchor="middle" fontSize="12" fill="#f59e0b">⚠ Needs more data</text>
+        <text x="550" y="265" textAnchor="middle" fontSize="12" fill="#ef4444">✗ Systematic bias</text>
 
         {/* Bias explanation */}
         <rect x="80" y="290" width="540" height="60" rx="8" className="fill-amber-50 dark:fill-amber-900/15" stroke="#f59e0b" strokeWidth="1" />
         <text x="350" y="312" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-gray-700 dark:fill-slate-200">Bias in butterfly counting</text>
-        <text x="350" y="330" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">You notice bright butterflies more than dull ones \u2014 your count is biased toward colorful species</text>
+        <text x="350" y="330" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">You notice bright butterflies more than dull ones — your count is biased toward colorful species</text>
         <text x="350" y="344" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Solution: train observers, use photo verification, and report effort (time spent looking)</text>
       </svg>
     </div>

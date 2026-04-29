@@ -51,7 +51,7 @@ export default function ElephantConfusionDiagram() {
   return (
     <svg
       viewBox="0 0 630 424"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Confusion matrix showing true positives, false positives, false negatives, and true negatives with precision and recall formulas"
     >

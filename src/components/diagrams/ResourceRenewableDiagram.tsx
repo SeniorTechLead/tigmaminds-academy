@@ -1,7 +1,7 @@
 export default function ResourceRenewableDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 520 340" className="w-full h-auto" role="img"
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 534 340" className="w-full h-auto" role="img"
         aria-label="Comparison chart of renewable versus non-renewable resources">
         <rect width="520" height="340" rx="8" className="fill-slate-950 dark:fill-slate-950 stroke-slate-700" strokeWidth="1" />
 

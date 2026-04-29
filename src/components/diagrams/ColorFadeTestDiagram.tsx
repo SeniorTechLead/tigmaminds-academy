@@ -4,7 +4,7 @@ export default function ColorFadeTestDiagram() {
       <svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Comparing how pigment colors fade over decades while structural colors remain vivid">
         <rect width="700" height="360" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Why Structural Color Never Fades</text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Sunlight breaks pigment molecules \u2014 but it cannot break geometry</text>
+        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Sunlight breaks pigment molecules — but it cannot break geometry</text>
 
         {/* Time axis */}
         <line x1="100" y1="280" x2="620" y2="280" strokeWidth="1.5" className="stroke-gray-400 dark:stroke-slate-500" />
@@ -30,8 +30,8 @@ export default function ColorFadeTestDiagram() {
         <text x="60" y="235" textAnchor="middle" fontSize="11" fontWeight="600" fill="#3b82f6" transform="rotate(-90, 60, 235)">Structural</text>
 
         {/* Labels */}
-        <text x="360" y="80" textAnchor="middle" fontSize="12" className="fill-gray-600 dark:fill-slate-300">Pigment: UV light breaks the molecules \u2192 color fades</text>
-        <text x="360" y="96" textAnchor="middle" fontSize="12" className="fill-gray-600 dark:fill-slate-300">Structural: nanostructure stays intact \u2192 color stays vivid</text>
+        <text x="360" y="80" textAnchor="middle" fontSize="12" className="fill-gray-600 dark:fill-slate-300">Pigment: UV light breaks the molecules → color fades</text>
+        <text x="360" y="96" textAnchor="middle" fontSize="12" className="fill-gray-600 dark:fill-slate-300">Structural: nanostructure stays intact → color stays vivid</text>
 
         {/* Bottom fact */}
         <text x="350" y="342" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Museum kingfisher feathers from the 1800s are still brilliant blue today</text>

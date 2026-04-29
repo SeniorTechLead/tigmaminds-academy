@@ -70,7 +70,7 @@ export default function ExponentialDistDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Controls */}
       <div className="flex justify-center gap-2 mb-1 flex-wrap">
         <span className="text-sm font-medium text-gray-600 dark:text-gray-300 self-center">λ =</span>
@@ -102,7 +102,7 @@ export default function ExponentialDistDiagram() {
 
       <svg
         viewBox={`0 0 ${svgW} ${svgH}`}
-        className="w-full max-w-md mx-auto cursor-crosshair"
+        className="w-full max-w-xl mx-auto cursor-crosshair"
         role="img"
         aria-label={`Exponential distribution ${showCDF ? 'CDF' : 'PDF'} with lambda ${lambda}`}
         onClick={handleSvgClick}

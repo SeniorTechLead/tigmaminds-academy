@@ -15,7 +15,7 @@ export default function AstrolabeCelestialNavDiagram() {
   const polarisY = horizonY - 120 * Math.sin(polarisRad);
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 440 250" className="w-full" role="img" aria-label="Celestial navigation: finding latitude from Polaris">
         <rect width="440" height="250" className="fill-white dark:fill-slate-950" rx="8" />
 

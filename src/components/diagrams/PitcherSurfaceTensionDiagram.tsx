@@ -1,7 +1,7 @@
 export default function PitcherSurfaceTensionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram explaining surface tension and fluid dynamics in pitcher plant traps">
+      <svg viewBox="0 0 560 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram explaining surface tension and fluid dynamics in pitcher plant traps">
         <rect width="560" height="440" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#38bdf8">Surface Tension and Fluid Dynamics</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Why insects cannot escape the pitcher</text>

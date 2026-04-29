@@ -1,7 +1,7 @@
 export default function BanyanStomataCloseupDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 545 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Leaf stomata showing guard cells opening and closing to control gas exchange and water loss">
+      <svg viewBox="0 0 545 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Leaf stomata showing guard cells opening and closing to control gas exchange and water loss">
         <rect width="500" height="380" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

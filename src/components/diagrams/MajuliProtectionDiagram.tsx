@@ -1,7 +1,7 @@
 export default function MajuliProtectionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 580 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing four erosion protection methods: bamboo porcupines, vetiver grass, geotextile bags, and gabion walls">
+      <svg viewBox="0 0 580 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing four erosion protection methods: bamboo porcupines, vetiver grass, geotextile bags, and gabion walls">
         <rect width="580" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

@@ -22,7 +22,7 @@ export default function FireflyPWMDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="PWM duty cycles at 25%, 50%, and 75% controlling LED brightness">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="PWM duty cycles at 25%, 50%, and 75% controlling LED brightness">
         <rect width={w} height={h} rx="12" className="fill-slate-900" />
 
         <text x={w / 2} y="28" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="700">PWM: Pulse Width Modulation</text>

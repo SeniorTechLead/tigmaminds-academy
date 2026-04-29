@@ -40,7 +40,7 @@ export default function ElephantConfusionMatrixDiagram() {
   return (
     <svg
       viewBox="0 0 630 454"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="6 by 6 confusion matrix showing classifier accuracy across rumble, trumpet, roar, bark, cry, and snort, with annotation highlighting roar confused with trumpet"
     >

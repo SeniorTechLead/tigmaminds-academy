@@ -11,7 +11,7 @@ export default function ActivityGrassGrowDiagram() {
         <rect width="700" height="400" rx="10" className="fill-white dark:fill-slate-950" />
 
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fcd34d">
-          Try This: Grass Growth and \u201cFire\u201d Recovery
+          Try This: Grass Growth and “Fire” Recovery
         </text>
         <text x="350" y="50" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
           You need: 2 pots, grass seeds or clippings, scissors, a sunny spot, a shady spot
@@ -51,7 +51,7 @@ export default function ActivityGrassGrowDiagram() {
         <text x="190" y="269" textAnchor="middle" fontSize="11" className="fill-blue-700 dark:fill-blue-300">Measure daily for 7 days with a ruler</text>
 
         {/* Part 2: Trim = simulated fire */}
-        <text x="510" y="80" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-orange-600 dark:fill-orange-400">Part 2: Simulated \u201cBurn\u201d</text>
+        <text x="510" y="80" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-orange-600 dark:fill-orange-400">Part 2: Simulated “Burn”</text>
 
         {/* Before trim */}
         <g transform="translate(420, 95)">
@@ -64,7 +64,7 @@ export default function ActivityGrassGrowDiagram() {
         </g>
 
         {/* Scissors */}
-        <text x="520" y="155" fontSize="22">\u2702</text>
+        <text x="520" y="155" fontSize="22">✂</text>
         <text x="520" y="175" textAnchor="middle" fontSize="10" className="fill-orange-600 dark:fill-orange-400">Trim to soil</text>
 
         {/* After trim */}
@@ -82,7 +82,7 @@ export default function ActivityGrassGrowDiagram() {
         <rect x="400" y="230" width="260" height="80" rx="6" className="fill-green-50 dark:fill-green-950/30" stroke="#16a34a" strokeWidth="1" />
         <text x="530" y="252" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-green-700 dark:fill-green-300">Why it works:</text>
         <text x="530" y="270" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Grass roots survive underground.</text>
-        <text x="530" y="285" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">New shoots emerge in days \u2014 same</text>
+        <text x="530" y="285" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">New shoots emerge in days — same</text>
         <text x="530" y="300" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">mechanism as Kaziranga after a burn.</text>
 
         {/* Bottom insight */}
@@ -91,7 +91,7 @@ export default function ActivityGrassGrowDiagram() {
           Record: Which pot grew taller? How many days until trimmed grass recovered?
         </text>
         <text x="350" y="374" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          C4 grasses in Kaziranga do this at massive scale \u2014 regrowing 5m from burnt stubble in one season
+          C4 grasses in Kaziranga do this at massive scale — regrowing 5m from burnt stubble in one season
         </text>
       </svg>
     </div>

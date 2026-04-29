@@ -11,11 +11,11 @@ export default function LotusEngineeringDiagram() {
       <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="The lotus effect in engineering: self-cleaning glass, stain-proof fabric, anti-icing, and anti-corrosion">
         <rect width="700" height="340" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Lotus Effect in Engineering</text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Copy the dual-scale bumps \u2192 any surface can become self-cleaning</text>
+        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Copy the dual-scale bumps → any surface can become self-cleaning</text>
 
         {/* Lotus to arrow */}
-        <text x="350" y="90" textAnchor="middle" fontSize="28">\uD83C\uDF38</text>
-        <text x="350" y="115" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-gray-700 dark:fill-slate-200">Nature\u2019s design</text>
+        <text x="350" y="90" textAnchor="middle" fontSize="28">🌸</text>
+        <text x="350" y="115" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-gray-700 dark:fill-slate-200">Nature’s design</text>
 
         {/* Arrow down */}
         <line x1="350" y1="125" x2="350" y2="150" stroke="#22c55e" strokeWidth="2" markerEnd="url(#downG)" />
@@ -37,7 +37,7 @@ export default function LotusEngineeringDiagram() {
 
         {/* Bottom note */}
         <text x="350" y="310" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">All these coatings use the same trick: micro-bumps + hydrophobic nano-layer</text>
-        <text x="350" y="326" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Water contacts &lt;3% of the surface \u2192 it cannot stick \u2192 it rolls off carrying dirt</text>
+        <text x="350" y="326" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Water contacts &lt;3% of the surface → it cannot stick → it rolls off carrying dirt</text>
       </svg>
     </div>
   );

@@ -1,7 +1,7 @@
 export default function BanyanCarbonFluxDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 428" className="w-full max-w-lg mx-auto" role="img" aria-label="Carbon flux diagram showing GPP, autotrophic respiration, NPP, heterotrophic respiration, and NEP">
+      <svg viewBox="0 0 560 428" className="w-full max-w-2xl mx-auto" role="img" aria-label="Carbon flux diagram showing GPP, autotrophic respiration, NPP, heterotrophic respiration, and NEP">
         <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

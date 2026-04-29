@@ -112,7 +112,7 @@ export default function ElephantBoundaryDiagram() {
   return (
     <svg
       viewBox="0 0 630 350"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Decision boundaries: k=1 produces a jagged overfitting boundary while k=15 produces a smooth generalizing boundary"
     >

@@ -1,7 +1,7 @@
 export default function PandaCamouflageDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 580 420" className="w-full max-w-xl mx-auto" role="img" aria-label="Three types of animal camouflage: crypsis, disruptive coloration, and mimicry">
+      <svg viewBox="0 0 603 420" className="w-full max-w-xl mx-auto" role="img" aria-label="Three types of animal camouflage: crypsis, disruptive coloration, and mimicry">
         <rect width="580" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

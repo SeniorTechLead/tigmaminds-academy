@@ -10,7 +10,7 @@ export default function StructuralColorDiagram() {
         </defs>
         <rect width="720" height="420" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="360" y="32" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Why Kingfisher Blue Is Not Pigment</text>
-        <text x="360" y="50" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Grind the feather \u2192 brown powder. The blue comes from structure, not chemistry.</text>
+        <text x="360" y="50" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Grind the feather → brown powder. The blue comes from structure, not chemistry.</text>
 
         {/* LEFT: Pigment color */}
         <rect x="40" y="70" width="300" height="300" rx="8" className="fill-red-50 dark:fill-red-900/10" stroke="#ef4444" strokeWidth="1" />
@@ -33,7 +33,7 @@ export default function StructuralColorDiagram() {
         <text x="190" y="260" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">Fades over time as</text>
         <text x="190" y="275" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">molecules break down</text>
 
-        <text x="190" y="310" textAnchor="middle" fontSize="24">\u23F3</text>
+        <text x="190" y="310" textAnchor="middle" fontSize="24">⏳</text>
         <text x="190" y="345" textAnchor="middle" fontSize="11" fontWeight="600" fill="#ef4444">Color fades</text>
 
         {/* RIGHT: Structural color */}
@@ -56,7 +56,7 @@ export default function StructuralColorDiagram() {
         <text x="530" y="250" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">Blue wavelengths add up</text>
         <text x="530" y="265" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-300">(constructive interference)</text>
 
-        <text x="530" y="310" textAnchor="middle" fontSize="24">\u267E\uFE0F</text>
+        <text x="530" y="310" textAnchor="middle" fontSize="24">♾️</text>
         <text x="530" y="345" textAnchor="middle" fontSize="11" fontWeight="600" fill="#3b82f6">Never fades</text>
 
         {/* Arrow markers */}
@@ -67,7 +67,7 @@ export default function StructuralColorDiagram() {
         </defs>
 
         {/* Bottom note */}
-        <text x="360" y="400" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Museum kingfisher specimens remain brilliant blue after centuries \u2014 proof that structure outlasts chemistry</text>
+        <text x="360" y="400" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Museum kingfisher specimens remain brilliant blue after centuries — proof that structure outlasts chemistry</text>
       </svg>
     </div>
   );

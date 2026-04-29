@@ -1,6 +1,6 @@
 export default function StarAirmasssDiagram() {
   return (
-    <svg viewBox="0 0 635 337" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Airmass diagram showing how starlight passes through more atmosphere at lower elevations">
+    <svg viewBox="0 0 635 337" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Airmass diagram showing how starlight passes through more atmosphere at lower elevations">
       <rect width="520" height="300" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Airmass: How Much Atmosphere?</text>

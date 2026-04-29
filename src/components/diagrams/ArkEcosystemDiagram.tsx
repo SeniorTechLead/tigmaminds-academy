@@ -7,7 +7,7 @@ export default function ArkEcosystemDiagram() {
     { label: 'Temperature', icon: '🌡', x: 330, y: 260, color: '#a78bfa', detail: 'Animal body heat' },
   ];
   return (
-    <svg viewBox="0 0 500 320" className="w-full max-w-lg mx-auto">
+    <svg viewBox="0 0 518 320" className="w-full max-w-2xl mx-auto">
       <text x="250" y="25" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">Closed Ecosystem: The Ark vs. the ISS</text>
 
       {/* Central ark icon */}

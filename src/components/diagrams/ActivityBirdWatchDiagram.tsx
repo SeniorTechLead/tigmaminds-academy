@@ -1,7 +1,7 @@
 export default function ActivityBirdWatchDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 360" className="w-full max-w-lg mx-auto" role="img" aria-label="Bird-watching observation sheet: a table for recording bird species, location, behavior, and time">
+      <svg viewBox="0 0 520 360" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bird-watching observation sheet: a table for recording bird species, location, behavior, and time">
         <rect width="520" height="360" rx="12" className="fill-slate-900" />
         <text x="260" y="26" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#fbbf24">Bird-Watching Observation Sheet</text>
         <text x="260" y="42" textAnchor="middle" fontSize="10" className="fill-slate-400">Sit quietly for 30 minutes. Record every bird you see or hear.</text>

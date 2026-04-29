@@ -1,7 +1,7 @@
 export default function BeeHiveTempDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 400" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee hive thermoregulation diagram maintaining temperature at 35 degrees Celsius">
+      <svg viewBox="0 0 560 400" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee hive thermoregulation diagram maintaining temperature at 35 degrees Celsius">
         <rect width="560" height="400" rx="12" className="fill-slate-900" />
 
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Hive Thermoregulation</text>

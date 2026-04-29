@@ -26,7 +26,7 @@ export default function ElephantFeaturesDiagram() {
   return (
     <svg
       viewBox="0 0 640 324"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Feature engineering: extracting 4 informative numbers from a raw audio signal of 110,250 samples"
     >

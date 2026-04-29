@@ -47,7 +47,7 @@ export default function ActivitySpoonTestDiagram() {
           </g>
         ))}
 
-        <text x="350" y="410" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Same water temperature, different handle temperatures \u2014 that\u2019s thermal conductivity in action</text>
+        <text x="350" y="410" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Same water temperature, different handle temperatures — that’s thermal conductivity in action</text>
       </svg>
     </div>
   );

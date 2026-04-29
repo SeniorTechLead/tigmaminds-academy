@@ -53,7 +53,7 @@ export default function RaceSpeedDiagram() {
   );
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Position versus time graph comparing a hare that sprints and rests against a tortoise that moves at constant speed">
         <rect width={w} height={h} rx={10} className="fill-white dark:fill-slate-900" />
 

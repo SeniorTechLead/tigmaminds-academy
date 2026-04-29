@@ -125,7 +125,7 @@ export default function DigestiveSystemDiagram() {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
         aria-label="Animated digestive tract — food traveling from mouth to exit, nutrients absorbed in small intestine">
 
         {/* Mouth */}

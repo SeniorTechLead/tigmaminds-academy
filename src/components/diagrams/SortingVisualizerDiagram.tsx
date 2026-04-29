@@ -147,7 +147,7 @@ export default function SortingVisualizerDiagram() {
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <div className="flex items-center gap-2 mb-2 flex-wrap">
         <button onClick={advance} disabled={allDone || playing} className="px-2 py-0.5 text-xs rounded font-medium bg-blue-600 text-white disabled:opacity-40 hover:bg-blue-700 transition-colors">Step</button>
         <button onClick={() => setPlaying(!playing)} disabled={allDone} className="px-2 py-0.5 text-xs rounded font-medium bg-amber-500 text-white disabled:opacity-40 hover:bg-amber-600 transition-colors">{playing ? 'Pause' : 'Play'}</button>

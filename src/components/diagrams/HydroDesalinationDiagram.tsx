@@ -1,7 +1,7 @@
 export default function HydroDesalinationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 400" className="w-full max-w-xl mx-auto" role="img" aria-label="Animated reverse osmosis desalination showing water forced through semipermeable membrane while salt is rejected">
+      <svg viewBox="0 0 604 400" className="w-full max-w-xl mx-auto" role="img" aria-label="Animated reverse osmosis desalination showing water forced through semipermeable membrane while salt is rejected">
         <defs>
           <style>{`
             @keyframes ro-waterPass {

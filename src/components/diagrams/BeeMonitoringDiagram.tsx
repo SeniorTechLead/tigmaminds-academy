@@ -1,7 +1,7 @@
 export default function BeeMonitoringDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee hive monitoring diagram with weight, temperature, and sound sensors feeding a health dashboard">
+      <svg viewBox="0 0 570 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee hive monitoring diagram with weight, temperature, and sound sensors feeding a health dashboard">
         <rect width="570" height="440" rx="12" className="fill-slate-900" />
 
         <text x="285" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Smart Hive Monitoring</text>

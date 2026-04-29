@@ -36,7 +36,7 @@ export default function DictCounterDiagram() {
   };
 
   return (
-    <svg viewBox={`0 0 ${totalW} 180`} className="w-full max-w-md mx-auto" role="img" aria-label="Dictionary counter building step by step">
+    <svg viewBox={`0 0 ${totalW} 180`} className="w-full max-w-xl mx-auto" role="img" aria-label="Dictionary counter building step by step">
       {/* Title */}
       <text x={totalW / 2} y="16" textAnchor="middle" className="fill-gray-800 dark:fill-gray-200" fontSize="12" fontWeight="700">
         Dictionary: Counting Characters

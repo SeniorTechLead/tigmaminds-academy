@@ -46,7 +46,7 @@ export default function BanyanClimateResponseDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 590 450" className="w-full max-w-lg mx-auto" role="img" aria-label="Climate reconstruction from tree rings showing ring width correlations with temperature and rainfall">
+      <svg viewBox="0 0 590 450" className="w-full max-w-2xl mx-auto" role="img" aria-label="Climate reconstruction from tree rings showing ring width correlations with temperature and rainfall">
         <rect width="500" height="420" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

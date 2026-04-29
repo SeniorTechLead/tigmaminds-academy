@@ -111,7 +111,7 @@ export default function ElephantPulseDiagram() {
   return (
     <svg
       viewBox="0 0 685 368"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Three elephant moods showing amplitude modulation: calm with slow pulse, nervous with fast pulse, danger with frantic pulse"
     >

@@ -38,7 +38,7 @@ export default function CircuitDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="LED circuit diagram">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="LED circuit diagram">
         {/* Circuit path */}
         <rect x={left} y={top} width={right - left} height={bottom - top}
           fill="none" stroke="currentColor" className="text-gray-400 dark:text-gray-500" strokeWidth="2" rx="8" />

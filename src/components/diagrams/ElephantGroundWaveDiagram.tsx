@@ -25,7 +25,7 @@ export default function ElephantGroundWaveDiagram() {
   return (
     <svg
       viewBox="0 0 675 482"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Diagram showing how elephant calls travel through the ground as seismic waves up to 10 kilometres"
     >

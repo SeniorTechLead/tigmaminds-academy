@@ -1,7 +1,7 @@
 export default function LoktakDamImpactDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 430" className="w-full max-w-lg mx-auto" role="img" aria-label="Before and after the Ithai Barrage showing impact on phumdi thickness and water level">
+      <svg viewBox="0 0 578 430" className="w-full max-w-2xl mx-auto" role="img" aria-label="Before and after the Ithai Barrage showing impact on phumdi thickness and water level">
         <rect width="560" height="430" rx="12" className="fill-slate-900" />
 
         {/* Title */}

@@ -36,7 +36,7 @@ export default function EnergyBalanceDiagram() {
   const ry = pivotY + beamLen * Math.sin(rad) * -1;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <div className="flex items-center justify-center gap-2 mb-2">
         <label className="text-xs font-medium text-slate-600 dark:text-slate-300">Activity:</label>
         <input

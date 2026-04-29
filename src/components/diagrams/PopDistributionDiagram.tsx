@@ -1,6 +1,6 @@
 export default function PopDistributionDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 520 360" className="w-full h-auto" role="img"
         aria-label="World map showing population density hotspots">
         <rect width="520" height="360" rx="8" className="fill-slate-950 dark:fill-slate-950 stroke-slate-700" strokeWidth="1" />

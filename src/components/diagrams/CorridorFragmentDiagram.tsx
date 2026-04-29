@@ -25,7 +25,7 @@ export default function CorridorFragmentDiagram() {
         <text x="200" y="200" fontSize="14">{'\ud83d\udc18'}</text>
         <text x="260" y="190" fontSize="12">{'\ud83d\udc18'}</text>
         <path d="M 110 205 C 150 195 180 198 210 195 C 230 192 250 190 270 185" fill="none" stroke="#065f46" strokeWidth="1.5" strokeDasharray="4 3" />
-        <text x="175" y="228" textAnchor="middle" fontSize="10" className="fill-emerald-700 dark:fill-emerald-300">Continuous forest \u2014 free movement</text>
+        <text x="175" y="228" textAnchor="middle" fontSize="10" className="fill-emerald-700 dark:fill-emerald-300">Continuous forest — free movement</text>
 
         {/* After: fragmented */}
         <text x="525" y="62" textAnchor="middle" fontSize="12" fontWeight="600" className="fill-gray-700 dark:fill-slate-300">After</text>
@@ -54,9 +54,9 @@ export default function CorridorFragmentDiagram() {
 
         {/* Blocked arrow */}
         <line x1="470" y1="135" x2="550" y2="155" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="4 4" />
-        <text x="510" y="128" textAnchor="middle" fontSize="14" className="fill-red-500 dark:fill-red-400">\u2717</text>
+        <text x="510" y="128" textAnchor="middle" fontSize="14" className="fill-red-500 dark:fill-red-400">✗</text>
 
-        <text x="525" y="228" textAnchor="middle" fontSize="10" className="fill-red-600 dark:fill-red-400">Isolated patches \u2014 movement blocked</text>
+        <text x="525" y="228" textAnchor="middle" fontSize="10" className="fill-red-600 dark:fill-red-400">Isolated patches — movement blocked</text>
 
         {/* Consequences */}
         <text x="350" y="270" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-red-600 dark:fill-red-400">
@@ -87,7 +87,7 @@ export default function CorridorFragmentDiagram() {
           A strip of habitat (even 50 m wide) connecting patches restores movement.
         </text>
         <text x="350" y="438" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          India has identified 101 elephant corridors \u2014 some barely a few hundred metres wide.
+          India has identified 101 elephant corridors — some barely a few hundred metres wide.
         </text>
         <text x="350" y="456" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-green-600 dark:fill-green-400">
           Lose one corridor = permanently isolate two populations.

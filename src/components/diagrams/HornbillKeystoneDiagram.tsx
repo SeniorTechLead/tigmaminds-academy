@@ -1,7 +1,7 @@
 export default function HornbillKeystoneDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing hornbill as keystone species connecting seed dispersal, forest structure, and biodiversity">
+      <svg viewBox="0 0 520 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing hornbill as keystone species connecting seed dispersal, forest structure, and biodiversity">
         <rect width="520" height="440" rx="12" className="fill-slate-900" />
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Keystone Species: Remove One, Lose Many</text>
 

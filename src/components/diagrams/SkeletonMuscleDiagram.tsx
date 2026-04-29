@@ -81,7 +81,7 @@ export default function SkeletonMuscleDiagram() {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
         aria-label="Animated arm flexion showing bicep contracting while tricep relaxes">
 
         {/* Shoulder joint */}

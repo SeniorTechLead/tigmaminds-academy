@@ -16,7 +16,7 @@ export default function TaxonomyHierarchyDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 525 342" className="w-full max-w-lg mx-auto" role="img" aria-label="Taxonomy hierarchy from Domain to Species using tiger classification as example">
+      <svg viewBox="0 0 525 342" className="w-full max-w-2xl mx-auto" role="img" aria-label="Taxonomy hierarchy from Domain to Species using tiger classification as example">
         {levels.map((level, i) => {
           const w = maxW - (i / (totalLevels - 1)) * (maxW - minW);
           const x = baseX - w / 2;

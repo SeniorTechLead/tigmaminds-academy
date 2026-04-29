@@ -2,7 +2,7 @@ export default function PitchFrequencyDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
       <svg
-        viewBox="0 0 780 440"
+        viewBox="0 0 875 440"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -48,7 +48,7 @@ export default function PitchFrequencyDiagram() {
         {/* Frequency ratio annotation */}
         <rect x="150" y="320" width="480" height="50" rx="8" className="fill-fuchsia-50 dark:fill-fuchsia-950" stroke="#d946ef" strokeWidth="1.5" />
         <text x="390" y="340" textAnchor="middle" fontSize="12" fontWeight="700" className="fill-fuchsia-700 dark:fill-fuchsia-300">
-          523 Hz \u00f7 261 Hz = 2:1 ratio = one octave
+          523 Hz ÷ 261 Hz = 2:1 ratio = one octave
         </text>
         <text x="390" y="360" textAnchor="middle" fontSize="11" className="fill-fuchsia-600 dark:fill-fuchsia-400">
           The wave on top fits exactly 2 cycles into the same time as 1 cycle below
@@ -59,7 +59,7 @@ export default function PitchFrequencyDiagram() {
           Key musical ratios:
         </text>
         <text x="390" y="420" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          Octave = 2:1 \u00a0\u00a0|\u00a0\u00a0 Fifth = 3:2 \u00a0\u00a0|\u00a0\u00a0 Fourth = 4:3 \u00a0\u00a0|\u00a0\u00a0 These simple ratios sound most harmonious
+          Octave = 2:1   |   Fifth = 3:2   |   Fourth = 4:3   |   These simple ratios sound most harmonious
         </text>
       </svg>
     </div>

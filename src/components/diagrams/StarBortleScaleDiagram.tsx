@@ -15,7 +15,7 @@ export default function StarBortleScaleDiagram() {
   const startX = 32;
 
   return (
-    <svg viewBox="0 0 560 348" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Bortle scale from 1 (pristine dark sky) to 9 (inner city, only 20 stars visible)">
+    <svg viewBox="0 0 560 348" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Bortle scale from 1 (pristine dark sky) to 9 (inner city, only 20 stars visible)">
       <rect width="520" height="300" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Bortle Dark-Sky Scale</text>

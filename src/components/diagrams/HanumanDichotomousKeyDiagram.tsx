@@ -1,7 +1,7 @@
 export default function HanumanDichotomousKeyDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 360" className="w-full max-w-lg mx-auto" role="img" aria-label="Dichotomous key for identifying Himalayan medicinal plants">
+      <svg viewBox="0 0 560 360" className="w-full max-w-2xl mx-auto" role="img" aria-label="Dichotomous key for identifying Himalayan medicinal plants">
         {/* Title */}
         <text x="280" y="20" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="13" fontWeight="bold">
           Dichotomous Key: Himalayan Medicinal Plants

@@ -65,7 +65,7 @@ export default function MemorylessDiagram() {
   const pWait5 = Math.exp(-LAMBDA * 5);
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <div className="flex gap-2 mb-2 justify-center">
         <button
           onClick={() => { setBusPos({ a: 0, b: 0 }); setAnimating(true); }}

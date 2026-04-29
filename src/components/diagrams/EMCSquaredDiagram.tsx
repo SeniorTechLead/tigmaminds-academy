@@ -1,7 +1,7 @@
 export default function EMCSquaredDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 525 298" className="w-full max-w-lg mx-auto" role="img" aria-label="E equals mc squared diagram">
+      <svg viewBox="0 0 525 298" className="w-full max-w-2xl mx-auto" role="img" aria-label="E equals mc squared diagram">
         {/* Title */}
         <text x="225" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="16" fontWeight="bold">
           E = mc²

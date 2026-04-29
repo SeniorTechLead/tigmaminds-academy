@@ -1,6 +1,6 @@
 export default function StarInverseSquareDiagram() {
   return (
-    <svg viewBox="0 0 546 315" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Inverse square law showing light spreading over larger area with distance">
+    <svg viewBox="0 0 546 315" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Inverse square law showing light spreading over larger area with distance">
       <rect width="520" height="280" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Inverse Square Law of Light</text>

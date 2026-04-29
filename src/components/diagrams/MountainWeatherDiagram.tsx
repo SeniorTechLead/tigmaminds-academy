@@ -5,7 +5,7 @@ export default function MountainWeatherDiagram() {
   const mtnPoly = "40,340 120,280 200,180 260,100 300,80 340,110 380,170 440,260 500,320 560,340";
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 630 437"
         className="w-full"

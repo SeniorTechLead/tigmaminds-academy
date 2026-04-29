@@ -1,7 +1,7 @@
 export default function BodhiGraftingDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Grafting and tissue culture techniques for plant cloning">
+      <svg viewBox="0 0 570 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Grafting and tissue culture techniques for plant cloning">
         <rect width="570" height="420" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="285" y="28" textAnchor="middle" className="fill-teal-400" fontSize="14" fontWeight="bold">Grafting & Tissue Culture</text>
 

@@ -39,7 +39,7 @@ export default function PoissonDistDiagram() {
   const barW = plotW / MAX_K - 2;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Lambda selector */}
       <div className="flex justify-center gap-2 mb-2 flex-wrap">
         <span className="text-sm font-medium text-gray-600 dark:text-gray-300 self-center">λ =</span>
@@ -58,7 +58,7 @@ export default function PoissonDistDiagram() {
         ))}
       </div>
 
-      <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-md mx-auto" role="img" aria-label={`Poisson distribution bar chart with lambda ${lambda}`}>
+      <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-xl mx-auto" role="img" aria-label={`Poisson distribution bar chart with lambda ${lambda}`}>
         <rect width={svgW} height={svgH} className="fill-white dark:fill-slate-950" rx="8" />
         <text x={svgW / 2} y={20} textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">
           The Poisson Distribution

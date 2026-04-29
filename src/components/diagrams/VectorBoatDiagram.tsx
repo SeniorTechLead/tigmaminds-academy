@@ -76,7 +76,7 @@ export default function VectorBoatDiagram() {
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
-        className="w-full max-w-lg mx-auto select-none touch-none"
+        className="w-full max-w-2xl mx-auto select-none touch-none"
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}

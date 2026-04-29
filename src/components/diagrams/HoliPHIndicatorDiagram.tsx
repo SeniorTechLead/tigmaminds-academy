@@ -50,13 +50,13 @@ export default function HoliPHIndicatorDiagram() {
           Why Does Turmeric Change Color?
         </text>
         <text x="350" y="240" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          Curcumin's molecular structure CHANGES when it gains or loses a hydrogen ion (H\u207a).
+          Curcumin's molecular structure CHANGES when it gains or loses a hydrogen ion (H⁺).
         </text>
         <text x="350" y="258" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
           Different structure = absorbs different wavelengths = different color.
         </text>
         <text x="350" y="276" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          In base: curcumin loses H\u207a \u2192 extended conjugation \u2192 absorbs green \u2192 reflects RED.
+          In base: curcumin loses H⁺ → extended conjugation → absorbs green → reflects RED.
         </text>
 
         {/* Red cabbage full pH scale */}
@@ -86,14 +86,14 @@ export default function HoliPHIndicatorDiagram() {
           );
         })}
 
-        <text x="170" y="410" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">\u2190 Acidic</text>
+        <text x="170" y="410" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">← Acidic</text>
         <text x="350" y="410" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Neutral</text>
-        <text x="530" y="410" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-green-600 dark:fill-green-400">Basic \u2192</text>
+        <text x="530" y="410" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-green-600 dark:fill-green-400">Basic →</text>
 
         {/* Bottom insight */}
         <rect x="60" y="430" width="580" height="40" rx="8" className="fill-pink-50 dark:fill-pink-950/30 stroke-pink-200 dark:stroke-pink-800" strokeWidth="1" />
         <text x="350" y="448" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-pink-700 dark:fill-pink-300">
-          Anthocyanins in red cabbage have 8 color states \u2014 one of nature's best pH indicators
+          Anthocyanins in red cabbage have 8 color states — one of nature's best pH indicators
         </text>
         <text x="350" y="464" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
           Same chemistry as tea polyphenols changing color with oxidation

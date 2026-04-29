@@ -192,7 +192,7 @@ export default function PhotosynthesisDiagram() {
         </div>
       </div>
 
-      <svg viewBox="0 0 520 400" className="w-full max-w-xl mx-auto" role="img" aria-label="Animated photosynthesis — watch water, CO₂, and light become sugar and oxygen inside a leaf">
+      <svg viewBox="0 0 520 440" className="w-full max-w-xl mx-auto" role="img" aria-label="Animated photosynthesis — watch water, CO₂, and light become sugar and oxygen inside a leaf">
 
         {/* ── Sky background gradient ── */}
         <defs>

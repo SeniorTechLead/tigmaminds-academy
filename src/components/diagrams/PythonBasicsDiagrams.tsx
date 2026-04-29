@@ -40,7 +40,7 @@ export function PrintDiagram() {
   const reset = () => { setStep(0); setTyping(''); setOutputs([]); };
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>Python Terminal</span>
         <button onClick={reset} className="text-[10px] text-gray-500 hover:text-gray-900 dark:hover:text-white">Replay</button>
@@ -116,7 +116,7 @@ export function VariableDiagram() {
   const newest = steps[step].vars.length - 1;
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>Memory — Labeled Boxes</span>
         <div className="flex gap-1">
@@ -167,7 +167,7 @@ export function ListDiagram() {
   const allItems = showAppend ? [...items, 'deer'] : items;
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>animals = ["elephant", "tiger", "rhino"]</span>
         <button onClick={() => { setShowAppend(!showAppend); setHighlight(null); }}
@@ -222,7 +222,7 @@ export function LoopDiagram() {
   }, []);
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>for animal in animals:</span>
         <button onClick={run} disabled={running}
@@ -285,7 +285,7 @@ export function ConditionalDiagram() {
   const activeBranch = branches.find(b => b.active)!;
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>if / elif / else</span>
         <div className="flex items-center gap-2">
@@ -347,7 +347,7 @@ export function FunctionDiagram() {
   };
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>Function Call</span>
         <span className="text-[10px] text-gray-400 dark:text-gray-600 font-mono">def greet(name):</span>
@@ -430,7 +430,7 @@ export function NumpyDiagram() {
   };
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>{mode === 'loop' ? 'Loop (one at a time)' : 'Numpy (all at once)'}</span>
         <div className="flex gap-2">

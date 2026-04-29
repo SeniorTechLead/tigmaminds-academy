@@ -3,8 +3,8 @@ export default function SurfaceTensionWalkDiagram() {
     <div className="w-full max-w-xl mx-auto my-4">
       <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Surface tension: water molecules pull on each other to create an elastic-like surface film">
         <rect width="700" height="380" rx="10" className="fill-white dark:fill-slate-950" />
-        <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Surface Tension: Water\u2019s Invisible Skin</text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Water molecules pull on their neighbours \u2014 at the surface, this creates an elastic film</text>
+        <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Surface Tension: Water’s Invisible Skin</text>
+        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Water molecules pull on their neighbours — at the surface, this creates an elastic film</text>
 
         {/* Water body */}
         <rect x="100" y="180" width="500" height="120" rx="4" fill="#3b82f6" opacity="0.08" />
@@ -13,25 +13,25 @@ export default function SurfaceTensionWalkDiagram() {
 
         {/* Interior molecule \u2014 pulled in all directions */}
         <circle cx="350" cy="260" r="10" fill="#3b82f6" opacity="0.3" stroke="#3b82f6" strokeWidth="1.5" />
-        <text x="350" y="264" textAnchor="middle" fontSize="8" fontWeight="700" className="fill-gray-800 dark:fill-white">H\u2082O</text>
+        <text x="350" y="264" textAnchor="middle" fontSize="8" fontWeight="700" className="fill-gray-800 dark:fill-white">H₂O</text>
         {/* Arrows all directions */}
         {[0, 45, 90, 135, 180, 225, 270, 315].map(a => {
           const r = 22;
           const rad = (a * Math.PI) / 180;
           return <line key={a} x1={350} y1={260} x2={350 + r * Math.cos(rad)} y2={260 + r * Math.sin(rad)} stroke="#60a5fa" strokeWidth="1" markerEnd="url(#tinyBlue)" />;
         })}
-        <text x="350" y="300" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Interior: pulled equally in all directions \u2192 balanced</text>
+        <text x="350" y="300" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Interior: pulled equally in all directions → balanced</text>
 
         {/* Surface molecule \u2014 pulled sideways and down only */}
         <circle cx="200" cy="180" r="10" fill="#3b82f6" opacity="0.3" stroke="#3b82f6" strokeWidth="1.5" />
-        <text x="200" y="184" textAnchor="middle" fontSize="8" fontWeight="700" className="fill-gray-800 dark:fill-white">H\u2082O</text>
+        <text x="200" y="184" textAnchor="middle" fontSize="8" fontWeight="700" className="fill-gray-800 dark:fill-white">H₂O</text>
         {[135, 180, 225, 270].map(a => {
           const r = 22;
           const rad = (a * Math.PI) / 180;
           return <line key={a} x1={200} y1={180} x2={200 + r * Math.cos(rad)} y2={180 + r * Math.sin(rad)} stroke="#60a5fa" strokeWidth="1.5" markerEnd="url(#tinyBlue)" />;
         })}
         <text x="200" y="148" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Surface: only pulled sideways</text>
-        <text x="200" y="161" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">and down \u2192 surface tension!</text>
+        <text x="200" y="161" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">and down → surface tension!</text>
 
         <defs><marker id="tinyBlue" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#60a5fa" /></marker></defs>
 
@@ -51,7 +51,7 @@ export default function SurfaceTensionWalkDiagram() {
 
         {/* Facts box */}
         <rect x="100" y="325" width="500" height="36" rx="6" className="fill-blue-50 dark:fill-blue-900/15" stroke="#3b82f6" strokeWidth="1" />
-        <text x="350" y="342" textAnchor="middle" fontSize="11" className="fill-gray-700 dark:fill-slate-200">Water\u2019s surface tension = 72.8 mN/m at 25\u00B0C \u2014 unusually high due to hydrogen bonding</text>
+        <text x="350" y="342" textAnchor="middle" fontSize="11" className="fill-gray-700 dark:fill-slate-200">Water’s surface tension = 72.8 mN/m at 25°C — unusually high due to hydrogen bonding</text>
         <text x="350" y="356" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">This helps lotus leaves trap air underneath for extra buoyancy</text>
       </svg>
     </div>

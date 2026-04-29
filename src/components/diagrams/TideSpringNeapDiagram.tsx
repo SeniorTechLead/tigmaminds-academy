@@ -1,6 +1,6 @@
 export default function TideSpringNeapDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 520 440" className="w-full h-auto" role="img"
         aria-label="Diagram comparing spring tides and neap tides based on Sun-Moon-Earth alignment">
         <rect width="520" height="440" rx="8" className="fill-slate-950 dark:fill-slate-950 stroke-slate-700" strokeWidth="1" />

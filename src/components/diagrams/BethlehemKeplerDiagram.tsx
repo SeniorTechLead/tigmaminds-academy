@@ -31,7 +31,7 @@ export default function BethlehemKeplerDiagram() {
   const planetAngles = [0, 0.6, 1.2, 1.8, 2.4, 3.0, 3.6, 4.2, 4.8, 5.4];
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 400 250" className="w-full" role="img" aria-label="Kepler’s laws: elliptical orbits with the Sun at one focus">
         <rect width="400" height="250" className="fill-white dark:fill-slate-950" rx="8" />
 

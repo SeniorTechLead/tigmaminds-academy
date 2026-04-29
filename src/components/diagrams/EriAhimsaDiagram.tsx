@@ -1,6 +1,6 @@
 export default function EriAhimsaDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 620 400"
         xmlns="http://www.w3.org/2000/svg"
@@ -83,13 +83,13 @@ export default function EriAhimsaDiagram() {
         <rect x="40" y="295" width="230" height="85" rx="6" fill="#fef2f2" stroke="#ef4444" strokeWidth="1" className="dark:fill-red-900/10 dark:stroke-red-800" />
         <text x="155" y="315" textAnchor="middle" className="small fill-red-600 dark:fill-red-400" fontWeight="600">Result: Smooth, lustrous silk</text>
         <text x="155" y="332" textAnchor="middle" className="small fill-red-500 dark:fill-red-400">Cost: ~5,000 lives per kg</text>
-        <text x="155" y="349" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Decomposes at ~250\u00B0C</text>
+        <text x="155" y="349" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Decomposes at ~250°C</text>
         <text x="155" y="366" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Cool to touch (smooth fibers)</text>
 
         <rect x="330" y="295" width="250" height="85" rx="6" fill="#ecfdf5" stroke="#10b981" strokeWidth="1" className="dark:fill-emerald-900/10 dark:stroke-emerald-800" />
         <text x="455" y="315" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">Result: Warm, textured silk</text>
         <text x="455" y="332" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-400">Cost: Zero lives</text>
-        <text x="455" y="349" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Stable to ~300\u00B0C</text>
+        <text x="455" y="349" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Stable to ~300°C</text>
         <text x="455" y="366" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Warm (trapped air pockets)</text>
       </svg>
     </div>

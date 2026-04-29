@@ -1,7 +1,7 @@
 export default function ActivityErosionModelDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 580 380" className="w-full max-w-lg mx-auto" role="img" aria-label="Step-by-step instructions for building a mini river erosion model using a tray, sand, and water">
+      <svg viewBox="0 0 580 380" className="w-full max-w-2xl mx-auto" role="img" aria-label="Step-by-step instructions for building a mini river erosion model using a tray, sand, and water">
         <rect width="580" height="380" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

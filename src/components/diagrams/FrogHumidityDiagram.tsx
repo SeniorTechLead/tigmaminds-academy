@@ -23,7 +23,7 @@ export default function FrogHumidityDiagram() {
 
         {/* Frog calling */}
         <circle cx="80" cy="220" r="20" className="fill-emerald-200 dark:fill-emerald-800" stroke="#065f46" strokeWidth="1.5" />
-        <text x="80" y="224" textAnchor="middle" fontSize="10" fontWeight="700" className="fill-emerald-800 dark:fill-emerald-200">\ud83d\udc38</text>
+        <text x="80" y="224" textAnchor="middle" fontSize="10" fontWeight="700" className="fill-emerald-800 dark:fill-emerald-200">🐸</text>
 
         {/* Sound waves - fading quickly */}
         {[1, 2, 3, 4].map((i) => (
@@ -35,7 +35,7 @@ export default function FrogHumidityDiagram() {
         {/* Absorption markers */}
         {[140, 190, 230].map((x, i) => (
           <g key={`abs${i}`}>
-            <text x={x} y="180" textAnchor="middle" fontSize="16" className="fill-red-400 dark:fill-red-500">\u00d7</text>
+            <text x={x} y="180" textAnchor="middle" fontSize="16" className="fill-red-400 dark:fill-red-500">×</text>
           </g>
         ))}
 
@@ -56,7 +56,7 @@ export default function FrogHumidityDiagram() {
 
         {/* Frog calling */}
         <circle cx="390" cy="220" r="20" className="fill-emerald-200 dark:fill-emerald-800" stroke="#065f46" strokeWidth="1.5" />
-        <text x="390" y="224" textAnchor="middle" fontSize="10" fontWeight="700" className="fill-emerald-800 dark:fill-emerald-200">\ud83d\udc38</text>
+        <text x="390" y="224" textAnchor="middle" fontSize="10" fontWeight="700" className="fill-emerald-800 dark:fill-emerald-200">🐸</text>
 
         {/* Sound waves - travelling far */}
         {[1, 2, 3, 4, 5].map((i) => (
@@ -68,7 +68,7 @@ export default function FrogHumidityDiagram() {
         {/* Water droplet icons */}
         {[430, 470, 510, 550, 590].map((x, i) => (
           <text key={`drop${i}`} x={x} y="170" textAnchor="middle" fontSize="10" className="fill-cyan-400 dark:fill-cyan-500" opacity="0.5">
-            \ud83d\udca7
+            💧
           </text>
         ))}
 
@@ -85,10 +85,10 @@ export default function FrogHumidityDiagram() {
         {/* Bottom insight */}
         <rect x="60" y="390" width="580" height="56" rx="8" className="fill-cyan-50 dark:fill-cyan-950/30 stroke-cyan-200 dark:stroke-cyan-800" strokeWidth="1" />
         <text x="350" y="412" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-cyan-700 dark:fill-cyan-300">
-          After rain, humidity spikes above 80% \u2192 sound travels 2\u20133\u00d7 further
+          After rain, humidity spikes above 80% → sound travels 2–3× further
         </text>
         <text x="350" y="430" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          Frogs call when conditions maximize their range \u2014 not to predict rain, but to exploit it
+          Frogs call when conditions maximize their range — not to predict rain, but to exploit it
         </text>
       </svg>
     </div>

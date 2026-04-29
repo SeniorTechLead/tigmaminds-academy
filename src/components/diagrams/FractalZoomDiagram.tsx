@@ -42,7 +42,7 @@ export default function FractalZoomDiagram() {
     Math.max(base * Math.pow(0.55, d), 0.8);
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 670 400"
         xmlns="http://www.w3.org/2000/svg"

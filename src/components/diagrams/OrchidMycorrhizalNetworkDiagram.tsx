@@ -2,7 +2,7 @@ export default function OrchidMycorrhizalNetworkDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
       <svg
-        viewBox="0 0 780 520"
+        viewBox="0 0 836 520"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"

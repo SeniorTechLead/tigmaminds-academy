@@ -1,6 +1,6 @@
 export default function BabelSkyscraperDiagram() {
   return (
-    <svg viewBox="0 0 520 380" className="w-full max-w-lg mx-auto">
+    <svg viewBox="0 0 520 380" className="w-full max-w-2xl mx-auto">
       <text x="260" y="22" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="bold">Modern Skyscraper Anatomy</text>
 
       {/* Ground line */}

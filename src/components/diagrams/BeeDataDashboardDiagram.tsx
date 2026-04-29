@@ -10,7 +10,7 @@ export default function BeeDataDashboardDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 460" className="w-full max-w-lg mx-auto" role="img" aria-label="Apiary management dashboard showing colony health, honey yield, and weather data">
+      <svg viewBox="0 0 560 460" className="w-full max-w-2xl mx-auto" role="img" aria-label="Apiary management dashboard showing colony health, honey yield, and weather data">
         <rect width="560" height="460" rx="12" className="fill-slate-900" />
 
         <text x="280" y="24" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#fbbf24">Apiary Management Dashboard</text>

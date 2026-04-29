@@ -1,8 +1,8 @@
 export default function BellSoundWaveDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
-        viewBox="0 0 560 340"
+        viewBox="0 0 577 340"
         className="w-full h-auto"
         role="img"
         aria-label="Diagram showing how a bell creates sound waves through vibration"

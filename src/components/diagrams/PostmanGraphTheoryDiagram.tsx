@@ -51,7 +51,7 @@ export default function PostmanGraphTheoryDiagram() {
         </g>
 
         {/* Arrow between */}
-        <text x="330" y="215" textAnchor="middle" fontSize="22" className="fill-gray-400 dark:fill-gray-600">\u2192</text>
+        <text x="330" y="215" textAnchor="middle" fontSize="22" className="fill-gray-400 dark:fill-gray-600">→</text>
         <text x="330" y="235" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Abstract</text>
 
         {/* Right: graph representation */}

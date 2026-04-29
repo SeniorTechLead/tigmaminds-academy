@@ -8,7 +8,7 @@ export default function PitcherSpeciesDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 480" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram showing Nepenthes species diversity with focus on Nepenthes khasiana of Meghalaya">
+      <svg viewBox="0 0 560 480" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram showing Nepenthes species diversity with focus on Nepenthes khasiana of Meghalaya">
         <rect width="560" height="480" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#86efac">Nepenthes of Meghalaya and Beyond</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Pitcher plant species diversity — Meghalaya hosts India’s only native Nepenthes</text>

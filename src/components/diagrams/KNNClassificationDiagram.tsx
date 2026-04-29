@@ -63,7 +63,7 @@ export default function KNNClassificationDiagram() {
   const axisRight = 470;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-6">
+    <div className="w-full max-w-2xl mx-auto my-6">
       <svg
         viewBox="0 0 525 441"
         className="w-full"

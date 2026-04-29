@@ -43,7 +43,7 @@ export default function PeacockHonestSignalDiagram() {
           '150+ eyespots',
         ].map((text, i) => (
           <g key={i}>
-            <text x="70" y={286 + i * 18} fontSize="10" className="fill-emerald-600 dark:fill-emerald-400">\u2713</text>
+            <text x="70" y={286 + i * 18} fontSize="10" className="fill-emerald-600 dark:fill-emerald-400">✓</text>
             <text x="85" y={286 + i * 18} fontSize="10" className="fill-gray-600 dark:fill-slate-400">{text}</text>
           </g>
         ))}
@@ -74,7 +74,7 @@ export default function PeacockHonestSignalDiagram() {
           'Fewer eyespots, duller colors',
         ].map((text, i) => (
           <g key={i}>
-            <text x="395" y={286 + i * 18} fontSize="10" className="fill-red-500 dark:fill-red-400">\u2717</text>
+            <text x="395" y={286 + i * 18} fontSize="10" className="fill-red-500 dark:fill-red-400">✗</text>
             <text x="410" y={286 + i * 18} fontSize="10" className="fill-gray-600 dark:fill-slate-400">{text}</text>
           </g>
         ))}
@@ -88,7 +88,7 @@ export default function PeacockHonestSignalDiagram() {
           "I am so fit that I can survive DESPITE this ridiculous tail."
         </text>
         <text x="350" y="442" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          The signal is honest BECAUSE it is costly \u2014 a weak male cannot fake it.
+          The signal is honest BECAUSE it is costly — a weak male cannot fake it.
         </text>
       </svg>
     </div>

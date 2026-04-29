@@ -13,7 +13,7 @@ export default function ChurningMassSpecDiagram() {
   const hToY = (h: number) => chartY + chartH - (h / 100) * chartH;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 500 260" className="w-full h-auto" role="img" aria-label="Mass spectrum showing peaks at different mass-to-charge ratios identifying compounds in a mixture">
         <style>{`
           .ms-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }

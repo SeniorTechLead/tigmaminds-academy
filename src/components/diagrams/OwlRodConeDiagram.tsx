@@ -14,7 +14,7 @@ export default function OwlRodConeDiagram() {
           Rod Cells vs Cone Cells
         </text>
         <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          Two types of photoreceptors in your retina \u2014 owls have extreme rod density
+          Two types of photoreceptors in your retina — owls have extreme rod density
         </text>
 
         {/* Rod cell */}
@@ -47,7 +47,7 @@ export default function OwlRodConeDiagram() {
           </g>
 
           <text x="120" y="294" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-indigo-600 dark:fill-indigo-400">
-            Owl: \u223c1,000,000 rods/mm\u00b2
+            Owl: ∼1,000,000 rods/mm²
           </text>
         </g>
 
@@ -85,14 +85,14 @@ export default function OwlRodConeDiagram() {
           </g>
 
           <text x="120" y="294" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-amber-600 dark:fill-amber-400">
-            Human: \u223c150,000 rods/mm\u00b2
+            Human: ∼150,000 rods/mm²
           </text>
         </g>
 
         {/* Bottom comparison */}
         <rect x="50" y="390" width="600" height="24" rx="6" className="fill-indigo-50 dark:fill-indigo-950/30" stroke="#6366f1" strokeWidth="1" />
         <text x="350" y="407" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-indigo-800 dark:fill-indigo-200">
-          Owl eyes: 5% of body weight (vs 0.0003% in humans) \u2014 giant eyes = more rods = better night vision
+          Owl eyes: 5% of body weight (vs 0.0003% in humans) — giant eyes = more rods = better night vision
         </text>
       </svg>
     </div>

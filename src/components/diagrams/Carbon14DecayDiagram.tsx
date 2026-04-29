@@ -15,14 +15,14 @@ export default function Carbon14DecayDiagram() {
       <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Carbon-14 decay curve showing how remaining C-14 halves every 5,730 years">
         <rect width="660" height="380" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="330" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Carbon-14 Decay Curve</text>
-        <text x="330" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Half-life = 5,730 years \u2014 every half-life, half the \u00B9\u2074C is gone</text>
+        <text x="330" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Half-life = 5,730 years — every half-life, half the ¹⁴C is gone</text>
 
         {/* Axes */}
         <line x1="80" y1="300" x2="600" y2="300" strokeWidth="1.5" className="stroke-gray-400 dark:stroke-slate-500" />
         <line x1="80" y1="70" x2="80" y2="300" strokeWidth="1.5" className="stroke-gray-400 dark:stroke-slate-500" />
 
         {/* Y-axis label */}
-        <text x="30" y="190" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-600 dark:fill-slate-300" transform="rotate(-90, 30, 190)">\u00B9\u2074C remaining (%)</text>
+        <text x="30" y="190" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-600 dark:fill-slate-300" transform="rotate(-90, 30, 190)">¹⁴C remaining (%)</text>
         {/* X-axis label */}
         <text x="340" y="340" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-gray-600 dark:fill-slate-300">Years before present</text>
 
@@ -42,7 +42,7 @@ export default function Carbon14DecayDiagram() {
             <line x1={p.x} y1="298" x2={p.x} y2="304" strokeWidth="1" className="stroke-gray-400 dark:stroke-slate-500" />
             {/* Half-life bracket */}
             {i < points.length - 1 && (
-              <text x={(p.x + points[i + 1].x) / 2} y="356" textAnchor="middle" fontSize="10" fill="#f59e0b">\u00BD</text>
+              <text x={(p.x + points[i + 1].x) / 2} y="356" textAnchor="middle" fontSize="10" fill="#f59e0b">½</text>
             )}
           </g>
         ))}

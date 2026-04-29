@@ -10,8 +10,8 @@ export default function ZamzamPorosityDiagram() {
   ];
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 400 260" className="w-full" role="img" aria-label="Porosity vs permeability comparison for gravel, sandstone, and clay">
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 419 260" className="w-full" role="img" aria-label="Porosity vs permeability comparison for gravel, sandstone, and clay">
         <rect width="400" height="260" className="fill-white dark:fill-slate-950" rx="8" />
         <text x="200" y="22" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">Porosity vs Permeability</text>
         <text x="200" y="38" textAnchor="middle" className="fill-gray-500 dark:fill-slate-400" fontSize="10">Pore space (porosity) does NOT always mean water flows easily (permeability)</text>

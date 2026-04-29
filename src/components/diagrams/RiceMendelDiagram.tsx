@@ -1,6 +1,6 @@
 export default function RiceMendelDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Punnett square showing Mendelian genetics of tall versus dwarf rice varieties in the Green Revolution">
         <style>{`
@@ -25,7 +25,7 @@ export default function RiceMendelDiagram() {
           <text x="120" y="155" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">120 cm</text>
         </g>
 
-        <text x="220" y="118" textAnchor="middle" className="label fill-slate-500 dark:fill-slate-400">\u00D7</text>
+        <text x="220" y="118" textAnchor="middle" className="label fill-slate-500 dark:fill-slate-400">×</text>
 
         <g>
           <text x="320" y="78" textAnchor="middle" className="small fill-amber-700 dark:fill-amber-400" fontWeight="600">Dwarf Parent (tt)</text>
@@ -36,7 +36,7 @@ export default function RiceMendelDiagram() {
         </g>
 
         {/* Punnett Square */}
-        <text x="490" y="78" textAnchor="middle" className="label fill-slate-700 dark:fill-slate-300" fontWeight="600">Punnett Square (F1 \u00D7 F1)</text>
+        <text x="490" y="78" textAnchor="middle" className="label fill-slate-700 dark:fill-slate-300" fontWeight="600">Punnett Square (F1 × F1)</text>
 
         {/* Grid */}
         <rect x="430" y="88" width="55" height="28" rx="2" fill="#86efac" opacity="0.3" stroke="#16a34a" strokeWidth="1" />
@@ -66,7 +66,7 @@ export default function RiceMendelDiagram() {
 
         {/* Green Revolution section */}
         <rect x="30" y="250" width="560" height="130" rx="6" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" className="dark:fill-slate-800 dark:stroke-slate-700" />
-        <text x="310" y="272" textAnchor="middle" className="label fill-green-700 dark:fill-green-300" fontWeight="600">The Green Revolution (1960s\u20131970s)</text>
+        <text x="310" y="272" textAnchor="middle" className="label fill-green-700 dark:fill-green-300" fontWeight="600">The Green Revolution (1960s–1970s)</text>
 
         {/* Before and After */}
         <rect x="50" y="285" width="240" height="80" rx="4" fill="#fef2f2" stroke="#fca5a5" strokeWidth="1" className="dark:fill-red-900/10 dark:stroke-red-800" />
@@ -77,7 +77,7 @@ export default function RiceMendelDiagram() {
 
         <rect x="330" y="285" width="240" height="80" rx="4" fill="#ecfdf5" stroke="#6ee7b7" strokeWidth="1" className="dark:fill-emerald-900/10 dark:stroke-emerald-800" />
         <text x="450" y="302" textAnchor="middle" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">After: HYV semi-dwarf rice</text>
-        <text x="450" y="318" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Yield: 2\u20134 tonnes/hectare</text>
+        <text x="450" y="318" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Yield: 2–4 tonnes/hectare</text>
         <text x="450" y="333" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Short stems resist lodging</text>
         <text x="450" y="348" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Needs fertilizer, pesticides, water</text>
 

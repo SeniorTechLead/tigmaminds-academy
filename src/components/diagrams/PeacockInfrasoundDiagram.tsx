@@ -27,7 +27,7 @@ export default function PeacockInfrasoundDiagram() {
         {/* Human hearing region */}
         <rect x="180" y="78" width="320" height="44" rx="4" fill="#3b82f6" opacity="0.15" />
         <text x="340" y="96" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-blue-700 dark:fill-blue-300">Human Hearing Range</text>
-        <text x="340" y="112" textAnchor="middle" fontSize="10" className="fill-blue-600 dark:fill-blue-400">20 Hz \u2013 20,000 Hz</text>
+        <text x="340" y="112" textAnchor="middle" fontSize="10" className="fill-blue-600 dark:fill-blue-400">20 Hz – 20,000 Hz</text>
 
         {/* Ultrasound region */}
         <rect x="500" y="78" width="140" height="44" rx="4" fill="#06b6d4" opacity="0.15" />
@@ -60,7 +60,7 @@ export default function PeacockInfrasoundDiagram() {
           <circle key={i} cx="200" cy="240" r={r} fill="none" stroke="#8b5cf6" strokeWidth="1" opacity={0.5 - i * 0.12} strokeDasharray="4 4" />
         ))}
         <text x="200" y="340" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-purple-600 dark:fill-purple-400">
-          Tail vibrates \u2192 infrasound waves
+          Tail vibrates → infrasound waves
         </text>
 
         {/* Peahen receiving */}
@@ -99,7 +99,7 @@ export default function PeacockInfrasoundDiagram() {
           We see the display. Peahens also FEEL it.
         </text>
         <text x="350" y="438" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          The tail is a visual AND acoustic signal \u2014 a dual-channel communication system
+          The tail is a visual AND acoustic signal — a dual-channel communication system
         </text>
       </svg>
     </div>

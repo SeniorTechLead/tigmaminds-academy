@@ -85,7 +85,7 @@ export default function ZScoreDiagram() {
   }, []);
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Dataset buttons */}
       <div className="flex flex-wrap justify-center gap-2 mb-2">
         {DATASETS.map((d, i) => (
@@ -96,7 +96,7 @@ export default function ZScoreDiagram() {
         ))}
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto cursor-pointer" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto cursor-pointer" role="img"
         aria-label="Z-score interactive bell curve diagram" onClick={handleSvgClick}>
         <rect width={W} height={H} className="fill-white dark:fill-gray-900" rx="8" />
         <text x={W / 2} y={20} textAnchor="middle" fontSize="12" fontWeight="700" className="fill-gray-700 dark:fill-gray-200">

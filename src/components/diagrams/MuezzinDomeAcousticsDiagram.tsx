@@ -17,8 +17,8 @@ export default function MuezzinDomeAcousticsDiagram() {
   ];
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 400 280" className="w-full" role="img" aria-label="Dome acoustics: sound reflects off curved surfaces to focus at a point">
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 428 280" className="w-full" role="img" aria-label="Dome acoustics: sound reflects off curved surfaces to focus at a point">
         <rect width="400" height="280" className="fill-white dark:fill-slate-950" rx="8" />
         <text x="200" y="22" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">Dome Acoustics: How Mosques Amplify Sound</text>
 

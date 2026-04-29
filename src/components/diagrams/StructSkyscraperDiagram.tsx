@@ -1,6 +1,6 @@
 export default function StructSkyscraperDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 520 440" className="w-full h-auto" role="img"
         aria-label="Diagram of a skyscraper showing wind load, tuned mass damper, and foundation systems">
         <defs>

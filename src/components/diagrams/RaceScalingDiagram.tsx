@@ -18,7 +18,7 @@ export default function RaceScalingDiagram() {
   const barW = barRight - barLeft;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Bar chart comparing how many body lengths per second different animals move, showing that small animals are faster relative to their size">
         <rect width={w} height={h} rx={10} className="fill-white dark:fill-slate-900" />
 

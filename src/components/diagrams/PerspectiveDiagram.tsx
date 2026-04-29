@@ -26,7 +26,7 @@ export default function PerspectiveDiagram() {
 
   return (
     <svg
-      viewBox="0 0 580 370"
+      viewBox="0 0 610 370"
       className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="Perspective diagram showing a road with fence posts converging to a vanishing point, with figures getting smaller as they recede"

@@ -4,7 +4,7 @@ export default function ActivityFishObserveDiagram() {
   return (
     <svg
       viewBox="0 0 592 340"
-      className="w-full max-w-lg mx-auto my-6"
+      className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="Activity: observe fish jumping behaviour at a local water body, recording frequency, conditions, and analysing patterns"
     >

@@ -1,7 +1,7 @@
 export default function ActivityCuttingDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 340" className="w-full max-w-lg mx-auto" role="img" aria-label="Step-by-step guide to growing a plant from a cutting">
+      <svg viewBox="0 0 570 340" className="w-full max-w-2xl mx-auto" role="img" aria-label="Step-by-step guide to growing a plant from a cutting">
         <rect width="570" height="340" rx="12" className="fill-white dark:fill-slate-900" />
         <text x="285" y="28" textAnchor="middle" className="fill-green-400" fontSize="14" fontWeight="bold">Grow Your Own Clone: Plant Cutting Activity</text>
 

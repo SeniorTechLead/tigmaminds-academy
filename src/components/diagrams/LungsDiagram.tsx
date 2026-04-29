@@ -82,7 +82,7 @@ export default function LungsDiagram() {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-2xl mx-auto" role="img"
         aria-label="Animated respiration — diaphragm contracts, lungs expand, oxygen diffuses into blood">
 
         <text x={W / 2} y={20} textAnchor="middle"

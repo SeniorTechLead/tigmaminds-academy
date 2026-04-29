@@ -316,7 +316,7 @@ export default function ElephantRumblePlayerDiagram() {
   const h = controlsY + 68;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <div className="bg-slate-900 rounded-xl p-4">
         <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
           Elephant Rumble Player

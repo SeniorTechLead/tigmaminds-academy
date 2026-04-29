@@ -17,7 +17,7 @@ export default function MountainBodyAdaptDiagram() {
   milestones.forEach(m => { m.x = dayToX(m.day); });
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 630 388"
         className="w-full"

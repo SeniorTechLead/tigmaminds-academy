@@ -1,6 +1,6 @@
 export default function ActivityEchoTimeDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 280" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Offline activity to measure echo time and calculate the speed of sound using a wall">
         <style>{`
@@ -41,9 +41,9 @@ export default function ActivityEchoTimeDiagram() {
         <rect x="30" y="160" width="560" height="110" rx="6" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" className="dark:fill-slate-800 dark:stroke-slate-700" />
         <text x="50" y="180" className="label fill-slate-700 dark:fill-slate-300" fontWeight="600">Method:</text>
         <text x="50" y="198" className="small fill-slate-600 dark:fill-slate-400">1. Stand 50 m from a large flat wall (school building works well)</text>
-        <text x="50" y="214" className="small fill-slate-600 dark:fill-slate-400">2. Clap sharply. Adjust your timing to clap in sync with the echo (clap\u2014echo\u2014clap\u2014echo)</text>
+        <text x="50" y="214" className="small fill-slate-600 dark:fill-slate-400">2. Clap sharply. Adjust your timing to clap in sync with the echo (clap—echo—clap—echo)</text>
         <text x="50" y="230" className="small fill-slate-600 dark:fill-slate-400">3. Have a friend time 20 clap-echo cycles. Divide total time by 20 = time per echo</text>
-        <text x="50" y="246" className="small fill-slate-600 dark:fill-slate-400">4. Speed = (2 \u00D7 50 m) / echo time. Compare to 343 m/s!</text>
+        <text x="50" y="246" className="small fill-slate-600 dark:fill-slate-400">4. Speed = (2 × 50 m) / echo time. Compare to 343 m/s!</text>
         <text x="50" y="264" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">Timing 20 cycles and dividing reduces error — this is how real scientists improve accuracy</text>
       </svg>
     </div>

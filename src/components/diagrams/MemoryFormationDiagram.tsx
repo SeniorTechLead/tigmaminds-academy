@@ -84,7 +84,7 @@ export default function MemoryFormationDiagram() {
             Long-term Memory
           </text>
           <text x="0" y="14" textAnchor="middle" fontSize="11" className="fill-purple-600 dark:fill-purple-400">
-            (neocortex \u2014 permanent storage)
+            (neocortex — permanent storage)
           </text>
           <text x="0" y="52" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
             can last a lifetime

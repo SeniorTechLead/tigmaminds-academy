@@ -18,7 +18,7 @@ export default function FishBiomechanicsDiagram() {
   return (
     <svg
       viewBox="0 0 592 380"
-      className="w-full max-w-lg mx-auto my-6"
+      className="w-full max-w-2xl mx-auto my-6"
       role="img"
       aria-label="Physics of a fish jump showing C-start muscle contraction, launch angle, and projectile trajectory"
     >

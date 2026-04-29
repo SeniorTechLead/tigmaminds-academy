@@ -13,7 +13,7 @@ export default function ChurningTitrationDiagram() {
   const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${toX(p[0])} ${toY(p[1])}`).join(' ');
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 480 260" className="w-full h-auto" role="img" aria-label="Acid-base titration curve showing pH change as base is added, with sharp jump at equivalence point">
         <style>{`
           .tt-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }

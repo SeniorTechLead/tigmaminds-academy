@@ -5,7 +5,7 @@ export default function StarBlackbodyDiagram() {
   const curve10000 = 'M60,190 Q80,150 100,95 Q120,62 145,52 Q170,48 200,58 Q240,78 280,105 Q320,130 380,155 Q440,172 450,175';
 
   return (
-    <svg viewBox="0 0 570 328" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Blackbody radiation curves at different temperatures showing Planck's law">
+    <svg viewBox="0 0 570 328" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Blackbody radiation curves at different temperatures showing Planck's law">
       <rect width="520" height="300" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Blackbody Radiation Curves</text>

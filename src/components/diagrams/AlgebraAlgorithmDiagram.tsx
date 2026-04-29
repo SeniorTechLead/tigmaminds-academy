@@ -16,7 +16,7 @@ export default function AlgebraAlgorithmDiagram() {
   const cx = 200;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 400 390" className="w-full" role="img" aria-label="Flowchart of al-Khwarizmi's algorithm for solving equations">
         <rect width="400" height="390" className="fill-white dark:fill-slate-950" rx="8" />
         <text x="200" y="24" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">The Original Algorithm</text>

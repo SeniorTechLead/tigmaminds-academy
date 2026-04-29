@@ -41,7 +41,7 @@ export default function AltitudeAdaptationDiagram() {
   const totalH = topPad + 3 * panelH + 2 * gap + 60;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox={`0 0 580 ${totalH}`}
         className="w-full"

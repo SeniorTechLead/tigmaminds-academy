@@ -13,7 +13,7 @@ export default function ElephantTrainTestDiagram() {
   return (
     <svg
       viewBox="0 0 630 338"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Train-test split: 80% of data for training, 20% held out for testing to verify the model truly learned"
     >

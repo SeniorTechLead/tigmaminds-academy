@@ -69,7 +69,7 @@ export default function BinomialDistDiagram() {
   const seqs = hoverK !== null && n <= 5 ? sequences(n, hoverK) : [];
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Sliders */}
       <div className="flex flex-wrap justify-center gap-4 mb-2">
         <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
@@ -84,7 +84,7 @@ export default function BinomialDistDiagram() {
         </label>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
         aria-label={`Binomial distribution with n=${n} and p=${p}`}>
         <rect width={W} height={H} className="fill-white dark:fill-gray-900" rx="8" />
 

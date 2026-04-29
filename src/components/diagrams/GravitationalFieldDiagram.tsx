@@ -2,7 +2,7 @@ const GravitationalFieldDiagram = () => {
   const fieldLines = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 
   return (
-    <div className="w-full max-w-lg mx-auto">
+    <div className="w-full max-w-2xl mx-auto">
       <svg
         viewBox="0 0 480 438"
         xmlns="http://www.w3.org/2000/svg"

@@ -57,7 +57,7 @@ export default function JasminePhotoperiodDiagram() {
           Key discovery: Plants measure UNINTERRUPTED darkness, not daylight
         </text>
         <text x="350" y="306" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-gray-400">
-          A brief light flash resets the dark timer \u2014 proving the plant counts continuous night hours
+          A brief light flash resets the dark timer — proving the plant counts continuous night hours
         </text>
 
         {/* Critical night length marker */}
@@ -70,8 +70,8 @@ export default function JasminePhotoperiodDiagram() {
           <rect x="360" y="40" width="200" height="12" rx="6" fill="#22c55e" opacity="0.3" />
           <line x1="360" y1="35" x2="360" y2="58" stroke="#6366f1" strokeWidth="2" />
           <text x="360" y="72" textAnchor="middle" fontSize="10" fontWeight="700" className="fill-indigo-700 dark:fill-indigo-300">Critical threshold</text>
-          <text x="200" y="72" textAnchor="middle" fontSize="10" className="fill-red-600 dark:fill-red-400">Night too short \u2192 no bloom</text>
-          <text x="470" y="72" textAnchor="middle" fontSize="10" className="fill-emerald-600 dark:fill-emerald-400">Night long enough \u2192 bloom</text>
+          <text x="200" y="72" textAnchor="middle" fontSize="10" className="fill-red-600 dark:fill-red-400">Night too short → no bloom</text>
+          <text x="470" y="72" textAnchor="middle" fontSize="10" className="fill-emerald-600 dark:fill-emerald-400">Night long enough → bloom</text>
         </g>
       </svg>
     </div>

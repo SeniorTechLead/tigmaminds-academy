@@ -42,7 +42,7 @@ export default function HalfLifeDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 472 315" className="w-full max-w-lg mx-auto" role="img" aria-label="Half-life exponential decay curve">
+      <svg viewBox="0 0 472 315" className="w-full max-w-2xl mx-auto" role="img" aria-label="Half-life exponential decay curve">
         {/* Title */}
         <text x="250" y="25" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="14" fontWeight="bold">
           Radioactive Decay (Half-Life)

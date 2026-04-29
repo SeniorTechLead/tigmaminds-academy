@@ -1,6 +1,6 @@
 export default function ActivityRiceSproutDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img"
         aria-label="Offline activity showing how to sprout rice seeds in wet cotton to observe germination">
         <style>{`
@@ -65,7 +65,7 @@ export default function ActivityRiceSproutDiagram() {
               <path d={`M ${x} ${86} Q ${x + 5} ${80} ${x + 8} ${82}`} fill="none" stroke="#16a34a" strokeWidth="1" />
             </g>
           ))}
-          <text x="370" y="148" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Seedlings 3\u20135 cm tall</text>
+          <text x="370" y="148" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Seedlings 3–5 cm tall</text>
           <text x="370" y="160" textAnchor="middle" className="small fill-slate-600 dark:fill-slate-400">Measure and record!</text>
         </g>
 

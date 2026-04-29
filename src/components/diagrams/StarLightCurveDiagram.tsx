@@ -11,7 +11,7 @@ export default function StarLightCurveDiagram() {
   const plotY = (v: number) => 220 - v * 1.4;
 
   return (
-    <svg viewBox="0 0 567 338" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Light curve showing brightness changes over time revealing eclipsing binary stars">
+    <svg viewBox="0 0 567 338" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Light curve showing brightness changes over time revealing eclipsing binary stars">
       <rect width="520" height="300" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Light Curves</text>

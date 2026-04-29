@@ -63,13 +63,13 @@ export default function GrassNDVIDiagram() {
         {/* Formula box */}
         <rect x="100" y="330" width="500" height="75" rx="8" className="fill-blue-50 dark:fill-blue-950/30" stroke="#3b82f6" strokeWidth="1.5" />
         <text x="350" y="352" textAnchor="middle" fontSize="13" fontWeight="700" className="fill-blue-700 dark:fill-blue-300">
-          NDVI = (NIR \u2212 Red) / (NIR + Red)
+          NDVI = (NIR − Red) / (NIR + Red)
         </text>
         <text x="200" y="376" textAnchor="middle" fontSize="11" className="fill-emerald-600 dark:fill-emerald-400">
-          Healthy grass: NDVI \u2248 0.6\u20130.8
+          Healthy grass: NDVI ≈ 0.6–0.8
         </text>
         <text x="500" y="376" textAnchor="middle" fontSize="11" className="fill-amber-600 dark:fill-amber-400">
-          Burnt ground: NDVI \u2248 0.0\u20130.1
+          Burnt ground: NDVI ≈ 0.0–0.1
         </text>
         <text x="350" y="396" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
           Recovery tracked weekly: NDVI rises as shoots emerge from roots

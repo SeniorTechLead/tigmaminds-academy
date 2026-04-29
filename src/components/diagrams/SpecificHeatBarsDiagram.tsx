@@ -11,10 +11,10 @@ export default function SpecificHeatBarsDiagram() {
 
   return (
     <div className="w-full max-w-xl mx-auto my-4">
-      <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Specific heat capacity comparison showing water stores the most heat energy per kilogram">
+      <svg viewBox="0 0 742 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Specific heat capacity comparison showing water stores the most heat energy per kilogram">
         <rect width="700" height="380" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Specific Heat Capacity</text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Energy needed to raise 1 kg by 1\u00B0C (J/kg\u00B7K) \u2014 higher = stores more heat</text>
+        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Energy needed to raise 1 kg by 1°C (J/kg·K) — higher = stores more heat</text>
 
         {data.map((d, i) => {
           const barW = (d.cp / 4186) * maxBar;
@@ -32,7 +32,7 @@ export default function SpecificHeatBarsDiagram() {
 
         {/* Key insight */}
         <rect x="100" y="330" width="500" height="30" rx="6" className="fill-blue-50 dark:fill-blue-900/15" stroke="#3b82f6" strokeWidth="1" />
-        <text x="350" y="350" textAnchor="middle" fontSize="11" className="fill-gray-700 dark:fill-slate-200">Charcoal at 500\u00B0C stores far less energy per cm\u00B3 than iron at the same temperature \u2014 your foot cools it quickly</text>
+        <text x="350" y="350" textAnchor="middle" fontSize="11" className="fill-gray-700 dark:fill-slate-200">Charcoal at 500°C stores far less energy per cm³ than iron at the same temperature — your foot cools it quickly</text>
       </svg>
     </div>
   );

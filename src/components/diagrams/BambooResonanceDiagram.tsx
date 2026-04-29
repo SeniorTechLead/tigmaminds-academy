@@ -2,7 +2,7 @@ export default function BambooResonanceDiagram() {
   const barHeight = (val: number, max: number) => (val / max) * 200;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 600 440"
         xmlns="http://www.w3.org/2000/svg"

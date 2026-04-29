@@ -14,7 +14,7 @@ export default function TurtleMountainCollisionDiagram() {
           Continental Collision: How Mountains Form
         </text>
         <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          India crashed into Eurasia \u223c50 million years ago and is still pushing today
+          India crashed into Eurasia ∼50 million years ago and is still pushing today
         </text>
 
         {/* Before collision */}
@@ -35,7 +35,7 @@ export default function TurtleMountainCollisionDiagram() {
           <rect x="190" y="55" width="80" height="50" rx="4" fill="#6b7280" opacity="0.3" stroke="#6b7280" strokeWidth="1" />
           <text x="230" y="83" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-gray-700 dark:fill-gray-300">Eurasia</text>
 
-          <text x="140" y="130" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">India moving north at \u223c15 cm/year</text>
+          <text x="140" y="130" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">India moving north at ∼15 cm/year</text>
         </g>
 
         {/* After collision */}
@@ -63,7 +63,7 @@ export default function TurtleMountainCollisionDiagram() {
 
           {/* Himalayas label */}
           <text x="140" y="28" textAnchor="middle" fontSize="11" fontWeight="700" className="fill-amber-800 dark:fill-amber-200">Himalayas</text>
-          <text x="140" y="130" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Still growing \u223c5 mm/year!</text>
+          <text x="140" y="130" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Still growing ∼5 mm/year!</text>
         </g>
 
         {/* Boundary types */}
@@ -77,7 +77,7 @@ export default function TurtleMountainCollisionDiagram() {
             <line x1="40" y1="60" x2="80" y2="60" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arr-mt-r)" />
             <line x1="150" y1="60" x2="110" y2="60" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arr-mt-r)" />
             <text x="95" y="85" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Plates push together</text>
-            <text x="95" y="100" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">\u2192 Mountains, volcanoes</text>
+            <text x="95" y="100" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">→ Mountains, volcanoes</text>
             <text x="95" y="115" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Himalayas, Andes</text>
           </g>
 
@@ -88,7 +88,7 @@ export default function TurtleMountainCollisionDiagram() {
             <line x1="80" y1="60" x2="40" y2="60" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arr-mt-bl)" />
             <line x1="110" y1="60" x2="150" y2="60" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arr-mt-bl)" />
             <text x="95" y="85" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Plates pull apart</text>
-            <text x="95" y="100" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-blue-600 dark:fill-blue-400">\u2192 Rift valleys, new ocean floor</text>
+            <text x="95" y="100" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-blue-600 dark:fill-blue-400">→ Rift valleys, new ocean floor</text>
             <text x="95" y="115" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">Mid-Atlantic Ridge</text>
           </g>
 
@@ -99,7 +99,7 @@ export default function TurtleMountainCollisionDiagram() {
             <line x1="40" y1="55" x2="95" y2="55" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arr-mt-y)" />
             <line x1="150" y1="65" x2="95" y2="65" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arr-mt-y2)" />
             <text x="95" y="85" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-gray-400">Plates slide past</text>
-            <text x="95" y="100" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-amber-600 dark:fill-amber-400">\u2192 Earthquakes</text>
+            <text x="95" y="100" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-amber-600 dark:fill-amber-400">→ Earthquakes</text>
             <text x="95" y="115" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">San Andreas Fault</text>
           </g>
         </g>

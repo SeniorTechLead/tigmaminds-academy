@@ -147,7 +147,7 @@ export default function LimitDiagram() {
       </svg>
 
       {/* Slider */}
-      <div className="max-w-md mx-auto mt-2">
+      <div className="max-w-xl mx-auto mt-2">
         <label className="text-xs text-gray-600 dark:text-gray-400 flex justify-between mb-1">
           <span>Drag x toward 1 (from either side)</span>
         </label>

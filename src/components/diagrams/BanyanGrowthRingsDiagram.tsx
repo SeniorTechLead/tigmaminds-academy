@@ -14,7 +14,7 @@ export default function BanyanGrowthRingsDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 557 455" className="w-full max-w-lg mx-auto" role="img" aria-label="Tree trunk cross-section showing growth rings that reveal age and climate history">
+      <svg viewBox="0 0 557 455" className="w-full max-w-2xl mx-auto" role="img" aria-label="Tree trunk cross-section showing growth rings that reveal age and climate history">
         <rect width="500" height="420" rx="12" className="fill-slate-900" />
 
         {/* Title */}

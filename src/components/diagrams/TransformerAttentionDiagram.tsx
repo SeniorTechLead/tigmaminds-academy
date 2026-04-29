@@ -385,7 +385,7 @@ export default function TransformerAttentionDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Tab buttons */}
       <div className="flex gap-1 mb-2">
         {([

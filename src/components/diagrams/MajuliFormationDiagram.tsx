@@ -1,7 +1,7 @@
 export default function MajuliFormationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 580 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Three-stage diagram showing how Majuli island formed through river avulsion">
+      <svg viewBox="0 0 580 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Three-stage diagram showing how Majuli island formed through river avulsion">
         <defs>
           <linearGradient id="majFwater" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#1e40af" />

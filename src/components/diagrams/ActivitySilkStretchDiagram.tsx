@@ -1,8 +1,8 @@
 export default function ActivitySilkStretchDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
-        viewBox="0 0 620 320"
+        viewBox="0 0 664 320"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -66,7 +66,7 @@ export default function ActivitySilkStretchDiagram() {
         {/* Instructions box */}
         <rect x="40" y="220" width="540" height="85" rx="6" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" className="dark:fill-slate-800 dark:stroke-slate-700" />
         <text x="60" y="242" className="label fill-slate-700 dark:fill-slate-300" fontWeight="600">How to do this:</text>
-        <text x="60" y="260" className="small fill-slate-600 dark:fill-slate-400">1. Cut equal-sized strips (10 cm \u00D7 2 cm) from cotton, silk (or any smooth fabric), and synthetic fabric</text>
+        <text x="60" y="260" className="small fill-slate-600 dark:fill-slate-400">1. Cut equal-sized strips (10 cm × 2 cm) from cotton, silk (or any smooth fabric), and synthetic fabric</text>
         <text x="60" y="275" className="small fill-slate-600 dark:fill-slate-400">2. Mark the original length. Gently pull each strip and measure how far it stretches</text>
         <text x="60" y="290" className="small fill-slate-600 dark:fill-slate-400">3. Release and measure again — did it return to its original length? That is elastic recovery</text>
         <text x="60" y="305" className="small fill-emerald-600 dark:fill-emerald-400" fontWeight="600">Silk has moderate stretch and good recovery — this comes from its mix of crystalline and amorphous regions</text>

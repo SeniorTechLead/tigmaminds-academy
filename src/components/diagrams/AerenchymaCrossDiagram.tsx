@@ -19,7 +19,7 @@ export default function AerenchymaCrossDiagram() {
       <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Cross-section of a lotus stem showing aerenchyma air channels that provide buoyancy and oxygen transport">
         <rect width="700" height="420" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Aerenchyma: Air Highways in Lotus Stems</text>
-        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Cross-section of a lotus petiole \u2014 up to 70% is air</text>
+        <text x="350" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Cross-section of a lotus petiole — up to 70% is air</text>
 
         {/* Outer stem wall */}
         <circle cx="350" cy="200" r="100" fill="#22c55e" opacity="0.15" stroke="#16a34a" strokeWidth="2" />
@@ -38,8 +38,8 @@ export default function AerenchymaCrossDiagram() {
         <g>
           <line x1="180" y1="140" x2="258" y2="175" stroke="#3b82f6" strokeWidth="1.5" markerEnd="url(#o2arr)" />
           <defs><marker id="o2arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#3b82f6" /></marker></defs>
-          <text x="130" y="130" fontSize="11" fontWeight="600" fill="#3b82f6">O\u2082 from air</text>
-          <text x="130" y="145" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u2193 down to roots</text>
+          <text x="130" y="130" fontSize="11" fontWeight="600" fill="#3b82f6">O₂ from air</text>
+          <text x="130" y="145" fontSize="10" className="fill-gray-500 dark:fill-slate-400">↓ down to roots</text>
         </g>
 
         {/* Right: buoyancy */}
@@ -59,9 +59,9 @@ export default function AerenchymaCrossDiagram() {
         <rect x="360" y="320" width="240" height="70" rx="8" className="fill-amber-50 dark:fill-amber-900/10" stroke="#f59e0b" strokeWidth="1" />
         <text x="480" y="342" textAnchor="middle" fontSize="12" fontWeight="600" fill="#f59e0b">Function 2: Buoyancy</text>
         <text x="480" y="360" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">Air channels make stems lighter</text>
-        <text x="480" y="374" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">than water \u2192 leaves float up</text>
+        <text x="480" y="374" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-300">than water → leaves float up</text>
 
-        <text x="350" y="410" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Cut a lotus stem and blow through it \u2014 you can feel the air channels!</text>
+        <text x="350" y="410" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Cut a lotus stem and blow through it — you can feel the air channels!</text>
       </svg>
     </div>
   );

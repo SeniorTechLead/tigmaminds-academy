@@ -4,7 +4,7 @@ export default function MieVsRayleighDiagram() {
       <p className="text-center text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">
         Rayleigh vs Mie Scattering — Why Clouds Are White and Skies Are Blue
       </p>
-      <svg viewBox="0 0 740 340" className="w-full max-w-xl mx-auto">
+      <svg viewBox="0 0 756 340" className="w-full max-w-xl mx-auto">
         {/* === LEFT: Rayleigh === */}
         <text x="165" y="28" textAnchor="middle" fontSize="14" fontWeight="700" fill="white">Rayleigh Scattering</text>
         <text x="165" y="46" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Tiny molecules (N₂, O₂) — much smaller than light</text>

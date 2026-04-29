@@ -3,7 +3,7 @@ export default function FireflyCircuitBasicDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Basic LED circuit: battery to resistor to LED to ground with Ohm's Law">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Basic LED circuit: battery to resistor to LED to ground with Ohm's Law">
         <rect width={w} height={h} rx="12" className="fill-slate-900" />
 
         {/* Title */}

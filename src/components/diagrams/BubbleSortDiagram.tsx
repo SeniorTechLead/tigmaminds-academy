@@ -61,7 +61,7 @@ export default function BubbleSortDiagram() {
   const totalW = startX + arr.length * (boxW + gap) + 30;
 
   return (
-    <svg viewBox={`0 0 ${totalW} 210`} className="w-full max-w-md mx-auto" role="img" aria-label="Bubble sort animation">
+    <svg viewBox={`0 0 ${totalW} 210`} className="w-full max-w-xl mx-auto" role="img" aria-label="Bubble sort animation">
       {/* Title */}
       <text x={totalW / 2} y="18" textAnchor="middle" className="fill-gray-800 dark:fill-gray-200" fontSize="13" fontWeight="700">
         Bubble Sort — Swap Adjacent Pairs

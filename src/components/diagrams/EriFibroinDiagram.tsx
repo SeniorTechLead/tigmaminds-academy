@@ -1,6 +1,6 @@
 export default function EriFibroinDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg
         viewBox="0 0 620 400"
         xmlns="http://www.w3.org/2000/svg"
@@ -76,8 +76,8 @@ export default function EriFibroinDiagram() {
         <rect x="50" y="310" width="520" height="75" rx="6" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" className="dark:fill-slate-800 dark:stroke-slate-700" />
         <text x="310" y="330" textAnchor="middle" className="label fill-slate-700 dark:fill-slate-300" fontWeight="600">Eri vs Mulberry Silk Fibroin</text>
 
-        <text x="80" y="350" className="small fill-slate-600 dark:fill-slate-400">Eri: More alanine → more crystalline → thermal stability to 300\u00B0C</text>
-        <text x="80" y="368" className="small fill-slate-600 dark:fill-slate-400">Mulberry: More glycine → less crystalline → decomposes at 250\u00B0C</text>
+        <text x="80" y="350" className="small fill-slate-600 dark:fill-slate-400">Eri: More alanine → more crystalline → thermal stability to 300°C</text>
+        <text x="80" y="368" className="small fill-slate-600 dark:fill-slate-400">Mulberry: More glycine → less crystalline → decomposes at 250°C</text>
         <text x="80" y="383" className="small fill-amber-600 dark:fill-amber-400" fontWeight="600">Eri silk is warmer because short spun fibers trap air pockets (like wool)</text>
       </svg>
     </div>

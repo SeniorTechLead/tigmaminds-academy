@@ -1,6 +1,6 @@
 export default function RotTorqueDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 520 380" className="w-full h-auto" role="img"
         aria-label="Diagram showing torque as force times lever arm using a door handle and wrench analogy">
         <defs>

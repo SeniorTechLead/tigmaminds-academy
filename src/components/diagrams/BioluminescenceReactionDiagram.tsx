@@ -33,7 +33,7 @@ export default function BioluminescenceReactionDiagram() {
       <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
         How a Firefly Makes Light
       </p>
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Bioluminescence chemical reaction diagram">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Bioluminescence chemical reaction diagram">
         <defs>
           {/* Glow filter for the photon */}
           <radialGradient id="photon-glow" cx="50%" cy="50%" r="50%">

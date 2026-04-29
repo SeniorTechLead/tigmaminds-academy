@@ -50,7 +50,7 @@ export default function StdDevStepsDiagram() {
   const sqBaseY = 150;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Step buttons */}
       <div className="flex flex-wrap gap-1 mb-2 justify-center">
         {STEP_LABELS.map(s => (

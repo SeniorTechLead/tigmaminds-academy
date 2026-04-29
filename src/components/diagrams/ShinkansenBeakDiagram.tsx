@@ -3,8 +3,8 @@ export default function ShinkansenBeakDiagram() {
     <div className="w-full max-w-xl mx-auto my-4">
       <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Biomimicry: Kingfisher beak shape inspired the Shinkansen bullet train nose design">
         <rect width="720" height="400" rx="10" className="fill-white dark:fill-slate-950" />
-        <text x="360" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Biomimicry: Beak \u2192 Bullet Train</text>
-        <text x="360" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">The kingfisher\u2019s beak shape solved a high-speed rail problem</text>
+        <text x="360" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Biomimicry: Beak → Bullet Train</text>
+        <text x="360" y="48" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">The kingfisher’s beak shape solved a high-speed rail problem</text>
 
         {/* LEFT: Kingfisher beak */}
         <text x="180" y="80" textAnchor="middle" fontSize="13" fontWeight="600" fill="#3b82f6">Kingfisher Beak</text>
@@ -50,7 +50,7 @@ export default function ShinkansenBeakDiagram() {
           'Air resistance reduced by 30%',
           'Power consumption reduced by 15%',
         ].map((t, i) => (
-          <text key={i} x="360" y={318 + i * 16} textAnchor="middle" fontSize="11" className="fill-gray-700 dark:fill-slate-200">\u2713 {t}</text>
+          <text key={i} x="360" y={318 + i * 16} textAnchor="middle" fontSize="11" className="fill-gray-700 dark:fill-slate-200">✓ {t}</text>
         ))}
 
         {/* Footer */}

@@ -1,7 +1,7 @@
 export default function BeeFlowerCoevolutionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 546 399" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee and flower coevolution diagram showing UV patterns, nectar guides, and shape matching">
+      <svg viewBox="0 0 546 399" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee and flower coevolution diagram showing UV patterns, nectar guides, and shape matching">
         <rect width="520" height="380" rx="12" className="fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Bee–Flower Coevolution</text>

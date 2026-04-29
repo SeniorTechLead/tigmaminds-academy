@@ -41,7 +41,7 @@ export default function RaceEnergyDiagram() {
   const exhaustionY = eY(15);
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Energy over time diagram showing how a hare rapidly depletes energy through anaerobic sprinting while a tortoise slowly uses energy through aerobic metabolism">
         <rect width={w} height={h} rx={10} className="fill-white dark:fill-slate-900" />
 

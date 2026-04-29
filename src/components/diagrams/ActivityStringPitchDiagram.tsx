@@ -42,7 +42,7 @@ export default function ActivityStringPitchDiagram() {
             press here
           </text>
           <text x="-75" y="-20" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-violet-600 dark:fill-violet-400">
-            1/2 length = octave (2\u00d7 frequency)
+            1/2 length = octave (2× frequency)
           </text>
         </g>
 

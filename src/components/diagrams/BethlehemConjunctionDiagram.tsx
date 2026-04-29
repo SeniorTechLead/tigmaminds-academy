@@ -25,7 +25,7 @@ export default function BethlehemConjunctionDiagram() {
   const saturnY = cy + saturnR * Math.sin(saturnAngle);
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 400 260" className="w-full" role="img" aria-label="Jupiter-Saturn conjunction as seen from Earth, candidate for the Star of Bethlehem">
         <rect width="400" height="260" className="fill-white dark:fill-slate-950" rx="8" />
 

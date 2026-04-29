@@ -35,7 +35,7 @@ export default function ElectronShellDiagram() {
   return (
     <div className="my-4">
       {/* Element selector buttons */}
-      <div className="flex flex-wrap gap-1 justify-center mb-3 max-w-lg mx-auto">
+      <div className="flex flex-wrap gap-1 justify-center mb-3 max-w-2xl mx-auto">
         {elements.map((e, i) => (
           <button
             key={e.z}
@@ -53,7 +53,7 @@ export default function ElectronShellDiagram() {
 
       <svg
         viewBox="0 0 420 426"
-        className="w-full max-w-md mx-auto"
+        className="w-full max-w-xl mx-auto"
         role="img"
         aria-label={`Electron shell diagram for ${el.name}`}
       >

@@ -31,7 +31,7 @@ export default function PandaConvergentDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 580 460" className="w-full max-w-xl mx-auto" role="img" aria-label="Convergent evolution: red panda, raccoon, and giant panda evolved similar facial masks independently">
+      <svg viewBox="0 0 600 460" className="w-full max-w-xl mx-auto" role="img" aria-label="Convergent evolution: red panda, raccoon, and giant panda evolved similar facial masks independently">
         <rect width="580" height="460" rx="12" className="fill-slate-900" />
 
         <text x="290" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#c084fc">Convergent Evolution — Three Masks, Three Families</text>

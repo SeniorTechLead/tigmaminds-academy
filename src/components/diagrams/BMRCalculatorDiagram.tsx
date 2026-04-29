@@ -41,7 +41,7 @@ export default function BMRCalculatorDiagram() {
   const tefR = tefKcal * scale;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Input controls */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3 px-1">
         <div className="flex flex-col">

@@ -50,7 +50,7 @@ export default function EnergyEfficiencyDiagram() {
         {/* Efficiency multiplier arrow */}
         <path d="M 140 80 Q 390 60 590 80" fill="none" stroke="#22c55e" strokeWidth="1.5" strokeDasharray="5 4" />
         <text x="390" y="72" textAnchor="middle" fontSize="12" fontWeight="700" className="fill-green-600 dark:fill-green-400">
-          400\u00d7 more efficient!
+          400× more efficient!
         </text>
 
         {/* Summary box */}

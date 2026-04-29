@@ -1,7 +1,7 @@
 export default function OrchidBeeVisionDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Diagram comparing human vision and bee vision of flowers, showing UV nectar guide patterns invisible to humans">
+      <svg viewBox="0 0 560 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Diagram comparing human vision and bee vision of flowers, showing UV nectar guide patterns invisible to humans">
         <rect width="560" height="420" rx="12" className="fill-slate-900" />
         <text x="280" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Flowers Talk to Insects</text>
         <text x="280" y="46" textAnchor="middle" fontSize="10" className="fill-slate-400">Bees see UV patterns invisible to human eyes — hidden nectar guides</text>

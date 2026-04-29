@@ -70,7 +70,7 @@ export default function BayesUpdatingDiagram() {
   const logTicks = [0.01, 0.1, 1, 10, 50, 90, 99, 99.9].map(pct => pct / 100);
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Buttons */}
       <div className="flex gap-2 mb-2 justify-center">
         <button

@@ -106,7 +106,7 @@ export default function ChiSquaredDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* DF selector */}
       <div className="flex justify-center gap-2 mb-2 flex-wrap">
         <span className="text-sm font-medium text-gray-600 dark:text-gray-300 self-center">df =</span>
@@ -127,7 +127,7 @@ export default function ChiSquaredDiagram() {
 
       <svg
         viewBox={`0 0 ${svgW} ${svgH}`}
-        className="w-full max-w-md mx-auto cursor-crosshair"
+        className="w-full max-w-xl mx-auto cursor-crosshair"
         role="img"
         aria-label={`Chi-squared distribution with ${df} degrees of freedom`}
         onClick={handleSvgClick}

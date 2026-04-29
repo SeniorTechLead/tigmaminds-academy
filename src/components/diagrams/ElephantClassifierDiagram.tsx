@@ -38,7 +38,7 @@ export default function ElephantClassifierDiagram() {
   return (
     <svg
       viewBox="0 0 630 336"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="Rule-based classifier pipeline: raw signal goes through FFT to find peak frequency, then decision thresholds classify as danger, calm, or nervous"
     >

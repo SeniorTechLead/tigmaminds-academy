@@ -1,7 +1,7 @@
 export default function LoktakConservationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 560 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Conservation strategy diagram for Loktak Lake showing interconnected actions">
+      <svg viewBox="0 0 560 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Conservation strategy diagram for Loktak Lake showing interconnected actions">
         <rect width="560" height="440" rx="12" className="fill-slate-900" />
 
         {/* Title */}

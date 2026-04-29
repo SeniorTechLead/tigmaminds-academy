@@ -1,7 +1,7 @@
 export default function SeedBankDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 520 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Seed bank storage: from collection to cryogenic preservation at Svalbard">
+      <svg viewBox="0 0 520 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Seed bank storage: from collection to cryogenic preservation at Svalbard">
         <rect width="520" height="440" rx="12" className="fill-white dark:fill-slate-900" />
 
         <text x="260" y="28" textAnchor="middle" className="fill-cyan-400" fontSize="14" fontWeight="bold">Inside a Seed Bank</text>

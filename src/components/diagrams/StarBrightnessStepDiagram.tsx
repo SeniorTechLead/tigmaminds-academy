@@ -9,7 +9,7 @@ export default function StarBrightnessStepDiagram() {
   ];
 
   return (
-    <svg viewBox="0 0 546 320" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Brightness staircase showing 2.5x multiplier per magnitude step">
+    <svg viewBox="0 0 546 320" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Brightness staircase showing 2.5x multiplier per magnitude step">
       <rect width="520" height="280" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Brightness Staircase</text>

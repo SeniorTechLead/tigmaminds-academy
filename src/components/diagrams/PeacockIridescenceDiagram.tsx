@@ -2,7 +2,7 @@ export default function PeacockIridescenceDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
       <svg
-        viewBox="0 0 700 500"
+        viewBox="0 0 727 500"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
         role="img"
@@ -48,7 +48,7 @@ export default function PeacockIridescenceDiagram() {
 
         {/* Angle change demo */}
         <text x="210" y="270" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          Tilt the feather \u2192 path length changes \u2192 color shifts
+          Tilt the feather → path length changes → color shifts
         </text>
 
         {/* Right panel: what it looks like */}
@@ -63,9 +63,9 @@ export default function PeacockIridescenceDiagram() {
         <circle cx="540" cy="170" r="12" fill="#1e3a5f" />
 
         {/* Angle arrows showing color change */}
-        <text x="450" y="160" fontSize="10" className="fill-blue-500 dark:fill-blue-400">\u2190 Blue at 0\u00b0</text>
-        <text x="450" y="200" fontSize="10" className="fill-emerald-500 dark:fill-emerald-400">\u2190 Green at 15\u00b0</text>
-        <text x="590" y="140" fontSize="10" className="fill-amber-500 dark:fill-amber-400">Gold at 30\u00b0 \u2192</text>
+        <text x="450" y="160" fontSize="10" className="fill-blue-500 dark:fill-blue-400">← Blue at 0°</text>
+        <text x="450" y="200" fontSize="10" className="fill-emerald-500 dark:fill-emerald-400">← Green at 15°</text>
+        <text x="590" y="140" fontSize="10" className="fill-amber-500 dark:fill-amber-400">Gold at 30° →</text>
 
         <text x="540" y="260" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
           No pigment! Grind it up and color vanishes
@@ -95,7 +95,7 @@ export default function PeacockIridescenceDiagram() {
           Structural color = nanostructure + interference. No pigment needed. Color depends on viewing angle.
         </text>
         <text x="350" y="478" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          Wavelength \u2248 2 \u00d7 film thickness \u00d7 cos(\u03b8) for constructive interference
+          Wavelength ≈ 2 × film thickness × cos(θ) for constructive interference
         </text>
       </svg>
     </div>

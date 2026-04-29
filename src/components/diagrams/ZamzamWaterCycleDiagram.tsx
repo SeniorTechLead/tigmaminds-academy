@@ -4,8 +4,8 @@
  */
 export default function ZamzamWaterCycleDiagram() {
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
-      <svg viewBox="0 0 420 300" className="w-full" role="img" aria-label="Hydrological cycle showing precipitation, infiltration, groundwater flow, and discharge">
+    <div className="w-full max-w-2xl mx-auto my-4">
+      <svg viewBox="0 0 453 300" className="w-full" role="img" aria-label="Hydrological cycle showing precipitation, infiltration, groundwater flow, and discharge">
         <rect width="420" height="300" className="fill-white dark:fill-slate-950" rx="8" />
         <text x="210" y="20" textAnchor="middle" className="fill-gray-900 dark:fill-slate-50" fontSize="13" fontWeight="bold">The Water Cycle — Above and Below Ground</text>
 

@@ -1,7 +1,7 @@
 export default function EarthLayersDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 502 445" className="w-full max-w-lg mx-auto" role="img" aria-label="Cross-section of Earth showing layers">
+      <svg viewBox="0 0 502 445" className="w-full max-w-2xl mx-auto" role="img" aria-label="Cross-section of Earth showing layers">
         {/* Inner core */}
         <circle cx="200" cy="200" r="180" className="fill-amber-800 dark:fill-amber-900" />
         {/* Outer core */}

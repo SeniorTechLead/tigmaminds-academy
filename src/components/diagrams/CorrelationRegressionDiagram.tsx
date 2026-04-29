@@ -89,7 +89,7 @@ export default function CorrelationRegressionDiagram() {
   const lineX1 = 0, lineX2 = 100;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       {/* Correlation type buttons */}
       <div className="flex flex-wrap justify-center gap-2 mb-2">
         {CORR_TYPES.map((c, i) => (
@@ -108,7 +108,7 @@ export default function CorrelationRegressionDiagram() {
         </button>
       </div>
 
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
         aria-label={`Scatter plot with ${corr.label} correlation`}>
         <rect width={W} height={H} className="fill-white dark:fill-gray-900" rx="8" />
         <text x={W / 2} y={18} textAnchor="middle" fontSize="12" fontWeight="700" className="fill-gray-700 dark:fill-gray-200">

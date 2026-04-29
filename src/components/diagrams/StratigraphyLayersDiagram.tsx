@@ -12,7 +12,7 @@ export default function StratigraphyLayersDiagram() {
       <svg viewBox="0 0 700 460" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="Stratigraphy diagram showing deeper layers are older">
         <rect width="700" height="460" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="350" y="32" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-gray-800 dark:fill-gray-100">Stratigraphy: Deeper = Older</text>
-        <text x="350" y="52" textAnchor="middle" fontSize="12" className="fill-gray-500 dark:fill-slate-400">Law of Superposition \u2014 undisturbed layers stack youngest on top</text>
+        <text x="350" y="52" textAnchor="middle" fontSize="12" className="fill-gray-500 dark:fill-slate-400">Law of Superposition — undisturbed layers stack youngest on top</text>
 
         {layers.map((l, i) => (
           <g key={i}>
@@ -35,7 +35,7 @@ export default function StratigraphyLayersDiagram() {
         <text x="620" y="62" textAnchor="middle" fontSize="12" fontWeight="700" fill="#22c55e">NEWER</text>
 
         {/* Key idea */}
-        <text x="350" y="440" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Each layer is a chapter \u2014 the deeper you dig, the further back in time you read</text>
+        <text x="350" y="440" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">Each layer is a chapter — the deeper you dig, the further back in time you read</text>
       </svg>
     </div>
   );

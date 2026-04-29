@@ -57,7 +57,7 @@ export default function ActivityBambooGrowthDiagram() {
         {/* Bottom insight */}
         <rect x="60" y="420" width="580" height="30" rx="6" className="fill-emerald-50 dark:fill-emerald-950/30 stroke-emerald-200 dark:stroke-emerald-800" strokeWidth="1" />
         <text x="350" y="440" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-emerald-700 dark:fill-emerald-300">
-          Bamboo follows the same S-curve \u2014 just 30\u00d7 faster than your bean sprout!
+          Bamboo follows the same S-curve — just 30× faster than your bean sprout!
         </text>
       </svg>
     </div>

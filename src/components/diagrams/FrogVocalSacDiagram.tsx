@@ -78,7 +78,7 @@ export default function FrogVocalSacDiagram() {
           Larger sac = lower frequency = deeper voice
         </text>
         <text x="350" y="455" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          Females assess male body size from pitch alone (100 dB \u2014 as loud as a motorcycle)
+          Females assess male body size from pitch alone (100 dB — as loud as a motorcycle)
         </text>
       </svg>
     </div>

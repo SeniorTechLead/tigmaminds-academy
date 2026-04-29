@@ -32,7 +32,7 @@ export default function BanyanGrowthModelDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 525 440" className="w-full max-w-lg mx-auto" role="img" aria-label="Sigmoid growth model showing tree diameter over time with fast growth when young and slowing with age">
+      <svg viewBox="0 0 525 440" className="w-full max-w-2xl mx-auto" role="img" aria-label="Sigmoid growth model showing tree diameter over time with fast growth when young and slowing with age">
         <rect width="500" height="400" rx="12" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}

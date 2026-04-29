@@ -57,7 +57,7 @@ export function AngleExplorer() {
   const largeArc = angle > 180 ? 1 : 0;
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Angle Explorer</span>
         <span className={`font-mono text-sm font-bold ${classColor(angle)}`}>{classify(angle)}</span>
@@ -189,7 +189,7 @@ export function TriangleExplorer() {
   }
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Triangle Explorer</span>
         {valid && (
@@ -333,7 +333,7 @@ export function ProbabilityDice() {
   const barArea = H - 30;
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Dice Probability</span>
         <span className={`text-xs ${TEXT_MUTED}`}>{totalRolls} rolls</span>
@@ -470,7 +470,7 @@ export function GaussianExplorer() {
   ];
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Gaussian / Normal Distribution</span>
         <span className={`font-mono text-xs ${TEXT_SECONDARY}`}>68-95-99.7 Rule</span>
@@ -583,7 +583,7 @@ export function DerivativeVisualizer() {
   const tx2 = t + tanLen, ty2 = slope * (tx2 - t) + yAtT;
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Derivative Visualizer</span>
         <select value={funcKey} onChange={e => setFuncKey(e.target.value)}
@@ -724,7 +724,7 @@ export function AreaUnderCurve() {
   const N_OPTIONS = [2, 5, 10, 20, 50];
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-md mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} ${TEXT_MUTED}`}>Area Under Curve (Integration)</span>
         <select value={funcKey} onChange={e => setFuncKey(e.target.value)}

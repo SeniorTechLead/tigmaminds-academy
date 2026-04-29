@@ -28,12 +28,12 @@ export default function HoliNaturalDyeDiagram() {
           <g key={source}>
             <circle cx="65" cy={y} r="8" fill={color} opacity="0.6" />
             <text x="80" y={y + 1} fontSize="10" className="fill-gray-700 dark:fill-slate-300">{source}</text>
-            <text x="80" y={y + 13} fontSize="9" className="fill-gray-500 dark:fill-slate-400">{gives} \u2014 {molecule}</text>
+            <text x="80" y={y + 13} fontSize="9" className="fill-gray-500 dark:fill-slate-400">{gives} — {molecule}</text>
           </g>
         ))}
 
         <text x="190" y="290" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-green-600 dark:fill-green-400">
-          Biodegradable \u2022 Skin-safe \u2022 Fade over time
+          Biodegradable • Skin-safe • Fade over time
         </text>
 
         {/* Synthetic dyes panel */}
@@ -48,7 +48,7 @@ export default function HoliNaturalDyeDiagram() {
           { y: 186, fact: 'Extremely vivid and consistent colors' },
           { y: 208, fact: 'Highly color-fast (don\u2019t fade easily)' },
         ].map(({ y, fact }) => (
-          <text key={y} x="385" y={y} fontSize="10" className="fill-gray-600 dark:fill-slate-400">\u2022 {fact}</text>
+          <text key={y} x="385" y={y} fontSize="10" className="fill-gray-600 dark:fill-slate-400">• {fact}</text>
         ))}
 
         <text x="510" y="240" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-red-600 dark:fill-red-400">
@@ -59,7 +59,7 @@ export default function HoliNaturalDyeDiagram() {
         </text>
 
         <text x="510" y="290" textAnchor="middle" fontSize="10" fontWeight="600" className="fill-violet-600 dark:fill-violet-400">
-          Vivid \u2022 Cheap \u2022 Environmental cost
+          Vivid • Cheap • Environmental cost
         </text>
 
         {/* Key chemistry */}
@@ -71,7 +71,7 @@ export default function HoliNaturalDyeDiagram() {
           A dye molecule absorbs certain wavelengths of light and reflects the rest.
         </text>
         <text x="350" y="395" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
-          Turmeric absorbs blue/violet light \u2192 reflects yellow/orange \u2192 looks yellow.
+          Turmeric absorbs blue/violet light → reflects yellow/orange → looks yellow.
         </text>
         <text x="350" y="415" textAnchor="middle" fontSize="11" className="fill-gray-600 dark:fill-slate-400">
           The molecular structure determines WHICH wavelengths are absorbed.

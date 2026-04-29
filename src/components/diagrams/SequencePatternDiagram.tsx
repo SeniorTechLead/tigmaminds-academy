@@ -6,7 +6,7 @@ export default function SequencePatternDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox="0 0 525 295" className="w-full max-w-lg mx-auto" role="img" aria-label="Sequence patterns comparing arithmetic (linear) and geometric (exponential) growth">
+      <svg viewBox="0 0 525 295" className="w-full max-w-2xl mx-auto" role="img" aria-label="Sequence patterns comparing arithmetic (linear) and geometric (exponential) growth">
         {/* Arithmetic Sequence */}
         <text x="125" y="22" textAnchor="middle" className="fill-blue-600 dark:fill-blue-400" fontSize="13" fontWeight="bold">Arithmetic Sequence</text>
         <text x="125" y="37" textAnchor="middle" className="fill-gray-500 dark:fill-gray-400" fontSize="10">Common difference = +3</text>

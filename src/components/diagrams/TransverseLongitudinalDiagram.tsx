@@ -35,7 +35,7 @@ export default function TransverseLongitudinalDiagram() {
 
   return (
     <div className="my-4">
-      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-lg mx-auto" role="img" aria-label="Comparison of transverse and longitudinal waves">
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Comparison of transverse and longitudinal waves">
         {/* === Panel 1: Transverse wave === */}
         <text x="250" y="18" textAnchor="middle" className="fill-gray-700 dark:fill-gray-200" fontSize="12" fontWeight="700">
           Transverse (light, rope)

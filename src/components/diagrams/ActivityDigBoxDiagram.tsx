@@ -11,16 +11,16 @@ export default function ActivityDigBoxDiagram() {
 
         {/* Layers */}
         <rect x="152" y="250" width="396" height="78" fill="#a78bfa" opacity="0.25" />
-        <text x="350" y="296" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-gray-700 dark:fill-slate-200">Layer 3: pebbles + \u201Cancient\u201D object</text>
+        <text x="350" y="296" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-gray-700 dark:fill-slate-200">Layer 3: pebbles + “ancient” object</text>
 
         <rect x="152" y="185" width="396" height="65" fill="#fb923c" opacity="0.25" />
-        <text x="350" y="222" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-gray-700 dark:fill-slate-200">Layer 2: soil + \u201Cmedieval\u201D object</text>
+        <text x="350" y="222" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-gray-700 dark:fill-slate-200">Layer 2: soil + “medieval” object</text>
 
         <rect x="152" y="120" width="396" height="65" fill="#a3e635" opacity="0.25" />
-        <text x="350" y="158" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-gray-700 dark:fill-slate-200">Layer 1: sand + \u201Cmodern\u201D object</text>
+        <text x="350" y="158" textAnchor="middle" fontSize="12" fontWeight="500" className="fill-gray-700 dark:fill-slate-200">Layer 1: sand + “modern” object</text>
 
         {/* Top label */}
-        <text x="350" y="100" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">\u2191 surface (newest)</text>
+        <text x="350" y="100" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">↑ surface (newest)</text>
 
         {/* Steps */}
         {[

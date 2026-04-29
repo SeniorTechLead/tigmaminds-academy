@@ -11,7 +11,7 @@ export default function TurtleEarthLayersDiagram() {
         <rect width="700" height="440" rx="10" className="fill-white dark:fill-slate-950" />
 
         <text x="350" y="30" textAnchor="middle" fontSize="16" fontWeight="700" className="fill-amber-600 dark:fill-amber-400">
-          Earth\u2019s Internal Structure
+          Earth’s Internal Structure
         </text>
 
         {/* Earth cross-section */}
@@ -35,7 +35,7 @@ export default function TurtleEarthLayersDiagram() {
           {/* Crust */}
           <circle cx="0" cy="0" r="155" fill="none" stroke="#78350f" strokeWidth="6" opacity="0.6" />
           <text x="105" y="-120" fontSize="10" fontWeight="600" className="fill-amber-900 dark:fill-amber-200">Crust</text>
-          <text x="105" y="-107" fontSize="9" className="fill-amber-700 dark:fill-amber-400">5\u201370 km thin!</text>
+          <text x="105" y="-107" fontSize="9" className="fill-amber-700 dark:fill-amber-400">5–70 km thin!</text>
 
           {/* Convection arrows in mantle */}
           <path d="M-60,-90 Q-80,-50 -60,-10" fill="none" stroke="#ef4444" strokeWidth="1.5" markerEnd="url(#arr-earth)" />
@@ -66,7 +66,7 @@ export default function TurtleEarthLayersDiagram() {
         {/* Bottom note */}
         <rect x="50" y="410" width="600" height="24" rx="6" className="fill-amber-50 dark:fill-amber-950/30" stroke="#f59e0b" strokeWidth="1" />
         <text x="350" y="427" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-amber-800 dark:fill-amber-200">
-          Convection currents in the mantle push tectonic plates \u2014 the engine behind mountains and earthquakes
+          Convection currents in the mantle push tectonic plates — the engine behind mountains and earthquakes
         </text>
 
         <defs>

@@ -1,6 +1,6 @@
 export default function ChurningChromatographyDiagram() {
   return (
-    <div className="w-full max-w-md mx-auto my-4">
+    <div className="w-full max-w-xl mx-auto my-4">
       <svg viewBox="0 0 400 300" className="w-full h-auto" role="img" aria-label="Paper chromatography showing ink separating into component dyes as solvent rises up the paper strip">
         <style>{`
           .chr-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }

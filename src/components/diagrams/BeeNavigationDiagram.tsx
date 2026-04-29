@@ -1,7 +1,7 @@
 export default function BeeNavigationDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 570 420" className="w-full max-w-lg mx-auto" role="img" aria-label="Bee navigation diagram showing sun compass, polarized light, and magnetic sense">
+      <svg viewBox="0 0 570 420" className="w-full max-w-2xl mx-auto" role="img" aria-label="Bee navigation diagram showing sun compass, polarized light, and magnetic sense">
         <rect width="570" height="420" rx="12" className="fill-slate-900" />
 
         <text x="285" y="28" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#fbbf24">Bee Navigation Systems</text>

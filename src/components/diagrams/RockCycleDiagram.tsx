@@ -1,7 +1,7 @@
 export default function RockCycleDiagram() {
   return (
     <div className="my-4">
-      <svg viewBox="0 0 530 425" className="w-full max-w-lg mx-auto" role="img" aria-label="Rock cycle diagram showing igneous, sedimentary, and metamorphic rocks">
+      <svg viewBox="0 0 530 425" className="w-full max-w-2xl mx-auto" role="img" aria-label="Rock cycle diagram showing igneous, sedimentary, and metamorphic rocks">
         <defs>
           <marker id="rc-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" className="fill-gray-500 dark:fill-gray-400" />

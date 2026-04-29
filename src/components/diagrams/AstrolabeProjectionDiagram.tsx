@@ -20,7 +20,7 @@ export default function AstrolabeProjectionDiagram() {
   const spY = sphereCy + sphereR;
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 440 250" className="w-full" role="img" aria-label="Stereographic projection: flattening the sky onto a disk">
         <rect width="440" height="250" className="fill-white dark:fill-slate-950" rx="8" />
 

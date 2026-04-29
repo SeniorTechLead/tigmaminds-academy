@@ -1,7 +1,7 @@
 export default function LibraryAPIDiagram() {
   return (
     <div className="w-full max-w-xl mx-auto my-4">
-      <svg viewBox="0 0 780 480" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="API as a waiter: browser sends request, API fetches from database, returns response">
+      <svg viewBox="0 0 872 480" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" role="img" aria-label="API as a waiter: browser sends request, API fetches from database, returns response">
         <rect width="780" height="480" rx="10" className="fill-white dark:fill-slate-950" />
         <text x="390" y="36" textAnchor="middle" fontSize="16" fontWeight="700" fill="#f59e0b">APIs: The Waiter Between You and the Kitchen</text>
         <text x="390" y="56" textAnchor="middle" fontSize="12" className="fill-gray-500 dark:fill-slate-400">Your browser never talks to the database directly — the API carries messages</text>

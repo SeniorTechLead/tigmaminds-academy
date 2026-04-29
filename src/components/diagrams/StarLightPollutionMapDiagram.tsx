@@ -1,6 +1,6 @@
 export default function StarLightPollutionMapDiagram() {
   return (
-    <svg viewBox="0 0 550 345" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Light pollution zones from city center to pristine dark sky at Ziro Valley">
+    <svg viewBox="0 0 550 345" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Light pollution zones from city center to pristine dark sky at Ziro Valley">
       <rect width="520" height="300" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="28" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Light Pollution Zones</text>

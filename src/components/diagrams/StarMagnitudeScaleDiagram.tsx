@@ -11,7 +11,7 @@ export default function StarMagnitudeScaleDiagram() {
   ];
 
   return (
-    <svg viewBox="0 0 623 300" className="w-full max-w-lg mx-auto my-4" role="img" aria-label="Star magnitude scale from -1 (brightest) to 6 (faintest visible)">
+    <svg viewBox="0 0 623 300" className="w-full max-w-2xl mx-auto my-4" role="img" aria-label="Star magnitude scale from -1 (brightest) to 6 (faintest visible)">
       <rect width="520" height="260" rx="12" className="fill-white dark:fill-slate-950" />
 
       <text x="260" y="30" textAnchor="middle" className="fill-gray-700 dark:fill-slate-200" fontSize="14" fontWeight="700">Star Magnitude Scale</text>

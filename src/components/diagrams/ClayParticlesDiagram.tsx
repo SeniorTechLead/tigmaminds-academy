@@ -25,12 +25,12 @@ export default function ClayParticlesDiagram() {
               {/* Tetrahedral layer (Si-O) */}
               <rect x="120" y={y} width="540" height="28" rx="4" fill="#7c3aed" opacity="0.75" />
               <text x="390" y={y + 19} textAnchor="middle" fontSize="11" fontWeight="600" fill="#fff">
-                Si\u2013O Tetrahedral Layer
+                Si–O Tetrahedral Layer
               </text>
               {/* Octahedral layer (Al-O) */}
               <rect x="120" y={y + 30} width="540" height="28" rx="4" fill="#059669" opacity="0.75" />
               <text x="390" y={y + 49} textAnchor="middle" fontSize="11" fontWeight="600" fill="#fff">
-                Al\u2013O Octahedral Layer
+                Al–O Octahedral Layer
               </text>
               {/* Water molecules between layers */}
               {i < 2 && (
@@ -39,7 +39,7 @@ export default function ClayParticlesDiagram() {
                     <g key={wx}>
                       <circle cx={wx} cy={y + 76} r="8" fill="#3b82f6" opacity="0.5" />
                       <text x={wx} y={y + 80} textAnchor="middle" fontSize="10" fontWeight="700" fill="#fff">
-                        H\u2082O
+                        H₂O
                       </text>
                     </g>
                   ))}

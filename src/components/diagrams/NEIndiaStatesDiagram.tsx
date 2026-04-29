@@ -49,7 +49,7 @@ export default function NEIndiaStatesDiagram() {
         <g transform="translate(400, 75)">
           {/* Header */}
           <text x="0" y="0" fontSize="12" fontWeight="700" className="fill-gray-700 dark:fill-slate-200">State</text>
-          <text x="150" y="0" fontSize="12" fontWeight="700" className="fill-gray-700 dark:fill-slate-200">Area (km\u00B2)</text>
+          <text x="150" y="0" fontSize="12" fontWeight="700" className="fill-gray-700 dark:fill-slate-200">Area (km²)</text>
           <text x="270" y="0" fontSize="12" fontWeight="700" className="fill-gray-700 dark:fill-slate-200">Population</text>
           <line x1="-10" y1="8" x2="350" y2="8" stroke="#64748b" strokeWidth="0.5" />
 

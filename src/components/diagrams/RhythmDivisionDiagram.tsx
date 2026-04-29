@@ -25,7 +25,7 @@ export default function RhythmDivisionDiagram() {
           <rect x="100" y="90" width="600" height="30" rx="4" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" strokeWidth="1.5" />
           <circle cx="400" cy="105" r="8" fill="#8b5cf6" opacity="0.7" />
           <text x="60" y="110" textAnchor="end" fontSize="11" fontWeight="600" className="fill-violet-600 dark:fill-violet-400">Whole</text>
-          <text x="720" y="110" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u00d71</text>
+          <text x="720" y="110" fontSize="10" className="fill-gray-500 dark:fill-slate-400">×1</text>
         </g>
 
         {/* Half notes */}
@@ -37,7 +37,7 @@ export default function RhythmDivisionDiagram() {
             </g>
           ))}
           <text x="60" y="150" textAnchor="end" fontSize="11" fontWeight="600" className="fill-purple-600 dark:fill-purple-400">Half</text>
-          <text x="720" y="150" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u00d72</text>
+          <text x="720" y="150" fontSize="10" className="fill-gray-500 dark:fill-slate-400">×2</text>
         </g>
 
         {/* Quarter notes */}
@@ -49,7 +49,7 @@ export default function RhythmDivisionDiagram() {
             </g>
           ))}
           <text x="60" y="190" textAnchor="end" fontSize="11" fontWeight="600" className="fill-fuchsia-600 dark:fill-fuchsia-400">Quarter</text>
-          <text x="720" y="190" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u00d74</text>
+          <text x="720" y="190" fontSize="10" className="fill-gray-500 dark:fill-slate-400">×4</text>
         </g>
 
         {/* Eighth notes */}
@@ -61,7 +61,7 @@ export default function RhythmDivisionDiagram() {
             </g>
           ))}
           <text x="60" y="230" textAnchor="end" fontSize="11" fontWeight="600" className="fill-pink-600 dark:fill-pink-400">Eighth</text>
-          <text x="720" y="230" fontSize="10" className="fill-gray-500 dark:fill-slate-400">\u00d78</text>
+          <text x="720" y="230" fontSize="10" className="fill-gray-500 dark:fill-slate-400">×8</text>
         </g>
 
         {/* Polyrhythm section */}
@@ -87,7 +87,7 @@ export default function RhythmDivisionDiagram() {
         </g>
 
         <text x="390" y="368" textAnchor="middle" fontSize="10" className="fill-gray-500 dark:fill-slate-400">
-          They align every 12 beats (LCM of 3 and 4) \u2014 creating tension and release
+          They align every 12 beats (LCM of 3 and 4) — creating tension and release
         </text>
 
         {/* Summary */}

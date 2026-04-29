@@ -12,7 +12,7 @@ export default function RotGearsDiagram() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto my-4">
+    <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 520 420" className="w-full h-auto" role="img"
         aria-label="Diagram showing how gears trade speed for force, with a small driving gear turning a large driven gear">
         <defs>

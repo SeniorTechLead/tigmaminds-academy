@@ -28,7 +28,7 @@ export function SelectWhereDiagram() {
   const filter = filters[step];
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-lg mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-2xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>elephants table</span>
         <div className="flex gap-1">
@@ -107,7 +107,7 @@ export function OrderByDiagram() {
   });
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-lg mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-2xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>ORDER BY</span>
         <div className="flex gap-1">
@@ -155,7 +155,7 @@ export function GroupByDiagram() {
   }));
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-lg mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-2xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>GROUP BY park</span>
         <button onClick={() => setGrouped(!grouped)}
@@ -333,7 +333,7 @@ export function SubqueryDiagram() {
   };
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-lg mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-2xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>Subquery</span>
         <button onClick={run}
@@ -429,7 +429,7 @@ export function MutateDiagram() {
   };
 
   return (
-    <div className={`${DARK_BG} rounded-xl p-4 max-w-lg mx-auto my-4`}>
+    <div className={`${DARK_BG} rounded-xl p-4 max-w-2xl mx-auto my-4`}>
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>INSERT / UPDATE / DELETE</span>
         <div className="flex gap-1">

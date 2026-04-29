@@ -80,7 +80,7 @@ export default function ActivityDyeExtractDiagram() {
           Soak cotton strips in turmeric water for 30 min. Wash one untreated strip and one
         </text>
         <text x="350" y="450" textAnchor="middle" fontSize="10" className="fill-gray-600 dark:fill-slate-400">
-          pre-soaked in alum (mordant) water. Compare color retention \u2014 the alum strip keeps its color!
+          pre-soaked in alum (mordant) water. Compare color retention — the alum strip keeps its color!
         </text>
       </svg>
     </div>

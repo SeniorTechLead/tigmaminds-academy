@@ -30,7 +30,7 @@ export default function ElephantKNNVoteDiagram() {
   return (
     <svg
       viewBox="0 0 630 346"
-      className="w-full max-w-lg mx-auto my-4"
+      className="w-full max-w-2xl mx-auto my-4"
       role="img"
       aria-label="k-NN voting diagram: a query point surrounded by 7 nearest neighbors voting across 6 mood classes, rumble wins with 3 votes"
     >

@@ -13,7 +13,7 @@ export default function CorridorConflictSolutionDiagram() {
           Human-Elephant Conflict: Solutions That Work
         </text>
         <text x="350" y="52" textAnchor="middle" fontSize="11" className="fill-gray-500 dark:fill-slate-400">
-          No single solution works everywhere \u2014 the best programs combine multiple strategies
+          No single solution works everywhere — the best programs combine multiple strategies
         </text>
 
         {/* Four solution panels */}
@@ -77,7 +77,7 @@ export default function CorridorConflictSolutionDiagram() {
             <text x={x + 42} y={y + 26} fontSize="12" fontWeight="700" className={titleColor}>{title}</text>
             {items.map((item, i) => (
               <text key={i} x={x + 20} y={y + 50 + i * 18} fontSize="10" className="fill-gray-600 dark:fill-slate-400">
-                \u2022 {item}
+                • {item}
               </text>
             ))}
           </g>
@@ -86,7 +86,7 @@ export default function CorridorConflictSolutionDiagram() {
         {/* Key principle */}
         <rect x="60" y="420" width="580" height="30" rx="8" className="fill-orange-50 dark:fill-orange-950/30 stroke-orange-200 dark:stroke-orange-800" strokeWidth="1" />
         <text x="350" y="440" textAnchor="middle" fontSize="11" fontWeight="600" className="fill-orange-700 dark:fill-orange-300">
-          Key: involve local communities in planning \u2014 people who live with elephants know what works
+          Key: involve local communities in planning — people who live with elephants know what works
         </text>
       </svg>
     </div>
