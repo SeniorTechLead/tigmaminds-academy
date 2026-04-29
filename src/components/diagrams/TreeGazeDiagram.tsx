@@ -19,10 +19,11 @@ export default function TreeGazeDiagram() {
   const treeTopX = 420;
   const treeTopY = 70;
 
-  // Tara's eye position (head center is at -86 in her local coords; head tilted -20° rotates eyes)
-  // After scale 1.2 and translate (taraX, groundY), her eye sits roughly here:
-  const eyeX = taraX + 6;     // shifted slightly forward by head tilt
-  const eyeY = groundY - 105; // ~88 * scale 1.2
+  // Tara's eye position in profile pose. The single visible eye sits at
+  // local (~7, -92) inside her body group, then gets rotated by -15° around
+  // (4, -86) (the head's tilt). After scale 1.3 and translate (taraX, groundY):
+  const eyeX = taraX + 12;     // forward of body centre, after rotation
+  const eyeY = groundY - 124;  // ~92 * 1.3 raised by tilt
 
   return (
     <div className="my-6 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
@@ -77,8 +78,8 @@ export default function TreeGazeDiagram() {
         {/* The "top of the tree" point — where Tara is looking */}
         <circle cx={treeTopX} cy={treeTopY + 30} r="4" fill="#dc2626" stroke="white" strokeWidth="1.5" />
 
-        {/* Tara — looking up at the tree */}
-        <Tara x={taraX} y={groundY} scale={1.3} pose="lookingUp" />
+        {/* Tara — side-on profile, facing right toward the tree, head tilted up */}
+        <Tara x={taraX} y={groundY} scale={1.3} pose="lookingUpProfile" />
 
         {/* Gaze line — dashed, from Tara's eye to top of tree */}
         <line x1={eyeX} y1={eyeY} x2={treeTopX} y2={treeTopY + 30}

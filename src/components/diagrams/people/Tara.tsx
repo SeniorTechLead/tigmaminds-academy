@@ -11,7 +11,8 @@ import type { CSSProperties } from 'react';
 
 export type TaraPose =
   | 'standing'      // arms at sides, looking forward
-  | 'lookingUp'     // head tilted up, one hand at brow
+  | 'lookingUp'     // head tilted up, one hand at brow (front view)
+  | 'lookingUpProfile' // side-on profile, looking up-and-forward (e.g. at a tall tree to her right)
   | 'lookingDown'   // head tilted down, hands on hips (e.g. cliff edge)
   | 'pointing'      // arm extended, finger pointing
   | 'walking'       // mid-stride
@@ -47,6 +48,11 @@ export default function Tara({
 }
 
 function TaraBody({ pose }: { pose: TaraPose }) {
+  // Profile pose has its own dedicated renderer
+  if (pose === 'lookingUpProfile') {
+    return <TaraProfile />;
+  }
+
   // Head tilt for "lookingUp" / "lookingDown"
   const headTilt = pose === 'lookingUp' ? -20 : pose === 'lookingDown' ? 18 : 0;
   // Eye direction
@@ -81,10 +87,11 @@ function TaraBody({ pose }: { pose: TaraPose }) {
         d="M -13 -34 L -11 -68 L 11 -68 L 13 -34 Z"
         fill={KURTA} stroke={STROKE} strokeWidth="1.2" strokeLinejoin="round"
       />
-      {/* Kurta neckline trim */}
-      <path d="M -5 -68 Q 0 -64 5 -68" fill="none" stroke={KURTA_DARK} strokeWidth="1.2" />
-      {/* Kurta side detail (vertical line, hint of fold) */}
-      <line x1="0" y1="-68" x2="0" y2="-36" stroke={KURTA_DARK} strokeWidth="0.6" opacity="0.5" />
+      {/* Kurta neckline — V-shape trim in darker thread */}
+      <path d="M -5 -68 L 0 -62 L 5 -68" fill="none" stroke={KURTA_DARK} strokeWidth="1.4" strokeLinejoin="round" />
+      {/* Decorative trim band at the hem */}
+      <line x1="-13" y1="-37" x2="13" y2="-37" stroke={KURTA_DARK} strokeWidth="1.2" />
+      <line x1="-13" y1="-39" x2="13" y2="-39" stroke="#fbbf24" strokeWidth="0.6" />
 
       {/* Arms — vary by pose. Anchored at shoulders (~y=-66, x=±10). */}
       <Arms pose={pose} />
@@ -92,81 +99,116 @@ function TaraBody({ pose }: { pose: TaraPose }) {
       {/* Neck */}
       <rect x="-3" y="-72" width="6" height="6" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
 
+      {/* Twin pigtail braids — drawn BEFORE head so the head sits on top.
+          They hang in FRONT of the shoulders (over the chest) — common for school-age
+          Indian girls. Anchored just below the ears at (±12, -82). */}
+      <PigtailBraids headTilt={headTilt} />
+
       {/* Head group — rotates as a unit for tilt */}
       <g transform={`rotate(${headTilt}, 0, -72)`}>
         {/* Head — slightly oval, larger than realistic for cartoon read */}
         <ellipse cx="0" cy="-86" rx="13" ry="14.5" fill={SKIN} stroke={STROKE} strokeWidth="1.2" />
 
-        {/* Hair top — curves over the forehead */}
+        {/* Hair — covers crown with a clear hairline arc; soft fringe over the brow */}
         <path
-          d="M -13 -90 Q -10 -100 0 -101 Q 10 -100 13 -90 Q 11 -94 8 -94 Q 4 -97 0 -97 Q -4 -97 -8 -94 Q -11 -94 -13 -90 Z"
-          fill={HAIR} stroke={STROKE} strokeWidth="0.8" strokeLinejoin="round"
+          d="M -13 -88 Q -13 -101 0 -102 Q 13 -101 13 -88 Q 13 -93 8 -94 Q 4 -96 0 -94 Q -4 -96 -8 -94 Q -13 -93 -13 -88 Z"
+          fill={HAIR} stroke={STROKE} strokeWidth="0.9" strokeLinejoin="round"
         />
+        {/* Centre parting — thin line down the crown */}
+        <line x1="0" y1="-101" x2="0" y2="-94" stroke="#3a2a20" strokeWidth="0.7" />
+        {/* Tucked-back hair behind ears — small dark patches */}
+        <path d="M -13 -86 Q -14 -80 -12 -76" fill="none" stroke={HAIR} strokeWidth="2" strokeLinecap="round" />
+        <path d="M 13 -86 Q 14 -80 12 -76" fill="none" stroke={HAIR} strokeWidth="2" strokeLinecap="round" />
 
-        {/* Hair side wisps */}
-        <path d="M -13 -88 Q -14 -82 -12 -78" fill="none" stroke={HAIR} strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M 13 -88 Q 14 -82 12 -78" fill="none" stroke={HAIR} strokeWidth="2.5" strokeLinecap="round" />
+        {/* Small stud earrings — gold dots at the lobes */}
+        <circle cx="-12" cy="-82" r="1.3" fill="#fbbf24" stroke={STROKE} strokeWidth="0.5" />
+        <circle cx="12" cy="-82" r="1.3" fill="#fbbf24" stroke={STROKE} strokeWidth="0.5" />
 
-        {/* Eyes — react to gaze direction */}
+        {/* Eyes — react to gaze direction (large almond-ish for young girl read) */}
         <Eyes dir={eyeDir} />
 
-        {/* Eyebrows — slight arch */}
-        <path d={`M -8 ${eyeDir === 'up' ? -94 : -92} Q -5 ${eyeDir === 'up' ? -96 : -93} -2 ${eyeDir === 'up' ? -94 : -92}`} fill="none" stroke={HAIR} strokeWidth="1.5" strokeLinecap="round" />
-        <path d={`M 2 ${eyeDir === 'up' ? -94 : -92} Q 5 ${eyeDir === 'up' ? -96 : -93} 8 ${eyeDir === 'up' ? -94 : -92}`} fill="none" stroke={HAIR} strokeWidth="1.5" strokeLinecap="round" />
+        {/* Eyebrows — slight arch, thin */}
+        <path d={`M -9 ${eyeDir === 'up' ? -94 : -92} Q -6 ${eyeDir === 'up' ? -97 : -94} -3 ${eyeDir === 'up' ? -94 : -92}`} fill="none" stroke={HAIR} strokeWidth="1.4" strokeLinecap="round" />
+        <path d={`M 3 ${eyeDir === 'up' ? -94 : -92} Q 6 ${eyeDir === 'up' ? -97 : -94} 9 ${eyeDir === 'up' ? -94 : -92}`} fill="none" stroke={HAIR} strokeWidth="1.4" strokeLinecap="round" />
+
+        {/* Small nose hint */}
+        <path d="M 0 -84 Q 1 -82 0 -81" fill="none" stroke={STROKE} strokeWidth="0.7" strokeLinecap="round" opacity="0.6" />
 
         {/* Mouth — small smile, slightly bigger when looking up (curious) */}
         <path
-          d={pose === 'lookingUp' ? "M -3 -80 Q 0 -76 3 -80" : "M -2 -80 Q 0 -78 2 -80"}
-          fill="none" stroke={STROKE} strokeWidth="1.2" strokeLinecap="round"
+          d={pose === 'lookingUp' ? "M -3 -78 Q 0 -75 3 -78" : "M -2 -78 Q 0 -76 2 -78"}
+          fill="none" stroke="#7c2d12" strokeWidth="1.3" strokeLinecap="round"
         />
       </g>
-
-      {/* Braid — drawn AFTER head so it appears behind/beside. Anchored at nape. */}
-      {/* Sweeps down behind shoulder. Horizontal flip via `scaleX(-1)` would put braid on other side; we draw on right by default. */}
-      <Braid headTilt={headTilt} />
     </g>
   );
 }
 
 function Eyes({ dir }: { dir: 'forward' | 'up' | 'down' }) {
   // Pupil offset based on gaze
-  const pupilDx = 0;
-  const pupilDy = dir === 'up' ? -1.5 : dir === 'down' ? 1.5 : 0;
+  const pupilDy = dir === 'up' ? -1.6 : dir === 'down' ? 1.6 : 0;
 
   return (
     <g>
-      {/* Left eye — eye white */}
-      <ellipse cx="-5" cy="-89" rx="2.5" ry="2.8" fill="white" stroke={STROKE} strokeWidth="0.8" />
+      {/* Left eye — slightly wider almond shape for young-girl read */}
+      <ellipse cx="-5.5" cy="-89" rx="3" ry="3.2" fill="white" stroke={STROKE} strokeWidth="0.9" />
       {/* Right eye */}
-      <ellipse cx="5" cy="-89" rx="2.5" ry="2.8" fill="white" stroke={STROKE} strokeWidth="0.8" />
-      {/* Pupils — black dots, shift with gaze */}
-      <circle cx={-5 + pupilDx} cy={-89 + pupilDy} r="1.3" fill={STROKE} />
-      <circle cx={5 + pupilDx} cy={-89 + pupilDy} r="1.3" fill={STROKE} />
-      {/* Eye highlight — tiny white dot for life */}
-      <circle cx={-4.5 + pupilDx} cy={-89.5 + pupilDy} r="0.4" fill="white" />
-      <circle cx={5.5 + pupilDx} cy={-89.5 + pupilDy} r="0.4" fill="white" />
+      <ellipse cx="5.5" cy="-89" rx="3" ry="3.2" fill="white" stroke={STROKE} strokeWidth="0.9" />
+      {/* Pupils — large dark irises */}
+      <circle cx={-5.5} cy={-89 + pupilDy} r="1.7" fill="#1f1410" />
+      <circle cx={5.5} cy={-89 + pupilDy} r="1.7" fill="#1f1410" />
+      {/* Eye highlight — small white dot for life */}
+      <circle cx={-5} cy={-89.5 + pupilDy} r="0.6" fill="white" />
+      <circle cx={6} cy={-89.5 + pupilDy} r="0.6" fill="white" />
+      {/* Eyelashes — three short strokes above each eye */}
+      <path d="M -8 -92 L -8.5 -93.5 M -5.5 -92.5 L -5.5 -94 M -3 -92 L -2.5 -93.5" stroke={STROKE} strokeWidth="0.7" strokeLinecap="round" />
+      <path d="M 3 -92 L 2.5 -93.5 M 5.5 -92.5 L 5.5 -94 M 8 -92 L 8.5 -93.5" stroke={STROKE} strokeWidth="0.7" strokeLinecap="round" />
     </g>
   );
 }
 
-function Braid({ headTilt }: { headTilt: number }) {
-  // Anchor at back of head; braid sweeps down right side.
-  // When head tilts up, braid swings slightly forward; we approximate with a curve.
-  const sway = headTilt < 0 ? 4 : headTilt > 0 ? -2 : 0;
-
+/**
+ * Twin pigtail braids hanging from below each ear, draping in front of the
+ * shoulders. Each braid has a thick stroke, chevron-style segment marks
+ * (V-shapes that read as plait weave), and a red ribbon tie at the end.
+ *
+ * The braids ignore headTilt — they hang from the body, not the head, so
+ * they shouldn't rotate when the head tilts.
+ */
+function PigtailBraids({ headTilt: _headTilt }: { headTilt: number }) {
+  // Anchor points just below each ear (after head finishes around y=-72).
+  // Left braid: starts at (-12, -75), curves outward then down to chest level.
+  // Right braid: mirror.
   return (
     <g>
-      {/* Braid main shape — thick curved tapered strand */}
+      {/* LEFT BRAID — from (-12, -75) draping over the left shoulder, ending at chest */}
       <path
-        d={`M 8 -78 Q ${14 + sway} -68 ${12 + sway} -55 Q ${10 + sway} -42 ${6 + sway} -32`}
-        fill="none" stroke={HAIR} strokeWidth="6" strokeLinecap="round"
+        d="M -12 -76 Q -16 -64 -16 -52 Q -16 -40 -13 -32"
+        fill="none" stroke={HAIR} strokeWidth="5.5" strokeLinecap="round"
       />
-      {/* Braid texture — small horizontal bands */}
-      <line x1={11 + sway} y1="-65" x2={13 + sway} y2="-65" stroke="#000" strokeWidth="0.8" opacity="0.4" />
-      <line x1={11 + sway} y1="-55" x2={13 + sway} y2="-55" stroke="#000" strokeWidth="0.8" opacity="0.4" />
-      <line x1={9 + sway} y1="-45" x2={11 + sway} y2="-45" stroke="#000" strokeWidth="0.8" opacity="0.4" />
-      {/* Tie at end */}
-      <ellipse cx={6 + sway} cy="-31" rx="2.5" ry="1.5" fill="#dc2626" stroke={STROKE} strokeWidth="0.6" />
+      {/* Chevron segment marks — V-shapes pointing down for braid weave */}
+      <path d="M -18 -64 L -16 -62 L -14 -64" fill="none" stroke="#3a2a20" strokeWidth="0.9" />
+      <path d="M -18 -54 L -16 -52 L -14 -54" fill="none" stroke="#3a2a20" strokeWidth="0.9" />
+      <path d="M -17 -44 L -15 -42 L -13 -44" fill="none" stroke="#3a2a20" strokeWidth="0.9" />
+      {/* Tapered tip — thinner stroke at the bottom */}
+      <path d="M -13 -36 L -13 -32" stroke={HAIR} strokeWidth="3" strokeLinecap="round" />
+      {/* Red ribbon — small bow */}
+      <ellipse cx="-13" cy="-30" rx="3" ry="1.5" fill="#dc2626" stroke={STROKE} strokeWidth="0.6" />
+      <path d="M -16 -30 L -14 -32 L -14 -28 Z M -10 -30 L -12 -32 L -12 -28 Z"
+        fill="#dc2626" stroke={STROKE} strokeWidth="0.4" />
+
+      {/* RIGHT BRAID — mirror image */}
+      <path
+        d="M 12 -76 Q 16 -64 16 -52 Q 16 -40 13 -32"
+        fill="none" stroke={HAIR} strokeWidth="5.5" strokeLinecap="round"
+      />
+      <path d="M 14 -64 L 16 -62 L 18 -64" fill="none" stroke="#3a2a20" strokeWidth="0.9" />
+      <path d="M 14 -54 L 16 -52 L 18 -54" fill="none" stroke="#3a2a20" strokeWidth="0.9" />
+      <path d="M 13 -44 L 15 -42 L 17 -44" fill="none" stroke="#3a2a20" strokeWidth="0.9" />
+      <path d="M 13 -36 L 13 -32" stroke={HAIR} strokeWidth="3" strokeLinecap="round" />
+      <ellipse cx="13" cy="-30" rx="3" ry="1.5" fill="#dc2626" stroke={STROKE} strokeWidth="0.6" />
+      <path d="M 10 -30 L 12 -32 L 12 -28 Z M 16 -30 L 14 -32 L 14 -28 Z"
+        fill="#dc2626" stroke={STROKE} strokeWidth="0.4" />
     </g>
   );
 }
@@ -247,6 +289,94 @@ function Arms({ pose }: { pose: TaraPose }) {
       <circle cx="-14" cy="-38" r="3.5" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
       <path d="M 10 -66 L 13 -50 L 14 -38" fill="none" stroke={sleeveFill} strokeWidth="6" strokeLinecap="round" />
       <circle cx="14" cy="-38" r="3.5" fill={skinFill} stroke={STROKE} strokeWidth="0.8" />
+    </g>
+  );
+}
+
+/**
+ * Side-on profile of Tara, facing right, head tilted up — for scenes where she
+ * looks up at something to her right (a tall tree, a cliff, a mountain peak).
+ * Drawn with a single visible eye and the braid trailing behind on the left.
+ */
+function TaraProfile() {
+  return (
+    <g>
+      {/* Legs side-by-side from this angle, near-leg slightly forward */}
+      <rect x="-5" y="-34" width="6" height="34" rx="2" fill={LEGGINGS} stroke={STROKE} strokeWidth="1" />
+      <rect x="2" y="-34" width="6" height="34" rx="2" fill={LEGGINGS} stroke={STROKE} strokeWidth="1" />
+      <ellipse cx="-2" cy="-1" rx="6" ry="2.5" fill={STROKE} />
+      <ellipse cx="6" cy="-1" rx="6" ry="2.5" fill={STROKE} />
+
+      {/* Torso — narrow side profile of the kurta */}
+      <path d="M -7 -34 L -5 -68 L 7 -68 L 9 -34 Z" fill={KURTA} stroke={STROKE} strokeWidth="1.2" strokeLinejoin="round" />
+      {/* Decorative trim band at the hem */}
+      <line x1="-7" y1="-37" x2="9" y2="-37" stroke={KURTA_DARK} strokeWidth="1.2" />
+      <line x1="-7" y1="-39" x2="9" y2="-39" stroke="#fbbf24" strokeWidth="0.6" />
+
+      {/* FRONT pigtail braid — drapes from the front-side ear (right side from viewer's perspective)
+          down over the front of the chest. Visible because the body is in profile, this braid is in
+          the foreground. Drawn BEFORE the head so the head sits on top at the anchor point. */}
+      <path d="M 8 -75 Q 12 -64 11 -52 Q 10 -42 7 -34"
+        fill="none" stroke={HAIR} strokeWidth="5" strokeLinecap="round" />
+      <path d="M 9 -64 L 11 -62 L 13 -64" fill="none" stroke="#3a2a20" strokeWidth="0.8" />
+      <path d="M 8 -54 L 10 -52 L 12 -54" fill="none" stroke="#3a2a20" strokeWidth="0.8" />
+      <ellipse cx="7" cy="-32" rx="2.5" ry="1.3" fill="#dc2626" stroke={STROKE} strokeWidth="0.5" />
+
+      {/* Far arm (back, behind torso) — relaxed at side */}
+      <path d="M -3 -66 L -5 -50 L -6 -38" fill="none" stroke={KURTA} strokeWidth="5" strokeLinecap="round" opacity="0.85" />
+      <circle cx="-6" cy="-38" r="3" fill={SKIN} stroke={STROKE} strokeWidth="0.8" opacity="0.9" />
+
+      {/* Near arm (front, foreground) — bent up to brow shading eyes */}
+      <path d="M 6 -66 L 14 -78 L 8 -90" fill="none" stroke={KURTA} strokeWidth="6" strokeLinecap="round" />
+      <circle cx="8" cy="-90" r="3.5" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+
+      {/* Neck — visible only on the front side */}
+      <path d="M 1 -72 L 1 -66 L 5 -66 L 5 -72 Z" fill={SKIN} stroke={STROKE} strokeWidth="0.8" />
+
+      {/* Head — profile, facing right, tilted upward (back-of-head tilts back) */}
+      <g transform="rotate(-15, 4, -86)">
+        {/* Head silhouette — slightly egg-shaped, pointed slightly to the right (chin direction) */}
+        <path
+          d="M -8 -100 Q -10 -90 -8 -82 Q -6 -78 -2 -76 Q 4 -74 10 -76 Q 14 -78 14 -84 Q 14 -94 10 -100 Q 4 -104 -2 -103 Q -6 -103 -8 -100 Z"
+          fill={SKIN} stroke={STROKE} strokeWidth="1.2" strokeLinejoin="round"
+        />
+        {/* Hair top + back — covers the crown and back of head, with a forehead fringe arc */}
+        <path
+          d="M -8 -100 Q -10 -104 -2 -107 Q 6 -108 12 -103 Q 14 -100 13 -96 Q 11 -98 8 -97 Q 4 -98 0 -96 Q -3 -97 -7 -96 Z"
+          fill={HAIR} stroke={STROKE} strokeWidth="0.9" strokeLinejoin="round"
+        />
+        {/* Hair line at the temple / sideburn */}
+        <path d="M -8 -96 Q -8 -90 -7 -86" fill="none" stroke={HAIR} strokeWidth="2" strokeLinecap="round" />
+
+        {/* BACK pigtail braid — trails behind/below from the back of the head */}
+        <path
+          d="M -8 -94 Q -14 -88 -15 -78 Q -16 -68 -13 -58 Q -11 -52 -10 -48"
+          fill="none" stroke={HAIR} strokeWidth="5" strokeLinecap="round"
+        />
+        <path d="M -16 -78 L -14 -76 L -12 -78" fill="none" stroke="#3a2a20" strokeWidth="0.8" />
+        <path d="M -15 -68 L -13 -66 L -11 -68" fill="none" stroke="#3a2a20" strokeWidth="0.8" />
+        <ellipse cx="-10" cy="-46" rx="2.5" ry="1.3" fill="#dc2626" stroke={STROKE} strokeWidth="0.5" />
+
+        {/* One visible eye — larger almond shape with lashes */}
+        <ellipse cx="6" cy="-91" rx="2.7" ry="3" fill="white" stroke={STROKE} strokeWidth="0.9" />
+        <circle cx="7" cy="-92.5" r="1.6" fill="#1f1410" />
+        <circle cx="7.4" cy="-93" r="0.5" fill="white" />
+        {/* Eyelashes — three short strokes */}
+        <path d="M 4 -94 L 3.5 -95.5 M 6.5 -94 L 6.5 -96 M 8.5 -94 L 9 -95.5" stroke={STROKE} strokeWidth="0.7" strokeLinecap="round" />
+
+        {/* Eyebrow — slight arch */}
+        <path d="M 3 -95.5 Q 6 -97.5 9 -95.5" fill="none" stroke={HAIR} strokeWidth="1.4" strokeLinecap="round" />
+
+        {/* Nose — small bump on the right side */}
+        <path d="M 11 -88 Q 13 -85 11 -82" fill="none" stroke={STROKE} strokeWidth="1" strokeLinecap="round" />
+
+        {/* Mouth — tiny smile */}
+        <path d="M 7 -78 Q 9 -76 11 -78" fill="none" stroke="#7c2d12" strokeWidth="1.3" strokeLinecap="round" />
+
+        {/* Ear + earring stud */}
+        <path d="M -3 -88 Q -5 -86 -3 -82" fill="none" stroke={STROKE} strokeWidth="0.8" />
+        <circle cx="-3" cy="-83" r="1.2" fill="#fbbf24" stroke={STROKE} strokeWidth="0.5" />
+      </g>
     </g>
   );
 }
