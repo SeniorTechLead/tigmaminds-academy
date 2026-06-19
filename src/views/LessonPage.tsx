@@ -37,6 +37,9 @@ const LEVEL_COMPLETION: { level: 0 | 1 | 2 | 3; name: string; tab: Level }[] = [
 
 export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
+  // Lightweight meta is in the bundle synchronously — drives the hero/title and the
+  // not-found check so they render immediately, before the heavy content arrives.
+  const meta = slug ? lessonsMeta.find((l) => l.slug === slug) : undefined;
   const [lesson, setLesson] = useState<Lesson | undefined>(undefined);
   const [lessonLoading, setLessonLoading] = useState(true);
   const [activeLevel, setActiveLevelRaw] = useState<Level>('listener');
@@ -89,11 +92,55 @@ export default function LessonPage() {
     if (lesson) recordLevelViewed(lesson.slug, levelToNumber[lvl]);
   };
 
-  if (lessonLoading) {
+  // No meta entry = the slug genuinely doesn't exist. Decide this immediately.
+  if (slug && !meta) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900">
         <Header />
-        <div className="pt-32 pb-20 flex items-center justify-center">
+        <div className="pt-32 pb-20 max-w-4xl mx-auto px-4 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Lesson Not Found</h1>
+          <p className="text-gray-600 dark:text-gray-300 mb-8">This lesson doesn't exist yet.</p>
+          <Link href="/" className="inline-flex items-center gap-2 text-amber-600 dark:text-amber-400 hover:underline">
+            <ArrowLeft className="w-4 h-4" /> Back to Home
+          </Link>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (lessonLoading) {
+    const MetaIcon = meta?.stemIcon;
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-900">
+        <Header />
+        <section className="pt-20">
+          {meta?.illustration && (
+            <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img src={`${meta.illustration}?v=2`} alt={meta.storyTitle} width={1280} height={720} className="w-full aspect-video object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </div>
+            </div>
+          )}
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8 border border-gray-100 dark:border-gray-700">
+              {meta && (
+                <div className="flex items-center gap-3 mb-3">
+                  {MetaIcon && (
+                    <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${meta.stemColor} flex items-center justify-center shadow-md`}>
+                      <MetaIcon className="w-5 h-5 text-white" />
+                    </div>
+                  )}
+                  <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wide">{meta.stemTitle}</span>
+                </div>
+              )}
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">{meta?.storyTitle ?? ''}</h1>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mb-4">{meta?.tagline ?? ''}</p>
+            </div>
+          </div>
+        </section>
+        <div className="py-16 flex items-center justify-center">
           <Sparkles className="w-6 h-6 animate-pulse text-amber-500" />
         </div>
         <Footer />
