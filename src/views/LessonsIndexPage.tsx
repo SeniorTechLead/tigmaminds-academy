@@ -307,6 +307,9 @@ export default function LessonsIndexPage() {
                       <img
                         src={`${lesson.illustration}?v=2`}
                         alt={lesson.storyTitle}
+                        width={400}
+                        height={160}
+                        loading="lazy"
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />

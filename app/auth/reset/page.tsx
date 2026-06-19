@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Lock, Loader2, CheckCircle, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Header from '../../../src/components/Header';
 import Footer from '../../../src/components/Footer';
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token') || '';
   const email = searchParams.get('email') || '';
@@ -111,5 +111,19 @@ export default function ResetPasswordPage() {
       </section>
       <Footer />
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
+          <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
+        </div>
+      }
+    >
+      <ResetPasswordForm />
+    </Suspense>
   );
 }

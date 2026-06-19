@@ -88,6 +88,8 @@ export default function Hero() {
               <img
                 src="https://images.pexels.com/photos/16034401/pexels-photo-16034401.jpeg"
                 alt="Indian schoolchildren in classroom"
+                width={600}
+                height={500}
                 className="relative rounded-2xl shadow-2xl object-cover w-full h-[500px]"
               />
             </div>

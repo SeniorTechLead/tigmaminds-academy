@@ -107,6 +107,8 @@ export default function LessonPage() {
             <img
               src={`${lesson.illustration}?v=2`}
               alt={lesson.story.title}
+              width={1280}
+              height={720}
               className="w-full aspect-video object-cover"
             />
             {/* Subtle bottom gradient for text readability — only the lower 40% */}

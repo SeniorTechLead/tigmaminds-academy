@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Mail, Lock, Check, Loader2, AlertCircle, ArrowLeft, Camera } from 'lucide-react';
 import Header from '../components/Header';
@@ -65,10 +65,12 @@ export default function AccountSettingsPage() {
   const [pwLoading, setPwLoading] = useState(false);
   const [pwMsg, setPwMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  if (!user) {
-    router.push('/auth?returnTo=/account', { replace: true });
-    return null;
-  }
+  // Redirect unauthenticated users in an effect — never during render (breaks SSR/prerender).
+  useEffect(() => {
+    if (!user) router.push('/auth?returnTo=/account', { replace: true });
+  }, [user, router]);
+
+  if (!user) return null;
 
   const handleEmailChange = async (e: React.FormEvent) => {
     e.preventDefault();

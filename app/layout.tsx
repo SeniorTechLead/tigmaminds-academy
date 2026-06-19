@@ -3,8 +3,6 @@ import '../src/index.css';
 import { Providers } from './providers';
 import VersionCheck from '../src/components/VersionCheck';
 
-export const dynamic = 'force-dynamic';
-
 export const metadata: Metadata = {
   title: 'TigmaMinds Academy — Learn STEM Through Stories',
   description: 'Programming, AI, and robotics taught through illustrated stories that make science feel like an adventure.',
