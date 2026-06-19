@@ -4,7 +4,9 @@ import { useParams } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, BookOpen, Wrench, Lightbulb, Gamepad2, Clock, Target, Package, ListChecks, Trophy, Sparkles } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { getLessonBySlug, lessons } from '../data/lessons';
+import type { Lesson } from '../data/lesson-types';
+import { loadLessonBySlug } from '../data/lessons-loader';
+import { lessonsMeta } from '../data/lessons-meta';
 import { getLevelComponents } from '../components/levels';
 import { useProgress } from '../contexts/ProgressContext';
 import Level0Listener from '../components/Level0Listener';
@@ -35,7 +37,8 @@ const LEVEL_COMPLETION: { level: 0 | 1 | 2 | 3; name: string; tab: Level }[] = [
 
 export default function LessonPage() {
   const { slug } = useParams<{ slug: string }>();
-  const lesson = slug ? getLessonBySlug(slug) : undefined;
+  const [lesson, setLesson] = useState<Lesson | undefined>(undefined);
+  const [lessonLoading, setLessonLoading] = useState(true);
   const [activeLevel, setActiveLevelRaw] = useState<Level>('listener');
   const { markLevelComplete, isLevelComplete, canMarkComplete, recordLevelViewed, getStoryProgress, getLevelDetail } = useProgress();
   const { isDemoStory } = useLessonMeta();
@@ -45,6 +48,18 @@ export default function LessonPage() {
   const isDemo = lesson ? isDemoStory(lesson.slug) : false;
   const [clientReady, setClientReady] = useState(false);
   useEffect(() => setClientReady(true), []);
+
+  // Load the heavy lesson content as a separate async chunk so it doesn't block
+  // hydration of the page shell.
+  useEffect(() => {
+    if (!slug) { setLessonLoading(false); return; }
+    let active = true;
+    setLessonLoading(true);
+    loadLessonBySlug(slug).then((l) => {
+      if (active) { setLesson(l); setLessonLoading(false); }
+    });
+    return () => { active = false; };
+  }, [slug]);
 
   // Restore level tab from URL hash (e.g. #level-explorer after sign-in redirect)
   useEffect(() => {
@@ -74,6 +89,18 @@ export default function LessonPage() {
     if (lesson) recordLevelViewed(lesson.slug, levelToNumber[lvl]);
   };
 
+  if (lessonLoading) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-900">
+        <Header />
+        <div className="pt-32 pb-20 flex items-center justify-center">
+          <Sparkles className="w-6 h-6 animate-pulse text-amber-500" />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   if (!lesson) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -91,9 +118,11 @@ export default function LessonPage() {
   }
 
   const Icon = lesson.stem.icon;
-  const currentIndex = lessons.findIndex((l) => l.slug === slug);
-  const prevLesson = currentIndex > 0 ? lessons[currentIndex - 1] : null;
-  const nextLesson = currentIndex < lessons.length - 1 ? lessons[currentIndex + 1] : null;
+  // Prev/next use lightweight meta (not the full lesson array) to keep this page's
+  // navigation working without re-bundling all lesson content.
+  const currentIndex = lessonsMeta.findIndex((l) => l.slug === slug);
+  const prevLesson = currentIndex > 0 ? lessonsMeta[currentIndex - 1] : null;
+  const nextLesson = currentIndex >= 0 && currentIndex < lessonsMeta.length - 1 ? lessonsMeta[currentIndex + 1] : null;
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
@@ -742,12 +771,12 @@ plt.show()`}</pre>
           {prevLesson ? (
             <Link href={`/lessons/${prevLesson.slug}`} className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
               <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">{prevLesson.story.title}</span>
+              <span className="text-sm font-medium">{prevLesson.storyTitle}</span>
             </Link>
           ) : <div />}
           {nextLesson ? (
             <Link href={`/lessons/${nextLesson.slug}`} className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
-              <span className="text-sm font-medium">{nextLesson.story.title}</span>
+              <span className="text-sm font-medium">{nextLesson.storyTitle}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           ) : <div />}

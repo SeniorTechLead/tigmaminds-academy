@@ -1,8 +1,8 @@
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { BookOpen, HelpCircle, CheckCircle, XCircle, Sparkles, ArrowRight, Lightbulb, Globe, Library, Compass } from 'lucide-react';
-import type { Lesson } from '../data/lessons';
-import { getLessonBySlug } from '../data/lessons';
+import type { Lesson } from '../data/lesson-types';
+import { getLessonMetaBySlug } from '../data/lessons-meta';
 import { referenceMeta } from '../data/reference-meta';
 import MatchingActivity from './interactive/MatchingActivity';
 import TrueFalse from './interactive/TrueFalse';
@@ -401,7 +401,7 @@ export default function Level0Listener({ lesson }: Props) {
           </p>
           <div className="space-y-3">
             {lesson.level0.nextLessons.map((next: { slug: string; reason: string }) => {
-              const nextLesson = getLessonBySlug(next.slug);
+              const nextLesson = getLessonMetaBySlug(next.slug);
               if (!nextLesson) return null;
               const parts = next.reason.split(' — ');
               const skill = parts[0];
@@ -415,7 +415,7 @@ export default function Level0Listener({ lesson }: Props) {
                 >
                   <ArrowRight className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold text-sm text-emerald-700 dark:text-emerald-300 group-hover:underline">{nextLesson.story.title}</span>
+                    <span className="font-semibold text-sm text-emerald-700 dark:text-emerald-300 group-hover:underline">{nextLesson.storyTitle}</span>
                     <p className="text-xs mt-1">
                       <span className="font-semibold text-emerald-600 dark:text-emerald-400">{skill}</span>
                       {detail && <span className="text-gray-500 dark:text-gray-400"> — {detail}</span>}
@@ -436,7 +436,7 @@ export default function Level0Listener({ lesson }: Props) {
           </p>
           <div className="space-y-3">
             {lesson.level0.relatedStories.map((rel: { slug: string; reason: string }) => {
-              const relLesson = getLessonBySlug(rel.slug);
+              const relLesson = getLessonMetaBySlug(rel.slug);
               if (!relLesson) return null;
               return (
                 <Link
@@ -447,7 +447,7 @@ export default function Level0Listener({ lesson }: Props) {
                 >
                   <BookOpen className="w-5 h-5 text-sky-500 flex-shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold text-sm text-sky-700 dark:text-sky-300 group-hover:underline">{relLesson.story.title}</span>
+                    <span className="font-semibold text-sm text-sky-700 dark:text-sky-300 group-hover:underline">{relLesson.storyTitle}</span>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{rel.reason}</p>
                   </div>
                 </Link>
