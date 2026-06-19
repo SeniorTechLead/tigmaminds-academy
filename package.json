@@ -4,13 +4,15 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/build-search-index.mjs",
+    "predev": "node scripts/split-lessons.mjs && node scripts/build-search-index.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/check-diagram-overflows.mjs && node scripts/build-playground-meta.mjs && node scripts/build-search-index.mjs && npx tsx scripts/build-lessons-meta.ts",
+    "split-lessons": "node scripts/split-lessons.mjs && node scripts/verify-lesson-split.mjs",
+    "prebuild": "node scripts/split-lessons.mjs && node scripts/verify-lesson-split.mjs && node scripts/check-diagram-overflows.mjs && node scripts/build-playground-meta.mjs && node scripts/build-search-index.mjs && npx tsx scripts/build-lessons-meta.ts",
     "check-diagrams": "node scripts/check-diagram-overflows.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "pretypecheck": "node scripts/split-lessons.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

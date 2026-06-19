@@ -1,16 +1,11 @@
 import type { Lesson } from './lesson-types';
+import { loadLesson } from './lessons/registry';
 
-// The full lesson dataset (lessons.ts) is ~2MB of inline content. Importing it
-// statically pulls all of it into the route's first-load JS, which blocks
-// hydration. Load it as a separate async chunk on demand instead, so the page
-// shell stays interactive while the heavy content streams in.
-
-let cache: Promise<Lesson | undefined> | null = null;
-let cachedSlug: string | null = null;
+// Each lesson's content lives in its own file (src/data/lessons/<slug>.ts) with a
+// dynamic importer in the generated registry. Loading a lesson pulls only that
+// lesson's chunk — not the whole ~2MB dataset — and only after the page shell has
+// hydrated, so it never blocks interactivity.
 
 export async function loadLessonBySlug(slug: string): Promise<Lesson | undefined> {
-  if (cachedSlug === slug && cache) return cache;
-  cachedSlug = slug;
-  cache = import('./lessons').then(({ getLessonBySlug }) => getLessonBySlug(slug));
-  return cache;
+  return loadLesson(slug);
 }

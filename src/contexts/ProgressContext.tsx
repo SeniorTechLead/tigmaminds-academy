@@ -1,10 +1,11 @@
 import { createContext, useContext, useState, useCallback, useEffect, useMemo, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
-// Dynamically import lessons only when saving to Supabase — keeps 1.9MB out of main bundle
+// Load a single lesson's chunk on demand (used when saving progress to Supabase) —
+// pulls only that lesson, not the whole dataset.
 const getLessonBySlug = async (slug: string) => {
-  const { getLessonBySlug: lookup } = await import('../data/lessons');
-  return lookup(slug);
+  const { loadLesson } = await import('../data/lessons/registry');
+  return loadLesson(slug);
 };
 
 // Redirect deleted/renamed slugs to their canonical versions
