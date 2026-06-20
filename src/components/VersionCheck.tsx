@@ -5,39 +5,59 @@ import { usePathname } from 'next/navigation';
 
 let knownBuildId: string | null = null;
 
+/**
+ * Auto-reloads live users when a new build is deployed, so nobody is stuck on a
+ * stale bundle (and nobody has to clear their cache). Detects a new deploy three
+ * ways: on a polling interval, when the tab regains focus, and on in-app
+ * navigation. On change, reloads once.
+ */
 export default function VersionCheck() {
   const pathname = usePathname();
-  const checkCount = useRef(0);
+  const reloadedRef = useRef(false);
 
   useEffect(() => {
-    const check = async () => {
+    let cancelled = false;
+
+    const fetchBuildId = async (): Promise<string | null> => {
       try {
         const res = await fetch('/api/build-id', { cache: 'no-store' });
-        if (!res.ok) return;
+        if (!res.ok) return null;
         const { buildId } = await res.json();
-
-        if (!knownBuildId) {
-          knownBuildId = buildId;
-          return;
-        }
-
-        if (buildId !== knownBuildId) {
-          window.location.reload();
-        }
-      } catch {}
+        return buildId ?? null;
+      } catch {
+        return null;
+      }
     };
 
-    // Skip the very first mount, check on subsequent navigations
-    checkCount.current++;
-    if (checkCount.current > 1) {
-      check();
-    } else {
-      // Set the initial build ID
-      fetch('/api/build-id', { cache: 'no-store' })
-        .then(r => r.json())
-        .then(({ buildId }) => { knownBuildId = buildId; })
-        .catch(() => {});
-    }
+    const check = async () => {
+      if (cancelled || reloadedRef.current) return;
+      const buildId = await fetchBuildId();
+      if (!buildId || cancelled) return;
+      if (!knownBuildId) {
+        knownBuildId = buildId; // first observation — establish baseline
+        return;
+      }
+      if (buildId !== knownBuildId) {
+        reloadedRef.current = true;
+        window.location.reload();
+      }
+    };
+
+    // 1) Establish baseline / check immediately on mount.
+    check();
+
+    // 2) Poll periodically so an idle open page still picks up a new deploy.
+    const interval = setInterval(check, 60_000);
+
+    // 3) Check when the user returns to the tab (cheap, catches deploys during idle).
+    const onVisible = () => { if (document.visibilityState === 'visible') check(); };
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, [pathname]);
 
   return null;
