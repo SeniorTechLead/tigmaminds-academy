@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef, ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './AuthContext';
 
@@ -62,17 +62,25 @@ async function saveToSupabase(userId: string, progress: BasicsProgress) {
 export function BasicsProgressProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [data, setData] = useState<BasicsProgress>(loadLocal);
+  // Track which user id we've already attempted a sync for, so the query runs
+  // exactly once per user — never in a loop, even if the `user` object identity
+  // changes on token refresh or re-render.
+  const syncedUserRef = useRef<string | null>(null);
 
   // Sync from Supabase when user logs in
   useEffect(() => {
-    if (!user) return;
+    const uid = user?.id;
+    if (!uid) { syncedUserRef.current = null; return; }
+    if (syncedUserRef.current === uid) return; // already attempted for this user
+    syncedUserRef.current = uid;
     (async () => {
       try {
-        const { data: row } = await supabase
+        const { data: row, error } = await supabase
           .from('basics_progress')
           .select('courses')
-          .eq('user_id', user.id)
-          .single();
+          .eq('user_id', uid)
+          .maybeSingle();
+        if (error) return; // table missing / RLS / network — fail silently, keep localStorage
         if (row?.courses) {
           // Merge: keep whichever has more completions per course
           setData(prev => {
@@ -90,7 +98,7 @@ export function BasicsProgressProvider({ children }: { children: ReactNode }) {
         // Table may not exist yet — that's fine
       }
     })();
-  }, [user]);
+  }, [user?.id]);
 
   const persist = useCallback((next: BasicsProgress) => {
     saveLocal(next);
