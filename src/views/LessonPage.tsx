@@ -54,13 +54,21 @@ export default function LessonPage() {
 
   // Load the heavy lesson content as a separate async chunk so it doesn't block
   // hydration of the page shell.
+  const [loadError, setLoadError] = useState(false);
   useEffect(() => {
     if (!slug) { setLessonLoading(false); return; }
     let active = true;
     setLessonLoading(true);
-    loadLessonBySlug(slug).then((l) => {
-      if (active) { setLesson(l); setLessonLoading(false); }
-    });
+    setLoadError(false);
+    loadLessonBySlug(slug)
+      .then((l) => {
+        if (active) { setLesson(l); setLessonLoading(false); }
+      })
+      .catch(() => {
+        // A failed dynamic import (e.g. a stale chunk after a deploy) must not
+        // leave the page stuck on the spinner forever. Surface a recoverable error.
+        if (active) { setLoadError(true); setLessonLoading(false); }
+      });
     return () => { active = false; };
   }, [slug]);
 
@@ -109,6 +117,34 @@ export default function LessonPage() {
     );
   }
 
+  if (loadError) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-900">
+        <Header />
+        <div className="pt-32 pb-20 max-w-2xl mx-auto px-4 text-center">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+            {meta?.storyTitle ? `Couldn't load "${meta.storyTitle}"` : "Couldn't load this lesson"}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            The lesson content failed to load. This usually fixes itself with a reload.
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => window.location.reload()}
+              className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-xl font-semibold transition-colors"
+            >
+              Reload
+            </button>
+            <Link href="/lessons" className="inline-flex items-center gap-2 text-amber-600 dark:text-amber-400 hover:underline px-4 py-2.5">
+              <ArrowLeft className="w-4 h-4" /> Back to Lessons
+            </Link>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   if (lessonLoading) {
     const MetaIcon = meta?.stemIcon;
     return (
@@ -120,6 +156,9 @@ export default function LessonPage() {
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <img src={`${meta.illustration}?v=2`} alt={meta.storyTitle} width={1280} height={720} className="w-full aspect-video object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <button onClick={() => window.history.back()} className="absolute top-4 left-4 inline-flex items-center gap-2 bg-black/40 backdrop-blur-sm text-white/90 hover:text-white px-3 py-1.5 rounded-full text-sm transition-colors cursor-pointer">
+                  <ArrowLeft className="w-4 h-4" /> Back
+                </button>
               </div>
             </div>
           )}

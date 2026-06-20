@@ -116,8 +116,23 @@ console.log(`Registry entries:     ${regSlugs.length}`);
 console.log(`In data but not reg:  ${notInReg.length} ${notInReg.slice(0, 5).join(', ')}`);
 console.log(`In reg but not data:  ${extraInReg.length} ${extraInReg.slice(0, 5).join(', ')}`);
 
-if (mismatches === 0 && missing === 0 && notInReg.length === 0 && extraInReg.length === 0) {
-  console.log(`\n✅ PASS: every lesson's content is byte-identical and fully registered.`);
+// Guard: a split file must import every Lucide icon it references (e.g. `icon: Ship`).
+// A missing import compiles fine but crashes at runtime with "X is not defined".
+const iconBroken = [];
+for (const slug of seen) {
+  const file = path.join(OUT, `${slug}.ts`);
+  if (!fs.existsSync(file)) continue;
+  const text = fs.readFileSync(file, 'utf8');
+  const imp = text.match(/import\s*\{([^}]*)\}\s*from\s*['"]lucide-react['"]/);
+  const imported = new Set(imp ? imp[1].split(',').map((s) => s.trim()) : []);
+  for (const m of text.matchAll(/icon:\s*([A-Z][A-Za-z0-9]+)/g)) {
+    if (!imported.has(m[1])) { iconBroken.push(`${slug} → ${m[1]}`); break; }
+  }
+}
+console.log(`Icon-import errors:   ${iconBroken.length} ${iconBroken.slice(0, 5).join(', ')}`);
+
+if (mismatches === 0 && missing === 0 && notInReg.length === 0 && extraInReg.length === 0 && iconBroken.length === 0) {
+  console.log(`\n✅ PASS: every lesson is byte-identical, registered, and imports its icons.`);
   process.exit(0);
 } else {
   console.error(`\n❌ FAIL`);

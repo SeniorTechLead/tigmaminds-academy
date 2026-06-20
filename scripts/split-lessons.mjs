@@ -16,11 +16,22 @@ const SOURCES = [
   { file: 'lessons-ne-states.ts', exportName: 'neStatesLessons' },
 ];
 
-// The Lucide icons that lesson files reference (from the original import lines).
-const LUCIDE_ICONS = new Set([
-  'Cpu', 'Lightbulb', 'Bot', 'Code2', 'Rocket', 'Sparkles', 'Leaf', 'Sun',
-  'Cloud', 'Mountain', 'Music', 'TreePine', 'Construction', 'Code',
-]);
+// The Lucide icons each lesson may reference. Derive this from the actual
+// `lucide-react` import lines in the source files rather than hardcoding — a
+// hardcoded list silently drifts and produces split files that reference an icon
+// they never import (runtime "X is not defined" crash). This union stays correct
+// automatically as authors add icons.
+const LUCIDE_ICONS = new Set();
+for (const { file } of SOURCES) {
+  const src = fs.readFileSync(path.join(DATA, file), 'utf8');
+  const m = src.match(/import\s*\{([^}]*)\}\s*from\s*['"]lucide-react['"]/);
+  if (m) {
+    for (const name of m[1].split(',')) {
+      const id = name.trim();
+      if (id) LUCIDE_ICONS.add(id);
+    }
+  }
+}
 
 fs.mkdirSync(OUT, { recursive: true });
 
