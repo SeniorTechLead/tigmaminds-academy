@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Loader2 } from 'lucide-react';
 import type { ReferenceGuide } from '../../data/reference';
 import { REFERENCE_CATEGORIES } from '../../data/reference';
 import SectionRenderer from './SectionRenderer';
@@ -231,6 +232,7 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
       {/* Collapsed header — always visible */}
       <div
         onClick={handleHeaderClick}
+        onMouseEnter={() => { if (!isExpanded) onExpand?.(guide.slug); }}
         className="w-full flex items-center gap-3 p-4 text-left cursor-pointer select-text"
         role="button"
         tabIndex={0}
@@ -318,6 +320,14 @@ export default function GuideCard({ guide, defaultTab = 'understand', expandedSl
         }`}
       >
         <div className="px-4 pb-5">
+          {/* Content is loaded lazily on expand — show a spinner until it arrives */}
+          {isExpanded && allSections.length === 0 && (
+            <div className="flex items-center justify-center gap-2 py-10 text-gray-500 dark:text-gray-400">
+              <Loader2 className="w-5 h-5 animate-spin text-amber-500" />
+              <span className="text-sm">Loading guide…</span>
+            </div>
+          )}
+
           {/* Mini table of contents */}
           {allSections.length > 2 && (
             <div className="mb-4 py-2.5 px-3 bg-gray-50 dark:bg-gray-700/40 rounded-lg border border-gray-100 dark:border-gray-700">

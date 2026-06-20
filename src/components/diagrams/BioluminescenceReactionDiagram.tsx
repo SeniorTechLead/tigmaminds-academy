@@ -29,8 +29,8 @@ export default function BioluminescenceReactionDiagram() {
   const barX = 190;
 
   return (
-    <div className="bg-slate-900 rounded-xl p-4 my-4">
-      <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
+    <div className="bg-slate-50 dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-gray-700 p-4 my-4">
+      <p className="text-center text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
         How a Firefly Makes Light
       </p>
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full max-w-2xl mx-auto" role="img" aria-label="Bioluminescence chemical reaction diagram">
@@ -159,10 +159,10 @@ export default function BioluminescenceReactionDiagram() {
         </g>
 
         {/* Divider line */}
-        <line x1={40} y1={210} x2={500} y2={210} stroke="#334155" strokeWidth={1} />
+        <line x1={40} y1={210} x2={500} y2={210} stroke="#cbd5e1" className="dark:stroke-slate-700" strokeWidth={1} />
 
         {/* === SECTION TITLE === */}
-        <text x={w / 2} y={238} textAnchor="middle" fill="#d1d5db" fontSize="12" fontWeight="700">
+        <text x={w / 2} y={238} textAnchor="middle" fill="#334155" className="dark:fill-gray-300" fontSize="12" fontWeight="700">
           Why fireflies are energy superstars
         </text>
 
@@ -175,7 +175,7 @@ export default function BioluminescenceReactionDiagram() {
           return (
             <g key={i}>
               {/* Row label */}
-              <text x={barX - 12} y={y + barH / 2 + 4} textAnchor="end" fill="#e5e7eb" fontSize="11" fontWeight="600">
+              <text x={barX - 12} y={y + barH / 2 + 4} textAnchor="end" fill="#334155" className="dark:fill-gray-200" fontSize="11" fontWeight="600">
                 {bar.label}
               </text>
 

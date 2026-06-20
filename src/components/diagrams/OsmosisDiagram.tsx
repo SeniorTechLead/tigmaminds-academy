@@ -149,9 +149,9 @@ export default function OsmosisDiagram() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-blue-950 via-slate-950 to-teal-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
+    <div className="bg-gradient-to-b from-sky-50 via-blue-50 to-teal-50 dark:from-blue-950 dark:via-slate-950 dark:to-teal-950 rounded-xl p-4 my-4 ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg">
       <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
-        <p className="text-xs font-bold text-teal-400 uppercase tracking-wider">
+        <p className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider">
           Osmosis — Watch Water Move
         </p>
         <div className="flex items-center gap-2">
@@ -159,22 +159,22 @@ export default function OsmosisDiagram() {
             <button key={m} onClick={() => setMode(m)}
               className={`text-xs px-2 py-0.5 rounded transition ${
                 mode === m
-                  ? 'bg-teal-500/30 text-teal-300 ring-1 ring-teal-500/50'
-                  : 'bg-white/10 text-gray-400 hover:bg-white/20'
+                  ? 'bg-teal-500/20 text-teal-700 dark:text-teal-300 ring-1 ring-teal-500/50'
+                  : 'bg-black/5 text-gray-600 hover:bg-black/10 dark:bg-white/10 dark:text-gray-400 dark:hover:bg-white/20'
               }`}>
               {modeConfig[m].label}
             </button>
           ))}
           <button
             onClick={() => setPaused(!paused)}
-            className="text-xs px-2 py-0.5 rounded bg-white/10 text-gray-300 hover:bg-white/20 transition"
+            className="text-xs px-2 py-0.5 rounded bg-black/5 text-gray-600 hover:bg-black/10 dark:bg-white/10 dark:text-gray-300 dark:hover:bg-white/20 transition"
           >
             {paused ? '▶' : '⏸'}
           </button>
         </div>
       </div>
 
-      <p className="text-xs text-center text-gray-400 mb-2">{modeConfig[mode].desc}</p>
+      <p className="text-xs text-center text-gray-600 dark:text-gray-400 mb-2">{modeConfig[mode].desc}</p>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-xl mx-auto" role="img"
         aria-label={`Osmosis in ${mode} solution — water molecules crossing a semi-permeable membrane`}>
@@ -204,7 +204,7 @@ export default function OsmosisDiagram() {
               fill="#1e293b" stroke="#64748b" strokeWidth="1" />
           );
         })}
-        <text x={membraneX} y={waterBottom + 25} textAnchor="middle" fill="#94a3b8" fontSize="8">
+        <text x={membraneX} y={waterBottom + 25} textAnchor="middle" fill="#64748b" className="dark:fill-slate-400" fontSize="8">
           Semi-permeable membrane
         </text>
 
@@ -216,7 +216,7 @@ export default function OsmosisDiagram() {
           <ellipse cx={380} cy={190} rx={cellR * 0.4} ry={cellR * 0.3}
             fill="#7f1d1d" opacity="0.3" />
         )}
-        <text x={380} y={190 + cellR + 15} textAnchor="middle" fill="#fca5a5" fontSize="9" fontWeight="600">
+        <text x={380} y={190 + cellR + 15} textAnchor="middle" fill="#dc2626" className="dark:fill-red-300" fontSize="9" fontWeight="600">
           {modeConfig[mode].cellLabel}
         </text>
 
@@ -226,7 +226,7 @@ export default function OsmosisDiagram() {
           return (
             <g key={`sugar-r-${i}`}>
               <circle cx={s.x + jiggle} cy={s.y} r="7" fill="#a855f7" opacity="0.5" />
-              <text x={s.x + jiggle} y={s.y + 1} textAnchor="middle" fill="#e9d5ff" fontSize="6"
+              <text x={s.x + jiggle} y={s.y + 1} textAnchor="middle" fill="#6b21a8" className="dark:fill-purple-200" fontSize="6"
                 fontWeight="bold">S</text>
             </g>
           );
@@ -236,7 +236,7 @@ export default function OsmosisDiagram() {
           return (
             <g key={`sugar-l-${i}`}>
               <circle cx={s.x + jiggle} cy={s.y} r="7" fill="#a855f7" opacity="0.5" />
-              <text x={s.x + jiggle} y={s.y + 1} textAnchor="middle" fill="#e9d5ff" fontSize="6"
+              <text x={s.x + jiggle} y={s.y + 1} textAnchor="middle" fill="#6b21a8" className="dark:fill-purple-200" fontSize="6"
                 fontWeight="bold">S</text>
             </g>
           );
@@ -279,13 +279,13 @@ export default function OsmosisDiagram() {
 
       {/* Legend */}
       <div className="flex flex-wrap justify-center gap-3 mt-2 text-xs">
-        <span className="flex items-center gap-1 text-gray-400">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
           <span className="inline-block w-2 h-2 rounded-full bg-blue-400" /> Water (H₂O) — passes through
         </span>
-        <span className="flex items-center gap-1 text-gray-400">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
           <span className="inline-block w-2 h-2 rounded-full bg-purple-500" /> Sugar (solute) — too big to cross
         </span>
-        <span className="flex items-center gap-1 text-gray-400">
+        <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400">
           <span className="inline-block w-2 h-2 rounded-full bg-red-600" /> Red blood cell
         </span>
       </div>

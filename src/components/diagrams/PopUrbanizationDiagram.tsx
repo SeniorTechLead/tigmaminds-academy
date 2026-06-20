@@ -3,16 +3,16 @@ export default function PopUrbanizationDiagram() {
     <div className="w-full max-w-2xl mx-auto my-4">
       <svg viewBox="0 0 520 360" className="w-full h-auto" role="img"
         aria-label="Diagram showing rural to urban migration flow and urbanization trends">
-        <rect width="520" height="360" rx="8" className="fill-slate-950 dark:fill-slate-950 stroke-slate-700" strokeWidth="1" />
+        <rect width="520" height="360" rx="8" className="fill-slate-50 dark:fill-slate-950 stroke-gray-200 dark:stroke-slate-700" strokeWidth="1" />
 
-        <text x="260" y="26" textAnchor="middle" fontSize="14" fontWeight="600" fill="#e2e8f0">
+        <text x="260" y="26" textAnchor="middle" fontSize="14" fontWeight="600" fill="#0f172a" className="dark:fill-slate-200">
           Urbanization: Rural to Urban Migration
         </text>
 
         {/* Rural scene */}
         <rect x="20" y="50" width="170" height="170" rx="8" fill="none" stroke="#34d399" strokeWidth="1.5" />
         <rect x="20" y="50" width="170" height="24" rx="8" fill="#166534" opacity="0.3" />
-        <text x="105" y="67" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#6ee7b7">Rural</text>
+        <text x="105" y="67" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#047857" className="dark:fill-emerald-300">Rural</text>
 
         {/* Rural elements */}
         <rect x="55" y="120" width="18" height="20" rx="2" fill="#713f12" opacity="0.5" />
@@ -26,23 +26,23 @@ export default function PopUrbanizationDiagram() {
         <line x1="40" y1="130" x2="40" y2="140" stroke="#713f12" strokeWidth="2" />
         {/* Fields */}
         <rect x="30" y="150" width="150" height="25" rx="3" fill="#166534" opacity="0.2" />
-        <text x="105" y="166" textAnchor="middle" fontSize="10" fill="#6ee7b7">Farmland</text>
+        <text x="105" y="166" textAnchor="middle" fontSize="10" fill="#047857" className="dark:fill-emerald-300">Farmland</text>
 
-        <text x="105" y="195" textAnchor="middle" fontSize="10" fill="#94a3b8">Limited jobs</text>
-        <text x="105" y="208" textAnchor="middle" fontSize="10" fill="#94a3b8">Fewer schools/hospitals</text>
+        <text x="105" y="195" textAnchor="middle" fontSize="10" fill="#64748b" className="dark:fill-slate-400">Limited jobs</text>
+        <text x="105" y="208" textAnchor="middle" fontSize="10" fill="#64748b" className="dark:fill-slate-400">Fewer schools/hospitals</text>
 
         {/* Arrow flow */}
         <g transform="translate(200, 95)">
           <line x1="0" y1="40" x2="100" y2="40" stroke="#fbbf24" strokeWidth="2.5" markerEnd="url(#urbArrow)" />
           <text x="50" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#fbbf24">Migration</text>
-          <text x="50" y="60" textAnchor="middle" fontSize="10" fill="#fde68a">Push: poverty, lack of opportunity</text>
-          <text x="50" y="74" textAnchor="middle" fontSize="10" fill="#fde68a">Pull: jobs, education, services</text>
+          <text x="50" y="60" textAnchor="middle" fontSize="10" fill="#b45309" className="dark:fill-amber-200">Push: poverty, lack of opportunity</text>
+          <text x="50" y="74" textAnchor="middle" fontSize="10" fill="#b45309" className="dark:fill-amber-200">Pull: jobs, education, services</text>
         </g>
 
         {/* Urban scene */}
         <rect x="315" y="50" width="185" height="170" rx="8" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
         <rect x="315" y="50" width="185" height="24" rx="8" fill="#1e40af" opacity="0.3" />
-        <text x="407" y="67" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#93c5fd">Urban</text>
+        <text x="407" y="67" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#1d4ed8" className="dark:fill-blue-300">Urban</text>
 
         {/* Buildings */}
         <rect x="335" y="100" width="20" height="55" rx="2" fill="#475569" opacity="0.6" />
@@ -67,35 +67,35 @@ export default function PopUrbanizationDiagram() {
         <rect x="325" y="155" width="165" height="10" rx="2" fill="#374151" opacity="0.4" />
         <line x1="330" y1="160" x2="485" y2="160" stroke="#fbbf24" strokeWidth="1" strokeDasharray="8,6" />
 
-        <text x="407" y="185" textAnchor="middle" fontSize="10" fill="#94a3b8">Jobs, education, healthcare</text>
-        <text x="407" y="198" textAnchor="middle" fontSize="10" fill="#94a3b8">But: congestion, pollution, floods</text>
+        <text x="407" y="185" textAnchor="middle" fontSize="10" fill="#64748b" className="dark:fill-slate-400">Jobs, education, healthcare</text>
+        <text x="407" y="198" textAnchor="middle" fontSize="10" fill="#64748b" className="dark:fill-slate-400">But: congestion, pollution, floods</text>
 
         {/* Stats bar */}
         <rect x="20" y="235" width="480" height="50" rx="6" fill="none" stroke="#475569" strokeWidth="1" />
-        <text x="260" y="253" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#e2e8f0">Global Urbanization Trend</text>
+        <text x="260" y="253" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#0f172a" className="dark:fill-slate-200">Global Urbanization Trend</text>
 
         {/* Progress bars */}
-        <text x="50" y="274" fontSize="10" fill="#94a3b8">1950:</text>
-        <rect x="85" y="266" width="120" height="12" rx="3" fill="#1e293b" />
+        <text x="50" y="274" fontSize="10" fill="#64748b" className="dark:fill-slate-400">1950:</text>
+        <rect x="85" y="266" width="120" height="12" rx="3" fill="#e2e8f0" className="dark:fill-slate-700" />
         <rect x="85" y="266" width="36" height="12" rx="3" fill="#34d399" opacity="0.6" />
-        <text x="130" y="275" fontSize="10" fill="#6ee7b7">30%</text>
+        <text x="130" y="275" fontSize="10" fill="#047857" className="dark:fill-emerald-300">30%</text>
 
-        <text x="255" y="274" fontSize="10" fill="#94a3b8">2024:</text>
-        <rect x="290" y="266" width="120" height="12" rx="3" fill="#1e293b" />
+        <text x="255" y="274" fontSize="10" fill="#64748b" className="dark:fill-slate-400">2024:</text>
+        <rect x="290" y="266" width="120" height="12" rx="3" fill="#e2e8f0" className="dark:fill-slate-700" />
         <rect x="290" y="266" width="66" height="12" rx="3" fill="#60a5fa" opacity="0.6" />
-        <text x="365" y="275" fontSize="10" fill="#93c5fd">55%</text>
+        <text x="365" y="275" fontSize="10" fill="#1d4ed8" className="dark:fill-blue-300">55%</text>
 
-        <text x="430" y="274" fontSize="10" fill="#94a3b8">2050:</text>
-        <rect x="460" y="266" width="30" height="12" rx="3" fill="#1e293b" />
+        <text x="430" y="274" fontSize="10" fill="#64748b" className="dark:fill-slate-400">2050:</text>
+        <rect x="460" y="266" width="30" height="12" rx="3" fill="#e2e8f0" className="dark:fill-slate-700" />
         <text x="475" y="275" fontSize="10" fill="#fbbf24">68%</text>
 
         {/* Guwahati callout */}
         <rect x="20" y="295" width="480" height="55" rx="6" fill="none" stroke="#fbbf24" strokeWidth="1" />
         <text x="260" y="315" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#fbbf24">Guwahati: NE India's Urbanization Story</text>
-        <text x="260" y="332" textAnchor="middle" fontSize="10" fill="#94a3b8">
+        <text x="260" y="332" textAnchor="middle" fontSize="10" fill="#64748b" className="dark:fill-slate-400">
           Population: 300,000 (1991) to 1.1 million (2021) | One of India's fastest-growing cities
         </text>
-        <text x="260" y="346" textAnchor="middle" fontSize="10" fill="#94a3b8">
+        <text x="260" y="346" textAnchor="middle" fontSize="10" fill="#64748b" className="dark:fill-slate-400">
           Growth brings jobs and services but also congestion, flooding, and waste challenges
         </text>
 

@@ -24,12 +24,12 @@ export default function BoatBrahmaputraDiagram() {
         <rect width="630" height="480" rx="8" className="fill-white dark:fill-slate-900" />
 
         {/* Title */}
-        <text x="315" y="28" textAnchor="middle" className="title fill-amber-300">
+        <text x="315" y="28" textAnchor="middle" className="title fill-amber-700 dark:fill-amber-300">
           The Brahmaputra — A River That Moves
         </text>
 
         {/* === TOP: Bird's eye view of braided channels === */}
-        <text x="315" y="55" textAnchor="middle" className="heading fill-slate-300">
+        <text x="315" y="55" textAnchor="middle" className="heading fill-slate-600 dark:fill-slate-300">
           Braided River (top view)
         </text>
 
@@ -54,7 +54,7 @@ export default function BoatBrahmaputraDiagram() {
 
         {/* Majuli island */}
         <ellipse cx="300" cy="130" rx="30" ry="14" fill="#4ade80" opacity="0.4" stroke="#22c55e" strokeWidth="1" />
-        <text x="300" y="134" textAnchor="middle" className="small fill-green-300">Majuli</text>
+        <text x="300" y="134" textAnchor="middle" className="small fill-green-700 dark:fill-green-300">Majuli</text>
 
         {/* Bank erosion arrows */}
         <line x1="40" y1="75" x2="55" y2="85" stroke="#ef4444" strokeWidth="1.5" />
@@ -67,17 +67,17 @@ export default function BoatBrahmaputraDiagram() {
 
         {/* Width label */}
         <line x1="40" y1="190" x2="590" y2="190" stroke="#94a3b8" strokeWidth="1" strokeDasharray="4,2" />
-        <text x="315" y="205" textAnchor="middle" className="label fill-slate-400">
+        <text x="315" y="205" textAnchor="middle" className="label fill-slate-500 dark:fill-slate-400">
           Width: up to 10 km in monsoon season
         </text>
 
         {/* === MIDDLE: Cross-section === */}
-        <text x="315" y="230" textAnchor="middle" className="heading fill-slate-300">
+        <text x="315" y="230" textAnchor="middle" className="heading fill-slate-600 dark:fill-slate-300">
           Cross-Section (why it shifts)
         </text>
 
-        {/* Ground level */}
-        <rect x="30" y="240" width="570" height="100" rx="4" fill="#1a1a2e" />
+        {/* Ground level (earthy cross-section) */}
+        <rect x="30" y="240" width="570" height="100" rx="4" fill="#e7e0d4" className="dark:fill-[#1a1a2e]" />
 
         {/* River bed profile */}
         <path d="M 30 250 L 80 250 Q 120 250 140 270 Q 170 310 210 300 Q 240 290 260 310 Q 290 330 330 310 Q 370 290 400 310 Q 430 325 470 300 Q 510 275 540 260 L 600 250"
@@ -91,9 +91,9 @@ export default function BoatBrahmaputraDiagram() {
         <ellipse cx="330" cy="308" rx="15" ry="5" fill="#d4a574" opacity="0.5" />
 
         {/* Channel labels */}
-        <text x="175" y="285" textAnchor="middle" className="small fill-blue-300">channel 1</text>
-        <text x="295" y="300" textAnchor="middle" className="small fill-blue-300">channel 2</text>
-        <text x="435" y="290" textAnchor="middle" className="small fill-blue-300">channel 3</text>
+        <text x="175" y="285" textAnchor="middle" className="small fill-blue-100 dark:fill-blue-200">channel 1</text>
+        <text x="295" y="300" textAnchor="middle" className="small fill-blue-100 dark:fill-blue-200">channel 2</text>
+        <text x="435" y="290" textAnchor="middle" className="small fill-blue-100 dark:fill-blue-200">channel 3</text>
 
         {/* Banks */}
         <rect x="30" y="245" width="55" height="18" rx="2" fill="#4a3728" />
@@ -117,29 +117,29 @@ export default function BoatBrahmaputraDiagram() {
         <g>
           <rect x="30" y="372" width="130" height="55" rx="5" fill="#7f1d1d" opacity="0.3" stroke="#ef4444" strokeWidth="1" />
           <text x="95" y="390" textAnchor="middle" className="small fill-red-300" fontWeight="600">Shifting Sandbars</text>
-          <text x="95" y="404" textAnchor="middle" className="small fill-slate-400">Sand moves daily</text>
-          <text x="95" y="416" textAnchor="middle" className="small fill-slate-400">in monsoon floods</text>
+          <text x="95" y="404" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">Sand moves daily</text>
+          <text x="95" y="416" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">in monsoon floods</text>
         </g>
 
         <g>
           <rect x="175" y="372" width="130" height="55" rx="5" fill="#7f1d1d" opacity="0.3" stroke="#ef4444" strokeWidth="1" />
           <text x="240" y="390" textAnchor="middle" className="small fill-red-300" fontWeight="600">Bank Collapse</text>
-          <text x="240" y="404" textAnchor="middle" className="small fill-slate-400">Soft soil crumbles</text>
-          <text x="240" y="416" textAnchor="middle" className="small fill-slate-400">without warning</text>
+          <text x="240" y="404" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">Soft soil crumbles</text>
+          <text x="240" y="416" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">without warning</text>
         </g>
 
         <g>
           <rect x="320" y="372" width="130" height="55" rx="5" fill="#7f1d1d" opacity="0.3" stroke="#ef4444" strokeWidth="1" />
           <text x="385" y="390" textAnchor="middle" className="small fill-red-300" fontWeight="600">Hidden Currents</text>
-          <text x="385" y="404" textAnchor="middle" className="small fill-slate-400">Underwater flows</text>
-          <text x="385" y="416" textAnchor="middle" className="small fill-slate-400">can drag boats</text>
+          <text x="385" y="404" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">Underwater flows</text>
+          <text x="385" y="416" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">can drag boats</text>
         </g>
 
         <g>
           <rect x="465" y="372" width="135" height="55" rx="5" fill="#7f1d1d" opacity="0.3" stroke="#ef4444" strokeWidth="1" />
           <text x="532" y="390" textAnchor="middle" className="small fill-red-300" fontWeight="600">Monsoon Floods</text>
-          <text x="532" y="404" textAnchor="middle" className="small fill-slate-400">Water rises 5–10 m</text>
-          <text x="532" y="416" textAnchor="middle" className="small fill-slate-400">in weeks</text>
+          <text x="532" y="404" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">Water rises 5–10 m</text>
+          <text x="532" y="416" textAnchor="middle" className="small fill-slate-500 dark:fill-slate-400">in weeks</text>
         </g>
 
         {/* Key stat */}
@@ -147,7 +147,7 @@ export default function BoatBrahmaputraDiagram() {
         <text x="315" y="452" textAnchor="middle" className="small fill-blue-200">
           The Brahmaputra carries 590 million tonnes of sediment per year — more than almost any river on Earth
         </text>
-        <text x="315" y="465" textAnchor="middle" className="small fill-blue-300">
+        <text x="315" y="465" textAnchor="middle" className="small fill-blue-600 dark:fill-blue-300">
           It can shift its main channel by kilometres in a single monsoon season
         </text>
       </svg>
