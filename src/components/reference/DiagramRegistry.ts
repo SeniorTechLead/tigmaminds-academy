@@ -1049,6 +1049,12 @@ const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = 
   // Algorithms diagrams
   AlgoParityBitDiagram: () => import('../diagrams/AlgoParityBitDiagram'),
 
+  // Economics diagrams
+  SupplyDemandCurveDiagram: () => import('../diagrams/SupplyDemandCurveDiagram'),
+  MarketTypesSpectrumDiagram: () => import('../diagrams/MarketTypesSpectrumDiagram'),
+  ComparativeAdvantageDiagram: () => import('../diagrams/ComparativeAdvantageDiagram'),
+  InflationPurchasingPowerDiagram: () => import('../diagrams/InflationPurchasingPowerDiagram'),
+
   // Statistics diagrams
   StatsMonteCarloDiagram: () => import('../diagrams/StatsMonteCarloDiagram'),
   StatsBayesianDiagram: () => import('../diagrams/StatsBayesianDiagram'),
