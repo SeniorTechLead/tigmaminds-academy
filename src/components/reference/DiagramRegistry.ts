@@ -1002,6 +1002,61 @@ const lazyMap: Record<string, () => Promise<{ default: ComponentType<any> }>> = 
   ImmuneResponseDiagram: () => import('../diagrams/ImmuneResponseDiagram'),
   SleepCycleDiagram: () => import('../diagrams/SleepCycleDiagram'),
   BMRCalculatorDiagram: () => import('../diagrams/BMRCalculatorDiagram'),
+
+  // Machine Learning diagrams
+  MLFeatureLearningDiagram: () => import('../diagrams/MLFeatureLearningDiagram'),
+  MLLabelsDiagram: () => import('../diagrams/MLLabelsDiagram'),
+  MLOverfittingDiagram: () => import('../diagrams/MLOverfittingDiagram'),
+  MLApplicationsDiagram: () => import('../diagrams/MLApplicationsDiagram'),
+  MLTrainTestScaleDiagram: () => import('../diagrams/MLTrainTestScaleDiagram'),
+  MLKNNVoteDiagram: () => import('../diagrams/MLKNNVoteDiagram'),
+  MLDecisionTreeDiagram: () => import('../diagrams/MLDecisionTreeDiagram'),
+  MLEvaluationFlowDiagram: () => import('../diagrams/MLEvaluationFlowDiagram'),
+  MLNeuralNetDiagram: () => import('../diagrams/MLNeuralNetDiagram'),
+  MLCrossValidationDiagram: () => import('../diagrams/MLCrossValidationDiagram'),
+  MLConfusionMatrixDiagram: () => import('../diagrams/MLConfusionMatrixDiagram'),
+
+  // Python diagrams
+  PyProgramIODiagram: () => import('../diagrams/PyProgramIODiagram'),
+  PyLiteralStepsDiagram: () => import('../diagrams/PyLiteralStepsDiagram'),
+  PyIfElseDiagram: () => import('../diagrams/PyIfElseDiagram'),
+  PySequentialExecDiagram: () => import('../diagrams/PySequentialExecDiagram'),
+  PyPrintDiagram: () => import('../diagrams/PyPrintDiagram'),
+  PyComprehensionDiagram: () => import('../diagrams/PyComprehensionDiagram'),
+  PyFileIODiagram: () => import('../diagrams/PyFileIODiagram'),
+  PyBisectDiagram: () => import('../diagrams/PyBisectDiagram'),
+  PyItertoolsDiagram: () => import('../diagrams/PyItertoolsDiagram'),
+  PyScopeLEGBDiagram: () => import('../diagrams/PyScopeLEGBDiagram'),
+  PyFStringDiagram: () => import('../diagrams/PyFStringDiagram'),
+
+  // NumPy diagrams
+  NumpyCreateArraysDiagram: () => import('../diagrams/NumpyCreateArraysDiagram'),
+  NumpyVectorizedDiagram: () => import('../diagrams/NumpyVectorizedDiagram'),
+  NumpyBooleanMaskDiagram: () => import('../diagrams/NumpyBooleanMaskDiagram'),
+  NumpyStatsDiagram: () => import('../diagrams/NumpyStatsDiagram'),
+  NumpyReshapeDiagram: () => import('../diagrams/NumpyReshapeDiagram'),
+  NumpySensorPipelineDiagram: () => import('../diagrams/NumpySensorPipelineDiagram'),
+
+  // Materials & Chemistry diagrams
+  MatMaterialClassesDiagram: () => import('../diagrams/MatMaterialClassesDiagram'),
+  MatChemicalBondsDiagram: () => import('../diagrams/MatChemicalBondsDiagram'),
+  MatCeramicFiringDiagram: () => import('../diagrams/MatCeramicFiringDiagram'),
+  MatMaillardDiagram: () => import('../diagrams/MatMaillardDiagram'),
+  MatNaturalVsSyntheticDiagram: () => import('../diagrams/MatNaturalVsSyntheticDiagram'),
+  MatLostWaxDiagram: () => import('../diagrams/MatLostWaxDiagram'),
+  MatSolarConcentrationDiagram: () => import('../diagrams/MatSolarConcentrationDiagram'),
+
+  // Algorithms diagrams
+  AlgoParityBitDiagram: () => import('../diagrams/AlgoParityBitDiagram'),
+
+  // Statistics diagrams
+  StatsMonteCarloDiagram: () => import('../diagrams/StatsMonteCarloDiagram'),
+  StatsBayesianDiagram: () => import('../diagrams/StatsBayesianDiagram'),
+  StatsCentralTendencyDiagram: () => import('../diagrams/StatsCentralTendencyDiagram'),
+  StatsStdDevDiagram: () => import('../diagrams/StatsStdDevDiagram'),
+  StatsHistogramShapesDiagram: () => import('../diagrams/StatsHistogramShapesDiagram'),
+  StatsIQROutlierDiagram: () => import('../diagrams/StatsIQROutlierDiagram'),
+  StatsCorrelationDiagram: () => import('../diagrams/StatsCorrelationDiagram'),
 };
 
 const cache: Record<string, ComponentType<any>> = {};

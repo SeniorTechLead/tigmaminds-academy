@@ -866,6 +866,7 @@ print(fibonacci(10))  # 55`,
         '| **Polar codes** | Channel polarization creates "perfect" and "useless" sub-channels; data sent on reliable ones only | 5G control channels |\n\n' +
         '**The math behind Reed-Solomon:** Uses **Galois field arithmetic** (GF(2\\u2078)) where addition is XOR and multiplication uses polynomial arithmetic modulo an irreducible polynomial.\n\n' +
         '**The Shannon limit** (channel capacity C = B\\u00B7log\\u2082(1 + SNR)) sets the theoretical maximum data rate for a given noise level. Modern codes (LDPC, Turbo, Polar) approach this limit within fractions of a decibel.',
+          diagram: 'AlgoParityBitDiagram',
     },
   ],
 };

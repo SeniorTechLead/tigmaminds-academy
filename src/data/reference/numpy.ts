@@ -125,6 +125,7 @@ export const guide: ReferenceGuide = {
         'patch = data[1000:1100, 2000:2100]  # only this 100×100 patch is loaded into RAM\n' +
         '```\n' +
         'The OS transparently pages data in/out — you write normal NumPy code, but only the accessed slices actually occupy RAM.',
+          diagram: 'NumpyCreateArraysDiagram',
     },
     {
       title: 'Math on Entire Arrays — No Loops Needed',
@@ -161,6 +162,7 @@ export const guide: ReferenceGuide = {
         '**Einstein summation** — a compact notation for complex operations:\n' +
         '`np.einsum("ij,jk->ik", A, B)` = matrix multiplication. "ij,jk->ik" means: sum over shared index j, keep i and k. ' +
         'Einsum can express matrix multiply, trace, transpose, outer product, and batch operations in one line.',
+          diagram: 'NumpyVectorizedDiagram',
     },
     {
       title: 'Filtering Data — Boolean Indexing',
@@ -191,6 +193,7 @@ export const guide: ReferenceGuide = {
         'Cropping: `image[100:200, 50:150]`. Brightening: `np.clip(image + 50, 0, 255)`. ' +
         'Blurring: convolve with a 3×3 averaging kernel. Edge detection: convolve with a Sobel kernel. ' +
         'A color image is (480, 640, 3) — the third axis is [R, G, B]. Grayscale conversion: `0.299*R + 0.587*G + 0.114*B` (human eye sensitivity).',
+          diagram: 'NumpyBooleanMaskDiagram',
     },
     {
       title: 'Real-World Data Shapes',
@@ -276,6 +279,7 @@ uniform = np.random.uniform(0, 100, 50)  # 50 values between 0 and 100
 print(temps.shape)   # (5,)     — 1D, 5 elements
 print(ones.shape)    # (3, 4)   — 2D, 3 rows x 4 columns
 print(ones.size)     # 12       — total element count`,
+          diagram: 'NumpyCreateArraysDiagram',
     },
     {
       title: 'Vectorized Math — No Loops',
@@ -307,6 +311,7 @@ print(fahrenheit)  # [ 32.  68.  98.6 212. ]
 # Compare: Python loop vs NumPy for 1 million values
 # Loop:  [x * 2 for x in range(1_000_000)]  ~120ms
 # NumPy: np.arange(1_000_000) * 2            ~2ms`,
+          diagram: 'NumpyVectorizedDiagram',
     },
     {
       title: 'Statistics on Arrays',
@@ -341,6 +346,7 @@ print(f"Cumsum: {np.cumsum(scores)}")
 hours = np.array([2, 3, 1, 5, 4, 6, 3, 7, 5, 8])
 r = np.corrcoef(hours, scores)[0, 1]
 print(f"Correlation study hours vs scores: {r:.3f}")`,
+          diagram: 'NumpyStatsDiagram',
     },
     {
       title: 'Boolean Indexing — Filtering Data',
@@ -384,6 +390,7 @@ print(f"Percentage: {hot.mean() * 100:.0f}%")
 # Replace values conditionally
 capped = np.where(temps > 35, 35, temps)  # cap at 35
 print(f"Capped: {capped}")  # [22 28 35 19 31 35 27 33 18 29]`,
+          diagram: 'NumpyBooleanMaskDiagram',
     },
     {
       title: 'Reshaping and Slicing',
@@ -422,6 +429,7 @@ a = np.array([1, 2, 3])
 b = np.array([4, 5, 6])
 print(np.vstack([a, b]))   # [[1 2 3], [4 5 6]]  — vertical
 print(np.hstack([a, b]))   # [1 2 3 4 5 6]        — horizontal`,
+          diagram: 'NumpyReshapeDiagram',
     },
     {
       title: 'Real-World Example: Analyzing Sensor Data',
@@ -457,6 +465,7 @@ for i, label in enumerate(["Sensor A", "Sensor B", "Sensor C"]):
 daily_avg = np.nanmean(data, axis=1)  # one value per row
 hottest_day = np.nanargmax(daily_avg)
 print(f"Hottest day: #{hottest_day + 1} ({daily_avg[hottest_day]:.1f}°C)")`,
+          diagram: 'NumpySensorPipelineDiagram',
     },
   ],
 };

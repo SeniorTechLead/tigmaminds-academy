@@ -25,6 +25,7 @@ export const guide: ReferenceGuide = {
       advancedContent:
         'Beneath your recipe-like Python code, the computer doesn\'t see words. It sees binary: sequences of 1s and 0s called **machine code**, loaded into memory, one instruction at a time. The CPU executes these with the **fetch-decode-execute cycle**: fetch the next instruction from memory, decode what it means (ADD? MOVE? COMPARE?), execute it. Your quad-core laptop runs this cycle **billions of times per second**, per core.\n\n' +
         'Python adds two layers of translation. When you run `python script.py`: (1) the Python interpreter compiles your source into **bytecode** (stored in `.pyc` files — portable, lower-level but not machine code yet); (2) the **Python Virtual Machine (PVM)** reads that bytecode one instruction at a time and runs it. This interpretation step is why Python is slower than compiled languages like C or Rust — for every single operation in your code, the PVM is doing extra lookup work. But it\'s also why Python feels so fast to *develop* in: you skip the multi-minute compile step and run instantly. **Just-in-time (JIT) compilers** like PyPy get the best of both: watch the bytecode, notice which functions run often, compile those to machine code on the fly. 10-100× speedups on compute-heavy workloads.',
+          diagram: 'PyProgramIODiagram',
     },
     {
       title: 'How Computers Follow Instructions',
@@ -46,6 +47,7 @@ export const guide: ReferenceGuide = {
         'Why? Because `b = a` didn\'t copy the list. It made `b` point to the *same list object* as `a`. One object; two names. Modify through either name and the change is visible from both.\n\n' +
         'This matters because Python has two kinds of objects: **mutable** (lists, dicts, sets — you can modify them in place) and **immutable** (ints, strings, tuples — you can\'t). With immutables, the trap doesn\'t arise, because there\'s no "modify in place" to share. With mutables, you need `b = a.copy()` or `b = a[:]` to get an independent copy.\n\n' +
         'Python also uses **dynamic typing** — a variable can hold an int one moment and a string the next. The type is attached to the *value*, not the variable. Combined with reference semantics, this means Python pushes responsibility onto the programmer: you\'re the one who needs to know whether you\'re sharing a reference or copying. The language trusts you — which is freeing, and also where most subtle Python bugs come from.',
+          diagram: 'PyLiteralStepsDiagram',
     },
     {
       title: 'Variables Are Labeled Boxes',
@@ -136,6 +138,7 @@ export const guide: ReferenceGuide = {
         'to Python from functional languages (Haskell, OCaml, Erlang) where it\'s the primary ' +
         'control flow. If you find yourself writing a 10-branch `elif` chain that all dispatches ' +
         'on the shape of some data, `match` is almost always the cleaner choice.',
+          diagram: 'PyIfElseDiagram',
     },
     {
       title: 'Repeating Things (Loops)',
@@ -216,6 +219,7 @@ export const guide: ReferenceGuide = {
         '**The rule of thumb:** CPU-bound work → multiprocessing. I/O-bound work → asyncio or ' +
         'threading. If in doubt, start sequential — only reach for concurrency when you actually ' +
         'have a bottleneck. Concurrent code is dramatically harder to reason about.',
+          diagram: 'PySequentialExecDiagram',
     },
     {
       title: 'Debugging — Finding and Fixing Mistakes',
@@ -262,6 +266,7 @@ print("My name is Priya")
 print(42)
 print(3 + 7)        # 10
 print("Age:", 14)    # you can mix types with commas`,
+          diagram: 'PyPrintDiagram',
     },
     {
       id: 'py-variables',
@@ -823,6 +828,7 @@ names = ["Ranga", "Mohini", "Kavi"]
 ages = [25, 18, 30]
 profiles = {name: age for name, age in zip(names, ages)}
 print(profiles)  # {'Ranga': 25, 'Mohini': 18, 'Kavi': 30}`,
+          diagram: 'PyComprehensionDiagram',
     },
     {
       id: 'py-files',
@@ -862,6 +868,7 @@ with open("report.csv", "w", newline="") as f:
 with open("elephant_data.csv", "r") as f:
   line_count = sum(1 for line in f)
   print(f"Total rows: {line_count - 1}")  # minus header`,
+          diagram: 'PyFileIODiagram',
     },
     {
       id: 'py-errors',
@@ -998,6 +1005,7 @@ print(richter_class(7.2))  # major
 scores = [60, 70, 80, 90]
 bisect.insort(scores, 75)
 print(scores)  # [60, 70, 75, 80, 90] — inserted in right place`,
+          diagram: 'PyBisectDiagram',
     },
     {
       id: 'py-itertools',
@@ -1063,6 +1071,7 @@ pattern = [1, 2, 3]
 total_length = 7
 filled = list(islice(cycle(pattern), total_length))
 print(filled)  # [1, 2, 3, 1, 2, 3, 1]`,
+          diagram: 'PyItertoolsDiagram',
     },
     {
       id: 'py-tuples-sets',
@@ -1360,6 +1369,7 @@ add_score, get_scores = create_scorer()
 print(add_score(85))   # Added 85, average: 85.0, total: 1
 print(add_score(92))   # Added 92, average: 88.5, total: 2
 print(get_scores())    # [85, 92]`,
+          diagram: 'PyScopeLEGBDiagram',
     },
     {
       id: 'py-formatting',
@@ -1449,6 +1459,7 @@ name = "Ranga"
 print(f"{x = }")        # x = 42
 print(f"{name = }")     # name = 'Ranga'
 print(f"{len(name) = }")  # len(name) = 5`,
+          diagram: 'PyFStringDiagram',
     },
     {
       id: 'py-math',

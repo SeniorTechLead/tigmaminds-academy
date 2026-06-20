@@ -136,6 +136,7 @@ export const guide: ReferenceGuide = {
         'Take one elephant photo. Create two augmented versions (crop, rotate, color-shift). Train the network to produce SIMILAR embeddings ' +
         'for the two augmentations but DIFFERENT embeddings from other images. The network learns "what makes an elephant look like an elephant" ' +
         'without a single label. After this pretraining, fine-tuning with just 10 labeled images per species can match the accuracy of training from scratch with 1,000.',
+          diagram: 'MLFeatureLearningDiagram',
     },
     {
       title: 'Features — The Lightbulb Moment',
@@ -287,6 +288,7 @@ export const guide: ReferenceGuide = {
         'use that prediction as a "pseudo-label." Then augment the same image strongly (color distort, cutout) ' +
         'and train on it with the pseudo-label.\n\n' +
         'Result: near-supervised accuracy with 7 labeled images per class — because the unlabeled data teaches the model about the structure of the input space.',
+          diagram: 'MLLabelsDiagram',
     },
     {
       title: 'Training vs Testing — Why You Hide the Exam',
@@ -389,6 +391,7 @@ export const guide: ReferenceGuide = {
         'Gradually fills in the mistakes. Reduces bias.\n\n' +
         'In practice, gradient boosting (XGBoost, LightGBM) wins most Kaggle competitions on tabular data. ' +
         'Random forests are harder to misconfigure and a safer default for beginners.',
+          diagram: 'MLOverfittingDiagram',
     },
     {
       title: 'Accuracy, Precision, Recall — Did It Actually Work?',
@@ -525,6 +528,7 @@ export const guide: ReferenceGuide = {
         '- **Knowledge distillation:** Train a large "teacher" model (ResNet-152, 230 MB). Then train a small "student" model (MobileNet, 14 MB) ' +
         'to mimic the teacher\'s outputs. The student learns the teacher\'s "dark knowledge" — subtle probability distributions over classes — ' +
         'and achieves 95% of the teacher\'s accuracy at 1/16th the size.',
+          diagram: 'MLApplicationsDiagram',
     },
     // ── Beyond k-NN: Other Algorithms (visual) ──────────────
     {
@@ -810,6 +814,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)  # use same scaling`,
+          diagram: 'MLTrainTestScaleDiagram',
     },
     {
       title: 'K-Nearest Neighbors',
@@ -830,6 +835,7 @@ print("Accuracy:", accuracy_score(y_test, predictions))
 # Predict a single new animal
 new_animal = scaler.transform([[4000, 265, 42]])
 print("New animal is a:", knn.predict(new_animal)[0])`,
+          diagram: 'MLKNNVoteDiagram',
     },
     {
       title: 'Decision Trees',
@@ -847,6 +853,7 @@ print(export_text(tree, feature_names=["weight","height","footprint"]))
 # Evaluate
 score = tree.score(X_test, y_test)
 print(f"Test accuracy: {score:.0%}")`,
+          diagram: 'MLDecisionTreeDiagram',
     },
     {
       title: 'Evaluating a Model',
@@ -862,6 +869,7 @@ print(confusion_matrix(y_test, predictions))
 print("\\nClassification Report:")
 print(classification_report(y_test, predictions))
 # Shows precision, recall, and f1-score for each class`,
+          diagram: 'MLEvaluationFlowDiagram',
     },
     {
       title: 'Training a Simple Neural Network',
@@ -880,6 +888,7 @@ print("MLP accuracy:", mlp.score(X_test, y_test))
 
 # Neural nets need more data and tuning, but can
 # capture patterns that KNN and trees miss.`,
+          diagram: 'MLNeuralNetDiagram',
     },
     {
       title: 'Cross-Validation',
@@ -894,6 +903,7 @@ scores = cross_val_score(
 print(f"CV scores: {scores}")
 print(f"Mean: {scores.mean():.2%} ± {scores.std():.2%}")
 # More reliable estimate of real-world performance`,
+          diagram: 'MLCrossValidationDiagram',
     },
     {
       title: 'Building a Confusion Matrix',
@@ -963,6 +973,7 @@ plt.title("Elephant Classifier — Confusion Matrix")
 plt.tight_layout()
 plt.savefig("confusion_matrix.png", dpi=150)
 plt.show()`,
+          diagram: 'MLConfusionMatrixDiagram',
     },
   ],
 };

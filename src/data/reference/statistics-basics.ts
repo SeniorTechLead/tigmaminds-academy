@@ -392,6 +392,7 @@ export const guide: ReferenceGuide = {
         '**The curse of dimensionality:** In 100 dimensions, a grid with 10 points per dimension needs 10¹⁰⁰ evaluations. ' +
         'Monte Carlo needs only O(1/ε²) samples regardless of dimension — this is why MCMC is the standard tool for Bayesian inference ' +
         'in climate models (millions of parameters), genomics (thousands of genes), and astrophysics (galaxy formation models).',
+          diagram: 'StatsMonteCarloDiagram',
     },
     {
       title: 'Bayesian Inference',
@@ -441,6 +442,7 @@ export const guide: ReferenceGuide = {
         'Then you use MCMC to sample from the posterior (see Monte Carlo section above) or **variational inference** — ' +
         'which approximates the posterior with a simpler distribution by minimizing KL divergence. ' +
         'Variational inference is faster but less accurate; MCMC is exact but slower. Modern tools (Stan, PyMC, NumPyro) handle both.',
+          diagram: 'StatsBayesianDiagram',
     },
   ],
 
@@ -466,6 +468,7 @@ print("\\n=== With outlier (200) ===")
 print(f"Mean:   {np.mean(scores_with_outlier):.1f}")   # jumps to 93.3
 print(f"Median: {np.median(scores_with_outlier):.1f}") # stays at 85.0
 # The median barely moved — that's why it's called "robust"`,
+          diagram: 'StatsCentralTendencyDiagram',
     },
     {
       id: 'stats-stddev',
@@ -492,6 +495,7 @@ print(f"Class B variance: {np.var(class_b):.1f}")
 # ~68% of values fall within 1 SD of the mean
 # ~95% fall within 2 SDs
 # ~99.7% fall within 3 SDs`,
+          diagram: 'StatsStdDevDiagram',
     },
     {
       id: 'stats-histograms',
@@ -528,6 +532,7 @@ axes[2].set_title("Bimodal (Two Groups)")
 
 plt.tight_layout()
 plt.show()`,
+          diagram: 'StatsHistogramShapesDiagram',
     },
     {
       id: 'stats-outliers',
@@ -556,6 +561,7 @@ print(f"Clean data: {clean}")
 
 print(f"\\nMean with outlier:    {np.mean(data):.1f}")
 print(f"Mean without outlier: {np.mean(clean):.1f}")`,
+          diagram: 'StatsIQROutlierDiagram',
     },
     {
       id: 'stats-correlation',
@@ -590,6 +596,7 @@ plt.show()
 
 print(f"Correlation: {r:.3f}")
 print(f"Each extra hour ≈ +{m:.1f} points on the exam")`,
+          diagram: 'StatsCorrelationDiagram',
     },
   ],
 };
