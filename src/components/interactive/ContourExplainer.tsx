@@ -380,7 +380,10 @@ function Section2BellCurve() {
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" style={{ minHeight: 200 }}>
-        <rect width={W} height={H} rx={12} fill="#0f172a" />
+        {/* Dark plot canvas — the plasma colormap is designed to be read on a dark
+            background (like matplotlib viridis/plasma), so it stays dark in both
+            themes. The border frames it as a deliberate plot panel in light mode. */}
+        <rect x="0.75" y="0.75" width={W - 1.5} height={H - 1.5} rx={12} fill="#0f172a" stroke="#cbd5e1" strokeWidth="1.5" className="dark:stroke-slate-700" />
 
         {/* Heatmap cells */}
         {cells.map((cell, i) => {
@@ -512,7 +515,10 @@ function Section3Correlation() {
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" style={{ minHeight: 190 }}>
-        <rect width={W} height={H} rx={12} fill="#0f172a" />
+        {/* Dark plot canvas — the plasma colormap is designed to be read on a dark
+            background (like matplotlib viridis/plasma), so it stays dark in both
+            themes. The border frames it as a deliberate plot panel in light mode. */}
+        <rect x="0.75" y="0.75" width={W - 1.5} height={H - 1.5} rx={12} fill="#0f172a" stroke="#cbd5e1" strokeWidth="1.5" className="dark:stroke-slate-700" />
 
         {/* Heatmap */}
         {cells.map((cell, i) => {
@@ -644,7 +650,10 @@ function Section4Colors() {
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-md mx-auto" style={{ minHeight: 190 }}>
-        <rect width={W} height={H} rx={12} fill="#0f172a" />
+        {/* Dark plot canvas — the plasma colormap is designed to be read on a dark
+            background (like matplotlib viridis/plasma), so it stays dark in both
+            themes. The border frames it as a deliberate plot panel in light mode. */}
+        <rect x="0.75" y="0.75" width={W - 1.5} height={H - 1.5} rx={12} fill="#0f172a" stroke="#cbd5e1" strokeWidth="1.5" className="dark:stroke-slate-700" />
 
         {/* Heatmap */}
         {cells.map((cell, i) => {
