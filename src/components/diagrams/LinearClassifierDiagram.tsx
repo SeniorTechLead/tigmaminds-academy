@@ -100,8 +100,11 @@ export default function LinearClassifierDiagram() {
       <svg
         viewBox="0 0 533 483"
         className="w-full"
-        style={{ background: "#0f172a", borderRadius: 12 }}
+        style={{ borderRadius: 12 }}
       >
+        {/* Background — light by default, dark variant via class */}
+        <rect x={0} y={0} width={533} height={483} rx={12} fill="#f1f5f9" className="dark:fill-slate-900" />
+
         {/* ════════════ TOP PANEL: linearly separable ════════════ */}
         <g>
           {/* Panel background */}

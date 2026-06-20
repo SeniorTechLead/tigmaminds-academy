@@ -6,16 +6,16 @@
  * Used in the "How a Child Learns Dog" section of the machine-learning guide.
  */
 export default function MLFeatureLearningDiagram() {
-  const W = 760, H = 360;
+  const W = 760, H = 400;
 
   const features = [
-    { label: 'Barks', weight: 'high', wText: '0.9', y: 70 },
-    { label: 'Wags tail', weight: 'high', wText: '0.8', y: 130 },
-    { label: 'Has fur', weight: 'low', wText: '0.2', y: 190 },
-    { label: 'Colour', weight: 'low', wText: '0.0', y: 250 },
+    { label: 'Barks', weight: 'high', wText: '0.9', y: 120 },
+    { label: 'Wags tail', weight: 'high', wText: '0.8', y: 178 },
+    { label: 'Has fur', weight: 'low', wText: '0.2', y: 236 },
+    { label: 'Colour', weight: 'low', wText: '0.0', y: 294 },
   ];
 
-  const hubX = 470, hubY = 165;
+  const hubX = 470, hubY = 207;
 
   return (
     <div className="my-6 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
@@ -27,7 +27,7 @@ export default function MLFeatureLearningDiagram() {
         <text x="32" y="33" fontSize="13" fontWeight="700" fill="#0f172a" className="dark:fill-gray-100">Learning = extract features, then weight them</text>
         <text x="32" y="50" fontSize="11" fill="#475569" className="dark:fill-gray-300">Strong predictors get big weights; weak ones get small weights.</text>
 
-        {/* Column headers */}
+        {/* Column headers — sit in the gap between caption (ends y=58) and first row box (top y=102) */}
         <text x="110" y="92" textAnchor="middle" fontSize="11" fontWeight="700" fill="#64748b" className="dark:fill-gray-400">FEATURES</text>
         <text x="300" y="92" textAnchor="middle" fontSize="11" fontWeight="700" fill="#64748b" className="dark:fill-gray-400">WEIGHTS</text>
 

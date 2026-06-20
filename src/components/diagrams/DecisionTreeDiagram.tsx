@@ -42,27 +42,29 @@ const edges: { from: keyof typeof nodes; to: keyof typeof nodes; label: string; 
   { from: "barks",    to: "cat",      label: "No",  color: "#ef4444" },
 ];
 
-/* ── Leaf metadata ── */
-const leaves: Record<string, { emoji: string; label: string; bg: string }> = {
-  elephant: { emoji: "🐘", label: "ELEPHANT", bg: "#166534" },
-  rhino:    { emoji: "🦏", label: "RHINO",    bg: "#166534" },
-  dog:      { emoji: "🐕", label: "DOG",      bg: "#1e40af" },
-  cat:      { emoji: "🐱", label: "CAT",      bg: "#92400e" },
+/* ── Leaf metadata. Result fills: light value + dark class so each leaf reads in
+   both themes (the leaf only takes this fill when it is the classification result). ── */
+const leaves: Record<string, { emoji: string; label: string; bg: string; bgDark: string }> = {
+  elephant: { emoji: "🐘", label: "ELEPHANT", bg: "#bbf7d0", bgDark: "dark:fill-green-800" },
+  rhino:    { emoji: "🦏", label: "RHINO",    bg: "#bbf7d0", bgDark: "dark:fill-green-800" },
+  dog:      { emoji: "🐕", label: "DOG",      bg: "#bfdbfe", bgDark: "dark:fill-blue-800" },
+  cat:      { emoji: "🐱", label: "CAT",      bg: "#fde68a", bgDark: "dark:fill-amber-700" },
 };
 
 /* ── Helpers ── */
 function RoundedRect({
-  x, y, w, h, fill, stroke, opacity, children,
+  x, y, w, h, fill, stroke, opacity, className, children,
 }: {
   x: number; y: number; w: number; h: number;
   fill: string; stroke: string; opacity: number;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
     <g opacity={opacity} style={{ transition: "opacity 0.4s" }}>
       <rect
         x={x - w / 2} y={y - h / 2} width={w} height={h}
-        rx={10} fill={fill} stroke={stroke} strokeWidth={2}
+        rx={10} fill={fill} stroke={stroke} strokeWidth={2} className={className}
       />
       {children}
     </g>
@@ -124,19 +126,18 @@ export default function DecisionTreeDiagram() {
 
       {/* Result banner */}
       {resultLeaf && (
-        <div className="text-center mb-3 text-lg font-bold text-emerald-400">
+        <div className="text-center mb-3 text-lg font-bold text-emerald-600 dark:text-emerald-400">
           Result: {resultLeaf.emoji} {resultLeaf.label} ✓
         </div>
       )}
 
       {/* SVG Tree */}
-      <svg
-        viewBox="0 0 588 441"
-        className="w-full"
-        style={{ background: "#0f172a", borderRadius: 12 }}
-      >
+      <svg viewBox="0 0 588 441" className="w-full" style={{ borderRadius: 12 }}>
+        {/* Background — light by default, dark variant via class */}
+        <rect x={0} y={0} width={588} height={441} rx={12} fill="#f1f5f9" className="dark:fill-slate-900" />
+
         {/* Title */}
-        <text x={280} y={25} textAnchor="middle" fill="#94a3b8" fontSize={13} fontWeight={600}>
+        <text x={280} y={25} textAnchor="middle" fill="#475569" className="dark:fill-slate-400" fontSize={13} fontWeight={600}>
           Decision-Tree Animal Classifier
         </text>
 
@@ -152,7 +153,7 @@ export default function DecisionTreeDiagram() {
             <g key={`${from}-${to}`} opacity={activePath ? (on ? 1 : 0.2) : 0.7} style={{ transition: "opacity 0.4s" }}>
               <line
                 x1={a.x} y1={a.y + 20} x2={b.x} y2={b.y - 20}
-                stroke={on && activePath ? color : "#475569"}
+                stroke={on && activePath ? color : "#94a3b8"}
                 strokeWidth={on && activePath ? 3 : 2}
                 style={{ transition: "stroke 0.4s, stroke-width 0.4s" }}
               />
@@ -160,7 +161,8 @@ export default function DecisionTreeDiagram() {
                 x={mx + (isYes ? -14 : 14)}
                 y={my - 4}
                 textAnchor="middle"
-                fill={on && activePath ? color : "#94a3b8"}
+                fill={on && activePath ? color : "#64748b"}
+                className={on && activePath ? undefined : "dark:fill-slate-400"}
                 fontSize={12}
                 fontWeight={700}
               >
@@ -182,11 +184,12 @@ export default function DecisionTreeDiagram() {
             <RoundedRect
               key={key}
               x={x} y={y} w={150} h={40}
-              fill={on && activePath ? "#1e293b" : "#1e293b"}
-              stroke={on && activePath ? "#38bdf8" : "#475569"}
+              fill="#ffffff"
+              stroke={on && activePath ? "#0ea5e9" : "#94a3b8"}
               opacity={activePath ? (on ? 1 : 0.2) : 1}
+              className="fill-white dark:fill-slate-800"
             >
-              <text x={x} y={y + 5} textAnchor="middle" fill="#e2e8f0" fontSize={13} fontWeight={600}>
+              <text x={x} y={y + 5} textAnchor="middle" fill="#0f172a" className="dark:fill-slate-100" fontSize={13} fontWeight={600}>
                 {label}
               </text>
             </RoundedRect>
@@ -194,7 +197,7 @@ export default function DecisionTreeDiagram() {
         })}
 
         {/* Leaf nodes */}
-        {(Object.entries(leaves) as [string, typeof leaves[string]][]).map(([key, { emoji, label, bg }]) => {
+        {(Object.entries(leaves) as [string, typeof leaves[string]][]).map(([key, { emoji, label, bg, bgDark }]) => {
           const { x, y } = nodes[key as keyof typeof nodes];
           const on = isOnPath(key);
           const isResult = resultNode === key;
@@ -207,15 +210,16 @@ export default function DecisionTreeDiagram() {
               <rect
                 x={x - 55} y={y - 25} width={110} height={50}
                 rx={10}
-                fill={isResult ? bg : "#1e293b"}
-                stroke={isResult ? "#4ade80" : "#475569"}
+                fill={isResult ? bg : "#ffffff"}
+                stroke={isResult ? "#16a34a" : "#94a3b8"}
                 strokeWidth={isResult ? 3 : 2}
-                style={{ transition: "fill 0.4s, stroke 0.4s" }}
+                className={isResult ? bgDark : "fill-white dark:fill-slate-800"}
+                style={{ transition: "stroke 0.4s" }}
               />
               <text x={x} y={y - 2} textAnchor="middle" fontSize={22}>
                 {emoji}
               </text>
-              <text x={x} y={y + 18} textAnchor="middle" fill="#e2e8f0" fontSize={12} fontWeight={700}>
+              <text x={x} y={y + 18} textAnchor="middle" fill="#0f172a" className="dark:fill-slate-100" fontSize={12} fontWeight={700}>
                 {label}
               </text>
             </g>
@@ -237,11 +241,11 @@ export default function DecisionTreeDiagram() {
         {/* Legend */}
         <g transform="translate(20, 380)">
           <circle cx={8} cy={0} r={5} fill="#22c55e" />
-          <text x={18} y={4} fill="#94a3b8" fontSize={10}>Yes branch</text>
+          <text x={18} y={4} fill="#64748b" className="dark:fill-slate-400" fontSize={10}>Yes branch</text>
           <circle cx={108} cy={0} r={5} fill="#ef4444" />
-          <text x={118} y={4} fill="#94a3b8" fontSize={10}>No branch</text>
-          <rect x={200} y={-6} width={12} height={12} rx={3} fill="#1e293b" stroke="#38bdf8" strokeWidth={1.5} />
-          <text x={218} y={4} fill="#94a3b8" fontSize={10}>Active node</text>
+          <text x={118} y={4} fill="#64748b" className="dark:fill-slate-400" fontSize={10}>No branch</text>
+          <rect x={200} y={-6} width={12} height={12} rx={3} fill="#ffffff" stroke="#0ea5e9" strokeWidth={1.5} className="fill-white dark:fill-slate-800" />
+          <text x={218} y={4} fill="#64748b" className="dark:fill-slate-400" fontSize={10}>Active node</text>
         </g>
       </svg>
     </div>
