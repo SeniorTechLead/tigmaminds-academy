@@ -26,6 +26,33 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
 
   const sqlState = running ? 'running' : ctxState;
 
+  const loadSchema = useCallback(async () => {
+    const db = await load();
+    if (!db) return;
+    // Query schema directly from the db object (not via runSql which may see stale ref)
+    const tableNames = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
+    const result: typeof schema = [];
+    if (tableNames.length) {
+      for (const row of tableNames[0].values) {
+        const tableName = String(row[0]);
+        const info = db.exec(`PRAGMA table_info("${tableName}")`);
+        if (info.length > 0) {
+          result.push({
+            table: tableName,
+            columns: info[0].values.map((r: any[]) => ({
+              name: String(r[1]),
+              type: String(r[2] || 'TEXT'),
+              pk: r[5] === 1,
+              notnull: r[3] === 1,
+            })),
+          });
+        }
+      }
+    }
+    // Always set (even to []) so dropping the last table clears the panel.
+    setSchema(result);
+  }, [load]);
+
   const handleRun = useCallback(async () => {
     const db = await load();
     if (!db) return;
@@ -40,6 +67,9 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
 
     const { results: res, rowsModified, error: err } = runSql(code);
 
+    // Detect schema-changing statements so we can report them and refresh the panel.
+    const ddl = code.match(/\b(create|drop|alter)\s+table\s+(?:if\s+(?:not\s+)?exists\s+)?["'`]?([a-zA-Z0-9_]+)/i);
+
     if (err) {
       setError(err);
     } else if (res.length > 0) {
@@ -48,46 +78,31 @@ export default function SqlPlayground({ starterCode, title = 'SQL Playground' }:
       if (totalRows > MAX_DISPLAY_ROWS) {
         setMessage(`Showing first ${MAX_DISPLAY_ROWS} of ${totalRows} rows.`);
       }
+    } else if (ddl) {
+      const verb = ddl[1].toLowerCase();
+      const tbl = ddl[2];
+      const past = verb === 'create' ? 'created' : verb === 'drop' ? 'dropped' : 'altered';
+      setMessage(`Table "${tbl}" ${past}. Saved — it'll persist across reloads.`);
     } else if (rowsModified > 0) {
       setMessage(`Done. ${rowsModified} row${rowsModified !== 1 ? 's' : ''} affected.`);
     } else {
       setMessage('Query executed successfully (no rows returned).');
     }
 
-    setRunning(false);
-  }, [code, load, runSql]);
+    // Refresh the schema panel after any successful run so created/dropped tables
+    // (and altered columns) show up immediately.
+    if (!err) await loadSchema();
 
-  const handleReset = useCallback(() => {
+    setRunning(false);
+  }, [code, load, runSql, loadSchema]);
+
+  const handleReset = useCallback(async () => {
     resetDb();
     setResults([]);
     setMessage('Database reset to sample data.');
     setError('');
-  }, [resetDb]);
-
-  const loadSchema = useCallback(async () => {
-    const db = await load();
-    if (!db) return;
-    // Query schema directly from the db object (not via runSql which may see stale ref)
-    const tableNames = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
-    if (!tableNames.length) return;
-    const result: typeof schema = [];
-    for (const row of tableNames[0].values) {
-      const tableName = String(row[0]);
-      const info = db.exec(`PRAGMA table_info("${tableName}")`);
-      if (info.length > 0) {
-        result.push({
-          table: tableName,
-          columns: info[0].values.map((r: any[]) => ({
-            name: String(r[1]),
-            type: String(r[2] || 'TEXT'),
-            pk: r[5] === 1,
-            notnull: r[3] === 1,
-          })),
-        });
-      }
-    }
-    setSchema(result);
-  }, [load]);
+    await loadSchema();
+  }, [resetDb, loadSchema]);
 
   const toggleSchema = useCallback(() => {
     if (!schemaOpen && schema.length === 0) loadSchema();
