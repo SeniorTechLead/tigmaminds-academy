@@ -17,19 +17,19 @@ const lessons = [
     concept: `Every SQL query starts with a question: "Show me this data." The most basic command is **SELECT** — it tells the database what columns you want. **FROM** tells it which table to look in. **WHERE** filters the rows.
 
 \`\`\`
-SELECT name, age FROM elephants WHERE park = 'Kaziranga';
+SELECT name, weight FROM elephants WHERE park = 'Kaziranga';
 \`\`\`
 
-This reads almost like English: "Select the name and age from the elephants table where the park is Kaziranga." That readability is what makes SQL powerful — you describe *what* you want, not *how* to get it.
+This reads almost like English: "Select the name and weight from the elephants table where the park is Kaziranga." That readability is what makes SQL powerful — you describe *what* you want, not *how* to get it.
 
 Use \`SELECT *\` to get all columns. Use \`WHERE\` with comparisons like \`=\`, \`>\`, \`<\`, \`!=\`, and combine conditions with \`AND\` / \`OR\`. Text values go in single quotes: \`'Kaziranga'\`. Numbers do not need quotes.`,
     analogy: 'A SELECT query is like asking a librarian a question. "Show me all books (SELECT *) from the fiction shelf (FROM books) where the author is Ruskin Bond (WHERE author = \'Ruskin Bond\')." The librarian knows where everything is — you just describe what you want.',
-    storyConnection: 'In "The Girl Who Spoke to Elephants," Tara tracked elephants across Kaziranga National Park. Every time a ranger spots an elephant, they log it in a database: name, age, weight, park. Your first SQL query retrieves that data — the same way a real wildlife database works.',
+    storyConnection: 'In "The Girl Who Spoke to Elephants," Tara tracked elephants across Kaziranga National Park. Every time a ranger spots an elephant, they log it in a database: name, weight, species, park. Your first SQL query retrieves that data — the same way a real wildlife database works.',
     starterCode: `-- See all elephants in the database
 SELECT * FROM elephants;
 
--- Try this next: filter by park
--- SELECT name, age, weight_kg FROM elephants WHERE park_id = 1;`,
+-- Try this next: pick columns and filter by park
+-- SELECT name, weight FROM elephants WHERE park = 'Kaziranga';`,
     challenge: 'Write a query that finds all elephants weighing more than 4000 kg. Then write another that finds elephants whose name starts with a specific letter (hint: use the LIKE operator with a wildcard %).',
     successHint: 'You just queried a database. Every website you use — from Instagram to Google Maps — runs SQL queries like this behind the scenes, thousands of times per second.',
   },
@@ -38,27 +38,27 @@ SELECT * FROM elephants;
     concept: `**ORDER BY** sorts your results. Add **ASC** for ascending (smallest first) or **DESC** for descending (largest first). The default is ASC.
 
 \`\`\`
-SELECT name, weight_kg FROM elephants ORDER BY weight_kg DESC;
+SELECT name, weight FROM elephants ORDER BY weight DESC;
 \`\`\`
 
 **LIMIT** restricts how many rows you get back. Combined with ORDER BY, it answers questions like "What are the top 3?" or "What is the single heaviest?"
 
 \`\`\`
-SELECT name, weight_kg FROM elephants ORDER BY weight_kg DESC LIMIT 3;
+SELECT name, weight FROM elephants ORDER BY weight DESC LIMIT 3;
 \`\`\`
 
-You can sort by multiple columns: \`ORDER BY park_id ASC, weight_kg DESC\` sorts by park first, then by weight within each park. This layered sorting is essential when you have thousands of records and need to find patterns.`,
+You can sort by multiple columns: \`ORDER BY park ASC, weight DESC\` sorts by park first, then by weight within each park. This layered sorting is essential when you have thousands of records and need to find patterns.`,
     analogy: 'ORDER BY is like sorting a deck of cards. You can arrange them by number (ascending) or reverse (descending). LIMIT is like saying "just show me the top 3 cards." Together, they let you quickly find the biggest, smallest, newest, or oldest of anything.',
     storyConnection: 'Rangers in Kaziranga need quick answers: "Which elephant is the heaviest?" "What are the 3 most recent sightings?" They cannot scroll through thousands of records. ORDER BY and LIMIT turn a wall of data into a focused answer.',
     starterCode: `-- Find the heaviest elephant
-SELECT name, weight_kg FROM elephants ORDER BY weight_kg DESC LIMIT 1;
+SELECT name, weight FROM elephants ORDER BY weight DESC LIMIT 1;
 
 -- The 3 most recent sightings
-SELECT * FROM sightings ORDER BY sighted_at DESC LIMIT 3;
+SELECT * FROM sightings ORDER BY date DESC LIMIT 3;
 
--- Sort elephants by age, oldest first
-SELECT name, age, weight_kg FROM elephants ORDER BY age DESC;`,
-    challenge: 'Find the 5 youngest elephants. Then find the lightest elephant in the database. Finally, sort all sightings by date in ascending order (oldest first) and limit to the first 10.',
+-- Sort elephants by weight, lightest first
+SELECT name, weight FROM elephants ORDER BY weight ASC;`,
+    challenge: 'Find the 3 lightest elephants. Then find the single heaviest elephant in the database. Finally, sort all sightings by date in ascending order (oldest first) and limit to the first 10.',
     successHint: 'ORDER BY and LIMIT are the bread and butter of data exploration. "Top 10 songs," "most recent posts," "highest scores" — they all use this exact pattern.',
   },
   {
@@ -71,19 +71,19 @@ SELECT name, age, weight_kg FROM elephants ORDER BY age DESC;`,
 
 \`\`\`
 SELECT COUNT(*) FROM elephants;
-SELECT AVG(weight_kg) FROM elephants;
+SELECT AVG(weight) FROM elephants;
 \`\`\`
 
 **GROUP BY** splits rows into groups and runs the aggregate on each group separately:
 
 \`\`\`
-SELECT park_id, COUNT(*) FROM elephants GROUP BY park_id;
+SELECT park, COUNT(*) FROM elephants GROUP BY park;
 \`\`\`
 
 This gives you one row per park, with the count of elephants in each. **HAVING** filters groups (like WHERE, but for groups):
 
 \`\`\`
-SELECT park_id, COUNT(*) as total FROM elephants GROUP BY park_id HAVING total > 2;
+SELECT park, COUNT(*) as total FROM elephants GROUP BY park HAVING total > 2;
 \`\`\``,
     analogy: 'GROUP BY is like sorting students into houses, then counting each house. Instead of listing every student, you get "Gryffindor: 45, Slytherin: 40, Ravenclaw: 42, Hufflepuff: 38." One summary row per group — that is the power of GROUP BY.',
     storyConnection: 'A wildlife researcher studying Kaziranga does not care about individual elephant records — they need the big picture. "How many elephants per park?" "What is the average weight?" "Which park has the most sightings?" GROUP BY transforms raw logs into the summaries that drive conservation decisions.',
@@ -91,60 +91,61 @@ SELECT park_id, COUNT(*) as total FROM elephants GROUP BY park_id HAVING total >
 SELECT COUNT(*) as total_elephants FROM elephants;
 
 -- Average weight
-SELECT ROUND(AVG(weight_kg), 1) as avg_weight FROM elephants;
+SELECT ROUND(AVG(weight), 1) as avg_weight FROM elephants;
 
 -- Count elephants per park
-SELECT park_id, COUNT(*) as elephant_count
+SELECT park, COUNT(*) as elephant_count
 FROM elephants
-GROUP BY park_id;
+GROUP BY park;
 
 -- Parks with more than 2 elephants
-SELECT park_id, COUNT(*) as elephant_count
+SELECT park, COUNT(*) as elephant_count
 FROM elephants
-GROUP BY park_id
+GROUP BY park
 HAVING elephant_count > 2;`,
-    challenge: 'Find the heaviest elephant in each park (use MAX with GROUP BY). Then calculate the total weight of all elephants combined. Finally, find the average age of elephants, rounded to one decimal place.',
+    challenge: 'Find the heaviest elephant in each park (use MAX with GROUP BY). Then calculate the total weight of all elephants combined. Finally, find the average weight of elephants, rounded to one decimal place.',
     successHint: 'Aggregation is how raw data becomes insight. Every dashboard, report, and analytics tool runs GROUP BY queries behind the scenes. You now speak the language of data analysis.',
   },
   {
     title: 'Joining tables — connecting related data',
-    concept: `Real databases split data across multiple tables to avoid repetition. The **elephants** table has a \`park_id\`, and the **parks** table has the park details. A **JOIN** connects them.
+    concept: `Real databases split data across multiple tables to avoid repetition. The **sightings** table records *which* elephant was seen (\`elephant_id\`) and *where* (\`park_id\`) — but not the elephant's name or the park's name. Those live in the **elephants** and **parks** tables. A **JOIN** connects them.
 
 **INNER JOIN** returns only rows that match in both tables:
 
 \`\`\`
-SELECT elephants.name, parks.name as park_name
-FROM elephants
-INNER JOIN parks ON elephants.park_id = parks.id;
+SELECT e.name AS elephant, s.date, s.location
+FROM sightings s
+INNER JOIN elephants e ON s.elephant_id = e.id;
 \`\`\`
 
 **LEFT JOIN** returns all rows from the left table, even if there is no match on the right (unmatched columns get NULL):
 
 \`\`\`
-SELECT parks.name, elephants.name
-FROM parks
-LEFT JOIN elephants ON parks.id = elephants.park_id;
+SELECT e.name, s.date
+FROM elephants e
+LEFT JOIN sightings s ON e.id = s.elephant_id;
 \`\`\`
 
-The \`ON\` clause specifies which columns link the tables. Think of it as the "key" that unlocks the connection. Table aliases (\`e\` for elephants, \`p\` for parks) keep queries short and readable.`,
+The \`ON\` clause specifies which columns link the tables. Think of it as the "key" that unlocks the connection. Table aliases (\`e\` for elephants, \`s\` for sightings) keep queries short and readable.`,
     analogy: 'A JOIN is like matching student IDs to their exam scores. The students table has names and IDs. The scores table has IDs and marks. JOIN connects them by ID so you can see "Ravi scored 85" instead of two disconnected lists. The ID column is the bridge.',
-    storyConnection: 'When Tara tracks an elephant sighting, the database records the elephant ID, location, and date. But the elephant\'s name and age live in a different table. To build a useful sighting report — "Lakshmi (age 35) was spotted near the river on March 12" — you need to JOIN the sightings table with the elephants table. This is how real wildlife tracking databases work.',
-    starterCode: `-- Connect elephants to their park names
-SELECT e.name as elephant, e.age, p.name as park
-FROM elephants e
-INNER JOIN parks p ON e.park_id = p.id;
-
--- Show all sightings with elephant names
-SELECT e.name as elephant, s.sighted_at, s.health_status
+    storyConnection: 'When Tara tracks an elephant sighting, the database records the elephant ID, location, and date. But the elephant\'s name and weight live in a different table. To build a useful sighting report — "Ranga was spotted near Kaziranga East on Jan 15" — you need to JOIN the sightings table with the elephants table. This is how real wildlife tracking databases work.',
+    starterCode: `-- Show every sighting with the elephant's name
+SELECT e.name AS elephant, s.date, s.location
 FROM sightings s
 INNER JOIN elephants e ON s.elephant_id = e.id
-ORDER BY s.sighted_at DESC;
+ORDER BY s.date DESC;
 
--- LEFT JOIN: show all parks, even those with no elephants
-SELECT p.name as park, e.name as elephant
-FROM parks p
-LEFT JOIN elephants e ON p.id = e.park_id;`,
-    challenge: 'Write a query that joins all three tables: show the elephant name, park name, and sighting date for every sighting. Then use a LEFT JOIN to find parks that have zero elephant sightings (look for NULL values).',
+-- Add the park name too (join all three tables)
+SELECT e.name AS elephant, p.name AS park, s.date
+FROM sightings s
+INNER JOIN elephants e ON s.elephant_id = e.id
+INNER JOIN parks p ON s.park_id = p.id;
+
+-- LEFT JOIN: show all elephants, even those never sighted (NULL date)
+SELECT e.name AS elephant, s.date
+FROM elephants e
+LEFT JOIN sightings s ON e.id = s.elephant_id;`,
+    challenge: 'Write a query that shows the elephant name, park name, and sighting date for every sighting (join all three tables). Then use a LEFT JOIN to find elephants that have zero sightings (look for NULL values).',
     successHint: 'JOINs are the heart of relational databases. Without them, data would be trapped in isolated tables. With them, you can answer questions that span the entire database.',
   },
   {
@@ -155,10 +156,10 @@ LEFT JOIN elephants e ON p.id = e.park_id;`,
 
 \`\`\`
 SELECT name FROM elephants
-WHERE id IN (SELECT elephant_id FROM sightings WHERE health_status = 'healthy');
+WHERE id IN (SELECT elephant_id FROM sightings WHERE location = 'Kaziranga East');
 \`\`\`
 
-This first finds all elephant IDs with healthy sightings, then returns the names of those elephants. You could do this with a JOIN too, but subqueries are sometimes clearer.
+This first finds all elephant IDs sighted at Kaziranga East, then returns the names of those elephants. You could do this with a JOIN too, but subqueries are sometimes clearer.
 
 **EXISTS** checks whether a subquery returns any rows at all:
 
@@ -171,16 +172,16 @@ This returns elephants that have at least one sighting. The subquery is **correl
     analogy: 'A subquery is like a two-step question. "Which students passed?" is one query. "Show me the names of students who passed" wraps that answer inside a bigger question. You first get the list of passing IDs, then use it to look up the names.',
     storyConnection: 'A park manager asks: "Which elephants have been sighted in more than one park?" This cannot be answered with a simple WHERE clause — you need to first count sightings per elephant, then filter. That is a subquery: one query finds the elephants with multiple sightings, and the outer query retrieves their details.',
     starterCode: `-- Elephants that have at least one sighting
-SELECT name, age FROM elephants
+SELECT name FROM elephants
 WHERE id IN (SELECT DISTINCT elephant_id FROM sightings);
 
 -- Elephants with NO sightings (never spotted)
-SELECT name, age FROM elephants
+SELECT name FROM elephants
 WHERE id NOT IN (SELECT DISTINCT elephant_id FROM sightings);
 
 -- Elephants heavier than the average weight
-SELECT name, weight_kg FROM elephants
-WHERE weight_kg > (SELECT AVG(weight_kg) FROM elephants);`,
+SELECT name, weight FROM elephants
+WHERE weight > (SELECT AVG(weight) FROM elephants);`,
     challenge: 'Write a subquery to find elephants that have been sighted more than once (hint: use GROUP BY and HAVING inside the subquery). Then find the park that has the most elephants using a subquery.',
     successHint: 'Subqueries let you compose simple questions into complex ones. Real-world SQL queries often nest 2-3 levels deep. You now have the skill to build queries that answer multi-step questions.',
   },
@@ -190,13 +191,13 @@ WHERE weight_kg > (SELECT AVG(weight_kg) FROM elephants);`,
 
 **INSERT** adds new rows:
 \`\`\`
-INSERT INTO elephants (name, age, weight_kg, park_id)
-VALUES ('Ganesha', 8, 2800, 1);
+INSERT INTO elephants (name, weight, species, park)
+VALUES ('Ganesha', 2800, 'Asian', 'Kaziranga');
 \`\`\`
 
 **UPDATE** changes existing rows (always use WHERE or you will update every row!):
 \`\`\`
-UPDATE elephants SET weight_kg = 2900 WHERE name = 'Ganesha';
+UPDATE elephants SET weight = 2900 WHERE name = 'Ganesha';
 \`\`\`
 
 **DELETE** removes rows (again, always use WHERE):
@@ -216,14 +217,14 @@ These are called **DML** (Data Manipulation Language) and **DDL** (Data Definiti
 SELECT * FROM elephants;
 
 -- Add a new elephant
-INSERT INTO elephants (name, age, weight_kg, park_id)
-VALUES ('Ganesha', 8, 2800, 1);
+INSERT INTO elephants (name, weight, species, park)
+VALUES ('Ganesha', 2800, 'Asian', 'Kaziranga');
 
 -- Verify the insert
 SELECT * FROM elephants WHERE name = 'Ganesha';
 
 -- Update the weight after a health check
-UPDATE elephants SET weight_kg = 2950 WHERE name = 'Ganesha';
+UPDATE elephants SET weight = 2950 WHERE name = 'Ganesha';
 
 -- Create a new table for ranger patrols
 CREATE TABLE IF NOT EXISTS patrols (
