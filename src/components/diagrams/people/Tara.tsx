@@ -37,7 +37,33 @@ interface TaraProps {
   pose?: TaraPose;
   direction?: TaraDirection;
   style?: CSSProperties;
+  /**
+   * 'drawn' (default) = the inline-SVG character.
+   * 'illustrated' = the polished illustration assets in /public/characters,
+   * rendered via <image>. Opt-in while we trial the new art.
+   */
+  art?: 'drawn' | 'illustrated';
 }
+
+// Illustrated assets (in /public/characters). Each is ~442 units tall in its own
+// viewBox; we scale to the drawn body height (~120) so x/y/scale stay consistent.
+const ILLUSTRATED_HEIGHT = 130; // tuned to sit close to the drawn body height
+const ILLUSTRATED_SRC: Record<TaraPose, string> = {
+  standing: '/characters/tara-standing.svg',
+  thinking: '/characters/tara-thumbsup.svg',
+  pointing: '/characters/tara-pointing.svg',
+  lookingUp: '/characters/tara-pointup.svg',
+  lookingUpProfile: '/characters/tara-pointup.svg',
+  lookingDown: '/characters/tara-standing.svg',
+  walking: '/characters/tara-standing.svg',
+};
+// Native aspect ratios (viewBox w/h) so the <image> isn't distorted.
+const ILLUSTRATED_ASPECT: Record<string, number> = {
+  '/characters/tara-standing.svg': 166.5 / 442.7,
+  '/characters/tara-pointing.svg': 252.3 / 442.7,
+  '/characters/tara-thumbsup.svg': 197.6 / 442.7,
+  '/characters/tara-pointup.svg': 252.3 / 442.7,
+};
 
 // Skin/hair/clothing palette — warm tones, Indian-coded
 const SKIN = '#d9a273';       // medium warm brown
@@ -49,7 +75,21 @@ const STROKE = '#1f2937';     // outlines
 
 export default function Tara({
   x = 0, y = 0, scale = 1, flip = false, pose = 'standing', direction, style,
+  art = 'illustrated',
 }: TaraProps) {
+  if (art === 'illustrated') {
+    const src = ILLUSTRATED_SRC[pose] ?? ILLUSTRATED_SRC.standing;
+    const aspect = ILLUSTRATED_ASPECT[src] ?? 0.45;
+    const h = ILLUSTRATED_HEIGHT * scale;
+    const w = h * aspect;
+    const faceLeft = direction === 'left' || (direction == null && flip);
+    // Anchor at feet: image top-left placed so the bottom sits at y, centered on x.
+    return (
+      <g transform={faceLeft ? `translate(${x * 2}, 0) scale(-1, 1)` : undefined} style={style}>
+        <image href={src} x={x - w / 2} y={y - h} width={w} height={h} preserveAspectRatio="xMidYMax meet" />
+      </g>
+    );
+  }
   // Resolve direction: explicit prop > legacy flip > default 'right' (most scenes
   // have the character on the left of the SVG looking at something on the right).
   // Use direction="front" explicitly for present-to-reader scenes.
