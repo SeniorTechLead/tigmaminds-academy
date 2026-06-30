@@ -264,6 +264,44 @@ function ProblemSolver({ problem, tier, onBack, onTierChange, isTierLocked, user
     }
   }, [code, tier, loadPyodide, pyodideRef]);
 
+  const loadSqlSchema = useCallback(async () => {
+    const db = await loadSqlJs();
+    if (!db) return;
+    const tableNames = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
+    const result: typeof schemaData = [];
+    if (tableNames.length > 0) {
+      for (const row of tableNames[0].values) {
+        const tbl = String(row[0]);
+        const info = db.exec(`PRAGMA table_info("${tbl}")`);
+        if (info.length > 0) {
+          result.push({
+            table: tbl,
+            columns: info[0].values.map((r: any[]) => ({
+              name: String(r[1]),
+              type: String(r[2] || 'TEXT'),
+              pk: r[5] === 1,
+              notnull: r[3] === 1,
+            })),
+          });
+        }
+      }
+    }
+    setSchemaData(result);
+  }, [loadSqlJs]);
+
+  const toggleSqlSchema = useCallback(() => {
+    setSchemaOpen(o => !o);
+  }, []);
+
+  // For SQL problems, load the schema up front and show it by default — the student
+  // needs to see the available tables/columns to write the query without guessing.
+  useEffect(() => {
+    if (isSql) {
+      setSchemaOpen(true);
+      loadSqlSchema();
+    }
+  }, [isSql, problem.slug, loadSqlSchema]);
+
   const runSqlTests = useCallback(async () => {
     const db = await loadSqlJs();
     if (!db) { setOutput('Failed to load SQL engine. Check your internet connection and try again.'); return; }
@@ -343,7 +381,10 @@ function ProblemSolver({ problem, tier, onBack, onTierChange, isTierLocked, user
 
     setResults(testResults);
     setRunning(false);
-  }, [code, tier, loadSqlJs, runSql, resetDb]);
+    // The DB was reset/re-seeded during testing — refresh the schema panel so it
+    // reflects the current tables (and any the query/setup created).
+    loadSqlSchema();
+  }, [code, tier, loadSqlJs, runSql, resetDb, loadSqlSchema]);
 
   const runTsTests = useCallback(async () => {
     const ts = await loadTs();
@@ -581,34 +622,6 @@ function ProblemSolver({ problem, tier, onBack, onTierChange, isTierLocked, user
   }, [code, tier]);
 
   const runTests = isArduino ? runArduinoTests : isHtml ? runHtmlTests : isTs ? runTsTests : isSql ? runSqlTests : runPythonTests;
-
-  const toggleSqlSchema = useCallback(async () => {
-    if (!schemaOpen && schemaData.length === 0) {
-      const db = await loadSqlJs();
-      if (!db) return;
-      const tableNames = db.exec("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
-      if (tableNames.length > 0) {
-        const result: typeof schemaData = [];
-        for (const row of tableNames[0].values) {
-          const tbl = String(row[0]);
-          const info = db.exec(`PRAGMA table_info("${tbl}")`);
-          if (info.length > 0) {
-            result.push({
-              table: tbl,
-              columns: info[0].values.map((r: any[]) => ({
-                name: String(r[1]),
-                type: String(r[2] || 'TEXT'),
-                pk: r[5] === 1,
-                notnull: r[3] === 1,
-              })),
-            });
-          }
-        }
-        setSchemaData(result);
-      }
-    }
-    setSchemaOpen(o => !o);
-  }, [schemaOpen, schemaData.length, loadSqlJs]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Tab') {
