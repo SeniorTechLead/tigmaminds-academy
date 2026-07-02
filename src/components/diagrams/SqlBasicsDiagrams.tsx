@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 const DARK_BG = 'bg-white dark:bg-gray-900';
 const CELL = 'px-3 py-1.5 text-xs font-mono transition-all duration-500';
-const HEADER = 'px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-600 dark:text-gray-400';
+const HEADER = 'px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400';
 const LABEL = 'text-[10px] font-bold uppercase tracking-wider';
 
 const elephants = [
@@ -159,7 +159,7 @@ export function GroupByDiagram() {
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>GROUP BY park</span>
         <button onClick={() => setGrouped(!grouped)}
-          className={`px-3 py-1 rounded text-[10px] font-semibold ${grouped ? 'bg-emerald-600 text-white' : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}>
+          className={`px-3 py-1 rounded text-[10px] font-semibold ${grouped ? 'bg-emerald-600 text-white' : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}>
           {grouped ? 'Grouped' : 'Click to GROUP BY'}
         </button>
       </div>
@@ -185,13 +185,13 @@ export function GroupByDiagram() {
               <div className="flex items-center justify-between mb-2">
                 <span className={`text-sm font-bold ${g.park === 'Kaziranga' ? 'text-emerald-600 dark:text-emerald-400' : 'text-blue-600 dark:text-blue-400'}`}>{g.park}</span>
                 <div className="flex gap-3">
-                  <span className="text-xs text-gray-500 dark:text-gray-600 dark:text-gray-400">COUNT: <span className="text-gray-900 dark:text-white font-bold">{g.count}</span></span>
-                  <span className="text-xs text-gray-500 dark:text-gray-600 dark:text-gray-400">AVG: <span className="text-gray-900 dark:text-white font-bold">{g.avgWeight}kg</span></span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">COUNT: <span className="text-gray-900 dark:text-white font-bold">{g.count}</span></span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">AVG: <span className="text-gray-900 dark:text-white font-bold">{g.avgWeight}kg</span></span>
                 </div>
               </div>
               <div className="flex gap-2">
                 {g.members.map(e => (
-                  <span key={e.id} className="text-[10px] text-gray-600 dark:text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{e.name}</span>
+                  <span key={e.id} className="text-[10px] text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{e.name}</span>
                 ))}
               </div>
             </div>
@@ -229,7 +229,7 @@ export function JoinDiagram() {
       <div className="flex items-center justify-between mb-3">
         <span className={`${LABEL} text-gray-500 dark:text-gray-500`}>JOIN</span>
         <button onClick={() => { setShowJoin(!showJoin); setHighlight(null); }}
-          className={`px-3 py-1 rounded text-[10px] font-semibold ${showJoin ? 'bg-purple-600 text-white' : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}>
+          className={`px-3 py-1 rounded text-[10px] font-semibold ${showJoin ? 'bg-purple-600 text-white' : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'}`}>
           {showJoin ? 'Joined' : 'Click to JOIN'}
         </button>
       </div>
@@ -270,7 +270,7 @@ export function JoinDiagram() {
                   }`}>
                     <td className={`${CELL} ${highlight === r.id ? 'text-purple-700 dark:text-purple-400 font-bold' : 'text-gray-600 dark:text-gray-400'}`}>{r.id}</td>
                     <td className={`${CELL} text-gray-900 dark:text-white`}>{r.name}</td>
-                    <td className={`${CELL} text-gray-500 dark:text-gray-600 dark:text-gray-400`}>{r.state}</td>
+                    <td className={`${CELL} text-gray-500 dark:text-gray-400`}>{r.state}</td>
                   </tr>
                 ))}
               </tbody>
@@ -295,7 +295,7 @@ export function JoinDiagram() {
                     <td className={`${CELL} text-gray-900 dark:text-white`}>{l.name}</td>
                     <td className={`${CELL} text-purple-700 dark:text-purple-400`}>{l.park_id}</td>
                     <td className={`${CELL} text-gray-900 dark:text-white`}>{r.name}</td>
-                    <td className={`${CELL} text-gray-500 dark:text-gray-600 dark:text-gray-400`}>{r.state}</td>
+                    <td className={`${CELL} text-gray-500 dark:text-gray-400`}>{r.state}</td>
                   </tr>
                 );
               })}
@@ -346,7 +346,7 @@ export function SubqueryDiagram() {
       <div className={`rounded-lg border-2 p-3 transition-all duration-500 ${
         phase >= 2 ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/10' : 'border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800'
       }`}>
-        <p className="text-[10px] text-gray-500 dark:text-gray-600 dark:text-gray-400 mb-1">Outer query</p>
+        <p className="text-[10px] text-gray-500 dark:text-gray-400 mb-1">Outer query</p>
         <p className="font-mono text-xs text-orange-700 dark:text-orange-300">
           SELECT name, weight FROM elephants
         </p>
@@ -356,13 +356,13 @@ export function SubqueryDiagram() {
 
         {/* Inner query box */}
         <div className={`ml-4 my-2 rounded border-2 p-2 transition-all duration-500 ${
-          phase >= 1 ? 'border-cyan-500 bg-cyan-50 dark:bg-cyan-100 dark:bg-cyan-900/20' : 'border-gray-300 dark:border-gray-600 bg-gray-100/50 dark:bg-gray-800/50'
+          phase >= 1 ? 'border-cyan-500 bg-cyan-50 dark:bg-cyan-900/20' : 'border-gray-300 dark:border-gray-600 bg-gray-100/50 dark:bg-gray-800/50'
         }`}>
-          <p className="text-[10px] text-gray-500 dark:text-gray-600 dark:text-gray-400 mb-1">Inner query {phase >= 1 ? '→ executes first!' : ''}</p>
+          <p className="text-[10px] text-gray-500 dark:text-gray-400 mb-1">Inner query {phase >= 1 ? '→ executes first!' : ''}</p>
           <p className="font-mono text-xs text-cyan-700 dark:text-cyan-300">SELECT AVG(weight) FROM elephants</p>
           {phase >= 1 && (
             <div className="mt-2 flex items-center gap-2">
-              <span className="text-[10px] text-gray-500 dark:text-gray-600 dark:text-gray-400">Result:</span>
+              <span className="text-[10px] text-gray-500 dark:text-gray-400">Result:</span>
               <span className="font-mono text-sm font-bold text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-900/30 px-2 py-0.5 rounded">4160.0</span>
             </div>
           )}
@@ -372,13 +372,13 @@ export function SubqueryDiagram() {
 
         {phase >= 2 && (
           <div className="mt-2 border-t border-gray-300 dark:border-gray-700 pt-2">
-            <p className="text-[10px] text-gray-500 dark:text-gray-600 dark:text-gray-400 mb-1">Becomes: WHERE weight {'>'} 4160.0</p>
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 mb-1">Becomes: WHERE weight {'>'} 4160.0</p>
             <div className="space-y-1">
               {elephants.filter(e => e.weight > 4160).map(e => (
                 <div key={e.id} className="flex gap-3 text-xs">
                   <span className="text-gray-900 dark:text-white font-medium">{e.name}</span>
                   <span className="text-orange-600 dark:text-orange-400">{e.weight}kg</span>
-                  <span className="text-emerald-600 dark:text-emerald-600 dark:text-emerald-400">✓ above average</span>
+                  <span className="text-emerald-600 dark:text-emerald-400">✓ above average</span>
                 </div>
               ))}
             </div>
@@ -436,7 +436,7 @@ export function MutateDiagram() {
           <button onClick={insert} className="px-2 py-1 rounded text-[10px] bg-emerald-800 text-emerald-300 hover:bg-emerald-700">INSERT</button>
           <button onClick={update} className="px-2 py-1 rounded text-[10px] bg-amber-800 text-amber-300 hover:bg-amber-700">UPDATE</button>
           <button onClick={del} className="px-2 py-1 rounded text-[10px] bg-red-800 text-red-300 hover:bg-red-700">DELETE</button>
-          <button onClick={reset} className="px-2 py-1 rounded text-[10px] bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Reset</button>
+          <button onClick={reset} className="px-2 py-1 rounded text-[10px] bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Reset</button>
         </div>
       </div>
 
@@ -459,14 +459,14 @@ export function MutateDiagram() {
               <td className={`${CELL} text-gray-500 dark:text-gray-500`}>{e.id}</td>
               <td className={`${CELL} text-gray-900 dark:text-white`}>{e.name}</td>
               <td className={`${CELL} ${flash?.id === e.id && flash.type === 'update' ? 'text-amber-600 dark:text-amber-400 font-bold' : 'text-gray-600 dark:text-gray-300'}`}>{e.weight}</td>
-              <td className={`${CELL} text-gray-500 dark:text-gray-600 dark:text-gray-400`}>{e.park}</td>
+              <td className={`${CELL} text-gray-500 dark:text-gray-400`}>{e.park}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
       {lastAction && (
-        <div className="mt-3 font-mono text-xs text-gray-600 dark:text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded px-3 py-2">
+        <div className="mt-3 font-mono text-xs text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded px-3 py-2">
           {lastAction}
         </div>
       )}
