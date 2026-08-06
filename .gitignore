@@ -24,9 +24,6 @@ dist-ssr
 *.sw?
 .env
 
-# Hackathon form submissions (local file store)
-data/hackathon-registrations.json
-
 # Illustration source assets (watermarked PNGs, raw Midjourney)
 content/illustrations/
 content/illustrations-raw/

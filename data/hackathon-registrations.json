@@ -1,0 +1,253 @@
+[
+  {
+    "id": "hk-1785994839938-78u9kp",
+    "teamName": "Team1",
+    "members": [
+      {
+        "name": "Bikash",
+        "email": "bikashb@tigmaminds.com",
+        "phone": "8876564328",
+        "institution": "KU",
+        "eligibility": "Recent Passout",
+        "gender": "Female",
+        "tshirtSize": "XS",
+        "isLead": true
+      },
+      {
+        "name": "Priyam",
+        "email": "priyamd@tigmaminds.com",
+        "phone": "8876456789",
+        "institution": "DU",
+        "eligibility": "Recent Passout",
+        "gender": "Male",
+        "tshirtSize": "3XL",
+        "isLead": false
+      }
+    ],
+    "ideaSummary": "Team 1 desc",
+    "createdAt": "2026-08-06T05:40:39.938Z"
+  },
+  {
+    "id": "hk-1785995102917-7kyqto",
+    "teamName": "Team2",
+    "members": [
+      {
+        "name": "Gitartha",
+        "email": "gitarthak@tigmaminds.com",
+        "phone": "8876455789",
+        "institution": "KU",
+        "eligibility": "Fresher",
+        "gender": "Male",
+        "tshirtSize": "M",
+        "isLead": true
+      },
+      {
+        "name": "Priyam",
+        "email": "priyamd@tigmaminds.com",
+        "phone": "8876543467",
+        "institution": "DU",
+        "eligibility": "Recent Passout",
+        "gender": "Male",
+        "tshirtSize": "XXL",
+        "isLead": false
+      }
+    ],
+    "ideaSummary": "Hello desc",
+    "createdAt": "2026-08-06T05:45:02.917Z"
+  },
+  {
+    "id": "hk-1785995372675-yzu9i4",
+    "teamName": "Team22",
+    "members": [
+      {
+        "name": "Priyam",
+        "email": "priyamd@tigmaminds.com",
+        "phone": "8876413709",
+        "institution": "DU",
+        "eligibility": "Fresher",
+        "gender": "Male",
+        "tshirtSize": "XXL",
+        "isLead": true
+      },
+      {
+        "name": "Gitartha",
+        "email": "gitarthak@tigmaminds.com",
+        "phone": "8876589345",
+        "institution": "KU",
+        "eligibility": "PG Student",
+        "gender": "Male",
+        "tshirtSize": "XL",
+        "isLead": false
+      }
+    ],
+    "ideaSummary": "Desc demo",
+    "createdAt": "2026-08-06T05:49:32.675Z"
+  },
+  {
+    "id": "hk-1785996078908-tzlcu7",
+    "teamName": "Team44",
+    "members": [
+      {
+        "name": "Bikash",
+        "email": "bikashb@tigmaminds.com",
+        "phone": "8876543245",
+        "institution": "KU",
+        "eligibility": "Recent Passout",
+        "gender": "Female",
+        "tshirtSize": "XXL",
+        "isLead": true
+      },
+      {
+        "name": "Priyam",
+        "email": "daspriyam59@gmail.com",
+        "phone": "8876413709",
+        "institution": "DU",
+        "eligibility": "Recent Passout",
+        "gender": "Male",
+        "tshirtSize": "3XL",
+        "isLead": false
+      }
+    ],
+    "ideaSummary": "Demo desc",
+    "createdAt": "2026-08-06T06:01:18.908Z"
+  },
+  {
+    "id": "hk-1785996317436-wipyx1",
+    "teamName": "team22",
+    "members": [
+      {
+        "name": "Priyam",
+        "email": "daspriyam59@gmail.com",
+        "phone": "6678399328",
+        "institution": "fu",
+        "eligibility": "PG Student",
+        "gender": "Male",
+        "tshirtSize": "S",
+        "isLead": true
+      },
+      {
+        "name": "q23redq2d",
+        "email": "bikashb@tigmaminds.com",
+        "phone": "8876356894",
+        "institution": "KU",
+        "eligibility": "PG Student",
+        "gender": "Male",
+        "tshirtSize": "XXL",
+        "isLead": false
+      }
+    ],
+    "ideaSummary": "desccc",
+    "createdAt": "2026-08-06T06:05:17.436Z"
+  },
+  {
+    "id": "hk-1785996720766-4z7d54",
+    "teamName": "Team88",
+    "members": [
+      {
+        "name": "Priyam",
+        "email": "daspriyam@gmail.com",
+        "phone": "8876413709",
+        "institution": "DU",
+        "eligibility": "Fresher",
+        "gender": "Male",
+        "tshirtSize": "M",
+        "isLead": true
+      },
+      {
+        "name": "Bikash",
+        "email": "bikashb@tigmaminds.com",
+        "phone": "8876543458",
+        "institution": "KU",
+        "eligibility": "PG Student",
+        "gender": "Male",
+        "tshirtSize": "XXL",
+        "isLead": false
+      }
+    ],
+    "ideaSummary": "descccc",
+    "createdAt": "2026-08-06T06:12:00.766Z"
+  },
+  {
+    "id": "hk-1785998894840-lo4i0z",
+    "teamName": "Test Team",
+    "members": [
+      {
+        "name": "Gitartha",
+        "email": "gitarthak@tigmaminds.com",
+        "phone": "8846671328",
+        "institution": "ku",
+        "eligibility": "PG Student",
+        "gender": "Female",
+        "tshirtSize": "M",
+        "isLead": true
+      },
+      {
+        "name": "Priyam",
+        "email": "priyamd@tigmaminds.com",
+        "phone": "8763667428",
+        "institution": "ku",
+        "eligibility": "UG Student",
+        "gender": "Male",
+        "tshirtSize": "XL",
+        "isLead": false
+      }
+    ],
+    "ideaSummary": "desccc",
+    "createdAt": "2026-08-06T06:48:14.841Z"
+  },
+  {
+    "id": "hk-1786000975887-usa9pg",
+    "teamName": "Team44444",
+    "members": [
+      {
+        "name": "Akashi",
+        "email": "akaship@tigmaminds.com",
+        "phone": "8476256728",
+        "institution": "nehu",
+        "eligibility": "PG Student",
+        "gender": "Male",
+        "tshirtSize": "3XL",
+        "isLead": true
+      },
+      {
+        "name": "Gitartha",
+        "email": "gitarthak@tigmaminds.com",
+        "phone": "8846632647",
+        "institution": "ku",
+        "eligibility": "Fresher",
+        "gender": "Female",
+        "tshirtSize": "L",
+        "isLead": false
+      }
+    ],
+    "ideaSummary": "desccc",
+    "createdAt": "2026-08-06T07:22:55.887Z"
+  },
+  {
+    "id": "hk-1786003222201-noyntc",
+    "teamName": "tttt",
+    "members": [
+      {
+        "name": "bikash",
+        "email": "bikashb@tigmaminds.com",
+        "phone": "8824362646",
+        "institution": "ku",
+        "eligibility": "UG Student",
+        "gender": "Male",
+        "tshirtSize": "XXL",
+        "isLead": true
+      },
+      {
+        "name": "priyam",
+        "email": "priyamd@tigmaminds.com",
+        "phone": "7877384228",
+        "institution": "du",
+        "eligibility": "Fresher",
+        "gender": "Female",
+        "tshirtSize": "L",
+        "isLead": false
+      }
+    ],
+    "createdAt": "2026-08-06T08:00:22.201Z"
+  }
+]
