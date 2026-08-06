@@ -1,0 +1,52 @@
+{
+  "slug": "guwahati-hackathon-2026",
+  "title": "TigmaMinds Hackathon 2026",
+  "tagline": "Build a software prototype. Compete offline in Guwahati.",
+  "location": "Guwahati, Assam",
+  "dates": "29–30 August 2026",
+  "registrationCloses": "22nd August 2026",
+  "registrationClosesAt": "2026-08-22T23:59:59+05:30",
+  "teamSize": "2–4 members",
+  "duration": "48 hours",
+  "venue": "To be announced",
+  "eligibility": "UG and PG students, Freshers, recent passouts",
+  "prizePool": "Up to ₹1,00,000/-",
+  "format": "In Person / Offline Hackathon",
+  "organizedBy": "TigmaMinds Academy",
+  "eventCategory": "Build a prototype/model for software solutions",
+  "modeOfConduct": [
+    "Online qualifier round",
+    "Offline final hackathon"
+  ],
+  "developmentObjective": "Build a software model or a prototype to handle the problem statement given.",
+  "theme": "Problem statements will be shared once participants clear the initial round.",
+  "whatYouCanBuild": [
+    "Web Applications",
+    "Mobile Applications",
+    "AI/ML Solutions",
+    "SaaS Products",
+    "Other innovative software prototypes"
+  ],
+  "certificates": "Participation certificates for all candidates, alongside Mentor Appreciation Certificates.",
+  "goodiesAndMentorship": "Hands-on guidance from industry and domain experts, alongside event goodies.",
+  "finalEvaluation": "Judges evaluate projects based on innovation, implementation, impact and presentation.",
+  "prizes": {
+    "totalPool": "Up to ₹1,00,000/-",
+    "categories": [
+      "Winner",
+      "Runner-up",
+      "Special / Category Awards"
+    ]
+  },
+  "judgingCriteria": [
+    { "criteria": "Innovation & Creativity", "weightage": "25%" },
+    { "criteria": "Technical Implementation", "weightage": "25%" },
+    { "criteria": "Problem-Solving & Impact", "weightage": "20%" },
+    { "criteria": "Functionality / Prototype", "weightage": "20%" },
+    { "criteria": "Presentation & Demo", "weightage": "10%" }
+  ],
+  "registrationOpen": true,
+  "minTeamSize": 2,
+  "maxTeamSize": 4,
+  "notifyEmail": "hackathon@tigmaminds.com"
+}
