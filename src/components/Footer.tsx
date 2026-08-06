@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { Mail } from 'lucide-react';
 
-export default function Footer() {
+export default function Footer({
+  contactEmail = 'hello@tigmaminds.academy',
+}: {
+  contactEmail?: string;
+}) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -42,7 +46,12 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-2">
                 <Mail className="h-5 w-5 text-amber-400 flex-shrink-0 mt-0.5" />
-                <span className="text-sm break-all">hello@tigmaminds.academy</span>
+                <a
+                  href={`mailto:${contactEmail}`}
+                  className="text-sm break-all hover:text-amber-400 transition-colors"
+                >
+                  {contactEmail}
+                </a>
               </li>
             </ul>
           </div>

@@ -830,7 +830,7 @@ export default function HackathonPage() {
         />
       ) : null}
 
-      <Footer />
+      <Footer contactEmail="hackathon@tigmaminds.com" />
       </div>
     </div>
   );

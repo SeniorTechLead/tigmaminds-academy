@@ -81,7 +81,7 @@ export default function HackathonSuccessPage() {
           <SuccessContent />
         </Suspense>
       </section>
-      <Footer />
+      <Footer contactEmail="hackathon@tigmaminds.com" />
     </div>
   );
 }
