@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Bot, Code2 } from 'lucide-react';
+import { ArrowRight, Sparkles, Bot, Code2, Trophy } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { lessonsMeta } from '../data/lessons-meta';
@@ -57,10 +57,18 @@ export default function HomePage() {
                 Learn to Build
                 <span className="block text-gradient">Through Imagination</span>
               </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-lg">
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed max-w-lg">
                 Programming, AI, and robotics — taught through illustrated stories
                 that make science feel like an adventure.
               </p>
+              <Link
+                href="/hackathon"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-purple-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold mb-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              >
+                <Trophy className="w-4 h-4" />
+                Hackathon 2026 — Register your team
+                <ArrowRight className="w-4 h-4" />
+              </Link>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/programs"
                   className="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
@@ -256,6 +264,12 @@ export default function HomePage() {
             >
               Explore Programs
               <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+            <Link href="/hackathon"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-violet-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+            >
+              <Trophy className="mr-2 h-5 w-5" />
+              Hackathon 2026
             </Link>
             <Link href="/contact"
               className="inline-flex items-center justify-center border-2 border-white/80 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-200"
