@@ -77,7 +77,7 @@ export const HACKATHON_RULEBOOK_SECTIONS: HackathonRuleSection[] = [
     title: '5. Registration',
     bullets: [
       'Registration is mandatory.',
-      'Registration closes on 23 August 2026.',
+      'Registration closes on 23rd August 2026.',
     ],
   },
   {
