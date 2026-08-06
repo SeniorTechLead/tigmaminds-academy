@@ -31,31 +31,57 @@ import {
   type HackathonRuleSection,
 } from '../data/hackathon-rulebook';
 
-const ELIGIBILITY_OPTIONS = [
-  'UG Student',
-  'PG Student',
-  'Fresher',
-  'Recent Passout',
-] as const;
+import {
+  HACKATHON_ELIGIBILITY_OPTIONS,
+  HACKATHON_ELIGIBILITY_OTHER,
+  HACKATHON_INSTITUTION_OTHER,
+  HACKATHON_INSTITUTIONS,
+} from '../data/hackathon-institutions';
+
+const ELIGIBILITY_OPTIONS = HACKATHON_ELIGIBILITY_OPTIONS;
 
 const GENDER_OPTIONS = ['Male', 'Female', 'Other', 'Prefer not to say'] as const;
 
 const TSHIRT_SIZE_OPTIONS = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL'] as const;
 
-type MemberForm = Omit<HackathonMember, 'isLead'> & { isLead?: boolean };
+type MemberForm = Omit<HackathonMember, 'isLead' | 'institution' | 'eligibility'> & {
+  isLead?: boolean;
+  institutionOption: string;
+  institutionOther: string;
+  eligibilityOption: string;
+  eligibilityOther: string;
+};
 
-type MemberErrors = Partial<Record<keyof MemberForm, string>>;
+type MemberErrors = Partial<
+  Record<'name' | 'email' | 'phone' | 'institution' | 'eligibility' | 'gender' | 'tshirtSize', string>
+>;
 
 function emptyMember(): MemberForm {
   return {
     name: '',
     email: '',
     phone: '',
-    institution: '',
-    eligibility: '',
+    institutionOption: '',
+    institutionOther: '',
+    eligibilityOption: '',
+    eligibilityOther: '',
     gender: '',
     tshirtSize: '',
   };
+}
+
+function resolveInstitution(member: MemberForm) {
+  if (member.institutionOption === HACKATHON_INSTITUTION_OTHER) {
+    return member.institutionOther.trim();
+  }
+  return member.institutionOption.trim();
+}
+
+function resolveEligibility(member: MemberForm) {
+  if (member.eligibilityOption === HACKATHON_ELIGIBILITY_OTHER) {
+    return member.eligibilityOther.trim();
+  }
+  return member.eligibilityOption.trim();
 }
 
 function isValidEmail(email: string) {
@@ -90,7 +116,7 @@ function validateMember(member: MemberForm): MemberErrors {
   const name = member.name.trim();
   const email = member.email.trim();
   const phone = member.phone.trim();
-  const institution = member.institution.trim();
+  const institution = resolveInstitution(member);
 
   if (!name) errors.name = 'Full name is required';
   else if (name.length < 2) errors.name = 'Enter a valid full name';
@@ -101,10 +127,21 @@ function validateMember(member: MemberForm): MemberErrors {
   if (!phone) errors.phone = 'Phone number is required';
   else if (!isValidPhone(phone)) errors.phone = 'Enter a valid 10-digit Indian mobile number';
 
-  if (!institution) errors.institution = 'College / institution is required';
-  else if (institution.length < 2) errors.institution = 'Enter a valid institution name';
+  if (!member.institutionOption) errors.institution = 'Select college / institution';
+  else if (member.institutionOption === HACKATHON_INSTITUTION_OTHER && !institution) {
+    errors.institution = 'Enter your college / institution name';
+  } else if (institution.length < 2) {
+    errors.institution = 'Enter a valid institution name';
+  }
 
-  if (!member.eligibility) errors.eligibility = 'Select participant type';
+  const eligibility = resolveEligibility(member);
+  if (!member.eligibilityOption) errors.eligibility = 'Select participant type';
+  else if (member.eligibilityOption === HACKATHON_ELIGIBILITY_OTHER && !eligibility) {
+    errors.eligibility = 'Enter your participant type';
+  } else if (eligibility.length < 2) {
+    errors.eligibility = 'Enter a valid participant type';
+  }
+
   if (!member.gender) errors.gender = 'Select gender';
   if (!member.tshirtSize) errors.tshirtSize = 'Select t-shirt size';
 
@@ -159,8 +196,25 @@ export default function HackathonPage() {
     setMembers((prev) =>
       prev.map((member, i) => (i === index ? { ...member, [field]: value } : member)),
     );
-    if (field in { name: 1, email: 1, phone: 1, institution: 1, eligibility: 1, gender: 1, tshirtSize: 1 }) {
-      clearMemberFieldError(index, field as keyof MemberErrors);
+    if (
+      field === 'name' ||
+      field === 'email' ||
+      field === 'phone' ||
+      field === 'institutionOption' ||
+      field === 'institutionOther' ||
+      field === 'eligibilityOption' ||
+      field === 'eligibilityOther' ||
+      field === 'gender' ||
+      field === 'tshirtSize'
+    ) {
+      clearMemberFieldError(
+        index,
+        field === 'institutionOption' || field === 'institutionOther'
+          ? 'institution'
+          : field === 'eligibilityOption' || field === 'eligibilityOther'
+            ? 'eligibility'
+            : field,
+      );
     }
   };
 
@@ -231,11 +285,13 @@ export default function HackathonPage() {
           ideaSummary: ideaSummary.trim(),
           acceptedTerms: true,
           members: members.map((member, index) => ({
-            ...member,
             name: member.name.trim(),
             email: member.email.trim(),
             phone: member.phone.trim(),
-            institution: member.institution.trim(),
+            institution: resolveInstitution(member),
+            eligibility: resolveEligibility(member),
+            gender: member.gender,
+            tshirtSize: member.tshirtSize,
             isLead: index === 0,
           })),
         }),
@@ -564,23 +620,84 @@ export default function HackathonPage() {
                         error={errors.phone}
                         maxLength={13}
                       />
-                      <Field
-                        label="College / Institution *"
-                        value={member.institution}
-                        onChange={(v) => updateMember(index, 'institution', v)}
-                        disabled={!registrationOpen}
-                        placeholder="Your college or organization"
-                        error={errors.institution}
-                      />
-                      <SelectField
-                        label="Participant type *"
-                        value={member.eligibility}
-                        onChange={(v) => updateMember(index, 'eligibility', v)}
-                        disabled={!registrationOpen}
-                        placeholder="Select participant type"
-                        options={ELIGIBILITY_OPTIONS}
-                        error={errors.eligibility}
-                      />
+                      <div className="sm:col-span-2 space-y-3">
+                        <SelectField
+                          label="College / Institution *"
+                          value={member.institutionOption}
+                          onChange={(v) => {
+                            setMembers((prev) =>
+                              prev.map((m, i) =>
+                                i === index
+                                  ? {
+                                      ...m,
+                                      institutionOption: v,
+                                      institutionOther:
+                                        v === HACKATHON_INSTITUTION_OTHER ? m.institutionOther : '',
+                                    }
+                                  : m,
+                              ),
+                            );
+                            clearMemberFieldError(index, 'institution');
+                          }}
+                          disabled={!registrationOpen}
+                          placeholder="Select college / institution"
+                          options={HACKATHON_INSTITUTIONS}
+                          error={
+                            member.institutionOption === HACKATHON_INSTITUTION_OTHER
+                              ? undefined
+                              : errors.institution
+                          }
+                        />
+                        {member.institutionOption === HACKATHON_INSTITUTION_OTHER ? (
+                          <Field
+                            label="Enter college / institution *"
+                            value={member.institutionOther}
+                            onChange={(v) => updateMember(index, 'institutionOther', v)}
+                            disabled={!registrationOpen}
+                            placeholder="Type your college or organization name"
+                            error={errors.institution}
+                          />
+                        ) : null}
+                      </div>
+                      <div className="space-y-3">
+                        <SelectField
+                          label="Participant type *"
+                          value={member.eligibilityOption}
+                          onChange={(v) => {
+                            setMembers((prev) =>
+                              prev.map((m, i) =>
+                                i === index
+                                  ? {
+                                      ...m,
+                                      eligibilityOption: v,
+                                      eligibilityOther:
+                                        v === HACKATHON_ELIGIBILITY_OTHER ? m.eligibilityOther : '',
+                                    }
+                                  : m,
+                              ),
+                            );
+                            clearMemberFieldError(index, 'eligibility');
+                          }}
+                          disabled={!registrationOpen}
+                          placeholder="Select participant type"
+                          options={ELIGIBILITY_OPTIONS}
+                          error={
+                            member.eligibilityOption === HACKATHON_ELIGIBILITY_OTHER
+                              ? undefined
+                              : errors.eligibility
+                          }
+                        />
+                        {member.eligibilityOption === HACKATHON_ELIGIBILITY_OTHER ? (
+                          <Field
+                            label="Enter participant type *"
+                            value={member.eligibilityOther}
+                            onChange={(v) => updateMember(index, 'eligibilityOther', v)}
+                            disabled={!registrationOpen}
+                            placeholder="e.g. Working professional, Faculty"
+                            error={errors.eligibility}
+                          />
+                        ) : null}
+                      </div>
                       <SelectField
                         label="Gender *"
                         value={member.gender}

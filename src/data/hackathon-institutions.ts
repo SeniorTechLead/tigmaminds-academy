@@ -1,0 +1,48 @@
+export const HACKATHON_INSTITUTION_OTHER = 'Others';
+export const HACKATHON_ELIGIBILITY_OTHER = 'Others';
+
+export const HACKATHON_INSTITUTIONS = [
+  'Indian Institute of Technology Guwahati (IIT Guwahati)',
+  'National Institute of Technology Silchar (NIT Silchar)',
+  'Indian Institute of Information Technology Guwahati (IIIT Guwahati)',
+  'Central Institute of Technology Kokrajhar (CIT Kokrajhar)',
+  'Tezpur University',
+  'Assam Science and Technology University (ASTU)',
+  'Gauhati University',
+  'Dibrugarh University',
+  'Assam University, Silchar',
+  'Bodoland University',
+  'Assam Women\'s University',
+  'Assam Rajiv Gandhi University of Cooperative Management (ARGUCOM)',
+  'Assam Engineering College (AEC)',
+  'Jorhat Engineering College (JEC)',
+  'Jorhat Institute of Science and Technology (JIST)',
+  'Bineswar Brahma Engineering College (BBEC)',
+  'Barak Valley Engineering College (BVEC)',
+  'Golaghat Engineering College (GEC)',
+  'Dhemaji Engineering College (DEC)',
+  'Dibrugarh University Institute of Engineering and Technology (DUIET)',
+  'Scholars Institute of Technology and Management (SITM)',
+  'NETES Institute of Technology and Science (NITS)',
+  'Assam Don Bosco University (ADBU)',
+  'Assam down town University (ADTU)',
+  'Royal Global University (RGU)',
+  'The Assam Kaziranga University',
+  'Girijananda Chowdhury University (GCU)',
+  'Girijananda Chowdhury Institute of Management and Technology (GIMT)',
+  'NERIM Group of Institutions',
+  'Royal Group of Institutions',
+  'Asian Institute of Management and Technology (AIMT)',
+  'Cotton University',
+  'North-Eastern Hill University',
+  'North Eastern Regional Institute of Science and Technology',
+  HACKATHON_INSTITUTION_OTHER,
+] as const;
+
+export const HACKATHON_ELIGIBILITY_OPTIONS = [
+  'UG Student',
+  'PG Student',
+  'Fresher',
+  'Recent Passout',
+  HACKATHON_ELIGIBILITY_OTHER,
+] as const;

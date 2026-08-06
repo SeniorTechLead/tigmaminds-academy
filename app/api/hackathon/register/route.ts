@@ -1,42 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
 import hackathon from '../../../../src/data/hackathon.json';
-import type { HackathonMember, HackathonRegistration } from '../../../../src/data/hackathon-types';
+import type { HackathonMember } from '../../../../src/data/hackathon-types';
 import { isHackathonRegistrationOpen } from '../../../../src/data/hackathon-utils';
+import {
+  HACKATHON_ELIGIBILITY_OTHER,
+  HACKATHON_INSTITUTION_OTHER,
+} from '../../../../src/data/hackathon-institutions';
 import {
   hackathonConfirmationEmail,
   hackathonOrganizerEmail,
   sendEmail,
 } from '../../../../src/lib/email';
 
-const REGISTRATIONS_PATH = path.join(process.cwd(), 'data', 'hackathon-registrations.json');
-
-const ELIGIBILITY_OPTIONS = new Set([
-  'UG Student',
-  'PG Student',
-  'Fresher',
-  'Recent Passout',
-]);
-
 const GENDER_OPTIONS = new Set(['Male', 'Female', 'Other', 'Prefer not to say']);
 
 const TSHIRT_SIZE_OPTIONS = new Set(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']);
-
-async function readRegistrations(): Promise<HackathonRegistration[]> {
-  try {
-    const raw = await fs.readFile(REGISTRATIONS_PATH, 'utf8');
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-async function writeRegistrations(registrations: HackathonRegistration[]) {
-  await fs.mkdir(path.dirname(REGISTRATIONS_PATH), { recursive: true });
-  await fs.writeFile(REGISTRATIONS_PATH, JSON.stringify(registrations, null, 2), 'utf8');
-}
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -59,8 +37,18 @@ function normalizeMember(raw: Partial<HackathonMember>, index: number): Hackatho
   if (!name || name.length < 2) return `Member ${index + 1}: valid full name is required`;
   if (!email || !isValidEmail(email)) return `Member ${index + 1}: valid email is required`;
   if (!phone || !isValidPhone(phone)) return `Member ${index + 1}: valid 10-digit Indian mobile is required`;
-  if (!institution || institution.length < 2) return `Member ${index + 1}: institution is required`;
-  if (!ELIGIBILITY_OPTIONS.has(eligibility)) return `Member ${index + 1}: participant type is invalid`;
+  if (!institution || institution.length < 2) {
+    return `Member ${index + 1}: institution is required`;
+  }
+  if (institution === HACKATHON_INSTITUTION_OTHER) {
+    return `Member ${index + 1}: enter your college / institution name`;
+  }
+  if (!eligibility || eligibility.length < 2) {
+    return `Member ${index + 1}: participant type is required`;
+  }
+  if (eligibility === HACKATHON_ELIGIBILITY_OTHER) {
+    return `Member ${index + 1}: enter your participant type`;
+  }
   if (!GENDER_OPTIONS.has(gender)) return `Member ${index + 1}: gender is invalid`;
   if (!TSHIRT_SIZE_OPTIONS.has(tshirtSize)) return `Member ${index + 1}: t-shirt size is invalid`;
 
@@ -129,7 +117,6 @@ export async function POST(request: NextRequest) {
     members.push(result);
   }
 
-  // Ensure exactly one lead (first member)
   members.forEach((m, i) => {
     m.isLead = i === 0;
   });
@@ -139,23 +126,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Each team member must have a unique email.' }, { status: 400 });
   }
 
-  const registration: HackathonRegistration = {
-    id: `hk-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    teamName,
-    members,
-    ideaSummary: String(body.ideaSummary ?? '').trim() || undefined,
-    createdAt: new Date().toISOString(),
-  };
-
-  const existing = await readRegistrations();
-  existing.push(registration);
-  await writeRegistrations(existing);
+  const registrationId = `hk-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  const ideaSummary = String(body.ideaSummary ?? '').trim() || undefined;
 
   const emailPayload = {
-    registrationId: registration.id,
-    teamName: registration.teamName,
-    members: registration.members,
-    ideaSummary: registration.ideaSummary,
+    registrationId,
+    teamName,
+    members,
+    ideaSummary,
     eventTitle: hackathon.title,
     eventDates: hackathon.dates,
     eventLocation: hackathon.location,
@@ -163,13 +141,22 @@ export async function POST(request: NextRequest) {
   };
 
   const emailResults = await Promise.all([
-    ...registration.members.map((member) =>
-      sendEmail(hackathonConfirmationEmail(emailPayload, member)),
-    ),
+    ...members.map((member) => sendEmail(hackathonConfirmationEmail(emailPayload, member))),
     sendEmail(hackathonOrganizerEmail(emailPayload, hackathon.notifyEmail)),
   ]);
 
   const emailsSent = emailResults.filter((r) => r.success).length;
+  if (emailsSent === 0) {
+    console.error(
+      '[Hackathon] All registration emails failed:',
+      emailResults.map((r) => r.error),
+    );
+    return NextResponse.json(
+      { error: 'Could not send confirmation emails. Please try again.' },
+      { status: 500 },
+    );
+  }
+
   if (emailsSent < emailResults.length) {
     console.warn(
       '[Hackathon] Some registration emails failed:',
@@ -179,7 +166,7 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({
     ok: true,
-    id: registration.id,
+    id: registrationId,
     emailsSent,
   });
 }
