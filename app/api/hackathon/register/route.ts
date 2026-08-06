@@ -85,12 +85,20 @@ export async function POST(request: NextRequest) {
     teamName?: string;
     members?: Partial<HackathonMember>[];
     ideaSummary?: string;
+    acceptedTerms?: boolean;
   };
 
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 });
+  }
+
+  if (body.acceptedTerms !== true) {
+    return NextResponse.json(
+      { error: 'You must accept the Official Rules and Terms to register.' },
+      { status: 400 },
+    );
   }
 
   const teamName = String(body.teamName ?? '').trim();

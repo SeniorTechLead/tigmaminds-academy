@@ -86,3 +86,366 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Hackathon page atmosphere */
+@keyframes hackGridDrift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 48px 48px;
+  }
+}
+
+@keyframes hackGridDriftAlt {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -56px 56px;
+  }
+}
+
+@keyframes hackFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(-14px);
+    opacity: 0.6;
+  }
+}
+
+@keyframes hackFloatX {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(18px, -10px);
+  }
+}
+
+@keyframes hackOrbit {
+  from {
+    transform: rotate(0deg) translateX(28px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(28px) rotate(-360deg);
+  }
+}
+
+@keyframes hackPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes hackScan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.4;
+  }
+  85% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes hackScanX {
+  0% {
+    transform: translateX(-30%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.35;
+  }
+  80% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateX(130%);
+    opacity: 0;
+  }
+}
+
+@keyframes hackDash {
+  to {
+    stroke-dashoffset: -240;
+  }
+}
+
+@keyframes hackRise {
+  0% {
+    transform: translateY(110vh) scale(0.6);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.7;
+  }
+  88% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes hackTwinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes hackDriftDiag {
+  0% {
+    transform: translate(-8%, 6%);
+  }
+  50% {
+    transform: translate(6%, -8%);
+  }
+  100% {
+    transform: translate(-8%, 6%);
+  }
+}
+
+@keyframes hackMatrixFall {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.55;
+  }
+  92% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(120vh);
+    opacity: 0;
+  }
+}
+
+@keyframes hackBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hackTypeReveal {
+  0% {
+    max-width: 0;
+  }
+  100% {
+    max-width: 100%;
+  }
+}
+
+@keyframes hackRadar {
+  0% {
+    transform: scale(0.35);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes hackPacket {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes hackHexSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hackBarPulse {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+}
+
+.hack-grid-drift {
+  animation: hackGridDrift 28s linear infinite;
+}
+
+.hack-grid-drift-alt {
+  animation: hackGridDriftAlt 40s linear infinite;
+}
+
+.hack-float {
+  animation: hackFloat 7s ease-in-out infinite;
+}
+
+.hack-float-delayed {
+  animation: hackFloat 9s ease-in-out 1.4s infinite;
+}
+
+.hack-float-slow {
+  animation: hackFloat 12s ease-in-out 0.8s infinite;
+}
+
+.hack-float-x {
+  animation: hackFloatX 11s ease-in-out infinite;
+}
+
+.hack-orbit {
+  animation: hackOrbit 14s linear infinite;
+}
+
+.hack-orbit-slow {
+  animation: hackOrbit 22s linear infinite reverse;
+}
+
+.hack-pulse {
+  animation: hackPulse 3.2s ease-in-out infinite;
+}
+
+.hack-scan {
+  animation: hackScan 9s ease-in-out infinite;
+}
+
+.hack-scan-delayed {
+  animation: hackScan 12s ease-in-out 4s infinite;
+}
+
+.hack-scan-x {
+  animation: hackScanX 11s ease-in-out infinite;
+}
+
+.hack-scan-x-delayed {
+  animation: hackScanX 15s ease-in-out 5s infinite;
+}
+
+.hack-dash {
+  stroke-dasharray: 12 18;
+  animation: hackDash 8s linear infinite;
+}
+
+.hack-dash-slow {
+  stroke-dasharray: 8 14;
+  animation: hackDash 14s linear infinite reverse;
+}
+
+.hack-rise {
+  animation: hackRise 16s linear infinite;
+}
+
+.hack-twinkle {
+  animation: hackTwinkle 2.8s ease-in-out infinite;
+}
+
+.hack-drift-diag {
+  animation: hackDriftDiag 18s ease-in-out infinite;
+}
+
+.hack-matrix {
+  animation: hackMatrixFall 12s linear infinite;
+}
+
+.hack-blink {
+  animation: hackBlink 1s step-end infinite;
+}
+
+.hack-type {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: hackTypeReveal 4s steps(28, end) infinite;
+}
+
+.hack-radar {
+  animation: hackRadar 3.5s ease-out infinite;
+}
+
+.hack-packet {
+  animation: hackPacket 5.5s linear infinite;
+}
+
+.hack-hex-spin {
+  animation: hackHexSpin 40s linear infinite;
+}
+
+.hack-bar {
+  transform-origin: bottom center;
+  animation: hackBarPulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hack-grid-drift,
+  .hack-grid-drift-alt,
+  .hack-float,
+  .hack-float-delayed,
+  .hack-float-slow,
+  .hack-float-x,
+  .hack-orbit,
+  .hack-orbit-slow,
+  .hack-pulse,
+  .hack-scan,
+  .hack-scan-delayed,
+  .hack-scan-x,
+  .hack-scan-x-delayed,
+  .hack-dash,
+  .hack-dash-slow,
+  .hack-rise,
+  .hack-twinkle,
+  .hack-drift-diag,
+  .hack-matrix,
+  .hack-blink,
+  .hack-type,
+  .hack-radar,
+  .hack-packet,
+  .hack-hex-spin,
+  .hack-bar {
+    animation: none;
+  }
+}
