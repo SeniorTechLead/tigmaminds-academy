@@ -345,12 +345,8 @@ export default function HackathonPage() {
               {hackathon.title}
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mb-4 leading-relaxed">
+          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed">
             {hackathon.tagline}
-          </p>
-          <p className="text-sm text-slate-400 mb-8 max-w-2xl">
-            {hackathon.location} · {hackathon.dates} · Registration closes{' '}
-            {hackathon.registrationCloses}
           </p>
           <div className="flex flex-wrap items-center gap-4 animate-slide-up">
             <a
@@ -358,13 +354,13 @@ export default function HackathonPage() {
               className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:brightness-110 transition-all"
             >
               <Code2 className="w-5 h-5" />
-              Register your team
+              Register Your Team
             </a>
             <a
               href="#details"
               className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-white/15 bg-white/5 text-slate-200 font-medium hover:bg-white/10 transition-colors"
             >
-              View details
+              View Details
             </a>
           </div>
         </div>

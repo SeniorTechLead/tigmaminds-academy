@@ -1,7 +1,7 @@
 {
   "slug": "guwahati-hackathon-2026",
-  "title": "TigmaMinds Hackathon 2026",
-  "tagline": "Build a software prototype. Compete offline in Guwahati.",
+  "title": "TigmaMinds Academy Hackathon 2026",
+  "tagline": "Build a software prototype. Compete in Guwahati.",
   "location": "Guwahati, Assam",
   "dates": "29–30 August 2026",
   "registrationCloses": "22nd August 2026",
@@ -11,12 +11,12 @@
   "venue": "To be announced",
   "eligibility": "UG and PG students, Freshers, recent passouts",
   "prizePool": "Up to ₹1,00,000/-",
-  "format": "In Person / Offline Hackathon",
+  "format": "In Person",
   "organizedBy": "TigmaMinds Academy",
   "eventCategory": "Build a prototype/model for software solutions",
   "modeOfConduct": [
     "Online qualifier round",
-    "Offline final hackathon"
+    "In-person final hackathon"
   ],
   "developmentObjective": "Build a software model or a prototype to handle the problem statement given.",
   "theme": "Problem statements will be shared once participants clear the initial round.",
