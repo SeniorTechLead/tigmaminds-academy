@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Bot, Code2, Trophy } from 'lucide-react';
+import { ArrowRight, Sparkles, Trophy, Calendar, MapPin, Users } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { lessonsMeta } from '../data/lessons-meta';
 import { useLessonMeta } from '../contexts/LessonMetaContext';
+import hackathon from '../data/hackathon.json';
+import { isHackathonRegistrationOpen } from '../data/hackathon-utils';
 
 function shuffleArray<T>(arr: T[]): T[] {
   const copy = [...arr];
@@ -34,6 +36,7 @@ const tracks = [
 
 export default function HomePage() {
   const { isDemoStory } = useLessonMeta();
+  const registrationOpen = isHackathonRegistrationOpen();
   const featuredStories = useMemo(() => {
     const demos = lessonsMeta.filter(l => isDemoStory(l.slug));
     return shuffleArray(demos).slice(0, 6);
@@ -43,8 +46,30 @@ export default function HomePage() {
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       <Header />
 
+      {/* Hackathon announcement strip — below fixed header */}
+      <div className="relative z-40 mt-20 border-b border-amber-500/30 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm">
+          <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-medium">
+            <span className="inline-flex items-center gap-1.5 rounded-md bg-amber-500/20 px-2 py-0.5 text-amber-300 text-xs font-bold uppercase tracking-wide">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              {registrationOpen ? 'Registration open' : 'Hackathon'}
+            </span>
+            <span className="text-white/90">{hackathon.title}</span>
+            <span className="hidden sm:inline text-white/40">·</span>
+            <span className="text-white/70">{hackathon.dates} · {hackathon.location}</span>
+          </p>
+          <Link
+            href="/hackathon#register"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white hover:brightness-110 transition"
+          >
+            Register Your Team
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </div>
+
       {/* Hero */}
-      <section className="relative pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative pt-14 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-white to-sky-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 -z-10" />
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -53,22 +78,14 @@ export default function HomePage() {
                 <Sparkles className="w-4 h-4" />
                 Where stories spark STEM curiosity
               </div>
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-[1.15]">
                 Learn to Build
-                <span className="block text-gradient">Through Imagination</span>
+                <span className="block text-gradient mt-1">Through Imagination</span>
               </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-6 leading-relaxed max-w-lg">
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-lg">
                 Programming, AI, and robotics — taught through illustrated stories
                 that make science feel like an adventure.
               </p>
-              <Link
-                href="/hackathon"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-purple-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold mb-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <Trophy className="w-4 h-4" />
-                Hackathon 2026 — Register your team
-                <ArrowRight className="w-4 h-4" />
-              </Link>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/programs"
                   className="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
@@ -92,6 +109,101 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Hackathon spotlight */}
+      <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(251,146,60,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(251,146,60,0.2) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(245,158,11,0.2),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(14,165,233,0.12),transparent_40%)]" />
+
+        <div className="relative max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12 items-center">
+            <div>
+              <p className="inline-flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-[0.18em] mb-4">
+                <Trophy className="w-4 h-4" />
+                Happening now
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+                {hackathon.title}
+              </h2>
+              <p className="text-lg text-slate-300 mb-6 max-w-xl leading-relaxed">
+                {hackathon.tagline} Online qualifier + in-person finale. Prize pool{' '}
+                <span className="text-amber-300 font-semibold">{hackathon.prizePool}</span>.
+              </p>
+
+              <div className="flex flex-wrap gap-3 mb-8 text-sm">
+                <span className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-slate-200">
+                  <Calendar className="w-4 h-4 text-amber-400" />
+                  {hackathon.dates}
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-slate-200">
+                  <MapPin className="w-4 h-4 text-amber-400" />
+                  {hackathon.location}
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-slate-200">
+                  <Users className="w-4 h-4 text-amber-400" />
+                  Teams of {hackathon.teamSize}
+                </span>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="/hackathon#register"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:brightness-110 transition"
+                >
+                  {registrationOpen ? 'Register Your Team' : 'View hackathon'}
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+                <Link
+                  href="/hackathon"
+                  className="inline-flex items-center justify-center gap-2 border border-white/20 bg-white/5 text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-white/10 transition"
+                >
+                  Event details
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-6 sm:p-7">
+              <p className="text-xs font-semibold uppercase tracking-wider text-amber-300 mb-4">
+                Quick facts
+              </p>
+              <ul className="space-y-4 text-sm">
+                <li className="flex justify-between gap-4 border-b border-white/10 pb-3">
+                  <span className="text-slate-400">Format</span>
+                  <span className="text-white font-medium text-right">{hackathon.format}</span>
+                </li>
+                <li className="flex justify-between gap-4 border-b border-white/10 pb-3">
+                  <span className="text-slate-400">Duration</span>
+                  <span className="text-white font-medium text-right">{hackathon.duration}</span>
+                </li>
+                <li className="flex justify-between gap-4 border-b border-white/10 pb-3">
+                  <span className="text-slate-400">Registration closes</span>
+                  <span className="text-amber-300 font-semibold text-right">
+                    {hackathon.registrationCloses}
+                  </span>
+                </li>
+                <li className="flex justify-between gap-4">
+                  <span className="text-slate-400">Status</span>
+                  <span className={`font-semibold text-right ${registrationOpen ? 'text-emerald-400' : 'text-slate-300'}`}>
+                    {registrationOpen ? 'Open for teams' : 'Closed'}
+                  </span>
+                </li>
+              </ul>
+              <p className="mt-5 text-xs text-slate-500 leading-relaxed">
+                Built for UG/PG students, freshers, and recent passouts. Mentors, certificates,
+                and goodies included.
+              </p>
             </div>
           </div>
         </div>
@@ -266,7 +378,7 @@ export default function HomePage() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <Link href="/hackathon"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-violet-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
             >
               <Trophy className="mr-2 h-5 w-5" />
               Hackathon 2026

@@ -40,8 +40,8 @@ export const HACKATHON_RULEBOOK_SECTIONS: HackathonRuleSection[] = [
         ['Event', 'TigmaMinds Academy Hackathon 2026'],
         ['Organizer', 'TigmaMinds Academy'],
         ['Location', 'Guwahati, Assam'],
-        ['Mode', 'Online Qualifier + Offline Grand Finale'],
-        ['Format', 'In-Person (Final Round)'],
+        ['Mode', 'Online Qualifier + In-Person Grand Finale'],
+        ['Format', 'In Person'],
         ['Duration', '48 Hours'],
         ['Theme', 'Software Innovation'],
         ['Event Category', 'Prototype & Product Development'],
@@ -77,7 +77,7 @@ export const HACKATHON_RULEBOOK_SECTIONS: HackathonRuleSection[] = [
     title: '5. Registration',
     bullets: [
       'Registration is mandatory.',
-      'Registration closes on 23 August 2026.',
+      'Registration closes on 23rd August 2026.',
     ],
   },
   {
@@ -95,7 +95,7 @@ export const HACKATHON_RULEBOOK_SECTIONS: HackathonRuleSection[] = [
         paragraphs: ['Only shortlisted teams will qualify for the Grand Finale.'],
       },
       {
-        title: 'Round 2 – Offline Grand Finale',
+        title: 'Round 2 – In-Person Grand Finale',
         paragraphs: [
           'Qualified teams will participate in a 48-hour in-person hackathon in Guwahati.',
           'During the final round:',
