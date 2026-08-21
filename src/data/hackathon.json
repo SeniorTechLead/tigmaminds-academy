@@ -19,7 +19,7 @@
     "In-person final hackathon"
   ],
   "developmentObjective": "Build a software model or a prototype to handle the problem statement given.",
-  "theme": "Problem statements will be shared once participants clear the initial round.",
+  "theme": "Choose one qualifier theme: Health & Wellbeing, Agriculture & Food Security, Education & Future Learning, Water & Water Security, Cybersecurity, AI & Emerging Technologies, Climate Change & Sustainability, or Low-Code Automation.",
   "whatYouCanBuild": [
     "Web Applications",
     "Mobile Applications",
@@ -48,5 +48,9 @@
   "registrationOpen": true,
   "minTeamSize": 2,
   "maxTeamSize": 4,
-  "notifyEmail": "hackathon@tigmaminds.com"
+  "notifyEmail": "hackathon@tigmaminds.com",
+  "qualifyingRound": {
+    "title": "Qualifying Rounds",
+    "intro": "Registered teams verify with OTP, choose a qualifier problem, then submit a response."
+  }
 }

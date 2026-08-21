@@ -58,13 +58,22 @@ export default function HomePage() {
             <span className="hidden sm:inline text-white/40">·</span>
             <span className="text-white/70">{hackathon.dates} · {hackathon.location}</span>
           </p>
-          <Link
-            href="/hackathon#register"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white hover:brightness-110 transition"
-          >
-            Register Your Team
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <Link
+              href="/hackathon#register"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white hover:brightness-110 transition"
+            >
+              Register Your Team
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <Link
+              href="/hackathon/qualify#qualifying"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-amber-400/40 bg-white/5 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-amber-200 hover:bg-white/10 hover:border-amber-300/60 transition"
+            >
+              Qualifying Round
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       </div>
 
