@@ -8,6 +8,11 @@ export interface HackathonPrizes {
   categories: string[];
 }
 
+export interface HackathonQualifyingRound {
+  title: string;
+  intro: string;
+}
+
 export interface HackathonDetails {
   slug: string;
   title: string;
@@ -37,6 +42,7 @@ export interface HackathonDetails {
   minTeamSize: number;
   maxTeamSize: number;
   notifyEmail: string;
+  qualifyingRound: HackathonQualifyingRound;
 }
 
 export interface HackathonMember {
