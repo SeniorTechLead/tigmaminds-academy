@@ -1,13 +1,16 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Code2, FileText } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HackathonQualifyingSection from './HackathonQualifyingSection';
+import { isHackathonRegistrationOpen } from '../data/hackathon-utils';
 import { HackathonEventDetails, HackathonHero, HackPageBackdrop } from './hackathon-shared';
 
 export default function HackathonQualifyPage() {
+  const registrationOpen = isHackathonRegistrationOpen();
+
   useEffect(() => {
     const scrollToHash = () => {
       const id = window.location.hash.replace('#', '');
@@ -45,13 +48,14 @@ export default function HackathonQualifyPage() {
               >
                 View Details
               </a>
-              <a
-                href="/hackathon#register"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
-              >
-                <Code2 className="w-5 h-5" />
-                Register Your Team
-              </a>
+              {registrationOpen ? (
+                <a
+                  href="/hackathon#register"
+                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
+                >
+                  Register Your Team
+                </a>
+              ) : null}
             </>
           }
         />

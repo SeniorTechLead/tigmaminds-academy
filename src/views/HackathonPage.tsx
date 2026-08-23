@@ -3,11 +3,16 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
+  Calendar,
   Code2,
+  Info,
   Loader2,
+  MapPin,
   Minus,
   Plus,
   Send,
+  Trophy,
+  Users,
   X,
 } from 'lucide-react';
 import Header from '../components/Header';
@@ -261,6 +266,12 @@ export default function HackathonPage() {
     setStatus('idle');
     setErrorMessage('');
 
+    if (!registrationOpen) {
+      setStatus('error');
+      setErrorMessage('Registration is closed. New teams cannot be registered.');
+      return;
+    }
+
     if (!validateForm()) {
       setStatus('error');
       setErrorMessage('Please fix the highlighted fields and try again.');
@@ -318,36 +329,57 @@ export default function HackathonPage() {
 
       <HackathonHero
         actions={
-          <>
-            <a
-              href="#register"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:brightness-110 transition-all"
-            >
-              <Code2 className="w-5 h-5" />
-              Register Your Team
-            </a>
-            <a
-              href="#details"
-              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-white/15 bg-white/5 text-slate-200 font-medium hover:bg-white/10 transition-colors"
-            >
-              View Details
-            </a>
-            <a
-              href="/hackathon/qualify#qualifying"
-              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
-            >
-              Qualifying Rounds
-            </a>
-          </>
+          registrationOpen ? (
+            <>
+              <a
+                href="#register"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:brightness-110 transition-all"
+              >
+                <Code2 className="w-5 h-5" />
+                Register Your Team
+              </a>
+              <a
+                href="#details"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-white/15 bg-white/5 text-slate-200 font-medium hover:bg-white/10 transition-colors"
+              >
+                View Details
+              </a>
+              <a
+                href="/hackathon/qualify#qualifying"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
+              >
+                Qualifying Rounds
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                href="#details"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:brightness-110 transition-all"
+              >
+                View Event Details
+              </a>
+              <a
+                href="/hackathon/qualify#qualifying"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
+              >
+                Qualifying Rounds
+              </a>
+            </>
+          )
         }
       />
 
       <HackathonEventDetails />
 
-      {/* Registration form */}
+      {/* Registration — closed notice or form (below judging criteria) */}
       <section id="register" className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
         <div className="relative max-w-3xl mx-auto">
+          {!registrationOpen ? (
+            <ClosedRegistrationNotice />
+          ) : (
+            <>
           <div className="text-center mb-8">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-400 mb-2">
               Join the build
@@ -364,12 +396,6 @@ export default function HackathonPage() {
               </a>
             </p>
           </div>
-
-          {!registrationOpen && (
-            <div className="mb-6 p-4 bg-amber-500/10 border border-amber-400/30 rounded-xl text-amber-200 text-center">
-              Registration is currently closed.
-            </div>
-          )}
 
           {status === 'error' && (
             <div className="mb-6 p-4 bg-red-500/10 border border-red-400/30 rounded-xl text-sm text-red-300">
@@ -666,6 +692,8 @@ export default function HackathonPage() {
               )}
             </button>
           </form>
+            </>
+          )}
         </div>
       </section>
 
@@ -682,6 +710,75 @@ export default function HackathonPage() {
 
       <Footer contactEmail="hackathon@tigmaminds.com" />
       </div>
+    </div>
+  );
+}
+
+function ClosedRegistrationNotice() {
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-amber-400/30 bg-slate-950/70 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.65)]">
+      <div className="pointer-events-none absolute -top-px inset-x-8 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
+      <div className="text-center mb-8">
+        <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-amber-400 mb-3">
+          <Info className="w-3.5 h-3.5" />
+          Registration closed
+        </p>
+        <h2 className="text-3xl font-bold text-white mb-3">Team registration is closed</h2>
+        <p className="text-slate-300 max-w-xl mx-auto leading-relaxed">
+          New teams can no longer register for {hackathon.title}. Event information
+          is listed above. Registered teams can continue to the qualifying rounds.
+        </p>
+      </div>
+
+      <ul className="grid sm:grid-cols-2 gap-3 mb-8">
+        {[
+          { icon: Calendar, label: 'Event dates', value: hackathon.dates },
+          { icon: MapPin, label: 'Location', value: hackathon.location },
+          { icon: Users, label: 'Team size', value: hackathon.teamSize },
+          { icon: Trophy, label: 'Prize pool', value: hackathon.prizePool },
+        ].map((item) => {
+          const Icon = item.icon;
+          return (
+            <li
+              key={item.label}
+              className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-4"
+            >
+              <Icon className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-0.5">
+                  {item.label}
+                </p>
+                <p className="text-white font-medium">{item.value}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+
+      <p className="text-sm text-slate-400 text-center mb-6">
+        Registration closed on {hackathon.registrationCloses}.
+      </p>
+
+      <div className="flex flex-col sm:flex-row gap-3">
+        <a
+          href="#details"
+          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-white/15 bg-white/5 text-slate-200 font-medium hover:bg-white/10 transition-colors"
+        >
+          View event details
+        </a>
+        <a
+          href="/hackathon/qualify#qualifying"
+          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:brightness-110 transition-all"
+        >
+          Go to qualifying
+        </a>
+      </div>
+      <p className="mt-5 text-center text-sm text-slate-500">
+        Questions? Email{' '}
+        <a href={`mailto:${hackathon.notifyEmail}`} className="text-amber-300 hover:text-amber-200">
+          {hackathon.notifyEmail}
+        </a>
+      </p>
     </div>
   );
 }

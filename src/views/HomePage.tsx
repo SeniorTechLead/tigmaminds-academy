@@ -51,8 +51,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm">
           <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-medium">
             <span className="inline-flex items-center gap-1.5 rounded-md bg-amber-500/20 px-2 py-0.5 text-amber-300 text-xs font-bold uppercase tracking-wide">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              {registrationOpen ? 'Registration open' : 'Hackathon'}
+              <span className={`h-1.5 w-1.5 rounded-full ${registrationOpen ? 'bg-emerald-400 animate-pulse' : 'bg-slate-400'}`} />
+              {registrationOpen ? 'Registration open' : 'Registration closed'}
             </span>
             <span className="text-white/90">{hackathon.title}</span>
             <span className="hidden sm:inline text-white/40">·</span>
@@ -60,10 +60,10 @@ export default function HomePage() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2">
             <Link
-              href="/hackathon#register"
+              href={registrationOpen ? '/hackathon#register' : '/hackathon#details'}
               className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white hover:brightness-110 transition"
             >
-              Register Your Team
+              {registrationOpen ? 'Register Your Team' : 'Event details'}
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
@@ -168,7 +168,7 @@ export default function HomePage() {
 
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
-                  href="/hackathon#register"
+                  href={registrationOpen ? '/hackathon#register' : '/hackathon#details'}
                   className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:brightness-110 transition"
                 >
                   {registrationOpen ? 'Register Your Team' : 'View hackathon'}
