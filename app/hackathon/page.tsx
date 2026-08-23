@@ -3,7 +3,7 @@ import HackathonPage from '../../src/views/HackathonPage';
 import hackathon from '../../src/data/hackathon.json';
 
 export const metadata: Metadata = {
-  title: `${hackathon.title} — Register | TigmaMinds Academy`,
+  title: `${hackathon.title} | TigmaMinds Academy`,
   description: `${hackathon.tagline} ${hackathon.location}. ${hackathon.dates}. Prize pool ${hackathon.prizePool}.`,
 };
 

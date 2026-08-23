@@ -45,7 +45,7 @@
     { "criteria": "Functionality / Prototype", "weightage": "20%" },
     { "criteria": "Presentation & Demo", "weightage": "10%" }
   ],
-  "registrationOpen": true,
+  "registrationOpen": false,
   "minTeamSize": 2,
   "maxTeamSize": 4,
   "notifyEmail": "hackathon@tigmaminds.com",
