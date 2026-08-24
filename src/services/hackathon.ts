@@ -1,4 +1,9 @@
+import { isHackathonQualifyingOpen } from '../data/hackathon-utils';
+
 export const BASE_URL = 'https://agentic-envoy.xorai.com';
+
+const QUALIFYING_CLOSED_MESSAGE =
+  'The qualifying round is closed. Your response has been recorded.';
 
 export const VALIDATE_TEAM_HACKATHON_URL = `${BASE_URL}/validateTeamhackathon`;
 export const VALIDATE_TEAM_OTP_URL = `${BASE_URL}/validateTeamOtp`;
@@ -145,10 +150,17 @@ async function postJson(url: string, body: unknown) {
   return data;
 }
 
+function assertQualifyingOpen() {
+  if (!isHackathonQualifyingOpen()) {
+    throw new Error(QUALIFYING_CLOSED_MESSAGE);
+  }
+}
+
 /** Verify team / send OTP. Payload: { email, teamName }. */
 export async function validateTeamHackathon(
   payload: ValidateTeamHackathonPayload,
 ): Promise<ValidateTeamHackathonResult> {
+  assertQualifyingOpen();
   const data = await postJson(VALIDATE_TEAM_HACKATHON_URL, {
     email: payload.email,
     teamName: payload.teamName,
@@ -170,6 +182,7 @@ export async function validateTeamHackathon(
 
 /** Verify OTP. Payload: { email, teamName, otp } from the validate API response. */
 export async function validateTeamOtp(payload: ValidateTeamOtpPayload): Promise<ValidateTeamOtpResult> {
+  assertQualifyingOpen();
   const data = await postJson(VALIDATE_TEAM_OTP_URL, {
     email: payload.email,
     teamName: payload.teamName,
@@ -193,6 +206,7 @@ export async function submitSelectedQuestion(input: {
   token: string;
   questionId: string;
 }): Promise<SubmitSelectedQuestionResult> {
+  assertQualifyingOpen();
   const url = new URL(SELECT_QUESTION_URL);
   url.searchParams.set('questionId', input.questionId);
 
@@ -222,6 +236,7 @@ export async function submitSelectedQuestion(input: {
 
 /** Submit the selected qualifying file as multipart FormData. Returns the API success message. */
 export async function uploadHackathonFile(input: { token: string; file: File }): Promise<UploadHackathonFileResult> {
+  assertQualifyingOpen();
   const formData = new FormData();
   formData.append('file', input.file);
 

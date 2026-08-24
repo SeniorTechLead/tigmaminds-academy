@@ -726,7 +726,8 @@ function ClosedRegistrationNotice() {
         <h2 className="text-3xl font-bold text-white mb-3">Team registration is closed</h2>
         <p className="text-slate-300 max-w-xl mx-auto leading-relaxed">
           New teams can no longer register for {hackathon.title}. Event information
-          is listed above. Registered teams can continue to the qualifying rounds.
+          is listed above. The qualifying round is also closed. Selected teams will
+          receive an email related to the Grand Finale.
         </p>
       </div>
 
@@ -770,7 +771,7 @@ function ClosedRegistrationNotice() {
           href="/hackathon/qualify#qualifying"
           className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:brightness-110 transition-all"
         >
-          Go to qualifying
+          Qualifying update
         </a>
       </div>
       <p className="mt-5 text-center text-sm text-slate-500">
