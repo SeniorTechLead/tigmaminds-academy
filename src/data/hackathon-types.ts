@@ -11,6 +11,7 @@ export interface HackathonPrizes {
 export interface HackathonQualifyingRound {
   title: string;
   intro: string;
+  open: boolean;
 }
 
 export interface HackathonDetails {

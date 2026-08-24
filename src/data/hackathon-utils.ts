@@ -7,3 +7,7 @@ export function isHackathonRegistrationOpen(now = new Date()): boolean {
   if (Number.isNaN(closesAt.getTime())) return hackathon.registrationOpen;
   return now.getTime() <= closesAt.getTime();
 }
+
+export function isHackathonQualifyingOpen(): boolean {
+  return Boolean(hackathon.qualifyingRound.open);
+}

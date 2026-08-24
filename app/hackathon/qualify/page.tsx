@@ -4,7 +4,7 @@ import hackathon from '../../../src/data/hackathon.json';
 
 export const metadata: Metadata = {
   title: `${hackathon.title} — Qualifying Round | TigmaMinds Academy`,
-  description: `${hackathon.qualifyingRound.intro} ${hackathon.location}. ${hackathon.dates}.`,
+  description: `Qualifying round closed. ${hackathon.location}. ${hackathon.dates}.`,
 };
 
 export default function Page() {

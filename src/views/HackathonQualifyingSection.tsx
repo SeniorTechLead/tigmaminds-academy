@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { getHackathonQuestionById, HACKATHON_QUESTIONS, type HackathonQuestion } from '../data/hackathon-questions';
 import hackathon from '../data/hackathon.json';
+import { isHackathonQualifyingOpen } from '../data/hackathon-utils';
 import {
   HACKATHON_QUALIFY_FILE_ACCEPT,
   HACKATHON_QUALIFY_GUIDES,
@@ -189,6 +190,7 @@ type QualifyStep = 'verify' | 'otp' | 'select' | 'list' | 'submit';
 
 export default function HackathonQualifyingSection() {
   const round = hackathon.qualifyingRound;
+  const qualifyingOpen = isHackathonQualifyingOpen();
 
   const [step, setStep] = useState<QualifyStep>('verify');
   const [verifyTeamName, setVerifyTeamName] = useState('');
@@ -479,6 +481,10 @@ export default function HackathonQualifyingSection() {
     <section id="qualifying" className="relative scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
       <div className="relative max-w-3xl mx-auto">
+        {!qualifyingOpen ? (
+          <ClosedQualifyingNotice />
+        ) : (
+          <>
         <div className="text-center mb-8">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-400 mb-2">
             Online qualifier
@@ -990,6 +996,8 @@ export default function HackathonQualifyingSection() {
             ) : null}
           </form>
         ) : null}
+          </>
+        )}
       </div>
 
       {confirmSelectOpen ? (
@@ -1038,5 +1046,31 @@ export default function HackathonQualifyingSection() {
         </div>
       ) : null}
     </section>
+  );
+}
+
+function ClosedQualifyingNotice() {
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-amber-400/30 bg-slate-950/70 backdrop-blur-md p-6 sm:p-8 text-center shadow-[0_20px_50px_-28px_rgba(0,0,0,0.65)]">
+      <div className="pointer-events-none absolute -top-px inset-x-8 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
+      <h2 className="text-3xl font-bold text-white mb-5">Qualifying Round Closed</h2>
+      <div className="max-w-xl mx-auto space-y-4 text-slate-300 leading-relaxed">
+        <p>
+          Thank you for participating! The qualifying round is now closed, and your submission
+          has been successfully recorded.
+        </p>
+        <p>
+          Our team will carefully review all entries. Shortlisted teams will be notified via
+          email with further details about the Grand Finale.
+        </p>
+        <p>We appreciate your effort and enthusiasm, and wish you the best of luck!</p>
+      </div>
+      <p className="mt-6 text-sm text-slate-500">
+        Questions? Email{' '}
+        <a href={`mailto:${hackathon.notifyEmail}`} className="text-amber-300 hover:text-amber-200">
+          {hackathon.notifyEmail}
+        </a>
+      </p>
+    </div>
   );
 }

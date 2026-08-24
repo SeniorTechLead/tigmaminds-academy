@@ -51,6 +51,7 @@
   "notifyEmail": "hackathon@tigmaminds.com",
   "qualifyingRound": {
     "title": "Qualifying Rounds",
-    "intro": "Registered teams verify with OTP, choose a qualifier problem, then submit a response."
+    "intro": "Registered teams verify with OTP, choose a qualifier problem, then submit a response.",
+    "open": false
   }
 }
