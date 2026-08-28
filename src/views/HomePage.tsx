@@ -67,10 +67,17 @@ export default function HomePage() {
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
-              href="/hackathon/qualify#qualifying"
+              href="/hackathon/venue"
               className="inline-flex items-center gap-1.5 rounded-lg border border-amber-400/40 bg-white/5 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-amber-200 hover:bg-white/10 hover:border-amber-300/60 transition"
             >
-              Qualifying Round
+              Venue
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <Link
+              href="/hackathon/venue/teams"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-amber-400/40 bg-white/5 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-amber-200 hover:bg-white/10 hover:border-amber-300/60 transition"
+            >
+              Teams
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

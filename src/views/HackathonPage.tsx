@@ -345,10 +345,16 @@ export default function HackathonPage() {
                 View Details
               </a>
               <a
-                href="/hackathon/qualify#qualifying"
+                href="/hackathon/venue"
                 className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
               >
-                Qualifying Rounds
+                Venue
+              </a>
+              <a
+                href="/hackathon/venue/teams"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
+              >
+                Teams
               </a>
             </>
           ) : (
@@ -360,10 +366,16 @@ export default function HackathonPage() {
                 View Event Details
               </a>
               <a
-                href="/hackathon/qualify#qualifying"
+                href="/hackathon/venue"
                 className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
               >
-                Qualifying Rounds
+                Venue
+              </a>
+              <a
+                href="/hackathon/venue/teams"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
+              >
+                Teams
               </a>
             </>
           )

@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react';
+'use client';
+
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import {
   Award,
   Calendar,
@@ -7,6 +9,7 @@ import {
   Code2,
   Gift,
   MapPin,
+  Maximize2,
   Trophy,
   Users,
 } from 'lucide-react';
@@ -412,5 +415,85 @@ export function HackPageBackdrop() {
         </span>
       </div>
     </div>
+  );
+}
+
+export function TigmaMindsWordmark({
+  className = '',
+  size = 'md',
+}: {
+  className?: string;
+  size?: 'md' | 'lg';
+}) {
+  const height = size === 'lg' ? 'h-[clamp(2.1rem,4.8vw,3.5rem)]' : 'h-[clamp(1.35rem,2.4vw,2rem)]';
+
+  return (
+    <svg
+      viewBox="0 0 470 90"
+      className={`w-auto ${height} ${className}`}
+      overflow="visible"
+      role="img"
+      aria-label="TigmaMinds"
+    >
+      <text
+        x="0"
+        y="76"
+        fill="#E2B23A"
+        fontFamily="Inter, system-ui, sans-serif"
+        fontWeight="500"
+        letterSpacing="9"
+      >
+        <tspan fontSize="70">T</tspan>
+        <tspan fontSize="52">IGMA</tspan>
+        <tspan fontSize="70">M</tspan>
+        <tspan fontSize="52">INDS</tspan>
+      </text>
+    </svg>
+  );
+}
+
+export function VenueFullscreenButton({ className = '' }: { className?: string }) {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = useCallback(async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await document.documentElement.requestFullscreen();
+      }
+    } catch {
+      /* Fullscreen can be blocked by the browser; the page still works. */
+    }
+  }, []);
+
+  useEffect(() => {
+    const sync = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'f' || event.key === 'F') {
+        event.preventDefault();
+        void toggleFullscreen();
+      }
+    };
+    sync();
+    document.addEventListener('fullscreenchange', sync);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('fullscreenchange', sync);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [toggleFullscreen]);
+
+  if (isFullscreen) return null;
+
+  return (
+    <button
+      type="button"
+      onClick={() => void toggleFullscreen()}
+      className={`inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 p-2 text-slate-200 hover:bg-white/10 ${className}`}
+      aria-label="Enter fullscreen"
+    >
+      <Maximize2 className="h-4 w-4" />
+    </button>
   );
 }
