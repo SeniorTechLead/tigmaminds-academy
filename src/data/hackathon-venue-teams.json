@@ -1,0 +1,159 @@
+[
+  {
+    "teamName": "CODE_BNS",
+    "members": [
+      { "name": "Barsha Deb (Team Lead)", "college": "Assam down town University (ADTU)" },
+      { "name": "Snigdha Ray", "college": "Assam down town University (ADTU)" },
+      { "name": "Nazia Farhat", "college": "Gauhati University" }
+    ]
+  },
+  {
+    "teamName": "D Noobs",
+    "members": [
+      { "name": "Manav Agarwalla (Team Lead)", "college": "Dibrugarh University" },
+      { "name": "Rupesh Thakur", "college": "Dibrugarh University" },
+      { "name": "Gaurav Deori", "college": "Dibrugarh University" },
+      { "name": "Nishanka Borthakur", "college": "Dibrugarh University" }
+    ]
+  },
+  {
+    "teamName": "Phoenix",
+    "members": [
+      { "name": "Aditi Agarwal (Team Lead)", "college": "Girijananda Chowdhury University (GCU)" },
+      { "name": "Shabnam Sultana", "college": "Girijananda Chowdhury University (GCU)" },
+      { "name": "Pangkita Thakuria", "college": "Girijananda Chowdhury University (GCU)" }
+    ]
+  },
+  {
+    "teamName": "Psyduck",
+    "members": [
+      { "name": "Rishav Kumar Singh (Team Lead)", "college": "Girijananda Chowdhury University (GCU)" },
+      { "name": "Hrishikesh Das", "college": "Girijananda Chowdhury University (GCU)" }
+    ]
+  },
+  {
+    "teamName": "CodeSpace",
+    "members": [
+      { "name": "Riky Rabha (Team Lead)", "college": "Girijananda Chowdhury University (GCU)" },
+      { "name": "Arpita Bhattacharya", "college": "Girijananda Chowdhury University (GCU)" },
+      { "name": "Bhaswati Sarmah", "college": "Girijananda Chowdhury University (GCU)" },
+      { "name": "Nishanta Lal Choudhury", "college": "Girijananda Chowdhury University (GCU)" }
+    ]
+  },
+  {
+    "teamName": "Nexora",
+    "members": [
+      { "name": "Prachi Saud (Team Lead)", "college": "Gauhati University" },
+      { "name": "Hridip Sarma", "college": "Gauhati University" },
+      { "name": "Licha Pathak", "college": "Gauhati University" },
+      { "name": "Abhijeet Das", "college": "Gauhati University" }
+    ]
+  },
+  {
+    "teamName": "Binary",
+    "members": [
+      { "name": "Ankur Ranjan Chanda (Team Lead)", "college": "Girijananda Chowdhury University (GCU)" },
+      { "name": "Yuvraj Sarma", "college": "Girijananda Chowdhury University (GCU)" }
+    ]
+  },
+  {
+    "teamName": "Team Nibble",
+    "members": [
+      { "name": "Madhurjya Barman (Team Lead)", "college": "Gauhati University" },
+      { "name": "Md Salim Ahmed", "college": "Gauhati University" },
+      { "name": "Nisanta Sarmah", "college": "Gauhati University" },
+      { "name": "Atreyee Paul", "college": "Gauhati University" }
+    ]
+  },
+  {
+    "teamName": "Team Falcons",
+    "members": [
+      { "name": "Bishal Duarah (Team Lead)", "college": "The Assam Kaziranga University" },
+      { "name": "Nandita Das", "college": "The Assam Kaziranga University" }
+    ]
+  },
+  {
+    "teamName": "FineShyft",
+    "members": [
+      { "name": "Juman Dev Sarma (Team Lead)", "college": "Assam down town University (ADTU)" },
+      { "name": "Khairul Hassan", "college": "Assam down town University (ADTU)" },
+      { "name": "Abhirup Das", "college": "Assam down town University (ADTU)" },
+      { "name": "Bhaskarjyoti Chanda", "college": "Assam down town University (ADTU)" }
+    ]
+  },
+  {
+    "teamName": "Team Rocket",
+    "members": [
+      { "name": "Farhaz Ali (Team Lead)", "college": "Assam down town University (ADTU)" },
+      { "name": "Sudipta Mazumder", "college": "Assam down town University (ADTU)" },
+      { "name": "Daanish Rahman", "college": "Assam down town University (ADTU)" }
+    ]
+  },
+  {
+    "teamName": "Brain Cells",
+    "members": [
+      { "name": "Dimpal Baishya (Team Lead)", "college": "Cotton University" },
+      { "name": "Arnabjyoti Deka", "college": "Cotton University" },
+      { "name": "Chandan Giri", "college": "Cotton University" },
+      { "name": "Katyayan Borthakur", "college": "Cotton University" }
+    ]
+  },
+  {
+    "teamName": "Brahmāstra",
+    "members": [
+      { "name": "Utsav Mishra (Team Lead)", "college": "Girijananda Chowdhury University (GCU)" },
+      { "name": "Utpal Mishra", "college": "Girijananda Chowdhury University (GCU)" }
+    ]
+  },
+  {
+    "teamName": "Team Exabyte",
+    "members": [
+      { "name": "Hijbul Bahar Mazumder (Team Lead)", "college": "Barak Valley Engineering College (BVEC)" },
+      { "name": "Shahid Anowar", "college": "Barak Valley Engineering College (BVEC)" },
+      { "name": "Sourav Sharma", "college": "Barak Valley Engineering College (BVEC)" },
+      { "name": "Sahil alom choudhury", "college": "Barak Valley Engineering College (BVEC)" }
+    ]
+  },
+  {
+    "teamName": "CodeCraft",
+    "members": [
+      { "name": "Kasturi Kashyap (Team Lead)", "college": "Gauhati University" },
+      { "name": "Shashwati Shivam", "college": "Gauhati University" },
+      { "name": "Arnab Kumar Kashyap", "college": "Gauhati University" },
+      { "name": "Hrishikesh Dutta", "college": "Gauhati University" }
+    ]
+  },
+  {
+    "teamName": "Novice coders",
+    "members": [
+      { "name": "Amar Das (Team Lead)", "college": "Cotton University" },
+      { "name": "Hemantu Das", "college": "Cotton University" },
+      { "name": "Partha Pratim Kalita", "college": "Cotton University" }
+    ]
+  },
+  {
+    "teamName": "Buri Buri Zaemon",
+    "members": [
+      { "name": "Arjun Bora (Team Lead)", "college": "Dibrugarh University" },
+      { "name": "Arunabh Bhattacharyya", "college": "Dibrugarh University" },
+      { "name": "Moharnab Gogoi", "college": "Dibrugarh University" },
+      { "name": "Bichitra Bikram Hazarika", "college": "Dibrugarh University" }
+    ]
+  },
+  {
+    "teamName": "Forge",
+    "members": [
+      { "name": "Himtrishanu Nath (Team Lead)", "college": "Jorhat Institute of Science and Technology (JIST)" },
+      { "name": "Hridiman Sarmah", "college": "Jorhat Institute of Science and Technology (JIST)" }
+    ]
+  },
+  {
+    "teamName": "ZeDev",
+    "members": [
+      { "name": "Arindam Chakraborty", "college": "Assam down town University (ADTU)" },
+      { "name": "Sanjay Barman", "college": "Assam down town University (ADTU)" },
+      { "name": "Md Ayan Qurashi", "college": "Assam down town University (ADTU)" },
+      { "name": "Sumitra Devi Bala Brahma", "college": "Assam down town University (ADTU)" }
+    ]
+  }
+]
