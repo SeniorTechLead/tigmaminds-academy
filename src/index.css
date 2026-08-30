@@ -712,6 +712,357 @@
   animation: venueSlideProgress 4s linear forwards;
 }
 
+@keyframes venueConfetti {
+  0%,
+  100% {
+    opacity: 0.55;
+    translate: 0 0;
+  }
+  50% {
+    opacity: 1;
+    translate: 0 -12px;
+  }
+}
+
+.venue-confetti {
+  position: absolute;
+  animation: venueConfetti 4.2s ease-in-out infinite;
+}
+
+.venue-confetti-circle {
+  border-radius: 9999px;
+}
+
+.venue-confetti-diamond {
+  border-radius: 2px;
+  rotate: 45deg;
+}
+
+.venue-confetti-square {
+  border-radius: 2px;
+}
+
+@keyframes venueConfettiFall {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--confetti-drift, 20px), 110vh, 0) rotate(420deg);
+    opacity: 0.15;
+  }
+}
+
+.venue-confetti-fall {
+  position: absolute;
+  top: -8%;
+  animation-name: venueConfettiFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.venue-slide-progress-winners {
+  animation: venueSlideProgress 7s linear forwards;
+}
+
+@keyframes venueTrophyGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 14px rgba(251, 191, 36, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(251, 191, 36, 0.65);
+  }
+}
+
+@keyframes venueTrophyGlowSilver {
+  0%,
+  100% {
+    box-shadow: 0 0 14px rgba(226, 232, 240, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(226, 232, 240, 0.5);
+  }
+}
+
+.venue-trophy-glow {
+  animation: venueTrophyGlow 2.8s ease-in-out infinite;
+}
+
+.venue-trophy-glow-silver {
+  animation: venueTrophyGlowSilver 2.8s ease-in-out infinite;
+}
+
+.reveal-vignette {
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(2, 6, 23, 0.72) 100%);
+}
+
+@keyframes revealSpotlight {
+  0%,
+  100% {
+    transform: translate(-12%, -8%) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(10%, 6%) scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+.reveal-spotlight {
+  background: radial-gradient(circle at 50% 42%, rgba(251, 191, 36, 0.16), transparent 34%);
+  animation: revealSpotlight 3.6s ease-in-out infinite;
+}
+
+@keyframes revealHeartbeat {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+.reveal-heartbeat {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid rgba(251, 191, 36, 0.7);
+  animation: revealHeartbeat 1.5s ease-out infinite;
+}
+
+.reveal-heartbeat-delay {
+  animation-delay: 0.75s;
+}
+
+@keyframes revealLineIn {
+  from {
+    opacity: 0;
+    letter-spacing: 0.8em;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.45em;
+    transform: translateY(0);
+  }
+}
+
+.reveal-line {
+  opacity: 0;
+  animation: revealLineIn 1s 0.15s ease-out forwards;
+}
+
+.reveal-delay-is {
+  animation-delay: 0.85s;
+}
+
+@keyframes revealSlam {
+  0% {
+    opacity: 0;
+    transform: scale(1.45) translateY(18px);
+    filter: blur(10px);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(0.96) translateY(0);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.reveal-slam {
+  opacity: 0;
+  animation: revealSlam 0.9s 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-ellipsis {
+  display: inline-flex;
+  gap: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+
+.reveal-ellipsis span {
+  height: 0.45rem;
+  width: 0.45rem;
+  border-radius: 9999px;
+  background: #fbbf24;
+  animation: revealDot 1.05s ease-in-out infinite;
+}
+
+.reveal-ellipsis span:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.reveal-ellipsis span:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes revealDot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes revealDrum {
+  0%,
+  100% {
+    transform: scaleY(0.28);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.reveal-drum {
+  transform-origin: bottom center;
+  animation: revealDrum 0.7s ease-in-out infinite;
+}
+
+@keyframes revealHint {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal-hint {
+  opacity: 0;
+  animation: revealHint 0.8s 1.8s ease-out forwards;
+}
+
+@keyframes revealFlash {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.reveal-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #fff7d6, #fbbf24 38%, transparent 68%);
+  animation: revealFlash 0.7s ease-out forwards;
+}
+
+@keyframes revealShake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-10px, 6px);
+  }
+  40% {
+    transform: translate(12px, -8px);
+  }
+  60% {
+    transform: translate(-8px, -4px);
+  }
+  80% {
+    transform: translate(7px, 5px);
+  }
+}
+
+.reveal-shake {
+  animation: revealShake 0.45s ease-in-out;
+}
+
+@keyframes revealShockwave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.15);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4.2);
+    opacity: 0;
+  }
+}
+
+.reveal-shockwave {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  height: 12rem;
+  width: 12rem;
+  border: 3px solid rgba(251, 191, 36, 0.85);
+  border-radius: 9999px;
+  animation: revealShockwave 0.95s ease-out forwards;
+}
+
+.reveal-shockwave-delay {
+  animation-delay: 0.12s;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.reveal-shockwave-late {
+  animation-delay: 0.26s;
+  border-color: rgba(52, 211, 153, 0.65);
+}
+
+@keyframes revealSpark {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--spark-angle)) translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--spark-angle)) translateY(-48vh) scale(0.15);
+    opacity: 0;
+  }
+}
+
+.reveal-spark {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  height: 10px;
+  width: 10px;
+  border-radius: 2px;
+  animation: revealSpark 0.85s ease-out forwards;
+}
+
+@keyframes revealPhoto {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) rotateX(28deg) scale(0.86);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+}
+
+.reveal-photo {
+  opacity: 0;
+  transform-origin: center bottom;
+  animation: revealPhoto 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hack-grid-drift,
   .hack-grid-drift-alt,
@@ -751,7 +1102,24 @@
   .venue-team-stage,
   .venue-card-scan::after,
   .venue-member,
-  .venue-team-line {
+  .venue-team-line,
+  .venue-confetti,
+  .venue-confetti-fall,
+  .venue-slide-progress-winners,
+  .venue-trophy-glow,
+  .venue-trophy-glow-silver,
+  .reveal-spotlight,
+  .reveal-heartbeat,
+  .reveal-line,
+  .reveal-slam,
+  .reveal-ellipsis span,
+  .reveal-drum,
+  .reveal-hint,
+  .reveal-flash,
+  .reveal-shake,
+  .reveal-shockwave,
+  .reveal-spark,
+  .reveal-photo {
     animation: none;
     opacity: 1;
     transform: none;
