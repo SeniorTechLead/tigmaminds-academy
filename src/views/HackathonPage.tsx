@@ -1,1044 +1,575 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import {
-  Calendar,
-  Code2,
-  Info,
-  Loader2,
-  MapPin,
-  Minus,
-  Plus,
-  Send,
   Trophy,
+  Award,
+  Medal,
+  Sparkles,
+  Calendar,
+  MapPin,
   Users,
-  X,
+  Search,
+  Crown,
+  ShieldCheck,
+  TrendingUp,
+  Leaf,
+  HeartHandshake,
+  CheckCircle2,
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import hackathon from '../data/hackathon.json';
-import type { HackathonMember } from '../data/hackathon-types';
-import { isHackathonRegistrationOpen } from '../data/hackathon-utils';
-import { HackathonEventDetails, HackathonHero, HackPageBackdrop } from './hackathon-shared';
-import {
-  HACKATHON_RULEBOOK_CONTACT,
-  HACKATHON_RULEBOOK_SECTIONS,
-  HACKATHON_RULEBOOK_SUBTITLE,
-  HACKATHON_RULEBOOK_TITLE,
-  type HackathonRuleSection,
-} from '../data/hackathon-rulebook';
+import resultsData from '../data/hackathon-venue-results.json';
+import venueTeamsData from '../data/hackathon-venue-teams.json';
 
-import {
-  HACKATHON_ELIGIBILITY_OPTIONS,
-  HACKATHON_ELIGIBILITY_OTHER,
-  HACKATHON_INSTITUTION_OTHER,
-  HACKATHON_INSTITUTIONS,
-} from '../data/hackathon-institutions';
-
-const ELIGIBILITY_OPTIONS = HACKATHON_ELIGIBILITY_OPTIONS;
-
-const GENDER_OPTIONS = ['Male', 'Female', 'Other', 'Prefer not to say'] as const;
-
-const TSHIRT_SIZE_OPTIONS = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL'] as const;
-
-type MemberForm = Omit<HackathonMember, 'isLead' | 'institution' | 'eligibility'> & {
-  isLead?: boolean;
-  institutionOption: string;
-  institutionOther: string;
-  eligibilityOption: string;
-  eligibilityOther: string;
-};
-
-type MemberErrors = Partial<
-  Record<'name' | 'email' | 'phone' | 'institution' | 'eligibility' | 'gender' | 'tshirtSize', string>
->;
-
-function emptyMember(): MemberForm {
-  return {
-    name: '',
-    email: '',
-    phone: '',
-    institutionOption: '',
-    institutionOther: '',
-    eligibilityOption: '',
-    eligibilityOther: '',
-    gender: '',
-    tshirtSize: '',
-  };
+function memberDisplay(name: string) {
+  const lead = /\(\s*Team Lead\s*\)/i.test(name);
+  const display = name.replace(/\(\s*Team Lead\s*\)/gi, '').trim();
+  return { display, lead };
 }
-
-function resolveInstitution(member: MemberForm) {
-  if (member.institutionOption === HACKATHON_INSTITUTION_OTHER) {
-    return member.institutionOther.trim();
-  }
-  return member.institutionOption.trim();
-}
-
-function resolveEligibility(member: MemberForm) {
-  if (member.eligibilityOption === HACKATHON_ELIGIBILITY_OTHER) {
-    return member.eligibilityOther.trim();
-  }
-  return member.eligibilityOption.trim();
-}
-
-function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function isValidPhone(phone: string) {
-  const digits = phone.replace(/[\s\-()]/g, '');
-  return /^(\+91)?[6-9]\d{9}$/.test(digits);
-}
-
-/** Allow only + at start and digits (spaces/dashes stripped while typing). */
-function sanitizePhoneInput(value: string) {
-  const cleaned = value.replace(/[^\d+]/g, '');
-  if (!cleaned) return '';
-
-  const hasPlus = cleaned.startsWith('+');
-  const digits = cleaned.replace(/\D/g, '').slice(0, hasPlus ? 12 : 10);
-  return hasPlus ? `+${digits}` : digits;
-}
-
-function validateTeamName(value: string) {
-  const trimmed = value.trim();
-  if (!trimmed) return 'Team name is required';
-  if (trimmed.length < 2) return 'Team name must be at least 2 characters';
-  if (trimmed.length > 80) return 'Team name must be under 80 characters';
-  return '';
-}
-
-function validateMember(member: MemberForm): MemberErrors {
-  const errors: MemberErrors = {};
-  const name = member.name.trim();
-  const email = member.email.trim();
-  const phone = member.phone.trim();
-  const institution = resolveInstitution(member);
-
-  if (!name) errors.name = 'Full name is required';
-  else if (name.length < 2) errors.name = 'Enter a valid full name';
-
-  if (!email) errors.email = 'Email is required';
-  else if (!isValidEmail(email)) errors.email = 'Enter a valid email address';
-
-  if (!phone) errors.phone = 'Phone number is required';
-  else if (!isValidPhone(phone)) errors.phone = 'Enter a valid 10-digit Indian mobile number';
-
-  if (!member.institutionOption) errors.institution = 'Select college / institution';
-  else if (member.institutionOption === HACKATHON_INSTITUTION_OTHER && !institution) {
-    errors.institution = 'Enter your college / institution name';
-  } else if (institution.length < 2) {
-    errors.institution = 'Enter a valid institution name';
-  }
-
-  const eligibility = resolveEligibility(member);
-  if (!member.eligibilityOption) errors.eligibility = 'Select participant type';
-  else if (member.eligibilityOption === HACKATHON_ELIGIBILITY_OTHER && !eligibility) {
-    errors.eligibility = 'Enter your participant type';
-  } else if (eligibility.length < 2) {
-    errors.eligibility = 'Enter a valid participant type';
-  }
-
-  if (!member.gender) errors.gender = 'Select gender';
-  if (!member.tshirtSize) errors.tshirtSize = 'Select t-shirt size';
-
-  return errors;
-}
-
-const inputClass = (hasError?: boolean) =>
-  `w-full px-4 py-3 border bg-slate-950/80 text-white placeholder:text-slate-500 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent ${
-    hasError ? 'border-red-400' : 'border-white/15'
-  }`;
 
 export default function HackathonPage() {
-  const router = useRouter();
-  const registrationOpen = isHackathonRegistrationOpen();
-  const [teamName, setTeamName] = useState('');
-  const [ideaSummary, setIdeaSummary] = useState('');
-  const [members, setMembers] = useState<MemberForm[]>([emptyMember(), emptyMember()]);
-  const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [teamNameError, setTeamNameError] = useState('');
-  const [memberErrors, setMemberErrors] = useState<MemberErrors[]>([]);
-  const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [termsError, setTermsError] = useState('');
-  const [showRulebook, setShowRulebook] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'winners' | 'finalists'>('all');
 
-  useEffect(() => {
-    if (!showRulebook) return;
+  // Categorize winners
+  const winnerSlide = resultsData.slides.find((s) => s.place === 'Winner');
+  const runnerUpSlide = resultsData.slides.find((s) => s.place === 'Runner-up');
+  const thirdPrizeSlide = resultsData.slides.find((s) => s.place === 'Third Prize');
 
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setShowRulebook(false);
-    };
+  const specialCategorySlides = resultsData.slides.filter(
+    (s) => !['Winner', 'Runner-up', 'Third Prize'].includes(s.place)
+  );
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', onKeyDown);
+  const winningTeamNames = useMemo(() => {
+    return new Set(resultsData.slides.map((s) => s.teamName.toLowerCase().replace(/\s+/g, '')));
+  }, []);
 
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, [showRulebook]);
+  const filteredTeams = useMemo(() => {
+    return venueTeamsData.filter((team) => {
+      const normalizedName = team.teamName.toLowerCase().replace(/\s+/g, '');
+      const isWinner = winningTeamNames.has(normalizedName);
 
-  const clearMemberFieldError = (index: number, field: keyof MemberErrors) => {
-    setMemberErrors((prev) => {
-      if (!prev[index]?.[field]) return prev;
-      return prev.map((errors, i) => (i === index ? { ...errors, [field]: undefined } : errors));
-    });
-  };
+      if (selectedFilter === 'winners' && !isWinner) return false;
+      if (selectedFilter === 'finalists' && isWinner) return false;
 
-  const updateMember = (index: number, field: keyof MemberForm, value: string) => {
-    setMembers((prev) =>
-      prev.map((member, i) => (i === index ? { ...member, [field]: value } : member)),
-    );
-    if (
-      field === 'name' ||
-      field === 'email' ||
-      field === 'phone' ||
-      field === 'institutionOption' ||
-      field === 'institutionOther' ||
-      field === 'eligibilityOption' ||
-      field === 'eligibilityOther' ||
-      field === 'gender' ||
-      field === 'tshirtSize'
-    ) {
-      clearMemberFieldError(
-        index,
-        field === 'institutionOption' || field === 'institutionOther'
-          ? 'institution'
-          : field === 'eligibilityOption' || field === 'eligibilityOther'
-            ? 'eligibility'
-            : field,
+      if (!searchQuery.trim()) return true;
+
+      const q = searchQuery.toLowerCase();
+      const matchTeamName = team.teamName.toLowerCase().includes(q);
+      const matchMember = team.members.some(
+        (m) => m.name.toLowerCase().includes(q) || m.college.toLowerCase().includes(q)
       );
-    }
-  };
 
-  const addMember = () => {
-    if (members.length >= hackathon.maxTeamSize) return;
-    setMembers((prev) => [...prev, emptyMember()]);
-    setMemberErrors((prev) => [...prev, {}]);
-  };
-
-  const removeMember = (index: number) => {
-    if (members.length <= hackathon.minTeamSize) return;
-    setMembers((prev) => prev.filter((_, i) => i !== index));
-    setMemberErrors((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const validateForm = (): boolean => {
-    const nextTeamError = validateTeamName(teamName);
-    const nextMemberErrors = members.map(validateMember);
-    const emails = members.map((m) => m.email.trim().toLowerCase()).filter(Boolean);
-    const emailCounts = emails.reduce<Record<string, number>>((acc, email) => {
-      acc[email] = (acc[email] || 0) + 1;
-      return acc;
-    }, {});
-
-    members.forEach((member, index) => {
-      const email = member.email.trim().toLowerCase();
-      if (email && emailCounts[email] > 1) {
-        nextMemberErrors[index] = {
-          ...nextMemberErrors[index],
-          email: 'Each team member must use a unique email',
-        };
-      }
+      return matchTeamName || matchMember;
     });
-
-    setTeamNameError(nextTeamError);
-    setMemberErrors(nextMemberErrors);
-
-    const nextTermsError = acceptedTerms
-      ? ''
-      : 'Open the Official Rules and Terms and click I agree to register.';
-    setTermsError(nextTermsError);
-
-    const hasMemberErrors = nextMemberErrors.some((errors) =>
-      Object.values(errors).some(Boolean),
-    );
-    return !nextTeamError && !hasMemberErrors && !nextTermsError;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('idle');
-    setErrorMessage('');
-
-    if (!registrationOpen) {
-      setStatus('error');
-      setErrorMessage('Registration is closed. New teams cannot be registered.');
-      return;
-    }
-
-    if (!validateForm()) {
-      setStatus('error');
-      setErrorMessage('Please fix the highlighted fields and try again.');
-      return;
-    }
-
-    setSubmitting(true);
-
-    try {
-      const response = await fetch('/api/hackathon/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          teamName: teamName.trim(),
-          ideaSummary: ideaSummary.trim(),
-          acceptedTerms: true,
-          members: members.map((member, index) => ({
-            name: member.name.trim(),
-            email: member.email.trim(),
-            phone: member.phone.trim(),
-            institution: resolveInstitution(member),
-            eligibility: resolveEligibility(member),
-            gender: member.gender,
-            tshirtSize: member.tshirtSize,
-            isLead: index === 0,
-          })),
-        }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        setStatus('error');
-        setErrorMessage(data.error || 'Registration failed. Please try again.');
-        setSubmitting(false);
-        return;
-      }
-
-      const params = new URLSearchParams({
-        id: data.id,
-        team: teamName.trim(),
-      });
-      router.push(`/hackathon/success?${params.toString()}`);
-    } catch {
-      setStatus('error');
-      setErrorMessage('Something went wrong. Please try again.');
-      setSubmitting(false);
-    }
-  };
+  }, [searchQuery, selectedFilter, winningTeamNames]);
 
   return (
-    <div className="relative min-h-screen text-white transition-colors">
-      <HackPageBackdrop />
-      <div className="relative z-10">
+    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-amber-500/30 selection:text-amber-200">
       <Header />
 
-      <HackathonHero
-        actions={
-          registrationOpen ? (
-            <>
-              <a
-                href="#register"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:brightness-110 transition-all"
-              >
-                <Code2 className="w-5 h-5" />
-                Register Your Team
-              </a>
-              <a
-                href="#details"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-white/15 bg-white/5 text-slate-200 font-medium hover:bg-white/10 transition-colors"
-              >
-                View Details
-              </a>
-              <a
-                href="/hackathon/venue"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
-              >
-                Venue
-              </a>
-              <a
-                href="/hackathon/venue/teams"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
-              >
-                Teams
-              </a>
-            </>
-          ) : (
-            <>
-              <a
-                href="#details"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-xl font-semibold hover:brightness-110 transition-all"
-              >
-                View Event Details
-              </a>
-              <a
-                href="/hackathon/venue"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
-              >
-                Venue
-              </a>
-              <a
-                href="/hackathon/venue/teams"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-amber-400/40 bg-amber-500/10 text-amber-100 font-medium hover:bg-amber-500/20 transition-colors"
-              >
-                Teams
-              </a>
-            </>
-          )
-        }
-      />
+      {/* Decorative Ambient Lighting */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-gradient-to-b from-amber-500/15 via-orange-500/5 to-transparent blur-3xl opacity-70" />
+        <div className="absolute top-[800px] left-10 w-[500px] h-[500px] bg-emerald-500/10 blur-3xl rounded-full" />
+        <div className="absolute top-[1400px] right-10 w-[600px] h-[600px] bg-sky-500/10 blur-3xl rounded-full" />
+        <div
+          className="absolute inset-0 opacity-[0.14]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(251,191,36,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(251,191,36,0.2) 1px, transparent 1px)',
+            backgroundSize: '44px 44px',
+          }}
+        />
+      </div>
 
-      <HackathonEventDetails />
-
-      {/* Registration — closed notice or form (below judging criteria) */}
-      <section id="register" className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
-        <div className="relative max-w-3xl mx-auto">
-          {!registrationOpen ? (
-            <ClosedRegistrationNotice />
-          ) : (
-            <>
-          <div className="text-center mb-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-400 mb-2">
-              Join the build
-            </p>
-            <h2 className="text-3xl font-bold text-white mb-2">Team Registration</h2>
-            <p className="text-slate-300 mb-1">Teams of {hackathon.teamSize}.</p>
-            <p className="text-sm text-slate-400">
-              Registration closes {hackathon.registrationCloses}.
-            </p>
-            <p className="text-sm text-slate-400 mt-3">
-              Already registered?{' '}
-              <a href="/hackathon/qualify#qualifying" className="text-amber-300 hover:text-amber-200 font-medium">
-                Go to qualifying
-              </a>
-            </p>
-          </div>
-
-          {status === 'error' && (
-            <div className="mb-6 p-4 bg-red-500/10 border border-red-400/30 rounded-xl text-sm text-red-300">
-              {errorMessage}
-            </div>
-          )}
-
-          <form
-            onSubmit={handleSubmit}
-            className="relative bg-slate-950/70 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.65)]"
-          >
-            <div className="pointer-events-none absolute -top-px inset-x-8 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
-            <div>
-              <label className="block text-sm font-semibold text-slate-200 mb-1.5">
-                Team Name *
-              </label>
-              <input
-                type="text"
-                value={teamName}
-                onChange={(e) => {
-                  setTeamName(e.target.value);
-                  if (teamNameError) setTeamNameError('');
-                }}
-                disabled={!registrationOpen}
-                aria-invalid={Boolean(teamNameError)}
-                className={inputClass(Boolean(teamNameError))}
-                placeholder="Your team name"
-              />
-              {teamNameError ? (
-                <p className="mt-1.5 text-sm text-red-400">{teamNameError}</p>
-              ) : null}
+      <div className="relative z-10">
+        {/* ===================== HERO SECTION ===================== */}
+        <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 border-b border-amber-500/20">
+          <div className="max-w-6xl mx-auto text-center">
+            {/* Celebratory Pill */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-gradient-to-r from-amber-500/20 via-orange-500/15 to-amber-500/20 px-5 py-2 text-xs sm:text-sm font-bold text-amber-300 backdrop-blur-md mb-6 shadow-lg shadow-amber-500/10 animate-fade-in">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>OFFICIAL HALL OF FAME · EVENT CONCLUDED SUCCESSFULLY</span>
+              <Sparkles className="w-4 h-4 text-amber-400" />
             </div>
 
-            <div className="space-y-5">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="text-lg font-bold text-white">Team Members</h3>
-                <p className="text-sm text-slate-400">
-                  {members.length}/{hackathon.maxTeamSize} members
-                </p>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6 leading-[1.1]">
+              TigmaMinds Hackathon <span className="bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-400 bg-clip-text text-transparent">2026</span>
+            </h1>
+
+            <p className="text-lg sm:text-2xl text-slate-300 max-w-3xl mx-auto font-medium mb-8 leading-relaxed">
+              48-Hour In-Person Prototype Championship · Guwahati, Assam
+            </p>
+
+            <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+              On 29–30 August 2026, over 50 brilliant young builders, engineers, and visionaries came together to build, 
+              innovate, and present working software prototypes. Here are the champion teams and award winners.
+            </p>
+
+            {/* Quick Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mb-10">
+              <div className="rounded-2xl border border-amber-500/30 bg-slate-900/80 p-4 sm:p-5 backdrop-blur-md shadow-lg shadow-amber-500/5">
+                <span className="text-2xl sm:text-3xl font-extrabold text-amber-400 block mb-1">₹1,00,000+</span>
+                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Prize Pool & Honors</span>
               </div>
+              <div className="rounded-2xl border border-white/10 bg-slate-900/80 p-4 sm:p-5 backdrop-blur-md">
+                <span className="text-2xl sm:text-3xl font-extrabold text-white block mb-1">18+</span>
+                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Finalist Teams</span>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-slate-900/80 p-4 sm:p-5 backdrop-blur-md">
+                <span className="text-2xl sm:text-3xl font-extrabold text-white block mb-1">50+</span>
+                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Innovators & Builders</span>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-slate-900/80 p-4 sm:p-5 backdrop-blur-md">
+                <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 block mb-1">7</span>
+                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Prestigious Awards</span>
+              </div>
+            </div>
 
-              {members.map((member, index) => {
-                const errors = memberErrors[index] || {};
-                const canRemove = registrationOpen && members.length > hackathon.minTeamSize;
+            {/* Quick Actions Bar */}
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#podium"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-amber-500/20 hover:brightness-110 transition transform hover:-translate-y-0.5"
+              >
+                <Trophy className="w-4 h-4" />
+                Champions Podium
+              </a>
+              <a
+                href="#special-awards"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
+              >
+                <Award className="w-4 h-4 text-amber-400" />
+                Category Winners
+              </a>
+              <a
+                href="#all-teams"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-slate-200 hover:bg-white/10 transition"
+              >
+                <Users className="w-4 h-4 text-amber-400" />
+                All Finalist Teams
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== PODIUM CHAMPIONS SECTION ===================== */}
+        <section id="podium" className="py-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="inline-flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-[0.2em] mb-2">
+                <Crown className="w-4 h-4" />
+                Top 3 Grand Honors
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-black text-white mb-4">
+                The Champions Podium
+              </h2>
+              <p className="text-slate-400 text-sm sm:text-base">
+                Selected by a panel of industry experts after rigorous prototype evaluation and live demonstrations.
+              </p>
+            </div>
+
+            {/* 3-Column Podium Layout (2nd - 1st - 3rd) */}
+            <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+              {/* 2nd Place: ZeDev */}
+              {runnerUpSlide && (
+                <div className="order-2 lg:order-1 flex flex-col justify-between rounded-3xl border border-slate-700/80 bg-gradient-to-b from-slate-900/95 via-slate-950 to-slate-950 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden transition-all hover:border-slate-500">
+                  <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400" />
+                  
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-800 border border-slate-600 px-3 py-1 text-xs font-black text-slate-200 uppercase tracking-wider">
+                        <Medal className="w-3.5 h-3.5 text-slate-300" />
+                        🥈 Runner-Up (2nd Place)
+                      </span>
+                    </div>
+
+                    <h3 className="text-3xl font-extrabold text-white mb-1">{runnerUpSlide.teamName}</h3>
+                    <p className="text-base font-semibold text-slate-300 mb-4">
+                      Project: <span className="text-amber-300">{runnerUpSlide.projectName}</span>
+                    </p>
+
+                    <div className="rounded-xl bg-slate-950/80 border border-white/5 p-4 mb-6">
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Team Roster</p>
+                      <div className="grid grid-cols-2 gap-3">
+                        {runnerUpSlide.members.map((m) => {
+                          const { display, lead } = memberDisplay(m.name);
+                          return (
+                            <div key={m.name} className="flex items-center gap-2.5">
+                              <img
+                                src={m.photo}
+                                alt={display}
+                                className="w-10 h-10 rounded-full object-cover border border-slate-600 flex-shrink-0 bg-slate-800"
+                                onError={(e) => {
+                                  (e.target as HTMLElement).style.display = 'none';
+                                }}
+                              />
+                              <div className="min-w-0">
+                                <p className="text-xs font-bold text-white truncate">{display}</p>
+                                <span className={`text-[10px] ${lead ? 'text-amber-400 font-bold' : 'text-slate-400'}`}>
+                                  {lead ? 'Team Lead' : 'Member'}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
+                    <span className="flex items-center gap-1 text-slate-400">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Verified Prototype
+                    </span>
+                    <span className="font-bold text-slate-200">Runner-Up Trophy & Cash</span>
+                  </div>
+                </div>
+              )}
+
+              {/* 1st Place: D Noobs (Grand Winner - Elevated) */}
+              {winnerSlide && (
+                <div className="order-1 lg:order-2 flex flex-col justify-between rounded-3xl border-2 border-amber-400 bg-gradient-to-b from-amber-950/40 via-slate-900/95 to-slate-950 p-6 sm:p-8 backdrop-blur-xl shadow-2xl shadow-amber-500/20 relative overflow-hidden transform lg:-translate-y-4">
+                  <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500" />
+                  
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 px-3.5 py-1 text-xs font-black text-slate-950 uppercase tracking-wider shadow-md">
+                        <Crown className="w-4 h-4 text-slate-950" />
+                        🥇 Grand Winner (1st Place)
+                      </span>
+                    </div>
+
+                    <h3 className="text-3xl sm:text-4xl font-black text-white mb-1">{winnerSlide.teamName}</h3>
+                    <p className="text-lg font-bold text-amber-200 mb-4">
+                      Project: <span className="text-white underline decoration-amber-400 decoration-2 underline-offset-4">{winnerSlide.projectName}</span>
+                    </p>
+
+                    <div className="rounded-xl bg-slate-950/90 border border-amber-500/20 p-4 mb-6">
+                      <p className="text-xs font-semibold text-amber-300 uppercase tracking-wider mb-3">Champion Team Roster</p>
+                      <div className="grid grid-cols-2 gap-3">
+                        {winnerSlide.members.map((m) => {
+                          const { display, lead } = memberDisplay(m.name);
+                          return (
+                            <div key={m.name} className="flex items-center gap-2.5">
+                              <img
+                                src={m.photo}
+                                alt={display}
+                                className="w-11 h-11 rounded-full object-cover border-2 border-amber-400 flex-shrink-0 bg-slate-800 shadow-sm"
+                                onError={(e) => {
+                                  (e.target as HTMLElement).style.display = 'none';
+                                }}
+                              />
+                              <div className="min-w-0">
+                                <p className="text-xs font-bold text-white truncate">{display}</p>
+                                <span className={`text-[10px] ${lead ? 'text-amber-300 font-bold' : 'text-slate-400'}`}>
+                                  {lead ? '★ Team Lead' : 'Member'}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-amber-500/20 flex items-center justify-between text-xs font-bold text-amber-300">
+                    <span className="flex items-center gap-1">
+                      <Trophy className="w-4 h-4 text-amber-400" /> Winner Champion Trophy
+                    </span>
+                    <span className="text-white font-extrabold">₹ Cash Prize & Certificates</span>
+                  </div>
+                </div>
+              )}
+
+              {/* 3rd Place: Buri Buri Zaemon */}
+              {thirdPrizeSlide && (
+                <div className="order-3 flex flex-col justify-between rounded-3xl border border-amber-900/60 bg-gradient-to-b from-slate-900/95 via-slate-950 to-slate-950 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden transition-all hover:border-amber-700/80">
+                  <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-700" />
+                  
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-4">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-950/60 border border-amber-800/80 px-3 py-1 text-xs font-black text-amber-300 uppercase tracking-wider">
+                        <Medal className="w-3.5 h-3.5 text-amber-400" />
+                        🥉 Third Prize (3rd Place)
+                      </span>
+                    </div>
+
+                    <h3 className="text-3xl font-extrabold text-white mb-1">{thirdPrizeSlide.teamName}</h3>
+                    <p className="text-base font-semibold text-slate-300 mb-4">
+                      Project: <span className="text-amber-300">{thirdPrizeSlide.projectName}</span>
+                    </p>
+
+                    <div className="rounded-xl bg-slate-950/80 border border-white/5 p-4 mb-6">
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Team Roster</p>
+                      <div className="grid grid-cols-2 gap-3">
+                        {thirdPrizeSlide.members.map((m) => {
+                          const { display, lead } = memberDisplay(m.name);
+                          return (
+                            <div key={m.name} className="flex items-center gap-2.5">
+                              <img
+                                src={m.photo}
+                                alt={display}
+                                className="w-10 h-10 rounded-full object-cover border border-amber-700 flex-shrink-0 bg-slate-800"
+                                onError={(e) => {
+                                  (e.target as HTMLElement).style.display = 'none';
+                                }}
+                              />
+                              <div className="min-w-0">
+                                <p className="text-xs font-bold text-white truncate">{display}</p>
+                                <span className={`text-[10px] ${lead ? 'text-amber-400 font-bold' : 'text-slate-400'}`}>
+                                  {lead ? 'Team Lead' : 'Member'}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
+                    <span className="flex items-center gap-1 text-slate-400">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Verified Prototype
+                    </span>
+                    <span className="font-bold text-amber-300">3rd Prize Trophy & Cash</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== SPECIAL THEMATIC AWARDS ===================== */}
+        <section id="special-awards" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/10 bg-slate-950/50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <div className="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-[0.2em] mb-2">
+                <Award className="w-4 h-4" />
+                Category Excellence
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+                Special Category Award Winners
+              </h2>
+              <p className="text-slate-400 text-sm sm:text-base">
+                Recognizing teams that demonstrated outstanding depth in specific technical domains and real-world impact.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {specialCategorySlides.map((slide) => {
+                let badgeColor = 'text-amber-300 border-amber-500/30 bg-amber-500/10';
+                let icon = <Award className="w-4 h-4 text-amber-400" />;
+
+                if (slide.place.includes('Enterprise')) {
+                  badgeColor = 'text-emerald-300 border-emerald-500/30 bg-emerald-500/10';
+                  icon = <ShieldCheck className="w-4 h-4 text-emerald-400" />;
+                } else if (slide.place.includes('Commercial')) {
+                  badgeColor = 'text-sky-300 border-sky-500/30 bg-sky-500/10';
+                  icon = <TrendingUp className="w-4 h-4 text-sky-400" />;
+                } else if (slide.place.includes('Sustainability')) {
+                  badgeColor = 'text-green-300 border-green-500/30 bg-green-500/10';
+                  icon = <Leaf className="w-4 h-4 text-green-400" />;
+                } else if (slide.place.includes('Community')) {
+                  badgeColor = 'text-purple-300 border-purple-500/30 bg-purple-500/10';
+                  icon = <HeartHandshake className="w-4 h-4 text-purple-400" />;
+                }
+
                 return (
                   <div
-                    key={index}
-                    className="rounded-xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 space-y-4"
+                    key={slide.place}
+                    className="rounded-2xl border border-white/10 bg-slate-900/80 p-6 backdrop-blur-md shadow-lg hover:border-white/20 transition"
                   >
-                    <div className="flex items-center justify-between gap-3">
-                      <p className="font-semibold text-white">
-                        Member {index + 1}
-                        {index === 0 ? (
-                          <span className="ml-2 text-xs font-medium text-amber-200 bg-amber-500/20 px-2 py-0.5 rounded-full">
-                            Team Lead
-                          </span>
-                        ) : null}
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => removeMember(index)}
-                        disabled={!canRemove}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg border border-red-400/30 text-red-300 hover:bg-red-500/10 disabled:opacity-40 disabled:hover:bg-transparent"
-                      >
-                        <Minus className="w-4 h-4" /> Remove
-                      </button>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-bold ${badgeColor}`}>
+                        {icon}
+                        {slide.place}
+                      </span>
                     </div>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <Field
-                        label="Full Name *"
-                        value={member.name}
-                        onChange={(v) => updateMember(index, 'name', v)}
-                        disabled={!registrationOpen}
-                        placeholder="Full name"
-                        error={errors.name}
-                      />
-                      <Field
-                        label="Email *"
-                        type="email"
-                        value={member.email}
-                        onChange={(v) => updateMember(index, 'email', v)}
-                        disabled={!registrationOpen}
-                        placeholder="you@example.com"
-                        error={errors.email}
-                      />
-                      <Field
-                        label="Phone *"
-                        type="tel"
-                        inputMode="numeric"
-                        value={member.phone}
-                        onChange={(v) => updateMember(index, 'phone', sanitizePhoneInput(v))}
-                        disabled={!registrationOpen}
-                        placeholder="+91 9876543210"
-                        error={errors.phone}
-                        maxLength={13}
-                      />
-                      <div className="sm:col-span-2 space-y-3">
-                        <SelectField
-                          label="College / Institution *"
-                          value={member.institutionOption}
-                          onChange={(v) => {
-                            setMembers((prev) =>
-                              prev.map((m, i) =>
-                                i === index
-                                  ? {
-                                      ...m,
-                                      institutionOption: v,
-                                      institutionOther:
-                                        v === HACKATHON_INSTITUTION_OTHER ? m.institutionOther : '',
-                                    }
-                                  : m,
-                              ),
-                            );
-                            clearMemberFieldError(index, 'institution');
-                          }}
-                          disabled={!registrationOpen}
-                          placeholder="Select college / institution"
-                          options={HACKATHON_INSTITUTIONS}
-                          error={
-                            member.institutionOption === HACKATHON_INSTITUTION_OTHER
-                              ? undefined
-                              : errors.institution
-                          }
-                        />
-                        {member.institutionOption === HACKATHON_INSTITUTION_OTHER ? (
-                          <Field
-                            label="Enter college / institution *"
-                            value={member.institutionOther}
-                            onChange={(v) => updateMember(index, 'institutionOther', v)}
-                            disabled={!registrationOpen}
-                            placeholder="Type your college or organization name"
-                            error={errors.institution}
-                          />
-                        ) : null}
-                      </div>
-                      <div className="space-y-3">
-                        <SelectField
-                          label="Participant type *"
-                          value={member.eligibilityOption}
-                          onChange={(v) => {
-                            setMembers((prev) =>
-                              prev.map((m, i) =>
-                                i === index
-                                  ? {
-                                      ...m,
-                                      eligibilityOption: v,
-                                      eligibilityOther:
-                                        v === HACKATHON_ELIGIBILITY_OTHER ? m.eligibilityOther : '',
-                                    }
-                                  : m,
-                              ),
-                            );
-                            clearMemberFieldError(index, 'eligibility');
-                          }}
-                          disabled={!registrationOpen}
-                          placeholder="Select participant type"
-                          options={ELIGIBILITY_OPTIONS}
-                          error={
-                            member.eligibilityOption === HACKATHON_ELIGIBILITY_OTHER
-                              ? undefined
-                              : errors.eligibility
-                          }
-                        />
-                        {member.eligibilityOption === HACKATHON_ELIGIBILITY_OTHER ? (
-                          <Field
-                            label="Enter participant type *"
-                            value={member.eligibilityOther}
-                            onChange={(v) => updateMember(index, 'eligibilityOther', v)}
-                            disabled={!registrationOpen}
-                            placeholder="e.g. Working professional, Faculty"
-                            error={errors.eligibility}
-                          />
-                        ) : null}
-                      </div>
-                      <SelectField
-                        label="Gender *"
-                        value={member.gender}
-                        onChange={(v) => updateMember(index, 'gender', v)}
-                        disabled={!registrationOpen}
-                        placeholder="Select gender"
-                        options={GENDER_OPTIONS}
-                        error={errors.gender}
-                      />
-                      <SelectField
-                        label="T-shirt size *"
-                        value={member.tshirtSize}
-                        onChange={(v) => updateMember(index, 'tshirtSize', v)}
-                        disabled={!registrationOpen}
-                        placeholder="Select size"
-                        options={TSHIRT_SIZE_OPTIONS}
-                        error={errors.tshirtSize}
-                      />
+
+                    <div className="mb-4">
+                      <h4 className="text-2xl font-bold text-white">{slide.teamName}</h4>
+                      <p className="text-sm font-semibold text-amber-200 mt-1">
+                        Project: <span className="text-white">{slide.projectName}</span>
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-white/5">
+                      {slide.members.map((m) => {
+                        const { display, lead } = memberDisplay(m.name);
+                        return (
+                          <div key={m.name} className="flex flex-col items-center text-center">
+                            <img
+                              src={m.photo}
+                              alt={display}
+                              className="w-12 h-12 rounded-full object-cover border border-white/15 bg-slate-800 mb-1.5 shadow-sm"
+                              onError={(e) => {
+                                (e.target as HTMLElement).style.display = 'none';
+                              }}
+                            />
+                            <p className="text-xs font-bold text-white line-clamp-1">{display}</p>
+                            <span className={`text-[10px] ${lead ? 'text-amber-400 font-semibold' : 'text-slate-400'}`}>
+                              {lead ? 'Lead' : 'Member'}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 );
               })}
-
-              <button
-                type="button"
-                onClick={addMember}
-                disabled={!registrationOpen || members.length >= hackathon.maxTeamSize}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm rounded-xl border border-dashed border-amber-400/40 text-amber-300 hover:bg-amber-500/10 disabled:opacity-40"
-              >
-                <Plus className="w-4 h-4" /> Add member
-                {members.length >= hackathon.maxTeamSize
-                  ? ` (max ${hackathon.maxTeamSize})`
-                  : ''}
-              </button>
             </div>
+          </div>
+        </section>
 
-            <div>
-              <label className="block text-sm font-semibold text-slate-200 mb-1.5">
-                Idea summary (optional)
-              </label>
-              <textarea
-                value={ideaSummary}
-                onChange={(e) => setIdeaSummary(e.target.value)}
-                rows={3}
-                disabled={!registrationOpen}
-                className="w-full px-4 py-3 border border-white/15 bg-slate-950/80 text-white placeholder:text-slate-500 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent resize-none"
-                placeholder="Briefly share what you hope to build (problem statements come after the qualifier)."
-              />
-            </div>
+        {/* ===================== ALL FINALISTS ROSTER ===================== */}
+        <section id="all-teams" className="py-20 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+              <div>
+                <p className="text-xs font-bold text-amber-400 uppercase tracking-[0.2em] mb-2">Finalist Teams Archive</p>
+                <h2 className="text-3xl sm:text-4xl font-bold text-white">
+                  Meet All 2026 Finalist Teams
+                </h2>
+              </div>
 
-            <div
-              className={`rounded-xl border p-4 ${
-                termsError
-                  ? 'border-red-400/50 bg-red-500/10'
-                  : 'border-white/10 bg-white/[0.03]'
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                <input
-                  type="checkbox"
-                  checked={acceptedTerms}
-                  disabled={!registrationOpen}
-                  onChange={() => {
-                    if (!registrationOpen) return;
-                    if (acceptedTerms) {
-                      setAcceptedTerms(false);
-                      return;
-                    }
-                    setShowRulebook(true);
-                  }}
-                  className="mt-1 h-4 w-4 rounded border-white/20 bg-slate-950 text-amber-500 focus:ring-amber-500 cursor-pointer disabled:cursor-not-allowed"
-                  aria-describedby="hackathon-terms-hint"
-                />
-                <div className="text-sm text-slate-300 leading-relaxed">
-                  <p>
-                    I have read and agree to the{' '}
-                    <button
-                      type="button"
-                      onClick={() => setShowRulebook(true)}
-                      disabled={!registrationOpen}
-                      className="font-semibold text-amber-300 underline underline-offset-2 hover:text-amber-200 disabled:opacity-50"
-                    >
-                      Official Rules and Terms
-                    </button>{' '}
-                    for {hackathon.title}. *
-                  </p>
-                  <p
-                    id="hackathon-terms-hint"
-                    className="mt-1.5 text-xs text-slate-500"
+              {/* Filters and Search */}
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="relative">
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Search team, member, college..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-9 pr-4 py-2 text-xs sm:text-sm bg-slate-900 border border-white/10 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-400 w-56 sm:w-64"
+                  />
+                </div>
+
+                <div className="inline-flex rounded-xl border border-white/10 bg-slate-900 p-1 text-xs font-semibold">
+                  <button
+                    onClick={() => setSelectedFilter('all')}
+                    className={`px-3 py-1.5 rounded-lg transition ${selectedFilter === 'all' ? 'bg-amber-500 text-white' : 'text-slate-400 hover:text-white'}`}
                   >
-                    {acceptedTerms
-                      ? 'Rules accepted. You can uncheck to withdraw agreement.'
-                      : (
-                        <>
-                          Open the rules and click <span className="font-medium text-slate-300">I agree</span> to
-                          enable this checkbox.
-                        </>
-                      )}
-                  </p>
+                    All ({venueTeamsData.length})
+                  </button>
+                  <button
+                    onClick={() => setSelectedFilter('winners')}
+                    className={`px-3 py-1.5 rounded-lg transition ${selectedFilter === 'winners' ? 'bg-amber-500 text-white' : 'text-slate-400 hover:text-white'}`}
+                  >
+                    Winners ({resultsData.slides.length})
+                  </button>
+                  <button
+                    onClick={() => setSelectedFilter('finalists')}
+                    className={`px-3 py-1.5 rounded-lg transition ${selectedFilter === 'finalists' ? 'bg-amber-500 text-white' : 'text-slate-400 hover:text-white'}`}
+                  >
+                    Finalists
+                  </button>
                 </div>
               </div>
-              {termsError ? (
-                <p className="mt-2 text-sm text-red-400">{termsError}</p>
-              ) : null}
             </div>
 
-            <button
-              type="submit"
-              disabled={submitting || !registrationOpen}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3.5 rounded-xl font-semibold text-lg hover:shadow-lg transition-all disabled:opacity-50"
-            >
-              {submitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" /> Submitting...
-                </>
-              ) : (
-                <>
-                  <Send className="w-5 h-5" /> Submit Registration
-                </>
-              )}
-            </button>
-          </form>
-            </>
-          )}
-        </div>
-      </section>
+            {/* Teams Roster Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {filteredTeams.map((team) => {
+                const normalizedName = team.teamName.toLowerCase().replace(/\s+/g, '');
+                const awardSlide = resultsData.slides.find(
+                  (s) => s.teamName.toLowerCase().replace(/\s+/g, '') === normalizedName
+                );
 
-      {showRulebook ? (
-        <RulebookModal
-          onClose={() => setShowRulebook(false)}
-          onAccept={() => {
-            setAcceptedTerms(true);
-            setTermsError('');
-            setShowRulebook(false);
-          }}
-        />
-      ) : null}
+                return (
+                  <div
+                    key={team.teamName}
+                    className={`rounded-2xl border p-5 backdrop-blur-sm transition ${
+                      awardSlide
+                        ? 'border-amber-500/40 bg-gradient-to-b from-amber-500/10 via-slate-900/80 to-slate-950 shadow-md'
+                        : 'border-white/10 bg-slate-900/60 hover:border-white/20'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-2 mb-3">
+                      <div>
+                        <h4 className="text-xl font-bold text-white">{team.teamName}</h4>
+                        {awardSlide && (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-extrabold text-amber-300 mt-1">
+                            <Trophy className="w-3 h-3 text-amber-400" />
+                            {awardSlide.place} ({awardSlide.projectName})
+                          </span>
+                        )}
+                      </div>
+                    </div>
 
-      <Footer contactEmail="hackathon@tigmaminds.com" />
-      </div>
-    </div>
-  );
-}
+                    <div className="space-y-2 mt-4 pt-3 border-t border-white/5 text-xs">
+                      {team.members.map((m) => {
+                        const { display, lead } = memberDisplay(m.name);
+                        return (
+                          <div key={m.name} className="flex items-start justify-between gap-2">
+                            <span className="font-semibold text-slate-200">
+                              {display} {lead && <span className="text-amber-400 font-bold">(Lead)</span>}
+                            </span>
+                            <span className="text-slate-400 text-right truncate max-w-[150px]">{m.college}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
-function ClosedRegistrationNotice() {
-  return (
-    <div className="relative overflow-hidden rounded-2xl border border-amber-400/30 bg-slate-950/70 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.65)]">
-      <div className="pointer-events-none absolute -top-px inset-x-8 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
-      <div className="text-center mb-8">
-        <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-amber-400 mb-3">
-          <Info className="w-3.5 h-3.5" />
-          Registration closed
-        </p>
-        <h2 className="text-3xl font-bold text-white mb-3">Team registration is closed</h2>
-        <p className="text-slate-300 max-w-xl mx-auto leading-relaxed">
-          New teams can no longer register for {hackathon.title}. Event information
-          is listed above. The qualifying round is also closed. Selected teams will
-          receive an email related to the Grand Finale.
-        </p>
-      </div>
-
-      <ul className="grid sm:grid-cols-2 gap-3 mb-8">
-        {[
-          { icon: Calendar, label: 'Event dates', value: hackathon.dates },
-          { icon: MapPin, label: 'Location', value: hackathon.location },
-          { icon: Users, label: 'Team size', value: hackathon.teamSize },
-          { icon: Trophy, label: 'Prize pool', value: hackathon.prizePool },
-        ].map((item) => {
-          const Icon = item.icon;
-          return (
-            <li
-              key={item.label}
-              className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-4"
-            >
-              <Icon className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-0.5">
-                  {item.label}
-                </p>
-                <p className="text-white font-medium">{item.value}</p>
+            {filteredTeams.length === 0 && (
+              <div className="text-center py-16 border border-dashed border-white/10 rounded-2xl">
+                <p className="text-slate-400 text-sm">No teams found matching your query.</p>
               </div>
-            </li>
-          );
-        })}
-      </ul>
-
-      <p className="text-sm text-slate-400 text-center mb-6">
-        Registration closed on {hackathon.registrationCloses}.
-      </p>
-
-      <div className="flex flex-col sm:flex-row gap-3">
-        <a
-          href="#details"
-          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-white/15 bg-white/5 text-slate-200 font-medium hover:bg-white/10 transition-colors"
-        >
-          View event details
-        </a>
-        <a
-          href="/hackathon/qualify#qualifying"
-          className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:brightness-110 transition-all"
-        >
-          Qualifying update
-        </a>
-      </div>
-      <p className="mt-5 text-center text-sm text-slate-500">
-        Questions? Email{' '}
-        <a href={`mailto:${hackathon.notifyEmail}`} className="text-amber-300 hover:text-amber-200">
-          {hackathon.notifyEmail}
-        </a>
-      </p>
-    </div>
-  );
-}
-
-function Field({
-  label,
-  value,
-  onChange,
-  placeholder,
-  type = 'text',
-  inputMode,
-  disabled,
-  error,
-  maxLength,
-}: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  type?: string;
-  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
-  disabled?: boolean;
-  error?: string;
-  maxLength?: number;
-}) {
-  return (
-    <div>
-      <label className="block text-sm font-semibold text-slate-200 mb-1.5">{label}</label>
-      <input
-        type={type}
-        inputMode={inputMode}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        disabled={disabled}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        aria-invalid={Boolean(error)}
-        className={inputClass(Boolean(error))}
-      />
-      {error ? <p className="mt-1.5 text-sm text-red-400">{error}</p> : null}
-    </div>
-  );
-}
-
-function SelectField({
-  label,
-  value,
-  onChange,
-  placeholder,
-  options,
-  disabled,
-  error,
-}: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  placeholder: string;
-  options: readonly string[];
-  disabled?: boolean;
-  error?: string;
-}) {
-  return (
-    <div>
-      <label className="block text-sm font-semibold text-slate-200 mb-1.5">{label}</label>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        disabled={disabled}
-        aria-invalid={Boolean(error)}
-        className={inputClass(Boolean(error))}
-      >
-        <option value="">{placeholder}</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-      {error ? <p className="mt-1.5 text-sm text-red-400">{error}</p> : null}
-    </div>
-  );
-}
-
-function RulebookModal({
-  onClose,
-  onAccept,
-}: {
-  onClose: () => void;
-  onAccept: () => void;
-}) {
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="hackathon-rulebook-title"
-    >
-      <button
-        type="button"
-        aria-label="Close rulebook"
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      <div className="relative z-10 flex w-full max-w-3xl max-h-[92vh] sm:max-h-[85vh] flex-col overflow-hidden rounded-t-2xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-2xl border border-gray-200 dark:border-gray-700">
-        <div className="flex items-start justify-between gap-4 px-5 sm:px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-              {HACKATHON_RULEBOOK_SUBTITLE}
-            </p>
-            <h2
-              id="hackathon-rulebook-title"
-              className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white"
-            >
-              {HACKATHON_RULEBOOK_TITLE}
-            </h2>
+            )}
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="p-2 rounded-lg text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
-            aria-label="Close"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
+        </section>
 
-        <div className="flex-1 overflow-y-auto px-5 sm:px-6 py-5 space-y-6">
-          {HACKATHON_RULEBOOK_SECTIONS.map((section) => (
-            <RulebookSection key={section.id} section={section} />
-          ))}
-          <div className="rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 text-sm text-amber-900 dark:text-amber-100">
-            <p className="font-semibold mb-1">Questions?</p>
-            <p>
-              Email{' '}
-              <a
-                href={`mailto:${HACKATHON_RULEBOOK_CONTACT.email}`}
-                className="underline underline-offset-2"
-              >
-                {HACKATHON_RULEBOOK_CONTACT.email}
-              </a>{' '}
-              or call {HACKATHON_RULEBOOK_CONTACT.phone}.
-            </p>
+        {/* ===================== EVENT RETROSPECTIVE & FAQS ===================== */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/10 bg-slate-900/40">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">About Hackathon 2026</h3>
+              <p className="text-slate-400 text-sm max-w-xl mx-auto">
+                TigmaMinds Academy is proud to host initiatives empowering North East India's young developers and thinkers.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 text-sm">
+              <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+                <h4 className="font-bold text-amber-300 mb-2 flex items-center gap-2">
+                  <Calendar className="w-4 h-4" /> 48-Hour In-Person Build
+                </h4>
+                <p className="text-slate-300 text-xs leading-relaxed">
+                  Teams engineered software models from scratch across AI, Sustainability, Healthcare, Education, and Cloud domains.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+                <h4 className="font-bold text-amber-300 mb-2 flex items-center gap-2">
+                  <Award className="w-4 h-4" /> Industry Mentorship & Panels
+                </h4>
+                <p className="text-slate-300 text-xs leading-relaxed">
+                  Experienced engineers and architects guided participants throughout development, providing critical real-time architecture feedback.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+                <h4 className="font-bold text-amber-300 mb-2 flex items-center gap-2">
+                  <Users className="w-4 h-4" /> Community & Next Edition
+                </h4>
+                <p className="text-slate-300 text-xs leading-relaxed">
+                  All finalists received certificates and goodies. Stay tuned for announcements on TigmaMinds Hackathon 2027!
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3 px-5 sm:px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/80">
-          <button
-            type="button"
-            onClick={onClose}
-            className="sm:flex-1 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 font-medium hover:bg-white dark:hover:bg-gray-800"
-          >
-            Close
-          </button>
-          <button
-            type="button"
-            onClick={onAccept}
-            className="sm:flex-1 px-4 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:shadow-lg"
-          >
-            I agree
-          </button>
-        </div>
+        </section>
       </div>
+
+      <Footer />
     </div>
-  );
-}
-
-function RulebookSection({ section }: { section: HackathonRuleSection }) {
-  return (
-    <section>
-      <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2">
-        {section.title}
-      </h3>
-
-      {section.paragraphs?.map((paragraph) => (
-        <p
-          key={paragraph}
-          className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-2"
-        >
-          {paragraph}
-        </p>
-      ))}
-
-      {section.subsections?.map((subsection) => (
-        <div key={subsection.title} className="mt-3 mb-2">
-          <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1.5">
-            {subsection.title}
-          </h4>
-          {subsection.paragraphs?.map((paragraph) => (
-            <p
-              key={paragraph}
-              className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-2"
-            >
-              {paragraph}
-            </p>
-          ))}
-          {subsection.bullets ? <BulletList items={subsection.bullets} /> : null}
-        </div>
-      ))}
-
-      {section.bullets ? <BulletList items={section.bullets} /> : null}
-
-      {section.table ? (
-        <div className="mt-2 overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-          <table className="w-full text-sm text-left">
-            <thead className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
-              <tr>
-                {section.table.headers.map((header) => (
-                  <th key={header} className="px-3 py-2 font-semibold">
-                    {header}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {section.table.rows.map((row) => (
-                <tr
-                  key={row.join('-')}
-                  className="border-t border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300"
-                >
-                  {row.map((cell, cellIndex) => (
-                    <td
-                      key={`${row[0]}-${cellIndex}`}
-                      className={`px-3 py-2 ${cellIndex === 0 ? 'font-medium text-gray-900 dark:text-white' : ''}`}
-                    >
-                      {cell}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : null}
-
-      {section.note ? (
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 italic">{section.note}</p>
-      ) : null}
-    </section>
-  );
-}
-
-function BulletList({ items }: { items: string[] }) {
-  return (
-    <ul className="list-disc pl-5 space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
   );
 }
