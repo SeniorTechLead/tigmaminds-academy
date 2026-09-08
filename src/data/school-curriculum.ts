@@ -1,11 +1,9 @@
 /**
- * 12-Month Curriculum Curriculum
+ * ProductionReady: Real-World Software Engineering Program
  *
- * Each track has 4 terms (12 weeks each = 48 weeks total).
- * Each week has: topic, lesson slug(s), level(s) to cover, project deliverable, and learning objectives.
- *
- * Stories are mapped from the existing lesson library.
- * Weeks marked with `newContent: true` need content to be authored.
+ * Program tracks:
+ * 1. 9 Month (Mandatory): Core Software Engineering Foundation (36 weeks / 4 terms)
+ * 2. 3 Month (Optional): Deep Specialization Sprint (4 specialized tracks)
  */
 
 export interface WeekPlan {
@@ -38,6 +36,436 @@ export interface TrackCurriculum {
   capstoneProject: string;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// TRACK 1: 9 MONTH (MANDATORY) — CORE PHASE
+// ═══════════════════════════════════════════════════════════════
+export const corePhaseTrack: TrackCurriculum = {
+  id: 'nine-month-core',
+  name: '9 Month (Mandatory)',
+  tagline: 'The 9-Month Real-World Software Engineering Program',
+  icon: '🚀',
+  color: 'amber',
+  audience: 'College students, graduates & career switchers ready to build industry-standard software',
+  prerequisite: 'Basic computer literacy. No prior programming background required.',
+  capstoneProject: 'Deploy a complete flagship product end-to-end (Database, Backend, Frontend & AI Recommendation engine) pitched live like a company demo.',
+  terms: [
+    {
+      term: 1,
+      title: 'Term 1: Programming Foundations + OOP',
+      description: '"Before Uber can match a ride, it needs objects: Driver, Rider, Trip." Master clean syntax, logic flow, memory representation, and object-oriented design.',
+      weeks: [
+        {
+          week: 1,
+          topic: 'Syntax, Logic & Control Flow',
+          slugs: ['the-legend-of-zero'],
+          levels: ['L0', 'L1'],
+          objectives: ['Variables, data types & expressions', 'Conditionals and branching logic', 'Iteration and loop control'],
+          project: 'Command-line calculator & logic engine',
+          basics: '/learn/python-basics'
+        },
+        {
+          week: 2,
+          topic: 'Functions & Problem Decomposition',
+          slugs: ['the-secret-of-the-primes'],
+          levels: ['L1'],
+          objectives: ['Function definitions, parameters & return values', 'Scope, lifetime & recursion basics', 'Pure functions and modular thinking'],
+          project: 'Modular mathematical analyzer'
+        },
+        {
+          week: 3,
+          topic: 'Classes, Objects & Memory Model',
+          slugs: ['the-geometry-of-life'],
+          levels: ['L1', 'L2'],
+          objectives: ['Instantiating classes and objects', 'Constructors and internal state management', 'Stack vs heap object references'],
+          project: 'Ride-sharing simulation entity classes'
+        },
+        {
+          week: 4,
+          topic: 'Encapsulation & Data Invariants',
+          slugs: ['the-cipher-of-caesar'],
+          levels: ['L2'],
+          objectives: ['Private vs public access modifiers', 'Getters, setters & invariant protection', 'Data validation and defensive programming'],
+          project: 'Secure bank account & transaction model'
+        },
+        {
+          week: 5,
+          topic: 'Inheritance & Polymorphism',
+          slugs: ['the-tree-of-knowledge'],
+          levels: ['L2', 'L3'],
+          objectives: ['Base and derived classes', 'Method overriding & dynamic dispatch', 'Code reuse without tight coupling'],
+          project: 'Payment gateway processor hierarchy'
+        },
+        {
+          week: 6,
+          topic: 'Abstraction & Interface Contracts',
+          slugs: ['the-tower-of-hanoi'],
+          levels: ['L3'],
+          objectives: ['Abstract base classes & interface contracts', 'Core design principles (SOLID intro)', 'Decoupling client callers from implementations'],
+          project: 'Pluggable notification delivery engine'
+        },
+        {
+          week: 7,
+          topic: 'Error Handling & Unit Testing',
+          slugs: ['the-matrix-mystery'],
+          levels: ['L3'],
+          objectives: ['Try/catch/finally exception hierarchies', 'Structured logging vs console debugging', 'Writing automated unit test suites'],
+          project: 'Test-driven validation test suite'
+        },
+        {
+          week: 8,
+          topic: 'Milestone Build: Uber Ride-Matching Model',
+          slugs: ['map-makers-granddaughter'],
+          levels: ['L3', 'L4'],
+          objectives: ['Design Driver, Rider, Vehicle, and Trip objects', 'Implement matching state machine', 'Simulate live ride lifecycle'],
+          project: 'Uber ride-matching simulation'
+        },
+      ],
+    },
+    {
+      term: 2,
+      title: 'Term 2: DSA, DBMS & Operating Systems',
+      description: '"How Google Maps finds the fastest route in milliseconds, Instagram stores billions of photos, and Netflix streams without crashing."',
+      weeks: [
+        {
+          week: 9,
+          topic: 'Linear Data Structures: Arrays & Strings',
+          slugs: ['the-string-weaver'],
+          levels: ['L1', 'L2'],
+          objectives: ['Two-pointer techniques', 'Sliding window algorithms', 'Time and space complexity (Big O)'],
+          project: 'Subarray string analyzer'
+        },
+        {
+          week: 10,
+          topic: 'Linked Lists, Stacks & Queues',
+          slugs: ['the-train-of-thought'],
+          levels: ['L2'],
+          objectives: ['Pointer manipulation & linked nodes', 'Stack evaluation (LIFO) & monotonic stacks', 'Queues (FIFO) for event processing'],
+          project: 'Undo/redo history buffer & job queue'
+        },
+        {
+          week: 11,
+          topic: 'Trees, Binary Search Trees & Heaps',
+          slugs: ['the-tree-of-knowledge'],
+          levels: ['L2', 'L3'],
+          objectives: ['BST traversal & searching', 'Balancing concepts & priority heaps', 'Heap sort & priority dispatch'],
+          project: 'Hierarchical file system navigator'
+        },
+        {
+          week: 12,
+          topic: 'Graphs: Representation & Traversal',
+          slugs: ['map-makers-granddaughter'],
+          levels: ['L3'],
+          objectives: ['Adjacency lists and matrices', 'Breadth-First Search (BFS)', 'Depth-First Search (DFS)'],
+          project: 'Social network connection graph'
+        },
+        {
+          week: 13,
+          topic: 'Shortest Paths: Google Maps Route-Finder',
+          slugs: ['map-makers-granddaughter'],
+          levels: ['L3', 'L4'],
+          objectives: ['Dijkstra algorithm with priority queues', 'A* heuristic pathfinding', 'Real-world road network modeling'],
+          project: 'Shortest-path navigation engine'
+        },
+        {
+          week: 14,
+          topic: 'Dynamic Programming & Caching Layers',
+          slugs: ['the-tower-of-hanoi'],
+          levels: ['L3', 'L4'],
+          objectives: ['Recursion to memoization & tabulation', 'Optimal substructure & overlapping subproblems', 'LRU cache eviction policy'],
+          project: 'LRU Cache and route optimizer'
+        },
+        {
+          week: 15,
+          topic: 'Relational Modeling & ER Diagrams',
+          slugs: ['the-matrix-mystery'],
+          levels: ['L2'],
+          objectives: ['Entity-Relationship design', 'Primary & foreign keys', '1:1, 1:N, and N:M relationship normalization (1NF, 2NF, 3NF)'],
+          project: 'Instagram-scale relational schema blueprint'
+        },
+        {
+          week: 16,
+          topic: 'SQL: Queries, Joins & Aggregations',
+          slugs: ['the-matrix-mystery'],
+          levels: ['L2', 'L3'],
+          objectives: ['Inner, outer, and self joins', 'GROUP BY, HAVING, and window functions', 'Subqueries & CTEs'],
+          project: 'Analytics reporting queries for millions of rows'
+        },
+        {
+          week: 17,
+          topic: 'Transactions, ACID & B-Tree Indexing',
+          slugs: ['the-matrix-mystery'],
+          levels: ['L3', 'L4'],
+          objectives: ['B-Tree and Hash indexes', 'Query execution plans (EXPLAIN ANALYZE)', 'ACID transactions & isolation levels'],
+          project: 'High-concurrency order placement database engine'
+        },
+        {
+          week: 18,
+          topic: 'Intro to NoSQL & Key-Value Stores',
+          slugs: ['the-cipher-of-caesar'],
+          levels: ['L3'],
+          objectives: ['Document stores vs Key-Value (Redis)', 'JSON document querying', 'Cache-aside patterns'],
+          project: 'User session and feed cache'
+        },
+        {
+          week: 19,
+          topic: 'Operating Systems: Processes, Threads & Memory',
+          slugs: ['dragonfly-and-the-paddy-field'],
+          levels: ['L2', 'L3'],
+          objectives: ['Process lifecycle & context switching', 'Multithreading & CPU scheduling', 'Virtual memory, paging & allocations'],
+          project: 'Multi-process task worker pool'
+        },
+        {
+          week: 20,
+          topic: 'Concurrency, Synchronization & Deadlocks',
+          slugs: ['firefly-festival-of-majuli'],
+          levels: ['L3', 'L4'],
+          objectives: ['Race conditions & critical sections', 'Mutexes, semaphores & atomic variables', 'Deadlock detection & prevention'],
+          project: 'Thread-safe order booking simulator'
+        },
+      ],
+    },
+    {
+      term: 3,
+      title: 'Term 3: Frontend & Backend Engineering',
+      description: '"How Swiggy takes an order from tap to delivery. Build reactive modern interfaces and the high-throughput backend services behind them."',
+      weeks: [
+        {
+          week: 21,
+          topic: 'Modern JavaScript & Browser Runtime',
+          slugs: ['the-string-weaver'],
+          levels: ['L2'],
+          objectives: ['ES6+ syntax, closures & prototypes', 'Event loop, promises & async/await', 'Fetch API and network requests'],
+          project: 'Async interactive web dashboard'
+        },
+        {
+          week: 22,
+          topic: 'React & Component-Driven Architecture',
+          slugs: ['the-geometry-of-life'],
+          levels: ['L2', 'L3'],
+          objectives: ['JSX, functional components & props', 'useState, useEffect & lifecycle hooks', 'Component hierarchy & reusable UI elements'],
+          project: 'Food delivery menu & cart component library'
+        },
+        {
+          week: 23,
+          topic: 'State Management & Form Workflows',
+          slugs: ['the-tree-of-knowledge'],
+          levels: ['L3'],
+          objectives: ['Context API and reducer patterns', 'Controlled vs uncontrolled forms', 'Client-side validation & error handling'],
+          project: 'Interactive checkout & order customization wizard'
+        },
+        {
+          week: 24,
+          topic: 'Responsive Design & Tailwind CSS',
+          slugs: ['the-girl-who-painted-rain'],
+          levels: ['L2'],
+          objectives: ['Tailwind utility system & responsive modifiers', 'Flexbox & CSS Grid layouts', 'Dark mode, accessibility (a11y) & transitions'],
+          project: 'Pixel-perfect responsive food ordering web app'
+        },
+        {
+          week: 25,
+          topic: 'Consuming REST APIs & Client Architecture',
+          slugs: ['map-makers-granddaughter'],
+          levels: ['L3'],
+          objectives: ['HTTP methods (GET, POST, PUT, DELETE)', 'Optimistic UI updates & loading skeletons', 'Client caching & network error handling'],
+          project: 'Live Swiggy-style food delivery client'
+        },
+        {
+          week: 26,
+          topic: 'Backend Architecture & Server Runtimes',
+          slugs: ['dragonfly-and-the-paddy-field'],
+          levels: ['L2', 'L3'],
+          objectives: ['Node.js / Express or Java Spring Boot setup', 'HTTP request/response lifecycle', 'Middleware pattern & environment configurations'],
+          project: 'REST API server bootstrap with logging'
+        },
+        {
+          week: 27,
+          topic: 'REST API Design & Validation',
+          slugs: ['the-secret-of-the-primes'],
+          levels: ['L3'],
+          objectives: ['RESTful endpoint conventions & status codes', 'Request payload validation schemas', 'Centralized error-handling middleware'],
+          project: 'Catalog & Order Management REST API'
+        },
+        {
+          week: 28,
+          topic: 'Database Integration & ORMs',
+          slugs: ['the-matrix-mystery'],
+          levels: ['L3', 'L4'],
+          objectives: ['Connecting backend to PostgreSQL', 'Database migrations & seeders', 'Query optimization with ORM / query builders'],
+          project: 'Persistent order-to-delivery database backend'
+        },
+        {
+          week: 29,
+          topic: 'Authentication & Security',
+          slugs: ['the-cipher-of-caesar'],
+          levels: ['L3', 'L4'],
+          objectives: ['Password hashing with bcrypt / Argon2', 'JWT token issuance, verification & refresh tokens', 'Role-Based Access Control (RBAC) middleware'],
+          project: 'Secure auth service with role permissions'
+        },
+        {
+          week: 30,
+          topic: 'Microservices & Background Jobs',
+          slugs: ['honey-hunters-lesson'],
+          levels: ['L3', 'L4'],
+          objectives: ['Monolith vs microservices decomposition', 'Background asynchronous worker queues', 'Third-party webhook integrations'],
+          project: 'Payment & email notification dispatch worker'
+        },
+        {
+          week: 31,
+          topic: 'End-to-End System Integration',
+          slugs: ['river-dolphins-secret'],
+          levels: ['L4'],
+          objectives: ['Connecting React frontend to REST backend', 'CORS, proxying & cookie security', 'Full order lifecycle verification'],
+          project: 'Connected full-stack food delivery app'
+        },
+        {
+          week: 32,
+          topic: 'Containerization & Production Deployment',
+          slugs: ['old-banyan-trees-stories'],
+          levels: ['L4'],
+          objectives: ['Docker containerization of frontend & backend', 'Docker Compose local orchestration', 'Deploying database & services to cloud platform'],
+          project: 'Live deployed full-stack web service'
+        },
+      ],
+    },
+    {
+      term: 4,
+      title: 'Term 4: AI / Machine Learning & Flagship Capstone',
+      description: '"How Spotify learns your taste and predicts your next favorite song." Add an intelligent recommendation engine and ship a complete portfolio product.',
+      weeks: [
+        {
+          week: 33,
+          topic: 'Python for ML & Data Preprocessing',
+          slugs: ['snow-leopards-promise'],
+          levels: ['L3'],
+          objectives: ['Data exploration with Pandas & NumPy', 'Feature scaling, normalization & encoding', 'Exploratory Data Analysis (EDA)'],
+          project: 'User interaction data processing pipeline'
+        },
+        {
+          week: 34,
+          topic: 'Supervised & Unsupervised Machine Learning',
+          slugs: ['girl-who-spoke-to-elephants'],
+          levels: ['L3', 'L4'],
+          objectives: ['Classification vs Regression algorithms', 'Clustering & collaborative filtering', 'Evaluating models with Precision, Recall & F1'],
+          project: 'User preference classifier'
+        },
+        {
+          week: 35,
+          topic: 'Recommendation Systems & Neural Embeddings',
+          slugs: ['stars-above-ziro'],
+          levels: ['L4'],
+          objectives: ['Content-based & collaborative filtering', 'Vector embeddings & cosine similarity', 'Integrating ML inference with backend API'],
+          project: 'Live recommendation engine endpoint'
+        },
+        {
+          week: 36,
+          topic: 'Flagship Capstone Launch & Demo Day',
+          slugs: ['festival-of-lights'],
+          levels: ['L4'],
+          objectives: ['Ship complete product: DB + Backend + Frontend + AI', 'System documentation, architecture diagram & live demo', 'Pitch live like a technology company showcase'],
+          project: 'Live Portfolio Product Deployment & Demo Day Pitch'
+        },
+      ],
+    },
+  ],
+};
+
+// ═══════════════════════════════════════════════════════════════
+// TRACK 2: 3 MONTH (OPTIONAL) — SPECIALIZATION PHASE
+// ═══════════════════════════════════════════════════════════════
+export const specializationTrack: TrackCurriculum = {
+  id: 'three-month-specialization',
+  name: '3 Month (Optional)',
+  tagline: 'Deep Specialization Sprint — 4 Advanced Industry Tracks',
+  icon: '⚡',
+  color: 'violet',
+  audience: 'Students and graduates targeting specialist roles in AI/ML, Scalable Backend, Frontend Architecture, or Full-Stack Solo Ownership',
+  prerequisite: 'Completion of the 9-Month Core Foundation or equivalent engineering fluency',
+  capstoneProject: 'Architect and ship an enterprise-grade specialist system with one-on-one mentorship.',
+  terms: [
+    {
+      term: 1,
+      title: 'Specialization Track A: AI/ML Deep Dive',
+      description: 'Advanced ML, deep learning with PyTorch, Transformer architectures, LLM fine-tuning, RAG systems, and production model serving.',
+      weeks: [
+        { week: 1, topic: 'Advanced Deep Learning & PyTorch', slugs: [], levels: ['L4'], objectives: ['Tensors, autograd & custom neural layers in PyTorch', 'Loss functions, optimizers & backpropagation'], project: 'Custom neural network from scratch' },
+        { week: 2, topic: 'Convolutional Neural Networks (CNNs)', slugs: [], levels: ['L4'], objectives: ['Convolution, pooling & image classification', 'Transfer learning with ResNet / EfficientNet'], project: 'Computer vision classifier' },
+        { week: 3, topic: 'Transformers & Self-Attention', slugs: [], levels: ['L4'], objectives: ['Encoder-Decoder architectures & attention mechanisms', 'BERT, GPT & tokenization fundamentals'], project: 'Attention visualizer & sequence model' },
+        { week: 4, topic: 'Natural Language Processing (NLP)', slugs: [], levels: ['L4'], objectives: ['Named Entity Recognition, sentiment analysis', 'Text preprocessing & embedding generation'], project: 'NLP extraction pipeline' },
+        { week: 5, topic: 'Large Language Models (LLMs) & Prompting', slugs: [], levels: ['L4'], objectives: ['Zero-shot/few-shot prompting & chain-of-thought', 'Structured outputs & function calling with LLMs'], project: 'Structured AI assistant engine' },
+        { week: 6, topic: 'Vector Databases & RAG Architecture', slugs: [], levels: ['L4'], objectives: ['Vector indexing (HNSW, Cosine)', 'Chunking strategies & hybrid retrieval (RAG)'], project: 'Domain-specific RAG knowledge base' },
+        { week: 7, topic: 'Autonomous AI Agents & Workflows', slugs: [], levels: ['L4'], objectives: ['ReAct framework, LangChain / LlamaIndex', 'Multi-agent orchestration & tool usage'], project: 'Autonomous research and coding agent' },
+        { week: 8, topic: 'Model Fine-Tuning (LoRA / QLoRA)', slugs: [], levels: ['L4'], objectives: ['Instruction tuning dataset creation', 'Parameter-efficient fine-tuning (PEFT)'], project: 'Domain fine-tuned open-weights model' },
+        { week: 9, topic: 'Model Optimization & Quantization', slugs: [], levels: ['L4'], objectives: ['4-bit/8-bit quantization (bitsandbytes)', 'ONNX runtime & TensorRT inference acceleration'], project: 'Quantized low-latency inference engine' },
+        { week: 10, topic: 'Production Model Serving (FastAPI / vLLM)', slugs: [], levels: ['L4'], objectives: ['High-throughput model serving with vLLM / Triton', 'Streaming responses & batching strategies'], project: 'Production AI inference microservice' },
+        { week: 11, topic: 'MLOps: Pipelines & Monitoring', slugs: [], levels: ['L4'], objectives: ['Model registry, data drift detection', 'Automated retraining & evaluation pipelines'], project: 'Continuous MLOps monitoring dashboard' },
+        { week: 12, topic: 'AI Specialist Capstone Launch', slugs: [], levels: ['L4'], objectives: ['Deploy production AI agent with vector search', 'Demonstrate fine-tuning metrics & live demo'], project: 'Live Enterprise AI Agent System' },
+      ],
+    },
+    {
+      term: 2,
+      title: 'Specialization Track B: Backend Systems & Scale',
+      description: 'Distributed architectures, high-throughput message streaming with Kafka, Redis caching, microservices, and Kubernetes orchestration.',
+      weeks: [
+        { week: 1, topic: 'High-Concurrency & Multi-Threading', slugs: [], levels: ['L4'], objectives: ['Non-blocking I/O & event-driven concurrency', 'Thread pools, worker patterns & load throttling'], project: 'High-concurrency benchmark tool' },
+        { week: 2, topic: 'Distributed System Fundamentals', slugs: [], levels: ['L4'], objectives: ['CAP theorem, PACELC & consistency models', 'Leader election & consensus protocols (Raft)'], project: 'Distributed key-value store' },
+        { week: 3, topic: 'Advanced Redis Caching & In-Memory Data', slugs: [], levels: ['L4'], objectives: ['Cache invalidation, dogpiling/stampede prevention', 'Redis data structures: HyperLogLog, Streams, Geo'], project: 'Real-time leaderboard & session cluster' },
+        { week: 4, topic: 'Message Queues & Event Streaming (Kafka)', slugs: [], levels: ['L4'], objectives: ['Partitions, consumer groups & offset management', 'Event-driven architecture with Kafka / RabbitMQ'], project: 'Real-time telemetry event stream' },
+        { week: 5, topic: 'Database Sharding & Read Replicas', slugs: [], levels: ['L4'], objectives: ['Horizontal sharding, consistent hashing', 'Read/write splitting & replication lag handling'], project: 'Sharded PostgreSQL database cluster' },
+        { week: 6, topic: 'Distributed Transactions & Sagas', slugs: [], levels: ['L4'], objectives: ['Two-Phase Commit (2PC) vs Saga pattern', 'Compensating transactions & idempotency keys'], project: 'Distributed payment orchestration engine' },
+        { week: 7, topic: 'gRPC & Protocol Buffers', slugs: [], levels: ['L4'], objectives: ['Binary serialization with Protobuf', 'Bidirectional streaming RPCs between microservices'], project: 'High-speed inter-service communication mesh' },
+        { week: 8, topic: 'API Gateway & Rate Limiting', slugs: [], levels: ['L4'], objectives: ['Token bucket & sliding window rate limiters', 'Circuit breakers (Resilience4j) & request routing'], project: 'Resilient API gateway' },
+        { week: 9, topic: 'Observability & Distributed Tracing', slugs: [], levels: ['L4'], objectives: ['OpenTelemetry, Jaeger tracing & span context', 'Prometheus metrics & Grafana alert dashboards'], project: 'End-to-end tracing observability stack' },
+        { week: 10, topic: 'Docker Orchestration & Kubernetes', slugs: [], levels: ['L4'], objectives: ['K8s Pods, Deployments, Services & Ingress', 'ConfigMaps, Secrets & rolling zero-downtime updates'], project: 'Kubernetes multi-service deployment' },
+        { week: 11, topic: 'Load Testing & Chaos Engineering', slugs: [], levels: ['L4'], objectives: ['k6 load testing at 10,000+ RPS', 'Simulating server crashes & network partitions'], project: 'Stress-tested resilience report' },
+        { week: 12, topic: 'Backend Specialist Capstone Launch', slugs: [], levels: ['L4'], objectives: ['Ship scalable distributed microservice engine', 'Live load test demonstration during showcase'], project: '10,000+ RPS Distributed Ticketing / Payments Engine' },
+      ],
+    },
+    {
+      term: 3,
+      title: 'Specialization Track C: Frontend Engineering',
+      description: 'Advanced React internals, Next.js Server Components, Enterprise Design Systems, WebGL / Canvas interactive graphics, and Web Vitals.',
+      weeks: [
+        { week: 1, topic: 'React Internals & Fiber Reconciler', slugs: [], levels: ['L4'], objectives: ['Fiber nodes, priority lanes & work loops', 'Concurrent rendering & useTransition / useDeferredValue'], project: 'Custom React mini-reconciler' },
+        { week: 2, topic: 'Next.js App Router & Server Components', slugs: [], levels: ['L4'], objectives: ['RSC vs Client components boundary', 'Streaming SSR, Suspense & Parallel/Intercepting Routes'], project: 'High-speed e-commerce portal with streaming' },
+        { week: 3, topic: 'Enterprise Design System Engineering', slugs: [], levels: ['L4'], objectives: ['Design tokens, Radix UI primitives & accessibility', 'Storybook documentation, semantic versioning & npm packaging'], project: 'Publishable Enterprise UI Component Library' },
+        { week: 4, topic: 'State Machines & Complex UI Logic', slugs: [], levels: ['L4'], objectives: ['XState finite state machines', 'Hierarchical & parallel states for complex wizards'], project: 'Multi-step financial onboarding flow' },
+        { week: 5, topic: 'Core Web Vitals & Performance Optimization', slugs: ['the-secret-of-the-primes'], levels: ['L4'], objectives: ['Optimizing LCP, INP, CLS & Total Blocking Time', 'Code splitting, dynamic imports & bundle analysis'], project: '100/100 Lighthouse performance audit & fix' },
+        { week: 6, topic: 'Micro-Frontends & Module Federation', slugs: [], levels: ['L4'], objectives: ['Webpack / Vite Module Federation', 'Independent deployment of decoupled UI modules'], project: 'Micro-frontend enterprise dashboard' },
+        { week: 7, topic: 'Real-Time Collaborative UI (WebSockets/CRDTs)', slugs: ['river-dolphins-secret'], levels: ['L4'], objectives: ['WebSockets & Server-Sent Events', 'Conflict-free Replicated Data Types (Yjs / Automerge)'], project: 'Real-time collaborative document editor' },
+        { week: 8, topic: 'Interactive 2D/3D Graphics (Canvas & WebGL)', slugs: ['the-geometry-of-life'], levels: ['L4'], objectives: ['HTML5 Canvas 2D rendering loop', 'Three.js / React Three Fiber for 3D visualization'], project: 'Interactive 3D product showcase' },
+        { week: 9, topic: 'Progressive Web Apps (PWAs) & Offline Mode', slugs: [], levels: ['L4'], objectives: ['Service Workers, caching strategies & IndexedDB', 'Background sync & installable desktop/mobile experience'], project: 'Offline-first progressive web app' },
+        { week: 10, topic: 'Web Security & Authentication Hardening', slugs: ['the-cipher-of-caesar'], levels: ['L4'], objectives: ['CSP headers, XSS prevention & CSRF tokens', 'OAuth2 PKCE flow & biometric WebAuthn credentials'], project: 'Hardened web security suite' },
+        { week: 11, topic: 'E2E Testing with Playwright & Visual Diffing', slugs: [], levels: ['L4'], objectives: ['Playwright cross-browser automation', 'Visual regression testing & automated CI smoke suites'], project: 'Comprehensive automated test pipeline' },
+        { week: 12, topic: 'Frontend Specialist Capstone Launch', slugs: [], levels: ['L4'], objectives: ['Deploy real-time collaborative workspace app', 'Demonstrate design system & sub-second UI interactions'], project: 'Live Real-Time Collaborative Canvas App' },
+      ],
+    },
+    {
+      term: 4,
+      title: 'Specialization Track D: Full-Stack Mastery',
+      description: 'End-to-end solo product ownership from domain architecture to multi-tenant cloud infra, payment billing, and CI/CD pipelines.',
+      weeks: [
+        { week: 1, topic: 'Domain-Driven Architecture & Blueprint', slugs: [], levels: ['L4'], objectives: ['Bounded contexts, entity relationships & aggregates', 'Database schema & API contract blueprint'], project: 'Complete SaaS architecture specification' },
+        { week: 2, topic: 'Multi-Tenant SaaS Architecture', slugs: [], levels: ['L4'], objectives: ['Row-Level Security (RLS) tenant isolation', 'Custom domains & organization member roles'], project: 'Multi-tenant database engine' },
+        { week: 3, topic: 'Enterprise Auth & Single Sign-On (SSO)', slugs: ['the-cipher-of-caesar'], levels: ['L4'], objectives: ['SAML 2.0 / OAuth2 corporate SSO integration', 'Session management & audit logs'], project: 'Enterprise authentication portal' },
+        { week: 4, topic: 'Subscription Billing & Payment Webhooks', slugs: [], levels: ['L4'], objectives: ['PayU / Stripe subscription lifecycles', 'Idempotent webhook handlers & invoice generation'], project: 'Automated recurring billing system' },
+        { week: 5, topic: 'Edge Functions & Dynamic ISR', slugs: [], levels: ['L4'], objectives: ['Edge computing runtime & geographically distributed cache', 'Incremental Static Regeneration (ISR)'], project: 'Global low-latency content engine' },
+        { week: 6, topic: 'Asynchronous Job Queues (BullMQ / Redis)', slugs: ['honey-hunters-lesson'], levels: ['L4'], objectives: ['Delayed jobs, retries & exponential backoff', 'Concurrency controls & dead-letter queues'], project: 'Background report generation queue' },
+        { week: 7, topic: 'Media Processing & Cloud Storage Pipeline', slugs: [], levels: ['L4'], objectives: ['S3 presigned direct uploads', 'Automated image resizing & video transcoding'], project: 'High-volume media storage pipeline' },
+        { week: 8, topic: 'Security Hardening & OWASP Compliance', slugs: [], levels: ['L4'], objectives: ['SQL injection, SSRF & CORS mitigation', 'Automated dependency vulnerability scanning'], project: 'Security audit report & remediation' },
+        { week: 9, topic: 'CI/CD Automation (GitHub Actions)', slugs: [], levels: ['L4'], objectives: ['Automated test verification on PR', 'Preview deployments & production zero-downtime release'], project: 'Full CI/CD deployment pipeline' },
+        { week: 10, topic: 'Cloud Infrastructure as Code (Terraform / AWS)', slugs: [], levels: ['L4'], objectives: ['Provisioning VPC, RDS, ECS / Serverless', 'Secrets management & IAM least privilege'], project: 'Automated cloud infrastructure deployment' },
+        { week: 11, topic: 'Observability, Sentry & Alerting', slugs: [], levels: ['L4'], objectives: ['Sentry error capturing & performance monitoring', 'Uptime monitoring & automated Slack/PagerDuty alerts'], project: 'Full observability & alerting dashboard' },
+        { week: 12, topic: 'Full-Stack Solo Capstone Launch', slugs: [], levels: ['L4'], objectives: ['Solo launch of complete production SaaS product', 'Real user signup, live payment & monitoring demonstration'], project: 'Live Commercial SaaS Product Launch' },
+      ],
+    },
+  ],
+};
+
+export const allTracks: TrackCurriculum[] = [corePhaseTrack, specializationTrack];
+
+/* ═══════════════════════════════════════════════════════════════
+ * LEGACY / HIDDEN TRACKS (PRESERVED IN COMMENTS)
+ * ═══════════════════════════════════════════════════════════════
 // ═══════════════════════════════════════════════════════════════
 // TRACK 1: ROBOTICS & ARDUINO
 // ═══════════════════════════════════════════════════════════════
@@ -319,7 +747,7 @@ export const creativeTrack: TrackCurriculum = {
 // ═══════════════════════════════════════════════════════════════
 export const combinedTrack: TrackCurriculum = {
   id: 'combined',
-  name: 'Robotics + Programming',
+  name: 'Robotics + Programming hello',
   tagline: 'The full stack — code the algorithm, wire the hardware, build the robot',
   icon: '⚡',
   color: 'amber',
@@ -406,4 +834,5 @@ export const combinedTrack: TrackCurriculum = {
   ],
 };
 
-export const allTracks: TrackCurriculum[] = [roboticsTrack, pythonAITrack, creativeTrack, combinedTrack];
+// export const allTracks: TrackCurriculum[] = [roboticsTrack, pythonAITrack, creativeTrack, combinedTrack];
+ */

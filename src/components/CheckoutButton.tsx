@@ -7,7 +7,7 @@ import { useCurrency } from '../hooks/useCurrency';
 import { FEATURES } from '../config/features';
 
 interface Props {
-  plan: 'online_monthly' | 'online_yearly' | 'in_person_monthly';
+  plan: 'online_monthly' | 'online_yearly' | 'in_person_monthly' | 'curriculum_quarterly';
   label?: string;
   className?: string;
 }

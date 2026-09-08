@@ -148,45 +148,21 @@ function TermSection({ term, trackColor }: { term: TermPlan; trackColor: string 
 }
 
 function TrackView({ track }: { track: TrackCurriculum }) {
-  const totalWeeks = track.terms.reduce((s, t) => s + t.weeks.length, 0);
-  const withStories = track.terms.reduce((s, t) => s + t.weeks.filter(w => w.slugs.length > 0).length, 0);
-  const withProjects = track.terms.reduce((s, t) => s + t.weeks.filter(w => w.project).length, 0);
-  const needsAuthoring = track.terms.reduce((s, t) => s + t.weeks.filter(w => w.newContent).length, 0);
-
   return (
     <div>
-      {/* Track header */}
-      <div className="mb-8 p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-        <div className="flex items-start gap-4 mb-4">
-          <span className="text-4xl">{track.icon}</span>
+      {/* Track banner */}
+      <div className="mb-6 p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+        <div className="flex items-start gap-4 mb-3">
+          <span className="text-3xl p-2 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800">{track.icon}</span>
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{track.name}</h2>
-            <p className="text-gray-600 dark:text-gray-400">{track.tagline}</p>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">{track.tagline}</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-          <div className="text-center p-3 rounded-lg bg-gray-50 dark:bg-gray-900">
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalWeeks}</p>
-            <p className="text-xs text-gray-500">weeks</p>
-          </div>
-          <div className="text-center p-3 rounded-lg bg-gray-50 dark:bg-gray-900">
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{withStories}</p>
-            <p className="text-xs text-gray-500">with platform stories</p>
-          </div>
-          <div className="text-center p-3 rounded-lg bg-gray-50 dark:bg-gray-900">
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{withProjects}</p>
-            <p className="text-xs text-gray-500">projects</p>
-          </div>
-          <div className="text-center p-3 rounded-lg bg-gray-50 dark:bg-gray-900">
-            <p className="text-2xl font-bold text-amber-600">{needsAuthoring}</p>
-            <p className="text-xs text-gray-500">need new content</p>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
-          <span className="flex items-center gap-1"><BookOpen className="w-4 h-4" /> {track.audience}</span>
-          <span className="flex items-center gap-1"><Target className="w-4 h-4" /> Capstone: {track.capstoneProject}</span>
+        <div className="flex flex-wrap gap-4 text-xs text-gray-600 dark:text-gray-400 pt-3 border-t border-gray-100 dark:border-gray-700/60">
+          <span className="flex items-center gap-1.5"><BookOpen className="w-4 h-4 text-amber-500" /> <strong className="text-gray-800 dark:text-gray-200">Audience:</strong> {track.audience}</span>
+          <span className="flex items-center gap-1.5"><Target className="w-4 h-4 text-amber-500" /> <strong className="text-gray-800 dark:text-gray-200">Capstone:</strong> {track.capstoneProject}</span>
         </div>
       </div>
 
@@ -198,45 +174,140 @@ function TrackView({ track }: { track: TrackCurriculum }) {
   );
 }
 
-/* Visual journey: what students build across 12 months */
-function BuildJourneyVisual() {
-  const milestones = [
-    { month: 'Month 1', label: 'Blink an LED', icon: '💡', desc: 'First circuit + first Python program' },
-    { month: 'Month 3', label: 'Sensor Dashboard', icon: '📊', desc: 'Arduino reads sensors, Python plots live data' },
-    { month: 'Month 5', label: 'Weather Station', icon: '🌡️', desc: 'Multi-sensor station with data analysis' },
-    { month: 'Month 7', label: 'Moving Robot', icon: '🤖', desc: 'Motors, wheels, obstacle avoidance' },
-    { month: 'Month 9', label: 'Smart Robot', icon: '🧠', desc: 'Python AI brain processes sensor data' },
-    { month: 'Month 11', label: 'AI-Powered Robot', icon: '⚡', desc: 'ML classifier + path planning + wireless' },
-    { month: 'Month 12', label: 'Graduation Showcase', icon: '🎓', desc: 'Present your autonomous robot to the world' },
+/* Static Program at a Glance overview from PPT */
+function ProgramAtAGlance() {
+  const stats = [
+    { number: '9', label: 'Months of core curriculum' },
+    { number: '7', label: 'Core technical domains covered' },
+    { number: '1', label: 'Flagship product shipped by every student' },
+    { number: '3', label: 'Optional months for specialization' },
   ];
 
   return (
-    <div className="relative">
-      {/* Connection line */}
-      <div className="absolute top-8 left-8 right-8 h-0.5 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 hidden md:block" />
+    <div className="mb-8 p-6 md:p-8 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+        <div>
+          <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/40 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+            Overview
+          </span>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mt-1.5">
+            The Program at a Glance
+          </h2>
+        </div>
+      </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-7 gap-3">
-        {milestones.map((m, i) => (
-          <div key={i} className="text-center relative">
-            <div className={`w-16 h-16 rounded-2xl mx-auto mb-2 flex items-center justify-center text-2xl relative z-10 ${
-              i === milestones.length - 1
-                ? 'bg-gradient-to-br from-amber-400 to-red-500 shadow-lg shadow-amber-500/30 scale-110'
-                : 'bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700'
-            }`}>
-              {m.icon}
-            </div>
-            <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">{m.month}</p>
-            <p className="text-xs font-semibold text-gray-900 dark:text-white mt-0.5">{m.label}</p>
-            <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5 leading-tight">{m.desc}</p>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map((s, i) => (
+          <div
+            key={i}
+            className="p-5 rounded-xl bg-gray-50 dark:bg-gray-900/60 border border-gray-200/70 dark:border-gray-700/60 text-center flex flex-col items-center justify-center min-h-[140px] transition-all hover:border-amber-400/60 hover:shadow-sm"
+          >
+            <span className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+              {s.number}
+            </span>
+            <div className="w-8 h-1 bg-amber-500 rounded-full my-2.5" />
+            <p className="text-xs md:text-sm text-gray-600 dark:text-gray-300 font-medium leading-snug">
+              {s.label}
+            </p>
           </div>
         ))}
+      </div>
+
+      <p className="text-xs text-gray-500 dark:text-gray-400 italic mt-5">
+        Months 10–12 are optional — a deep specialization sprint for students who want mastery in one area.
+      </p>
+    </div>
+  );
+}
+
+/* Visual journey: what students build across the 9+3 month program */
+function BuildJourneyVisual() {
+  const milestones = [
+    { month: 'Month 1', label: 'Programming + OOP', icon: '💻', desc: 'Core paradigms, abstraction & clean code' },
+    { month: 'Month 2–3', label: 'DSA', icon: '⚡', desc: 'Data structures, algorithms & optimization' },
+    { month: 'Month 4', label: 'SQL & NoSQL', icon: '🗄️', desc: 'Relational modeling, indexing & transactions' },
+    { month: 'Month 5', label: 'OS & System Design', icon: '⚙️', desc: 'Memory, concurrency, processes & threads' },
+    { month: 'Month 5–6', label: 'Frontend', icon: '🎨', desc: 'Component systems, state & web APIs' },
+    { month: 'Month 6–7', label: 'Backend', icon: '🔌', desc: 'REST/GraphQL, auth, caching & services' },
+    { month: 'Month 8', label: 'Applied AI / ML', icon: '🧠', desc: 'ML models, embeddings & LLM integrations' },
+    { month: 'Month 9', label: 'Capstone Product', icon: '🚀', desc: 'Production deployment & graduation showcase' },
+  ];
+
+  const specializations = [
+    { month: 'Months 10–12', label: 'AI/ML Deep Dive', icon: '🧠', desc: 'LLMs, neural networks, PyTorch & agentic AI' },
+    { month: 'Months 10–12', label: 'Backend Systems & Scale', icon: '⚡', desc: 'Distributed systems, Kafka, Redis & microservices' },
+    { month: 'Months 10–12', label: 'Frontend Engineering', icon: '🎨', desc: 'Design systems, Next.js perf & reactive UI' },
+    { month: 'Months 10–12', label: 'Full-Stack Mastery', icon: '🚀', desc: 'End-to-end cloud infra, DevOps & CI/CD' },
+  ];
+
+  return (
+    <div className="space-y-8">
+      {/* 9-Month Core Journey */}
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
+            Core Phase — Months 1 to 9 (Mandatory)
+          </span>
+        </div>
+
+        <div className="relative">
+          {/* Connection line */}
+          <div className="absolute top-8 left-[6.25%] right-[6.25%] h-0.5 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 hidden lg:block" />
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+            {milestones.map((m, i) => (
+              <div key={i} className="text-center relative">
+                <div className={`w-16 h-16 rounded-2xl mx-auto mb-2 flex items-center justify-center text-2xl relative z-10 ${
+                  i === milestones.length - 1
+                    ? 'bg-gradient-to-br from-amber-400 to-red-500 shadow-lg shadow-amber-500/30 scale-110'
+                    : 'bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700'
+                }`}>
+                  {m.icon}
+                </div>
+                <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">{m.month}</p>
+                <p className="text-xs font-semibold text-gray-900 dark:text-white mt-0.5">{m.label}</p>
+                <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5 leading-tight">{m.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* 3-Month Specialization Timeline (+3 Model) */}
+      <div className="pt-6 border-t border-amber-200/50 dark:border-amber-800/50">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+            Specialization Phase — Months 10 to 12 (Optional — Choose 1 Track)
+          </span>
+          <span className="text-[10px] font-bold bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+            +3 Months
+          </span>
+        </div>
+
+        <div className="relative">
+          {/* Connection line for Specialization */}
+          <div className="absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-indigo-400 via-blue-500 to-purple-500 hidden sm:block" />
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {specializations.map((s, i) => (
+              <div key={i} className="text-center relative">
+                <div className="w-16 h-16 rounded-2xl mx-auto mb-2 flex items-center justify-center text-2xl relative z-10 bg-white dark:bg-gray-800 border-2 border-indigo-200 dark:border-indigo-800 shadow-sm">
+                  {s.icon}
+                </div>
+                <p className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">{s.month}</p>
+                <p className="text-xs font-semibold text-gray-900 dark:text-white mt-0.5">{s.label}</p>
+                <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5 leading-tight">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
 export default function CurriculumPage() {
-  const [activeTrack, setActiveTrack] = useState(3); // Default to combined track
+  const [activeTrack, setActiveTrack] = useState(0); // Default to 9 Month (Mandatory)
   const track = allTracks[activeTrack];
 
   return (
@@ -250,11 +321,7 @@ export default function CurriculumPage() {
             12-Month Curriculum
           </h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            48 weeks of structured learning. Every week has a topic, learning objectives,
-            platform stories to use, and a project deliverable. Pick a track.
-          </p>
-          <p className="text-sm text-gray-400 dark:text-gray-500 mt-3">
-            Looking for the career-focused program? See the <Link href="/curriculum/bootcamp" className="text-amber-600 dark:text-amber-400 hover:underline">24-Week Bootcamp</Link>.
+            The 9+3 Month Real-World Software Engineering Program. Every concept is taught the way it actually shows up in the products you use every day.
           </p>
         </div>
 
@@ -266,22 +333,22 @@ export default function CurriculumPage() {
           <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
             <div className="flex-1">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                ⚡ Robotics + Programming
+                ⚡ Flagship Programming
               </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-3">
-                The complete journey: learn Python AND Arduino together. Code the algorithm, wire the hardware, build the robot.
-                By month 12, learners present an <span className="font-semibold text-gray-900 dark:text-white">AI-powered autonomous robot</span> they built from scratch.
+                Go beyond syntax. Build a rock-solid foundation in <span className="font-semibold text-gray-900 dark:text-white">computer science fundamentals</span>, <span className="font-semibold text-gray-900 dark:text-white">scalable distributed systems</span>, <span className="font-semibold text-gray-900 dark:text-white">modern frontend & backend architectures</span>, and <span className="font-semibold text-gray-900 dark:text-white">production AI pipelines</span>.
               </p>
               <div className="flex flex-wrap gap-2 text-xs">
-                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Python</span>
-                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Arduino</span>
-                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Sensors</span>
-                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Machine Learning</span>
-                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Robotics</span>
-                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Data Science</span>
+                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Programming & OOP</span>
+                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">DSA</span>
+                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">DBMS & SQL</span>
+                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Operating Systems</span>
+                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Frontend</span>
+                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Backend</span>
+                <span className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">Applied AI/ML</span>
               </div>
             </div>
-            <button onClick={() => { setActiveTrack(3); document.getElementById('track-content')?.scrollIntoView({ behavior: 'smooth' }); }}
+            <button onClick={() => { setActiveTrack(0); document.getElementById('track-content')?.scrollIntoView({ behavior: 'smooth' }); }}
               className="self-start md:self-center px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white rounded-xl font-semibold text-sm shadow-lg shadow-amber-500/25 transition-all flex-shrink-0">
               View Full Curriculum →
             </button>
@@ -289,13 +356,19 @@ export default function CurriculumPage() {
 
           {/* Visual journey */}
           <div className="mt-4 pt-4 border-t border-amber-200/50 dark:border-amber-800/50">
-            <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-4">What you will build — month by month</p>
+            <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-1">The 9-Month Journey</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Modules build on each other and some run in parallel — just like real engineering teams work.</p>
             <BuildJourneyVisual />
           </div>
         </div>
 
-        {/* Track selector */}
-        <div id="track-content" className="flex flex-wrap gap-3 mb-10 justify-center scroll-mt-24">
+        {/* Static Program at a Glance Overview (above pills) */}
+        <div id="track-content" className="scroll-mt-24">
+          <ProgramAtAGlance />
+        </div>
+
+        {/* Track selector pills */}
+        <div className="flex flex-wrap gap-3 mb-8 justify-center">
           {allTracks.map((t, i) => (
             <button key={t.id} onClick={() => setActiveTrack(i)}
               className={`px-5 py-3 rounded-xl font-semibold text-sm transition-all ${
@@ -316,39 +389,38 @@ export default function CurriculumPage() {
         {/* Active track */}
         <TrackView track={track} />
 
-        {/* Join CTA + Callback + Enrollment */}
-        <div className="mt-12 grid md:grid-cols-2 gap-6">
-          {/* Left: Pricing + actions */}
-          <div className="space-y-6">
-            <div className="p-8 rounded-2xl bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-700">
-              <h2 className="text-2xl font-bold text-white mb-3">Ready to start?</h2>
-              <p className="text-gray-300 mb-4 text-sm">
-                48 weeks of structured learning. Small cohorts (max 12), dedicated mentor, hands-on hardware, monthly showcases.
+        {/* Join CTA + Callback (Stacked full-width with centered content) */}
+        <div className="mt-12 space-y-6">
+          {/* Ready to start? */}
+          <div className="p-8 md:p-10 rounded-2xl bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 text-center shadow-lg">
+            <div className="max-w-2xl mx-auto flex flex-col items-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">Ready to start?</h2>
+              <p className="text-gray-300 mb-4 text-sm md:text-base">
+                9 Months of core curriculum + 3 months optional specialization. Dedicated 1-on-1 mentorship, industry-anchored products, and live company demo day.
               </p>
-              <p className="text-amber-400 font-semibold mb-1">₹9,999/month (₹1,19,988 total)</p>
-              <p className="text-gray-500 text-xs mb-6">Coming to select cities &middot; <Link href="/curriculum/bootcamp" className="text-gray-400 hover:text-white underline">Looking for the bootcamp?</Link></p>
-              <div className="space-y-3">
+              <p className="text-amber-400 font-semibold text-lg mb-1">₹9,999/month (₹1,19,988 total)</p>
+              <p className="text-gray-400 text-xs mb-6">Coming to select cities &middot; <Link href="/curriculum/bootcamp" className="text-gray-300 hover:text-white underline">Looking for the bootcamp?</Link></p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
                 <Link href="/programs#enroll"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white rounded-xl font-semibold shadow-lg shadow-amber-500/25 transition-all">
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white rounded-xl font-semibold shadow-lg shadow-amber-500/25 transition-all text-sm">
                   Enroll Now <ChevronRight className="w-4 h-4" />
                 </Link>
                 <Link href="/partner"
-                  className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white rounded-xl font-medium transition-all text-sm">
-                  Partner as a School
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white rounded-xl font-medium transition-all text-sm">
+                  Partner with Us
                 </Link>
               </div>
             </div>
-            {/* Callback form */}
-            <div className="p-8 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-              <CallbackForm context="12-Month Curriculum" />
-            </div>
           </div>
 
-          {/* Right: Enrollment request form */}
-          <div className="p-8 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Enroll Now</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Fill this out and we\'ll contact you within 2 business days.</p>
-            <EnrollmentRequestForm />
+          {/* Have a doubt? Request a callback */}
+          <div className="p-8 md:p-10 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+            <div className="max-w-md mx-auto text-center">
+              <CallbackForm
+                context="ProductionReady Curriculum"
+                title="Have a doubt ? Request a callback"
+              />
+            </div>
           </div>
         </div>
       </main>
