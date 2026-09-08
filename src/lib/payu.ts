@@ -6,6 +6,7 @@ export const PLANS = {
   online_monthly:    { INR: 1999,  USD: 24,  label: 'Online Monthly',    months: 1 },
   online_yearly:     { INR: 19999, USD: 239, label: 'Online Yearly',     months: 12 },
   in_person_monthly: { INR: 9999,  USD: 59,  label: 'In-Person Monthly', months: 1 },
+  curriculum_quarterly: { INR: 2,  USD: 0.01,  label: '12-Month Curriculum (Quarterly)', months: 3 },
 } as const;
 
 export type PlanId = keyof typeof PLANS;

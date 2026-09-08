@@ -121,6 +121,7 @@ const faqs = [
   { q: 'Do I need to know how to code?', a: 'No. Level 0 (Listener) and Level 1 (Explorer) require zero coding. Levels 2-4 introduce Python gradually, with every line of code explained in context.' },
 ];
 
+/*
 function WaitlistForm({ isIndia }: { isIndia: boolean }) {
   const [form, setForm] = useState({ parentName: '', email: '', phone: '', childAge: '', city: '', role: '', callback: false });
   const [submitting, setSubmitting] = useState(false);
@@ -140,7 +141,7 @@ function WaitlistForm({ isIndia }: { isIndia: boolean }) {
       .insert([{
         name: form.parentName,
         email: form.email,
-        subject: `In-Person Waitlist \u2014 ${form.city}`,
+        subject: `In-Person Waitlist — ${form.city}`,
         message: `City: ${form.city}\nRole: ${form.role}\nLearner age: ${form.childAge}`,
       }]);
 
@@ -230,6 +231,7 @@ function WaitlistForm({ isIndia }: { isIndia: boolean }) {
     </div>
   );
 }
+*/
 
 function FAQ({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -522,7 +524,7 @@ function SchoolProgramCard({ isIndia }: { isIndia: boolean }) {
 
 export default function ProgramsPage() {
   const { user } = useAuth();
-  const { hasActiveSubscription, plan: currentPlan } = useSubscription();
+  // const { hasActiveSubscription, plan: currentPlan } = useSubscription();
   const searchParams = useSearchParams();
   const paymentResult = searchParams.get('payment');
   const highlightPlan = searchParams.get('plan');
@@ -556,7 +558,7 @@ export default function ProgramsPage() {
       <Header />
 
       {/* ── Hero ── */}
-      <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
+      {/* <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
             Three ways to learn
@@ -568,7 +570,7 @@ export default function ProgramsPage() {
             All paths start free. Upgrade when you are ready.
           </p>
         </div>
-      </section>
+      </section> */}
 
       {/* ── Payment result banner ── */}
       {FEATURES.PAYMENTS_ENABLED && paymentResult === 'success' && (
@@ -588,11 +590,11 @@ export default function ProgramsPage() {
       )}
 
       {/* ── Three Paths ── */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      {/* <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6">
             {/* Self-Paced */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 flex flex-col">
+            {/* <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 flex flex-col">
               <span className="text-3xl mb-3">📚</span>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Self-Paced Online</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
@@ -604,10 +606,10 @@ export default function ProgramsPage() {
               <Link href="/lessons" className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-semibold hover:bg-amber-200 dark:hover:bg-amber-800/30 transition-colors">
                 Browse Lessons <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
+            </div> */}
 
             {/* 12-Month Curriculum */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-emerald-200 dark:border-emerald-800 flex flex-col">
+            {/* <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-emerald-200 dark:border-emerald-800 flex flex-col">
               <span className="text-3xl mb-3">🏫</span>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">12-Month Curriculum</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
@@ -619,10 +621,10 @@ export default function ProgramsPage() {
               <Link href="/curriculum" className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors">
                 View 48-Week Curriculum <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
+            </div> */}
 
             {/* Bootcamp */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-purple-200 dark:border-purple-800 flex flex-col relative">
+            {/* <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-purple-200 dark:border-purple-800 flex flex-col relative">
               <div className="absolute -top-3 left-4 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">Early Bird</div>
               <span className="text-3xl mb-3">🚀</span>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">24-Week Bootcamp</h3>
@@ -639,17 +641,17 @@ export default function ProgramsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── Pricing Detail ── */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50">
+      {/* <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">Pricing</h2>
           <p className="text-gray-600 dark:text-gray-400 text-center mb-10">Start free. Upgrade when you are ready.</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"> */}
 
             {/* Free */}
-            <div className="rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 text-center">
+            {/* <div className="rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 text-center">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">Free</h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹0' : '$0'}</p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">forever</p>
@@ -662,10 +664,10 @@ export default function ProgramsPage() {
               <Link href="/lessons" className="block w-full py-2.5 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
                 Browse Lessons
               </Link>
-            </div>
+            </div> */}
 
             {/* Online */}
-            <div id="plan-online" className={`rounded-2xl border-2 border-amber-400 dark:border-amber-600 p-6 bg-amber-50/50 dark:bg-amber-900/10 text-center relative ${highlightPlan === 'online' ? 'ring-4 ring-amber-400/50 animate-pulse' : ''}`}>
+            {/* <div id="plan-online" className={`rounded-2xl border-2 border-amber-400 dark:border-amber-600 p-6 bg-amber-50/50 dark:bg-amber-900/10 text-center relative ${highlightPlan === 'online' ? 'ring-4 ring-amber-400/50 animate-pulse' : ''}`}>
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 mt-1">Online</h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹1,999' : '$24'}<span className="text-base font-normal text-gray-500">/mo</span></p>
@@ -684,10 +686,10 @@ export default function ProgramsPage() {
               ) : (
                 <CheckoutButton plan="online_monthly" label="Subscribe — Monthly" />
               )}
-            </div>
+            </div> */}
 
             {/* 12-Month Curriculum */}
-            <div className="rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 p-6 bg-white dark:bg-gray-800 text-center">
+            {/* <div className="rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 p-6 bg-white dark:bg-gray-800 text-center">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">12-Month Curriculum</h3>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹9,999' : '$59'}<span className="text-base font-normal text-gray-500">/mo</span></p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">12 months &middot; Grades 6-12</p>
@@ -699,13 +701,13 @@ export default function ProgramsPage() {
                 <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Parent progress reports</li>
               </ul>
               <Link href="/curriculum" className="block text-xs text-emerald-600 dark:text-emerald-400 hover:underline mb-3">View 48-week curriculum →</Link>
-              <a href="#waitlist" className="block w-full py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold hover:bg-emerald-200 dark:hover:bg-emerald-800/30 transition-colors">
-                Join Waitlist
+              <a href="#enroll" className="block w-full py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold hover:bg-emerald-200 dark:hover:bg-emerald-800/30 transition-colors">
+                Enroll Now
               </a>
-            </div>
+            </div> */}
 
             {/* Bootcamp */}
-            <div className="rounded-2xl border-2 border-purple-300 dark:border-purple-700 p-6 bg-white dark:bg-gray-800 text-center relative">
+            {/* <div className="rounded-2xl border-2 border-purple-300 dark:border-purple-700 p-6 bg-white dark:bg-gray-800 text-center relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-full">Early Bird — 24 Seats</div>
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 mt-1">Bootcamp</h3>
               <p className="text-sm text-gray-400 line-through">{isIndia ? '₹19,999/mo' : '$119/mo'}</p>
@@ -719,17 +721,30 @@ export default function ProgramsPage() {
                 <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Hardware kit included</li>
               </ul>
               <Link href="/curriculum/bootcamp" className="block text-xs text-purple-600 dark:text-purple-400 hover:underline mb-3">View 24-week curriculum →</Link>
-              <a href="#waitlist" className="block w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition-colors">
+              <a href="#enroll" className="block w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition-colors">
                 Join Early Bird
               </a>
             </div>
           </div>
         </div>
-      </section>
-      {/* ── Waitlist ── */}
-      <section id="waitlist" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 scroll-mt-24">
+      </section> */}
+      {/* ── Waitlist (Commented out) ── */}
+      {/* <section id="waitlist" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 scroll-mt-24">
         <div className="max-w-2xl mx-auto">
           <WaitlistForm isIndia={isIndia} />
+        </div>
+      </section> */}
+
+      {/* ── Enrollment Request ── */}
+      <section id="enroll" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Enroll Now</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Fill out the form below and our team will get back to you within 2 business days to discuss the best program for you.
+            </p>
+          </div>
+          <EnrollmentRequestForm />
         </div>
       </section>
 
@@ -742,20 +757,6 @@ export default function ProgramsPage() {
               <FAQ key={q} q={q} a={a} />
             ))}
           </div>
-        </div>
-      </section>
-
-
-      {/* ── Enrollment Request ── */}
-      <section id="enroll" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Enroll Now</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Fill out the form below and our team will get back to you within 2 business days to discuss the best program for you.
-            </p>
-          </div>
-          <EnrollmentRequestForm />
         </div>
       </section>
 

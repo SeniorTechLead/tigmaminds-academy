@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { CheckCircle, Loader2 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
@@ -12,10 +13,16 @@ const TRACKS = [
 ];
 
 export default function EnrollmentRequestForm() {
+  const router = useRouter();
   const [form, setForm] = useState({
-    guardianName: '', guardianEmail: '', guardianPhone: '',
-    studentName: '', studentEmail: '', studentAge: '',
-    preferredTrack: '', message: '',
+    guardianName: '', 
+    guardianEmail: '', 
+    guardianPhone: '',
+    studentName: '', 
+    studentEmail: '', 
+    // studentAge: '',
+    // preferredTrack: '', 
+    message: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -37,8 +44,8 @@ export default function EnrollmentRequestForm() {
       guardian_phone: form.guardianPhone || null,
       student_name: form.studentName,
       student_email: form.studentEmail,
-      student_age: form.studentAge ? parseInt(form.studentAge) : null,
-      preferred_track: form.preferredTrack || null,
+      // student_age: form.studentAge ? parseInt(form.studentAge) : null,
+      // preferred_track: form.preferredTrack || null,
       message: form.message || null,
     });
 
@@ -48,6 +55,8 @@ export default function EnrollmentRequestForm() {
       console.warn('[Enrollment] Submit error:', dbErr.message);
     } else {
       setSubmitted(true);
+      const studentParam = encodeURIComponent(form.studentName);
+      router.push(`/pricing?enrolled=true&student=${studentParam}`);
     }
   };
 
@@ -109,7 +118,7 @@ export default function EnrollmentRequestForm() {
             <input type="email" required value={form.studentEmail} onChange={e => setForm(f => ({ ...f, studentEmail: e.target.value }))}
               className="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
           </div>
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Age (optional)</label>
             <input type="number" min="5" max="25" value={form.studentAge} onChange={e => setForm(f => ({ ...f, studentAge: e.target.value }))}
               className="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-amber-500 focus:border-transparent" />
@@ -121,7 +130,7 @@ export default function EnrollmentRequestForm() {
               <option value="">Select a track...</option>
               {TRACKS.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
             </select>
-          </div>
+          </div> */}
         </div>
       </div>
 
