@@ -12,7 +12,7 @@ import { lessonsMeta as lessons } from '../data/lessons-meta';
 import { problemMeta } from '../data/playground-meta';
 
 export default function PricingPage() {
-  const { plan: currentPlan, hasActiveSubscription } = useSubscription();
+  // const { plan: currentPlan, hasActiveSubscription } = useSubscription();
   const searchParams = useSearchParams();
   const enrolled = searchParams?.get('enrolled') === 'true';
   const studentName = searchParams?.get('student') || '';
@@ -164,7 +164,7 @@ export default function PricingPage() {
                     View 9+3 month curriculum →
                   </Link>
                 </div>
-                <div>
+                {/* <div>
                   {hasActiveSubscription && currentPlan === 'online' ? (
                     <div className="py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold text-center">
                       ✓ Current Plan
@@ -172,7 +172,7 @@ export default function PricingPage() {
                   ) : (
                     <CheckoutButton plan="curriculum_quarterly" label="Subscribe — Quarterly" />
                   )}
-                </div>
+                </div> */}
               </div>
 
               {/* 12-Month Curriculum */}
