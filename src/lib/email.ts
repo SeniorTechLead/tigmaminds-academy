@@ -471,3 +471,156 @@ export function hackathonOrganizerEmail(
     `,
   };
 }
+
+export interface EnrollmentEmailPayload {
+  guardianName: string;
+  guardianEmail: string;
+  guardianPhone?: string | null;
+  studentName: string;
+  studentEmail: string;
+  message?: string | null;
+  submittedAt?: string;
+}
+
+export function enrollmentRequestNotificationEmail(
+  payload: EnrollmentEmailPayload,
+  notifyTo = 'hackathon@tigmaminds.com',
+): SendEmailParams {
+  const submittedTime = payload.submittedAt || new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+  return {
+    to: notifyTo,
+    subject: `New Enrollment Request: ${payload.studentName} (Guardian: ${payload.guardianName})`,
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; padding: 32px 24px; color: #1a1a1a;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div style="display: inline-block; background: linear-gradient(135deg, #f59e0b, #ea580c); border-radius: 50%; width: 48px; height: 48px; line-height: 48px; color: white; font-weight: 800; font-size: 18px;">TMA</div>
+        </div>
+        <h1 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; text-align: center;">New Enrollment Request</h1>
+        <p style="color: #666; font-size: 14px; line-height: 1.6; text-align: center; margin-bottom: 24px;">
+          A new student enrollment request has been submitted on TigmaMinds Academy.
+        </p>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+          <h2 style="font-size: 15px; font-weight: 600; color: #334155; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Student Information</h2>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px; line-height: 1.6;">
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; width: 140px;"><strong>Name:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${escapeHtml(payload.studentName)}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;"><strong>Email:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a;"><a href="mailto:${escapeHtml(payload.studentEmail)}" style="color: #ea580c; text-decoration: none;">${escapeHtml(payload.studentEmail)}</a></td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+          <h2 style="font-size: 15px; font-weight: 600; color: #334155; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Guardian Information</h2>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px; line-height: 1.6;">
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; width: 140px;"><strong>Name:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${escapeHtml(payload.guardianName)}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;"><strong>Email:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a;"><a href="mailto:${escapeHtml(payload.guardianEmail)}" style="color: #ea580c; text-decoration: none;">${escapeHtml(payload.guardianEmail)}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;"><strong>Phone:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a;">${payload.guardianPhone ? escapeHtml(payload.guardianPhone) : '<span style="color: #94a3b8;">Not provided</span>'}</td>
+            </tr>
+          </table>
+        </div>
+
+        ${
+          payload.message
+            ? `
+        <div style="background: #fffbeb; border: 1px solid #fef3c7; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+          <h2 style="font-size: 15px; font-weight: 600; color: #92400e; margin-top: 0; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Message / Notes</h2>
+          <p style="color: #78350f; font-size: 14px; line-height: 1.6; margin: 0; white-space: pre-wrap;">${escapeHtml(payload.message)}</p>
+        </div>`
+            : ''
+        }
+
+        <p style="color: #94a3b8; font-size: 12px; text-align: center; margin-top: 24px;">
+          Submitted at: ${escapeHtml(submittedTime)}
+        </p>
+        <p style="color: #cbd5e1; font-size: 11px; text-align: center; margin-top: 12px;">TigmaMinds Academy</p>
+      </div>
+    `,
+  };
+}
+
+export interface CallbackEmailPayload {
+  name: string;
+  phone: string;
+  preferredTime: string;
+  context?: string | null;
+  callerLabel?: string | null;
+  submittedAt?: string;
+}
+
+export function callbackRequestNotificationEmail(
+  payload: CallbackEmailPayload,
+  notifyTo = 'hackathon@tigmaminds.com',
+): SendEmailParams {
+  const submittedTime = payload.submittedAt || new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+  return {
+    to: notifyTo,
+    subject: `New Callback Request: ${payload.name} (${payload.phone})`,
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 560px; margin: 0 auto; padding: 32px 24px; color: #1a1a1a;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div style="display: inline-block; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; width: 48px; height: 48px; line-height: 48px; color: white; font-weight: 800; font-size: 18px;">TMA</div>
+        </div>
+        <h1 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; text-align: center;">New Callback Request</h1>
+        <p style="color: #666; font-size: 14px; line-height: 1.6; text-align: center; margin-bottom: 24px;">
+          A user has requested a callback on TigmaMinds Academy.
+        </p>
+
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+          <h2 style="font-size: 15px; font-weight: 600; color: #166534; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Contact Details</h2>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px; line-height: 1.6;">
+            <tr>
+              <td style="padding: 6px 0; color: #64748b; width: 140px;"><strong>Name:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${escapeHtml(payload.name)}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;"><strong>Phone:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a;"><a href="tel:${escapeHtml(payload.phone)}" style="color: #059669; font-weight: 600; text-decoration: none;">${escapeHtml(payload.phone)}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;"><strong>Preferred Time:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${escapeHtml(payload.preferredTime)}</td>
+            </tr>
+            ${
+              payload.context
+                ? `
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;"><strong>Context / Page:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a;">${escapeHtml(payload.context)}</td>
+            </tr>`
+                : ''
+            }
+            ${
+              payload.callerLabel
+                ? `
+            <tr>
+              <td style="padding: 6px 0; color: #64748b;"><strong>Requested Caller:</strong></td>
+              <td style="padding: 6px 0; color: #0f172a;">${escapeHtml(payload.callerLabel)}</td>
+            </tr>`
+                : ''
+            }
+          </table>
+        </div>
+
+        <p style="color: #94a3b8; font-size: 12px; text-align: center; margin-top: 24px;">
+          Submitted at: ${escapeHtml(submittedTime)}
+        </p>
+        <p style="color: #cbd5e1; font-size: 11px; text-align: center; margin-top: 12px;">TigmaMinds Academy</p>
+      </div>
+    `,
+  };
+}
