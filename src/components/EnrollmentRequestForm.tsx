@@ -38,25 +38,27 @@ export default function EnrollmentRequestForm() {
     }
 
     setSubmitting(true);
-    const { error: dbErr } = await supabase.from('enrollment_requests').insert({
-      guardian_name: form.guardianName,
-      guardian_email: form.guardianEmail,
-      guardian_phone: form.guardianPhone || null,
-      student_name: form.studentName,
-      student_email: form.studentEmail,
-      // student_age: form.studentAge ? parseInt(form.studentAge) : null,
-      // preferred_track: form.preferredTrack || null,
-      message: form.message || null,
-    });
+    try {
+      const res = await fetch('/api/enrollment/request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
 
-    setSubmitting(false);
-    if (dbErr) {
-      setError('Something went wrong. Please try again or contact us directly.');
-      console.warn('[Enrollment] Submit error:', dbErr.message);
-    } else {
-      setSubmitted(true);
-      const studentParam = encodeURIComponent(form.studentName);
-      router.push(`/pricing?enrolled=true&student=${studentParam}`);
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || data.error) {
+        setError(data.error || 'Something went wrong. Please try again or contact us directly.');
+      } else {
+        setSubmitted(true);
+        const studentParam = encodeURIComponent(form.studentName);
+        router.push(`/pricing?enrolled=true&student=${studentParam}`);
+      }
+    } catch (err) {
+      console.error('[Enrollment] Submit error:', err);
+      setError('Network error. Please try again or contact us directly.');
+    } finally {
+      setSubmitting(false);
     }
   };
 

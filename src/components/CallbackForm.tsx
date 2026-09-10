@@ -25,22 +25,32 @@ export default function CallbackForm({ context, callerLabel = 'mentor', title }:
     setCbSubmitting(true);
     setCbStatus('idle');
 
-    const { error } = await supabase
-      .from('contact_submissions')
-      .insert([{
-        name: cb.name,
-        email: '',
-        phone: cb.phone,
-        subject: `Callback Request${context ? ` — ${context}` : ''}`,
-        message: `Preferred time: ${cb.preferredTime}${context ? `\nContext: ${context}` : ''}`,
-      }]);
+    try {
+      const res = await fetch('/api/callback/request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: cb.name,
+          phone: cb.phone,
+          preferredTime: cb.preferredTime,
+          context,
+          callerLabel,
+        }),
+      });
 
-    setCbSubmitting(false);
-    if (error) {
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || data.error) {
+        setCbStatus('error');
+      } else {
+        setCbStatus('success');
+        setCb({ name: '', phone: '', preferredTime: '' });
+      }
+    } catch (err) {
+      console.error('[Callback] Submit error:', err);
       setCbStatus('error');
-    } else {
-      setCbStatus('success');
-      setCb({ name: '', phone: '', preferredTime: '' });
+    } finally {
+      setCbSubmitting(false);
     }
   };
 
