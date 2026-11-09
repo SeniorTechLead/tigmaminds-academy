@@ -16,6 +16,8 @@ import {
   Lock,
   Copy,
   Check,
+  ArrowRight,
+  MapPin,
 } from 'lucide-react';
 
 export interface WinterTrainingFormData {
@@ -125,7 +127,27 @@ function validateAll(data: WinterTrainingFormData): FormErrors {
 const ENVOY_BASE_URL = 'https://agentic-envoy.xorai.com';
 
 export default function WinterTrainingRegistrationForm() {
-  const [form, setForm] = useState<WinterTrainingFormData>(INITIAL_FORM);
+  const [form, setForm] = useState<WinterTrainingFormData>(() => {
+    if (typeof window === 'undefined') return INITIAL_FORM;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('payment') === 'success') {
+        const studentName = params.get('name') || '';
+        const email = params.get('email') || '';
+        const parts = studentName.split(' ');
+        return {
+          ...INITIAL_FORM,
+          firstName: parts[0] || '',
+          lastName: parts.slice(1).join(' ') || '',
+          email: email || '',
+        };
+      }
+    } catch {
+      // fallback
+    }
+    return INITIAL_FORM;
+  });
+
   const [touched, setTouched] = useState<Partial<Record<FormField, boolean>>>({});
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
 
@@ -136,10 +158,29 @@ export default function WinterTrainingRegistrationForm() {
 
   // Anti-bot security traps
   const [honeypot, setHoneypot] = useState('');
-  const [formLoadTime] = useState(() => Date.now());
 
   // Completion state
-  const [paymentSuccess, setPaymentSuccess] = useState<PaymentSuccessData | null>(null);
+  const [paymentSuccess, setPaymentSuccess] = useState<PaymentSuccessData | null>(() => {
+    if (typeof window === 'undefined') return null;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('payment') === 'success') {
+        const txnid = params.get('txnid') || '';
+        return {
+          registrationId: params.get('regId') || 'CONFIRMED',
+          orderId: txnid,
+          paymentId: params.get('mihpayid') || txnid || 'PAYU-VERIFIED',
+          signature: 'SHA-512 PayU Verified',
+          amount: params.get('amount') || '1.00',
+          currency: 'INR',
+          status: 'success',
+        };
+      }
+    } catch {
+      // fallback
+    }
+    return null;
+  });
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   // Check URL query parameters for PayU callback response
@@ -182,6 +223,14 @@ export default function WinterTrainingRegistrationForm() {
           params.get('reason') ||
           'Your payment was cancelled or could not be completed. Please try again.';
         setSubmitError(reason);
+
+        // Instant scroll to error on form without smooth animation
+        setTimeout(() => {
+          const el = document.getElementById('register');
+          if (el) {
+            el.scrollIntoView({ behavior: 'instant', block: 'start' });
+          }
+        }, 50);
       }
     } catch (e) {
       console.warn('[WinterTraining] Error reading callback search params:', e);
@@ -284,7 +333,6 @@ export default function WinterTrainingRegistrationForm() {
           phone: cleanPhone,
           organization: form.organization.trim(),
           honeypot,
-          formLoadTime,
         }),
       });
 
@@ -349,7 +397,7 @@ export default function WinterTrainingRegistrationForm() {
   // ────────────────────────────────────────────────────────────────────────────
   if (paymentSuccess) {
     return (
-      <div className="bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white dark:from-emerald-950/40 dark:via-gray-900 dark:to-gray-900 border-2 border-emerald-400/80 dark:border-emerald-600/80 rounded-3xl p-8 sm:p-12 text-center shadow-2xl animate-fade-in relative overflow-hidden">
+      <div id="registration-confirmation" className="bg-gradient-to-br from-emerald-50 via-teal-50/50 to-white dark:from-emerald-950/40 dark:via-gray-900 dark:to-gray-900 border-2 border-emerald-400/80 dark:border-emerald-600/80 rounded-3xl p-8 sm:p-12 text-center shadow-2xl animate-fade-in relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600" />
 
         <div className="w-20 h-20 rounded-3xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-emerald-500/10">
@@ -452,13 +500,28 @@ export default function WinterTrainingRegistrationForm() {
             </div>
           )}
 
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between pb-3 border-b border-gray-100 dark:border-gray-700 gap-1 text-left">
+            <span className="text-gray-500 dark:text-gray-400 flex items-center gap-1 flex-shrink-0">
+              <MapPin className="w-3.5 h-3.5 text-amber-500" />
+              Office Location:
+            </span>
+            <span className="font-medium text-xs sm:text-right text-gray-800 dark:text-gray-200">
+              TigmaMinds Pvt Ltd, 4th Floor, Prithvi Centre, GS Rd, South Sarania, Lachit Nagar, Guwahati, Assam 781007
+            </span>
+          </div>
+
           <div className="flex items-center justify-between">
             <span className="text-gray-500 dark:text-gray-400">Status:</span>
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">
               <ShieldCheck className="w-3.5 h-3.5" />
-              Verified &amp; Active
+              Seat Confirmed &amp; Active
             </span>
           </div>
+        </div>
+
+        {/* Seat Confirmation Deduction Guarantee */}
+        <div className="max-w-lg mx-auto bg-amber-50 dark:bg-amber-950/40 border border-amber-300/80 dark:border-amber-700/60 rounded-2xl p-4 text-xs text-amber-900 dark:text-amber-200 mb-8 text-center leading-relaxed">
+          ✨ <strong>Seat Confirmation Guarantee:</strong> Your ₹{paymentSuccess.amount || '1.00'} registration fee has been locked in and will be <strong>100% deducted from the final ₹4,999 program fee</strong> when the cohort commences, with your early bird discount applied.
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -474,17 +537,20 @@ export default function WinterTrainingRegistrationForm() {
           />
         </div>
 
-        <button
+          <a
+            href="#curriculum"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-emerald-500/20 transition cursor-pointer"
+          >
+            <span>Explore Cohort Curriculum</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
+
+          <button
             type="button"
             onClick={() => {
               if (typeof window !== 'undefined') {
-                window.history.replaceState({}, '', window.location.pathname);
+                window.location.href = '/programs/winter-training#register';
               }
-              setForm(INITIAL_FORM);
-              setTouched({});
-              setFieldErrors({});
-              setPaymentSuccess(null);
-              setSubmitError(null);
             }}
             className="text-xs sm:text-sm text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 underline font-medium cursor-pointer"
           >
@@ -512,8 +578,16 @@ export default function WinterTrainingRegistrationForm() {
           Reserve Your Spot &amp; Enroll
         </h3>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1.5 leading-relaxed">
-          Complete the registration below to lock in your seat and proceed with secure enrollment via PayU (₹1).
+          Full Program Fee: <strong>₹4,999</strong> (Early bird applicants receive priority discounts). Confirm your registration today with a <strong>₹1</strong> pass — this amount will be <strong>100% deducted from your final program fee</strong> when the cohort begins.
         </p>
+
+        {/* Office Location Badge */}
+        <div className="mt-3.5 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 flex items-start gap-2.5 text-xs text-amber-900 dark:text-amber-200">
+          <MapPin className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+          <div className="leading-relaxed">
+            <span className="font-bold">Office Location:</span> TigmaMinds Pvt Ltd, 4th Floor, Prithvi Centre, GS Rd, South Sarania, Lachit Nagar, Guwahati, Assam 781007
+          </div>
+        </div>
       </div>
 
       {submitError && (
@@ -724,7 +798,7 @@ export default function WinterTrainingRegistrationForm() {
             </>
           ) : (
             <>
-              <span>Register &amp; Proceed to Pay ₹1 &rarr;</span>
+              <span>Confirm Seat &amp; Pay ₹1 &rarr;</span>
             </>
           )}
         </button>

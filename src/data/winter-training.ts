@@ -269,6 +269,16 @@ export const WINTER_TRAINING_FAQS: WinterTrainingFAQ[] = [
       'Unlike tutorials that rely on high-level wrappers or toy scripts, you build the core RAG and vector retrieval pipeline by hand first before introducing LangChain or LangGraph. You will learn the mechanics of chunking, cosine distance, metadata filtering, API dependency injection, and stateful agents directly in code.',
   },
   {
+    question: 'What is the program fee and how does the registration fee deduction work?',
+    answer:
+      'The comprehensive program fee is ₹4,999 (all-inclusive: 5 architectural phases, daily 2-hour live hands-on labs, mentor code reviews, capstone repository, and verified credentials). Early registrations qualify for exclusive launch discounts. To reserve and confirm your seat today, you pay a token registration fee (currently ₹1 for testing / early access pass), which will be 100% deducted from the final program fee of ₹4,999 when the cohort commences.',
+  },
+  {
+    question: 'Where will the offline classes and hands-on labs be held?',
+    answer:
+      'The offline program will be conducted at our office location: TigmaMinds Pvt Ltd, 4th Floor, Prithvi Centre, GS Rd, South Sarania, Lachit Nagar, Guwahati, Assam 781007. The facility is equipped with dedicated high-speed development lab setups for interactive architecture sessions and capstone sprints.',
+  },
+  {
     question: 'What project will I showcase in my portfolio?',
     answer:
       'You will design, build, and deploy a demo-ready Enterprise Company Knowledge Assistant with multi-format ingestion, Chroma vector search, citation-backed question answering, and a LangGraph autonomous agent with tool routing and thread memory.',

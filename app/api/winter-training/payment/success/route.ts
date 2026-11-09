@@ -111,12 +111,14 @@ export async function POST(req: NextRequest) {
       successUrl.searchParams.set('name', `${firstname || ''} ${udf3 || ''}`.trim());
       successUrl.searchParams.set('email', email || '');
       successUrl.searchParams.set('mihpayid', mihpayid || txnid || '');
+      // Do not append hash so the page opens directly at top where the confirmation receipt is mounted
       return NextResponse.redirect(successUrl.toString(), 303);
     }
 
     const failedUrl = new URL('/programs/winter-training', origin);
     failedUrl.searchParams.set('payment', 'failed');
     failedUrl.searchParams.set('reason', body.error_Message || 'Payment was not successful.');
+    failedUrl.hash = 'register';
     return NextResponse.redirect(failedUrl.toString(), 303);
   } catch (err: unknown) {
     console.error('[WinterTraining] PayU success handler error:', err);
