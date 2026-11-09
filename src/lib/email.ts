@@ -624,3 +624,80 @@ export function callbackRequestNotificationEmail(
     `,
   };
 }
+
+export interface WinterTrainingConfirmationPayload {
+  studentName: string;
+  studentEmail: string;
+  registrationId: string;
+  txnid: string;
+  mihpayid: string;
+  amount: string;
+  institution?: string;
+}
+
+export function winterTrainingEnrollmentConfirmationEmail(
+  payload: WinterTrainingConfirmationPayload
+): SendEmailParams {
+  return {
+    to: payload.studentEmail,
+    toName: payload.studentName,
+    subject: `Enrollment Confirmed: Python, FastAPI & Production LLM Apps [${payload.registrationId.slice(0, 8)}]`,
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; color: #1e293b; background: #ffffff;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div style="display: inline-block; background: linear-gradient(135deg, #f59e0b, #ea580c); border-radius: 12px; width: 48px; height: 48px; line-height: 48px; color: white; font-weight: 800; font-size: 18px; text-align: center;">TMA</div>
+          <h1 style="font-size: 22px; font-weight: 800; color: #0f172a; margin-top: 16px; margin-bottom: 4px;">Enrollment & Payment Confirmed!</h1>
+          <p style="color: #64748b; font-size: 14px; margin: 0;">Winter Training: Python, FastAPI &amp; Production LLM Apps</p>
+        </div>
+
+        <p style="color: #334155; font-size: 15px; line-height: 1.6;">
+          Hi <strong>${escapeHtml(payload.studentName)}</strong>,
+        </p>
+        <p style="color: #334155; font-size: 14px; line-height: 1.6;">
+          Your registration and payment have been verified successfully. Welcome to the cohort! Below is your official receipt and registration details.
+        </p>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; margin: 24px 0;">
+          <h2 style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0; margin-bottom: 12px;">Transaction &amp; Registration Summary</h2>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size: 13px; line-height: 1.8;">
+            <tr>
+              <td style="color: #64748b; width: 140px;">Registration ID:</td>
+              <td style="color: #0f172a; font-family: monospace; font-weight: 700;">${escapeHtml(payload.registrationId)}</td>
+            </tr>
+            <tr>
+              <td style="color: #64748b;">PayU Payment ID:</td>
+              <td style="color: #0f172a; font-family: monospace;">${escapeHtml(payload.mihpayid)}</td>
+            </tr>
+            <tr>
+              <td style="color: #64748b;">Transaction Ref:</td>
+              <td style="color: #0f172a; font-family: monospace;">${escapeHtml(payload.txnid)}</td>
+            </tr>
+            <tr>
+              <td style="color: #64748b;">Amount Paid:</td>
+              <td style="color: #059669; font-weight: 700;">&#8377;${escapeHtml(payload.amount)} (All-Inclusive)</td>
+            </tr>
+            ${payload.institution ? `
+            <tr>
+              <td style="color: #64748b;">Institution/Company:</td>
+              <td style="color: #0f172a;">${escapeHtml(payload.institution)}</td>
+            </tr>` : ''}
+          </table>
+        </div>
+
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 16px; padding: 20px; margin: 24px 0;">
+          <h3 style="font-size: 14px; font-weight: 700; color: #1e40af; margin-top: 0; margin-bottom: 8px;">What Happens Next?</h3>
+          <ul style="margin: 0; padding-left: 20px; color: #1e3a8a; font-size: 13px; line-height: 1.6;">
+            <li>Our academic team will add your email to the live Google Meet / Discord cohort group within 24 hours.</li>
+            <li>You will receive your curriculum repository and virtual environment setup guide prior to Day 1.</li>
+            <li>If you have any questions, simply reply to this email or reach us at <a href="mailto:support@tigmaminds.academy" style="color: #2563eb;">support@tigmaminds.academy</a>.</li>
+          </ul>
+        </div>
+
+        <p style="color: #94a3b8; font-size: 12px; text-align: center; margin-top: 32px;">
+          TigmaMinds Academy &middot; Transforming Engineers for Production AI
+        </p>
+      </div>
+    `,
+  };
+}
+
