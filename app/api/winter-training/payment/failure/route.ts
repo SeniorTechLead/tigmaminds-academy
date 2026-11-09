@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
           ? 'Transaction was cancelled by user.'
           : 'Payment failed or was declined.')
     );
+    failedUrl.hash = 'register';
 
     return NextResponse.redirect(failedUrl.toString(), 303);
   } catch (err: unknown) {
@@ -50,6 +51,7 @@ export async function POST(req: NextRequest) {
     const fallbackUrl = new URL('/programs/winter-training', origin);
     fallbackUrl.searchParams.set('payment', 'failed');
     fallbackUrl.searchParams.set('reason', 'Payment was cancelled or failed.');
+    fallbackUrl.hash = 'register';
     return NextResponse.redirect(fallbackUrl.toString(), 303);
   }
 }

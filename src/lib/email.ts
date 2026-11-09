@@ -681,6 +681,12 @@ export function winterTrainingEnrollmentConfirmationEmail(
               <td style="color: #64748b;">Institution/Company:</td>
               <td style="color: #0f172a;">${escapeHtml(payload.institution)}</td>
             </tr>` : ''}
+            <tr>
+              <td style="color: #64748b; vertical-align: top;">Office Location:</td>
+              <td style="color: #0f172a; font-weight: 600; line-height: 1.5;">
+                TigmaMinds Pvt Ltd, 4th Floor, Prithvi Centre, GS Rd, South Sarania, Lachit Nagar, Guwahati, Assam 781007
+              </td>
+            </tr>
           </table>
         </div>
 

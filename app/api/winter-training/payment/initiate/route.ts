@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json().catch(() => ({}));
     let { registrationId } = body;
-    const { firstName, lastName, email, phone, organization, honeypot, formLoadTime } = body;
+    const { firstName, lastName, email, phone, organization, honeypot } = body;
 
     // 2. Anti-Spam: Invisible Honeypot check (Bots fill this, humans never do)
     if (honeypot && String(honeypot).trim().length > 0) {
@@ -60,19 +60,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Suspicious request detected.' }, { status: 400 });
     }
 
-    // 3. Anti-Spam: Fast-submission check (Human takes at least 1.5s to fill form)
-    if (formLoadTime && typeof formLoadTime === 'number') {
-      const elapsedMs = Date.now() - formLoadTime;
-      if (elapsedMs < 1200) {
-        console.warn('[AntiSpam] Sub-second automated bot submission rejected:', { elapsedMs, clientIp });
-        return NextResponse.json(
-          { error: 'Form submitted too quickly. Please review your details before submitting.' },
-          { status: 400 }
-        );
-      }
-    }
-
-    // 4. Anti-Spam: Reject URL / HTML Script injection in text fields
+    // 3. Anti-Spam: Reject URL / HTML Script injection in text fields
     const urlPattern = /(https?:\/\/|www\.|<script|<a\s)/i;
     if (
       urlPattern.test(String(firstName || '')) ||

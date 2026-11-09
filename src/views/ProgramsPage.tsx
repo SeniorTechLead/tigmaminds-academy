@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import {
   Sparkles,
   ArrowRight,
@@ -12,21 +13,16 @@ import {
   ChevronDown,
   BookOpen,
   CheckCircle,
-  FileCode2,
   Rocket,
   ShieldCheck,
-  Cpu,
   Workflow,
-  BrainCircuit,
   Zap,
-  Play,
-  Activity,
   Radio,
-  Check,
-  Copy,
   GitBranch,
-  RefreshCw,
   Award,
+  BadgePercent,
+  Tag,
+  MapPin,
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -39,283 +35,6 @@ import {
   WINTER_TRAINING_FAQS,
   CurriculumModule,
 } from '../data/winter-training';
-
-// ── Interactive Agent Execution Loop Simulator ──────────────────────────
-const AGENT_SIMULATION_STEPS = [
-  {
-    step: 1,
-    id: 'intent',
-    label: 'Intent Decomp & Schema',
-    role: 'Pydantic v2 Contract',
-    icon: BrainCircuit,
-    color: 'from-amber-500 to-orange-500',
-    borderColor: 'border-amber-500/40',
-    tagColor: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
-    summary: 'Deconstructs raw user prompt into typed constraints, entities, and query intents.',
-    code: `# Step 1: Pydantic Schema Validation
-class AgentQueryIntent(BaseModel):
-    raw_query: str = Field(min_length=3)
-    target_corpus: Literal["policies", "api_specs", "hr_faq"]
-    required_confidence: float = Field(default=0.85, ge=0.0, le=1.0)
-    requires_tool_execution: bool = True
-
-intent = AgentQueryIntent.model_validate(incoming_payload)`,
-    telemetry: {
-      latency: '18ms',
-      tokens: '48 tokens',
-      confidence: '99.4%',
-      status: 'VALIDATED_OK',
-    },
-  },
-  {
-    step: 2,
-    id: 'graph',
-    label: 'LangGraph Cognitive Router',
-    role: 'Cyclical State Machine',
-    icon: Workflow,
-    color: 'from-sky-500 to-blue-600',
-    borderColor: 'border-sky-500/40',
-    tagColor: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
-    summary: 'StateGraph checks conversation checkpoints and routes to deterministic retrieval tools.',
-    code: `# Step 2: LangGraph State Machine Node
-def cognitive_router(state: AgentState) -> dict:
-    latest_msg = state["messages"][-1]
-    # Evaluate memory & intent before hallucinating
-    if any(k in latest_msg.content.lower() for k in ["policy", "guideline", "limit"]):
-        return {"next_node": "chroma_hybrid_retriever"}
-    return {"next_node": "direct_synthesis"}
-
-workflow.add_conditional_edges("router", route_decision)`,
-    telemetry: {
-      latency: '34ms',
-      tokens: '112 tokens',
-      checkpoint: 'Thread#88219',
-      status: 'ROUTED_TO_TOOLS',
-    },
-  },
-  {
-    step: 3,
-    id: 'retrieval',
-    label: 'Grounded RAG & Vector Memory',
-    role: 'ChromaDB + Cosine Search',
-    icon: Database,
-    color: 'from-emerald-500 to-teal-500',
-    borderColor: 'border-emerald-500/40',
-    tagColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
-    summary: 'Dense cosine similarity retrieval from persistent disk embeddings with exact citations.',
-    code: `# Step 3: Cosine Similarity Vector Search
-async def execute_grounded_retrieval(query: str, k: int = 4) -> list[DocumentChunk]:
-    q_vec = await embedding_model.aembed_query(query)
-    results = chroma_collection.query(
-        query_embeddings=[q_vec],
-        n_results=k,
-        where={"doc_status": "verified"}
-    )
-    return parse_and_rank_citations(results)`,
-    telemetry: {
-      latency: '42ms',
-      retrieved_chunks: '4 citations',
-      top_similarity: '0.9412',
-      status: 'GROUNDED_PASS',
-    },
-  },
-  {
-    step: 4,
-    id: 'reflection',
-    label: 'Self-Reflection & Guardrails',
-    role: 'Evaluator & Refusal Engine',
-    icon: ShieldCheck,
-    color: 'from-purple-500 to-pink-500',
-    borderColor: 'border-purple-500/40',
-    tagColor: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
-    summary: 'Evaluates candidate output against retrieved facts. Rejects hallucinations with clean refusal.',
-    code: `# Step 4: Self-Correction & Refusal Guardrail
-def evaluate_grounding(state: AgentState) -> str:
-    draft = state["candidate_response"]
-    facts = state["grounded_context"]
-    
-    score = hallucination_critic(draft=draft, facts=facts)
-    if score < 0.88:
-        # Loop back for self-healing revision
-        return "re_retrieve"
-    return "finalize_response"`,
-    telemetry: {
-      grounding_score: '96.2%',
-      hallucination_check: 'ZERO_DETECTED',
-      citations: 'Doc#04 §3.1',
-      status: 'GUARDRAILS_PASSED',
-    },
-  },
-  {
-    step: 5,
-    id: 'fastapi',
-    label: 'Async FastAPI Stream Delivery',
-    role: 'High-Throughput ASGI',
-    icon: Terminal,
-    color: 'from-amber-400 to-yellow-500',
-    borderColor: 'border-amber-400/40',
-    tagColor: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
-    summary: 'Non-blocking async StreamingResponse delivers tokens over Server-Sent Events (SSE).',
-    code: `# Step 5: Streaming Token Delivery Endpoint
-@app.post("/v1/agent/chat/stream")
-async def stream_agent(request: ChatRequest):
-    async def token_generator():
-        async for chunk in agent_graph.astream(request.dict()):
-            if chunk.get("token"):
-                yield f"data: {json.dumps({'t': chunk['token']})}\\n\\n"
-    return StreamingResponse(token_generator(), media_type="text/event-stream")`,
-    telemetry: {
-      throughput: '124 tokens/s',
-      first_token: '92ms',
-      http_status: '200 OK',
-      status: 'DELIVERED_SUCCESS',
-    },
-  },
-];
-
-// ── Interactive Code Studio Tabs ─────────────────────────────────────────
-const CODE_STUDIO_TABS = [
-  {
-    id: 'graph',
-    fileName: 'autonomous_agent.py',
-    badge: 'LangGraph StateMachine',
-    lang: 'python',
-    code: `from typing import Annotated, TypedDict, Literal
-from langgraph.graph import StateGraph, END
-from langgraph.graph.message import add_messages
-from langchain_core.messages import BaseMessage
-
-class AgentState(TypedDict):
-    messages: Annotated[list[BaseMessage], add_messages]
-    grounded_docs: list[dict]
-    retry_count: int
-
-# Initialize cyclical LangGraph state machine
-workflow = StateGraph(AgentState)
-
-# Define architectural nodes
-workflow.add_node("reasoner", call_cognitive_llm)
-workflow.add_node("retrieval_tool", execute_vector_retrieval)
-workflow.add_node("guardrail_eval", evaluate_grounding_score)
-
-# Route conditionally based on real-time decisions
-def router(state: AgentState) -> Literal["retrieval_tool", "guardrail_eval", "end"]:
-    last_msg = state["messages"][-1]
-    if last_msg.tool_calls:
-        return "retrieval_tool"
-    if state["retry_count"] < 2 and not state["grounded_docs"]:
-        return "guardrail_eval"
-    return "end"
-
-workflow.add_conditional_edges("reasoner", router)
-workflow.add_edge("retrieval_tool", "reasoner")
-
-# Compile with thread memory persistence
-app = workflow.compile(checkpointer=MemorySaver())`,
-  },
-  {
-    id: 'rag',
-    fileName: 'vector_rag_from_scratch.py',
-    badge: 'Vector Math & ChromaDB',
-    lang: 'python',
-    code: `import numpy as np
-import chromadb
-from pydantic import BaseModel, Field
-
-class CitedResponse(BaseModel):
-    answer: str
-    citation_ids: list[str] = Field(default_factory=list)
-    confidence_score: float
-    refusal_triggered: bool = False
-
-def cosine_similarity(v1: np.ndarray, v2: np.ndarray) -> float:
-    """Zero-black-box vector cosine similarity calculation"""
-    return float(np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
-
-async def retrieve_grounded_chunks(query: str, client: chromadb.PersistentClient, k: int = 4):
-    collection = client.get_collection("enterprise_knowledge_base")
-    query_vector = await compute_dense_embedding(query)
-    
-    results = collection.query(
-        query_embeddings=[query_vector],
-        n_results=k,
-        include=["documents", "metadatas", "distances"]
-    )
-    
-    # Enforce strict relevance threshold
-    ranked = []
-    for doc, meta, dist in zip(results['documents'][0], results['metadatas'][0], results['distances'][0]):
-        score = 1.0 - (dist / 2.0)
-        if score >= 0.72:
-            ranked.append({"content": doc, "meta": meta, "score": score})
-            
-    return ranked`,
-  },
-  {
-    id: 'fastapi',
-    fileName: 'api_microservice.py',
-    badge: 'Async FastAPI & Pydantic v2',
-    lang: 'python',
-    code: `from fastapi import FastAPI, Depends, HTTPException, status
-from fastapi.responses import StreamingResponse
-from pydantic import BaseModel, Field
-import json
-
-app = FastAPI(title="TMA Agentic Runtime API", version="2.0.0")
-
-class IngestDocumentRequest(BaseModel):
-    title: str = Field(..., max_length=120)
-    category: str = Field(..., pattern="^(policy|technical|handbook)$")
-    content: str = Field(..., min_length=20)
-
-@app.post("/v1/agent/chat/stream", tags=["Agent Execution"])
-async def stream_agent_execution(prompt: str):
-    """
-    Asynchronous Server-Sent Events (SSE) streaming endpoint.
-    Maintains non-blocking ASGI event loop under concurrent load.
-    """
-    async def event_publisher():
-        async for chunk in agent_runtime.astream({"input": prompt}):
-            if chunk.get("type") == "token":
-                yield f"data: {json.dumps({'token': chunk['text']})}\\n\\n"
-            elif chunk.get("type") == "tool_execution":
-                yield f"event: telemetry\\ndata: {json.dumps(chunk['payload'])}\\n\\n"
-        yield "data: [DONE]\\n\\n"
-
-    return StreamingResponse(event_publisher(), media_type="text/event-stream")`,
-  },
-  {
-    id: 'test',
-    fileName: 'test_agent_guardrails.py',
-    badge: 'Pytest & Integration Rigor',
-    lang: 'python',
-    code: `import pytest
-from fastapi.testclient import TestClient
-from main import app
-
-client = TestClient(app)
-
-def test_health_check_returns_ok():
-    response = client.get("/health")
-    assert response.status_code == 200
-    assert response.json()["status"] == "healthy"
-
-def test_rag_refusal_when_context_is_absent():
-    """Verify that the agent does NOT hallucinate when facts do not exist"""
-    out_of_bounds_query = "What is the secret recipe for Martian rocket propellant?"
-    response = client.post("/v1/ask", json={"query": out_of_bounds_query})
-    
-    assert response.status_code == 200
-    data = response.json()
-    assert data["refusal_triggered"] is True
-    assert "Insufficient verified context" in data["answer"]
-    assert len(data["citation_ids"]) == 0
-
-def test_pydantic_schema_enforces_required_fields():
-    response = client.post("/v1/ingest", json={"title": "Short"})
-    assert response.status_code == 422  # Unprocessable Entity validation boundary`,
-  },
-];
 
 // ── Interactive Module Blueprint Component ──────────────────────────────
 function ModuleBlueprintCard({
@@ -481,31 +200,9 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 // ── MAIN PROGRAM VIEW ────────────────────────────────────────────────────
 export default function ProgramsPage() {
+  const searchParams = useSearchParams();
+  const isPaymentSuccess = searchParams.get('payment') === 'success';
   const [activeModuleIndex, setActiveModuleIndex] = useState<number>(0);
-  const [selectedAgentStep, setSelectedAgentStep] = useState<number>(0);
-  const [isSimulating, setIsSimulating] = useState<boolean>(false);
-  const [activeCodeTab, setActiveCodeTab] = useState<string>('graph');
-  const [copiedCode, setCopiedCode] = useState<boolean>(false);
-
-  // Auto-run simulator loop when toggled
-  useEffect(() => {
-    if (!isSimulating) return;
-    const timer = setInterval(() => {
-      setSelectedAgentStep((prev) => (prev + 1) % AGENT_SIMULATION_STEPS.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, [isSimulating]);
-
-  const activeStepData = AGENT_SIMULATION_STEPS[selectedAgentStep];
-  const activeCodeData = CODE_STUDIO_TABS.find((t) => t.id === activeCodeTab) || CODE_STUDIO_TABS[0];
-
-  const handleCopyCode = () => {
-    if (navigator?.clipboard) {
-      navigator.clipboard.writeText(activeCodeData.code);
-      setCopiedCode(true);
-      setTimeout(() => setCopiedCode(false), 2000);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-[#070913] text-slate-100 selection:bg-amber-500/30 selection:text-amber-200 font-sans relative overflow-x-hidden">
@@ -529,17 +226,26 @@ export default function ProgramsPage() {
       </div>
 
       <div className="relative z-10">
-        {/* ===================== HERO SECTION ===================== */}
-        <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        {isPaymentSuccess ? (
+          /* ===================== ENROLLMENT CONFIRMATION HERO ===================== */
+          <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+              <WinterTrainingRegistrationForm />
+            </div>
+          </section>
+        ) : (
+          <>
+            {/* ===================== HERO SECTION ===================== */}
+            <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto text-center">
             {/* Live Operational Status Pill */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-mono font-semibold mb-8 shadow-lg shadow-amber-500/10 backdrop-blur-md animate-fade-in">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-mono font-semibold mb-8 shadow-lg shadow-amber-500/10 backdrop-blur-md animate-fade-in">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>LIVE COHORT 2026 // AGENTIC SYSTEMS MASTERCLASS</span>
-              <span className="text-slate-500">|</span>
-              <span className="text-slate-400 font-sans flex items-center gap-1">
-                Hands-On Engineering
-                <Sparkles className="w-3 h-3 text-amber-400" />
+              <span>LIVE IN-PERSON COHORT 2026 // AGENTIC SYSTEMS MASTERCLASS</span>
+              <span className="text-slate-500 hidden sm:inline">|</span>
+              <span className="text-slate-300 font-sans flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                Guwahati Campus
               </span>
             </div>
 
@@ -571,11 +277,11 @@ export default function ProgramsPage() {
                 <ArrowRight className="w-5 h-5" />
               </a>
               <a
-                href="#agent-simulator"
+                href="#curriculum"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-slate-200 hover:text-white hover:border-amber-500/50 font-semibold text-base backdrop-blur-md transition-all cursor-pointer"
               >
-                <Cpu className="w-5 h-5 text-amber-400" />
-                <span>Simulate Agent Runtime</span>
+                <BookOpen className="w-5 h-5 text-amber-400" />
+                <span>Explore Curriculum</span>
               </a>
             </div>
 
@@ -617,153 +323,35 @@ export default function ProgramsPage() {
                 <p className="text-xs text-slate-400">Deploy an enterprise knowledge assistant demo to your GitHub.</p>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* ===================== INTERACTIVE AGENT LOOP SIMULATOR ===================== */}
-        <section id="agent-simulator" className="py-20 px-4 sm:px-6 lg:px-8 border-y border-slate-800/80 bg-slate-950/70 relative scroll-mt-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-xs font-bold uppercase tracking-wider mb-3">
-                <BrainCircuit className="w-3.5 h-3.5" />
-                <span>Interactive Architecture Visualizer</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
-                How an Autonomous Agent Thinks &amp; Executes
-              </h2>
-              <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
-                Click any node in the cognitive loop to inspect the live execution graph, Pydantic schema validation, and real-time telemetry.
-              </p>
-            </div>
-
-            {/* Simulation Controls & Stepper */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-                <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
-                <span>LANGGRAPH STATE MACHINE // v2.4-RELEASE</span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsSimulating(!isSimulating)}
-                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
-                  isSimulating
-                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/30'
-                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
-                }`}
-              >
-                {isSimulating ? (
-                  <>
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                    <span>Auto-Cycling (Click to Pause)</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3.5 h-3.5 fill-current" />
-                    <span>Simulate Agent Flow</span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            {/* Visual Node Pipeline Bar */}
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 mb-6">
-              {AGENT_SIMULATION_STEPS.map((s, idx) => {
-                const IconComponent = s.icon;
-                const isSelected = selectedAgentStep === idx;
-                return (
-                  <button
-                    key={s.id}
-                    type="button"
-                    onClick={() => {
-                      setIsSimulating(false);
-                      setSelectedAgentStep(idx);
-                    }}
-                    className={`p-3.5 rounded-xl border text-left transition-all duration-300 cursor-pointer relative overflow-hidden ${
-                      isSelected
-                        ? 'bg-slate-900 border-amber-400 shadow-lg shadow-amber-500/20 ring-1 ring-amber-400'
-                        : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90'
-                    }`}
-                  >
-                    {isSelected && (
-                      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500" />
-                    )}
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-mono text-[10px] font-bold text-slate-400">
-                        NODE 0{s.step}
-                      </span>
-                      <IconComponent
-                        className={`w-4 h-4 ${
-                          isSelected ? 'text-amber-400' : 'text-slate-500'
-                        }`}
-                      />
-                    </div>
-                    <div className="text-xs font-bold text-white mb-0.5 truncate">
-                      {s.label}
-                    </div>
-                    <div className="text-[11px] font-mono text-slate-400 truncate">
-                      {s.role}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Active Node Inspector Panel */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-900/80 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
-              {/* Left Column: Architectural Explanation & Telemetry */}
-              <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+            {/* Offline Campus Location Banner */}
+            <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-left max-w-5xl mx-auto">
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MapPin className="w-5 h-5" />
+                </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={`px-2.5 py-0.5 rounded-full font-mono text-xs font-bold border ${activeStepData.tagColor}`}>
-                      NODE 0{activeStepData.step} &middot; {activeStepData.role}
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="font-mono text-[11px] font-bold text-amber-400 uppercase tracking-wider">
+                      Office Location
+                    </span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
+                      In-Person
                     </span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
-                    {activeStepData.label}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    {activeStepData.summary}
+                  <p className="text-sm font-bold text-white">
+                    TigmaMinds Pvt Ltd, 4th Floor, Prithvi Centre, GS Rd, South Sarania, Lachit Nagar, Guwahati, Assam 781007
+                  </p>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Equipped with dedicated workstation setups, high-throughput network access, and mentor code review rooms.
                   </p>
                 </div>
-
-                {/* Simulated Telemetry Metrics */}
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs space-y-2">
-                  <div className="text-slate-500 font-bold uppercase tracking-widest text-[10px] pb-1 border-b border-slate-800/80">
-                    Live Telemetry Metrics
-                  </div>
-                  {Object.entries(activeStepData.telemetry).map(([key, val]) => (
-                    <div key={key} className="flex items-center justify-between">
-                      <span className="text-slate-400">{key.replace('_', ' ')}:</span>
-                      <span className="text-amber-300 font-semibold">{val}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right Column: Code Snippet Console */}
-              <div className="lg:col-span-7 rounded-2xl bg-slate-950 border border-slate-800 overflow-hidden flex flex-col">
-                <div className="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    <span className="font-mono text-xs text-slate-400 ml-2">
-                      agent_kernel_{activeStepData.id}.py
-                    </span>
-                  </div>
-                  <span className="font-mono text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">
-                    PYTHON 3.11+
-                  </span>
-                </div>
-                <div className="p-4 sm:p-5 font-mono text-xs text-slate-200 overflow-x-auto leading-relaxed flex-1">
-                  <pre className="text-amber-100/90 whitespace-pre">
-                    <code>{activeStepData.code}</code>
-                  </pre>
-                </div>
               </div>
             </div>
           </div>
         </section>
+
+
 
         {/* ===================== PARADIGM SHIFT: GENAI 1.0 VS AGENTIC 2.0 ===================== */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -843,71 +431,8 @@ export default function ProgramsPage() {
             </div>
           </div>
         </section>
-
-        {/* ===================== INTERACTIVE CODE STUDIO TERMINAL ===================== */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 border-y border-slate-800/80 bg-slate-950/60">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-widest">
-                Hands-On Code Preview
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-white mt-1 mb-3">
-                Inspect the Real Python You Will Write
-              </h2>
-              <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
-                No high-level fluff. Browse the actual production architectures, LangGraph states, and FastAPI endpoints built throughout the 5 phases.
-              </p>
-            </div>
-
-            {/* Code Studio Window */}
-            <div className="rounded-3xl border border-slate-800 bg-slate-950 shadow-2xl overflow-hidden backdrop-blur-xl">
-              {/* Tab Bar */}
-              <div className="p-3 bg-slate-900/90 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-                  {CODE_STUDIO_TABS.map((tab) => {
-                    const isActive = activeCodeTab === tab.id;
-                    return (
-                      <button
-                        key={tab.id}
-                        type="button"
-                        onClick={() => setActiveCodeTab(tab.id)}
-                        className={`px-3 py-1.5 rounded-lg font-mono text-xs transition-all flex items-center gap-2 cursor-pointer ${
-                          isActive
-                            ? 'bg-slate-800 text-amber-300 border border-amber-500/30'
-                            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                        }`}
-                      >
-                        <FileCode2 className={`w-3.5 h-3.5 ${isActive ? 'text-amber-400' : 'text-slate-500'}`} />
-                        <span>{tab.fileName}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <span className="hidden sm:inline-block font-mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                    {activeCodeData.badge}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={handleCopyCode}
-                    className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition cursor-pointer"
-                    title="Copy Code"
-                  >
-                    {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Code Editor Body */}
-              <div className="p-5 sm:p-6 font-mono text-xs sm:text-sm text-slate-200 overflow-x-auto leading-relaxed max-h-[460px] overflow-y-auto">
-                <pre className="text-amber-100/90 whitespace-pre">
-                  <code>{activeCodeData.code}</code>
-                </pre>
-              </div>
-            </div>
-          </div>
-        </section>
+      </>
+    )}
 
         {/* ===================== CURRICULUM SYLLABUS SECTION ===================== */}
         <section id="curriculum" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
@@ -1093,32 +618,154 @@ export default function ProgramsPage() {
           </div>
         </section>
 
-        {/* ===================== REGISTRATION PORTAL WITH FORM ===================== */}
-        <section id="register" className="py-24 px-4 sm:px-6 lg:px-8 scroll-mt-16">
-          <div className="max-w-3xl mx-auto">
-            {/* Header Badge & Callout */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-mono font-bold mb-3 shadow-lg shadow-amber-500/10">
-                <Zap className="w-4 h-4 fill-amber-400 text-amber-400" />
-                <span>WINTER 2026 COHORT // ENROLLMENT PORTAL</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-white mb-2">
-                Secure Your Seat in the Cohort
-              </h2>
-              <p className="text-sm text-slate-400 max-w-lg mx-auto">
-                All-inclusive &#8377;1 test pass. Complete curriculum, daily interactive coding labs, verified certificate, and full capstone repository.
-              </p>
-            </div>
+        {!isPaymentSuccess && (
+          <>
+            {/* ===================== PROGRAM INVESTMENT & REGISTRATION POLICY ===================== */}
+            <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-slate-950/70 scroll-mt-16">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-12">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs font-bold uppercase tracking-wider mb-3">
+                    <BadgePercent className="w-4 h-4 text-amber-400" />
+                    <span>Program Investment &amp; Early Bird Benefits</span>
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
+                    Program Tuition &amp; Seat Confirmation
+                  </h2>
+                  <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    Clear, transparent pricing. Reserve your seat today with a nominal registration fee that is 100% deducted from your final tuition.
+                  </p>
+                </div>
 
-            {/* Glowing Cyber Registration Container */}
-            <div className="rounded-3xl border border-amber-500/30 bg-slate-950/90 p-4 sm:p-8 backdrop-blur-2xl shadow-2xl shadow-amber-500/10 relative">
-              <div className="absolute top-0 right-10 -translate-y-1/2 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-mono text-[11px] font-bold uppercase tracking-wider shadow-md">
-                &#9679; 30 SEATS MAXIMUM
+                {/* Main Pricing Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  {/* Card 1: Total Program Fee */}
+                  <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/80 border border-slate-800 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-700 to-slate-600" />
+                    <div>
+                      <span className="font-mono text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                        Total Program Fee
+                      </span>
+                      <div className="flex items-baseline gap-2 mb-3">
+                        <span className="text-4xl sm:text-5xl font-black text-white tracking-tight">&#8377;4,999</span>
+                        <span className="text-xs text-slate-400 font-mono">/ ALL-INCLUSIVE</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                        Complete 5-phase engineering curriculum, 2-hour daily live coding labs, 1-on-1 mentor code reviews, capstone repository, and verified certificate.
+                      </p>
+                    </div>
+                    <div className="pt-4 border-t border-slate-800/80 text-[11px] font-mono text-slate-400 flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                      <span>Comprehensive masterclass &middot; Zero hidden fees</span>
+                    </div>
+                  </div>
+
+                  {/* Card 2: Early Registration Discount */}
+                  <div className="p-6 sm:p-7 rounded-3xl bg-slate-900/80 border border-amber-500/40 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden shadow-xl shadow-amber-500/5">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500" />
+                    <div className="absolute top-4 right-4">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                        LIMITED SEATS
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-wider block mb-2">
+                        Early Registration Perk
+                      </span>
+                      <div className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+                        Early Bird Discount
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                        Early registrations receive exclusive tuition discounts and priority placement in the upcoming batch, strictly capped at 30 engineers for personalized attention.
+                      </p>
+                    </div>
+                    <div className="pt-4 border-t border-slate-800/80 text-[11px] font-mono text-amber-300 flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                      <span>Guaranteed cohort placement for early applicants</span>
+                    </div>
+                  </div>
+
+                  {/* Card 3: Seat Confirmation & Deduction */}
+                  <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-500/40 backdrop-blur-xl flex flex-col justify-between relative overflow-hidden shadow-xl shadow-emerald-500/5">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-500" />
+                    <div className="absolute top-4 right-4">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                        100% DEDUCTIBLE
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-2">
+                        Confirm Seat Today
+                      </span>
+                      <div className="flex items-baseline gap-2 mb-3">
+                        <span className="text-4xl sm:text-5xl font-black text-emerald-400 tracking-tight">&#8377;1</span>
+                        <span className="text-xs text-slate-400 line-through">&#8377;499</span>
+                        <span className="text-[10px] font-mono text-emerald-300 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">TEST PASS</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                        Lock in your admission today by paying the token registration fee. Your seat is confirmed immediately upon successful payment.
+                      </p>
+                    </div>
+                    <div className="pt-4 border-t border-slate-800/80 text-[11px] font-mono text-emerald-300 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                      <span>Deducted from final &#8377;4,999 tuition later</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* How Seat Confirmation & Deduction Works - Informational Callout */}
+                <div className="p-5 sm:p-6 rounded-2xl bg-slate-900/90 border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Tag className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm sm:text-base font-bold text-white mb-1">
+                        How the Seat Confirmation &amp; Fee Deduction Works:
+                      </h4>
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        To guarantee your spot, pay the registration fee today (currently <strong>&#8377;1</strong> for live testing, normally &#8377;499). This registration payment will be <strong>100% deducted from the final &#8377;4,999 program fee</strong> when the cohort starts. You only pay the balance later, with your early bird discount applied!
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href="#register"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-xs sm:text-sm whitespace-nowrap shadow-lg shadow-amber-500/20 transition cursor-pointer flex-shrink-0"
+                  >
+                    <span>Confirm Seat &middot; &#8377;1</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
-              <WinterTrainingRegistrationForm />
-            </div>
-          </div>
-        </section>
+            </section>
+
+            {/* ===================== REGISTRATION PORTAL WITH FORM ===================== */}
+            <section id="register" className="py-24 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+              <div className="max-w-3xl mx-auto">
+                {/* Header Badge & Callout */}
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-mono font-bold mb-3 shadow-lg shadow-amber-500/10">
+                    <Zap className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <span>WINTER 2026 COHORT // ENROLLMENT PORTAL</span>
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-black text-white mb-2">
+                    Secure Your Seat in the Cohort
+                  </h2>
+                  <p className="text-sm text-slate-400 max-w-lg mx-auto">
+                    Program Fee: &#8377;4,999 (Early registrations qualify for discounts). Pay &#8377;1 registration fee today to confirm your seat — 100% deducted from the final fee when the cohort begins.
+                  </p>
+                </div>
+
+                {/* Glowing Cyber Registration Container */}
+                <div className="rounded-3xl border border-amber-500/30 bg-slate-950/90 p-4 sm:p-8 backdrop-blur-2xl shadow-2xl shadow-amber-500/10 relative">
+                  <div className="absolute top-0 right-10 -translate-y-1/2 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-mono text-[11px] font-bold uppercase tracking-wider shadow-md">
+                    &#9679; 30 SEATS MAXIMUM
+                  </div>
+                  <WinterTrainingRegistrationForm />
+                </div>
+              </div>
+            </section>
+          </>
+        )}
 
         {/* ===================== FREQUENTLY ASKED QUESTIONS ===================== */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-slate-950/60">
