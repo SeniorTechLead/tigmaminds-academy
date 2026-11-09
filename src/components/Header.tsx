@@ -35,7 +35,7 @@ export default function Header() {
       { name: 'Arduino Basics', href: '/learn/arduino-basics' },
     ] },
     { name: 'Programs', href: '/programs', children: [
-      { name: 'Overview', href: '/programs' },
+      { name: 'Winter Training (Python & LLMs)', href: '/programs' },
       { name: '12-Month Curriculum', href: '/curriculum' },
       { name: '24-Week Bootcamp', href: '/curriculum/bootcamp' },
       { name: 'Capstones', href: '/capstones' },

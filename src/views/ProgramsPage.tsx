@@ -1,792 +1,1203 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
 import {
-  ArrowRight, BookOpen, Code2, Sparkles, Lock, Unlock,
-  ChevronDown, GraduationCap, Lightbulb, Wrench, Rocket,
-  Users, FlaskConical, BarChart3, Award, Loader2, CheckCircle, MapPin,
+  Sparkles,
+  ArrowRight,
+  Terminal,
+  Layers,
+  Database,
+  CheckCircle2,
+  ChevronDown,
+  BookOpen,
+  CheckCircle,
+  FileCode2,
+  Rocket,
+  ShieldCheck,
+  Cpu,
+  Workflow,
+  BrainCircuit,
+  Zap,
+  Play,
+  Activity,
+  Radio,
+  Check,
+  Copy,
+  GitBranch,
+  RefreshCw,
+  Award,
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import CheckoutButton from '../components/CheckoutButton';
-import { useSubscription } from '../contexts/SubscriptionContext';
-import { useAuth } from '../contexts/AuthContext';
-import { FEATURES } from '../config/features';
-import EnrollmentRequestForm from '../components/EnrollmentRequestForm';
-import { lessonsMeta as lessons } from '../data/lessons-meta';
-import { SUBJECTS } from '../data/lesson-constants';
-import { problemMeta } from '../data/playground-meta';
-import { getLessonOrigin } from '../data/lesson-types';
+import WinterTrainingRegistrationForm from '../components/WinterTrainingRegistrationForm';
+import {
+  WINTER_TRAINING_MODULES,
+  TECH_STACK,
+  CAPSTONE_LAYERS,
+  GRADUATE_OUTCOMES,
+  WINTER_TRAINING_FAQS,
+  CurriculumModule,
+} from '../data/winter-training';
 
-/* ── "What Students Will Build" — real capstone projects from real lessons ── */
-const capstoneProjects = [
+// ── Interactive Agent Execution Loop Simulator ──────────────────────────
+const AGENT_SIMULATION_STEPS = [
   {
-    story: 'The Girl Who Spoke to Elephants',
-    slug: 'girl-who-spoke-to-elephants',
-    project: 'Elephant Rumble Classifier',
-    description: 'Train a machine-learning model to classify elephant infrasound rumbles by type — contact calls, warnings, and greetings — using real acoustic data.',
-    skills: ['Python', 'NumPy', 'Machine Learning'],
-    color: 'from-emerald-400 to-teal-500',
+    step: 1,
+    id: 'intent',
+    label: 'Intent Decomp & Schema',
+    role: 'Pydantic v2 Contract',
+    icon: BrainCircuit,
+    color: 'from-amber-500 to-orange-500',
+    borderColor: 'border-amber-500/40',
+    tagColor: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+    summary: 'Deconstructs raw user prompt into typed constraints, entities, and query intents.',
+    code: `# Step 1: Pydantic Schema Validation
+class AgentQueryIntent(BaseModel):
+    raw_query: str = Field(min_length=3)
+    target_corpus: Literal["policies", "api_specs", "hr_faq"]
+    required_confidence: float = Field(default=0.85, ge=0.0, le=1.0)
+    requires_tool_execution: bool = True
+
+intent = AgentQueryIntent.model_validate(incoming_payload)`,
+    telemetry: {
+      latency: '18ms',
+      tokens: '48 tokens',
+      confidence: '99.4%',
+      status: 'VALIDATED_OK',
+    },
   },
   {
-    story: 'The Boy Who Built a Library',
-    slug: 'boy-who-built-a-library',
-    project: 'Library Management System',
-    description: 'Build a full-stack library backend with search, recommendations, analytics, and business rules — from data modeling to deployed API.',
-    skills: ['HTML/CSS/JS', 'REST APIs', 'SQL', 'Architecture'],
-    color: 'from-violet-400 to-purple-500',
+    step: 2,
+    id: 'graph',
+    label: 'LangGraph Cognitive Router',
+    role: 'Cyclical State Machine',
+    icon: Workflow,
+    color: 'from-sky-500 to-blue-600',
+    borderColor: 'border-sky-500/40',
+    tagColor: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
+    summary: 'StateGraph checks conversation checkpoints and routes to deterministic retrieval tools.',
+    code: `# Step 2: LangGraph State Machine Node
+def cognitive_router(state: AgentState) -> dict:
+    latest_msg = state["messages"][-1]
+    # Evaluate memory & intent before hallucinating
+    if any(k in latest_msg.content.lower() for k in ["policy", "guideline", "limit"]):
+        return {"next_node": "chroma_hybrid_retriever"}
+    return {"next_node": "direct_synthesis"}
+
+workflow.add_conditional_edges("router", route_decision)`,
+    telemetry: {
+      latency: '34ms',
+      tokens: '112 tokens',
+      checkpoint: 'Thread#88219',
+      status: 'ROUTED_TO_TOOLS',
+    },
   },
   {
-    story: 'The Firefly Festival of Majuli',
-    slug: 'firefly-festival-of-majuli',
-    project: 'Kuramoto Synchronization Simulator',
-    description: 'Model how thousands of fireflies synchronize their flashes using the Kuramoto coupled oscillator model — from chaos to emergent order.',
-    skills: ['Python', 'Physics', 'NumPy', 'Arduino'],
-    color: 'from-yellow-400 to-green-500',
+    step: 3,
+    id: 'retrieval',
+    label: 'Grounded RAG & Vector Memory',
+    role: 'ChromaDB + Cosine Search',
+    icon: Database,
+    color: 'from-emerald-500 to-teal-500',
+    borderColor: 'border-emerald-500/40',
+    tagColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+    summary: 'Dense cosine similarity retrieval from persistent disk embeddings with exact citations.',
+    code: `# Step 3: Cosine Similarity Vector Search
+async def execute_grounded_retrieval(query: str, k: int = 4) -> list[DocumentChunk]:
+    q_vec = await embedding_model.aembed_query(query)
+    results = chroma_collection.query(
+        query_embeddings=[q_vec],
+        n_results=k,
+        where={"doc_status": "verified"}
+    )
+    return parse_and_rank_citations(results)`,
+    telemetry: {
+      latency: '42ms',
+      retrieved_chunks: '4 citations',
+      top_similarity: '0.9412',
+      status: 'GROUNDED_PASS',
+    },
   },
   {
-    story: 'The River Dolphin\'s Secret',
-    slug: 'river-dolphins-secret',
-    project: 'Underwater Acoustic Modem',
-    description: 'Design a digital communication system that transmits messages through water using sound — inspired by dolphin echolocation.',
-    skills: ['Arduino', 'Signal Processing', 'Physics'],
-    color: 'from-blue-400 to-cyan-500',
+    step: 4,
+    id: 'reflection',
+    label: 'Self-Reflection & Guardrails',
+    role: 'Evaluator & Refusal Engine',
+    icon: ShieldCheck,
+    color: 'from-purple-500 to-pink-500',
+    borderColor: 'border-purple-500/40',
+    tagColor: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+    summary: 'Evaluates candidate output against retrieved facts. Rejects hallucinations with clean refusal.',
+    code: `# Step 4: Self-Correction & Refusal Guardrail
+def evaluate_grounding(state: AgentState) -> str:
+    draft = state["candidate_response"]
+    facts = state["grounded_context"]
+    
+    score = hallucination_critic(draft=draft, facts=facts)
+    if score < 0.88:
+        # Loop back for self-healing revision
+        return "re_retrieve"
+    return "finalize_response"`,
+    telemetry: {
+      grounding_score: '96.2%',
+      hallucination_check: 'ZERO_DETECTED',
+      citations: 'Doc#04 §3.1',
+      status: 'GUARDRAILS_PASSED',
+    },
   },
   {
-    story: 'The Fisherman\'s Daughter and the Storm',
-    slug: 'fishermans-daughter-storm',
-    project: 'Cyclone Track Visualizer',
-    description: 'Plot historical cyclone paths across the Bay of Bengal, color-coded by intensity, with landfall predictions and trend analysis.',
-    skills: ['Python', 'Matplotlib', 'Data Analysis'],
-    color: 'from-slate-400 to-blue-500',
-  },
-  {
-    story: 'The Dragonfly and the Paddy Field',
-    slug: 'dragonfly-paddy-field',
-    project: 'Crop Health Monitor',
-    description: 'Analyze drone imagery of paddy fields to detect diseased regions, estimate crop health, and generate actionable reports.',
-    skills: ['Python', 'Computer Vision', 'NumPy'],
-    color: 'from-lime-400 to-green-500',
-  },
-  {
-    story: 'Why the Muga Silk Is Golden',
-    slug: 'muga-silk-golden',
-    project: 'Silk Fiber Analyzer',
-    description: 'Build a materials science pipeline that tests tensile strength, elasticity, and luster of different silk fibers — comparing muga to mulberry.',
-    skills: ['Python', 'Materials Science', 'Data Viz'],
+    step: 5,
+    id: 'fastapi',
+    label: 'Async FastAPI Stream Delivery',
+    role: 'High-Throughput ASGI',
+    icon: Terminal,
     color: 'from-amber-400 to-yellow-500',
+    borderColor: 'border-amber-400/40',
+    tagColor: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+    summary: 'Non-blocking async StreamingResponse delivers tokens over Server-Sent Events (SSE).',
+    code: `# Step 5: Streaming Token Delivery Endpoint
+@app.post("/v1/agent/chat/stream")
+async def stream_agent(request: ChatRequest):
+    async def token_generator():
+        async for chunk in agent_graph.astream(request.dict()):
+            if chunk.get("token"):
+                yield f"data: {json.dumps({'t': chunk['token']})}\\n\\n"
+    return StreamingResponse(token_generator(), media_type="text/event-stream")`,
+    telemetry: {
+      throughput: '124 tokens/s',
+      first_token: '92ms',
+      http_status: '200 OK',
+      status: 'DELIVERED_SUCCESS',
+    },
+  },
+];
+
+// ── Interactive Code Studio Tabs ─────────────────────────────────────────
+const CODE_STUDIO_TABS = [
+  {
+    id: 'graph',
+    fileName: 'autonomous_agent.py',
+    badge: 'LangGraph StateMachine',
+    lang: 'python',
+    code: `from typing import Annotated, TypedDict, Literal
+from langgraph.graph import StateGraph, END
+from langgraph.graph.message import add_messages
+from langchain_core.messages import BaseMessage
+
+class AgentState(TypedDict):
+    messages: Annotated[list[BaseMessage], add_messages]
+    grounded_docs: list[dict]
+    retry_count: int
+
+# Initialize cyclical LangGraph state machine
+workflow = StateGraph(AgentState)
+
+# Define architectural nodes
+workflow.add_node("reasoner", call_cognitive_llm)
+workflow.add_node("retrieval_tool", execute_vector_retrieval)
+workflow.add_node("guardrail_eval", evaluate_grounding_score)
+
+# Route conditionally based on real-time decisions
+def router(state: AgentState) -> Literal["retrieval_tool", "guardrail_eval", "end"]:
+    last_msg = state["messages"][-1]
+    if last_msg.tool_calls:
+        return "retrieval_tool"
+    if state["retry_count"] < 2 and not state["grounded_docs"]:
+        return "guardrail_eval"
+    return "end"
+
+workflow.add_conditional_edges("reasoner", router)
+workflow.add_edge("retrieval_tool", "reasoner")
+
+# Compile with thread memory persistence
+app = workflow.compile(checkpointer=MemorySaver())`,
   },
   {
-    story: 'The Dancing Deer of Kaziranga',
-    slug: 'dancing-deer-kaziranga',
-    project: 'Wildlife Population Estimator',
-    description: 'Model endangered Sangai deer population dynamics using Leslie matrices, habitat capacity, and conservation intervention scenarios.',
-    skills: ['Python', 'Ecology', 'Statistics'],
-    color: 'from-rose-400 to-pink-500',
+    id: 'rag',
+    fileName: 'vector_rag_from_scratch.py',
+    badge: 'Vector Math & ChromaDB',
+    lang: 'python',
+    code: `import numpy as np
+import chromadb
+from pydantic import BaseModel, Field
+
+class CitedResponse(BaseModel):
+    answer: str
+    citation_ids: list[str] = Field(default_factory=list)
+    confidence_score: float
+    refusal_triggered: bool = False
+
+def cosine_similarity(v1: np.ndarray, v2: np.ndarray) -> float:
+    """Zero-black-box vector cosine similarity calculation"""
+    return float(np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
+
+async def retrieve_grounded_chunks(query: str, client: chromadb.PersistentClient, k: int = 4):
+    collection = client.get_collection("enterprise_knowledge_base")
+    query_vector = await compute_dense_embedding(query)
+    
+    results = collection.query(
+        query_embeddings=[query_vector],
+        n_results=k,
+        include=["documents", "metadatas", "distances"]
+    )
+    
+    # Enforce strict relevance threshold
+    ranked = []
+    for doc, meta, dist in zip(results['documents'][0], results['metadatas'][0], results['distances'][0]):
+        score = 1.0 - (dist / 2.0)
+        if score >= 0.72:
+            ranked.append({"content": doc, "meta": meta, "score": score})
+            
+    return ranked`,
   },
   {
-    story: 'Why Assam\'s Sunsets Are Orange',
-    slug: 'orange-sunsets-assam',
-    project: 'Sunset Color Simulator',
-    description: 'Predict tonight\'s sunset color from atmospheric conditions — humidity, aerosols, and sun angle — using Rayleigh scattering physics.',
-    skills: ['Python', 'Physics', 'Machine Learning'],
-    color: 'from-orange-400 to-red-500',
+    id: 'fastapi',
+    fileName: 'api_microservice.py',
+    badge: 'Async FastAPI & Pydantic v2',
+    lang: 'python',
+    code: `from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel, Field
+import json
+
+app = FastAPI(title="TMA Agentic Runtime API", version="2.0.0")
+
+class IngestDocumentRequest(BaseModel):
+    title: str = Field(..., max_length=120)
+    category: str = Field(..., pattern="^(policy|technical|handbook)$")
+    content: str = Field(..., min_length=20)
+
+@app.post("/v1/agent/chat/stream", tags=["Agent Execution"])
+async def stream_agent_execution(prompt: str):
+    """
+    Asynchronous Server-Sent Events (SSE) streaming endpoint.
+    Maintains non-blocking ASGI event loop under concurrent load.
+    """
+    async def event_publisher():
+        async for chunk in agent_runtime.astream({"input": prompt}):
+            if chunk.get("type") == "token":
+                yield f"data: {json.dumps({'token': chunk['text']})}\\n\\n"
+            elif chunk.get("type") == "tool_execution":
+                yield f"event: telemetry\\ndata: {json.dumps(chunk['payload'])}\\n\\n"
+        yield "data: [DONE]\\n\\n"
+
+    return StreamingResponse(event_publisher(), media_type="text/event-stream")`,
+  },
+  {
+    id: 'test',
+    fileName: 'test_agent_guardrails.py',
+    badge: 'Pytest & Integration Rigor',
+    lang: 'python',
+    code: `import pytest
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+def test_health_check_returns_ok():
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json()["status"] == "healthy"
+
+def test_rag_refusal_when_context_is_absent():
+    """Verify that the agent does NOT hallucinate when facts do not exist"""
+    out_of_bounds_query = "What is the secret recipe for Martian rocket propellant?"
+    response = client.post("/v1/ask", json={"query": out_of_bounds_query})
+    
+    assert response.status_code == 200
+    data = response.json()
+    assert data["refusal_triggered"] is True
+    assert "Insufficient verified context" in data["answer"]
+    assert len(data["citation_ids"]) == 0
+
+def test_pydantic_schema_enforces_required_fields():
+    response = client.post("/v1/ingest", json={"title": "Short"})
+    assert response.status_code == 422  # Unprocessable Entity validation boundary`,
   },
 ];
 
-/* ── How It Works steps ── */
-const steps = [
-  { num: '1', title: 'Pick any story', desc: 'Browse our growing library of illustrated tales from Northeast India and world traditions.' },
-  { num: '2', title: 'Read the story', desc: 'It\'s a real children\'s tale — elephants, fireflies, silk, storms.' },
-  { num: '3', title: 'Discover the science', desc: 'Each story hides real STEM — physics, biology, data science.' },
-  { num: '4', title: 'Code a project', desc: 'Build something inspired by the science: simulators, classifiers, circuits.' },
-  { num: '5', title: 'Grow your portfolio', desc: 'One story at a time, one project at a time.' },
-];
+// ── Interactive Module Blueprint Component ──────────────────────────────
+function ModuleBlueprintCard({
+  module,
+  index,
+  isExpanded,
+  onToggle,
+}: {
+  module: CurriculumModule;
+  index: number;
+  isExpanded: boolean;
+  onToggle: () => void;
+}) {
+  const phaseNumbers = ['01', '02', '03', '04', '05'];
 
-/* ── Who Is This For ── */
-const audiences = [
-  { icon: GraduationCap, title: 'Students, ages 10 and up', desc: 'Curious about science and coding but bored by textbooks. Start with stories, end with real projects.' },
-  { icon: Rocket, title: 'Career changers', desc: 'Switch into tech with a portfolio of real projects — not toy exercises. Our bootcamp gets you job-ready.' },
-  { icon: Users, title: 'College students', desc: 'Supplement your CS degree with hands-on projects that go beyond lecture slides.' },
-  { icon: Lightbulb, title: 'Teachers & schools', desc: 'Lesson plans that start with wonder, not worksheets. Integrates with existing curriculum.' },
-];
+  return (
+    <div
+      className={`rounded-2xl border transition-all duration-300 overflow-hidden backdrop-blur-xl ${
+        isExpanded
+          ? 'bg-slate-900/90 border-amber-500/60 shadow-xl shadow-amber-500/10'
+          : 'bg-slate-900/50 border-slate-800 hover:border-slate-700/80 hover:bg-slate-900/70'
+      }`}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        className="w-full text-left p-5 sm:p-6 flex items-start sm:items-center justify-between gap-4 cursor-pointer"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs font-bold px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-400">
+              PHASE {phaseNumbers[index]}
+            </span>
+            <span className="text-xs font-mono text-slate-500 hidden sm:inline">
+              // ARCHITECTURE
+            </span>
+          </div>
 
-/* ── FAQ ── */
-const faqs = [
-  { q: 'What do I need to get started?', a: 'A computer or tablet with internet access. Our Python environment runs in the browser — no installation needed. Arduino simulations work without hardware.' },
-  { q: 'Is this only for students in India?', a: 'The stories draw from Northeast India — elephants in Kaziranga, fireflies on Majuli, living root bridges in Meghalaya. But the STEM content is universal. Rayleigh scattering works the same everywhere.' },
-  { q: 'What age range is this for?', a: 'Designed for ages 10 and up. The five levels scale from no prior knowledge to university-level capstone projects — younger students start with stories and visuals, older learners dive into Python, SQL, and real data science.' },
-  { q: 'How is this different from free YouTube tutorials?', a: 'Every concept starts with a story, so you understand WHY before HOW. You build real projects, not toy exercises. And the five-level progression means you go as deep as you want — not just surface-level.' },
-  { q: 'Do I need to know how to code?', a: 'No. Level 0 (Listener) and Level 1 (Explorer) require zero coding. Levels 2-4 introduce Python gradually, with every line of code explained in context.' },
-];
+          <div className="min-w-0">
+            <h4 className="text-base sm:text-lg font-bold text-white tracking-tight truncate flex items-center gap-2">
+              <span>{module.title}</span>
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-400 truncate">
+              {module.focus}
+            </p>
+          </div>
+        </div>
 
-/*
-function WaitlistForm({ isIndia }: { isIndia: boolean }) {
-  const [form, setForm] = useState({ parentName: '', email: '', phone: '', childAge: '', city: '', role: '', callback: false });
-  const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+        <div className="flex items-center gap-3 flex-shrink-0 mt-1 sm:mt-0">
+          {module.lab.endpoints && module.lab.endpoints.length > 0 && (
+            <span className="hidden md:inline-flex items-center gap-1 font-mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+              <Radio className="w-3 h-3 text-amber-400 animate-pulse" />
+              {module.lab.endpoints[0]}
+            </span>
+          )}
+          <span className="text-xs font-medium text-amber-400 hidden sm:inline">
+            {isExpanded ? 'Collapse' : 'Inspect Architecture'}
+          </span>
+          <div
+            className={`w-8 h-8 rounded-full flex items-center justify-center bg-slate-800 text-slate-400 border border-slate-700 transition-transform duration-300 ${
+              isExpanded ? 'rotate-180 bg-amber-500/20 text-amber-400 border-amber-500/40' : ''
+            }`}
+          >
+            <ChevronDown className="w-4 h-4" />
+          </div>
+        </div>
+      </button>
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+      {isExpanded && (
+        <div className="px-5 pb-6 sm:px-6 sm:pb-6 pt-2 border-t border-slate-800/80 space-y-5 animate-fade-in">
+          <p className="text-sm text-slate-300 leading-relaxed">
+            {module.description}
+          </p>
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setStatus('idle');
+          {/* Topics Covered */}
+          <div>
+            <h5 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 mb-2.5 flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-amber-400" />
+              <span>Core Architectural Implementations</span>
+            </h5>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {module.topics.map((topic, i) => (
+                <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                  <span className="leading-snug">{topic}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
-    const { error } = await supabase
-      .from('contact_submissions')
-      .insert([{
-        name: form.parentName,
-        email: form.email,
-        subject: `In-Person Waitlist — ${form.city}`,
-        message: `City: ${form.city}\nRole: ${form.role}\nLearner age: ${form.childAge}`,
-      }]);
+          {/* Hands-On Lab Card */}
+          <div className="rounded-xl p-4 sm:p-5 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-amber-500/30 shadow-inner">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div className="flex items-center gap-2">
+                <Terminal className="w-4 h-4 text-amber-400" />
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">
+                  Mission Lab Deliverable
+                </span>
+              </div>
+              {module.lab.endpoints && module.lab.endpoints.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {module.lab.endpoints.map((ep) => (
+                    <span
+                      key={ep}
+                      className="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-amber-500/10 text-amber-300 border border-amber-500/30"
+                    >
+                      {ep}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <h6 className="text-sm font-bold text-white mb-1.5">
+              {module.lab.title}
+            </h6>
+            <p className="text-xs text-slate-300 leading-relaxed mb-3">
+              {module.lab.description}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {module.lab.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="px-2 py-0.5 rounded-full text-[11px] font-mono font-medium bg-slate-800 text-slate-300 border border-slate-700"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
-    setSubmitting(false);
-    if (error) {
-      setStatus('error');
-    } else {
-      setStatus('success');
-      setForm({ parentName: '', email: '', childAge: '', city: '', role: '' });
+// ── FAQ Item Component ───────────────────────────────────────────────────
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-slate-800 rounded-2xl overflow-hidden bg-slate-900/60 backdrop-blur-md transition-colors">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-slate-800/40 transition-colors cursor-pointer"
+      >
+        <span className="text-sm sm:text-base font-bold text-slate-200 pr-4">
+          {question}
+        </span>
+        <ChevronDown
+          className={`w-4 h-4 text-amber-400 flex-shrink-0 transition-transform duration-300 ${
+            open ? 'rotate-180 text-amber-300' : ''
+          }`}
+        />
+      </button>
+      {open && (
+        <div className="px-5 pb-5 text-xs sm:text-sm text-slate-400 leading-relaxed border-t border-slate-800 pt-3 animate-fade-in">
+          {answer}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── MAIN PROGRAM VIEW ────────────────────────────────────────────────────
+export default function ProgramsPage() {
+  const [activeModuleIndex, setActiveModuleIndex] = useState<number>(0);
+  const [selectedAgentStep, setSelectedAgentStep] = useState<number>(0);
+  const [isSimulating, setIsSimulating] = useState<boolean>(false);
+  const [activeCodeTab, setActiveCodeTab] = useState<string>('graph');
+  const [copiedCode, setCopiedCode] = useState<boolean>(false);
+
+  // Auto-run simulator loop when toggled
+  useEffect(() => {
+    if (!isSimulating) return;
+    const timer = setInterval(() => {
+      setSelectedAgentStep((prev) => (prev + 1) % AGENT_SIMULATION_STEPS.length);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, [isSimulating]);
+
+  const activeStepData = AGENT_SIMULATION_STEPS[selectedAgentStep];
+  const activeCodeData = CODE_STUDIO_TABS.find((t) => t.id === activeCodeTab) || CODE_STUDIO_TABS[0];
+
+  const handleCopyCode = () => {
+    if (navigator?.clipboard) {
+      navigator.clipboard.writeText(activeCodeData.code);
+      setCopiedCode(true);
+      setTimeout(() => setCopiedCode(false), 2000);
     }
   };
 
-  if (status === 'success') {
-    return (
-      <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-6 sm:p-8 text-center">
-        <CheckCircle className="w-10 h-10 text-emerald-500 mx-auto mb-3" />
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">You're on the list!</h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400">We'll email you when workshops open in your city.</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-purple-200 dark:border-purple-800 p-6 sm:p-8">
-      <div className="flex items-center gap-3 mb-4">
-        <MapPin className="w-6 h-6 text-purple-500" />
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">Join the Workshop Waitlist</h3>
-      </div>
-      <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-        Mentor-led workshops in Guwahati, Hyderabad, and Thiruvananthapuram — 24-week bootcamps for career changers and 12-month programs for students. Small cohorts, dedicated mentors, real outcomes.
-      </p>
-
-      {status === 'error' && (
-        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-sm text-red-700 dark:text-red-300">
-          Something went wrong. Please try again.
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Your Name *</label>
-            <input type="text" name="parentName" value={form.parentName} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Your name" />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Email *</label>
-            <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="you@example.com" />
-          </div>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">I am a *</label>
-            <select name="role" value={form.role} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-              <option value="">Select</option>
-              <option value="student">Student</option>
-              <option value="parent">Parent / Guardian</option>
-              <option value="teacher">Teacher</option>
-              <option value="self-learner">Self-learner (adult)</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Learner's Age *</label>
-            <select name="childAge" value={form.childAge} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-              <option value="">Select age</option>
-              {Array.from({ length: 9 }, (_, i) => i + 10).map((age) => (
-                <option key={age} value={age}>{age} years</option>
-              ))}
-              <option value="18+">18+</option>
-            </select>
-          </div>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">City *</label>
-            <select name="city" value={form.city} onChange={handleChange} required className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-              <option value="">Select city</option>
-              <option value="Guwahati">Guwahati</option>
-              <option value="Hyderabad">Hyderabad</option>
-              <option value="Thiruvananthapuram">Thiruvananthapuram</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit" disabled={submitting} className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50">
-          {submitting ? <><Loader2 className="w-4 h-4 animate-spin" /> Joining...</> : 'Join Waitlist'}
-        </button>
-      </form>
-    </div>
-  );
-}
-*/
-
-function FAQ({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white pr-4">{q}</h3>
-        <ChevronDown className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
-      </button>
-      <div className={`overflow-hidden transition-all duration-300 ${open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <p className="px-5 pb-5 text-gray-600 dark:text-gray-300 leading-relaxed">{a}</p>
-      </div>
-    </div>
-  );
-}
-
-/* ── Bootcamp specializations with week-by-week curriculum ── */
-const bootcampTracks = [
-  {
-    name: 'Full-Stack Development',
-    color: 'sky',
-    weeks: [
-      { phase: 'Weeks 1–4: Foundations', topics: ['HTML/CSS/JS fundamentals', 'Git & command line', 'Responsive design', 'DOM manipulation'] },
-      { phase: 'Weeks 5–8: Frontend', topics: ['React components & state', 'TypeScript', 'API integration (REST)', 'Routing & forms'] },
-      { phase: 'Weeks 9–12: Backend', topics: ['Node.js & Express', 'SQL & PostgreSQL', 'Authentication & sessions', 'REST API design'] },
-      { phase: 'Weeks 13–16: Advanced', topics: ['Database modeling & migrations', 'Testing (unit, integration, E2E)', 'CI/CD pipelines', 'Cloud deployment (Vercel/AWS)'] },
-      { phase: 'Weeks 17–20: Projects', topics: ['Build 2 production-grade apps', 'Code review with mentor', 'Performance optimization', 'Security best practices'] },
-      { phase: 'Weeks 21–24: Career', topics: ['Portfolio site', 'Resume & LinkedIn review', 'Mock technical interviews', 'Job referral introductions'] },
-    ],
-  },
-  {
-    name: 'AI & Machine Learning',
-    color: 'rose',
-    weeks: [
-      { phase: 'Weeks 1–4: Python & Data', topics: ['Python fluency', 'NumPy & Pandas', 'Data cleaning & exploration', 'Matplotlib & Seaborn'] },
-      { phase: 'Weeks 5–8: Classical ML', topics: ['Regression & classification', 'Decision trees & random forests', 'Feature engineering', 'Model evaluation & cross-validation'] },
-      { phase: 'Weeks 9–12: Deep Learning', topics: ['Neural network fundamentals', 'PyTorch basics', 'CNNs for image classification', 'Transfer learning'] },
-      { phase: 'Weeks 13–16: NLP & Applications', topics: ['Text preprocessing & embeddings', 'Sentiment analysis', 'LLM APIs & prompt engineering', 'Building AI-powered apps'] },
-      { phase: 'Weeks 17–20: Projects', topics: ['Build 2 end-to-end ML pipelines', 'Model deployment (FastAPI + Docker)', 'Experiment tracking (MLflow)', 'Code review with mentor'] },
-      { phase: 'Weeks 21–24: Career', topics: ['ML portfolio & case studies', 'Technical writing', 'Mock ML interviews', 'Job referral introductions'] },
-    ],
-  },
-  {
-    name: 'Cloud & DevOps',
-    color: 'violet',
-    weeks: [
-      { phase: 'Weeks 1–4: Linux & Networking', topics: ['Linux command line mastery', 'Networking fundamentals (TCP/IP, DNS, HTTP)', 'Shell scripting (Bash)', 'SSH & remote servers'] },
-      { phase: 'Weeks 5–8: Containers & Orchestration', topics: ['Docker fundamentals', 'Docker Compose & multi-container apps', 'Kubernetes basics', 'Helm charts & deployments'] },
-      { phase: 'Weeks 9–12: Cloud Platforms', topics: ['AWS core services (EC2, S3, RDS, Lambda)', 'Infrastructure as Code (Terraform)', 'IAM & security best practices', 'Cost optimization'] },
-      { phase: 'Weeks 13–16: CI/CD & Monitoring', topics: ['GitHub Actions / GitLab CI', 'Automated testing pipelines', 'Prometheus & Grafana', 'Log aggregation (ELK stack)'] },
-      { phase: 'Weeks 17–20: Projects', topics: ['Build 2 production infrastructure projects', 'Migrate a monolith to microservices', 'Disaster recovery & scaling', 'Code review with mentor'] },
-      { phase: 'Weeks 21–24: Career', topics: ['DevOps portfolio & architecture docs', 'System design interview prep', 'Mock DevOps interviews', 'Job referral introductions'] },
-    ],
-  },
-];
-
-/* ── Self-Paced card with expandable subject breakdown ── */
-const cultureGroups = (() => {
-  const map: Record<string, number> = {};
-  for (const l of lessons) { const label = getLessonOrigin(l).label; map[label] = (map[label] || 0) + 1; }
-  return Object.entries(map).sort((a, b) => b[1] - a[1]).slice(0, 8);
-})();
-
-const subjectCounts = SUBJECTS.map(s => ({
-  key: s.key, icon: s.icon,
-  count: lessons.filter(l => l.subjects?.includes(s.key)).length,
-})).filter(s => s.count > 0).sort((a, b) => b.count - a.count);
-
-function SelfPacedCard({ isIndia }: { isIndia: boolean }) {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <div className="rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-8 bg-white dark:bg-gray-800">
-      <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mb-4">
-        <Code2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-      </div>
-      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Online — Self-Paced</h3>
-      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">Learn anywhere, anytime. Stories, concepts, and coding — all in your browser.</p>
-      <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-        <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> {lessons.length}+ stories with 5 levels each</li>
-        <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> {problemMeta.length}+ coding problems (Python, SQL, TS, HTML, Arduino)</li>
-        <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Stories from {cultureGroups.length}+ cultures and traditions</li>
-        <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> In-browser coding with Arduino simulator — no setup</li>
-        <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Interactive reference library with 40+ diagrams</li>
-        <li className="flex items-start gap-2"><span className="text-blue-500 mt-0.5">✓</span> Progress tracking and certificates</li>
-      </ul>
-
-      <button onClick={() => setExpanded(!expanded)}
-        className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
-        {expanded ? 'Hide' : 'See'} what you{'\u2019'}ll learn <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
-      </button>
-
-      {expanded && (
-        <div className="mt-4 border-t border-gray-100 dark:border-gray-700 pt-4 space-y-5">
-          {/* How it works */}
-          <div>
-            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">How each lesson works</p>
-            <div className="flex flex-wrap gap-2">
-              {[
-                { step: 'Read', desc: 'A story from mythology or culture', color: 'amber' },
-                { step: 'Learn', desc: 'Science concepts with analogies', color: 'sky' },
-                { step: 'Code', desc: 'Python simulations in your browser', color: 'emerald' },
-                { step: 'Build', desc: 'A capstone project', color: 'purple' },
-              ].map((s, i) => (
-                <div key={s.step} className="flex items-center gap-1.5">
-                  <span className={`w-5 h-5 rounded-full bg-${s.color}-100 dark:bg-${s.color}-900/30 text-${s.color}-600 dark:text-${s.color}-400 flex items-center justify-center text-[10px] font-bold`}>{i + 1}</span>
-                  <span className="text-xs text-gray-700 dark:text-gray-300"><strong>{s.step}</strong> — {s.desc}</span>
-                  {i < 3 && <ArrowRight className="w-3 h-3 text-gray-300 dark:text-gray-600" />}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Subjects covered */}
-          <div>
-            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Subjects covered</p>
-            <div className="flex flex-wrap gap-1.5">
-              {subjectCounts.slice(0, 12).map(s => (
-                <span key={s.key} className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2.5 py-1 rounded-full">
-                  {s.icon} {s.key} ({s.count})
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Cultures */}
-          <div>
-            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Stories from</p>
-            <div className="flex flex-wrap gap-1.5">
-              {cultureGroups.map(([label, count]) => (
-                <span key={label} className="text-xs bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 px-2.5 py-1 rounded-full">
-                  {label} ({count})
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      <a href="#pricing" className="mt-6 block text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer">Free to start — {isIndia ? '₹1,999' : '$24'}/mo to unlock all levels ↓</a>
-    </div>
-  );
-}
-
-function BootcampCard({ isIndia }: { isIndia: boolean }) {
-  const [expanded, setExpanded] = useState(false);
-  const [activeTrack, setActiveTrack] = useState(0);
-
-  return (
-    <div id="bootcamp" className="bg-white dark:bg-gray-800 rounded-xl border border-sky-200 dark:border-sky-800 p-5 mb-4 scroll-mt-24">
-      <h4 className="text-sm font-bold text-sky-700 dark:text-sky-300 uppercase tracking-wide mb-2">24-Week Bootcamp</h4>
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Career changers &amp; college grads</p>
-      <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
-        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Full-stack, AI/ML, or Cloud &amp; DevOps specialization</li>
-        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Portfolio of 6+ production-grade projects</li>
-        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Weekly code reviews with industry mentors</li>
-        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Mock interviews &amp; resume building</li>
-        <li className="flex items-start gap-2"><span className="text-sky-500 mt-0.5">✓</span> Job referral network</li>
-      </ul>
-
-      <div className="mt-4 flex items-center gap-4">
-        <Link href="/curriculum/bootcamp"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline">
-          View full 24-week curriculum <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-        <button onClick={() => setExpanded(!expanded)}
-          className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:underline">
-          {expanded ? 'Hide' : 'Preview'} tracks <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
-        </button>
-      </div>
-
-      {expanded && (
-        <div className="mt-4 border-t border-sky-100 dark:border-sky-900 pt-4">
-          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Choose a specialization</p>
-          <div className="flex gap-2 mb-4">
-            {bootcampTracks.map((track, i) => (
-              <button key={track.name} onClick={() => setActiveTrack(i)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${activeTrack === i ? 'bg-sky-500 text-white shadow-sm' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`}>
-                {track.name}
-              </button>
-            ))}
-          </div>
-          <div className="space-y-3">
-            {bootcampTracks[activeTrack].weeks.map((w) => (
-              <div key={w.phase} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-                <h5 className="text-xs font-bold text-gray-900 dark:text-white mb-1.5">{w.phase}</h5>
-                <div className="flex flex-wrap gap-1.5">
-                  {w.topics.map((t) => (
-                    <span key={t} className="text-xs bg-white dark:bg-gray-600 text-gray-600 dark:text-gray-200 px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-500">{t}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* ── School program tracks with term-by-term curriculum ── */
-const schoolTracks = [
-  {
-    name: 'Robotics & Arduino',
-    color: 'emerald',
-    terms: [
-      { phase: 'Term 1: Circuits & Light', topics: ['What is electricity?', 'LEDs, resistors, breadboards', 'Build: traffic light system', 'Intro to Arduino IDE'] },
-      { phase: 'Term 2: Sensors & Input', topics: ['Buttons, potentiometers, LDRs', 'Reading analog vs digital', 'Build: automatic night light', 'Build: theremin instrument'] },
-      { phase: 'Term 3: Motors & Movement', topics: ['DC motors & servos', 'Motor drivers & H-bridges', 'Build: obstacle-avoiding robot', 'Basic PID control'] },
-      { phase: 'Term 4: Communication', topics: ['Serial communication', 'Bluetooth & wireless', 'Build: remote-controlled car', 'Sensor data logging'] },
-    ],
-  },
-  {
-    name: 'Python & AI',
-    color: 'rose',
-    terms: [
-      { phase: 'Term 1: Python Foundations', topics: ['Variables, loops, functions', 'Lists, dictionaries, files', 'Build: quiz game', 'Build: password generator'] },
-      { phase: 'Term 2: Data & Visualization', topics: ['Reading CSV files', 'Matplotlib charts', 'Build: weather data analyzer', 'Build: population tracker'] },
-      { phase: 'Term 3: Intro to AI', topics: ['What is machine learning?', 'Training vs testing data', 'Build: spam classifier', 'Build: image recognizer'] },
-      { phase: 'Term 4: AI Projects', topics: ['Natural language basics', 'Chatbot fundamentals', 'Build: story generator', 'Final showcase project'] },
-    ],
-  },
-  {
-    name: 'Creative Coding',
-    color: 'violet',
-    terms: [
-      { phase: 'Term 1: Web Basics', topics: ['HTML structure', 'CSS styling & layout', 'Build: personal portfolio', 'Build: recipe website'] },
-      { phase: 'Term 2: Interactivity', topics: ['JavaScript fundamentals', 'DOM manipulation & events', 'Build: interactive quiz', 'Build: drawing app'] },
-      { phase: 'Term 3: Games & Animation', topics: ['Canvas & animation loops', 'Collision detection', 'Build: platformer game', 'Build: particle effects'] },
-      { phase: 'Term 4: Full Projects', topics: ['APIs & data fetching', 'Responsive design', 'Build: weather dashboard', 'Final showcase project'] },
-    ],
-  },
-];
-
-function SchoolProgramCard({ isIndia }: { isIndia: boolean }) {
-  const [expanded, setExpanded] = useState(false);
-  const [activeTrack, setActiveTrack] = useState(0);
-
-  return (
-    <div id="school-program" className="bg-white dark:bg-gray-800 rounded-xl border border-emerald-200 dark:border-emerald-800 p-5 mb-4 scroll-mt-24">
-      <h4 className="text-sm font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wide mb-2">12-Month Curriculum</h4>
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Students — Grades 6 and up</p>
-      <ul className="space-y-1.5 text-sm text-gray-700 dark:text-gray-300">
-        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Robotics &amp; Arduino, Python &amp; AI, or Creative Coding</li>
-        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Small cohorts (max 12) with dedicated mentor</li>
-        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Hands-on experiments with real hardware</li>
-        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Monthly project presentations</li>
-        <li className="flex items-start gap-2"><span className="text-emerald-500 mt-0.5">✓</span> Progress reports for parents &amp; schools</li>
-      </ul>
-
-      <div className="mt-4 flex items-center gap-4">
-        <Link href="/curriculum"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
-          View full 48-week curriculum <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-        <button onClick={() => setExpanded(!expanded)}
-          className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:underline">
-          {expanded ? 'Hide' : 'Preview'} tracks <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
-        </button>
-      </div>
-
-      {expanded && (
-        <div className="mt-4 border-t border-emerald-100 dark:border-emerald-900 pt-4">
-          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Choose a track</p>
-          <div className="flex gap-2 mb-4">
-            {schoolTracks.map((track, i) => (
-              <button key={track.name} onClick={() => setActiveTrack(i)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${activeTrack === i ? 'bg-emerald-500 text-white shadow-sm' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`}>
-                {track.name}
-              </button>
-            ))}
-          </div>
-          <div className="space-y-3">
-            {schoolTracks[activeTrack].terms.map((t) => (
-              <div key={t.phase} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-                <h5 className="text-xs font-bold text-gray-900 dark:text-white mb-1.5">{t.phase}</h5>
-                <div className="flex flex-wrap gap-1.5">
-                  {t.topics.map((topic) => (
-                    <span key={topic} className="text-xs bg-white dark:bg-gray-600 text-gray-600 dark:text-gray-200 px-2 py-0.5 rounded-full border border-gray-200 dark:border-gray-500">{topic}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default function ProgramsPage() {
-  const { user } = useAuth();
-  // const { hasActiveSubscription, plan: currentPlan } = useSubscription();
-  const searchParams = useSearchParams();
-  const paymentResult = searchParams.get('payment');
-  const highlightPlan = searchParams.get('plan');
-  const pathname = usePathname();
-
-  // Scroll to highlighted plan card or hash anchor
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (highlightPlan) {
-        const planEl = document.getElementById(`plan-${highlightPlan}`);
-        if (planEl) { planEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-      }
-      if (typeof window !== 'undefined' && window.location.hash) {
-        const el = document.querySelector(window.location.hash);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [pathname, highlightPlan]);
-
-  // Detect India via timezone
-  const isIndia = (() => {
-    try {
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      return tz.startsWith('Asia/Kolkata') || tz.startsWith('Asia/Calcutta');
-    } catch { return false; }
-  })();
-
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-[#070913] text-slate-100 selection:bg-amber-500/30 selection:text-amber-200 font-sans relative overflow-x-hidden">
       <Header />
 
-      {/* ── Hero ── */}
-      {/* <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-            Three ways to learn
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-2">
-            Self-paced online, 12-month mentored curriculum, or 24-week career bootcamp.
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            All paths start free. Upgrade when you are ready.
-          </p>
-        </div>
-      </section> */}
+      {/* ── High-Tech Cyber Ambient Lighting & Background Grid ── */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-amber-500/20 via-orange-500/10 to-transparent blur-3xl opacity-60" />
+        <div className="absolute top-[600px] left-[-150px] w-[600px] h-[600px] bg-sky-500/10 blur-[130px] rounded-full" />
+        <div className="absolute top-[1300px] right-[-150px] w-[650px] h-[650px] bg-emerald-500/10 blur-[140px] rounded-full" />
+        <div className="absolute top-[2200px] left-1/3 w-[700px] h-[500px] bg-purple-500/10 blur-[150px] rounded-full" />
+        {/* Subtle Cyberpunk Mesh Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(245, 158, 11, 0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(245, 158, 11, 0.25) 1px, transparent 1px)',
+            backgroundSize: '40px 40px',
+          }}
+        />
+      </div>
 
-      {/* ── Payment result banner ── */}
-      {FEATURES.PAYMENTS_ENABLED && paymentResult === 'success' && (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-6">
-          <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4 flex items-center gap-3">
-            <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-            <p className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">Payment successful! Your subscription is now active.</p>
-          </div>
-        </div>
-      )}
-      {FEATURES.PAYMENTS_ENABLED && paymentResult === 'failed' && (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-6">
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 flex items-center gap-3">
-            <p className="text-sm font-semibold text-red-800 dark:text-red-300">Payment was not completed. Please try again or contact us.</p>
-          </div>
-        </div>
-      )}
-
-      {/* ── Three Paths ── */}
-      {/* <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Self-Paced */}
-            {/* <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 flex flex-col">
-              <span className="text-3xl mb-3">📚</span>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Self-Paced Online</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
-                {lessons.length}+ story-driven lessons and {problemMeta.length}+ coding challenges. Start free with Level 0 and easy problems, upgrade for full access. Learn at your own speed.
-              </p>
-              <div className="text-sm text-gray-500 mb-4">
-                <span className="font-semibold text-gray-900 dark:text-white">Free</span> or <span className="font-semibold text-gray-900 dark:text-white">{isIndia ? '₹1,999' : '$24'}/mo</span>
-              </div>
-              <Link href="/lessons" className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-sm font-semibold hover:bg-amber-200 dark:hover:bg-amber-800/30 transition-colors">
-                Browse Lessons <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div> */}
-
-            {/* 12-Month Curriculum */}
-            {/* <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-emerald-200 dark:border-emerald-800 flex flex-col">
-              <span className="text-3xl mb-3">🏫</span>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">12-Month Curriculum</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
-                Structured 48-week curriculum with a dedicated mentor. Small cohorts (max 12), hands-on hardware, monthly project showcases. Grades 6-12.
-              </p>
-              <div className="text-sm text-gray-500 mb-4">
-                <span className="font-semibold text-gray-900 dark:text-white">{isIndia ? '₹9,999' : '$59'}/mo</span> &middot; 4 tracks available
-              </div>
-              <Link href="/curriculum" className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors">
-                View 48-Week Curriculum <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div> */}
-
-            {/* Bootcamp */}
-            {/* <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border-2 border-purple-200 dark:border-purple-800 flex flex-col relative">
-              <div className="absolute -top-3 left-4 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">Early Bird</div>
-              <span className="text-3xl mb-3">🚀</span>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">24-Week Bootcamp</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
-                Intensive career training. Full-Stack, AI/ML, or Cloud/DevOps. Production portfolio, mock interviews, employer introductions. Career changers &amp; grads.
-              </p>
-              <div className="text-sm text-gray-500 mb-4">
-                <span className="line-through text-gray-400">{isIndia ? '₹19,999' : '$119'}/mo</span>{' '}
-                <span className="font-semibold text-purple-700 dark:text-purple-300">{isIndia ? '₹14,999' : '$89'}/mo</span>
-              </div>
-              <Link href="/curriculum/bootcamp" className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition-colors">
-                View 24-Week Curriculum <ArrowRight className="w-4 h-4" />
-              </Link>
+      <div className="relative z-10">
+        {/* ===================== HERO SECTION ===================== */}
+        <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto text-center">
+            {/* Live Operational Status Pill */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-mono font-semibold mb-8 shadow-lg shadow-amber-500/10 backdrop-blur-md animate-fade-in">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span>LIVE COHORT 2026 // AGENTIC SYSTEMS MASTERCLASS</span>
+              <span className="text-slate-500">|</span>
+              <span className="text-slate-400 font-sans flex items-center gap-1">
+                Hands-On Engineering
+                <Sparkles className="w-3 h-3 text-amber-400" />
+              </span>
             </div>
-          </div>
-        </div>
-      </section> */}
 
-      {/* ── Pricing Detail ── */}
-      {/* <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">Pricing</h2>
-          <p className="text-gray-600 dark:text-gray-400 text-center mb-10">Start free. Upgrade when you are ready.</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"> */}
+            {/* Main Cybernetic Headline */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] max-w-5xl mx-auto mb-6">
+              Engineer{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
+                Autonomous AI Agents
+              </span>
+              <br />
+              <span className="text-white">With Python &amp; FastAPI</span>
+            </h1>
 
-            {/* Free */}
-            {/* <div className="rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 text-center">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">Free</h3>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹0' : '$0'}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">forever</p>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> All {lessons.length}+ stories</li>
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Level 0 — first 2 concepts</li>
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Reference library previews</li>
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Python/Web/SQL/Arduino basics courses</li>
-              </ul>
-              <Link href="/lessons" className="block w-full py-2.5 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                Browse Lessons
-              </Link>
-            </div> */}
-
-            {/* Online */}
-            {/* <div id="plan-online" className={`rounded-2xl border-2 border-amber-400 dark:border-amber-600 p-6 bg-amber-50/50 dark:bg-amber-900/10 text-center relative ${highlightPlan === 'online' ? 'ring-4 ring-amber-400/50 animate-pulse' : ''}`}>
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 mt-1">Online</h3>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹1,999' : '$24'}<span className="text-base font-normal text-gray-500">/mo</span></p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">or {isIndia ? '₹19,999/year' : '$239/year'} (2 months free)</p>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Everything in Free, plus:</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> All 5 levels per story</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> {problemMeta.length}+ coding problems — all tiers, all difficulties</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Full reference library</li>
-                <li className="flex items-start gap-2"><span className="text-amber-500">✓</span> Progress tracking &amp; certificates</li>
-              </ul>
-              {hasActiveSubscription && currentPlan === 'online' ? (
-                <div className="py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold text-center">
-                  ✓ Current Plan
-                </div>
-              ) : (
-                <CheckoutButton plan="online_monthly" label="Subscribe — Monthly" />
-              )}
-            </div> */}
-
-            {/* 12-Month Curriculum */}
-            {/* <div className="rounded-2xl border-2 border-emerald-200 dark:border-emerald-800 p-6 bg-white dark:bg-gray-800 text-center">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">12-Month Curriculum</h3>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{isIndia ? '₹9,999' : '$59'}<span className="text-base font-normal text-gray-500">/mo</span></p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">12 months &middot; Grades 6-12</p>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Everything in Online, plus:</li>
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Dedicated mentor &amp; cohort (max 12)</li>
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Hands-on hardware &amp; sensors</li>
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Monthly project showcases</li>
-                <li className="flex items-start gap-2"><span className="text-emerald-500">✓</span> Parent progress reports</li>
-              </ul>
-              <Link href="/curriculum" className="block text-xs text-emerald-600 dark:text-emerald-400 hover:underline mb-3">View 48-week curriculum →</Link>
-              <a href="#enroll" className="block w-full py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-semibold hover:bg-emerald-200 dark:hover:bg-emerald-800/30 transition-colors">
-                Enroll Now
-              </a>
-            </div> */}
-
-            {/* Bootcamp */}
-            {/* <div className="rounded-2xl border-2 border-purple-300 dark:border-purple-700 p-6 bg-white dark:bg-gray-800 text-center relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-full">Early Bird — 24 Seats</div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 mt-1">Bootcamp</h3>
-              <p className="text-sm text-gray-400 line-through">{isIndia ? '₹19,999/mo' : '$119/mo'}</p>
-              <p className="text-3xl font-bold text-purple-700 dark:text-purple-300 mb-1">{isIndia ? '₹14,999' : '$89'}<span className="text-base font-normal text-gray-500">/mo</span></p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">24 weeks &middot; Career changers</p>
-              <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2 text-left mb-6">
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Full-Stack, AI/ML, or Cloud/DevOps</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Dedicated mentor &amp; cohort (max 15)</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> 8+ portfolio projects</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Mock interviews &amp; job referrals</li>
-                <li className="flex items-start gap-2"><span className="text-purple-500">✓</span> Hardware kit included</li>
-              </ul>
-              <Link href="/curriculum/bootcamp" className="block text-xs text-purple-600 dark:text-purple-400 hover:underline mb-3">View 24-week curriculum →</Link>
-              <a href="#enroll" className="block w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold transition-colors">
-                Join Early Bird
-              </a>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* ── Waitlist (Commented out) ── */}
-      {/* <section id="waitlist" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900 scroll-mt-24">
-        <div className="max-w-2xl mx-auto">
-          <WaitlistForm isIndia={isIndia} />
-        </div>
-      </section> */}
-
-      {/* ── Enrollment Request ── */}
-      <section id="enroll" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Enroll Now</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Fill out the form below and our team will get back to you within 2 business days to discuss the best program for you.
+            {/* Subtitle */}
+            <p className="text-base sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
+              Move beyond toy ChatGPT wrapper scripts. Master <strong>cyclical LangGraph state machines</strong>,
+              deconstruct <strong>vector RAG from mathematical scratch</strong>, and deploy
+              high-throughput <strong>async FastAPI microservices</strong> with zero black boxes.
             </p>
-          </div>
-          <EnrollmentRequestForm />
-        </div>
-      </section>
 
-      {/* ── FAQ ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-amber-50/30 dark:from-gray-900 dark:to-gray-800/30">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Common Questions</h2>
-          <div className="space-y-3">
-            {faqs.map(({ q, a }) => (
-              <FAQ key={q} q={q} a={a} />
-            ))}
-          </div>
-        </div>
-      </section>
+            {/* Primary Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+              <a
+                href="#register"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-base shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transform hover:-translate-y-0.5 transition-all cursor-pointer"
+              >
+                <Zap className="w-5 h-5 text-amber-200 fill-amber-200" />
+                <span>Claim Your Spot &middot; &#8377;1</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <a
+                href="#agent-simulator"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-slate-200 hover:text-white hover:border-amber-500/50 font-semibold text-base backdrop-blur-md transition-all cursor-pointer"
+              >
+                <Cpu className="w-5 h-5 text-amber-400" />
+                <span>Simulate Agent Runtime</span>
+              </a>
+            </div>
 
-      {/* ── Footer CTA ── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-500 to-orange-500">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            {user ? 'Continue your journey' : 'Start with any story — it\'s free'}
-          </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            {lessons.length}+ stories and growing. {problemMeta.length}+ coding problems. Real science.{!user && ' No credit card.'}
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/lessons" className="inline-flex items-center bg-white text-amber-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all">
-              Browse Lessons <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-            {user ? (
-              <Link href="/plan" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
-                My Lesson Plan <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            ) : (
-              <Link href="/auth" className="inline-flex items-center bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/30 transition-all">
-                Sign Up Free <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            )}
-          </div>
-        </div>
-      </section>
+            {/* High-Impact Stat Badges */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-left max-w-5xl mx-auto">
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 backdrop-blur-md hover:border-amber-500/30 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-xs font-bold text-amber-400">01 // PEDAGOGY</span>
+                  <Terminal className="w-4 h-4 text-slate-500" />
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-white mb-0.5">2-Hour Daily Labs</div>
+                <p className="text-xs text-slate-400">40m architectural breakdown + 70m intensive live coding.</p>
+              </div>
 
-            <Footer />
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 backdrop-blur-md hover:border-amber-500/30 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-xs font-bold text-sky-400">02 // MECHANICS</span>
+                  <Workflow className="w-4 h-4 text-slate-500" />
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-white mb-0.5">Zero Black Boxes</div>
+                <p className="text-xs text-slate-400">Implement vector embeddings &amp; cosine math before frameworks.</p>
+              </div>
+
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 backdrop-blur-md hover:border-amber-500/30 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-xs font-bold text-emerald-400">03 // QUALITY</span>
+                  <ShieldCheck className="w-4 h-4 text-slate-500" />
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-white mb-0.5">Production Rigor</div>
+                <p className="text-xs text-slate-400">Pydantic v2 data contracts, ASGI streaming &amp; Pytest suites.</p>
+              </div>
+
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 backdrop-blur-md hover:border-amber-500/30 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-xs font-bold text-purple-400">04 // OUTCOME</span>
+                  <Rocket className="w-4 h-4 text-slate-500" />
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-white mb-0.5">Live Capstone</div>
+                <p className="text-xs text-slate-400">Deploy an enterprise knowledge assistant demo to your GitHub.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== INTERACTIVE AGENT LOOP SIMULATOR ===================== */}
+        <section id="agent-simulator" className="py-20 px-4 sm:px-6 lg:px-8 border-y border-slate-800/80 bg-slate-950/70 relative scroll-mt-16">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-xs font-bold uppercase tracking-wider mb-3">
+                <BrainCircuit className="w-3.5 h-3.5" />
+                <span>Interactive Architecture Visualizer</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
+                How an Autonomous Agent Thinks &amp; Executes
+              </h2>
+              <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+                Click any node in the cognitive loop to inspect the live execution graph, Pydantic schema validation, and real-time telemetry.
+              </p>
+            </div>
+
+            {/* Simulation Controls & Stepper */}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+                <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
+                <span>LANGGRAPH STATE MACHINE // v2.4-RELEASE</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsSimulating(!isSimulating)}
+                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                  isSimulating
+                    ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/30'
+                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
+                }`}
+              >
+                {isSimulating ? (
+                  <>
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    <span>Auto-Cycling (Click to Pause)</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5 fill-current" />
+                    <span>Simulate Agent Flow</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Visual Node Pipeline Bar */}
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 mb-6">
+              {AGENT_SIMULATION_STEPS.map((s, idx) => {
+                const IconComponent = s.icon;
+                const isSelected = selectedAgentStep === idx;
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => {
+                      setIsSimulating(false);
+                      setSelectedAgentStep(idx);
+                    }}
+                    className={`p-3.5 rounded-xl border text-left transition-all duration-300 cursor-pointer relative overflow-hidden ${
+                      isSelected
+                        ? 'bg-slate-900 border-amber-400 shadow-lg shadow-amber-500/20 ring-1 ring-amber-400'
+                        : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90'
+                    }`}
+                  >
+                    {isSelected && (
+                      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500" />
+                    )}
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-mono text-[10px] font-bold text-slate-400">
+                        NODE 0{s.step}
+                      </span>
+                      <IconComponent
+                        className={`w-4 h-4 ${
+                          isSelected ? 'text-amber-400' : 'text-slate-500'
+                        }`}
+                      />
+                    </div>
+                    <div className="text-xs font-bold text-white mb-0.5 truncate">
+                      {s.label}
+                    </div>
+                    <div className="text-[11px] font-mono text-slate-400 truncate">
+                      {s.role}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Node Inspector Panel */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-900/80 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
+              {/* Left Column: Architectural Explanation & Telemetry */}
+              <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className={`px-2.5 py-0.5 rounded-full font-mono text-xs font-bold border ${activeStepData.tagColor}`}>
+                      NODE 0{activeStepData.step} &middot; {activeStepData.role}
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                    {activeStepData.label}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    {activeStepData.summary}
+                  </p>
+                </div>
+
+                {/* Simulated Telemetry Metrics */}
+                <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs space-y-2">
+                  <div className="text-slate-500 font-bold uppercase tracking-widest text-[10px] pb-1 border-b border-slate-800/80">
+                    Live Telemetry Metrics
+                  </div>
+                  {Object.entries(activeStepData.telemetry).map(([key, val]) => (
+                    <div key={key} className="flex items-center justify-between">
+                      <span className="text-slate-400">{key.replace('_', ' ')}:</span>
+                      <span className="text-amber-300 font-semibold">{val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Code Snippet Console */}
+              <div className="lg:col-span-7 rounded-2xl bg-slate-950 border border-slate-800 overflow-hidden flex flex-col">
+                <div className="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                    <span className="font-mono text-xs text-slate-400 ml-2">
+                      agent_kernel_{activeStepData.id}.py
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">
+                    PYTHON 3.11+
+                  </span>
+                </div>
+                <div className="p-4 sm:p-5 font-mono text-xs text-slate-200 overflow-x-auto leading-relaxed flex-1">
+                  <pre className="text-amber-100/90 whitespace-pre">
+                    <code>{activeStepData.code}</code>
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== PARADIGM SHIFT: GENAI 1.0 VS AGENTIC 2.0 ===================== */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest">
+                The 2026 Architectural Shift
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-black text-white mt-1 mb-3">
+                Why Toy Wrappers Fail in Production
+              </h2>
+              <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+                Comparing standard YouTube tutorial bots against the enterprise-grade agentic systems you will construct in this cohort.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Old GenAI 1.0 */}
+              <div className="p-6 rounded-3xl bg-slate-900/40 border border-red-500/20 backdrop-blur-md relative overflow-hidden">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                  <span className="font-mono text-xs font-bold text-red-400 uppercase tracking-wider">
+                    Legacy GenAI 1.0 (Toy Bots)
+                  </span>
+                  <span className="text-xs px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-mono">
+                    Fragile
+                  </span>
+                </div>
+                <ul className="space-y-3.5 text-xs sm:text-sm text-slate-400">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-red-400 font-bold text-base leading-none">&times;</span>
+                    <span>Single-shot prompt wrappers with no decision loops or self-healing.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-red-400 font-bold text-base leading-none">&times;</span>
+                    <span>Silent hallucinations when information is missing from documents.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-red-400 font-bold text-base leading-none">&times;</span>
+                    <span>Synchronous blocking web routes that crash under 5+ concurrent users.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-red-400 font-bold text-base leading-none">&times;</span>
+                    <span>Opaque frameworks where you cannot debug embeddings or vector cosine math.</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Modern Agentic AI 2.0 */}
+              <div className="p-6 rounded-3xl bg-slate-900/80 border border-emerald-500/30 backdrop-blur-md relative overflow-hidden shadow-xl shadow-emerald-500/5">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                  <span className="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                    Modern Agentic AI (What You Build)
+                  </span>
+                  <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-mono">
+                    Deterministic &middot; Tested
+                  </span>
+                </div>
+                <ul className="space-y-3.5 text-xs sm:text-sm text-slate-200">
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <span><strong>Cyclical LangGraph state machines</strong> with tool-calling and checkpoint memory.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <span><strong>Deterministic RAG with exact citations</strong> and strict refusal fallbacks.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <span><strong>Async FastAPI + ASGI streaming</strong> serving hundreds of concurrent tokens smoothly.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <span><strong>Automated Pytest test suites</strong> testing edge cases and Pydantic schema boundaries.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== INTERACTIVE CODE STUDIO TERMINAL ===================== */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 border-y border-slate-800/80 bg-slate-950/60">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="font-mono text-xs font-bold text-sky-400 uppercase tracking-widest">
+                Hands-On Code Preview
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-black text-white mt-1 mb-3">
+                Inspect the Real Python You Will Write
+              </h2>
+              <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+                No high-level fluff. Browse the actual production architectures, LangGraph states, and FastAPI endpoints built throughout the 5 phases.
+              </p>
+            </div>
+
+            {/* Code Studio Window */}
+            <div className="rounded-3xl border border-slate-800 bg-slate-950 shadow-2xl overflow-hidden backdrop-blur-xl">
+              {/* Tab Bar */}
+              <div className="p-3 bg-slate-900/90 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+                  {CODE_STUDIO_TABS.map((tab) => {
+                    const isActive = activeCodeTab === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        type="button"
+                        onClick={() => setActiveCodeTab(tab.id)}
+                        className={`px-3 py-1.5 rounded-lg font-mono text-xs transition-all flex items-center gap-2 cursor-pointer ${
+                          isActive
+                            ? 'bg-slate-800 text-amber-300 border border-amber-500/30'
+                            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                        }`}
+                      >
+                        <FileCode2 className={`w-3.5 h-3.5 ${isActive ? 'text-amber-400' : 'text-slate-500'}`} />
+                        <span>{tab.fileName}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="hidden sm:inline-block font-mono text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                    {activeCodeData.badge}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleCopyCode}
+                    className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition cursor-pointer"
+                    title="Copy Code"
+                  >
+                    {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Code Editor Body */}
+              <div className="p-5 sm:p-6 font-mono text-xs sm:text-sm text-slate-200 overflow-x-auto leading-relaxed max-h-[460px] overflow-y-auto">
+                <pre className="text-amber-100/90 whitespace-pre">
+                  <code>{activeCodeData.code}</code>
+                </pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== CURRICULUM SYLLABUS SECTION ===================== */}
+        <section id="curriculum" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono text-xs font-bold uppercase tracking-wider mb-3">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Structured Engineering Progression</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
+                The 5 Architectural Milestones
+              </h2>
+              <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                Every phase pairs foundational systems theory with an intensive live lab. You code, inspect execution traces, and debug real edge cases.
+              </p>
+            </div>
+
+            {/* Module Blueprints */}
+            <div className="space-y-4">
+              {WINTER_TRAINING_MODULES.map((module, idx) => (
+                <ModuleBlueprintCard
+                  key={module.id}
+                  module={module}
+                  index={idx}
+                  isExpanded={activeModuleIndex === idx}
+                  onToggle={() => setActiveModuleIndex(activeModuleIndex === idx ? -1 : idx)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== CAPSTONE ENTERPRISE SHOWCASE ===================== */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-950/70 border-t border-slate-800/80">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 font-mono text-xs font-bold uppercase tracking-wider mb-3">
+                <Rocket className="w-3.5 h-3.5" />
+                <span>Featured Capstone Project</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
+                Production Company Knowledge Assistant
+              </h2>
+              <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                Synthesize all 5 modules into a production-grade AI knowledge copilot built over real document corpuses with strict factual grounding.
+              </p>
+            </div>
+
+            <div className="bg-slate-900/90 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden backdrop-blur-xl">
+              <div className="p-6 sm:p-8 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-slate-800">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <span className="font-mono text-xs font-bold text-amber-400 uppercase tracking-widest">
+                      Live Portfolio Demonstration
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold mt-1 text-white">
+                      End-to-End System Blueprint
+                    </h3>
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 font-mono text-xs text-slate-300">
+                    <Database className="w-4 h-4 text-amber-400" />
+                    <span>FastAPI + Chroma + LangGraph</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-8 divide-y divide-slate-800/80">
+                {CAPSTONE_LAYERS.map((layer) => (
+                  <div key={layer.step} className="py-5 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono font-bold text-sm flex items-center justify-center flex-shrink-0">
+                      {layer.step}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h4 className="text-base font-bold text-white">
+                          {layer.title}
+                        </h4>
+                        {layer.route && (
+                          <span className="px-2 py-0.5 rounded text-xs font-mono bg-slate-800 text-amber-300 border border-slate-700">
+                            {layer.route}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-2">
+                        {layer.description}
+                      </p>
+                      <div className="inline-flex items-center gap-1.5 text-xs text-amber-400 font-mono">
+                        <CheckCircle className="w-3.5 h-3.5" />
+                        <span>{layer.keyFeature}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== PRODUCTION TECH STACK ===================== */}
+        <section className="py-20 border-y border-slate-800/80 bg-slate-900/40">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber-400 mb-1">
+                Industry Standard Arsenal
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-black text-white">
+                The Modern Agentic AI Tech Stack
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {TECH_STACK.map((item) => (
+                <div
+                  key={item.name}
+                  className="p-5 rounded-2xl bg-slate-950/70 border border-slate-800/90 shadow-sm hover:border-amber-500/40 transition duration-300"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                      {item.badge}
+                    </span>
+                  </div>
+                  <h3 className="text-sm sm:text-base font-bold text-white">
+                    {item.name}
+                  </h3>
+                  <p className="text-xs font-medium text-amber-400 mb-1.5">
+                    {item.role}
+                  </p>
+                  <p className="text-[11px] text-slate-400 leading-snug">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== GRADUATE CAPABILITIES & OUTCOMES ===================== */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 border-b border-slate-800/80">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider mb-3">
+                <Award className="w-3.5 h-3.5" />
+                <span>Verified Career Portfolio</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
+                What You Will Own &amp; Demonstrate
+              </h2>
+              <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+                Concrete engineering capabilities you walk away with — ready to showcase in technical interviews and deploy in production.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {GRADUATE_OUTCOMES.map((outcome, idx) => (
+                <div
+                  key={idx}
+                  className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-3.5 hover:border-slate-700 transition"
+                >
+                  <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+                    {outcome}
+                  </p>
+                </div>
+              ))}
+
+              {/* Bonus Portfolio Card */}
+              <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-transparent border border-amber-500/30 flex items-start gap-3.5 md:col-span-2">
+                <div className="w-7 h-7 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <GitBranch className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-white mb-1">
+                    Production-Grade GitHub Repository &amp; Verified Credential
+                  </h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Walk away with a clean, documented GitHub repository featuring virtual environment setup, Pydantic data models, vector retrieval benchmarks, and a running FastAPI ASGI service you can demonstrate live during company hiring rounds.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== REGISTRATION PORTAL WITH FORM ===================== */}
+        <section id="register" className="py-24 px-4 sm:px-6 lg:px-8 scroll-mt-16">
+          <div className="max-w-3xl mx-auto">
+            {/* Header Badge & Callout */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-mono font-bold mb-3 shadow-lg shadow-amber-500/10">
+                <Zap className="w-4 h-4 fill-amber-400 text-amber-400" />
+                <span>WINTER 2026 COHORT // ENROLLMENT PORTAL</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white mb-2">
+                Secure Your Seat in the Cohort
+              </h2>
+              <p className="text-sm text-slate-400 max-w-lg mx-auto">
+                All-inclusive &#8377;1 test pass. Complete curriculum, daily interactive coding labs, verified certificate, and full capstone repository.
+              </p>
+            </div>
+
+            {/* Glowing Cyber Registration Container */}
+            <div className="rounded-3xl border border-amber-500/30 bg-slate-950/90 p-4 sm:p-8 backdrop-blur-2xl shadow-2xl shadow-amber-500/10 relative">
+              <div className="absolute top-0 right-10 -translate-y-1/2 px-3 py-1 rounded-full bg-emerald-500 text-slate-950 font-mono text-[11px] font-bold uppercase tracking-wider shadow-md">
+                &#9679; 30 SEATS MAXIMUM
+              </div>
+              <WinterTrainingRegistrationForm />
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== FREQUENTLY ASKED QUESTIONS ===================== */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 bg-slate-950/60">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-sm text-slate-400">
+                Key details about schedule, live code reviews, and technology requirements.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              {WINTER_TRAINING_FAQS.map((faq, i) => (
+                <FAQItem key={i} question={faq.question} answer={faq.answer} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===================== OTHER TMA ACADEMY PROGRAMS ===================== */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                Explore Other Academy Offerings
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-400">
+                From continuous school STEM curricula to comprehensive 24-week career bootcamps.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div id="school-program" className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 shadow-sm flex flex-col justify-between hover:border-slate-700 transition">
+                <div>
+                  <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                    Grades 6–12
+                  </span>
+                  <h4 className="text-lg font-bold text-white mt-1 mb-2">
+                    12-Month Mentored Curriculum
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+                    Continuous year-round STEM learning across Robotics, Arduino, Python, and Creative Coding with dedicated cohorts and monthly projects.
+                  </p>
+                </div>
+                <Link
+                  href="/curriculum"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-emerald-400 hover:underline"
+                >
+                  View 12-Month Curriculum <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div id="bootcamp" className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 shadow-sm flex flex-col justify-between hover:border-slate-700 transition">
+                <div>
+                  <span className="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">
+                    Career Changers &amp; Grads
+                  </span>
+                  <h4 className="text-lg font-bold text-white mt-1 mb-2">
+                    24-Week Career Bootcamp
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
+                    Full-Stack Development, AI &amp; Machine Learning, or Cloud &amp; DevOps. Production portfolio, mock interviews, and industry job referrals.
+                  </p>
+                </div>
+                <Link
+                  href="/curriculum/bootcamp"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-sky-400 hover:underline"
+                >
+                  View 24-Week Bootcamp <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
     </div>
   );
 }
