@@ -7,6 +7,7 @@ import {
   Sparkles,
   ArrowRight,
   Terminal,
+  Calendar,
   Layers,
   Database,
   CheckCircle2,
@@ -241,7 +242,7 @@ export default function ProgramsPage() {
             {/* Live Operational Status Pill */}
             <div className="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-300 text-xs sm:text-sm font-mono font-semibold mb-8 shadow-lg shadow-amber-500/10 backdrop-blur-md animate-fade-in">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>LIVE IN-PERSON COHORT 2026 // AGENTIC SYSTEMS MASTERCLASS</span>
+              <span>STARTING DECEMBER 2026 // 1-MONTH IN-PERSON COHORT</span>
               <span className="text-slate-500 hidden sm:inline">|</span>
               <span className="text-slate-300 font-sans flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-amber-400" />
@@ -273,7 +274,7 @@ export default function ProgramsPage() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-base shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transform hover:-translate-y-0.5 transition-all cursor-pointer"
               >
                 <Zap className="w-5 h-5 text-amber-200 fill-amber-200" />
-                <span>Claim Your Spot &middot; &#8377;1</span>
+                <span>Claim Your Spot &middot; &#8377;499</span>
                 <ArrowRight className="w-5 h-5" />
               </a>
               <a
@@ -289,11 +290,11 @@ export default function ProgramsPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-left max-w-5xl mx-auto">
               <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 backdrop-blur-md hover:border-amber-500/30 transition-colors">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-mono text-xs font-bold text-amber-400">01 // PEDAGOGY</span>
-                  <Terminal className="w-4 h-4 text-slate-500" />
+                  <span className="font-mono text-xs font-bold text-amber-400">01 // DURATION</span>
+                  <Calendar className="w-4 h-4 text-slate-500" />
                 </div>
-                <div className="text-lg sm:text-xl font-bold text-white mb-0.5">2-Hour Daily Labs</div>
-                <p className="text-xs text-slate-400">40m architectural breakdown + 70m intensive live coding.</p>
+                <div className="text-lg sm:text-xl font-bold text-white mb-0.5">1-Month Program</div>
+                <p className="text-xs text-slate-400">Structured 4-week cohort with live coding &amp; mentor guidance.</p>
               </div>
 
               <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/90 backdrop-blur-md hover:border-amber-500/30 transition-colors">
@@ -650,7 +651,7 @@ export default function ProgramsPage() {
                         <span className="text-xs text-slate-400 font-mono">/ ALL-INCLUSIVE</span>
                       </div>
                       <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                        Complete 5-phase engineering curriculum, 2-hour daily live coding labs, 1-on-1 mentor code reviews, capstone repository, and verified certificate.
+                        Complete 5-phase engineering curriculum across a 1-month intensive program, daily live coding labs, 1-on-1 mentor code reviews, capstone repository, and verified certificate.
                       </p>
                     </div>
                     <div className="pt-4 border-t border-slate-800/80 text-[11px] font-mono text-slate-400 flex items-center gap-2">
@@ -697,12 +698,11 @@ export default function ProgramsPage() {
                         Confirm Seat Today
                       </span>
                       <div className="flex items-baseline gap-2 mb-3">
-                        <span className="text-4xl sm:text-5xl font-black text-emerald-400 tracking-tight">&#8377;1</span>
-                        <span className="text-xs text-slate-400 line-through">&#8377;499</span>
-                        <span className="text-[10px] font-mono text-emerald-300 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">TEST PASS</span>
+                        <span className="text-4xl sm:text-5xl font-black text-emerald-400 tracking-tight">&#8377;499</span>
+                        <span className="text-xs text-slate-400 font-mono">/ REGISTRATION PASS</span>
                       </div>
                       <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                        Lock in your admission today by paying the token registration fee. Your seat is confirmed immediately upon successful payment.
+                        Lock in your admission today by paying the &#8377;499 registration fee. Your seat is confirmed immediately upon successful payment.
                       </p>
                     </div>
                     <div className="pt-4 border-t border-slate-800/80 text-[11px] font-mono text-emerald-300 flex items-center gap-2">
@@ -723,7 +723,7 @@ export default function ProgramsPage() {
                         How the Seat Confirmation &amp; Fee Deduction Works:
                       </h4>
                       <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        To guarantee your spot, pay the registration fee today (currently <strong>&#8377;1</strong> for live testing, normally &#8377;499). This registration payment will be <strong>100% deducted from the final &#8377;4,999 program fee</strong> when the cohort starts. You only pay the balance later, with your early bird discount applied!
+                        To guarantee your spot, pay the registration fee today (<strong>&#8377;499</strong>). This registration payment will be <strong>100% deducted from the final &#8377;4,999 program fee</strong> when the cohort starts. You only pay the balance later, with your early bird discount applied!
                       </p>
                     </div>
                   </div>
@@ -731,7 +731,7 @@ export default function ProgramsPage() {
                     href="#register"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold text-xs sm:text-sm whitespace-nowrap shadow-lg shadow-amber-500/20 transition cursor-pointer flex-shrink-0"
                   >
-                    <span>Confirm Seat &middot; &#8377;1</span>
+                    <span>Confirm Seat &middot; &#8377;499</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
@@ -745,13 +745,13 @@ export default function ProgramsPage() {
                 <div className="text-center mb-8">
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-mono font-bold mb-3 shadow-lg shadow-amber-500/10">
                     <Zap className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    <span>WINTER 2026 COHORT // ENROLLMENT PORTAL</span>
+                    <span>1-MONTH WINTER COHORT // STARTING DECEMBER &middot; ENROLLMENT PORTAL</span>
                   </div>
                   <h2 className="text-3xl sm:text-4xl font-black text-white mb-2">
                     Secure Your Seat in the Cohort
                   </h2>
                   <p className="text-sm text-slate-400 max-w-lg mx-auto">
-                    Program Fee: &#8377;4,999 (Early registrations qualify for discounts). Pay &#8377;1 registration fee today to confirm your seat — 100% deducted from the final fee when the cohort begins.
+                    Program Fee: &#8377;4,999 (Early registrations qualify for discounts). Pay &#8377;499 registration fee today to confirm your seat — 100% deducted from the final fee when the cohort begins.
                   </p>
                 </div>
 

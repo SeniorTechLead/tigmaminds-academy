@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generateTxnId, generateHash } from '../../../../../src/lib/payu';
 import { createPendingPaymentRecord } from '../../../../../src/lib/winter-db';
 
-const DEFAULT_AMOUNT = 1.0;
+const DEFAULT_AMOUNT = 499.0;
 const ENVOY_BASE_URL = 'https://agentic-envoy.xorai.com';
 
 // ── In-Memory IP Rate Limiter (Max 5 attempts per 10 minutes per IP) ──
