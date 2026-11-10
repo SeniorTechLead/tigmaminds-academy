@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
             registrationId: udf1 || 'CONFIRMED',
             txnid: txnid || '',
             mihpayid: mihpayid || txnid || '',
-            amount: amount || '1.00',
+            amount: amount || '499.00',
             institution: udf2 || '',
           });
           sendEmail(emailParams).catch((mailErr) => {
@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
       successUrl.searchParams.set('payment', 'success');
       successUrl.searchParams.set('txnid', txnid || '');
       successUrl.searchParams.set('regId', udf1 || '');
-      successUrl.searchParams.set('amount', amount || '1.00');
+      successUrl.searchParams.set('amount', amount || '499.00');
       successUrl.searchParams.set('name', `${firstname || ''} ${udf3 || ''}`.trim());
       successUrl.searchParams.set('email', email || '');
       successUrl.searchParams.set('mihpayid', mihpayid || txnid || '');

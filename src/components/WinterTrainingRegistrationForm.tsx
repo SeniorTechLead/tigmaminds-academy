@@ -171,7 +171,7 @@ export default function WinterTrainingRegistrationForm() {
           orderId: txnid,
           paymentId: params.get('mihpayid') || txnid || 'PAYU-VERIFIED',
           signature: 'SHA-512 PayU Verified',
-          amount: params.get('amount') || '1.00',
+          amount: params.get('amount') || '499.00',
           currency: 'INR',
           status: 'success',
         };
@@ -195,7 +195,7 @@ export default function WinterTrainingRegistrationForm() {
         const txnid = params.get('txnid') || '';
         const regId = params.get('regId') || 'CONFIRMED';
         const mihpayid = params.get('mihpayid') || txnid || 'PAYU-VERIFIED';
-        const amount = params.get('amount') || '1.00';
+        const amount = params.get('amount') || '499.00';
         const studentName = params.get('name') || '';
         const email = params.get('email') || '';
 
@@ -478,7 +478,7 @@ export default function WinterTrainingRegistrationForm() {
           <div className="flex items-center justify-between pb-3 border-b border-gray-100 dark:border-gray-700">
             <span className="text-gray-500 dark:text-gray-400">Amount Paid:</span>
             <span className="font-semibold text-gray-900 dark:text-white">
-              ₹{paymentSuccess.amount || '1.00'}
+              ₹{paymentSuccess.amount || '499.00'}
             </span>
           </div>
 
@@ -521,7 +521,7 @@ export default function WinterTrainingRegistrationForm() {
 
         {/* Seat Confirmation Deduction Guarantee */}
         <div className="max-w-lg mx-auto bg-amber-50 dark:bg-amber-950/40 border border-amber-300/80 dark:border-amber-700/60 rounded-2xl p-4 text-xs text-amber-900 dark:text-amber-200 mb-8 text-center leading-relaxed">
-          ✨ <strong>Seat Confirmation Guarantee:</strong> Your ₹{paymentSuccess.amount || '1.00'} registration fee has been locked in and will be <strong>100% deducted from the final ₹4,999 program fee</strong> when the cohort commences, with your early bird discount applied.
+          ✨ <strong>Seat Confirmation Guarantee:</strong> Your ₹{paymentSuccess.amount || '499.00'} registration fee has been locked in and will be <strong>100% deducted from the final ₹4,999 program fee</strong> when the cohort commences, with your early bird discount applied.
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -578,7 +578,7 @@ export default function WinterTrainingRegistrationForm() {
           Reserve Your Spot &amp; Enroll
         </h3>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1.5 leading-relaxed">
-          Full Program Fee: <strong>₹4,999</strong> (Early bird applicants receive priority discounts). Confirm your registration today with a <strong>₹1</strong> pass — this amount will be <strong>100% deducted from your final program fee</strong> when the cohort begins.
+          Full Program Fee: <strong>₹4,999</strong> (Early bird applicants receive priority discounts). Confirm your registration today with a <strong>₹499</strong> seat reservation — this amount will be <strong>100% deducted from your final program fee</strong> when the cohort begins.
         </p>
 
         {/* Office Location Badge */}
@@ -798,7 +798,7 @@ export default function WinterTrainingRegistrationForm() {
             </>
           ) : (
             <>
-              <span>Confirm Seat &amp; Pay ₹1 &rarr;</span>
+              <span>Confirm Seat &amp; Pay ₹499 &rarr;</span>
             </>
           )}
         </button>

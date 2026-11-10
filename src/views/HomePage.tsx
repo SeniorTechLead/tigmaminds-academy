@@ -50,6 +50,23 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
+              {/* Winter Cohort Headline Announcement */}
+              <Link
+                href="/programs#register"
+                className="group inline-flex flex-wrap items-center gap-2.5 px-4 py-2 rounded-full bg-slate-950 hover:bg-slate-900 text-white border border-slate-800 hover:border-slate-700 text-xs sm:text-sm font-medium mb-5 shadow-xl shadow-slate-950/15 transition-all cursor-pointer transform hover:-translate-y-0.5"
+              >
+                <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono font-bold text-[10px] tracking-wider uppercase">
+                  Starting December
+                </span>
+                <span className="font-semibold text-slate-100">
+                  Winter Training (1-Month Program): Python, FastAPI &amp; LLM Apps
+                </span>
+                <span className="text-amber-400 font-bold inline-flex items-center gap-1 group-hover:text-amber-300">
+                  Register Now <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
+
               <div className="inline-flex items-center gap-2 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 px-4 py-2 rounded-full mb-6 text-sm font-medium">
                 <Sparkles className="w-4 h-4" />
                 Where stories spark STEM curiosity

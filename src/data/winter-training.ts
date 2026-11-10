@@ -259,9 +259,9 @@ export const WINTER_TRAINING_FAQS: WinterTrainingFAQ[] = [
       'You should be comfortable with programming fundamentals in any language (variables, functions, loops, basic data structures). Prior experience with Python is helpful but not strictly required, as Module 1 rapidly establishes modern Python conventions, typing, and async architecture.',
   },
   {
-    question: 'How is each daily session conducted?',
+    question: 'What is the program duration and session format?',
     answer:
-      'Each session is 2 hours of focused, interactive learning: ~40 minutes of architectural concepts, 70 minutes of live hands-on coding in the lab where you build each component, and 10 minutes of recap and code review. The final phase is dedicated sprint time to build the complete capstone project.',
+      'The winter training is an intensive 1-month program structured across 5 progressive engineering phases. Each session combines architectural deep-dives with live hands-on coding in the lab where you implement production systems from scratch, followed by mentor code reviews and capstone engineering sprints.',
   },
   {
     question: 'How does this compare to video tutorials or generic courses?',
@@ -271,7 +271,7 @@ export const WINTER_TRAINING_FAQS: WinterTrainingFAQ[] = [
   {
     question: 'What is the program fee and how does the registration fee deduction work?',
     answer:
-      'The comprehensive program fee is ₹4,999 (all-inclusive: 5 architectural phases, daily 2-hour live hands-on labs, mentor code reviews, capstone repository, and verified credentials). Early registrations qualify for exclusive launch discounts. To reserve and confirm your seat today, you pay a token registration fee (currently ₹1 for testing / early access pass), which will be 100% deducted from the final program fee of ₹4,999 when the cohort commences.',
+      'The comprehensive program fee is ₹4,999 (all-inclusive: 1-month intensive program across 5 architectural phases, daily live hands-on labs, mentor code reviews, capstone repository, and verified credentials). Early registrations qualify for exclusive launch discounts. To reserve and confirm your seat today, you pay a ₹499 registration fee, which will be 100% deducted from the final program fee of ₹4,999 when the cohort commences.',
   },
   {
     question: 'Where will the offline classes and hands-on labs be held?',
