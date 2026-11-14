@@ -1,6 +1,6 @@
 import { isHackathonQualifyingOpen } from '../data/hackathon-utils';
 
-export const BASE_URL = 'https://agentic-envoy.xorai.com';
+export const BASE_URL = 'https://development.xorai.com/hackathone';
 
 const QUALIFYING_CLOSED_MESSAGE =
   'The qualifying round is closed. Your response has been recorded.';

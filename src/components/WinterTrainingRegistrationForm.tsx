@@ -124,7 +124,7 @@ function validateAll(data: WinterTrainingFormData): FormErrors {
   return errors;
 }
 
-const ENVOY_BASE_URL = 'https://agentic-envoy.xorai.com';
+const ENVOY_BASE_URL = 'https://development.xorai.com/hackathone';
 
 export default function WinterTrainingRegistrationForm() {
   const [form, setForm] = useState<WinterTrainingFormData>(() => {
